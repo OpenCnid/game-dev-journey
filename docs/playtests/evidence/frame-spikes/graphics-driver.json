@@ -1,0 +1,12 @@
+[
+  {
+    "Name": "Intel(R) UHD Graphics 630",
+    "DriverVersion": "31.0.101.2140",
+    "DriverDate": "2025-11-04T18:00:00-06:00"
+  },
+  {
+    "Name": "NVIDIA GeForce RTX 3090",
+    "DriverVersion": "32.0.15.9186",
+    "DriverDate": "2026-01-19T18:00:00-06:00"
+  }
+]

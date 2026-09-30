@@ -1,0 +1,396 @@
+{
+  "method": "Classify each frame interval by preceding CSV row projectile/telegraph counts; approximate association, not GPU causality.",
+  "captures": [
+    {
+      "capture": "screen-r1-combined",
+      "phases": {
+        "projectiles>40000": {
+          "samples": 1837,
+          "meanMs": 7.3506692977681,
+          "p99Ms": 12.4044,
+          "maxMs": 14.8235
+        },
+        "other": {
+          "samples": 4457,
+          "meanMs": 3.3643404980928877,
+          "p99Ms": 5.8213,
+          "maxMs": 7.8463
+        },
+        "warnings>5000": {
+          "samples": 442,
+          "meanMs": 3.391039592760181,
+          "p99Ms": 5.0749,
+          "maxMs": 6.3323
+        }
+      }
+    },
+    {
+      "capture": "screen-r1-control",
+      "phases": {
+        "projectiles>40000": {
+          "samples": 1905,
+          "meanMs": 7.087858635170604,
+          "p99Ms": 12.5268,
+          "maxMs": 21.359
+        },
+        "other": {
+          "samples": 4684,
+          "meanMs": 3.2015688300597778,
+          "p99Ms": 5.5099,
+          "maxMs": 8.9989
+        },
+        "warnings>5000": {
+          "samples": 283,
+          "meanMs": 5.307062544169612,
+          "p99Ms": 8.5967,
+          "maxMs": 8.7433
+        }
+      }
+    },
+    {
+      "capture": "screen-r1-dedup",
+      "phases": {
+        "projectiles>40000": {
+          "samples": 1854,
+          "meanMs": 7.286873247033442,
+          "p99Ms": 13.2213,
+          "maxMs": 14.5266
+        },
+        "other": {
+          "samples": 4664,
+          "meanMs": 3.214049463979417,
+          "p99Ms": 5.2933,
+          "maxMs": 7.9245
+        },
+        "warnings>5000": {
+          "samples": 430,
+          "meanMs": 3.492666511627907,
+          "p99Ms": 5.0657,
+          "maxMs": 5.624
+        }
+      }
+    },
+    {
+      "capture": "screen-r1-native",
+      "phases": {
+        "projectiles>40000": {
+          "samples": 1855,
+          "meanMs": 7.278464312668464,
+          "p99Ms": 13.0075,
+          "maxMs": 16.2568
+        },
+        "other": {
+          "samples": 4571,
+          "meanMs": 3.2810334281338878,
+          "p99Ms": 5.5572,
+          "maxMs": 8.2813
+        },
+        "warnings>5000": {
+          "samples": 312,
+          "meanMs": 4.812089102564102,
+          "p99Ms": 5.8605,
+          "maxMs": 6.3659
+        }
+      }
+    },
+    {
+      "capture": "screen-r1-no-effects",
+      "phases": {
+        "projectiles>40000": {
+          "samples": 3731,
+          "meanMs": 3.6193369069954437,
+          "p99Ms": 5.9572,
+          "maxMs": 9.1822
+        },
+        "other": {
+          "samples": 4335,
+          "meanMs": 3.4597126643598615,
+          "p99Ms": 5.6407,
+          "maxMs": 10.1155
+        },
+        "warnings>5000": {
+          "samples": 468,
+          "meanMs": 3.198230982905983,
+          "p99Ms": 4.8211,
+          "maxMs": 5.3429
+        }
+      }
+    },
+    {
+      "capture": "screen-r1-no-projectiles",
+      "phases": {
+        "projectiles>40000": {
+          "samples": 3701,
+          "meanMs": 3.6480654687922183,
+          "p99Ms": 6.4812,
+          "maxMs": 10.5864
+        },
+        "other": {
+          "samples": 4656,
+          "meanMs": 3.2206110609965637,
+          "p99Ms": 5.58,
+          "maxMs": 8.2514
+        },
+        "warnings>5000": {
+          "samples": 310,
+          "meanMs": 4.839207096774193,
+          "p99Ms": 5.8928,
+          "maxMs": 6.7534
+        }
+      }
+    },
+    {
+      "capture": "screen-r1-no-warnings",
+      "phases": {
+        "projectiles>40000": {
+          "samples": 1810,
+          "meanMs": 7.459983093922652,
+          "p99Ms": 13.1816,
+          "maxMs": 15.6024
+        },
+        "other": {
+          "samples": 4572,
+          "meanMs": 3.280134951881015,
+          "p99Ms": 5.5261,
+          "maxMs": 8.3628
+        },
+        "warnings>5000": {
+          "samples": 417,
+          "meanMs": 3.6012088729016787,
+          "p99Ms": 6.0209,
+          "maxMs": 6.7211
+        }
+      }
+    },
+    {
+      "capture": "screen-r1-overlap",
+      "phases": {
+        "projectiles>40000": {
+          "samples": 1783,
+          "meanMs": 7.570865283230511,
+          "p99Ms": 13.3416,
+          "maxMs": 16.317
+        },
+        "other": {
+          "samples": 4603,
+          "meanMs": 3.2585330219422115,
+          "p99Ms": 5.9734,
+          "maxMs": 9.5028
+        },
+        "warnings>5000": {
+          "samples": 303,
+          "meanMs": 4.948675577557756,
+          "p99Ms": 6.3973,
+          "maxMs": 7.1615
+        }
+      }
+    },
+    {
+      "capture": "full-r1-combined",
+      "phases": {
+        "other": {
+          "samples": 7754,
+          "meanMs": 3.7709476012380705,
+          "p99Ms": 6.1718,
+          "maxMs": 13.8244
+        },
+        "warnings>5000": {
+          "samples": 955,
+          "meanMs": 3.930951727748691,
+          "p99Ms": 6.4754,
+          "maxMs": 7.4807
+        },
+        "projectiles>40000": {
+          "samples": 3221,
+          "meanMs": 8.383408227258615,
+          "p99Ms": 13.957,
+          "maxMs": 19.426
+        }
+      }
+    },
+    {
+      "capture": "full-r1-control",
+      "phases": {
+        "other": {
+          "samples": 8796,
+          "meanMs": 3.323412664847658,
+          "p99Ms": 5.5953,
+          "maxMs": 11.4952
+        },
+        "warnings>5000": {
+          "samples": 745,
+          "meanMs": 5.028467248322148,
+          "p99Ms": 6.7013,
+          "maxMs": 8.1177
+        },
+        "projectiles>40000": {
+          "samples": 3346,
+          "meanMs": 8.075153676031082,
+          "p99Ms": 15.5829,
+          "maxMs": 22.4315
+        }
+      }
+    },
+    {
+      "capture": "full-r1-native",
+      "phases": {
+        "other": {
+          "samples": 8352,
+          "meanMs": 3.501921587643678,
+          "p99Ms": 5.702,
+          "maxMs": 8.6202
+        },
+        "warnings>5000": {
+          "samples": 765,
+          "meanMs": 4.9007555555555555,
+          "p99Ms": 6.378,
+          "maxMs": 7.808
+        },
+        "projectiles>40000": {
+          "samples": 3465,
+          "meanMs": 7.793283896103896,
+          "p99Ms": 12.8735,
+          "maxMs": 16.3279
+        }
+      }
+    },
+    {
+      "capture": "full-r2-combined",
+      "phases": {
+        "other": {
+          "samples": 8301,
+          "meanMs": 3.521990507167811,
+          "p99Ms": 5.822,
+          "maxMs": 15.7789
+        },
+        "warnings>5000": {
+          "samples": 1041,
+          "meanMs": 3.6038245917387126,
+          "p99Ms": 5.6896,
+          "maxMs": 11.9784
+        },
+        "projectiles>40000": {
+          "samples": 3375,
+          "meanMs": 8.002807318518519,
+          "p99Ms": 13.381,
+          "maxMs": 16.8867
+        }
+      }
+    },
+    {
+      "capture": "full-r2-control",
+      "phases": {
+        "other": {
+          "samples": 7976,
+          "meanMs": 3.6659011409227684,
+          "p99Ms": 6.1739,
+          "maxMs": 9.8469
+        },
+        "warnings>5000": {
+          "samples": 731,
+          "meanMs": 5.127696853625171,
+          "p99Ms": 6.9643,
+          "maxMs": 8.167
+        },
+        "projectiles>40000": {
+          "samples": 3206,
+          "meanMs": 8.424728540237055,
+          "p99Ms": 14.8187,
+          "maxMs": 17.1493
+        }
+      }
+    },
+    {
+      "capture": "full-r2-native",
+      "phases": {
+        "other": {
+          "samples": 8368,
+          "meanMs": 3.4938895315487573,
+          "p99Ms": 5.6253,
+          "maxMs": 10.599
+        },
+        "warnings>5000": {
+          "samples": 750,
+          "meanMs": 5.007161866666666,
+          "p99Ms": 6.637,
+          "maxMs": 9.0768
+        },
+        "projectiles>40000": {
+          "samples": 3471,
+          "meanMs": 7.781291241717084,
+          "p99Ms": 13.969,
+          "maxMs": 27.3178
+        }
+      }
+    },
+    {
+      "capture": "full-r3-combined",
+      "phases": {
+        "other": {
+          "samples": 8340,
+          "meanMs": 3.5039497002398083,
+          "p99Ms": 6.1733,
+          "maxMs": 9.2991
+        },
+        "warnings>5000": {
+          "samples": 987,
+          "meanMs": 3.799799696048632,
+          "p99Ms": 6.7013,
+          "maxMs": 9.3399
+        },
+        "projectiles>40000": {
+          "samples": 3235,
+          "meanMs": 8.353463925811438,
+          "p99Ms": 14.6857,
+          "maxMs": 21.8231
+        }
+      }
+    },
+    {
+      "capture": "full-r3-control",
+      "phases": {
+        "other": {
+          "samples": 7424,
+          "meanMs": 3.9371627289870688,
+          "p99Ms": 6.8395,
+          "maxMs": 11.3
+        },
+        "warnings>5000": {
+          "samples": 730,
+          "meanMs": 5.141598767123288,
+          "p99Ms": 6.9307,
+          "maxMs": 7.7722
+        },
+        "projectiles>40000": {
+          "samples": 2985,
+          "meanMs": 9.051558023450585,
+          "p99Ms": 15.9028,
+          "maxMs": 20.6461
+        }
+      }
+    },
+    {
+      "capture": "full-r3-native",
+      "phases": {
+        "other": {
+          "samples": 8118,
+          "meanMs": 3.6019333456516383,
+          "p99Ms": 6.2089,
+          "maxMs": 9.5083
+        },
+        "warnings>5000": {
+          "samples": 741,
+          "meanMs": 5.056072064777328,
+          "p99Ms": 7.1143,
+          "maxMs": 8.7798
+        },
+        "projectiles>40000": {
+          "samples": 3408,
+          "meanMs": 7.925672564553991,
+          "p99Ms": 13.7203,
+          "maxMs": 18.6144
+        }
+      }
+    }
+  ]
+}

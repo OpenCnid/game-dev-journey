@@ -28,6 +28,8 @@ Late-game ambition includes **more than 10,000 active enemies, potentially all b
 
 The prototype now includes Jobs/Burst simulation, culled instanced rendering, and selectable reference paths. See [the measured comparison](docs/playtests/2026-09-30-jobs-burst.md) and [profiling instructions](docs/profiling.md).
 
+Further [frame-spike experiments](docs/playtests/2026-09-30-frame-spike-experiments.md) compare effect rendering, identical-warning deduplication, concurrent preparation, and native state ownership. These experiments retain the original optimized path as the default and record visual diagnostics separately from performance acceptance.
+
 ## What we're aiming for
 
 - Finish a small game with a clear beginning, playable loop, and ending.

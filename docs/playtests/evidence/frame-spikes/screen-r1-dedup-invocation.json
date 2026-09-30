@@ -1,0 +1,21 @@
+{
+  "startedUtc": "2026-09-30T09:05:25.8423729Z",
+  "visible": true,
+  "smoke": false,
+  "crowd": 20000,
+  "workload": "bosses",
+  "synchronizedAbilities": true,
+  "simulation": "burst",
+  "rendering": "culled",
+  "jobBatch": 128,
+  "profile": false,
+  "hideWarnings": false,
+  "hideProjectiles": false,
+  "deduplicateWarnings": true,
+  "overlapPreparation": false,
+  "nativeState": false,
+  "warmupSeconds": 10,
+  "captureSeconds": 30,
+  "repeats": 1,
+  "note": "Keep the game visible and unobstructed for rendering measurements."
+}

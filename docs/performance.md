@@ -88,3 +88,5 @@ See [initial prototype validation](playtests/2026-09-30-prototype-performance.md
 The later [boss-scale diagnostic](playtests/2026-09-30-boss-scale.md) supersedes the 1,000-drone workload as the relevant direction for optimization. It does not meet the performance target.
 
 [Jobs/Burst and rendering comparisons](playtests/2026-09-30-jobs-burst.md) measure the next implementation against the selectable managed reference on our now-selected desktop baseline. Follow [the profiling guide](profiling.md) to reproduce stage measurements and binary traces. The optimized 15,000-boss synthetic captures meet the proposed p99 threshold, with occasional slower frames; the 20,000 synchronized-boss capture misses it. Representative final gameplay remains to be validated.
+
+[Frame-spike experiments](playtests/2026-09-30-frame-spike-experiments.md) investigate the remaining 20,000-boss costs with independently selectable modes. Hidden-effect diagnostics preserve gameplay but omit visuals and cannot count as acceptance. Current captures also align simulation warm-up and record simulation phase to avoid startup delays shifting the workload between comparisons.
