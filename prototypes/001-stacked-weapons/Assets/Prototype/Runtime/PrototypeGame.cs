@@ -154,7 +154,9 @@ namespace Journey
             if (benchmark)
             {
                 double elapsed = now - runStarted;
-                if (!capture.Recording && elapsed >= warmup)
+                // Align the gameplay phase as well as wall-clock warm-up. Initial shader/
+                // driver stalls may hit the catch-up bound before capture begins.
+                if (!capture.Recording && elapsed >= warmup && sim.Elapsed >= warmup)
                 { capture.Begin(sim); captureStarted = now; captureStartShots = sim.Shots; captureStartKills = sim.Kills; StartProfile(); }
                 else if (capture.Recording)
                 {
@@ -189,6 +191,7 @@ namespace Journey
             accumulator = 0; capture.Cancel(); view.ResetFeedback();
             sim.Reset(crowd, seed, true, bosses: bosses, synchronizedAbilities: synchronizedAbilities);
             runStarted = Time.realtimeSinceStartupAsDouble;
+            previousClock = runStarted;
         }
         void FinishCapture(double actualSeconds)
         {

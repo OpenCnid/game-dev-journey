@@ -77,6 +77,7 @@ foreach ($taskCount in $Counts) {
         if ($taskResult.crowd -ne $taskCount -or ($Workload -eq 'bosses' -and $taskResult.bossCount -ne $taskCount)) { throw 'Player did not run the requested workload. Rebuild the player.' }
         if ($taskResult.simulationBackend -ne $(if ($Simulation -eq 'burst') { 'burst-jobs-v1' } else { 'managed-reference' })) { throw 'Player did not use the requested simulation backend.' }
         if ($taskResult.renderingBackend -ne $(if ($Rendering -eq 'culled') { 'burst-culled-v1' } else { 'legacy-instanced' })) { throw 'Player did not use the requested rendering backend.' }
+        if ($null -eq $taskResult.captureStartSimulationSeconds -or $taskResult.captureStartSimulationSeconds -lt $WarmupSeconds) { throw 'Player did not align simulation warm-up; rebuild the player.' }
         if ($taskResult.schema -ne 'journey-benchmark-v4') { throw 'Rebuild the player for experiment metadata.' }
         if ($taskResult.hideWarnings -ne [bool]$HideWarnings -or $taskResult.hideProjectiles -ne [bool]$HideProjectiles -or
             $taskResult.deduplicateWarnings -ne [bool]$DeduplicateWarnings -or $taskResult.overlapPreparation -ne [bool]$OverlapPreparation -or

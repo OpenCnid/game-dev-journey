@@ -26,6 +26,7 @@ namespace Journey
         public double meanCrowdMsPerTick, meanAbilityMsPerTick, meanProjectileMsPerTick,
             meanWeaponMsPerFrame, meanRenderPrepareMs, meanRenderSubmitMs, meanSubmittedInstances, meanInstanceBatches;
         public double actualCaptureSeconds;
+        public float captureStartSimulationSeconds, captureEndSimulationSeconds;
         public string workload, avoidance = "rotating-4-candidates-per-adjacent-cell-v1";
         public bool synchronizedAbilities;
         public int bossCount, peakProjectiles, peakTelegraphs, abilityActivations, projectilesSpawned,
@@ -101,6 +102,7 @@ namespace Journey
                 burstCompiled = BurstStatus.Compiled, profilerCapture = profiled, jobBatch = sim.BatchSize,
                 instanceBatchLimit = culled ? 500 : 250,
                 actualCaptureSeconds = actualSeconds,
+                captureStartSimulationSeconds = startSimulationTime, captureEndSimulationSeconds = sim.Elapsed,
                 operatingSystem = SystemInfo.operatingSystem, cpu = SystemInfo.processorType,
                 gpu = SystemInfo.graphicsDeviceName, graphicsApi = SystemInfo.graphicsDeviceType.ToString(),
                 cpuThreads = SystemInfo.processorCount, systemMemoryMB = SystemInfo.systemMemorySize,

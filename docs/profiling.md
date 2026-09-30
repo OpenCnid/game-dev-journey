@@ -37,13 +37,49 @@ The game defaults to Burst simulation and culled rendering. Menu toggles and CLI
 
 Use identical resolution, machine, seed, population, abilities, and warm-up/capture durations. Keep the game visible and unobstructed, and do not compile or run competing benchmarks during measurement. Release-player frame-time reports are the performance evidence. Baselines that lose simulation time are failures; compare per-tick costs and simulated durations as well as FPS, because a slowed simulation executes less gameplay work per wall-clock second.
 
-The capture window starts when warm-up actually completes, preventing a slow warm-up frame from shortening the requested recording. Simulation accumulates the same monotonic wall-clock intervals used for frame reporting. CSV/JSON record actual capture duration separately from requested duration and simulated time. Catch-up remains capped at eight ticks per rendered frame; reaching that bound is reported and invalidates acceptance.
+The capture window starts when both wall-clock and simulation warm-up complete, preventing startup stalls from shifting the attack phase substantially between runs. Reset also resets the frame clock so report-export time does not enter the next run. Schema v4 records `captureStartSimulationSeconds` and `captureEndSimulationSeconds`; check those alongside actual wall-clock capture duration. Simulation accumulates the same monotonic wall-clock intervals used for frame reporting. Catch-up remains capped at eight ticks per rendered frame; reaching that bound during capture is reported and invalidates acceptance.
 
 ## Stage timing in release players
 
 `Journey.Simulation` contains the fixed-step loop and weapon work. Additional named markers cover `Journey.Crowd`, `Journey.Abilities`, `Journey.Projectiles`, `Journey.Weapon`, `Journey.RenderPrepare`, and `Journey.RenderSubmit`.
 
 Schema v3 CSV contains per-frame stage times, tick counts, submitted instance counts, and instance batch counts. JSON adds average crowd/ability/projectile **milliseconds per simulation tick**, renderer **milliseconds per rendered frame**, backend names, job batch size, actual capture duration, and Burst compilation status. Copies and job completion waits belong to the measured stage. Stage times are elapsed wall time around work, not summed worker CPU consumption. Parent/child measurements overlap; do not add a parent to its children. Unity frame/GPU timings can lag the custom stage samples.
+
+## Effect, scheduling, and native-state experiments
+
+Schema v4 retains the v3 measurements and adds explicit experiment flags, `diagnosticOnly`, and per-frame/mean warning candidate and retained-warning counts (before frustum culling). Counts are zero when warning preparation is disabled. The summarizer reads both schemas and prevents hidden-effect diagnostics from passing its p99 budget check. The benchmark helper requires a rebuilt v4 player and validates each requested flag against the report.
+
+```powershell
+.\tools\unity.ps1 -Action Build
+# Short exploration only: eight modes, 10s warm-up + 30s capture each.
+.\tools\compare-experiments.ps1 -Visible -Repeats 1 -WarmupSeconds 10 -CaptureSeconds 30
+# Full controlled comparison: 20,000 synchronized bosses, 3 x (30s + 60s) per mode.
+.\tools\compare-experiments.ps1 -Visible -Modes control,combined
+# Use -Staggered to check the ordinary ability distribution too.
+# Individual experiments can be combined on benchmark.ps1:
+.\tools\benchmark.ps1 -Visible -Counts 20000 -SynchronizedAbilities -DeduplicateWarnings -OverlapPreparation -NativeState
+```
+
+| Mode / helper flag | Change |
+| --- | --- |
+| `control` | Existing Burst simulation, managed state with staging copies, culled rendering, serial category preparation |
+| `no-warnings` / `-HideWarnings` | Omit warning preparation and drawing; keep every cast, hit, and activation |
+| `no-projectiles` / `-HideProjectiles` | Omit projectile preparation and drawing; keep every projectile and collision |
+| `no-effects` | Both diagnostic omissions |
+| `dedup` / `-DeduplicateWarnings` | Retain one warning per exact target position and remaining cast time |
+| `overlap` / `-OverlapPreparation` | Separate enemy/projectile/warning buffers; schedule independent preparations before completing them |
+| `native` / `-NativeState` | Own crowd/projectile motion state in persistent native arrays; render directly from those arrays |
+| `combined` | Deduplication, overlapped preparation, and native ownership together |
+
+All switches are opt-in; the control remains the default until measurements justify adoption. Rendering experiments require the culled renderer; native state requires Burst. Native ownership is selected on reset. Boss cooldown/state transitions, spawning, and hitscan remain managed C#; this is not a full ECS migration. Interpolation history still requires writes, and warnings still use a managed staging array. Native ownership removes redundant staging round trips, not all memory transfers.
+
+Hidden-effect runs are visibly labeled and are diagnostic only. They measure the combined preparation/submission/GPU cost of a visual category, not an isolated GPU cost. They must never be presented as acceptance results or normal gameplay settings. Regular combat keeps dangerous effects visible even after a diagnostic benchmark.
+
+Deduplication uses exact equality, preserves stable first-occurrence order, and does not merge nearby targets or distinct attack deadlines. Current rings share a fixed mesh, material, radius, and appearance. Extend the identity key or disable deduplication if future warnings introduce per-attack visuals, different damage types, or intensity cues. Every underlying attack still executes independently.
+
+Parallel preparation uses additional persistent buffers and therefore trades memory for scheduling freedom. All preparation jobs complete before the next simulation update, buffer reuse, or disposal. `RenderPrepareMs` includes main-thread scheduling and completion waits but is not the sum of worker execution times; work may overlap submission and other preparation. The native path retains reference/staging allocations for A/B comparisons, so it is not a memory-minimized implementation.
+
+Compare controls and experiments from the same build on the same desktop. Rotate order over repeated runs and inspect p99, maximum, budget misses, simulation time, dropped projectiles, and stage costs. Short screening captures are exploratory. Wall-clock capture boundaries can differ by a simulation tick; fixed-tick parity tests check correctness separately from FPS comparisons.
 
 ## Binary Unity Profiler captures
 
