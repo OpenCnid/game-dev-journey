@@ -27,4 +27,4 @@ The interesting question is not just whether we can generate working code. It is
 
 Until the first complete playable loop exists, defer multiplayer, accounts, online services, monetization, extensive procedural content, and custom engine work. These are scope choices for this project, not judgments about what a game should be.
 
-Genre, engine, visual style, platform, and release destination remain open. Choose them around the first testable idea and the time we can realistically spend.
+The starting direction is first-person horde survival, inspired by the owner's time playing Vampire Hunters, with a focus on stacking weapons and creating powerful builds. The [game brief](design/game-brief.md) proposes a small test of growing firepower. Engine, visual style, final platform, and release destination remain open; choose them around the experiment and the time we can realistically spend.

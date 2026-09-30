@@ -6,14 +6,18 @@ This is a sequence of learning milestones, not a release-date promise. Update it
 
 - [x] Capture the motivation and scope.
 - [x] Create a repository structure and working documents.
-- [ ] Write three small game ideas and choose one to test.
+- [x] Select a reference direction: first-person horde survival inspired by Vampire Hunters.
+- [x] Identify the owner's priority: stacking weapons and creating powerful builds.
+- [ ] Record a focused reference play session and refine the [stacked-weapons experiment](../prototypes/001-stacked-weapons/README.md).
 - [ ] Choose an initial platform and engine; record the decision.
 
 **Done when:** we can name the player's main action, the question our first prototype will answer, and the tools needed to build it.
 
 ## 1. Make one interaction playable
 
-- [ ] Build a rough prototype with placeholder visuals.
+- [ ] Build a one-minute movement and shooting test with placeholder visuals.
+- [ ] Compare one weapon against three simultaneously firing weapons.
+- [ ] Add the proposed five-minute survival and upgrade loop if the combat test is promising.
 - [ ] Add enough feedback to understand the action and its result.
 - [ ] Play it and record what is promising or confusing.
 - [ ] Decide to continue, revise, or try another idea.

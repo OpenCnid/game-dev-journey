@@ -13,4 +13,6 @@ Before implementation, add a short README covering:
 
 Prototypes may use rough code and placeholder assets. They still need enough instructions to run again. Avoid sharing code between experiments until a real need appears.
 
-No prototypes yet.
+## Experiments
+
+- [001: Stacked weapons](001-stacked-weapons/README.md) - proposed first-person survival experiment; specification only, not executable yet.

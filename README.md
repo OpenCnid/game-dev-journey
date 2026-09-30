@@ -13,11 +13,11 @@ Two or three years ago, I wouldn't have felt ready to take this on this way. Tod
 | Area | Status |
 | --- | --- |
 | Experience | Software engineering background; first game |
-| Game concept | To be explored |
+| Game concept | First-person horde survival inspired by Vampire Hunters, focused on stacking weapons and powerful builds |
 | Engine and language | Not selected |
-| Target platform | Not selected |
+| Target platform | Windows desktop proposed; not finalized |
 | Playable build | Not yet |
-| Current milestone | Find one small interaction worth playing |
+| Current milestone | Study the reference and test a small stacked-weapon combat loop |
 
 There is no game to run yet. Setup and launch instructions will live in [game/README.md](game/README.md) when the first project exists.
 
@@ -58,9 +58,9 @@ See [the architecture guide](docs/architecture.md) for placement rules.
 ## Start here
 
 1. Read [the vision](docs/vision.md) and [roadmap](docs/roadmap.md).
-2. Sketch three tiny ideas using the prompts in [the game brief](docs/design/game-brief.md).
-3. Pick one mechanic to test, choose tools for that experiment, and record the reasoning in [decisions](docs/decisions/README.md).
-4. Build the smallest playable version under [prototypes](prototypes/README.md).
+2. Read [the Vampire Hunters study](docs/design/vampire-hunters-study.md) and [proposed game brief](docs/design/game-brief.md).
+3. Choose tools for the experiment and record the reasoning in [decisions](docs/decisions/README.md).
+4. Start with the one-minute combat slice in [the stacked-weapons experiment](prototypes/001-stacked-weapons/README.md).
 5. Play it, capture observations, and decide whether to keep, change, or discard it.
 
 Follow along in [the development journal](docs/devlog/README.md), starting with [day zero](docs/devlog/2026-09-30-day-zero.md). Our [workflow](docs/workflow.md) explains how we turn those lessons into the next change.
