@@ -8,6 +8,9 @@ This is a sequence of learning milestones, not a release-date promise. Update it
 - [x] Create a repository structure and working documents.
 - [x] Select a reference direction: first-person horde survival inspired by Vampire Hunters.
 - [x] Identify the owner's priority: stacking weapons and creating powerful builds.
+- [x] Set the baseline performance goal to at least 144 FPS, with higher frame-rate options.
+- [x] Identify a provisional GPU baseline: GTX 1080 Ti.
+- [ ] Define baseline hardware, resolution, visual settings, and a supported peak encounter for [performance validation](performance.md).
 - [ ] Record a focused reference play session and refine the [stacked-weapons experiment](../prototypes/001-stacked-weapons/README.md).
 - [ ] Choose an initial platform and engine; record the decision.
 
@@ -16,6 +19,7 @@ This is a sequence of learning milestones, not a release-date promise. Update it
 ## 1. Make one interaction playable
 
 - [ ] Build a one-minute movement and shooting test with placeholder visuals.
+- [ ] Benchmark repeatable crowd loads alongside development, recording CPU/GPU times and frame-time spikes in standalone builds.
 - [ ] Compare one weapon against three simultaneously firing weapons.
 - [ ] Add the proposed five-minute survival and upgrade loop if the combat test is promising.
 - [ ] Add enough feedback to understand the action and its result.
@@ -39,6 +43,7 @@ This is a sequence of learning milestones, not a release-date promise. Update it
 - [ ] Tune controls, timing, difficulty, sound, and visual feedback.
 - [ ] Check readable text, input clarity, and relevant accessibility settings.
 - [ ] Create a build and test it outside the editor on the chosen platform.
+- [ ] Validate the 144 FPS target in the supported peak encounter and verify gameplay timing at different frame caps and uncapped.
 - [ ] Add useful automated checks for systems that now justify them.
 
 **Done when:** the small game plays consistently, its remaining problems are documented, and another playtest supports the direction.

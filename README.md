@@ -18,8 +18,11 @@ Two or three years ago, I wouldn't have felt ready to take this on this way. Tod
 | Target platform | Windows desktop proposed; not finalized |
 | Playable build | Not yet |
 | Current milestone | Study the reference and test a small stacked-weapon combat loop |
+| Performance target | At least 144 FPS in supported crowded fights; higher caps and uncapped rendering supported by design; unmeasured |
 
 There is no game to run yet. Setup and launch instructions will live in [game/README.md](game/README.md) when the first project exists.
+
+Our provisional GPU baseline is a GTX 1080 Ti, with 1080p proposed as the starting resolution. See [the performance plan](docs/performance.md) for the 6.944 ms frame budget, benchmark scenarios, and the CPU/settings we still need to define.
 
 ## What we're aiming for
 

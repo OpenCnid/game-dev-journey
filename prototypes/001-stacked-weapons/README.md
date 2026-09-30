@@ -6,6 +6,8 @@
 
 **Tools and run instructions:** pending engine selection. This folder will own a self-contained prototype project once selected.
 
+**Performance requirement:** target at least 144 FPS (6.944 ms per frame) in the supported encounter, with higher caps and uncapped rendering available. Follow the [performance plan](../../docs/performance.md). Baseline hardware and the supported peak load remain open; no performance has been measured.
+
 ## Build in three slices
 
 ### A. One minute of combat
@@ -66,7 +68,7 @@ Use simple approach steering on the open arena initially. Measure crowd bunching
 
 Movement speed, player health, enemy health/speed/contact interval, each weapon's damage/cooldown/range/spread/piercing count, pickup value/radius, energy thresholds, upgrade caps, spawn cadence, active-enemy cap, and run duration.
 
-Store definitions in the chosen engine's native data format. Label baseline values as our tuning choices. Log engine version, build/commit, machine, resolution, and active-enemy count when profiling; choose a measured performance target before scaling the crowd.
+Store definitions in the chosen engine's native data format. Label baseline values as our tuning choices. Record hardware, settings, build, and live counts with each capture. Benchmark 100, 500, and 1,000 enemies as exploration loads alongside the three implementation slices, then test the most expensive supported weapon build. These loads do not promise a supported count. Verify gameplay timing across frame caps and report frame-time spikes, not just average FPS.
 
 ## Evidence and exit decision
 

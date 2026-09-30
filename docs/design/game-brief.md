@@ -4,6 +4,8 @@
 
 **Confirmed priority:** stacking weapons and creating powerful builds.
 
+**Confirmed performance requirement:** at least 144 FPS within the supported hardware/settings and encounter envelope, with higher caps and uncapped rendering available. GTX 1080 Ti is the owner's provisional GPU baseline; 1080p is a proposed starting resolution. The [performance plan](../performance.md) defines the measurements; CPU, final settings, and peak load are not finalized and the target is not yet verified.
+
 **Status:** the scope and mechanics below are proposals for the first experiment, not finalized requirements. No playable implementation exists yet.
 
 ## Experience to test
@@ -33,6 +35,8 @@ All counts, timings, and rules here are our starting test settings, not reconstr
 **Question:** does growing from one to three simultaneous weapons create a satisfying increase in power, with at least two upgrade paths that feel different?
 
 First build a 60-second combat test with one weapon and one enemy type. Stop and adjust if movement, aiming, or feedback feels poor. Only then add stacking and the five-minute loop.
+
+Run repeatable crowd benchmarks alongside these slices. A fun small encounter alone does not demonstrate that crowded, fully upgraded combat meets the frame budget.
 
 Stop expanding the prototype after three short documented playtests. Decide to continue, revise, or discard the approach based on whether players notice weapon differences, can describe their build's strengths, and want to try another combination. Three sessions guide the next iteration; they do not establish broad market demand.
 

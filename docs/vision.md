@@ -11,6 +11,7 @@ The interesting question is not just whether we can generate working code. It is
 - Someone can start, understand the basic action, complete a short session, and restart without developer help.
 - The core interaction gives us a reason to keep playing.
 - A build runs on the chosen target platform using documented steps.
+- Crowded combat targets at least 144 FPS on the agreed baseline configuration, with higher frame rates available on capable hardware; see [performance requirements](performance.md).
 - We can explain the important systems and make changes with confidence.
 - The journal records both progress and lessons from failed attempts.
 
