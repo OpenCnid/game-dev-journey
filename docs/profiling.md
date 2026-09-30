@@ -23,6 +23,7 @@ Persistent native staging buffers retain the managed reference state for compari
 # Default: 30-second warm-up + 60-second capture, three repeats each (~18 minutes).
 # Rotates combination order each repeat. Run only one player at a time.
 .\tools\compare-backends.ps1 -Visible -Count 15000
+.\tools\summarize-benchmarks.ps1 -InputDirectory 'path/to/comparison-reports' | Format-Table Mode,Crowd,AverageFps,P99Ms,SimulationKeptUp
 
 # Individual controlled run:
 .\tools\benchmark.ps1 -Visible -Counts 15000 -Repeats 3 -Simulation burst -Rendering culled -JobBatch 128
@@ -56,5 +57,7 @@ Schema v3 CSV contains per-frame stage times, tick counts, submitted instance co
 ```
 
 Load `profile.raw` in the Unity Profiler's CPU Timeline to inspect worker jobs and completion waits. The exporter creates `profile.summary.json` containing Journey markers, job waits, and graphics waits by thread, and fails if no readable markers exist. Summed worker/inclusive sample durations are not wall-clock frame latency. Development captures are marked and excluded from release acceptance; Deep Profiling is not enabled. Binary logs stay in ignored benchmark output because they can be large.
+
+The exporter summarizes Unity's loaded frame window and records its first/last frame indices. Long or high-FPS recordings can exceed the editor's Profiler history limit; do not confuse the exported window with the entire raw recording. Inspect the raw trace in the Profiler with an appropriate history size when investigating events outside that window.
 
 Unity references: [binary profiler logging](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Profiling.Profiler-enableBinaryLog.html), [raw frame data](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Profiling.RawFrameDataView.html), [instanced rendering and batch culling](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Graphics.RenderMeshInstanced.html).

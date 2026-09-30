@@ -61,7 +61,7 @@ Advanced player arguments:
 
 Use `-playtest` to start combat immediately or `-screenshot "C:\captures\arena.png"` to capture after three simulation seconds. Standard Unity player arguments can set resolution. A benchmark contains rendering, steering, firing, hits, respawns, sound, and HUD; it has placeholder meshes, no skeletal animation, and only one weapon. It cannot validate the eventual fully upgraded game's peak load. Keep developer-machine results separate from the i7-8700K / GTX 1080 Ti target.
 
-`-workload regular` disables abilities; `-workload bosses` enables the per-enemy ability state machine. Add `-synchronizedAbilities` for the aligned spike test. Supported CLI counts are 0–20,000. JSON schema v2 and CSV include live projectile/telegraph counts, ability activations and update totals, projectile spawns/updates, simulated capture duration, and pool overflow. Any dropped projectiles or catch-up limit events invalidate a performance pass. See [exact workload definitions and limitations](../../docs/design/late-game-workload.md).
+`-workload regular` disables abilities; `-workload bosses` enables the per-enemy ability state machine. Add `-synchronizedAbilities` for the aligned spike test. Supported CLI counts are 0–20,000. JSON schema v3 and CSV include live projectile/telegraph counts, ability activations and update totals, projectile spawns/updates, actual and simulated capture duration, stage timings, backend selections, and pool overflow. Any dropped projectiles or catch-up limit events invalidate a performance pass. See [exact workload definitions and limitations](../../docs/design/late-game-workload.md).
 
 ## Code map
 

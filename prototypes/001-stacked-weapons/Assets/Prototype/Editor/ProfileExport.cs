@@ -16,8 +16,8 @@ namespace Journey.Editor
         }
         [Serializable] sealed class Summary
         {
-            public string note = "Development profiler diagnostics. Inclusive samples overlap; worker sums are not wall-clock latency. No Deep Profiling.";
-            public int frames;
+            public string note = "Development profiler diagnostics for the loaded frame window; Unity history limits may truncate long recordings. Inclusive samples overlap; worker sums are not wall-clock latency. No Deep Profiling.";
+            public int frames, firstFrameIndex, lastFrameIndex;
             public List<Marker> markers = new List<Marker>();
         }
         public static void Export()
@@ -28,7 +28,8 @@ namespace Journey.Editor
             string path = Path.GetFullPath(args[argument + 1]);
             if (!File.Exists(path)) throw new FileNotFoundException(path);
             ProfilerDriver.LoadProfile(path, false);
-            var summary = new Summary(); var markers = new Dictionary<string, Marker>();
+            var summary = new Summary { firstFrameIndex = ProfilerDriver.firstFrameIndex, lastFrameIndex = ProfilerDriver.lastFrameIndex };
+            var markers = new Dictionary<string, Marker>();
             for (int frame = ProfilerDriver.firstFrameIndex; frame <= ProfilerDriver.lastFrameIndex; frame++)
             {
                 if (frame < 0) continue;
@@ -40,8 +41,8 @@ namespace Journey.Editor
                     for (int i = 0; i < data.sampleCount; i++)
                     {
                         string name = data.GetSampleName(i);
-                        if (!name.Contains("Journey") && !name.Contains("WaitForJobGroup") &&
-                            !name.Contains("JobHandle.Complete") && !name.Contains("Gfx.Wait")) continue;
+                        if (string.IsNullOrEmpty(name)) continue;
+                        if (!name.Contains("Journey") && !name.Contains("Job") && !name.Contains("Gfx.Wait")) continue;
                         string key = data.threadName + "/" + name;
                         if (!markers.TryGetValue(key, out var marker))
                         { marker = new Marker { thread = data.threadName, name = name }; markers.Add(key, marker); }

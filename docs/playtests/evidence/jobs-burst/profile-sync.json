@@ -1,0 +1,2003 @@
+{
+    "note": "Development profiler diagnostics for the loaded frame window; Unity history limits may truncate long recordings. Inclusive samples overlap; worker sums are not wall-clock latency. No Deep Profiling.",
+    "frames": 2000,
+    "firstFrameIndex": 590,
+    "lastFrameIndex": 2589,
+    "markers": [
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Prototype.dll!Journey::PrototypeGame.Update() [Invoke]",
+            "calls": 2000,
+            "totalInclusiveMs": 4134.961894214153,
+            "maxCallMs": 53.12770080566406
+        },
+        {
+            "thread": "Main Thread",
+            "name": "WaitForJobGroupID",
+            "calls": 14679,
+            "totalInclusiveMs": 2205.6906945722003,
+            "maxCallMs": 5.708499908447266
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.RenderPrepare",
+            "calls": 6000,
+            "totalInclusiveMs": 2192.048093024081,
+            "maxCallMs": 7.326000213623047
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Gfx.WaitForGfxCommandsFromMainThread",
+            "calls": 10529,
+            "totalInclusiveMs": 2133.1423959614112,
+            "maxCallMs": 50.43519973754883
+        },
+        {
+            "thread": "Main Thread",
+            "name": "JobHandle.Complete",
+            "calls": 3662,
+            "totalInclusiveMs": 1999.427393737249,
+            "maxCallMs": 5.717599868774414
+        },
+        {
+            "thread": "Worker 4",
+            "name": "EngineJob",
+            "calls": 7352,
+            "totalInclusiveMs": 1340.4518956768588,
+            "maxCallMs": 8.571999549865723
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.RenderSubmit",
+            "calls": 8000,
+            "totalInclusiveMs": 1113.4365978210553,
+            "maxCallMs": 2.664900064468384
+        },
+        {
+            "thread": "Worker 5",
+            "name": "EngineJob",
+            "calls": 5683,
+            "totalInclusiveMs": 915.233496534609,
+            "maxCallMs": 6.120999813079834
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Prototype.dll!Journey::PrototypeGame.OnGUI() [Invoke]",
+            "calls": 3998,
+            "totalInclusiveMs": 795.5276975259185,
+            "maxCallMs": 2.6477999687194826
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Simulation",
+            "calls": 2000,
+            "totalInclusiveMs": 737.9998990432578,
+            "maxCallMs": 5.897799968719482
+        },
+        {
+            "thread": "Worker 6",
+            "name": "EngineJob",
+            "calls": 3291,
+            "totalInclusiveMs": 699.2846998902096,
+            "maxCallMs": 7.114200115203857
+        },
+        {
+            "thread": "Worker 3",
+            "name": "EngineJob",
+            "calls": 5578,
+            "totalInclusiveMs": 554.5418986555887,
+            "maxCallMs": 7.144599914550781
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 2892,
+            "totalInclusiveMs": 476.42499851377217,
+            "maxCallMs": 0.8094000220298767
+        },
+        {
+            "thread": "Worker 7",
+            "name": "EngineJob",
+            "calls": 1819,
+            "totalInclusiveMs": 459.4160982617759,
+            "maxCallMs": 6.884099960327148
+        },
+        {
+            "thread": "Worker 2",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 2569,
+            "totalInclusiveMs": 458.2539990231162,
+            "maxCallMs": 0.5649999976158142
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 2508,
+            "totalInclusiveMs": 450.77389871596826,
+            "maxCallMs": 0.8073999881744385
+        },
+        {
+            "thread": "Worker 3",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 2506,
+            "totalInclusiveMs": 439.2126989692333,
+            "maxCallMs": 0.5425999760627747
+        },
+        {
+            "thread": "Worker 1",
+            "name": "EngineJob",
+            "calls": 15090,
+            "totalInclusiveMs": 438.8277989485796,
+            "maxCallMs": 5.5802998542785648
+        },
+        {
+            "thread": "Worker 7",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 2489,
+            "totalInclusiveMs": 433.4619992360822,
+            "maxCallMs": 0.521399974822998
+        },
+        {
+            "thread": "Worker 9",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 2461,
+            "totalInclusiveMs": 424.2547991548199,
+            "maxCallMs": 0.9420999884605408
+        },
+        {
+            "thread": "Worker 8",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 2469,
+            "totalInclusiveMs": 421.4057990240399,
+            "maxCallMs": 0.46959999203681948
+        },
+        {
+            "thread": "Worker 5",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 2379,
+            "totalInclusiveMs": 416.2164990734309,
+            "maxCallMs": 0.5339000225067139
+        },
+        {
+            "thread": "Worker 6",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 2397,
+            "totalInclusiveMs": 416.1176988877123,
+            "maxCallMs": 0.4648999869823456
+        },
+        {
+            "thread": "Worker 4",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 2256,
+            "totalInclusiveMs": 385.4197989408858,
+            "maxCallMs": 0.5442000031471252
+        },
+        {
+            "thread": "Worker 10",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 2281,
+            "totalInclusiveMs": 371.99489949143028,
+            "maxCallMs": 0.5293999910354614
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Crowd",
+            "calls": 511,
+            "totalInclusiveMs": 371.7617996931076,
+            "maxCallMs": 2.308500051498413
+        },
+        {
+            "thread": "Worker 0",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 2269,
+            "totalInclusiveMs": 361.1617991976673,
+            "maxCallMs": 0.5831000208854675
+        },
+        {
+            "thread": "Worker 11",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 2182,
+            "totalInclusiveMs": 343.5488992080209,
+            "maxCallMs": 0.5421000123023987
+        },
+        {
+            "thread": "Worker 8",
+            "name": "EngineJob",
+            "calls": 1157,
+            "totalInclusiveMs": 308.4075000921075,
+            "maxCallMs": 5.287600040435791
+        },
+        {
+            "thread": "Worker 2",
+            "name": "EngineJob",
+            "calls": 14755,
+            "totalInclusiveMs": 264.2455997580837,
+            "maxCallMs": 6.327499866485596
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Gfx.WaitForPresentOnGfxThread",
+            "calls": 1999,
+            "totalInclusiveMs": 261.33069936023096,
+            "maxCallMs": 1.9954999685287476
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Projectiles",
+            "calls": 511,
+            "totalInclusiveMs": 251.42919942125446,
+            "maxCallMs": 2.628000020980835
+        },
+        {
+            "thread": "Worker 12",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 1673,
+            "totalInclusiveMs": 238.92699930840173,
+            "maxCallMs": 0.44609999656677248
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 860,
+            "totalInclusiveMs": 228.7057997044176,
+            "maxCallMs": 1.8274999856948853
+        },
+        {
+            "thread": "Worker 13",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 1477,
+            "totalInclusiveMs": 213.48019949998707,
+            "maxCallMs": 0.4381999969482422
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 511,
+            "totalInclusiveMs": 190.48339992313414,
+            "maxCallMs": 0.6721000075340271
+        },
+        {
+            "thread": "Worker 2",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 501,
+            "totalInclusiveMs": 188.01019955729135,
+            "maxCallMs": 0.6942999958992004
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 485,
+            "totalInclusiveMs": 182.49709943309427,
+            "maxCallMs": 1.6360000371932984
+        },
+        {
+            "thread": "Worker 3",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 479,
+            "totalInclusiveMs": 178.16799965396059,
+            "maxCallMs": 0.6481000185012817
+        },
+        {
+            "thread": "Worker 8",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 486,
+            "totalInclusiveMs": 177.31609952263535,
+            "maxCallMs": 0.6579999923706055
+        },
+        {
+            "thread": "Worker 7",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 478,
+            "totalInclusiveMs": 176.1751994304359,
+            "maxCallMs": 0.642799973487854
+        },
+        {
+            "thread": "Worker 9",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 483,
+            "totalInclusiveMs": 174.89349940791727,
+            "maxCallMs": 0.8047000169754028
+        },
+        {
+            "thread": "Worker 5",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 458,
+            "totalInclusiveMs": 168.20709972456099,
+            "maxCallMs": 0.6395999789237976
+        },
+        {
+            "thread": "Worker 6",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 450,
+            "totalInclusiveMs": 164.09719960868825,
+            "maxCallMs": 0.6783000230789185
+        },
+        {
+            "thread": "Worker 4",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 431,
+            "totalInclusiveMs": 155.554599320516,
+            "maxCallMs": 0.6251000165939331
+        },
+        {
+            "thread": "Worker 0",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 443,
+            "totalInclusiveMs": 153.0473996642977,
+            "maxCallMs": 0.5516999959945679
+        },
+        {
+            "thread": "Worker 10",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 439,
+            "totalInclusiveMs": 151.50029940903188,
+            "maxCallMs": 0.6847999691963196
+        },
+        {
+            "thread": "Worker 11",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 440,
+            "totalInclusiveMs": 148.7247997422237,
+            "maxCallMs": 0.6621999740600586
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PreLateUpdate.EndGraphicsJobsAfterScriptUpdate",
+            "calls": 1999,
+            "totalInclusiveMs": 120.84289998351597,
+            "maxCallMs": 1.5109000205993653
+        },
+        {
+            "thread": "Main Thread",
+            "name": "EndGraphicsJobs",
+            "calls": 7996,
+            "totalInclusiveMs": 120.75369963852427,
+            "maxCallMs": 1.51010000705719
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Gfx.EndAsyncJobFrame",
+            "calls": 1999,
+            "totalInclusiveMs": 119.35149982885923,
+            "maxCallMs": 1.5094000101089478
+        },
+        {
+            "thread": "Main Thread",
+            "name": "WaitForRenderJobs",
+            "calls": 1999,
+            "totalInclusiveMs": 118.73169937508647,
+            "maxCallMs": 1.5089000463485718
+        },
+        {
+            "thread": "Worker 14",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 800,
+            "totalInclusiveMs": 104.40449985628948,
+            "maxCallMs": 0.42399999499320986
+        },
+        {
+            "thread": "Worker 9",
+            "name": "EngineJob",
+            "calls": 532,
+            "totalInclusiveMs": 97.00469921259355,
+            "maxCallMs": 5.190299987792969
+        },
+        {
+            "thread": "Worker 12",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 317,
+            "totalInclusiveMs": 95.55839985911735,
+            "maxCallMs": 0.5228999853134155
+        },
+        {
+            "thread": "Worker 0",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 220,
+            "totalInclusiveMs": 91.3157998174429,
+            "maxCallMs": 1.503600001335144
+        },
+        {
+            "thread": "Worker 13",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 289,
+            "totalInclusiveMs": 87.9054997547064,
+            "maxCallMs": 0.6259999871253967
+        },
+        {
+            "thread": "Worker 10",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 205,
+            "totalInclusiveMs": 79.41269995644689,
+            "maxCallMs": 1.7919000387191773
+        },
+        {
+            "thread": "Worker 9",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 226,
+            "totalInclusiveMs": 79.32980000600219,
+            "maxCallMs": 1.6159000396728516
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Weapon",
+            "calls": 511,
+            "totalInclusiveMs": 72.74590007239022,
+            "maxCallMs": 1.4641000032424927
+        },
+        {
+            "thread": "Worker 10",
+            "name": "EngineJob",
+            "calls": 393,
+            "totalInclusiveMs": 64.86919969401788,
+            "maxCallMs": 2.4630000591278078
+        },
+        {
+            "thread": "Worker 7",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 147,
+            "totalInclusiveMs": 60.553799886256459,
+            "maxCallMs": 1.9077999591827393
+        },
+        {
+            "thread": "Worker 11",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 147,
+            "totalInclusiveMs": 53.12089980952442,
+            "maxCallMs": 1.309499979019165
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BurstCrowd:GridJob (Burst)",
+            "calls": 503,
+            "totalInclusiveMs": 52.11159987747669,
+            "maxCallMs": 0.38519999384880068
+        },
+        {
+            "thread": "Worker 8",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 117,
+            "totalInclusiveMs": 48.44849984161556,
+            "maxCallMs": 2.0376999378204347
+        },
+        {
+            "thread": "Worker 5",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 131,
+            "totalInclusiveMs": 47.129499816917817,
+            "maxCallMs": 1.5199999809265137
+        },
+        {
+            "thread": "Worker 11",
+            "name": "EngineJob",
+            "calls": 282,
+            "totalInclusiveMs": 45.76560020126635,
+            "maxCallMs": 2.933799982070923
+        },
+        {
+            "thread": "Worker 6",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 108,
+            "totalInclusiveMs": 39.85629991069436,
+            "maxCallMs": 1.669600009918213
+        },
+        {
+            "thread": "Main Thread",
+            "name": "EngineJob",
+            "calls": 8691,
+            "totalInclusiveMs": 39.48119979107287,
+            "maxCallMs": 0.12060000002384186
+        },
+        {
+            "thread": "Worker 14",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 133,
+            "totalInclusiveMs": 38.70189997181296,
+            "maxCallMs": 0.569599986076355
+        },
+        {
+            "thread": "Worker 12",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 115,
+            "totalInclusiveMs": 38.59230002015829,
+            "maxCallMs": 1.496899962425232
+        },
+        {
+            "thread": "Worker 4",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 113,
+            "totalInclusiveMs": 38.03589991381159,
+            "maxCallMs": 1.5125999450683594
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 118,
+            "totalInclusiveMs": 37.74089994211681,
+            "maxCallMs": 2.1029000282287599
+        },
+        {
+            "thread": "Worker 3",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 111,
+            "totalInclusiveMs": 37.10609993338585,
+            "maxCallMs": 1.3324999809265137
+        },
+        {
+            "thread": "Worker 2",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 121,
+            "totalInclusiveMs": 36.39130002493039,
+            "maxCallMs": 1.5951000452041627
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Abilities",
+            "calls": 511,
+            "totalInclusiveMs": 35.27829980477691,
+            "maxCallMs": 1.2549999952316285
+        },
+        {
+            "thread": "Worker 14",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 68,
+            "totalInclusiveMs": 31.302699878811838,
+            "maxCallMs": 2.0130999088287355
+        },
+        {
+            "thread": "Worker 13",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 93,
+            "totalInclusiveMs": 31.168700002133848,
+            "maxCallMs": 1.652500033378601
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 251,
+            "totalInclusiveMs": 26.91359992098296,
+            "maxCallMs": 0.2937000095844269
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 203,
+            "totalInclusiveMs": 26.326999927754515,
+            "maxCallMs": 0.29429998993873598
+        },
+        {
+            "thread": "Worker 2",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 202,
+            "totalInclusiveMs": 25.401499900151977,
+            "maxCallMs": 0.32170000672340395
+        },
+        {
+            "thread": "Main Thread",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 1117,
+            "totalInclusiveMs": 23.558799871709199,
+            "maxCallMs": 0.1200999990105629
+        },
+        {
+            "thread": "Worker 7",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 188,
+            "totalInclusiveMs": 22.78049994027242,
+            "maxCallMs": 0.3409000039100647
+        },
+        {
+            "thread": "Worker 3",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 184,
+            "totalInclusiveMs": 22.24200001207646,
+            "maxCallMs": 0.29260000586509707
+        },
+        {
+            "thread": "Worker 5",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 178,
+            "totalInclusiveMs": 21.567299894988538,
+            "maxCallMs": 0.2583000063896179
+        },
+        {
+            "thread": "Worker 8",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 185,
+            "totalInclusiveMs": 21.548099947161974,
+            "maxCallMs": 0.5188000202178955
+        },
+        {
+            "thread": "Worker 6",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 181,
+            "totalInclusiveMs": 21.176299976883457,
+            "maxCallMs": 0.243599995970726
+        },
+        {
+            "thread": "Worker 9",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 180,
+            "totalInclusiveMs": 20.7721999399364,
+            "maxCallMs": 0.2524999976158142
+        },
+        {
+            "thread": "Worker 4",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 166,
+            "totalInclusiveMs": 19.54959988221526,
+            "maxCallMs": 0.2750000059604645
+        },
+        {
+            "thread": "Worker 10",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 153,
+            "totalInclusiveMs": 16.83329992555082,
+            "maxCallMs": 0.290800005197525
+        },
+        {
+            "thread": "Worker 11",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 158,
+            "totalInclusiveMs": 16.227899921825157,
+            "maxCallMs": 0.28529998660087588
+        },
+        {
+            "thread": "Worker 0",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 147,
+            "totalInclusiveMs": 15.9859999101609,
+            "maxCallMs": 0.29749998450279238
+        },
+        {
+            "thread": "Worker 13",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 118,
+            "totalInclusiveMs": 12.727999959141016,
+            "maxCallMs": 0.22869999706745149
+        },
+        {
+            "thread": "Worker 13",
+            "name": "EngineJob",
+            "calls": 212,
+            "totalInclusiveMs": 10.599599954963196,
+            "maxCallMs": 5.631999969482422
+        },
+        {
+            "thread": "Worker 12",
+            "name": "EngineJob",
+            "calls": 218,
+            "totalInclusiveMs": 10.557200028430089,
+            "maxCallMs": 4.979000091552734
+        },
+        {
+            "thread": "Worker 12",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 106,
+            "totalInclusiveMs": 9.7651999713853,
+            "maxCallMs": 0.1973000019788742
+        },
+        {
+            "thread": "Render Thread",
+            "name": "ScheduleGeometryJobs",
+            "calls": 712,
+            "totalInclusiveMs": 8.90549993980676,
+            "maxCallMs": 0.22139999270439149
+        },
+        {
+            "thread": "Worker 14",
+            "name": "EngineJob",
+            "calls": 273,
+            "totalInclusiveMs": 5.598099973169155,
+            "maxCallMs": 0.05049999803304672
+        },
+        {
+            "thread": "Worker 14",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 255,
+            "totalInclusiveMs": 5.4899999720510099,
+            "maxCallMs": 0.0502999983727932
+        },
+        {
+            "thread": "Main Thread",
+            "name": "LineRenderer.ScheduleGeometryJobs",
+            "calls": 712,
+            "totalInclusiveMs": 5.075099978130311,
+            "maxCallMs": 0.029600000008940698
+        },
+        {
+            "thread": "Worker 14",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 59,
+            "totalInclusiveMs": 5.013199948007241,
+            "maxCallMs": 0.23279999196529389
+        },
+        {
+            "thread": "Render Thread",
+            "name": "WaitForRenderJobs",
+            "calls": 1999,
+            "totalInclusiveMs": 4.88119997351896,
+            "maxCallMs": 0.019999999552965165
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 236,
+            "totalInclusiveMs": 4.859599971212447,
+            "maxCallMs": 0.10209999978542328
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 110,
+            "totalInclusiveMs": 4.704600016499171,
+            "maxCallMs": 0.572700023651123
+        },
+        {
+            "thread": "Worker 13",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 175,
+            "totalInclusiveMs": 3.7804999940562995,
+            "maxCallMs": 0.03680000081658363
+        },
+        {
+            "thread": "Worker 12",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 160,
+            "totalInclusiveMs": 3.5066999751143159,
+            "maxCallMs": 0.039799999445676807
+        },
+        {
+            "thread": "Render Thread",
+            "name": "PutAllGeometryJobFence",
+            "calls": 1999,
+            "totalInclusiveMs": 2.2698999792919496,
+            "maxCallMs": 0.02930000051856041
+        },
+        {
+            "thread": "Worker 1",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 204,
+            "totalInclusiveMs": 1.9866999902296812,
+            "maxCallMs": 0.03799999877810478
+        },
+        {
+            "thread": "Main Thread",
+            "name": "EarlyUpdate.ExecuteMainThreadJobs",
+            "calls": 2000,
+            "totalInclusiveMs": 1.8858999765943736,
+            "maxCallMs": 0.009599999524652958
+        },
+        {
+            "thread": "Worker 0",
+            "name": "EngineJob",
+            "calls": 107,
+            "totalInclusiveMs": 1.8607999966479839,
+            "maxCallMs": 0.042100001126527789
+        },
+        {
+            "thread": "Worker 0",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 81,
+            "totalInclusiveMs": 1.7715999961365015,
+            "maxCallMs": 0.04179999977350235
+        },
+        {
+            "thread": "Render Thread",
+            "name": "PutGeometryJobFence",
+            "calls": 712,
+            "totalInclusiveMs": 1.5337999920593575,
+            "maxCallMs": 0.007600000128149986
+        },
+        {
+            "thread": "Worker 2",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 173,
+            "totalInclusiveMs": 1.511299992678687,
+            "maxCallMs": 0.03200000151991844
+        },
+        {
+            "thread": "Worker 11",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 73,
+            "totalInclusiveMs": 1.4267999853473157,
+            "maxCallMs": 0.03880000114440918
+        },
+        {
+            "thread": "Worker 2",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 526,
+            "totalInclusiveMs": 1.2280999894355774,
+            "maxCallMs": 0.008700000122189522
+        },
+        {
+            "thread": "Worker 1",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 510,
+            "totalInclusiveMs": 1.1829999964757008,
+            "maxCallMs": 0.008899999782443047
+        },
+        {
+            "thread": "Worker 10",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 52,
+            "totalInclusiveMs": 1.1272999926004559,
+            "maxCallMs": 0.040300000458955768
+        },
+        {
+            "thread": "Worker 0",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 15,
+            "totalInclusiveMs": 1.0642999932169915,
+            "maxCallMs": 0.1251000016927719
+        },
+        {
+            "thread": "Worker 7",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 14,
+            "totalInclusiveMs": 0.9712999947369099,
+            "maxCallMs": 0.09239999949932099
+        },
+        {
+            "thread": "Worker 10",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 15,
+            "totalInclusiveMs": 0.9202999956905842,
+            "maxCallMs": 0.07959999889135361
+        },
+        {
+            "thread": "Worker 3",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 12,
+            "totalInclusiveMs": 0.8904999904334545,
+            "maxCallMs": 0.16699999570846559
+        },
+        {
+            "thread": "Worker 3",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 356,
+            "totalInclusiveMs": 0.8618999951213482,
+            "maxCallMs": 0.013100000098347664
+        },
+        {
+            "thread": "Worker 11",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 13,
+            "totalInclusiveMs": 0.8368999846279621,
+            "maxCallMs": 0.09470000118017197
+        },
+        {
+            "thread": "Worker 1",
+            "name": "PrepareSceneNodesJob",
+            "calls": 652,
+            "totalInclusiveMs": 0.8207999907317571,
+            "maxCallMs": 0.010400000028312207
+        },
+        {
+            "thread": "Worker 5",
+            "name": "PrepareSceneNodesJob",
+            "calls": 605,
+            "totalInclusiveMs": 0.7780999933020212,
+            "maxCallMs": 0.022199999541044236
+        },
+        {
+            "thread": "Worker 4",
+            "name": "PrepareSceneNodesJob",
+            "calls": 596,
+            "totalInclusiveMs": 0.7769999926968012,
+            "maxCallMs": 0.01140000019222498
+        },
+        {
+            "thread": "Worker 2",
+            "name": "SceneNodesInitJob",
+            "calls": 724,
+            "totalInclusiveMs": 0.7718999911448918,
+            "maxCallMs": 0.00419999985024333
+        },
+        {
+            "thread": "Worker 8",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 10,
+            "totalInclusiveMs": 0.7420000024139881,
+            "maxCallMs": 0.11720000207424164
+        },
+        {
+            "thread": "Worker 2",
+            "name": "PrepareSceneNodesJob",
+            "calls": 576,
+            "totalInclusiveMs": 0.7260999934514985,
+            "maxCallMs": 0.008200000040233136
+        },
+        {
+            "thread": "Worker 3",
+            "name": "PrepareSceneNodesJob",
+            "calls": 574,
+            "totalInclusiveMs": 0.7142999933857936,
+            "maxCallMs": 0.009499999694526196
+        },
+        {
+            "thread": "Worker 9",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 30,
+            "totalInclusiveMs": 0.6675999939907342,
+            "maxCallMs": 0.04149999842047691
+        },
+        {
+            "thread": "Worker 7",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 21,
+            "totalInclusiveMs": 0.6653999956324697,
+            "maxCallMs": 0.1784999966621399
+        },
+        {
+            "thread": "Worker 1",
+            "name": "SceneNodesInitJob",
+            "calls": 602,
+            "totalInclusiveMs": 0.6223999934154563,
+            "maxCallMs": 0.0032999999821186067
+        },
+        {
+            "thread": "Worker 6",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 32,
+            "totalInclusiveMs": 0.6110000000335276,
+            "maxCallMs": 0.03889999911189079
+        },
+        {
+            "thread": "Worker 13",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 9,
+            "totalInclusiveMs": 0.5932999923825264,
+            "maxCallMs": 0.08410000056028366
+        },
+        {
+            "thread": "Worker 6",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 9,
+            "totalInclusiveMs": 0.588100004941225,
+            "maxCallMs": 0.07800000160932541
+        },
+        {
+            "thread": "Worker 0",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 28,
+            "totalInclusiveMs": 0.5858999947085977,
+            "maxCallMs": 0.04309999942779541
+        },
+        {
+            "thread": "Main Thread",
+            "name": "CullSceneDynamicObjectsCombineJob",
+            "calls": 1549,
+            "totalInclusiveMs": 0.5797999879432609,
+            "maxCallMs": 0.00139999995008111
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 19,
+            "totalInclusiveMs": 0.5638999966904521,
+            "maxCallMs": 0.12349999696016312
+        },
+        {
+            "thread": "Worker 9",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 27,
+            "totalInclusiveMs": 0.5373000046238303,
+            "maxCallMs": 0.03660000115633011
+        },
+        {
+            "thread": "Worker 4",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 23,
+            "totalInclusiveMs": 0.5362999951466918,
+            "maxCallMs": 0.03610000014305115
+        },
+        {
+            "thread": "Worker 5",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 8,
+            "totalInclusiveMs": 0.5304000042378902,
+            "maxCallMs": 0.09120000153779984
+        },
+        {
+            "thread": "Worker 3",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 31,
+            "totalInclusiveMs": 0.5101999987382442,
+            "maxCallMs": 0.030300000682473184
+        },
+        {
+            "thread": "Worker 12",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 7,
+            "totalInclusiveMs": 0.5016000084578991,
+            "maxCallMs": 0.08950000256299973
+        },
+        {
+            "thread": "Worker 5",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 24,
+            "totalInclusiveMs": 0.4966999990865588,
+            "maxCallMs": 0.04729999974370003
+        },
+        {
+            "thread": "Worker 9",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 7,
+            "totalInclusiveMs": 0.4545999951660633,
+            "maxCallMs": 0.07479999959468842
+        },
+        {
+            "thread": "Worker 6",
+            "name": "PrepareSceneNodesJob",
+            "calls": 351,
+            "totalInclusiveMs": 0.4525999967881944,
+            "maxCallMs": 0.006599999964237213
+        },
+        {
+            "thread": "Worker 14",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 7,
+            "totalInclusiveMs": 0.44849999248981478,
+            "maxCallMs": 0.07720000296831131
+        },
+        {
+            "thread": "Worker 8",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 22,
+            "totalInclusiveMs": 0.42549999710172417,
+            "maxCallMs": 0.04010000079870224
+        },
+        {
+            "thread": "Worker 2",
+            "name": "BurstCrowd:GridJob (Burst)",
+            "calls": 3,
+            "totalInclusiveMs": 0.42500000447034838,
+            "maxCallMs": 0.17069999873638154
+        },
+        {
+            "thread": "Worker 11",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 21,
+            "totalInclusiveMs": 0.4155999980866909,
+            "maxCallMs": 0.04560000076889992
+        },
+        {
+            "thread": "Worker 10",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 19,
+            "totalInclusiveMs": 0.4098999975249171,
+            "maxCallMs": 0.043800000101327899
+        },
+        {
+            "thread": "Worker 2",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 6,
+            "totalInclusiveMs": 0.403999999165535,
+            "maxCallMs": 0.08389999717473984
+        },
+        {
+            "thread": "Worker 5",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 21,
+            "totalInclusiveMs": 0.4033999955281615,
+            "maxCallMs": 0.04039999842643738
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BurstCrowd:GridJob (Burst)",
+            "calls": 4,
+            "totalInclusiveMs": 0.3928000032901764,
+            "maxCallMs": 0.11110000312328339
+        },
+        {
+            "thread": "Worker 3",
+            "name": "SceneNodesInitJob",
+            "calls": 353,
+            "totalInclusiveMs": 0.38309999683406206,
+            "maxCallMs": 0.0034000000450760128
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 6,
+            "totalInclusiveMs": 0.3637999929487705,
+            "maxCallMs": 0.07159999758005142
+        },
+        {
+            "thread": "Worker 3",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 16,
+            "totalInclusiveMs": 0.3616999974474311,
+            "maxCallMs": 0.06289999932050705
+        },
+        {
+            "thread": "Worker 8",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 19,
+            "totalInclusiveMs": 0.3539000013843179,
+            "maxCallMs": 0.031300000846385959
+        },
+        {
+            "thread": "Worker 7",
+            "name": "PrepareSceneNodesJob",
+            "calls": 282,
+            "totalInclusiveMs": 0.3531999960250687,
+            "maxCallMs": 0.006399999838322401
+        },
+        {
+            "thread": "Worker 4",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 18,
+            "totalInclusiveMs": 0.302299995906651,
+            "maxCallMs": 0.030799999833106996
+        },
+        {
+            "thread": "Worker 4",
+            "name": "SceneNodesInitJob",
+            "calls": 268,
+            "totalInclusiveMs": 0.29199999559205028,
+            "maxCallMs": 0.007199999876320362
+        },
+        {
+            "thread": "Worker 12",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 17,
+            "totalInclusiveMs": 0.2834999989718199,
+            "maxCallMs": 0.02979999966919422
+        },
+        {
+            "thread": "Worker 2",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 13,
+            "totalInclusiveMs": 0.27550000231713059,
+            "maxCallMs": 0.04309999942779541
+        },
+        {
+            "thread": "Worker 6",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 14,
+            "totalInclusiveMs": 0.26570000033825638,
+            "maxCallMs": 0.02539999969303608
+        },
+        {
+            "thread": "Worker 1",
+            "name": "CullSceneDynamicObjectsCombineJob",
+            "calls": 944,
+            "totalInclusiveMs": 0.2434999934048392,
+            "maxCallMs": 0.001500000013038516
+        },
+        {
+            "thread": "Worker 2",
+            "name": "CullSceneDynamicObjectsCombineJob",
+            "calls": 970,
+            "totalInclusiveMs": 0.24339999348012499,
+            "maxCallMs": 0.001500000013038516
+        },
+        {
+            "thread": "Worker 8",
+            "name": "PrepareSceneNodesJob",
+            "calls": 185,
+            "totalInclusiveMs": 0.2393999982450623,
+            "maxCallMs": 0.0044999998062849049
+        },
+        {
+            "thread": "Worker 5",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 182,
+            "totalInclusiveMs": 0.20909999764990062,
+            "maxCallMs": 0.003499999875202775
+        },
+        {
+            "thread": "Worker 3",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 201,
+            "totalInclusiveMs": 0.203299997956492,
+            "maxCallMs": 0.0026000000070780517
+        },
+        {
+            "thread": "Worker 7",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 180,
+            "totalInclusiveMs": 0.20269999810261653,
+            "maxCallMs": 0.006500000134110451
+        },
+        {
+            "thread": "Worker 4",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 3,
+            "totalInclusiveMs": 0.20189999788999558,
+            "maxCallMs": 0.08290000259876251
+        },
+        {
+            "thread": "Worker 4",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 201,
+            "totalInclusiveMs": 0.20119999849703164,
+            "maxCallMs": 0.002199999988079071
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PostLateUpdate.EndGraphicsJobsAfterScriptLateUpdate",
+            "calls": 1999,
+            "totalInclusiveMs": 0.1971999949819292,
+            "maxCallMs": 0.0008999999845400453
+        },
+        {
+            "thread": "Worker 1",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 193,
+            "totalInclusiveMs": 0.19629999808967114,
+            "maxCallMs": 0.003499999875202775
+        },
+        {
+            "thread": "Worker 2",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 204,
+            "totalInclusiveMs": 0.1959999980754219,
+            "maxCallMs": 0.0034000000450760128
+        },
+        {
+            "thread": "Worker 6",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 168,
+            "totalInclusiveMs": 0.18849999899975956,
+            "maxCallMs": 0.002300000051036477
+        },
+        {
+            "thread": "Worker 8",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 166,
+            "totalInclusiveMs": 0.18839999847114087,
+            "maxCallMs": 0.008200000040233136
+        },
+        {
+            "thread": "Worker 13",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 9,
+            "totalInclusiveMs": 0.18269999790936709,
+            "maxCallMs": 0.052299998700618747
+        },
+        {
+            "thread": "Worker 3",
+            "name": "CullSceneDynamicObjectsCombineJob",
+            "calls": 301,
+            "totalInclusiveMs": 0.16789999876345974,
+            "maxCallMs": 0.00139999995008111
+        },
+        {
+            "thread": "Worker 9",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 138,
+            "totalInclusiveMs": 0.16409999883035199,
+            "maxCallMs": 0.002300000051036477
+        },
+        {
+            "thread": "Worker 10",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 124,
+            "totalInclusiveMs": 0.14279999898280949,
+            "maxCallMs": 0.0027000000700354578
+        },
+        {
+            "thread": "Worker 4",
+            "name": "CullSceneDynamicObjectsCombineJob",
+            "calls": 232,
+            "totalInclusiveMs": 0.13609999852633337,
+            "maxCallMs": 0.0013000000035390258
+        },
+        {
+            "thread": "Worker 9",
+            "name": "PrepareSceneNodesJob",
+            "calls": 105,
+            "totalInclusiveMs": 0.1321999991487246,
+            "maxCallMs": 0.004100000020116568
+        },
+        {
+            "thread": "Worker 7",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 10,
+            "totalInclusiveMs": 0.12379999994300306,
+            "maxCallMs": 0.025499999523162843
+        },
+        {
+            "thread": "Worker 14",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 7,
+            "totalInclusiveMs": 0.11689999606460333,
+            "maxCallMs": 0.024699999019503595
+        },
+        {
+            "thread": "Main Thread",
+            "name": "CombineJobResults",
+            "calls": 2597,
+            "totalInclusiveMs": 0.10019999755604658,
+            "maxCallMs": 0.0008999999845400453
+        },
+        {
+            "thread": "Worker 5",
+            "name": "BurstCrowd:GridJob (Burst)",
+            "calls": 1,
+            "totalInclusiveMs": 0.09179999679327011,
+            "maxCallMs": 0.09179999679327011
+        },
+        {
+            "thread": "Worker 11",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 72,
+            "totalInclusiveMs": 0.08579999895300716,
+            "maxCallMs": 0.00279999990016222
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 76,
+            "totalInclusiveMs": 0.06719999870983884,
+            "maxCallMs": 0.002099999925121665
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Prototype.dll!Journey::BuildStamp..ctor() [Invoke]",
+            "calls": 1,
+            "totalInclusiveMs": 0.0625,
+            "maxCallMs": 0.0625
+        },
+        {
+            "thread": "Main Thread",
+            "name": "ConstraintManager::Update::JobSetup",
+            "calls": 1999,
+            "totalInclusiveMs": 0.0594999984750757,
+            "maxCallMs": 0.0007999999797903001
+        },
+        {
+            "thread": "Worker 10",
+            "name": "PrepareSceneNodesJob",
+            "calls": 48,
+            "totalInclusiveMs": 0.05619999938062392,
+            "maxCallMs": 0.0031999999191612007
+        },
+        {
+            "thread": "Worker 12",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 42,
+            "totalInclusiveMs": 0.04769999970449135,
+            "maxCallMs": 0.0019000000320374966
+        },
+        {
+            "thread": "Main Thread",
+            "name": "JobAlloc.Grow",
+            "calls": 1,
+            "totalInclusiveMs": 0.03739999979734421,
+            "maxCallMs": 0.03739999979734421
+        },
+        {
+            "thread": "Worker 5",
+            "name": "SceneNodesInitJob",
+            "calls": 31,
+            "totalInclusiveMs": 0.03569999954197556,
+            "maxCallMs": 0.0031999999191612007
+        },
+        {
+            "thread": "Worker 1",
+            "name": "CombineJobResults",
+            "calls": 1012,
+            "totalInclusiveMs": 0.027599999295489398,
+            "maxCallMs": 0.00039999998989515007
+        },
+        {
+            "thread": "Worker 11",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 10,
+            "totalInclusiveMs": 0.0254000002387329,
+            "maxCallMs": 0.006500000134110451
+        },
+        {
+            "thread": "Worker 13",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 19,
+            "totalInclusiveMs": 0.02539999969303608,
+            "maxCallMs": 0.0017999999690800906
+        },
+        {
+            "thread": "Worker 2",
+            "name": "CombineJobResults",
+            "calls": 1014,
+            "totalInclusiveMs": 0.02449999938107794,
+            "maxCallMs": 0.00039999998989515007
+        },
+        {
+            "thread": "Worker 0",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 18,
+            "totalInclusiveMs": 0.022899999865330757,
+            "maxCallMs": 0.0027000000700354578
+        },
+        {
+            "thread": "Worker 6",
+            "name": "JobAlloc.Grow",
+            "calls": 2,
+            "totalInclusiveMs": 0.021699999924749137,
+            "maxCallMs": 0.014800000004470349
+        },
+        {
+            "thread": "Worker 14",
+            "name": "CombineJobResults",
+            "calls": 237,
+            "totalInclusiveMs": 0.019399999495362864,
+            "maxCallMs": 0.000699999975040555
+        },
+        {
+            "thread": "Worker 3",
+            "name": "JobAlloc.Grow",
+            "calls": 1,
+            "totalInclusiveMs": 0.017400000244379045,
+            "maxCallMs": 0.017400000244379045
+        },
+        {
+            "thread": "Worker 14",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 15,
+            "totalInclusiveMs": 0.017199999769218267,
+            "maxCallMs": 0.002300000051036477
+        },
+        {
+            "thread": "Worker 11",
+            "name": "PrepareSceneNodesJob",
+            "calls": 12,
+            "totalInclusiveMs": 0.01609999977517873,
+            "maxCallMs": 0.002899999963119626
+        },
+        {
+            "thread": "Worker 12",
+            "name": "CombineJobResults",
+            "calls": 144,
+            "totalInclusiveMs": 0.014099999607424252,
+            "maxCallMs": 0.00039999998989515007
+        },
+        {
+            "thread": "Worker 13",
+            "name": "CombineJobResults",
+            "calls": 160,
+            "totalInclusiveMs": 0.012599999681697227,
+            "maxCallMs": 0.00039999998989515007
+        },
+        {
+            "thread": "Main Thread",
+            "name": "SceneNodesInitJob",
+            "calls": 20,
+            "totalInclusiveMs": 0.012099999672500417,
+            "maxCallMs": 0.00139999995008111
+        },
+        {
+            "thread": "Worker 6",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 4,
+            "totalInclusiveMs": 0.010899999790126458,
+            "maxCallMs": 0.0052999998442828659
+        },
+        {
+            "thread": "Worker 3",
+            "name": "CombineJobResults",
+            "calls": 322,
+            "totalInclusiveMs": 0.009399999755260069,
+            "maxCallMs": 0.00029999998514540493
+        },
+        {
+            "thread": "Worker 13",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 4,
+            "totalInclusiveMs": 0.009099999850150198,
+            "maxCallMs": 0.004399999976158142
+        },
+        {
+            "thread": "Worker 0",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 2,
+            "totalInclusiveMs": 0.008699999685632065,
+            "maxCallMs": 0.00839999970048666
+        },
+        {
+            "thread": "Worker 12",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 4,
+            "totalInclusiveMs": 0.00840000012976816,
+            "maxCallMs": 0.005100000184029341
+        },
+        {
+            "thread": "Worker 4",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 4,
+            "totalInclusiveMs": 0.008099999788100832,
+            "maxCallMs": 0.00419999985024333
+        },
+        {
+            "thread": "Worker 4",
+            "name": "CombineJobResults",
+            "calls": 252,
+            "totalInclusiveMs": 0.007799999802955426,
+            "maxCallMs": 0.00009999999747378752
+        },
+        {
+            "thread": "Worker 0",
+            "name": "CombineJobResults",
+            "calls": 74,
+            "totalInclusiveMs": 0.007599999837111682,
+            "maxCallMs": 0.0005000000237487257
+        },
+        {
+            "thread": "Worker 10",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 2,
+            "totalInclusiveMs": 0.00710000007529743,
+            "maxCallMs": 0.006800000090152025
+        },
+        {
+            "thread": "Worker 11",
+            "name": "CombineJobResults",
+            "calls": 57,
+            "totalInclusiveMs": 0.006199999828822911,
+            "maxCallMs": 0.0007999999797903001
+        },
+        {
+            "thread": "Worker 13",
+            "name": "PrepareSceneNodesJob",
+            "calls": 6,
+            "totalInclusiveMs": 0.004600000043865293,
+            "maxCallMs": 0.0010000000474974514
+        },
+        {
+            "thread": "Worker 10",
+            "name": "CombineJobResults",
+            "calls": 43,
+            "totalInclusiveMs": 0.003999999884399585,
+            "maxCallMs": 0.00029999998514540493
+        },
+        {
+            "thread": "Worker 12",
+            "name": "PrepareSceneNodesJob",
+            "calls": 4,
+            "totalInclusiveMs": 0.003700000001117587,
+            "maxCallMs": 0.0010000000474974514
+        },
+        {
+            "thread": "Worker 9",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 2,
+            "totalInclusiveMs": 0.003399999979592394,
+            "maxCallMs": 0.0032999999821186067
+        },
+        {
+            "thread": "Worker 9",
+            "name": "CombineJobResults",
+            "calls": 24,
+            "totalInclusiveMs": 0.0029999999023857528,
+            "maxCallMs": 0.0005999999702908099
+        },
+        {
+            "thread": "Worker 6",
+            "name": "CombineJobResults",
+            "calls": 23,
+            "totalInclusiveMs": 0.0025999999343184756,
+            "maxCallMs": 0.00039999998989515007
+        },
+        {
+            "thread": "Worker 14",
+            "name": "PrepareSceneNodesJob",
+            "calls": 1,
+            "totalInclusiveMs": 0.002199999988079071,
+            "maxCallMs": 0.002199999988079071
+        },
+        {
+            "thread": "Worker 5",
+            "name": "CombineJobResults",
+            "calls": 19,
+            "totalInclusiveMs": 0.0013999999646330253,
+            "maxCallMs": 0.00009999999747378752
+        },
+        {
+            "thread": "Worker 8",
+            "name": "CombineJobResults",
+            "calls": 14,
+            "totalInclusiveMs": 0.0011999999696854503,
+            "maxCallMs": 0.00019999999494757503
+        },
+        {
+            "thread": "Worker 6",
+            "name": "SceneNodesInitJob",
+            "calls": 1,
+            "totalInclusiveMs": 0.0010999999940395356,
+            "maxCallMs": 0.0010999999940395356
+        },
+        {
+            "thread": "Worker 5",
+            "name": "CullSceneDynamicObjectsCombineJob",
+            "calls": 2,
+            "totalInclusiveMs": 0.001099999964935705,
+            "maxCallMs": 0.000699999975040555
+        },
+        {
+            "thread": "Worker 0",
+            "name": "PrepareSceneNodesJob",
+            "calls": 1,
+            "totalInclusiveMs": 0.0005999999702908099,
+            "maxCallMs": 0.0005999999702908099
+        },
+        {
+            "thread": "Worker 7",
+            "name": "CombineJobResults",
+            "calls": 5,
+            "totalInclusiveMs": 0.00019999999494757503,
+            "maxCallMs": 0.00009999999747378752
+        },
+        {
+            "thread": "Worker 7",
+            "name": "EndJob",
+            "calls": 5310,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 9",
+            "name": "EndJob",
+            "calls": 4233,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 8",
+            "name": "EndJob",
+            "calls": 4563,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 8",
+            "name": "BeginJob",
+            "calls": 4563,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Main Thread",
+            "name": "ScheduleAllocJob",
+            "calls": 10082,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 9",
+            "name": "BeginJob",
+            "calls": 4233,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Main Thread",
+            "name": "ScheduleJob",
+            "calls": 45393,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 14",
+            "name": "EndJob",
+            "calls": 1637,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 6",
+            "name": "BeginJob",
+            "calls": 6453,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "ScheduleJob",
+            "calls": 712,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 6",
+            "name": "ScheduleJob",
+            "calls": 232,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 4",
+            "name": "ScheduleAllocJob",
+            "calls": 54,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Main Thread",
+            "name": "KickJobs",
+            "calls": 16079,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 5",
+            "name": "ScheduleJob",
+            "calls": 1407,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 5",
+            "name": "ScheduleAllocJob",
+            "calls": 3,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 14",
+            "name": "BeginJob",
+            "calls": 1637,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 7",
+            "name": "ScheduleAllocJob",
+            "calls": 3,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 2",
+            "name": "ScheduleJob",
+            "calls": 1069,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 13",
+            "name": "ScheduleAllocJob",
+            "calls": 4,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 10",
+            "name": "BeginJob",
+            "calls": 3818,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BeginJob",
+            "calls": 19262,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 12",
+            "name": "BeginJob",
+            "calls": 2764,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 8",
+            "name": "ScheduleJob",
+            "calls": 35,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 12",
+            "name": "EndJob",
+            "calls": 2764,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 13",
+            "name": "BeginJob",
+            "calls": 2494,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 13",
+            "name": "EndJob",
+            "calls": 2494,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 7",
+            "name": "ScheduleJob",
+            "calls": 85,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 2",
+            "name": "BeginJob",
+            "calls": 23522,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 2",
+            "name": "EndJob",
+            "calls": 23522,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 2",
+            "name": "ScheduleAllocJob",
+            "calls": 6221,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 3",
+            "name": "ScheduleAllocJob",
+            "calls": 60,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 3",
+            "name": "BeginJob",
+            "calls": 10098,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 3",
+            "name": "EndJob",
+            "calls": 10098,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 3",
+            "name": "ScheduleJob",
+            "calls": 2215,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 9",
+            "name": "ScheduleJob",
+            "calls": 21,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 7",
+            "name": "BeginJob",
+            "calls": 5310,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 4",
+            "name": "BeginJob",
+            "calls": 11060,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 4",
+            "name": "EndJob",
+            "calls": 11060,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 10",
+            "name": "ScheduleJob",
+            "calls": 3,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 4",
+            "name": "ScheduleJob",
+            "calls": 2986,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 11",
+            "name": "BeginJob",
+            "calls": 3551,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 10",
+            "name": "EndJob",
+            "calls": 3818,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 1",
+            "name": "ScheduleAllocJob",
+            "calls": 5649,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 1",
+            "name": "EndJob",
+            "calls": 23791,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BeginJob",
+            "calls": 23791,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 0",
+            "name": "EndJob",
+            "calls": 3656,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 0",
+            "name": "BeginJob",
+            "calls": 3656,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 5",
+            "name": "BeginJob",
+            "calls": 9140,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 5",
+            "name": "EndJob",
+            "calls": 9140,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 6",
+            "name": "EndJob",
+            "calls": 6454,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Main Thread",
+            "name": "EndJob",
+            "calls": 19262,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 1",
+            "name": "ScheduleJob",
+            "calls": 945,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 11",
+            "name": "EndJob",
+            "calls": 3551,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        }
+    ]
+}

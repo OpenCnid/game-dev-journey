@@ -26,6 +26,8 @@ Our benchmark CPU is an Intel Core i7-8700K at stock settings, paired with the p
 
 Late-game ambition includes **more than 10,000 active enemies, potentially all bosses with special abilities**. The [boss workload specification](docs/design/late-game-workload.md) separates this goal from what the current graybox has actually demonstrated. Unity/C# remains our chosen engine and language; target performance is not yet validated.
 
+The prototype now includes Jobs/Burst simulation, culled instanced rendering, and selectable reference paths. See [the measured comparison](docs/playtests/2026-09-30-jobs-burst.md) and [profiling instructions](docs/profiling.md).
+
 ## What we're aiming for
 
 - Finish a small game with a clear beginning, playable loop, and ending.
