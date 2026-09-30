@@ -82,3 +82,5 @@ When a scenario fails, identify the limiting CPU task, GPU workload, allocation 
 ## Results
 
 See [initial prototype validation](playtests/2026-09-30-prototype-performance.md). Hidden-window smoke captures validate launch/export only. Full rendering captures must keep the player visible and unobstructed; the CLI helper requires `-Visible` for those runs. GPU timings may be unavailable and are explicitly marked as such in the JSON report.
+
+The later [boss-scale diagnostic](playtests/2026-09-30-boss-scale.md) supersedes the 1,000-drone workload as the relevant direction for optimization. It does not meet the performance target.

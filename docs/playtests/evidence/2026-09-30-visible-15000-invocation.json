@@ -1,0 +1,10 @@
+{
+  "visible": true,
+  "smoke": false,
+  "crowd": 15000,
+  "workload": "bosses",
+  "warmupSeconds": 30,
+  "captureSeconds": 60,
+  "repeats": 1,
+  "screenshotDuringWarmup": true
+}

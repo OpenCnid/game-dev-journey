@@ -18,7 +18,7 @@ Two or three years ago, I wouldn't have felt ready to take this on this way. Tod
 | Target platform | First prototype: Windows desktop, keyboard and mouse |
 | Playable build | One-weapon arena with health, pause/restart, and crowd/boss stress scenarios up to 20,000 enemies |
 | Current milestone | Playtest the first combat slice and profile crowded encounters before adding stacked weapons |
-| Performance target | At least 144 FPS in supported crowded fights; higher caps and uncapped rendering supported by design; unmeasured |
+| Performance target | At least 144 FPS in supported crowded fights; higher caps and uncapped rendering available; target not validated |
 
 Open [the prototype project](prototypes/001-stacked-weapons/README.md) for setup, controls, build commands, and benchmark instructions. The maintained game will move into `game/` after the experiment is evaluated.
 
