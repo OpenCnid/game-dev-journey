@@ -14,7 +14,7 @@ Two or three years ago, I wouldn't have felt ready to take this on this way. Tod
 | --- | --- |
 | Experience | Software engineering background; first game |
 | Game concept | First-person horde survival inspired by Vampire Hunters, focused on stacking weapons and powerful builds |
-| Engine and language | Unity + C# with URP recommended; [proposal](docs/decisions/0001-engine-recommendation.md), no engine project yet |
+| Engine and language | Unity 6.3 LTS + C# with URP; [accepted decision](docs/decisions/0001-engine-recommendation.md), exact patch pending project setup |
 | Target platform | Windows desktop proposed; not finalized |
 | Playable build | Not yet |
 | Current milestone | Study the reference and test a small stacked-weapon combat loop |
@@ -62,7 +62,7 @@ See [the architecture guide](docs/architecture.md) for placement rules.
 
 1. Read [the vision](docs/vision.md) and [roadmap](docs/roadmap.md).
 2. Read [the Vampire Hunters study](docs/design/vampire-hunters-study.md) and [proposed game brief](docs/design/game-brief.md).
-3. Choose tools for the experiment and record the reasoning in [decisions](docs/decisions/README.md).
+3. Set up the Unity prototype using [the accepted engine decision](docs/decisions/0001-engine-recommendation.md), and pin the exact editor and package versions.
 4. Start with the one-minute combat slice in [the stacked-weapons experiment](prototypes/001-stacked-weapons/README.md).
 5. Play it, capture observations, and decide whether to keep, change, or discard it.
 

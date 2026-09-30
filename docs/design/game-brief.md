@@ -24,7 +24,8 @@ The [reference study](vampire-hunters-study.md) distinguishes the source game's 
 | Core loop | Defeat enemies -> collect energy -> choose an upgrade -> face increasing pressure. |
 | Firing | Automatic firing on independent timers; player controls aim. Test this assumption early. |
 | Objective and ending | Survive five minutes; lose when health reaches zero; restart from either result. |
-| Initial platform and input | Proposed Windows desktop, keyboard and mouse. Engine/language remain undecided. |
+| Engine and language | Unity 6.3 LTS, C#, URP; exact editor patch and packages pending setup. |
+| Initial platform and input | Proposed Windows desktop, keyboard and mouse. |
 | Content limit | One graybox arena, one player, one approaching enemy type, three weapon behaviors, six upgrades. |
 | Presentation | Placeholder geometry, distinct shot feedback, readable enemy and damage cues. Theme remains open. |
 
@@ -46,7 +47,7 @@ Additional arenas, a full arsenal, bosses, character classes, permanent unlocks,
 
 ## Decisions still needed
 
-- Which engine and exact version fit the selected prototype and our development environment?
+- Which exact Unity 6.3 LTS patch and compatible package versions will we pin at project setup?
 - What do focused play sessions reveal about the weapon combinations we enjoy most?
 - What original theme and signature interaction should distinguish the finished game?
 

@@ -13,7 +13,9 @@ This is a sequence of learning milestones, not a release-date promise. Update it
 - [x] Choose an older high-end CPU baseline: Intel Core i7-8700K at stock settings.
 - [ ] Define baseline hardware, resolution, visual settings, and a supported peak encounter for [performance validation](performance.md).
 - [ ] Record a focused reference play session and refine the [stacked-weapons experiment](../prototypes/001-stacked-weapons/README.md).
-- [ ] Choose an initial platform and engine; record the decision.
+- [x] Choose Unity with C# and URP; accept [the engine decision](decisions/0001-engine-recommendation.md).
+- [ ] Confirm Windows desktop as the initial platform.
+- [ ] Create the first Unity prototype project and pin its Unity 6.3 LTS patch and compatible packages.
 
 **Done when:** we can name the player's main action, the question our first prototype will answer, and the tools needed to build it.
 

@@ -6,6 +6,7 @@ Write entries as `YYYY-MM-DD-short-title.md`. Keep them useful and honest: what 
 
 - [2026-09-30: Day zero](2026-09-30-day-zero.md)
 - [2026-09-30: Choosing a reference](2026-09-30-reference-direction.md)
+- [2026-09-30: Selecting Unity and C#](2026-09-30-unity-selected.md)
 
 ## Suggested entry shape
 

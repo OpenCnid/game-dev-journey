@@ -4,7 +4,9 @@
 
 **Question:** does adding simultaneous weapons create satisfying power growth and distinct builds while keeping combat readable?
 
-**Tools and run instructions:** pending engine selection. This folder will own a self-contained prototype project once selected.
+**Tools:** Unity 6.3 LTS, C#, and URP, following [the accepted decision](../../docs/decisions/0001-engine-recommendation.md). Pin an exact editor patch and compatible packages when creating this folder's self-contained Unity project.
+
+**Run instructions:** pending project creation. The first implementation will combine the one-weapon combat slice with the repeatable crowd benchmark. No executable exists yet.
 
 **Performance requirement:** target at least 144 FPS (6.944 ms per frame) in the supported encounter, with higher caps and uncapped rendering available. Follow the [performance plan](../../docs/performance.md): stock Intel Core i7-8700K plus the provisional GTX 1080 Ti GPU baseline, with 1080p proposed. Remaining system settings and the supported peak load remain open; no performance has been measured.
 
@@ -85,4 +87,4 @@ Use [playtest notes](../../docs/playtests/README.md). If weapons feel interchang
 
 **Result:** not tested.
 
-**Disposition:** proposed experiment; awaiting engine selection and reference gameplay observations.
+**Disposition:** proposed experiment with engine selected; next work is Unity project setup, the first combat slice, and reference gameplay observations.

@@ -2,7 +2,7 @@
 
 ## Current shape
 
-The repository separates the game we intend to finish from experiments and the record of how we learned. It deliberately leaves the engine's internal structure undecided until we select an engine.
+The repository separates the game we intend to finish from experiments and the record of how we learned. Unity with C# and URP is selected. The first self-contained Unity project will live under `prototypes/001-stacked-weapons/`; `game/` remains reserved for the maintained game after the experiment is evaluated.
 
 | Location | Owns | Placement rule |
 | --- | --- | --- |
@@ -18,7 +18,7 @@ The repository separates the game we intend to finish from experiments and the r
 
 ## Growing the game folder
 
-Follow the chosen engine's native project layout. Record the actual structure in `game/README.md` alongside the exact engine version and commands. Avoid imposing a generic application framework before there is a game to organize.
+Use Unity's native project layout with `Assets/`, `Packages/`, and `ProjectSettings/` inside each project root. Keep gameplay C# organized by feature and keep crowd simulation separate enough to profile independently. Record exact editor/package versions and launch/build steps in the owning project's README. These directories are planned; no Unity project exists yet.
 
 Where the engine allows it, keep files for a feature together: for example, a player scene, its behavior, and its specific resources. Create shared areas only when there are actual shared consumers. Keep tests close to their owning project or in the engine's conventional test location.
 
@@ -38,7 +38,7 @@ The game folder becomes the source of truth for promoted work. Experiments are a
 - Commit source code, engine project settings, required small runtime assets, and reproducibility files.
 - Keep editable art and audio originals under `assets/` when practical. Record external storage links if originals are too large for ordinary Git.
 - Commit runtime exports under the engine's asset directory; do not make the game depend on an undocumented path outside its project.
-- Keep generated builds, caches, logs, and local secrets out of Git. The starter `.gitignore` handles common cases; adjust it when the engine is selected.
+- Keep generated builds, caches, logs, and local secrets out of Git. Add Unity-specific cache exclusions before the first editor import, and preserve required asset metadata in version control.
 - Decide on large-file storage before committing large binary assets. No Git LFS setup is assumed yet.
 
 ## Documentation boundaries

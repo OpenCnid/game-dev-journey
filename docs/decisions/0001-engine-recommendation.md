@@ -1,13 +1,13 @@
-# 0001: Recommend Unity and C# for the first prototype
+# 0001: Use Unity and C# for the first prototype
 
 - **Date:** 2026-09-30
-- **Status:** proposed; recommendation documented, engine not installed and project not created.
+- **Status:** accepted by the project owner on 2026-09-30. No Unity project has been created in this repository yet.
 
 ## Context
 
 We are building a first game around stacking weapons and creating powerful builds in a first-person horde encounter. Our [performance target](../performance.md) is at least 144 FPS on a stock i7-8700K paired with a GTX 1080 Ti, with 1080p proposed. LLM assistance must work well with the language and development workflow.
 
-## Recommendation
+## Decision
 
 Use **Unity with C# and the Universal Render Pipeline (URP)**. Start from the **Unity 6.3 LTS** line and pin a specific supported patch plus compatible package versions when creating the project. Do not assume a package's newest release supports the selected editor.
 

@@ -2,7 +2,7 @@
 
 **Confirmed requirement:** target at least 144 FPS during supported gameplay, including crowded fights with stacked weapons. Allow higher frame rates when the user's hardware supports them.
 
-**Status:** requirement and proposed measurement plan only. No game build exists and no performance results have been collected. Use an Intel Core i7-8700K with the owner's provisional GTX 1080 Ti GPU baseline. RAM, final resolution, graphics preset, and supported peak encounter remain to be selected. Engine selection is still open.
+**Status:** requirement and proposed measurement plan only. No game build exists and no performance results have been collected. Use an Intel Core i7-8700K with the owner's provisional GTX 1080 Ti GPU baseline. RAM, final resolution, graphics preset, and supported peak encounter remain to be selected. Unity with C# and URP is the [accepted engine choice](decisions/0001-engine-recommendation.md); exact editor/package versions will be pinned at setup.
 
 ## Frame budget
 

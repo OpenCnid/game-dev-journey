@@ -1,6 +1,8 @@
 # The game
 
-The maintained game project will live here after we choose a concept and engine. There is no executable project yet.
+The maintained Unity game project will live here after the first prototype is evaluated. The accepted stack is Unity 6.3 LTS, C#, and URP; the exact editor patch will be pinned during setup. There is no executable project yet.
+
+Implementation starts in [the stacked-weapons prototype](../prototypes/001-stacked-weapons/README.md). Promote selected work here after the experiment establishes a promising direction.
 
 Use the engine's normal folder structure. Replace this placeholder with:
 
