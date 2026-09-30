@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Unity.Profiling;
+using Unity.Collections;
 
 namespace Journey
 {
@@ -32,6 +33,9 @@ namespace Journey
         static readonly ProfilerMarker CrowdMarker = new ProfilerMarker("Journey.Crowd");
         BurstCrowd burstCrowd;
         public bool UseBurst { get; set; }
+        public bool UseNativeState { get; set; }
+        public bool NativeState { get; private set; }
+        internal NativeArray<Vector3> NativePositions, NativePrevious;
         public int BatchSize { get; set; } = 128;
         internal Vector3[] Positions => positions;
         internal Vector3[] PreviousPositions => previous;
@@ -48,13 +52,21 @@ namespace Journey
         public float Elapsed { get; private set; }
         public bool Benchmark { get; private set; }
         public float Duration { get; private set; }
-        public Vector3 Position(int index) => positions[index];
-        public Vector3 RenderPosition(int index, float alpha) => Vector3.Lerp(previous[index], positions[index], alpha);
+        public Vector3 Position(int index) => NativeState ? NativePositions[index] : positions[index];
+        public Vector3 RenderPosition(int index, float alpha) => NativeState ?
+            Vector3.Lerp(NativePrevious[index], NativePositions[index], alpha) : Vector3.Lerp(previous[index], positions[index], alpha);
         public Vector3 RenderPlayer(float alpha) => Vector3.Lerp(PreviousPlayer, Player, alpha);
 
         public void Reset(int count, int seed, bool benchmark, float duration = 60f,
             bool bosses = false, bool synchronizedAbilities = false)
         {
+            if (UseNativeState && !UseBurst) throw new InvalidOperationException("Native state requires Burst simulation.");
+            NativeState = UseNativeState;
+            if (NativeState && !NativePositions.IsCreated)
+            {
+                NativePositions = new NativeArray<Vector3>(Capacity, Allocator.Persistent);
+                NativePrevious = new NativeArray<Vector3>(Capacity, Allocator.Persistent);
+            }
             Count = Mathf.Clamp(count, 0, Capacity);
             random = new System.Random(seed);
             Benchmark = benchmark;
@@ -65,7 +77,7 @@ namespace Journey
             Player = PreviousPlayer = benchmark ? new Vector3(18, 0, 0) : Vector3.zero;
             fireRemaining = damageRemaining = 0;
             tick = NeighborChecks = 0;
-            Abilities.Reset(Count, seed, bosses, synchronizedAbilities);
+            Abilities.Reset(Count, seed, bosses, synchronizedAbilities, NativeState);
             for (int i = 0; i < Count; i++) Respawn(i);
             State = RunState.Running;
         }
@@ -97,11 +109,17 @@ namespace Journey
             using (CrowdMarker.Auto())
             {
                 int start = Count == 0 ? 0 : (int)((long)tick++ * 977 % Count);
-                if (UseBurst)
+                if (UseBurst || NativeState)
                 {
                     if (burstCrowd == null) burstCrowd = new BurstCrowd();
-                    Array.Copy(positions, previous, Count);
-                    NeighborChecks = burstCrowd.Step(positions, Count, start, Player, dt, BatchSize, out bool contact);
+                    bool contact;
+                    if (NativeState)
+                        NeighborChecks = burstCrowd.StepNative(NativePositions, NativePrevious, Count, start, Player, dt, BatchSize, out contact);
+                    else
+                    {
+                        Array.Copy(positions, previous, Count);
+                        NeighborChecks = burstCrowd.Step(positions, Count, start, Player, dt, BatchSize, out contact);
+                    }
                     if (contact && !Benchmark && damageRemaining <= 0)
                     { PlayerHealth = Mathf.Max(0, PlayerHealth - 10); damageRemaining = .4f; }
                 }
@@ -156,7 +174,12 @@ namespace Journey
             else if (!Benchmark && Elapsed >= Duration) State = RunState.Won;
         }
 
-        public void Dispose() { burstCrowd?.Dispose(); burstCrowd = null; Abilities.Dispose(); }
+        public void Dispose()
+        {
+            burstCrowd?.Dispose(); burstCrowd = null; Abilities.Dispose();
+            if (NativePositions.IsCreated) NativePositions.Dispose();
+            if (NativePrevious.IsCreated) NativePrevious.Dispose();
+        }
 
         internal void AbilityHit()
         {
@@ -176,7 +199,7 @@ namespace Journey
             int target = -1;
             for (int i = 0; i < Count; i++)
             {
-                if (RaySphere(ray, positions[i] + Vector3.up * 1.1f, EnemyRadius, out float hit) && hit < nearest)
+                if (RaySphere(ray, Position(i) + Vector3.up * 1.1f, EnemyRadius, out float hit) && hit < nearest)
                 { nearest = hit; target = i; }
             }
             end = ray.origin + ray.direction * nearest;
@@ -217,7 +240,8 @@ namespace Journey
                     side == 2 ? new Vector3(offset, 0, -28) : new Vector3(offset, 0, 28);
                 if ((p - Player).sqrMagnitude > 100) break;
             }
-            positions[index] = previous[index] = p;
+            if (NativeState) NativePositions[index] = NativePrevious[index] = p;
+            else positions[index] = previous[index] = p;
             health[index] = 40;
             Abilities.CancelCast(index);
         }

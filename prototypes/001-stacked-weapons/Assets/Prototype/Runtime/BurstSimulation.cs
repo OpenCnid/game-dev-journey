@@ -23,11 +23,24 @@ namespace Journey
             contact = false;
             if (count == 0) return 0;
             NativeArray<Vector3>.Copy(positions, input, count);
-            JobHandle grid = new GridJob { Positions = input, Cells = cells, Next = next, Count = count, Start = start }.Schedule();
-            JobHandle move = new MoveJob { Positions = input, Output = output, Cells = cells, Next = next,
+            int checks = Run(input, output, count, start, player, dt, batch, out contact);
+            NativeArray<Vector3>.Copy(output, positions, count);
+            return checks;
+        }
+        public int StepNative(NativeArray<Vector3> positions, NativeArray<Vector3> previous, int count, int start,
+            Vector3 player, float dt, int batch, out bool contact)
+        {
+            contact = false; if (count == 0) return 0;
+            NativeArray<Vector3>.Copy(positions, previous, count);
+            return Run(previous, positions, count, start, player, dt, batch, out contact);
+        }
+        int Run(NativeArray<Vector3> source, NativeArray<Vector3> destination, int count, int start,
+            Vector3 player, float dt, int batch, out bool contact)
+        {
+            JobHandle grid = new GridJob { Positions = source, Cells = cells, Next = next, Count = count, Start = start }.Schedule();
+            JobHandle move = new MoveJob { Positions = source, Output = destination, Cells = cells, Next = next,
                 Results = results, Player = player, Dt = dt }.Schedule(count, batch, grid);
             new SumJob { Results = results, Totals = totals, Count = count }.Schedule(move).Complete();
-            NativeArray<Vector3>.Copy(output, positions, count);
             contact = totals[0].y > 0;
             return totals[0].x;
         }
@@ -113,13 +126,21 @@ namespace Journey
             hitCount = 0; if (count == 0) return 0;
             NativeArray<Vector3>.Copy(p, positions, count); NativeArray<Vector3>.Copy(v, velocities, count);
             NativeArray<float>.Copy(ttl, life, count);
+            int remaining = StepNative(positions, previous, velocities, life, count, player, previousPlayer, dt, batch, out hitCount);
+            NativeArray<Vector3>.Copy(positions, p, remaining); NativeArray<Vector3>.Copy(previous, old, remaining);
+            NativeArray<Vector3>.Copy(velocities, v, remaining); NativeArray<float>.Copy(life, ttl, remaining);
+            return remaining;
+        }
+        public int StepNative(NativeArray<Vector3> positions, NativeArray<Vector3> previous,
+            NativeArray<Vector3> velocities, NativeArray<float> life, int count,
+            Vector3 player, Vector3 previousPlayer, float dt, int batch, out int hitCount)
+        {
+            hitCount = 0; if (count == 0) return 0;
             JobHandle advance = new AdvanceJob { Positions = positions, Previous = previous, Velocities = velocities,
                 Life = life, Hits = hits, Player = player, PreviousPlayer = previousPlayer, Dt = dt }.Schedule(count, batch);
             new CompactJob { Positions = positions, Previous = previous, Velocities = velocities,
                 Life = life, Hits = hits, Totals = totals, Count = count }.Schedule(advance).Complete();
             int remaining = totals[0].x; hitCount = totals[0].y;
-            NativeArray<Vector3>.Copy(positions, p, remaining); NativeArray<Vector3>.Copy(previous, old, remaining);
-            NativeArray<Vector3>.Copy(velocities, v, remaining); NativeArray<float>.Copy(life, ttl, remaining);
             return remaining;
         }
         public void Dispose() { positions.Dispose(); previous.Dispose(); velocities.Dispose(); life.Dispose(); hits.Dispose(); totals.Dispose(); }

@@ -16,20 +16,40 @@ namespace Journey
         readonly NativeArray<Vector3> previous = new NativeArray<Vector3>(Capacity, Allocator.Persistent);
         NativeArray<float4> planes = new NativeArray<float4>(6, Allocator.Persistent);
         readonly NativeArray<byte> visible = new NativeArray<byte>(Capacity, Allocator.Persistent);
-        readonly NativeArray<int> count = new NativeArray<int>(1, Allocator.Persistent);
+        NativeArray<int> count = new NativeArray<int>(1, Allocator.Persistent);
         public readonly NativeArray<Matrix4x4> A = new NativeArray<Matrix4x4>(Capacity, Allocator.Persistent);
         public readonly NativeArray<Matrix4x4> B = new NativeArray<Matrix4x4>(Capacity, Allocator.Persistent);
+        JobHandle pending;
+        bool scheduled;
 
         public int Prepare(Vector3[] current, Vector3[] old, int total, float alpha, Plane[] frustum,
             Vector3 offsetA, Vector3 scaleA, Vector3 offsetB, Vector3 scaleB, Vector3 boundOffset, float radius, bool pair, int batch)
         {
-            if (total == 0) return 0;
+            Schedule(current, old, total, alpha, frustum, offsetA, scaleA, offsetB, scaleB, boundOffset, radius, pair, batch);
+            return Complete();
+        }
+        public void Schedule(Vector3[] current, Vector3[] old, int total, float alpha, Plane[] frustum,
+            Vector3 offsetA, Vector3 scaleA, Vector3 offsetB, Vector3 scaleB, Vector3 boundOffset, float radius, bool pair, int batch)
+        {
+            if (scheduled) throw new InvalidOperationException("Complete the previous preparation before reusing its buffers.");
             NativeArray<Vector3>.Copy(current, positions, total); NativeArray<Vector3>.Copy(old, previous, total);
+            ScheduleNative(positions, previous, total, alpha, frustum, offsetA, scaleA, offsetB, scaleB, boundOffset, radius, pair, batch);
+        }
+        public void ScheduleNative(NativeArray<Vector3> current, NativeArray<Vector3> old, int total, float alpha, Plane[] frustum,
+            Vector3 offsetA, Vector3 scaleA, Vector3 offsetB, Vector3 scaleB, Vector3 boundOffset, float radius, bool pair, int batch)
+        {
+            if (scheduled) throw new InvalidOperationException("Complete the previous preparation before reusing its buffers.");
+            if (total == 0) { count[0] = 0; return; }
             for (int i = 0; i < 6; i++) planes[i] = new float4(frustum[i].normal, frustum[i].distance);
-            JobHandle build = new BuildJob { Positions = positions, Previous = previous, Planes = planes, Visible = visible,
+            JobHandle build = new BuildJob { Positions = current, Previous = old, Planes = planes, Visible = visible,
                 A = A, B = B, OffsetA = offsetA, OffsetB = offsetB, ScaleA = scaleA, ScaleB = scaleB,
                 BoundOffset = boundOffset, Radius = radius, Pair = pair, Alpha = math.clamp(alpha, 0, 1) }.Schedule(total, batch);
-            new CompactJob { Visible = visible, A = A, B = B, Count = count, Total = total, Pair = pair }.Schedule(build).Complete();
+            pending = new CompactJob { Visible = visible, A = A, B = B, Count = count, Total = total, Pair = pair }.Schedule(build);
+            scheduled = true;
+        }
+        public int Complete()
+        {
+            if (scheduled) { pending.Complete(); scheduled = false; }
             return count[0];
         }
         public static bool SphereVisible(Plane[] frustum, Vector3 center, float radius)
@@ -37,7 +57,7 @@ namespace Journey
             for (int i = 0; i < frustum.Length; i++) if (frustum[i].GetDistanceToPoint(center) < -radius) return false;
             return true;
         }
-        public void Dispose() { positions.Dispose(); previous.Dispose(); planes.Dispose(); visible.Dispose(); count.Dispose(); A.Dispose(); B.Dispose(); }
+        public void Dispose() { Complete(); positions.Dispose(); previous.Dispose(); planes.Dispose(); visible.Dispose(); count.Dispose(); A.Dispose(); B.Dispose(); }
 
         [BurstCompile(CompileSynchronously = true, FloatMode = FloatMode.Strict)]
         struct BuildJob : IJobParallelFor

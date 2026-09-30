@@ -19,10 +19,15 @@ namespace Journey
         AudioClip shot;
         float flash, recoil;
         readonly Plane[] frustum = new Plane[6];
-        readonly Vector3[] warningPositions = new Vector3[CombatSimulation.Capacity];
+        readonly WarningCollector warnings = new WarningCollector();
         static readonly ProfilerMarker PrepareMarker = new ProfilerMarker("Journey.RenderPrepare");
         static readonly ProfilerMarker SubmitMarker = new ProfilerMarker("Journey.RenderSubmit");
-        BurstInstances instances;
+        BurstInstances instances, projectileInstances, warningInstances;
+        public bool HideWarnings { get; set; }
+        public bool HideProjectiles { get; set; }
+        public bool DeduplicateWarnings { get; set; }
+        public bool OverlapPreparation { get; set; }
+        public bool DiagnosticOnly => HideWarnings || HideProjectiles;
         public bool CullInstances { get; set; } = true;
         public int BatchSize { get; set; } = 128;
         public Camera Camera { get; private set; }
@@ -164,36 +169,89 @@ namespace Journey
         void DrawCulled(CombatSimulation sim, float alpha)
         {
             if (instances == null) instances = new BurstInstances();
+            bool showProjectiles = sim.Abilities.Enabled && !(sim.Benchmark && HideProjectiles);
+            bool showWarnings = sim.Abilities.Enabled && !(sim.Benchmark && HideWarnings);
             long begin = StageProfile.Begin();
-            int visible;
             using (PrepareMarker.Auto())
             {
                 GeometryUtility.CalculateFrustumPlanes(Camera, frustum);
-                visible = instances.Prepare(sim.Positions, sim.PreviousPositions, sim.Count, alpha, frustum,
+                ScheduleEnemies(instances, sim, alpha);
+            }
+            StageProfile.RenderPrepareMs += StageProfile.End(begin);
+            if (OverlapPreparation)
+            {
+                if (projectileInstances == null) projectileInstances = new BurstInstances();
+                if (warningInstances == null) warningInstances = new BurstInstances();
+                begin = StageProfile.Begin();
+                using (PrepareMarker.Auto())
+                {
+                    if (showProjectiles) ScheduleProjectiles(projectileInstances, sim, alpha);
+                    if (showWarnings) ScheduleWarnings(warningInstances, sim);
+                }
+                StageProfile.RenderPrepareMs += StageProfile.End(begin);
+            }
+            int visible = FinishPreparation(instances);
+            DrawNative(enemyMaterial, cube, instances.A, visible); DrawNative(headMaterial, cube, instances.B, visible);
+            if (showProjectiles)
+            {
+                var buffer = OverlapPreparation ? projectileInstances : instances;
+                if (!OverlapPreparation)
+                {
+                    begin = StageProfile.Begin();
+                    using (PrepareMarker.Auto()) ScheduleProjectiles(buffer, sim, alpha);
+                    StageProfile.RenderPrepareMs += StageProfile.End(begin);
+                }
+                DrawNative(projectileMaterial, cube, buffer.A, FinishPreparation(buffer));
+            }
+            if (showWarnings)
+            {
+                var buffer = OverlapPreparation ? warningInstances : instances;
+                if (!OverlapPreparation)
+                {
+                    begin = StageProfile.Begin();
+                    using (PrepareMarker.Auto()) ScheduleWarnings(buffer, sim);
+                    StageProfile.RenderPrepareMs += StageProfile.End(begin);
+                }
+                DrawNative(telegraphMaterial, ring, buffer.A, FinishPreparation(buffer));
+            }
+        }
+        void ScheduleEnemies(BurstInstances buffer, CombatSimulation sim, float alpha)
+        {
+            if (sim.NativeState)
+                buffer.ScheduleNative(sim.NativePositions, sim.NativePrevious, sim.Count, alpha, frustum,
                     Vector3.up * .8f, new Vector3(.85f, 1.4f, .85f), Vector3.up * 1.6f, Vector3.one * .45f,
                     Vector3.up, 1.2f, true, BatchSize);
-            }
+            else buffer.Schedule(sim.Positions, sim.PreviousPositions, sim.Count, alpha, frustum,
+                    Vector3.up * .8f, new Vector3(.85f, 1.4f, .85f), Vector3.up * 1.6f, Vector3.one * .45f,
+                    Vector3.up, 1.2f, true, BatchSize);
+        }
+        void ScheduleProjectiles(BurstInstances buffer, CombatSimulation sim, float alpha)
+        {
+            if (sim.NativeState)
+                buffer.ScheduleNative(sim.Abilities.NativePositions, sim.Abilities.NativePrevious,
+                    sim.Abilities.Projectiles, alpha, frustum, Vector3.up, Vector3.one * .18f,
+                    Vector3.zero, Vector3.zero, Vector3.up, .17f, false, BatchSize);
+            else buffer.Schedule(sim.Abilities.Positions, sim.Abilities.PreviousPositions,
+                    sim.Abilities.Projectiles, alpha, frustum, Vector3.up, Vector3.one * .18f,
+                    Vector3.zero, Vector3.zero, Vector3.up, .17f, false, BatchSize);
+        }
+        void ScheduleWarnings(BurstInstances buffer, CombatSimulation sim)
+        {
+            warnings.Begin();
+            for (int i = 0; i < sim.Count; i++) if (sim.Abilities.IsCasting(i))
+                warnings.Add(sim.Abilities.Target(i), sim.Abilities.CastRemaining(i), DeduplicateWarnings);
+            StageProfile.WarningCandidates = warnings.Candidates; StageProfile.UniqueWarnings = warnings.Count;
+            buffer.Schedule(warnings.Positions, warnings.Positions, warnings.Count, 1, frustum,
+                Vector3.up * .02f, Vector3.one * BossAbilities.AreaRadius, Vector3.zero, Vector3.zero,
+                Vector3.up * .02f, BossAbilities.AreaRadius, false, BatchSize);
+        }
+        static int FinishPreparation(BurstInstances buffer)
+        {
+            long begin = StageProfile.Begin();
+            int count;
+            using (PrepareMarker.Auto()) count = buffer.Complete();
             StageProfile.RenderPrepareMs += StageProfile.End(begin);
-            DrawNative(enemyMaterial, cube, instances.A, visible); DrawNative(headMaterial, cube, instances.B, visible);
-            if (!sim.Abilities.Enabled) return;
-            begin = StageProfile.Begin();
-            using (PrepareMarker.Auto())
-                visible = instances.Prepare(sim.Abilities.Positions, sim.Abilities.PreviousPositions,
-                    sim.Abilities.Projectiles, alpha, frustum, Vector3.up, Vector3.one * .18f, Vector3.zero,
-                    Vector3.zero, Vector3.up, .17f, false, BatchSize);
-            StageProfile.RenderPrepareMs += StageProfile.End(begin);
-            DrawNative(projectileMaterial, cube, instances.A, visible);
-            begin = StageProfile.Begin();
-            using (PrepareMarker.Auto())
-            {
-                int warnings = 0;
-                for (int i = 0; i < sim.Count; i++) if (sim.Abilities.IsCasting(i)) warningPositions[warnings++] = sim.Abilities.Target(i);
-                visible = instances.Prepare(warningPositions, warningPositions, warnings, 1, frustum,
-                    Vector3.up * .02f, Vector3.one * BossAbilities.AreaRadius, Vector3.zero, Vector3.zero,
-                    Vector3.up * .02f, BossAbilities.AreaRadius, false, BatchSize);
-            }
-            StageProfile.RenderPrepareMs += StageProfile.End(begin);
-            DrawNative(telegraphMaterial, ring, instances.A, visible);
+            return count;
         }
         static void DrawNative(Material material, Mesh mesh, NativeArray<Matrix4x4> matrices, int total)
         {
@@ -249,7 +307,7 @@ namespace Journey
             mesh.RecalculateNormals(); mesh.RecalculateBounds(); return mesh;
         }
         public void ResetFeedback() { flash = recoil = 0; tracer.enabled = false; audio.Stop(); }
-        public void Dispose() { instances?.Dispose(); instances = null; if (shot != null) Object.Destroy(shot); if (ring != null) Object.Destroy(ring); }
+        public void Dispose() { instances?.Dispose(); instances = null; projectileInstances?.Dispose(); projectileInstances = null; warningInstances?.Dispose(); warningInstances = null; if (shot != null) Object.Destroy(shot); if (ring != null) Object.Destroy(ring); }
 
         static Material Material(string name, Color color, bool unlit = false)
         {

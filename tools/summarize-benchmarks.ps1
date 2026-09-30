@@ -2,9 +2,13 @@ param([Parameter(Mandatory=$true)][string]$InputDirectory)
 $ErrorActionPreference = 'Stop'
 Get-ChildItem -LiteralPath $InputDirectory -Recurse -Filter '*-crowd*-r*.json' | ForEach-Object {
     $taskReport = Get-Content -LiteralPath $_.FullName -Raw | ConvertFrom-Json
-    if ($taskReport.schema -ne 'journey-benchmark-v3' -or $taskReport.profilerCapture) { return }
+    if ($taskReport.schema -notin @('journey-benchmark-v3','journey-benchmark-v4') -or $taskReport.profilerCapture) { return }
     [pscustomobject]@{
         Mode = "$($taskReport.simulationBackend)/$($taskReport.renderingBackend)"
+        NativeState = [bool]$taskReport.nativeState
+        DeduplicateWarnings = [bool]$taskReport.deduplicateWarnings
+        OverlapPreparation = [bool]$taskReport.overlapPreparation
+        DiagnosticOnly = [bool]$taskReport.diagnosticOnly
         Crowd = $taskReport.crowd
         Repeat = $taskReport.repeat
         AverageFps = [math]::Round($taskReport.averageFps, 2)
@@ -20,7 +24,7 @@ Get-ChildItem -LiteralPath $InputDirectory -Recurse -Filter '*-crowd*-r*.json' |
         DroppedProjectiles = $taskReport.droppedProjectilesIncludingWarmup
         SimulationSeconds = [math]::Round($taskReport.simulatedCaptureSeconds, 3)
         ActualCaptureSeconds = [math]::Round($taskReport.actualCaptureSeconds, 3)
-        WithinP99Budget = $taskReport.p99Ms -le (1000.0 / 144)
+        WithinP99Budget = -not $taskReport.diagnosticOnly -and $taskReport.p99Ms -le (1000.0 / 144)
         SimulationKeptUp = $taskReport.catchupLimitFrames -eq 0 -and $taskReport.droppedProjectilesIncludingWarmup -eq 0 -and [math]::Abs($taskReport.actualCaptureSeconds - $taskReport.simulatedCaptureSeconds) -lt .05
         Report = $_.FullName
     }

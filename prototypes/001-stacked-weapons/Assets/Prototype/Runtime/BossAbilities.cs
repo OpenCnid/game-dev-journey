@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Profiling;
+using Unity.Collections;
 
 namespace Journey
 {
@@ -23,6 +24,10 @@ namespace Journey
         static readonly ProfilerMarker AbilityMarker = new ProfilerMarker("Journey.Abilities");
         static readonly ProfilerMarker ProjectileMarker = new ProfilerMarker("Journey.Projectiles");
         BurstProjectiles burstProjectiles;
+        internal NativeArray<Vector3> NativePositions, NativePrevious;
+        NativeArray<Vector3> nativeVelocities;
+        NativeArray<float> nativeLife;
+        bool nativeState;
         internal Vector3[] Positions => projectilePositions;
         internal Vector3[] PreviousPositions => projectilePrevious;
         public bool Enabled { get; private set; }
@@ -37,10 +42,20 @@ namespace Journey
         public int ProjectileUpdates { get; private set; }
         public bool IsCasting(int i) => Enabled && casting[i];
         public Vector3 Target(int i) => targets[i];
-        public Vector3 RenderProjectile(int i, float alpha) => Vector3.Lerp(projectilePrevious[i], projectilePositions[i], alpha);
+        public float CastRemaining(int i) => timers[i];
+        public Vector3 RenderProjectile(int i, float alpha) => nativeState ?
+            Vector3.Lerp(NativePrevious[i], NativePositions[i], alpha) : Vector3.Lerp(projectilePrevious[i], projectilePositions[i], alpha);
 
-        public void Reset(int count, int seed, bool enabled, bool synchronized)
+        public void Reset(int count, int seed, bool enabled, bool synchronized, bool useNativeState = false)
         {
+            nativeState = useNativeState;
+            if (nativeState && !NativePositions.IsCreated)
+            {
+                NativePositions = new NativeArray<Vector3>(ProjectileCapacity, Allocator.Persistent);
+                NativePrevious = new NativeArray<Vector3>(ProjectileCapacity, Allocator.Persistent);
+                nativeVelocities = new NativeArray<Vector3>(ProjectileCapacity, Allocator.Persistent);
+                nativeLife = new NativeArray<float>(ProjectileCapacity, Allocator.Persistent);
+            }
             Enabled = enabled; Synchronized = synchronized;
             Projectiles = Telegraphs = Activations = Spawned = Dropped = PlayerHits = 0;
             StateUpdates = ProjectileUpdates = 0;
@@ -102,11 +117,14 @@ namespace Journey
             using (ProjectileMarker.Auto())
             {
                 ProjectileUpdates += Projectiles;
-                if (sim.UseBurst)
+                if (sim.UseBurst || nativeState)
                 {
                     if (burstProjectiles == null) burstProjectiles = new BurstProjectiles();
-                    Projectiles = burstProjectiles.Step(projectilePositions, projectilePrevious, projectileVelocities,
-                        life, Projectiles, sim.Player, sim.PreviousPlayer, dt, sim.BatchSize, out int hits);
+                    int hits;
+                    Projectiles = nativeState ? burstProjectiles.StepNative(NativePositions, NativePrevious, nativeVelocities,
+                        nativeLife, Projectiles, sim.Player, sim.PreviousPlayer, dt, sim.BatchSize, out hits) :
+                        burstProjectiles.Step(projectilePositions, projectilePrevious, projectileVelocities,
+                        life, Projectiles, sim.Player, sim.PreviousPlayer, dt, sim.BatchSize, out hits);
                     PlayerHits += hits;
                     if (hits > 0) sim.AbilityHit();
                 }
@@ -127,7 +145,14 @@ namespace Journey
             StageProfile.ProjectileMs += StageProfile.End(stageStart);
         }
 
-        public void Dispose() { burstProjectiles?.Dispose(); burstProjectiles = null; }
+        public void Dispose()
+        {
+            burstProjectiles?.Dispose(); burstProjectiles = null;
+            if (NativePositions.IsCreated) NativePositions.Dispose();
+            if (NativePrevious.IsCreated) NativePrevious.Dispose();
+            if (nativeVelocities.IsCreated) nativeVelocities.Dispose();
+            if (nativeLife.IsCreated) nativeLife.Dispose();
+        }
 
         public static bool SegmentHitsPlayer(Vector3 a, Vector3 b)
         {
@@ -140,8 +165,17 @@ namespace Journey
         {
             if (Projectiles == ProjectileCapacity) { Dropped++; return; }
             int i = Projectiles++;
-            projectilePositions[i] = projectilePrevious[i] = position;
-            projectileVelocities[i] = velocity; life[i] = ProjectileLifetime; Spawned++;
+            if (nativeState)
+            {
+                NativePositions[i] = NativePrevious[i] = position;
+                nativeVelocities[i] = velocity; nativeLife[i] = ProjectileLifetime;
+            }
+            else
+            {
+                projectilePositions[i] = projectilePrevious[i] = position;
+                projectileVelocities[i] = velocity; life[i] = ProjectileLifetime;
+            }
+            Spawned++;
         }
         void Remove(int i)
         {

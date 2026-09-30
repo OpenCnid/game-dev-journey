@@ -59,6 +59,11 @@ namespace Journey
                 if (args[i] == "-quitAfterBenchmark") quitAfterBenchmark = true;
                 if (args[i] == "-crowd" && int.TryParse(value, out int c)) crowd = Mathf.Clamp(c, 0, CombatSimulation.Capacity);
                 if (args[i] == "-workload") bosses = value == "bosses";
+                if (args[i] == "-hideWarnings") view.HideWarnings = true;
+                if (args[i] == "-hideProjectiles") view.HideProjectiles = true;
+                if (args[i] == "-deduplicateWarnings") view.DeduplicateWarnings = true;
+                if (args[i] == "-overlapPreparation") view.OverlapPreparation = true;
+                if (args[i] == "-nativeState") sim.UseNativeState = true;
                 if (args[i] == "-synchronizedAbilities") synchronizedAbilities = true;
                 if (args[i] == "-simulation") sim.UseBurst = value == "burst";
                 if (args[i] == "-rendering") view.CullInstances = value == "culled";
@@ -72,6 +77,9 @@ namespace Journey
                 if (args[i] == "-results" && !string.IsNullOrWhiteSpace(value)) outputDirectory = Path.GetFullPath(value);
                 if (args[i] == "-screenshot" && !string.IsNullOrWhiteSpace(value)) screenshotPath = Path.GetFullPath(value);
             }
+            if (view.DiagnosticOnly && !autoBenchmark) throw new InvalidOperationException("Hidden effects require -benchmark.");
+            if (!view.CullInstances && (view.DiagnosticOnly || view.DeduplicateWarnings || view.OverlapPreparation))
+                throw new InvalidOperationException("Rendering experiments require -rendering culled.");
             if (autoBenchmark) StartBenchmark(crowd);
             else if (autoPlay) StartCombat();
         }
@@ -187,7 +195,7 @@ namespace Journey
             try
             {
                 lastResult = capture.Save(outputDirectory, crowd, seed, repeat, warmup, captureSeconds,
-                    sim.Shots - captureStartShots, sim.Kills - captureStartKills, sim, view.CullInstances, profilePath != null, actualSeconds);
+                    sim.Shots - captureStartShots, sim.Kills - captureStartKills, sim, view.CullInstances, profilePath != null, actualSeconds, view);
                 Debug.Log("BENCHMARK_REPORT " + lastResult);
                 if (repeat++ < repeats) { ResetCapture(); return; }
                 CancelBenchmark();
@@ -228,7 +236,7 @@ namespace Journey
             profileActive = false; profileSaved = true;
             Debug.Log("PROFILER_REPORT " + profilePath);
         }
-        void OnDestroy() { StopProfile(); sim.Dispose(); view.Dispose(); SetCursor(false); }
+        void OnDestroy() { StopProfile(); view.Dispose(); sim.Dispose(); SetCursor(false); }
         static void SetCursor(bool locked) { Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None; Cursor.visible = !locked; }
 
         void Styles()
@@ -269,6 +277,7 @@ namespace Journey
             }
             if (benchmark)
             {
+                if (view.DiagnosticOnly) GUI.Label(new Rect(32, 100, 800, 30), "DIAGNOSTIC: EFFECTS HIDDEN / NOT AN ACCEPTANCE RUN", heading);
                 float remaining = capture.Recording ? Mathf.Max(0, captureSeconds - (float)(Time.realtimeSinceStartupAsDouble - captureStarted)) :
                     Mathf.Max(0, warmup - (float)(Time.realtimeSinceStartupAsDouble - runStarted)) + captureSeconds;
                 GUI.Box(new Rect(width / 2 - 260, 110, 520, 80), "");
@@ -288,6 +297,7 @@ namespace Journey
                 GUILayout.Space(12);
                 GUILayout.Label("REPEATABLE CROWD BENCHMARK", heading);
                 sim.UseBurst = GUILayout.Toggle(sim.UseBurst, " Jobs/Burst simulation");
+                if (!sim.UseBurst) sim.UseNativeState = false;
                 view.CullInstances = GUILayout.Toggle(view.CullInstances, " Burst instance preparation + frustum culling");
                 GUILayout.Label($"{warmup:0}s warm-up + {captureSeconds:0}s capture, {repeats} repeats. Automated movement, autofire, invulnerability. Writes CSV + JSON.", small);
                 bosses = GUILayout.Toggle(bosses, " Boss workload: area attacks + projectile bursts");

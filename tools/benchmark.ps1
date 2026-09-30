@@ -5,6 +5,11 @@ param(
     [ValidateSet('managed','burst')][string]$Simulation = 'burst',
     [ValidateSet('legacy','culled')][string]$Rendering = 'culled',
     [ValidateRange(16,1024)][int]$JobBatch = 128,
+    [switch]$HideWarnings,
+    [switch]$HideProjectiles,
+    [switch]$DeduplicateWarnings,
+    [switch]$OverlapPreparation,
+    [switch]$NativeState,
     [switch]$Profile,
     [ValidateRange(1,30)][int]$ProfileSeconds = 5,
     [int]$Repeats = 3,
@@ -26,6 +31,8 @@ if (-not $PlayerPath) {
 if (-not $OutputDirectory) { $OutputDirectory = Join-Path $taskProject ('BenchmarkResults\' + (Get-Date -Format 'yyyyMMdd-HHmmss')) }
 if (-not (Test-Path -LiteralPath $PlayerPath)) { throw 'Build the Windows player first with tools/unity.ps1 -Action Build.' }
 if ($Counts | Where-Object { $_ -lt 0 -or $_ -gt 20000 }) { throw 'Counts must be between 0 and 20000.' }
+if ($NativeState -and $Simulation -ne 'burst') { throw 'NativeState requires Burst simulation.' }
+if ($Rendering -ne 'culled' -and ($HideWarnings -or $HideProjectiles -or $DeduplicateWarnings -or $OverlapPreparation)) { throw 'Rendering experiments require culled rendering.' }
 if ($Smoke) { $WarmupSeconds = 1; $CaptureSeconds = 5; $Repeats = 1 }
 if (-not $Smoke -and -not $Visible) { throw 'Full rendering captures require -Visible. Hidden-window runs are reserved for -Smoke and are not performance evidence.' }
 if ($Repeats -lt 1 -or $Repeats -gt 20 -or $WarmupSeconds -lt 0 -or $WarmupSeconds -gt 300 -or $CaptureSeconds -lt 1 -or $CaptureSeconds -gt 600) { throw 'Parameters exceed supported capture limits.' }
@@ -37,6 +44,8 @@ foreach ($taskCount in $Counts) {
     [pscustomobject]@{startedUtc=[DateTime]::UtcNow.ToString('o');visible=[bool]$Visible;smoke=[bool]$Smoke;
         crowd=$taskCount;workload=$Workload;synchronizedAbilities=[bool]$SynchronizedAbilities;
         simulation=$Simulation;rendering=$Rendering;jobBatch=$JobBatch;profile=[bool]$Profile;
+        hideWarnings=[bool]$HideWarnings;hideProjectiles=[bool]$HideProjectiles;deduplicateWarnings=[bool]$DeduplicateWarnings;
+        overlapPreparation=[bool]$OverlapPreparation;nativeState=[bool]$NativeState;
         warmupSeconds=$WarmupSeconds;captureSeconds=$CaptureSeconds;repeats=$Repeats;
         note='Keep the game visible and unobstructed for rendering measurements.'} |
         ConvertTo-Json | Set-Content -LiteralPath (Join-Path $taskRunFolder 'invocation.json')
@@ -45,6 +54,11 @@ foreach ($taskCount in $Counts) {
         '-repeats',$Repeats,'-results',"`"$taskRunFolder`"",'-quitAfterBenchmark',
         '-screen-width','1920','-screen-height','1080','-screen-fullscreen','0',
         '-logFile',"`"$taskRunFolder\player.log`"")
+    if ($HideWarnings) { $taskArgs += '-hideWarnings' }
+    if ($HideProjectiles) { $taskArgs += '-hideProjectiles' }
+    if ($DeduplicateWarnings) { $taskArgs += '-deduplicateWarnings' }
+    if ($OverlapPreparation) { $taskArgs += '-overlapPreparation' }
+    if ($NativeState) { $taskArgs += '-nativeState' }
     if ($SynchronizedAbilities) { $taskArgs += '-synchronizedAbilities' }
     if ($Profile) { $taskArgs += @('-profile',"`"$taskRunFolder\profile.raw`"",'-profileSeconds',$ProfileSeconds) }
     if ($Screenshot) { $taskArgs += @('-screenshot',"`"$taskRunFolder\arena.png`"") }
@@ -63,6 +77,10 @@ foreach ($taskCount in $Counts) {
         if ($taskResult.crowd -ne $taskCount -or ($Workload -eq 'bosses' -and $taskResult.bossCount -ne $taskCount)) { throw 'Player did not run the requested workload. Rebuild the player.' }
         if ($taskResult.simulationBackend -ne $(if ($Simulation -eq 'burst') { 'burst-jobs-v1' } else { 'managed-reference' })) { throw 'Player did not use the requested simulation backend.' }
         if ($taskResult.renderingBackend -ne $(if ($Rendering -eq 'culled') { 'burst-culled-v1' } else { 'legacy-instanced' })) { throw 'Player did not use the requested rendering backend.' }
+        if ($taskResult.schema -ne 'journey-benchmark-v4') { throw 'Rebuild the player for experiment metadata.' }
+        if ($taskResult.hideWarnings -ne [bool]$HideWarnings -or $taskResult.hideProjectiles -ne [bool]$HideProjectiles -or
+            $taskResult.deduplicateWarnings -ne [bool]$DeduplicateWarnings -or $taskResult.overlapPreparation -ne [bool]$OverlapPreparation -or
+            $taskResult.nativeState -ne [bool]$NativeState -or $taskResult.diagnosticOnly -ne [bool]($HideWarnings -or $HideProjectiles)) { throw 'Player experiment settings do not match the invocation.' }
         if (($Simulation -eq 'burst' -or $Rendering -eq 'culled') -and -not $taskResult.burstCompiled) { throw 'Jobs are running without Burst compilation.' }
         [pscustomobject]@{Crowd=$taskResult.crowd;Workload=$taskResult.workload;Repeat=$taskResult.repeat;MedianMs=$taskResult.medianMs;P99Ms=$taskResult.p99Ms;MaxMs=$taskResult.maxMs;PeakProjectiles=$taskResult.peakProjectiles;DroppedProjectiles=$taskResult.droppedProjectilesIncludingWarmup;CatchupLimitFrames=$taskResult.catchupLimitFrames;Samples=$taskResult.samples;Report=$taskReport.FullName}
     }

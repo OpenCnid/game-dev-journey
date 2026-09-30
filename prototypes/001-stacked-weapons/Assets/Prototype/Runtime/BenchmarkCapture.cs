@@ -17,8 +17,10 @@ namespace Journey
     [Serializable]
     public sealed class BenchmarkSummary
     {
-        public string schema = "journey-benchmark-v3";
+        public string schema = "journey-benchmark-v4";
         public string simulationBackend, renderingBackend;
+        public bool nativeState, hideWarnings, hideProjectiles, deduplicateWarnings, overlapPreparation, diagnosticOnly;
+        public double meanWarningCandidates, meanUniqueWarnings;
         public bool burstCompiled, profilerCapture;
         public int jobBatch, instanceBatchLimit, simulationTicks;
         public double meanCrowdMsPerTick, meanAbilityMsPerTick, meanProjectileMsPerTick,
@@ -52,7 +54,7 @@ namespace Journey
             public int count, projectiles, telegraphs, neighborChecks;
             public bool catchupLimit;
             public double crowdMs, abilityMs, projectileMs, weaponMs, renderPrepareMs, renderSubmitMs;
-            public int ticks, submittedInstances, instanceBatches;
+            public int ticks, submittedInstances, instanceBatches, warningCandidates, uniqueWarnings;
         }
         readonly List<Sample> frames = new List<Sample>(65536);
         public bool Recording { get; private set; }
@@ -78,11 +80,11 @@ namespace Journey
                     crowdMs = StageProfile.CrowdMs, abilityMs = StageProfile.AbilityMs, projectileMs = StageProfile.ProjectileMs,
                     weaponMs = StageProfile.WeaponMs, renderPrepareMs = StageProfile.RenderPrepareMs,
                     renderSubmitMs = StageProfile.RenderSubmitMs, ticks = StageProfile.Ticks,
-                    submittedInstances = StageProfile.SubmittedInstances, instanceBatches = StageProfile.InstanceBatches });
+                    submittedInstances = StageProfile.SubmittedInstances, instanceBatches = StageProfile.InstanceBatches, warningCandidates = StageProfile.WarningCandidates, uniqueWarnings = StageProfile.UniqueWarnings });
         }
 
         public string Save(string folder, int crowd, int seed, int repeat, float warmup, float seconds, int shots, int kills,
-            CombatSimulation sim, bool culled, bool profiled, double actualSeconds)
+            CombatSimulation sim, bool culled, bool profiled, double actualSeconds, ArenaPresentation view = null)
         {
             Recording = false;
             if (frames.Count == 0) throw new InvalidOperationException("No frames captured; no report written.");
@@ -90,6 +92,9 @@ namespace Journey
             var values = new double[frames.Count];
             TextAsset stamp = Resources.Load<TextAsset>("BuildInfo");
             var summary = new BenchmarkSummary {
+                nativeState = sim.NativeState, hideWarnings = view?.HideWarnings ?? false, hideProjectiles = view?.HideProjectiles ?? false,
+                deduplicateWarnings = view?.DeduplicateWarnings ?? false, overlapPreparation = view?.OverlapPreparation ?? false,
+                diagnosticOnly = view?.DiagnosticOnly ?? false,
                 utc = DateTime.UtcNow.ToString("o"), unity = Application.unityVersion,
                 simulationBackend = sim.UseBurst ? "burst-jobs-v1" : "managed-reference",
                 renderingBackend = culled ? "burst-culled-v1" : "legacy-instanced",
@@ -117,12 +122,13 @@ namespace Journey
                 projectileUpdates = sim.Abilities.ProjectileUpdates - startProjectileUpdates,
                 simulatedCaptureSeconds = sim.Elapsed - startSimulationTime
             };
-            var csv = new StringBuilder("frame,frame_ms,simulation_ms,cpu_frame_ms,gpu_frame_ms,enemy_count,catchup_limit,projectiles,telegraphs,neighbor_checks_last_tick,ticks,crowd_ms,ability_ms,projectile_ms,weapon_ms,render_prepare_ms,render_submit_ms,submitted_instances,instance_batches\n");
+            var csv = new StringBuilder("frame,frame_ms,simulation_ms,cpu_frame_ms,gpu_frame_ms,enemy_count,catchup_limit,projectiles,telegraphs,neighbor_checks_last_tick,ticks,crowd_ms,ability_ms,projectile_ms,weapon_ms,render_prepare_ms,render_submit_ms,submitted_instances,instance_batches,warning_candidates,unique_warnings\n");
             double total = 0;
             for (int i = 0; i < frames.Count; i++)
             {
                 Sample f = frames[i]; values[i] = f.ms; total += f.ms;
                 summary.meanSimulationMs += f.simulationMs;
+                summary.meanWarningCandidates += f.warningCandidates; summary.meanUniqueWarnings += f.uniqueWarnings;
                 summary.simulationTicks += f.ticks;
                 summary.meanCrowdMsPerTick += f.crowdMs; summary.meanAbilityMsPerTick += f.abilityMs;
                 summary.meanProjectileMsPerTick += f.projectileMs; summary.meanWeaponMsPerFrame += f.weaponMs;
@@ -142,7 +148,7 @@ namespace Journey
                     .Append(',').Append(f.projectiles).Append(',').Append(f.telegraphs).Append(',').Append(f.neighborChecks)
                     .Append(',').Append(f.ticks).Append(',').Append(F(f.crowdMs)).Append(',').Append(F(f.abilityMs))
                     .Append(',').Append(F(f.projectileMs)).Append(',').Append(F(f.weaponMs)).Append(',').Append(F(f.renderPrepareMs))
-                    .Append(',').Append(F(f.renderSubmitMs)).Append(',').Append(f.submittedInstances).Append(',').Append(f.instanceBatches).Append('\n');
+                    .Append(',').Append(F(f.renderSubmitMs)).Append(',').Append(f.submittedInstances).Append(',').Append(f.instanceBatches).Append(',').Append(f.warningCandidates).Append(',').Append(f.uniqueWarnings).Append('\n');
             }
             Array.Sort(values);
             summary.medianMs = Percentile(values, .5);
@@ -151,6 +157,7 @@ namespace Journey
             summary.maxMs = values[values.Length - 1];
             summary.averageFps = frames.Count * 1000d / total;
             summary.meanSimulationMs /= frames.Count;
+            summary.meanWarningCandidates /= frames.Count; summary.meanUniqueWarnings /= frames.Count;
             int ticks = Math.Max(1, summary.simulationTicks);
             summary.meanCrowdMsPerTick /= ticks; summary.meanAbilityMsPerTick /= ticks; summary.meanProjectileMsPerTick /= ticks;
             summary.meanWeaponMsPerFrame /= frames.Count; summary.meanRenderPrepareMs /= frames.Count;
