@@ -12,6 +12,19 @@ namespace Journey
         public readonly Vector3[] Positions = new Vector3[CombatSimulation.Capacity];
         public int Count { get; private set; }
         public int Candidates { get; private set; }
+        CombatSimulation cachedSimulation;
+        long cachedVersion = -1;
+        bool cachedDeduplicate;
+        public int Collections { get; private set; }
+        public void Collect(CombatSimulation sim, bool deduplicate, bool cache)
+        {
+            if (cache && ReferenceEquals(cachedSimulation, sim) && cachedVersion == sim.StateVersion && cachedDeduplicate == deduplicate) return;
+            Begin();
+            if (sim.Abilities.Enabled)
+                for (int i = 0; i < sim.Count; i++) if (sim.Abilities.IsCasting(i))
+                    Add(sim.Abilities.Target(i), sim.Abilities.CastRemaining(i), deduplicate);
+            cachedSimulation = sim; cachedVersion = sim.StateVersion; cachedDeduplicate = deduplicate; Collections++;
+        }
         public void Begin() { seen.Clear(); Count = Candidates = 0; }
         public void Add(Vector3 target, float remaining, bool deduplicate)
         {

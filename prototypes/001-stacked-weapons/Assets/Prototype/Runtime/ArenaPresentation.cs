@@ -11,7 +11,15 @@ namespace Journey
         readonly Matrix4x4[] heads = new Matrix4x4[CombatSimulation.Capacity];
         readonly Matrix4x4[] projectiles = new Matrix4x4[BossAbilities.ProjectileCapacity];
         readonly Matrix4x4[] telegraphs = new Matrix4x4[CombatSimulation.Capacity];
-        Mesh cube, ring;
+        Mesh cube, ring, octahedron, character;
+        Texture2D characterAtlas;
+        Material characterMaterial;
+        CompactProjectiles compactProjectiles;
+        public string ProjectileRenderer { get; set; } = "cube";
+        public bool CombinedCharacters { get; set; }
+        public bool CacheWarnings { get; set; }
+        bool IndirectProjectiles => ProjectileRenderer.StartsWith("indirect-");
+        Mesh ProjectileMesh => ProjectileRenderer.EndsWith("octa") ? octahedron : cube;
         Material enemyMaterial, headMaterial, projectileMaterial, telegraphMaterial;
         LineRenderer tracer;
         Transform weapon;
@@ -90,6 +98,11 @@ namespace Journey
             telegraphMaterial = Material("Area warning", new Color(1, .4f, .06f), true);
             projectileMaterial.enableInstancing = telegraphMaterial.enableInstancing = true;
             ring = CreateRing();
+            octahedron = ExperimentMeshes.Octahedron(); character = ExperimentMeshes.Character(cube);
+            characterAtlas = new Texture2D(2, 1, TextureFormat.RGBA32, false) { filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Clamp };
+            characterAtlas.SetPixels(new[] { new Color(.94f, .23f, .19f), new Color(1, .72f, .27f) }); characterAtlas.Apply();
+            characterMaterial = Material("Combined drone", Color.white); characterMaterial.enableInstancing = true;
+            characterMaterial.SetTexture("_BaseMap", characterAtlas);
             tracer = new GameObject("Shot trail").AddComponent<LineRenderer>();
             tracer.transform.SetParent(root); tracer.positionCount = 2;
             tracer.startWidth = .018f; tracer.endWidth = .004f;
@@ -185,14 +198,28 @@ namespace Journey
                 begin = StageProfile.Begin();
                 using (PrepareMarker.Auto())
                 {
-                    if (showProjectiles) ScheduleProjectiles(projectileInstances, sim, alpha);
+                    if (showProjectiles && !IndirectProjectiles) ScheduleProjectiles(projectileInstances, sim, alpha);
                     if (showWarnings) ScheduleWarnings(warningInstances, sim);
                 }
                 StageProfile.RenderPrepareMs += StageProfile.End(begin);
             }
             int visible = FinishPreparation(instances);
-            DrawNative(enemyMaterial, cube, instances.A, visible); DrawNative(headMaterial, cube, instances.B, visible);
-            if (showProjectiles)
+            if (CombinedCharacters) DrawNative(characterMaterial, character, instances.A, visible);
+            else { DrawNative(enemyMaterial, cube, instances.A, visible); DrawNative(headMaterial, cube, instances.B, visible); }
+            if (showProjectiles && IndirectProjectiles)
+            {
+                if (!sim.NativeState) throw new System.InvalidOperationException("Indirect projectiles require native state.");
+                if (compactProjectiles == null) compactProjectiles = new CompactProjectiles();
+                begin = StageProfile.Begin();
+                int total;
+                using (PrepareMarker.Auto()) total = compactProjectiles.Prepare(sim.Abilities.NativePositions, sim.Abilities.NativePrevious,
+                    sim.Abilities.Projectiles, alpha, frustum, BatchSize);
+                StageProfile.RenderPrepareMs += StageProfile.End(begin);
+                begin = StageProfile.Begin();
+                using (SubmitMarker.Auto()) compactProjectiles.Draw(ProjectileMesh, total);
+                StageProfile.RenderSubmitMs += StageProfile.End(begin);
+            }
+            if (showProjectiles && !IndirectProjectiles)
             {
                 var buffer = OverlapPreparation ? projectileInstances : instances;
                 if (!OverlapPreparation)
@@ -201,7 +228,7 @@ namespace Journey
                     using (PrepareMarker.Auto()) ScheduleProjectiles(buffer, sim, alpha);
                     StageProfile.RenderPrepareMs += StageProfile.End(begin);
                 }
-                DrawNative(projectileMaterial, cube, buffer.A, FinishPreparation(buffer));
+                DrawNative(projectileMaterial, ProjectileMesh, buffer.A, FinishPreparation(buffer));
             }
             if (showWarnings)
             {
@@ -219,11 +246,11 @@ namespace Journey
         {
             if (sim.NativeState)
                 buffer.ScheduleNative(sim.NativePositions, sim.NativePrevious, sim.Count, alpha, frustum,
-                    Vector3.up * .8f, new Vector3(.85f, 1.4f, .85f), Vector3.up * 1.6f, Vector3.one * .45f,
-                    Vector3.up, 1.2f, true, BatchSize);
+                    CombinedCharacters ? Vector3.zero : Vector3.up * .8f, CombinedCharacters ? Vector3.one : new Vector3(.85f, 1.4f, .85f), Vector3.up * 1.6f, Vector3.one * .45f,
+                    Vector3.up, 1.2f, !CombinedCharacters, BatchSize);
             else buffer.Schedule(sim.Positions, sim.PreviousPositions, sim.Count, alpha, frustum,
-                    Vector3.up * .8f, new Vector3(.85f, 1.4f, .85f), Vector3.up * 1.6f, Vector3.one * .45f,
-                    Vector3.up, 1.2f, true, BatchSize);
+                    CombinedCharacters ? Vector3.zero : Vector3.up * .8f, CombinedCharacters ? Vector3.one : new Vector3(.85f, 1.4f, .85f), Vector3.up * 1.6f, Vector3.one * .45f,
+                    Vector3.up, 1.2f, !CombinedCharacters, BatchSize);
         }
         void ScheduleProjectiles(BurstInstances buffer, CombatSimulation sim, float alpha)
         {
@@ -237,9 +264,7 @@ namespace Journey
         }
         void ScheduleWarnings(BurstInstances buffer, CombatSimulation sim)
         {
-            warnings.Begin();
-            for (int i = 0; i < sim.Count; i++) if (sim.Abilities.IsCasting(i))
-                warnings.Add(sim.Abilities.Target(i), sim.Abilities.CastRemaining(i), DeduplicateWarnings);
+            warnings.Collect(sim, DeduplicateWarnings, CacheWarnings);
             StageProfile.WarningCandidates = warnings.Candidates; StageProfile.UniqueWarnings = warnings.Count;
             buffer.Schedule(warnings.Positions, warnings.Positions, warnings.Count, 1, frustum,
                 Vector3.up * .02f, Vector3.one * BossAbilities.AreaRadius, Vector3.zero, Vector3.zero,
@@ -307,7 +332,7 @@ namespace Journey
             mesh.RecalculateNormals(); mesh.RecalculateBounds(); return mesh;
         }
         public void ResetFeedback() { flash = recoil = 0; tracer.enabled = false; audio.Stop(); }
-        public void Dispose() { instances?.Dispose(); instances = null; projectileInstances?.Dispose(); projectileInstances = null; warningInstances?.Dispose(); warningInstances = null; if (shot != null) Object.Destroy(shot); if (ring != null) Object.Destroy(ring); }
+        public void Dispose() { compactProjectiles?.Dispose(); compactProjectiles = null; if (octahedron != null) Object.Destroy(octahedron); if (character != null) Object.Destroy(character); if (characterMaterial != null) Object.Destroy(characterMaterial); if (characterAtlas != null) Object.Destroy(characterAtlas); instances?.Dispose(); instances = null; projectileInstances?.Dispose(); projectileInstances = null; warningInstances?.Dispose(); warningInstances = null; if (shot != null) Object.Destroy(shot); if (ring != null) Object.Destroy(ring); }
 
         static Material Material(string name, Color color, bool unlit = false)
         {

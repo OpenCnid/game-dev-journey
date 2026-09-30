@@ -50,6 +50,7 @@ namespace Journey
         public int PlayerHealth { get; private set; }
         public int Shots { get; private set; }
         public float Elapsed { get; private set; }
+        public long StateVersion { get; private set; }
         public bool Benchmark { get; private set; }
         public float Duration { get; private set; }
         public Vector3 Position(int index) => NativeState ? NativePositions[index] : positions[index];
@@ -71,7 +72,7 @@ namespace Journey
             random = new System.Random(seed);
             Benchmark = benchmark;
             Duration = duration;
-            Elapsed = 0;
+            Elapsed = 0; StateVersion++;
             Kills = Shots = 0;
             PlayerHealth = 100;
             Player = PreviousPlayer = benchmark ? new Vector3(18, 0, 0) : Vector3.zero;
@@ -91,6 +92,7 @@ namespace Journey
         public void Step(Vector3 movement, float dt)
         {
             if (State != RunState.Running || dt <= 0) return;
+            StateVersion++;
             PreviousPlayer = Player;
             Elapsed += dt;
             fireRemaining -= dt;
@@ -243,7 +245,7 @@ namespace Journey
             if (NativeState) NativePositions[index] = NativePrevious[index] = p;
             else positions[index] = previous[index] = p;
             health[index] = 40;
-            Abilities.CancelCast(index);
+            Abilities.CancelCast(index); StateVersion++;
         }
         static int CellX(float value) => Mathf.Clamp((int)((value + 32) / CellSize), 0, GridWidth - 1);
         static int Cell(Vector3 p) => CellX(p.z) * GridWidth + CellX(p.x);

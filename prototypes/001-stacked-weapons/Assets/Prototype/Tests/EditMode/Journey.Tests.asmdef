@@ -1,7 +1,15 @@
 {
   "name": "Journey.Tests",
   "rootNamespace": "Journey.Tests",
-  "references": ["Journey.Prototype", "Unity.Collections"],
-  "includePlatforms": ["Editor"],
-  "optionalUnityReferences": ["TestAssemblies"]
+  "references": [
+    "Journey.Prototype",
+    "Unity.Collections",
+    "Unity.Mathematics"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ]
 }

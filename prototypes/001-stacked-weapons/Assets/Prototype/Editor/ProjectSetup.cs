@@ -63,6 +63,7 @@ namespace Journey.Editor
             // Serialized material references preserve the runtime-created primitive shaders in player builds.
             KeepMaterial("Body", "Universal Render Pipeline/Simple Lit");
             KeepMaterial("Trail", "Universal Render Pipeline/Unlit");
+            KeepMaterial("CompactProjectile", "Journey/CompactProjectile");
             var graphics = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/GraphicsSettings.asset")[0]);
             SerializedProperty stripping = graphics.FindProperty("m_InstancingStripping");
             if (stripping != null) { stripping.intValue = 0; graphics.ApplyModifiedPropertiesWithoutUndo(); }

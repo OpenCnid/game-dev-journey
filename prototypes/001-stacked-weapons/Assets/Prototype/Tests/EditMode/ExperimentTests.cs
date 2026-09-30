@@ -45,6 +45,64 @@ namespace Journey.Tests
         }
 
         [Test]
+        public void WarningCacheTracksTicksResetAndDeduplicationMode()
+        {
+            using (var sim = new CombatSimulation { UseBurst = true, UseNativeState = true })
+            {
+                var cached = new WarningCollector(); var reference = new WarningCollector();
+                sim.Reset(100, 137, true, bosses: true, synchronizedAbilities: true);
+                for (int tick = 0; tick < 190; tick++)
+                {
+                    sim.Step(Vector3.zero, CombatSimulation.Tick);
+                    cached.Collect(sim, true, true); reference.Collect(sim, true, false);
+                    Assert.That(cached.Count, Is.EqualTo(reference.Count));
+                    Assert.That(cached.Candidates, Is.EqualTo(reference.Candidates));
+                    for (int i = 0; i < cached.Count; i++) Assert.That(cached.Positions[i], Is.EqualTo(reference.Positions[i]));
+                    int builds = cached.Collections;
+                    cached.Collect(sim, true, true); Assert.That(cached.Collections, Is.EqualTo(builds));
+                }
+                int before = cached.Collections;
+                sim.Reset(0, 137, true, bosses: true);
+                cached.Collect(sim, true, true); Assert.That(cached.Count, Is.Zero);
+                Assert.That(cached.Collections, Is.EqualTo(before + 1));
+                cached.Collect(sim, false, true); Assert.That(cached.Collections, Is.EqualTo(before + 2));
+            }
+        }
+
+        [Test]
+        public void CompactProjectilesMatchMatrixCullingInterpolationAndEmptyReset()
+        {
+            var go = new GameObject("Compact camera");
+            try
+            {
+                var camera = go.AddComponent<Camera>(); var planes = GeometryUtility.CalculateFrustumPlanes(camera);
+                var old = new[] { new Vector3(0, 0, 10), new Vector3(0, 0, -10), new Vector3(2, 0, 5) };
+                var current = new[] { new Vector3(1, 0, 10), new Vector3(0, 0, -9), new Vector3(3, 0, 5) };
+                using (var a = new Unity.Collections.NativeArray<Vector3>(current, Unity.Collections.Allocator.TempJob))
+                using (var b = new Unity.Collections.NativeArray<Vector3>(old, Unity.Collections.Allocator.TempJob))
+                using (var compact = new CompactProjectiles())
+                using (var matrices = new BurstInstances())
+                {
+                    foreach (float alpha in new[] { 0f, .5f, 1f })
+                    {
+                        int expected = matrices.Prepare(current, old, 3, alpha, planes, Vector3.up, Vector3.one * .18f,
+                            Vector3.zero, Vector3.zero, Vector3.up, .17f, false, 128);
+                        Assert.That(compact.Prepare(a, b, 3, alpha, planes, 128), Is.EqualTo(expected));
+                        for (int i = 0; i < expected; i++)
+                        {
+                            Assert.That(compact.Data[i].x, Is.EqualTo(matrices.A[i].m03).Within(.00001f));
+                            Assert.That(compact.Data[i].y, Is.EqualTo(matrices.A[i].m13).Within(.00001f));
+                            Assert.That(compact.Data[i].z, Is.EqualTo(matrices.A[i].m23).Within(.00001f));
+                            Assert.That(compact.Data[i].w, Is.EqualTo(.18f));
+                        }
+                    }
+                    Assert.That(compact.Prepare(a, b, 0, 1, planes, 128), Is.Zero);
+                }
+            }
+            finally { Object.DestroyImmediate(go); }
+        }
+
+        [Test]
         public void WarningDeduplicationPreservesDistinctTargetsAndDeadlines()
         {
             var collector = new WarningCollector(); collector.Begin();

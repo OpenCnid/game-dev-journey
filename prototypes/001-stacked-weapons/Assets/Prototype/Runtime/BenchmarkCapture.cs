@@ -17,8 +17,10 @@ namespace Journey
     [Serializable]
     public sealed class BenchmarkSummary
     {
-        public string schema = "journey-benchmark-v4";
+        public string schema = "journey-benchmark-v5";
         public string simulationBackend, renderingBackend;
+        public string projectileRenderer;
+        public bool combinedCharacters, cacheWarnings;
         public bool nativeState, hideWarnings, hideProjectiles, deduplicateWarnings, overlapPreparation, diagnosticOnly;
         public double meanWarningCandidates, meanUniqueWarnings;
         public bool burstCompiled, profilerCapture;
@@ -44,6 +46,8 @@ namespace Journey
         public float warmupSeconds, captureSeconds;
         public double medianMs, p95Ms, p99Ms, maxMs, averageFps, meanSimulationMs, meanCpuFrameMs, meanGpuFrameMs;
         public int cpuTimingSamples, gpuTimingSamples, shots, kills;
+        public double meanMainThreadMs, meanRenderThreadMs;
+        public int mainThreadTimingSamples, renderThreadTimingSamples;
         public string note = "Measured on the hardware recorded in this report. A graybox crowd does not validate the final gameplay workload. Current development benchmarks use the owner's desktop; older-hardware testing is deferred until the game is more polished.";
     }
 
@@ -51,7 +55,7 @@ namespace Journey
     {
         struct Sample
         {
-            public double ms, simulationMs, cpuMs, gpuMs;
+            public double ms, simulationMs, cpuMs, gpuMs, mainThreadMs, renderThreadMs;
             public int count, projectiles, telegraphs, neighborChecks;
             public bool catchupLimit;
             public double crowdMs, abilityMs, projectileMs, weaponMs, renderPrepareMs, renderSubmitMs;
@@ -71,11 +75,11 @@ namespace Journey
             startSimulationTime = sim.Elapsed;
         }
         public void Cancel() { Recording = false; frames.Clear(); }
-        public void Add(double ms, double simulationMs, double cpuMs, double gpuMs, CombatSimulation sim, bool catchupLimit)
+        public void Add(double ms, double simulationMs, double cpuMs, double gpuMs, CombatSimulation sim, bool catchupLimit, double mainThreadMs = 0, double renderThreadMs = 0)
         {
             if (Recording && ms > 0 && !double.IsNaN(ms))
                 frames.Add(new Sample { ms = ms, simulationMs = simulationMs, cpuMs = cpuMs,
-                    gpuMs = gpuMs, count = sim.Count, catchupLimit = catchupLimit,
+                    gpuMs = gpuMs, mainThreadMs = mainThreadMs, renderThreadMs = renderThreadMs, count = sim.Count, catchupLimit = catchupLimit,
                     projectiles = sim.Abilities.Projectiles, telegraphs = sim.Abilities.Telegraphs,
                     neighborChecks = sim.NeighborChecks,
                     crowdMs = StageProfile.CrowdMs, abilityMs = StageProfile.AbilityMs, projectileMs = StageProfile.ProjectileMs,
@@ -93,6 +97,7 @@ namespace Journey
             var values = new double[frames.Count];
             TextAsset stamp = Resources.Load<TextAsset>("BuildInfo");
             var summary = new BenchmarkSummary {
+                projectileRenderer = view?.ProjectileRenderer ?? "cube", combinedCharacters = view?.CombinedCharacters ?? false, cacheWarnings = view?.CacheWarnings ?? false,
                 nativeState = sim.NativeState, hideWarnings = view?.HideWarnings ?? false, hideProjectiles = view?.HideProjectiles ?? false,
                 deduplicateWarnings = view?.DeduplicateWarnings ?? false, overlapPreparation = view?.OverlapPreparation ?? false,
                 diagnosticOnly = view?.DiagnosticOnly ?? false,
@@ -124,11 +129,14 @@ namespace Journey
                 projectileUpdates = sim.Abilities.ProjectileUpdates - startProjectileUpdates,
                 simulatedCaptureSeconds = sim.Elapsed - startSimulationTime
             };
-            var csv = new StringBuilder("frame,frame_ms,simulation_ms,cpu_frame_ms,gpu_frame_ms,enemy_count,catchup_limit,projectiles,telegraphs,neighbor_checks_last_tick,ticks,crowd_ms,ability_ms,projectile_ms,weapon_ms,render_prepare_ms,render_submit_ms,submitted_instances,instance_batches,warning_candidates,unique_warnings\n");
+            var csv = new StringBuilder("frame,frame_ms,simulation_ms,cpu_frame_ms,gpu_frame_ms,enemy_count,catchup_limit,projectiles,telegraphs,neighbor_checks_last_tick,ticks,crowd_ms,ability_ms,projectile_ms,weapon_ms,render_prepare_ms,render_submit_ms,submitted_instances,instance_batches,warning_candidates,unique_warnings,main_thread_ms,render_thread_ms\n");
             double total = 0;
             for (int i = 0; i < frames.Count; i++)
             {
-                Sample f = frames[i]; values[i] = f.ms; total += f.ms;
+                Sample f = frames[i];
+                if (f.mainThreadMs > 0) { summary.meanMainThreadMs += f.mainThreadMs; summary.mainThreadTimingSamples++; }
+                if (f.renderThreadMs > 0) { summary.meanRenderThreadMs += f.renderThreadMs; summary.renderThreadTimingSamples++; }
+                values[i] = f.ms; total += f.ms;
                 summary.meanSimulationMs += f.simulationMs;
                 summary.meanWarningCandidates += f.warningCandidates; summary.meanUniqueWarnings += f.uniqueWarnings;
                 summary.simulationTicks += f.ticks;
@@ -150,7 +158,7 @@ namespace Journey
                     .Append(',').Append(f.projectiles).Append(',').Append(f.telegraphs).Append(',').Append(f.neighborChecks)
                     .Append(',').Append(f.ticks).Append(',').Append(F(f.crowdMs)).Append(',').Append(F(f.abilityMs))
                     .Append(',').Append(F(f.projectileMs)).Append(',').Append(F(f.weaponMs)).Append(',').Append(F(f.renderPrepareMs))
-                    .Append(',').Append(F(f.renderSubmitMs)).Append(',').Append(f.submittedInstances).Append(',').Append(f.instanceBatches).Append(',').Append(f.warningCandidates).Append(',').Append(f.uniqueWarnings).Append('\n');
+                    .Append(',').Append(F(f.renderSubmitMs)).Append(',').Append(f.submittedInstances).Append(',').Append(f.instanceBatches).Append(',').Append(f.warningCandidates).Append(',').Append(f.uniqueWarnings).Append(',').Append(F(f.mainThreadMs)).Append(',').Append(F(f.renderThreadMs)).Append('\n');
             }
             Array.Sort(values);
             summary.medianMs = Percentile(values, .5);
@@ -166,6 +174,8 @@ namespace Journey
             summary.meanRenderSubmitMs /= frames.Count; summary.meanSubmittedInstances /= frames.Count; summary.meanInstanceBatches /= frames.Count;
             if (summary.cpuTimingSamples > 0) summary.meanCpuFrameMs /= summary.cpuTimingSamples;
             if (summary.gpuTimingSamples > 0) summary.meanGpuFrameMs /= summary.gpuTimingSamples;
+            if (summary.mainThreadTimingSamples > 0) summary.meanMainThreadMs /= summary.mainThreadTimingSamples;
+            if (summary.renderThreadTimingSamples > 0) summary.meanRenderThreadMs /= summary.renderThreadTimingSamples;
             summary.gpuTimingAvailable = summary.gpuTimingSamples > 0;
             string stem = Path.Combine(folder, DateTime.UtcNow.ToString("yyyyMMdd-HHmmss-fff") + "-crowd" + crowd + "-r" + repeat);
             File.WriteAllText(stem + ".csv", csv.ToString());

@@ -2,10 +2,13 @@ param([Parameter(Mandatory=$true)][string]$InputDirectory)
 $ErrorActionPreference = 'Stop'
 Get-ChildItem -LiteralPath $InputDirectory -Recurse -Filter '*-crowd*-r*.json' | ForEach-Object {
     $taskReport = Get-Content -LiteralPath $_.FullName -Raw | ConvertFrom-Json
-    if ($taskReport.schema -notin @('journey-benchmark-v3','journey-benchmark-v4') -or $taskReport.profilerCapture) { return }
+    if ($taskReport.schema -notin @('journey-benchmark-v3','journey-benchmark-v4','journey-benchmark-v5') -or $taskReport.profilerCapture) { return }
     [pscustomobject]@{
         Mode = "$($taskReport.simulationBackend)/$($taskReport.renderingBackend)"
         NativeState = [bool]$taskReport.nativeState
+        ProjectileRenderer = $taskReport.projectileRenderer
+        CombinedCharacters = [bool]$taskReport.combinedCharacters
+        CacheWarnings = [bool]$taskReport.cacheWarnings
         DeduplicateWarnings = [bool]$taskReport.deduplicateWarnings
         OverlapPreparation = [bool]$taskReport.overlapPreparation
         DiagnosticOnly = [bool]$taskReport.diagnosticOnly

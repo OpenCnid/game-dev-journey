@@ -10,11 +10,12 @@ namespace Journey.Tests
         [UnityTest]
         public IEnumerator ExperimentalRenderingPreservesSimulationAndDisposesBuffers()
         {
-            for (int mode = 0; mode < 4; mode++)
+            for (int mode = 0; mode < 8; mode++)
             {
                 var root = new GameObject("Experiment render test");
-                var view = new ArenaPresentation { OverlapPreparation = (mode & 1) != 0, DeduplicateWarnings = true };
-                var sim = new CombatSimulation { UseBurst = true, UseNativeState = (mode & 2) != 0 };
+                var view = new ArenaPresentation { OverlapPreparation = (mode & 1) != 0, DeduplicateWarnings = true, CacheWarnings = true, CombinedCharacters = mode >= 4,
+                    ProjectileRenderer = new[] { "cube", "octa", "indirect-cube", "indirect-octa" }[mode % 4] };
+                var sim = new CombatSimulation { UseBurst = true, UseNativeState = true };
                 try
                 {
                     view.Create(root.transform);

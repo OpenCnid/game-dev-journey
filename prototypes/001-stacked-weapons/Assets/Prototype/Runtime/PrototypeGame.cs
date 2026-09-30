@@ -64,6 +64,9 @@ namespace Journey
                 if (args[i] == "-deduplicateWarnings") view.DeduplicateWarnings = true;
                 if (args[i] == "-overlapPreparation") view.OverlapPreparation = true;
                 if (args[i] == "-nativeState") sim.UseNativeState = true;
+                if (args[i] == "-projectileRenderer") view.ProjectileRenderer = value;
+                if (args[i] == "-combinedCharacters") view.CombinedCharacters = true;
+                if (args[i] == "-cacheWarnings") view.CacheWarnings = true;
                 if (args[i] == "-synchronizedAbilities") synchronizedAbilities = true;
                 if (args[i] == "-simulation") sim.UseBurst = value == "burst";
                 if (args[i] == "-rendering") view.CullInstances = value == "culled";
@@ -77,8 +80,12 @@ namespace Journey
                 if (args[i] == "-results" && !string.IsNullOrWhiteSpace(value)) outputDirectory = Path.GetFullPath(value);
                 if (args[i] == "-screenshot" && !string.IsNullOrWhiteSpace(value)) screenshotPath = Path.GetFullPath(value);
             }
+            if (view.ProjectileRenderer != "cube" && view.ProjectileRenderer != "octa" && view.ProjectileRenderer != "indirect-cube" && view.ProjectileRenderer != "indirect-octa")
+                throw new InvalidOperationException("Unknown projectile renderer.");
+            if (view.ProjectileRenderer.StartsWith("indirect-") && (!sim.UseNativeState || !sim.UseBurst))
+                throw new InvalidOperationException("Indirect projectiles require native Burst state.");
             if (view.DiagnosticOnly && !autoBenchmark) throw new InvalidOperationException("Hidden effects require -benchmark.");
-            if (!view.CullInstances && (view.DiagnosticOnly || view.DeduplicateWarnings || view.OverlapPreparation))
+            if (!view.CullInstances && (view.DiagnosticOnly || view.DeduplicateWarnings || view.OverlapPreparation || view.ProjectileRenderer != "cube" || view.CacheWarnings || view.CombinedCharacters))
                 throw new InvalidOperationException("Rendering experiments require -rendering culled.");
             if (autoBenchmark) StartBenchmark(crowd);
             else if (autoPlay) StartCombat();
@@ -160,7 +167,7 @@ namespace Journey
                 { capture.Begin(sim); captureStarted = now; captureStartShots = sim.Shots; captureStartKills = sim.Kills; StartProfile(); }
                 else if (capture.Recording)
                 {
-                    capture.Add(interval, simulationMs, cpuMs, gpuMs, sim, catchupLimit);
+                    capture.Add(interval, simulationMs, cpuMs, gpuMs, sim, catchupLimit, timingCount > 0 ? timings[0].cpuMainThreadFrameTime : 0, timingCount > 0 ? timings[0].cpuRenderThreadFrameTime : 0);
                     if (now - captureStarted >= captureSeconds) FinishCapture(now - captureStarted);
                 }
             }
@@ -228,6 +235,7 @@ namespace Journey
             Directory.CreateDirectory(Path.GetDirectoryName(profilePath));
             UnityEngine.Profiling.Profiler.logFile = profilePath;
             UnityEngine.Profiling.Profiler.enableBinaryLog = true;
+            UnityEngine.Profiling.Profiler.SetAreaEnabled(UnityEngine.Profiling.ProfilerArea.GPU, true);
             UnityEngine.Profiling.Profiler.enabled = true;
             profileStarted = Time.realtimeSinceStartupAsDouble; profileActive = true;
         }

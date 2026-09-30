@@ -42,7 +42,7 @@ namespace Journey.Editor
                     {
                         string name = data.GetSampleName(i);
                         if (string.IsNullOrEmpty(name)) continue;
-                        if (!name.Contains("Journey") && !name.Contains("Job") && !name.Contains("Gfx.Wait")) continue;
+                        if (!name.Contains("Journey") && !name.Contains("Job") && !name.Contains("Gfx") && !name.Contains("Render") && !name.Contains("Camera") && !name.Contains("PlayerLoop") && !data.threadName.Contains("Render") && !data.threadName.Contains("GPU")) continue;
                         string key = data.threadName + "/" + name;
                         if (!markers.TryGetValue(key, out var marker))
                         { marker = new Marker { thread = data.threadName, name = name }; markers.Add(key, marker); }
