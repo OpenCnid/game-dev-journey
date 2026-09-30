@@ -14,7 +14,7 @@ Two or three years ago, I wouldn't have felt ready to take this on this way. Tod
 | --- | --- |
 | Experience | Software engineering background; first game |
 | Game concept | First-person horde survival inspired by Vampire Hunters, focused on stacking weapons and powerful builds |
-| Engine and language | Not selected |
+| Engine and language | Unity + C# with URP recommended; [proposal](docs/decisions/0001-engine-recommendation.md), no engine project yet |
 | Target platform | Windows desktop proposed; not finalized |
 | Playable build | Not yet |
 | Current milestone | Study the reference and test a small stacked-weapon combat loop |

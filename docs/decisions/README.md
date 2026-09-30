@@ -4,4 +4,4 @@ Use these for choices such as the engine, target platform, or a significant tech
 
 Copy [the template](template.md) to `NNNN-short-title.md`, starting at `0001`. Use increasing numbers and link new records below. If a decision changes, create a new record and mark the old one as superseded; preserve the original reasoning.
 
-No technology decisions have been recorded yet.
+- [0001: Recommend Unity and C# for the first prototype](0001-engine-recommendation.md) - proposed; no engine project created yet.
