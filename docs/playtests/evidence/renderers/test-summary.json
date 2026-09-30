@@ -1,0 +1,18 @@
+{
+  "EditMode": {
+    "total": "33",
+    "passed": "33",
+    "failed": "0",
+    "skipped": "0",
+    "start-time": "2026-09-30 10:00:26Z",
+    "end-time": "2026-09-30 10:00:29Z"
+  },
+  "PlayMode": {
+    "total": "2",
+    "passed": "2",
+    "failed": "0",
+    "skipped": "0",
+    "start-time": "2026-09-30 09:50:16Z",
+    "end-time": "2026-09-30 09:50:17Z"
+  }
+}

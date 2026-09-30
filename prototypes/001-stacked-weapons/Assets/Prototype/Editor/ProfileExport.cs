@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEditor.Profiling;
+using System.Reflection;
 
 namespace Journey.Editor
 {
@@ -19,6 +21,8 @@ namespace Journey.Editor
             public string note = "Development profiler diagnostics for the loaded frame window; Unity history limits may truncate long recordings. Inclusive samples overlap; worker sums are not wall-clock latency. No Deep Profiling.";
             public int frames, firstFrameIndex, lastFrameIndex;
             public List<Marker> markers = new List<Marker>();
+            public List<Marker> gpuMarkers = new List<Marker>();
+            public int gpuThreadFrames;
         }
         public static void Export()
         {
@@ -30,6 +34,10 @@ namespace Journey.Editor
             ProfilerDriver.LoadProfile(path, false);
             var summary = new Summary { firstFrameIndex = ProfilerDriver.firstFrameIndex, lastFrameIndex = ProfilerDriver.lastFrameIndex };
             var markers = new Dictionary<string, Marker>();
+            var gpuMarkers = new Dictionary<string, Marker>();
+            // Unity's GPU view uses this internal column on the same thread hierarchy.
+            // Resolve its name instead of hard-coding a version-dependent numeric column.
+            int gpuColumn = (int)typeof(HierarchyFrameDataView).GetField("columnTotalGpuTime", BindingFlags.Static | BindingFlags.NonPublic).GetRawConstantValue();
             for (int frame = ProfilerDriver.firstFrameIndex; frame <= ProfilerDriver.lastFrameIndex; frame++)
             {
                 if (frame < 0) continue;
@@ -38,6 +46,11 @@ namespace Journey.Editor
                 using (var data = ProfilerDriver.GetRawFrameDataView(frame, thread))
                 {
                     if (!data.valid) break;
+                    using (var hierarchy = ProfilerDriver.GetHierarchyFrameDataView(frame, thread,
+                        HierarchyFrameDataView.ViewModes.Default, HierarchyFrameDataView.columnDontSort, false))
+                    {
+                        if (hierarchy.valid && ExportGpu(hierarchy, gpuColumn, data.threadName, gpuMarkers)) summary.gpuThreadFrames++;
+                    }
                     for (int i = 0; i < data.sampleCount; i++)
                     {
                         string name = data.GetSampleName(i);
@@ -54,9 +67,33 @@ namespace Journey.Editor
             if (summary.frames == 0 || markers.Count == 0) throw new InvalidOperationException("Profile contains no readable Journey/job markers.");
             summary.markers.AddRange(markers.Values);
             summary.markers.Sort((a, b) => b.totalInclusiveMs.CompareTo(a.totalInclusiveMs));
+            summary.gpuMarkers.AddRange(gpuMarkers.Values);
+            summary.gpuMarkers.Sort((a, b) => b.totalInclusiveMs.CompareTo(a.totalInclusiveMs));
             string output = Path.ChangeExtension(path, ".summary.json");
             File.WriteAllText(output, JsonUtility.ToJson(summary, true));
             Debug.Log("PROFILE_SUMMARY " + output + " frames=" + summary.frames);
+        }
+        static bool ExportGpu(HierarchyFrameDataView data, int column, string thread, Dictionary<string, Marker> markers)
+        {
+            bool found = false;
+            var pending = new Stack<int>(); var children = new List<int>();
+            pending.Push(data.GetRootItemID());
+            while (pending.Count > 0)
+            {
+                int id = pending.Pop();
+                double ms = data.GetItemColumnDataAsFloat(id, column);
+                if (ms > 0)
+                {
+                    found = true;
+                    string name = data.GetItemName(id), key = thread + "/" + name;
+                    if (!markers.TryGetValue(key, out var marker))
+                    { marker = new Marker { thread = thread, name = name }; markers.Add(key, marker); }
+                    marker.calls++; marker.totalInclusiveMs += ms; marker.maxCallMs = Math.Max(marker.maxCallMs, ms);
+                }
+                data.GetItemChildren(id, children);
+                foreach (int child in children) pending.Push(child);
+            }
+            return found;
         }
     }
 }

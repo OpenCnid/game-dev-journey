@@ -81,6 +81,39 @@ Parallel preparation uses additional persistent buffers and therefore trades mem
 
 Compare controls and experiments from the same build on the same desktop. Rotate order over repeated runs and inspect p99, maximum, budget misses, simulation time, dropped projectiles, and stage costs. Short screening captures are exploratory. Wall-clock capture boundaries can differ by a simulation tick; fixed-tick parity tests check correctness separately from FPS comparisons.
 
+## Projectile and character renderer experiments
+
+`tools/compare-renderers.ps1` always uses native-state Burst simulation and serial preparation. It rotates mode order across repeats and launches a fresh visible release player for each capture. It is separate from the earlier `compare-experiments.ps1`; the names `native` and `combined` refer to the options in the corresponding script.
+
+```powershell
+.\tools\unity.ps1 -Action Build
+# Exploratory screen, not an acceptance test:
+.\tools\compare-renderers.ps1 -Visible -Repeats 1 -WarmupSeconds 10 -CaptureSeconds 30
+# Repeat selected candidates using 30s warm-up + 60s capture:
+.\tools\compare-renderers.ps1 -Visible -Modes native,indirect-cube,combined
+# Check a staggered workload separately:
+.\tools\compare-renderers.ps1 -Visible -Staggered -Modes native,combined
+```
+
+| Mode | Change relative to native-state baseline |
+| --- | --- |
+| `native` | Existing cube projectiles, separate body/head meshes, warnings gathered every frame |
+| `octa` | Six-vertex, eight-triangle projectile mesh instead of a 24-vertex, twelve-triangle cube |
+| `indirect-cube` | Same cube mesh, interpolated position/scale in a 16-byte instance record, one indirect projectile submission |
+| `indirect-octa` | Compact indirect data and the octahedron mesh |
+| `characters` | Same body/head geometry and normals combined into one mesh; one Simple Lit material with a two-color atlas |
+| `dedup` | Exact warning deduplication, still collected every frame |
+| `cached` | Exact deduplication plus collection cached until simulation state changes |
+| `combined` | Indirect octahedra, combined characters, cached exact warning deduplication |
+
+Individual `benchmark.ps1` flags are `-NativeState -ProjectileRenderer cube|octa|indirect-cube|indirect-octa`, `-CombinedCharacters`, and `-CacheWarnings`. Cache reuse also includes the deduplication setting and simulation identity; reset, simulation ticks, and respawns invalidate it. Warning frustum culling still runs each rendered frame. It does not defer attacks or collisions.
+
+The indirect path still culls and interpolates on the CPU in Burst, uploads visible instances, and uses CPU-authored indirect arguments. It is not GPU simulation or GPU occlusion culling. Projectile color, depth writing, fog, bounds, and collision behavior are retained; the octahedron changes the visual silhouette and screen coverage. The single-color cube comparison helps distinguish that visual change from submission/data-layout savings. All renderer variants remain opt-in.
+
+Schema v5 records renderer options and available main/render-thread frame timings alongside existing CPU/GPU timings. These engine timings are delayed and may include waiting; do not add them together or treat them as synchronous measurements of the CSV row's workload. Release frame intervals remain the acceptance metric. Binary diagnostic captures enable GPU profiling and export CPU rendering markers as well as Journey/job markers. GPU profiling can alter graphics scheduling, so use it for diagnosis, not release FPS claims.
+
+References: [indirect mesh rendering](https://docs.unity3d.com/6000.3/Documentation/ScriptReference/Graphics.RenderMeshIndirect.html), [GPU profiling limitations](https://docs.unity3d.com/6000.3/Documentation/Manual/ProfilerGPU.html).
+
 ## Binary Unity Profiler captures
 
 ```powershell

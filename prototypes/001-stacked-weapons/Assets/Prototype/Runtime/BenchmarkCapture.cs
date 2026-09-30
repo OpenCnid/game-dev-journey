@@ -46,6 +46,7 @@ namespace Journey
         public float warmupSeconds, captureSeconds;
         public double medianMs, p95Ms, p99Ms, maxMs, averageFps, meanSimulationMs, meanCpuFrameMs, meanGpuFrameMs;
         public int cpuTimingSamples, gpuTimingSamples, shots, kills;
+        public int rejectedCpuTimings, rejectedGpuTimings;
         public double meanMainThreadMs, meanRenderThreadMs;
         public int mainThreadTimingSamples, renderThreadTimingSamples;
         public string note = "Measured on the hardware recorded in this report. A graybox crowd does not validate the final gameplay workload. Current development benchmarks use the owner's desktop; older-hardware testing is deferred until the game is more polished.";
@@ -134,8 +135,8 @@ namespace Journey
             for (int i = 0; i < frames.Count; i++)
             {
                 Sample f = frames[i];
-                if (f.mainThreadMs > 0) { summary.meanMainThreadMs += f.mainThreadMs; summary.mainThreadTimingSamples++; }
-                if (f.renderThreadMs > 0) { summary.meanRenderThreadMs += f.renderThreadMs; summary.renderThreadTimingSamples++; }
+                if (ValidTiming(f.mainThreadMs)) { summary.meanMainThreadMs += f.mainThreadMs; summary.mainThreadTimingSamples++; }
+                if (ValidTiming(f.renderThreadMs)) { summary.meanRenderThreadMs += f.renderThreadMs; summary.renderThreadTimingSamples++; }
                 values[i] = f.ms; total += f.ms;
                 summary.meanSimulationMs += f.simulationMs;
                 summary.meanWarningCandidates += f.warningCandidates; summary.meanUniqueWarnings += f.uniqueWarnings;
@@ -144,8 +145,10 @@ namespace Journey
                 summary.meanProjectileMsPerTick += f.projectileMs; summary.meanWeaponMsPerFrame += f.weaponMs;
                 summary.meanRenderPrepareMs += f.renderPrepareMs; summary.meanRenderSubmitMs += f.renderSubmitMs;
                 summary.meanSubmittedInstances += f.submittedInstances; summary.meanInstanceBatches += f.instanceBatches;
-                if (f.cpuMs > 0) { summary.meanCpuFrameMs += f.cpuMs; summary.cpuTimingSamples++; }
-                if (f.gpuMs > 0) { summary.meanGpuFrameMs += f.gpuMs; summary.gpuTimingSamples++; }
+                if (ValidTiming(f.cpuMs)) { summary.meanCpuFrameMs += f.cpuMs; summary.cpuTimingSamples++; }
+                if (ValidTiming(f.gpuMs)) { summary.meanGpuFrameMs += f.gpuMs; summary.gpuTimingSamples++; }
+                if (f.cpuMs != 0 && !ValidTiming(f.cpuMs)) summary.rejectedCpuTimings++;
+                if (f.gpuMs != 0 && !ValidTiming(f.gpuMs)) summary.rejectedGpuTimings++;
                 if (f.ms > 1000d / 144) summary.framesOverBudget++;
                 if (f.ms > 2000d / 144) summary.framesOverDoubleBudget++;
                 if (f.catchupLimit) summary.catchupLimitFrames++;
@@ -182,6 +185,9 @@ namespace Journey
             File.WriteAllText(stem + ".json", JsonUtility.ToJson(summary, true));
             return stem + ".json";
         }
+        // Disjoint GPU timestamp queries can return impossible durations. Preserve raw CSV
+        // values, exclude invalid engine timings from means, and count rejected samples.
+        public static bool ValidTiming(double ms) => ms > 0 && ms < 1000 && !double.IsNaN(ms) && !double.IsInfinity(ms);
         static string F(double value) => value.ToString("F5", CultureInfo.InvariantCulture);
         // Nearest-rank percentile, input sorted ascending; same convention in tests and reports.
         public static double Percentile(double[] sorted, double percentile)

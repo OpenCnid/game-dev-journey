@@ -44,6 +44,15 @@ namespace Journey.Tests
             }
         }
 
+        [TestCase(4.2, true)]
+        [TestCase(0.0, false)]
+        [TestCase(-1.0, false)]
+        [TestCase(double.NaN, false)]
+        [TestCase(double.PositiveInfinity, false)]
+        [TestCase(1000000000.0, false)]
+        public void EngineTimingRejectsUnavailableAndDisjointQueries(double value, bool expected)
+        { Assert.That(BenchmarkCapture.ValidTiming(value), Is.EqualTo(expected)); }
+
         [Test]
         public void WarningCacheTracksTicksResetAndDeduplicationMode()
         {
