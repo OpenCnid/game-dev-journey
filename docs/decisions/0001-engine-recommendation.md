@@ -5,7 +5,7 @@
 
 ## Context
 
-We are building a first game around stacking weapons and creating powerful builds in a first-person horde encounter. Our [performance target](../performance.md) is at least 144 FPS on a stock i7-8700K paired with a GTX 1080 Ti, with 1080p proposed. LLM assistance must work well with the language and development workflow.
+We are building a first game around stacking weapons and creating powerful builds in a first-person horde encounter. Our [performance target](../performance.md) is at least 144 FPS. The original i7-8700K / GTX 1080 Ti requirement was revised by the owner on 2026-09-30: current benchmarking uses the i7-10700K / RTX 3090 desktop, with existing 1080p captures retained for comparisons. Older-hardware testing is deferred until the game is more polished. This changes the hardware plan, not the accepted engine decision. LLM assistance must work well with the language and development workflow.
 
 ## Decision
 

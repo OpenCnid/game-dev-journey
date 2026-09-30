@@ -4,7 +4,7 @@
 
 **Late-game scope:** the owner wants more than 10,000 simultaneously active enemies, potentially all bosses with special abilities. The original 1,000-drone capture was only an initial diagnostic. It does not cover this requirement. The current stress harness supports up to 20,000 enemies; this is a test capacity, not an agreed final gameplay cap or a performance promise. See [the late-game workload](design/late-game-workload.md).
 
-**Status:** a standalone prototype and benchmark capture path now exist. Local developer-machine diagnostics are available, but the 144 FPS target has not been validated. Use an Intel Core i7-8700K with the owner's provisional GTX 1080 Ti GPU baseline. RAM, final resolution, graphics preset, and supported peak encounter remain to be selected. The prototype pins Unity 6000.3.25f1 and URP 17.3.0; see [the accepted engine decision](decisions/0001-engine-recommendation.md).
+**Status:** benchmark all current development work on the owner's desktop: Intel Core i7-10700K, NVIDIA GeForce RTX 3090, and approximately 64 GB RAM. The owner revised the hardware plan on 2026-09-30; GTX 1080 Ti and older-CPU testing is deferred until the game is more polished. The 144 FPS goal remains, but the complete gameplay workload has not been validated. The prototype pins Unity 6000.3.25f1 and URP 17.3.0; see [the accepted engine decision](decisions/0001-engine-recommendation.md).
 
 ## Frame budget
 
@@ -28,24 +28,26 @@ The target concerns natively rendered gameplay frames. Frame generation does not
 - Verify gameplay at 60, 144, and 240 FPS plus uncapped operation. Lower test rates check correctness; they do not lower the 144 FPS baseline target.
 - Offer scalable visual costs such as shadows and effects without silently changing combat outcomes.
 
-## Baseline configuration to agree
+## Current development benchmark configuration
 
 | Component | Current baseline |
 | --- | --- |
-| GPU | NVIDIA GeForce GTX 1080 Ti, provisionally selected by the owner |
-| Resolution | 1920 x 1080 at 100% render scale, proposed starting point, not yet confirmed |
-| CPU | Intel Core i7-8700K, stock operation with normal Turbo Boost, no manual overclock or motherboard automatic overclock |
-| RAM | Capacity and configuration to be selected and recorded |
-| Visual preset | To be defined and fixed for comparisons |
+| GPU | NVIDIA GeForce RTX 3090 |
+| Resolution | Retain the existing 1920 x 1080 benchmark at 100% render scale for comparable captures |
+| CPU | Intel Core i7-10700K; record actual clocks and power settings rather than assuming stock operation |
+| RAM | Approximately 64 GB; record reported capacity and memory configuration |
+| OS | Windows 11; record exact build and graphics driver with captures |
+| Visual preset | Current prototype: shadows off; record explicit pipeline/effect settings and fix them across comparisons |
+| Presentation | Visible window, uncapped, VSync off for throughput; test frame caps separately |
 | Peak encounter | To be defined through the prototype's crowd and weapon benchmarks |
 
-### Why the i7-8700K
+### Later hardware coverage
 
-Selected on 2026-09-30 under the owner's request for a formerly high-end CPU that is old today and pairs with the GTX 1080 Ti. Intel lists a Q4 2017 launch, six cores, twelve threads, a 3.7 GHz base clock, and up to 4.7 GHz turbo. It provides a concrete older enthusiast-class CPU target for our crowd simulation. The maximum turbo figure is not an all-core benchmark frequency. [Intel specifications](https://www.intel.com/content/www/us/en/products/sku/126684/intel-core-i78700k-processor-12m-cache-up-to-4-70-ghz/specifications.html).
+Once the game is more polished, benchmark representative gameplay on a GTX 1080 Ti and older-generation CPUs. The previously selected i7-8700K is a candidate for that later test matrix, not a current development requirement. Choose the exact configurations, settings, and supported encounter envelope at that stage; published minimum/recommended specifications remain undecided.
 
-Intel's contemporary reference configuration paired the i7-8700K with a GTX 1080 Ti, so this is an established platform combination. Use an appropriate Intel 300-series motherboard supporting the CPU; LGA1151 alone is insufficient because earlier 100/200-series boards are incompatible. [Intel reference configuration](https://www.intel.com/content/dam/www/public/us/en/documents/reference-guides/resellers-8th-gen-quick-start-selling-guide.pdf), [platform compatibility](https://www.intel.com/content/www/us/en/support/articles/000025694/processors/intel-core-processors.html).
+Earlier dated playtests, devlogs, and raw captures retain the hardware assumptions in force when they were recorded. They remain valid measurements of their recorded machines; their references to an older-hardware target are superseded by this plan.
 
-Record the motherboard, BIOS/power settings, actual CPU clocks, memory configuration, and cooling condition with captures. Keep stock CPU settings consistent across comparisons. Test on the selected CPU/GPU when validating this baseline; a result from faster hardware does not establish performance on the target. The supported workload still needs explicit limits before the 144 FPS goal can be validated.
+Record the motherboard, BIOS/power settings, actual CPU clocks, memory configuration, and cooling condition with captures. Keep machine settings consistent across comparisons. Current desktop results establish our development baseline; older-hardware conclusions will require measurements on those machines later. The supported workload still needs explicit limits before the 144 FPS goal can be validated.
 
 Record all of these before declaring the target met:
 
@@ -85,4 +87,4 @@ See [initial prototype validation](playtests/2026-09-30-prototype-performance.md
 
 The later [boss-scale diagnostic](playtests/2026-09-30-boss-scale.md) supersedes the 1,000-drone workload as the relevant direction for optimization. It does not meet the performance target.
 
-[Jobs/Burst and rendering comparisons](playtests/2026-09-30-jobs-burst.md) measure the next implementation against the selectable managed reference. Follow [the profiling guide](profiling.md) to reproduce stage measurements and binary traces. Developer-machine improvements do not establish target-hardware acceptance.
+[Jobs/Burst and rendering comparisons](playtests/2026-09-30-jobs-burst.md) measure the next implementation against the selectable managed reference on our now-selected desktop baseline. Follow [the profiling guide](profiling.md) to reproduce stage measurements and binary traces. The optimized 15,000-boss synthetic captures meet the proposed p99 threshold, with occasional slower frames; the 20,000 synchronized-boss capture misses it. Representative final gameplay remains to be validated.

@@ -41,7 +41,7 @@ namespace Journey
         public float warmupSeconds, captureSeconds;
         public double medianMs, p95Ms, p99Ms, maxMs, averageFps, meanSimulationMs, meanCpuFrameMs, meanGpuFrameMs;
         public int cpuTimingSamples, gpuTimingSamples, shots, kills;
-        public string note = "Local observation only. A graybox crowd is not the final peak encounter or validation on the i7-8700K/GTX 1080 Ti baseline.";
+        public string note = "Measured on the hardware recorded in this report. A graybox crowd does not validate the final gameplay workload. Current development benchmarks use the owner's desktop; older-hardware testing is deferred until the game is more polished.";
     }
 
     public sealed class BenchmarkCapture

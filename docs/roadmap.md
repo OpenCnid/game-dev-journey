@@ -9,9 +9,8 @@ This is a sequence of learning milestones, not a release-date promise. Update it
 - [x] Select a reference direction: first-person horde survival inspired by Vampire Hunters.
 - [x] Identify the owner's priority: stacking weapons and creating powerful builds.
 - [x] Set the baseline performance goal to at least 144 FPS, with higher frame-rate options.
-- [x] Identify a provisional GPU baseline: GTX 1080 Ti.
-- [x] Choose an older high-end CPU baseline: Intel Core i7-8700K at stock settings.
-- [ ] Define baseline hardware, resolution, visual settings, and a supported peak encounter for [performance validation](performance.md).
+- [x] Use the current desktop as the development benchmark machine: i7-10700K, RTX 3090, approximately 64 GB RAM; retain existing 1080p captures for comparisons.
+- [ ] Finalize visual settings and a supported peak encounter for [performance validation](performance.md) on this desktop.
 - [ ] Record a focused reference play session and refine the [stacked-weapons experiment](../prototypes/001-stacked-weapons/README.md).
 - [x] Choose Unity with C# and URP; accept [the engine decision](decisions/0001-engine-recommendation.md).
 - [x] Implement the initial prototype for Windows desktop.
@@ -22,10 +21,10 @@ This is a sequence of learning milestones, not a release-date promise. Update it
 ## 1. Make one interaction playable
 
 - [x] Build a one-minute movement and shooting test with placeholder visuals.
-- [x] Implement standalone crowd benchmarks and frame-time reports; validate the capture path locally, explicitly marking missing GPU timings and non-target hardware.
+- [x] Implement standalone crowd benchmarks and frame-time reports; validate the capture path locally, recording actual hardware and explicitly marking missing GPU timings.
 - [x] Extend the stress harness to 20,000 enemies with synthetic boss area attacks, projectile bursts, and synchronized attack spikes.
 - [x] Add stage profiling, a batched Jobs/Burst simulation path, culled instanced rendering, and selectable reference paths for controlled comparisons.
-- [ ] Validate more than 10,000 ability-heavy bosses at 144 FPS on target hardware, including representative boss visuals and the most expensive stacked weapon build.
+- [ ] Validate more than 10,000 ability-heavy bosses at 144 FPS on the current desktop, including representative boss visuals and the most expensive stacked weapon build.
 - [ ] Compare one weapon against three simultaneously firing weapons.
 - [ ] Add the proposed five-minute survival and upgrade loop if the combat test is promising.
 - [x] Add rifle feedback, shot audio, health/damage cues, kill count, and a run-ending state.
@@ -50,6 +49,7 @@ This is a sequence of learning milestones, not a release-date promise. Update it
 - [ ] Check readable text, input clarity, and relevant accessibility settings.
 - [ ] Create a build and test it outside the editor on the chosen platform.
 - [ ] Validate the 144 FPS target in the supported peak encounter and verify gameplay timing at different frame caps and uncapped.
+- [ ] Once the game is more polished, benchmark a GTX 1080 Ti and older-generation CPUs; use measured results to define hardware support and scalable settings.
 - [ ] Add useful automated checks for systems that now justify them.
 
 **Done when:** the small game plays consistently, its remaining problems are documented, and another playtest supports the direction.

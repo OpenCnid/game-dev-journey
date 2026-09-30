@@ -1,5 +1,7 @@
 # Jobs/Burst and rendering comparison — 2026-09-30
 
+**Subsequent hardware-plan revision (2026-09-30):** the owner selected this i7-10700K / RTX 3090 desktop for current development benchmarks and deferred GTX 1080 Ti / older-CPU testing until the game is more polished. The measurements and original assumptions below are preserved. Follow the current [performance plan](../performance.md) for next steps; older-hardware validation is no longer an immediate milestone.
+
 The 15,000-boss managed baseline was dominated by CPU crowd simulation. This experiment preserves the synthetic boss workload while adding a Jobs/Burst simulation path and a culled renderer, with both improvements independently selectable.
 
 ## Reproduction and limits

@@ -22,7 +22,7 @@ Two or three years ago, I wouldn't have felt ready to take this on this way. Tod
 
 Open [the prototype project](prototypes/001-stacked-weapons/README.md) for setup, controls, build commands, and benchmark instructions. The maintained game will move into `game/` after the experiment is evaluated.
 
-Our benchmark CPU is an Intel Core i7-8700K at stock settings, paired with the provisional GTX 1080 Ti GPU baseline; 1080p is the proposed starting resolution. See [the performance plan](docs/performance.md) for the 6.944 ms frame budget, benchmark scenarios, and remaining settings to define.
+Our current benchmark machine is the owner's desktop: Intel Core i7-10700K, NVIDIA GeForce RTX 3090, and approximately 64 GB RAM. Keep the existing 1080p benchmark configuration for comparisons. GTX 1080 Ti and older-CPU testing is deferred until the game is more polished. See [the performance plan](docs/performance.md) for the 6.944 ms frame budget and benchmark scenarios.
 
 Late-game ambition includes **more than 10,000 active enemies, potentially all bosses with special abilities**. The [boss workload specification](docs/design/late-game-workload.md) separates this goal from what the current graybox has actually demonstrated. Unity/C# remains our chosen engine and language; target performance is not yet validated.
 

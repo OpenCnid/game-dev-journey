@@ -59,7 +59,7 @@ Advanced player arguments:
 -results "C:\captures\run-001" -quitAfterBenchmark
 ```
 
-Use `-playtest` to start combat immediately or `-screenshot "C:\captures\arena.png"` to capture after three simulation seconds. Standard Unity player arguments can set resolution. A benchmark contains rendering, steering, firing, hits, respawns, sound, and HUD; it has placeholder meshes, no skeletal animation, and only one weapon. It cannot validate the eventual fully upgraded game's peak load. Keep developer-machine results separate from the i7-8700K / GTX 1080 Ti target.
+Use `-playtest` to start combat immediately or `-screenshot "C:\captures\arena.png"` to capture after three simulation seconds. Standard Unity player arguments can set resolution. A benchmark contains rendering, steering, firing, hits, respawns, sound, and HUD; it has placeholder meshes, no skeletal animation, and only one weapon. It cannot validate the eventual fully upgraded game's peak load. Use the current desktop for development benchmarks; older-hardware coverage comes later.
 
 `-workload regular` disables abilities; `-workload bosses` enables the per-enemy ability state machine. Add `-synchronizedAbilities` for the aligned spike test. Supported CLI counts are 0–20,000. JSON schema v3 and CSV include live projectile/telegraph counts, ability activations and update totals, projectile spawns/updates, actual and simulated capture duration, stage timings, backend selections, and pool overflow. Any dropped projectiles or catch-up limit events invalidate a performance pass. See [exact workload definitions and limitations](../../docs/design/late-game-workload.md).
 
@@ -80,7 +80,7 @@ Use `-playtest` to start combat immediately or `-screenshot "C:\captures\arena.p
 
 The selectable Jobs/Burst path parallelizes crowd and projectile updates. Boss state transitions, input, hit resolution, and submission orchestration remain managed C#. Local separation samples four rotating candidates per adjacent cell, bounding checks to 36 per enemy per tick. This approximates avoidance and allows dense overlap. Tick catch-up is bounded and reported; a run that reaches that bound cannot pass performance acceptance. Backend comparisons must use the same workload and record actual simulated time.
 
-**Performance requirement:** target at least 144 FPS (6.944 ms per frame) in the supported encounter, with higher caps and uncapped rendering available. Follow the [performance plan](../../docs/performance.md): stock Intel Core i7-8700K plus the provisional GTX 1080 Ti GPU baseline, with 1080p proposed. Remaining system settings and the supported peak load remain open. [Initial local validation](../../docs/playtests/2026-09-30-prototype-performance.md) does not establish performance on that target.
+**Performance requirement:** target at least 144 FPS (6.944 ms per frame) in the supported encounter, with higher caps and uncapped rendering available. Follow the [performance plan](../../docs/performance.md): i7-10700K / RTX 3090 desktop, approximately 64 GB RAM, and the existing 1080p comparison configuration. GTX 1080 Ti and older-CPU testing is deferred until the game is more polished. Final visual settings and the supported peak load remain open; existing synthetic captures do not validate the full gameplay workload.
 
 ## Build in three slices
 

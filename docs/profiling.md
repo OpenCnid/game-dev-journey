@@ -14,6 +14,8 @@ Persistent native staging buffers retain the managed reference state for compari
 
 ## Reproduce an A/B comparison
 
+Use the owner's current i7-10700K / RTX 3090 desktop (approximately 64 GB RAM) for development benchmarks, retaining the existing 1080p configuration. GTX 1080 Ti and older-CPU testing is deferred until the game is more polished; see the updated [hardware plan](performance.md). Rebuild before new captures to include the updated report note. Existing binaries and archived reports retain the earlier hardware wording.
+
 ```powershell
 .\tools\unity.ps1 -Action Test -TestPlatform EditMode
 .\tools\unity.ps1 -Action Test -TestPlatform PlayMode

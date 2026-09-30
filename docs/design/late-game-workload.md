@@ -1,6 +1,6 @@
 # Late-game crowd and boss workload
 
-The owner reports that late Vampire Hunters runs can consist entirely of bosses and estimates counts above 10,000. We have not independently measured that game's count or inspected its implementation. Our requirement is to investigate **more than 10,000 active, ability-using enemies**, while retaining the 144 FPS target on the provisional i7-8700K / GTX 1080 Ti baseline.
+The owner reports that late Vampire Hunters runs can consist entirely of bosses and estimates counts above 10,000. We have not independently measured that game's count or inspected its implementation. Our requirement is to investigate **more than 10,000 active, ability-using enemies**, while retaining the 144 FPS target on the current i7-10700K / RTX 3090 desktop. GTX 1080 Ti and older-CPU testing is deferred until the game is more polished.
 
 Unity/C# remains the chosen stack. A custom engine is not required by this count alone. The implementation and measured costs of AI, avoidance, abilities, collision, animation, and rendering decide whether the target is feasible. We will not infer feasibility from a lower-count cube benchmark.
 
@@ -30,6 +30,6 @@ The projectile pool has 131,072 slots. Overflow is counted, never treated as suc
 
 The requirement remains 144 FPS, with higher caps and uncapped operation available. Use the [performance protocol](../performance.md): release player, visible 1080p window, uncapped throughput, 30-second warm-up and three 60-second captures per scenario. Include aligned-attack spikes and later a full run with spawning/death bursts.
 
-Report frame-time tails and budget misses, not only average FPS. A run with dropped projectiles or simulation time is invalid for acceptance. Compare simulated and wall-clock capture duration. Keep developer-machine results separate from the target hardware. Passing this synthetic workload would still leave final boss behaviors, visual complexity, and fully upgraded weapon combinations to validate.
+Report frame-time tails and budget misses, not only average FPS. A run with dropped projectiles or simulation time is invalid for acceptance. Compare simulated and wall-clock capture duration. Use this desktop for current comparisons and report later older-hardware results separately. Passing this synthetic workload would still leave final boss behaviors, visual complexity, and fully upgraded weapon combinations to validate.
 
 Next, use examples from the owner's actual runs to add expensive ability families and establish the final encounter envelope. Do not silently reduce active bosses or disable attacks to make a result pass.
