@@ -34,14 +34,18 @@ The helper locates the pinned editor in the standard Hub directory or the local 
 
 ## Capture a crowd benchmark
 
-The in-game menu runs 100, 500, or 1,000 drones with a scripted circular player route, continuous firing, and invulnerability. Each choice runs three repeats of 30 seconds warm-up plus 60 seconds capture. Seed 137 and fixed 60 Hz simulation make comparisons repeatable without claiming cross-platform determinism.
+The in-game menu runs 1,000, 10,000, 15,000, or 20,000 enemies with a scripted circular player route, continuous firing, and invulnerability. Select ordinary drones or the default synthetic boss workload (area attacks and projectile bursts); optionally synchronize attacks to stress spikes. Each choice runs three repeats of 30 seconds warm-up plus 60 seconds capture. Seed 137 and fixed 60 Hz simulation make comparisons repeatable without claiming cross-platform determinism.
 
-For all three counts from a standalone player:
+From a standalone player (default sweep: 1,000 / 5,000 / 10,000 / 15,000 / 20,000 bosses, about 23 minutes):
 
 ```powershell
 .\tools\benchmark.ps1 -Visible
+# Focused regular/boss comparison and aligned attack spikes:
+.\tools\benchmark.ps1 -Visible -Counts 10000,15000 -Workload regular
+.\tools\benchmark.ps1 -Visible -Counts 10000,15000 -Workload bosses
+.\tools\benchmark.ps1 -Visible -Counts 20000 -Workload bosses -SynchronizedAbilities
 # Short verification of launch/capture/reporting, not performance acceptance:
-.\tools\benchmark.ps1 -Smoke
+.\tools\benchmark.ps1 -Smoke -Counts 10000,20000
 ```
 
 The script reports output paths and saves invocation metadata. Full scripted captures require `-Visible`: keep the game window visible and unobstructed, since hidden or minimized windows can skip rendering and produce misleading throughput. Hidden `-Smoke` runs validate reporting only. In-game captures default to Unity's persistent data directory (`Application.persistentDataPath/BenchmarkResults`). Each repeat writes raw CSV samples and a JSON summary with the build revision/dirty flag, machine/settings, median/p95/p99/max frame times, budget misses, CPU/GPU timing availability, simulation time, and tick catch-up limit events. A shortened capture is marked nonstandard. Missing GPU timings remain unavailable rather than being interpreted as zero cost. FrameTimingManager samples can lag the current frame; raw timing columns are not a synchronized CPU/GPU trace.
@@ -49,24 +53,27 @@ The script reports output paths and saves invocation metadata. Full scripted cap
 Advanced player arguments:
 
 ```text
--benchmark -crowd 500 -seed 137 -warmup 30 -seconds 60 -repeats 3
+-benchmark -workload bosses -crowd 15000 -seed 137 -warmup 30 -seconds 60 -repeats 3
 -results "C:\captures\run-001" -quitAfterBenchmark
 ```
 
 Use `-playtest` to start combat immediately or `-screenshot "C:\captures\arena.png"` to capture after three simulation seconds. Standard Unity player arguments can set resolution. A benchmark contains rendering, steering, firing, hits, respawns, sound, and HUD; it has placeholder meshes, no skeletal animation, and only one weapon. It cannot validate the eventual fully upgraded game's peak load. Keep developer-machine results separate from the i7-8700K / GTX 1080 Ti target.
+
+`-workload regular` disables abilities; `-workload bosses` enables the per-enemy ability state machine. Add `-synchronizedAbilities` for the aligned spike test. Supported CLI counts are 0–20,000. JSON schema v2 and CSV include live projectile/telegraph counts, ability activations and update totals, projectile spawns/updates, simulated capture duration, and pool overflow. Any dropped projectiles or catch-up limit events invalidate a performance pass. See [exact workload definitions and limitations](../../docs/design/late-game-workload.md).
 
 ## Code map
 
 | Path under `Assets/Prototype/` | Responsibility |
 | --- | --- |
 | `Runtime/CombatSimulation.cs` | Preallocated enemy state, spatial buckets, movement, health, hits, cooldowns, run lifecycle |
+| `Runtime/BossAbilities.cs` | Per-boss area/burst state machine, pooled projectile movement and swept collision, workload counters |
 | `Runtime/ArenaPresentation.cs` | Arena geometry, instanced drones, camera, rifle, procedural shot audio |
 | `Runtime/PrototypeGame.cs` | Input, fixed simulation stepping, menus, HUD, benchmark orchestration |
 | `Runtime/BenchmarkCapture.cs` | Frame samples, percentile calculations, CSV/JSON export |
 | `Editor/ProjectSetup.cs` | Reproducible setup, scene creation, shader references, Windows build |
 | `Tests/` | Simulation/metric tests and runtime smoke test |
 
-Simulation currently runs on the main thread. The boundary is ready for profiling; no Jobs/Burst speedup is claimed. Local separation can still become expensive in dense clusters. Tick catch-up is bounded and reported; a run that reaches that bound needs investigation before accepting performance results.
+Simulation currently runs on the main thread; no Jobs/Burst speedup is claimed. Local separation samples four rotating candidates per adjacent cell, bounding checks to 36 per enemy per tick. This approximates avoidance and allows dense overlap. Tick catch-up is bounded and reported; a run that reaches that bound cannot pass performance acceptance.
 
 **Performance requirement:** target at least 144 FPS (6.944 ms per frame) in the supported encounter, with higher caps and uncapped rendering available. Follow the [performance plan](../../docs/performance.md): stock Intel Core i7-8700K plus the provisional GTX 1080 Ti GPU baseline, with 1080p proposed. Remaining system settings and the supported peak load remain open. [Initial local validation](../../docs/playtests/2026-09-30-prototype-performance.md) does not establish performance on that target.
 
@@ -130,7 +137,7 @@ Use simple approach steering on the open arena initially. Measure crowd bunching
 
 Movement speed, player health, enemy health/speed/contact interval, each weapon's damage/cooldown/range/spread/piercing count, pickup value/radius, energy thresholds, upgrade caps, spawn cadence, active-enemy cap, and run duration.
 
-Store definitions in the chosen engine's native data format. Label baseline values as our tuning choices. Record hardware, settings, build, and live counts with each capture. Benchmark 100, 500, and 1,000 enemies as exploration loads alongside the three implementation slices, then test the most expensive supported weapon build. These loads do not promise a supported count. Verify gameplay timing across frame caps and report frame-time spikes, not just average FPS.
+Store definitions in the chosen engine's native data format. Label baseline values as our tuning choices. Record hardware, settings, build, and live counts with each capture. Benchmark regular crowds and ability-heavy bosses through 20,000 enemies alongside the three implementation slices, then test the most expensive supported weapon build. The owner wants late-game encounters above 10,000 active bosses; the final upper limit remains open and no supported performance count is yet established. Verify gameplay timing across frame caps and report frame-time spikes, not just average FPS.
 
 ## Evidence and exit decision
 

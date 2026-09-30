@@ -17,6 +17,7 @@ namespace Journey
         readonly BenchmarkCapture capture = new BenchmarkCapture();
         readonly FrameTiming[] timings = new FrameTiming[1];
         bool benchmark, quitAfterBenchmark, screenshotSaved;
+        bool bosses = true, synchronizedAbilities;
         int crowd = 100, seed = 137, repeat = 1, repeats = 3, previousHealth = 100;
         int savedCap = 144, savedVSync, captureStartShots, captureStartKills;
         float yaw, pitch, accumulator, hitFlash, damageFlash;
@@ -49,7 +50,9 @@ namespace Journey
                 if (args[i] == "-benchmark") autoBenchmark = true;
                 if (args[i] == "-playtest") autoPlay = true;
                 if (args[i] == "-quitAfterBenchmark") quitAfterBenchmark = true;
-                if (args[i] == "-crowd" && int.TryParse(value, out int c)) crowd = Mathf.Clamp(c, 0, 1000);
+                if (args[i] == "-crowd" && int.TryParse(value, out int c)) crowd = Mathf.Clamp(c, 0, CombatSimulation.Capacity);
+                if (args[i] == "-workload") bosses = value == "bosses";
+                if (args[i] == "-synchronizedAbilities") synchronizedAbilities = true;
                 if (args[i] == "-seed" && int.TryParse(value, out int s)) seed = s;
                 if (args[i] == "-repeats" && int.TryParse(value, out int r)) repeats = Mathf.Clamp(r, 1, 20);
                 if (args[i] == "-warmup" && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out float w)) warmup = Mathf.Clamp(w, 0, 300);
@@ -126,10 +129,10 @@ namespace Journey
             {
                 double elapsed = now - runStarted;
                 if (!capture.Recording && elapsed >= warmup)
-                { capture.Begin(); captureStartShots = sim.Shots; captureStartKills = sim.Kills; }
+                { capture.Begin(sim); captureStartShots = sim.Shots; captureStartKills = sim.Kills; }
                 else if (capture.Recording)
                 {
-                    capture.Add(interval, simulationMs, cpuMs, gpuMs, sim.Count, catchupLimit);
+                    capture.Add(interval, simulationMs, cpuMs, gpuMs, sim, catchupLimit);
                     if (elapsed >= warmup + captureSeconds) FinishCapture();
                 }
             }
@@ -157,14 +160,15 @@ namespace Journey
         void ResetCapture()
         {
             accumulator = 0; capture.Cancel(); view.ResetFeedback();
-            sim.Reset(crowd, seed, true); runStarted = Time.realtimeSinceStartupAsDouble;
+            sim.Reset(crowd, seed, true, bosses: bosses, synchronizedAbilities: synchronizedAbilities);
+            runStarted = Time.realtimeSinceStartupAsDouble;
         }
         void FinishCapture()
         {
             try
             {
                 lastResult = capture.Save(outputDirectory, crowd, seed, repeat, warmup, captureSeconds,
-                    sim.Shots - captureStartShots, sim.Kills - captureStartKills);
+                    sim.Shots - captureStartShots, sim.Kills - captureStartKills, sim);
                 Debug.Log("BENCHMARK_REPORT " + lastResult);
                 if (repeat++ < repeats) { ResetCapture(); return; }
                 CancelBenchmark();
@@ -216,7 +220,7 @@ namespace Journey
                 GUI.DrawTexture(new Rect(width / 2 - 7, height / 2 - 1, 14, 2), Texture2D.whiteTexture);
                 GUI.DrawTexture(new Rect(width / 2 - 1, height / 2 - 7, 2, 14), Texture2D.whiteTexture);
                 GUI.color = Color.white;
-                GUI.Label(new Rect(32, height - 70, 700, 32), $"{(benchmark ? "BENCH" : "HP " + sim.PlayerHealth)}    /    {sim.Count} DRONES    /    {sim.Kills} KILLS", heading);
+                GUI.Label(new Rect(32, height - 70, 1100, 32), $"{(benchmark ? "BENCH" : "HP " + sim.PlayerHealth)} / {sim.Count} {(sim.Abilities.Enabled ? "BOSSES" : "DRONES")} / {sim.Kills} KILLS / {sim.Abilities.Projectiles} PROJECTILES", heading);
                 GUI.Label(new Rect(32, height - 38, 700, 28), benchmark ? "SCRIPTED ORBIT + AUTOFIRE  /  ESC CANCELS" : "WASD MOVE  /  MOUSE AIM  /  AUTO FIRE  /  ESC PAUSE  /  R RESTART", small);
                 if (!benchmark) GUI.Label(new Rect(width - 200, height - 65, 180, 32), $"{Mathf.Max(0, 60 - sim.Elapsed):F1}s", heading);
             }
@@ -229,7 +233,7 @@ namespace Journey
             {
                 float remaining = Mathf.Max(0, warmup + captureSeconds - (float)(Time.realtimeSinceStartupAsDouble - runStarted));
                 GUI.Box(new Rect(width / 2 - 260, 110, 520, 80), "");
-                GUI.Label(new Rect(width / 2 - 240, 120, 480, 26), $"{(capture.Recording ? "CAPTURING" : "WARMING UP")}   ·   {crowd} DRONES   ·   {repeat}/{repeats}", label);
+                GUI.Label(new Rect(width / 2 - 240, 120, 480, 26), $"{(capture.Recording ? "CAPTURING" : "WARMING UP")} · {crowd} {(bosses ? "BOSSES" : "DRONES")} · {repeat}/{repeats}", label);
                 GUI.Label(new Rect(width / 2 - 240, 153, 480, 25), $"{remaining:F1}s left this repeat  /  {capture.Samples} samples  /  uncapped", small);
             }
             else if (sim.State != RunState.Running)
@@ -245,10 +249,13 @@ namespace Journey
                 GUILayout.Space(12);
                 GUILayout.Label("REPEATABLE CROWD BENCHMARK", heading);
                 GUILayout.Label($"{warmup:0}s warm-up + {captureSeconds:0}s capture, {repeats} repeats. Automated movement, autofire, invulnerability. Writes CSV + JSON.", small);
+                bosses = GUILayout.Toggle(bosses, " Boss workload: area attacks + projectile bursts");
+                synchronizedAbilities = GUILayout.Toggle(synchronizedAbilities, " Synchronized ability spike stress");
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button("100 drones", button)) StartBenchmark(100);
-                if (GUILayout.Button("500 drones", button)) StartBenchmark(500);
-                if (GUILayout.Button("1,000 drones", button)) StartBenchmark(1000);
+                if (GUILayout.Button("1,000", button)) StartBenchmark(1000);
+                if (GUILayout.Button("10,000", button)) StartBenchmark(10000);
+                if (GUILayout.Button("15,000", button)) StartBenchmark(15000);
+                if (GUILayout.Button("20,000", button)) StartBenchmark(20000);
                 GUILayout.EndHorizontal();
                 GUILayout.Space(8);
                 GUILayout.BeginHorizontal(); GUILayout.Label("FPS cap", label, GUILayout.Width(80));

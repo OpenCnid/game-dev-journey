@@ -16,13 +16,15 @@ Two or three years ago, I wouldn't have felt ready to take this on this way. Tod
 | Game concept | First-person horde survival inspired by Vampire Hunters, focused on stacking weapons and powerful builds |
 | Engine and language | Unity **6000.3.25f1** + C#, URP **17.3.0**; editor and packages pinned |
 | Target platform | First prototype: Windows desktop, keyboard and mouse |
-| Playable build | One-weapon arena with health, pause/restart, and crowd benchmark |
+| Playable build | One-weapon arena with health, pause/restart, and crowd/boss stress scenarios up to 20,000 enemies |
 | Current milestone | Playtest the first combat slice and profile crowded encounters before adding stacked weapons |
 | Performance target | At least 144 FPS in supported crowded fights; higher caps and uncapped rendering supported by design; unmeasured |
 
 Open [the prototype project](prototypes/001-stacked-weapons/README.md) for setup, controls, build commands, and benchmark instructions. The maintained game will move into `game/` after the experiment is evaluated.
 
 Our benchmark CPU is an Intel Core i7-8700K at stock settings, paired with the provisional GTX 1080 Ti GPU baseline; 1080p is the proposed starting resolution. See [the performance plan](docs/performance.md) for the 6.944 ms frame budget, benchmark scenarios, and remaining settings to define.
+
+Late-game ambition includes **more than 10,000 active enemies, potentially all bosses with special abilities**. The [boss workload specification](docs/design/late-game-workload.md) separates this goal from what the current graybox has actually demonstrated. Unity/C# remains our chosen engine and language; target performance is not yet validated.
 
 ## What we're aiming for
 

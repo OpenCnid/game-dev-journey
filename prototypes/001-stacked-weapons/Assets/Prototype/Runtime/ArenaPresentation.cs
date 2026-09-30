@@ -7,8 +7,10 @@ namespace Journey
     {
         readonly Matrix4x4[] bodies = new Matrix4x4[CombatSimulation.Capacity];
         readonly Matrix4x4[] heads = new Matrix4x4[CombatSimulation.Capacity];
-        Mesh cube;
-        Material enemyMaterial, headMaterial;
+        readonly Matrix4x4[] projectiles = new Matrix4x4[BossAbilities.ProjectileCapacity];
+        readonly Matrix4x4[] telegraphs = new Matrix4x4[CombatSimulation.Capacity];
+        Mesh cube, ring;
+        Material enemyMaterial, headMaterial, projectileMaterial, telegraphMaterial;
         LineRenderer tracer;
         Transform weapon;
         AudioSource audio;
@@ -70,6 +72,10 @@ namespace Journey
             enemyMaterial = Material("Drone body", new Color(.94f, .23f, .19f));
             headMaterial = Material("Drone core", new Color(1, .72f, .27f));
             enemyMaterial.enableInstancing = headMaterial.enableInstancing = true;
+            projectileMaterial = Material("Boss projectiles", new Color(1, .15f, .75f), true);
+            telegraphMaterial = Material("Area warning", new Color(1, .4f, .06f), true);
+            projectileMaterial.enableInstancing = telegraphMaterial.enableInstancing = true;
+            ring = CreateRing();
             tracer = new GameObject("Shot trail").AddComponent<LineRenderer>();
             tracer.transform.SetParent(root); tracer.positionCount = 2;
             tracer.startWidth = .018f; tracer.endWidth = .004f;
@@ -101,8 +107,8 @@ namespace Journey
             for (int i = 0; i < sim.Count; i++)
             {
                 Vector3 p = sim.RenderPosition(i, alpha);
-                bodies[i] = Matrix4x4.TRS(p + Vector3.up * .8f, Quaternion.identity, new Vector3(.85f, 1.4f, .85f));
-                heads[i] = Matrix4x4.TRS(p + Vector3.up * 1.6f, Quaternion.identity, Vector3.one * .45f);
+                bodies[i] = ScaledTranslation(p + Vector3.up * .8f, new Vector3(.85f, 1.4f, .85f));
+                heads[i] = ScaledTranslation(p + Vector3.up * 1.6f, Vector3.one * .45f);
             }
             if (sim.Count == 0) return;
             var bodyParams = new RenderParams(enemyMaterial) { shadowCastingMode = ShadowCastingMode.Off,
@@ -116,9 +122,50 @@ namespace Journey
                 Graphics.RenderMeshInstanced(bodyParams, cube, 0, bodies, count, offset);
                 Graphics.RenderMeshInstanced(headParams, cube, 0, heads, count, offset);
             }
+            int warnings = 0;
+            if (sim.Abilities.Enabled)
+            {
+                for (int i = 0; i < sim.Count; i++)
+                    if (sim.Abilities.IsCasting(i)) telegraphs[warnings++] = ScaledTranslation(
+                        sim.Abilities.Target(i) + Vector3.up * .02f, Vector3.one * BossAbilities.AreaRadius);
+                for (int i = 0; i < sim.Abilities.Projectiles; i++)
+                    projectiles[i] = ScaledTranslation(sim.Abilities.RenderProjectile(i, alpha) + Vector3.up,
+                        Vector3.one * .18f);
+                DrawInstances(projectileMaterial, cube, projectiles, sim.Abilities.Projectiles);
+                DrawInstances(telegraphMaterial, ring, telegraphs, warnings);
+            }
+        }
+        static Matrix4x4 ScaledTranslation(Vector3 p, Vector3 scale)
+        {
+            var m = Matrix4x4.identity;
+            m.m00 = scale.x; m.m11 = scale.y; m.m22 = scale.z;
+            m.m03 = p.x; m.m13 = p.y; m.m23 = p.z; return m;
+        }
+        static void DrawInstances(Material material, Mesh mesh, Matrix4x4[] matrices, int total)
+        {
+            var parameters = new RenderParams(material) { shadowCastingMode = ShadowCastingMode.Off,
+                receiveShadows = false, worldBounds = new Bounds(Vector3.zero, new Vector3(120, 8, 120)) };
+            for (int offset = 0; offset < total; offset += 250)
+                Graphics.RenderMeshInstanced(parameters, mesh, 0, matrices, Mathf.Min(250, total - offset), offset);
+        }
+        static Mesh CreateRing()
+        {
+            const int segments = 32;
+            var vertices = new Vector3[segments * 2]; var indices = new int[segments * 6];
+            for (int i = 0; i < segments; i++)
+            {
+                float angle = i * Mathf.PI * 2 / segments;
+                var v = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle));
+                vertices[i * 2] = v; vertices[i * 2 + 1] = v * .94f;
+                int a = i * 2, b = (i * 2 + 2) % vertices.Length, t = i * 6;
+                indices[t] = a; indices[t + 1] = a + 1; indices[t + 2] = b;
+                indices[t + 3] = a + 1; indices[t + 4] = b + 1; indices[t + 5] = b;
+            }
+            var mesh = new Mesh { name = "Area warning ring", vertices = vertices, triangles = indices };
+            mesh.RecalculateNormals(); mesh.RecalculateBounds(); return mesh;
         }
         public void ResetFeedback() { flash = recoil = 0; tracer.enabled = false; audio.Stop(); }
-        public void Dispose() { if (shot != null) Object.Destroy(shot); }
+        public void Dispose() { if (shot != null) Object.Destroy(shot); if (ring != null) Object.Destroy(ring); }
 
         static Material Material(string name, Color color, bool unlit = false)
         {

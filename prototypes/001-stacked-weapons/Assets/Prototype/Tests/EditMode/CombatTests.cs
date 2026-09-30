@@ -68,8 +68,8 @@ namespace Journey.Tests
         [Test]
         public void RestartClearsRunStateAndDoesNotExceedCapacity()
         {
-            var sim = new CombatSimulation(); sim.Reset(2000, 1, true);
-            Assert.That(sim.Count, Is.EqualTo(1000)); sim.Step(Vector3.zero, 1);
+            var sim = new CombatSimulation(); sim.Reset(CombatSimulation.Capacity + 1, 1, true);
+            Assert.That(sim.Count, Is.EqualTo(CombatSimulation.Capacity)); sim.Step(Vector3.zero, 1);
             sim.TryFire(new Ray(Vector3.up, Vector3.forward), out _, out _);
             sim.Reset(35, 1, false);
             Assert.That(sim.Elapsed, Is.Zero); Assert.That(sim.Shots, Is.Zero); Assert.That(sim.Kills, Is.Zero);
@@ -116,6 +116,50 @@ namespace Journey.Tests
             Assert.That(BenchmarkCapture.Percentile(values, .5), Is.EqualTo(50));
             Assert.That(BenchmarkCapture.Percentile(values, .99), Is.EqualTo(99));
             Assert.Throws<System.ArgumentException>(() => BenchmarkCapture.Percentile(new double[0], .99));
+        }
+
+        [Test]
+        public void DenseCrowdBoundsNeighborWorkAndKeepsAllEnemiesActive()
+        {
+            var sim = new CombatSimulation(); sim.Reset(20000, 137, true);
+            sim.Step(Vector3.zero, CombatSimulation.Tick);
+            Assert.That(sim.Count, Is.EqualTo(20000));
+            Assert.That(sim.NeighborChecks, Is.InRange(1, 20000 * 9 * CombatSimulation.NeighborsPerCell));
+            for (int i = 0; i < sim.Count; i++)
+            {
+                Vector3 p = sim.Position(i);
+                Assert.That(float.IsNaN(p.x) || float.IsNaN(p.z), Is.False);
+                Assert.That(Mathf.Abs(p.x), Is.LessThanOrEqualTo(CombatSimulation.ArenaLimit));
+            }
+        }
+
+        [Test]
+        public void BossesTelegraphBurstCollideAndResetWithoutSkippingStateUpdates()
+        {
+            var sim = new CombatSimulation(); sim.Reset(100, 137, true, bosses: true, synchronizedAbilities: true);
+            for (int i = 0; i < 70; i++) sim.Step(Vector3.zero, CombatSimulation.Tick);
+            Assert.That(sim.Abilities.Telegraphs, Is.EqualTo(50));
+            Assert.That(sim.Abilities.Spawned, Is.EqualTo(400));
+            sim.TogglePause(); int updates = sim.Abilities.StateUpdates;
+            sim.Step(Vector3.zero, 1); Assert.That(sim.Abilities.StateUpdates, Is.EqualTo(updates)); sim.TogglePause();
+            for (int i = 70; i < 300; i++) sim.Step(Vector3.zero, CombatSimulation.Tick);
+            Assert.That(sim.Abilities.Activations, Is.EqualTo(100));
+            Assert.That(sim.Abilities.Telegraphs, Is.Zero);
+            Assert.That(sim.Abilities.Projectiles, Is.Zero, "Three-second projectile lifetime must expire.");
+            Assert.That(sim.Abilities.StateUpdates, Is.EqualTo(30000));
+            Assert.That(sim.Abilities.ProjectileUpdates, Is.GreaterThan(0));
+            Assert.That(sim.Abilities.Dropped, Is.Zero);
+            sim.Reset(35, 137, false);
+            Assert.That(sim.Abilities.Enabled, Is.False); Assert.That(sim.Abilities.Spawned, Is.Zero);
+            Assert.That(sim.Abilities.Projectiles, Is.Zero); Assert.That(sim.Abilities.Activations, Is.Zero);
+        }
+
+        [Test]
+        public void SweptProjectileCollisionDoesNotTunnelAcrossPlayer()
+        {
+            Assert.That(BossAbilities.SegmentHitsPlayer(new Vector3(-10, 0, 0), new Vector3(10, 0, 0)), Is.True);
+            Assert.That(BossAbilities.SegmentHitsPlayer(new Vector3(-10, 0, 2), new Vector3(10, 0, 2)), Is.False);
+            Assert.That(BossAbilities.SegmentHitsPlayer(Vector3.zero, Vector3.zero), Is.True);
         }
     }
 }

@@ -2,6 +2,8 @@
 
 **Confirmed requirement:** target at least 144 FPS during supported gameplay, including crowded fights with stacked weapons. Allow higher frame rates when the user's hardware supports them.
 
+**Late-game scope:** the owner wants more than 10,000 simultaneously active enemies, potentially all bosses with special abilities. The original 1,000-drone capture was only an initial diagnostic. It does not cover this requirement. The current stress harness supports up to 20,000 enemies; this is a test capacity, not an agreed final gameplay cap or a performance promise. See [the late-game workload](design/late-game-workload.md).
+
 **Status:** a standalone prototype and benchmark capture path now exist. Local developer-machine diagnostics are available, but the 144 FPS target has not been validated. Use an Intel Core i7-8700K with the owner's provisional GTX 1080 Ti GPU baseline. RAM, final resolution, graphics preset, and supported peak encounter remain to be selected. The prototype pins Unity 6000.3.25f1 and URP 17.3.0; see [the accepted engine decision](decisions/0001-engine-recommendation.md).
 
 ## Frame budget
@@ -57,7 +59,7 @@ Avoid promises about every PC or an unlimited number of enemies. Define an encou
 ## Benchmark alongside the first prototype
 
 1. Establish an empty-arena baseline in a standalone build.
-2. Add repeatable crowd scenarios at 100, 500, and 1,000 enemies. These are exploration loads, not commitments to a supported count.
+2. Compare regular crowds, ability-heavy bosses, and synchronized boss attacks at 1,000, 5,000, 10,000, 15,000, and 20,000 enemies. Use 100/500 for quick regressions and an empty scene for overhead. The 15,000/20,000 scenarios exercise the requirement to exceed 10,000; the exact supported upper bound remains open.
 3. Add movement and avoidance, then weapon targeting/damage, then animation and visual/audio feedback. Measure each increment to locate growing costs.
 4. Stress the most expensive supported build: maximum firing rates, spread/piercing, spawn/death bursts, pickups, damage feedback, and repeated restarts. Track actual live counts as enemies die or spawn.
 5. Use a recorded input route or scripted camera and a fixed random seed where supported. Keep the scenario comparable across commits; a seed alone does not guarantee identical execution.
@@ -72,6 +74,8 @@ Report each capture's frame-time median, p95, p99, maximum, and count of frames 
 Proposed initial gate: p99 frame time at or below the 144 FPS budget in every required uncapped gameplay capture on the agreed baseline configuration, with every repeatable hitch investigated. This percentile gate is a diagnostic threshold, not a claim that every frame meets a hard minimum. Report slower frames explicitly. Refine acceptance once we have baseline measurements; do not silently relax the owner's 144 FPS target.
 
 Also verify correct gameplay timing across frame caps, smooth camera/movement presentation, and complete state reset. A fast crowd that breaks weapon behavior is not a passing result.
+
+Boss captures must record the workload version, boss count, projectile/telegraph peaks, ability activations, projectile spawns, ability/projectile update counts, simulated capture duration, and dropped projectiles. Any dropped projectiles or simulation catch-up limit events invalidate an acceptance pass. Check ability activity against the configured cadence: removing attacks or skipping simulation is not an optimization pass. Sampled peaks are end-of-frame observations, not exact within-tick maxima.
 
 When a scenario fails, identify the limiting CPU task, GPU workload, allocation spike, or synchronization wait before changing architecture. Candidate techniques include batched crowd updates, local spatial queries, parallel work, reused objects, and cheaper distant visuals/decisions. Apply and measure them where evidence supports the cost; no particular engine or architecture guarantees the target.
 

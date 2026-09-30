@@ -4,6 +4,8 @@
 
 **Confirmed priority:** stacking weapons and creating powerful builds.
 
+**Late-game workload:** more than 10,000 active enemies, potentially all bosses with special abilities. The [boss workload specification](late-game-workload.md) defines synthetic tests up to 20,000 while the final encounter envelope remains open.
+
 **Confirmed performance requirement:** at least 144 FPS within the supported hardware/settings and encounter envelope, with higher caps and uncapped rendering available. The benchmark CPU is a stock Intel Core i7-8700K, paired with the owner's provisional GTX 1080 Ti GPU baseline; 1080p is a proposed starting resolution. The [performance plan](../performance.md) defines the measurements; remaining system settings and peak load are not finalized and the target is not yet verified.
 
 **Status:** the one-weapon combat slice and crowd benchmark are implemented. The three-weapon build and upgrade loop below remain proposed follow-up work.
@@ -43,7 +45,7 @@ Stop expanding the prototype after three short documented playtests. Decide to c
 
 ## Deferred
 
-Additional arenas, a full arsenal, bosses, character classes, permanent unlocks, story, polished art, multiplayer, and storefront integration. The [prototype specification](../../prototypes/001-stacked-weapons/README.md) defines the proposed technical slices and checks.
+Additional arenas, a full arsenal, finished boss content, character classes, permanent unlocks, story, polished art, multiplayer, and storefront integration. Synthetic boss ability workloads are included now for performance investigation. The [prototype specification](../../prototypes/001-stacked-weapons/README.md) defines the proposed technical slices and checks.
 
 ## Decisions still needed
 

@@ -9,7 +9,10 @@ namespace Journey
     // Open arena only: local separation is not a substitute for obstacle pathfinding.
     public sealed class CombatSimulation
     {
-        public const int Capacity = 1000;
+        public const int Capacity = 20000;
+        // Approximate soft separation: four rotating candidates per adjacent cell.
+        // This bounds dense-cell work; it does NOT guarantee collision-free packing.
+        public const int NeighborsPerCell = 4;
         public const float ArenaLimit = 29f;
         public const float Tick = 1f / 60f;
         public const float EnemyRadius = .62f;
@@ -24,6 +27,9 @@ namespace Journey
         System.Random random;
         float fireRemaining, damageRemaining;
         RunState beforePause;
+        int tick;
+        public readonly BossAbilities Abilities = new BossAbilities();
+        public int NeighborChecks { get; private set; }
 
         public RunState State { get; private set; } = RunState.Ready;
         public Vector3 Player { get; private set; }
@@ -39,7 +45,8 @@ namespace Journey
         public Vector3 RenderPosition(int index, float alpha) => Vector3.Lerp(previous[index], positions[index], alpha);
         public Vector3 RenderPlayer(float alpha) => Vector3.Lerp(PreviousPlayer, Player, alpha);
 
-        public void Reset(int count, int seed, bool benchmark, float duration = 60f)
+        public void Reset(int count, int seed, bool benchmark, float duration = 60f,
+            bool bosses = false, bool synchronizedAbilities = false)
         {
             Count = Mathf.Clamp(count, 0, Capacity);
             random = new System.Random(seed);
@@ -50,6 +57,8 @@ namespace Journey
             PlayerHealth = 100;
             Player = PreviousPlayer = benchmark ? new Vector3(18, 0, 0) : Vector3.zero;
             fireRemaining = damageRemaining = 0;
+            tick = NeighborChecks = 0;
+            Abilities.Reset(Count, seed, bosses, synchronizedAbilities);
             for (int i = 0; i < Count; i++) Respawn(i);
             State = RunState.Running;
         }
@@ -77,8 +86,12 @@ namespace Journey
             }
 
             Array.Fill(cells, -1);
-            for (int i = 0; i < Count; i++)
+            NeighborChecks = 0;
+            // Rotate insertion order so crowded cells do not always select the same IDs.
+            int start = Count == 0 ? 0 : (int)((long)tick++ * 977 % Count);
+            for (int n = 0; n < Count; n++)
             {
+                int i = (n + start) % Count;
                 previous[i] = positions[i];
                 int cell = Cell(positions[i]);
                 next[i] = cells[cell]; cells[cell] = i;
@@ -91,13 +104,17 @@ namespace Journey
                 int cx = CellX(positions[i].x), cz = CellX(positions[i].z);
                 for (int z = Mathf.Max(0, cz - 1); z <= Mathf.Min(GridWidth - 1, cz + 1); z++)
                 for (int x = Mathf.Max(0, cx - 1); x <= Mathf.Min(GridWidth - 1, cx + 1); x++)
-                for (int j = cells[z * GridWidth + x]; j != -1; j = next[j])
                 {
+                int visited = 0;
+                for (int j = cells[z * GridWidth + x]; j != -1 && visited < NeighborsPerCell; j = next[j], visited++)
+                {
+                    NeighborChecks++;
                     if (j == i) continue;
                     Vector3 delta = positions[i] - positions[j];
                     float distance = delta.sqrMagnitude;
                     if (distance > .0001f && distance < 1.44f)
                         separation += delta * ((1.2f - Mathf.Sqrt(distance)) / Mathf.Sqrt(distance));
+                }
                 }
                 velocities[i] = Vector3.ClampMagnitude(toward.normalized * 3.1f + separation * 5, 5);
             }
@@ -110,8 +127,15 @@ namespace Journey
                 if (!Benchmark && delta.sqrMagnitude < 1.25f && damageRemaining <= 0)
                 { PlayerHealth = Mathf.Max(0, PlayerHealth - 10); damageRemaining = .4f; }
             }
+            Abilities.Step(this, dt);
             if (PlayerHealth == 0) State = RunState.Lost;
             else if (!Benchmark && Elapsed >= Duration) State = RunState.Won;
+        }
+
+        internal void AbilityHit()
+        {
+            if (!Benchmark && damageRemaining <= 0)
+            { PlayerHealth = Mathf.Max(0, PlayerHealth - 10); damageRemaining = .4f; }
         }
 
         public bool TryFire(Ray ray, out Vector3 end, out bool killed)
@@ -169,6 +193,7 @@ namespace Journey
             }
             positions[index] = previous[index] = p;
             health[index] = 40;
+            Abilities.CancelCast(index);
         }
         static int CellX(float value) => Mathf.Clamp((int)((value + 32) / CellSize), 0, GridWidth - 1);
         static int Cell(Vector3 p) => CellX(p.z) * GridWidth + CellX(p.x);
