@@ -1,0 +1,12 @@
+[
+  {
+    "path": "prototypes/001-stacked-weapons/BenchmarkResults/render-profile-native/crowd-20000/profile.raw",
+    "bytes": 19295691,
+    "sha256": "d999d934370663d55f871d10d0d2322e73c065b7d0a0dc6f4979885f63064d98"
+  },
+  {
+    "path": "prototypes/001-stacked-weapons/BenchmarkResults/render-profile-combined/crowd-20000/profile.raw",
+    "bytes": 39352498,
+    "sha256": "5548a0dbca6022c5f2accd0fc572a332b753a421a07c80da90c70674fe3439f9"
+  }
+]

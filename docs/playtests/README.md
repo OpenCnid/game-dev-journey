@@ -12,3 +12,4 @@ Use anonymous participant labels and leave personal information out of the repos
 - [2026-09-30: Boss-scale stress testing](2026-09-30-boss-scale.md) - larger synthetic workloads and a failed performance baseline.
 - [2026-09-30: Jobs/Burst and rendering comparison](2026-09-30-jobs-burst.md) - controlled backend comparisons, stage costs, and profiler evidence.
 - [2026-09-30: Frame-spike experiments](2026-09-30-frame-spike-experiments.md) - effect isolation, exact warning deduplication, preparation scheduling, native ownership, and corrected warm-up alignment.
+- [2026-09-30: Renderer experiments](2026-09-30-renderer-experiments.md) - compact indirect projectiles, combined character meshes, cached warnings, and CPU/GPU profiling against native-state simulation.

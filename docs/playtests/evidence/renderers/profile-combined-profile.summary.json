@@ -1,0 +1,3595 @@
+{
+    "note": "Development profiler diagnostics for the loaded frame window; Unity history limits may truncate long recordings. Inclusive samples overlap; worker sums are not wall-clock latency. No Deep Profiling.",
+    "frames": 625,
+    "firstFrameIndex": 0,
+    "lastFrameIndex": 624,
+    "markers": [
+        {
+            "thread": "Main Thread",
+            "name": "PlayerLoop",
+            "calls": 624,
+            "totalInclusiveMs": 1983.465695142746,
+            "maxCallMs": 6.599100112915039
+        },
+        {
+            "thread": "Render Thread",
+            "name": "RenderLoop",
+            "calls": 2122,
+            "totalInclusiveMs": 1849.8299945498802,
+            "maxCallMs": 5.201099872589111
+        },
+        {
+            "thread": "Main Thread",
+            "name": "RenderLoop.ScheduleDraw",
+            "calls": 3120,
+            "totalInclusiveMs": 1272.690296914996,
+            "maxCallMs": 1.8410999774932862
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PostLateUpdate.FinishFrameRendering",
+            "calls": 624,
+            "totalInclusiveMs": 1197.4572979807854,
+            "maxCallMs": 3.080399990081787
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UnityEngine.CoreModule.dll!UnityEngine.Rendering::RenderPipelineManager.DoRenderLoop_Internal() [Invoke]",
+            "calls": 624,
+            "totalInclusiveMs": 1163.6972966194153,
+            "maxCallMs": 3.0236001014709474
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_UniversalRenderTotal",
+            "calls": 624,
+            "totalInclusiveMs": 1156.997396349907,
+            "maxCallMs": 3.013700008392334
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_RenderCameraStack",
+            "calls": 624,
+            "totalInclusiveMs": 1147.644698381424,
+            "maxCallMs": 2.997299909591675
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_ScriptableRenderContext.Submit",
+            "calls": 624,
+            "totalInclusiveMs": 917.1283964514732,
+            "maxCallMs": 2.472899913787842
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UniversalRenderPipeline.RenderSingleCameraInternal: Player camera",
+            "calls": 624,
+            "totalInclusiveMs": 903.0169966220856,
+            "maxCallMs": 2.441699981689453
+        },
+        {
+            "thread": "Render Thread",
+            "name": "UniversalRenderPipeline.RenderSingleCameraInternal: Player camera",
+            "calls": 624,
+            "totalInclusiveMs": 901.7185981273651,
+            "maxCallMs": 2.696500062942505
+        },
+        {
+            "thread": "Render Thread",
+            "name": "ExecuteRenderGraph",
+            "calls": 624,
+            "totalInclusiveMs": 900.9009977579117,
+            "maxCallMs": 2.6942999362945558
+        },
+        {
+            "thread": "Main Thread",
+            "name": "ExecuteRenderGraph",
+            "calls": 624,
+            "totalInclusiveMs": 899.4618978500366,
+            "maxCallMs": 2.432800054550171
+        },
+        {
+            "thread": "Render Thread",
+            "name": "DrawOpaqueObjects",
+            "calls": 624,
+            "totalInclusiveMs": 648.0724986195564,
+            "maxCallMs": 1.8174999952316285
+        },
+        {
+            "thread": "Render Thread",
+            "name": "GPUProfiler.EndQueries",
+            "calls": 622,
+            "totalInclusiveMs": 621.2397978901863,
+            "maxCallMs": 1.9661999940872193
+        },
+        {
+            "thread": "Render Thread",
+            "name": "RenderLoop.Draw",
+            "calls": 848,
+            "totalInclusiveMs": 603.2281983899884,
+            "maxCallMs": 1.7178000211715699
+        },
+        {
+            "thread": "Main Thread",
+            "name": "RenderLoop.Draw",
+            "calls": 847,
+            "totalInclusiveMs": 591.7484976071864,
+            "maxCallMs": 1.7265000343322755
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BatchRenderer.Flush",
+            "calls": 1297,
+            "totalInclusiveMs": 570.2719981860719,
+            "maxCallMs": 1.6756000518798829
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Prototype.dll!Journey::PrototypeGame.Update() [Invoke]",
+            "calls": 624,
+            "totalInclusiveMs": 566.5949991047382,
+            "maxCallMs": 4.073400020599365
+        },
+        {
+            "thread": "Main Thread",
+            "name": "WaitForJobGroupID",
+            "calls": 5420,
+            "totalInclusiveMs": 368.5890989621985,
+            "maxCallMs": 0.7652000188827515
+        },
+        {
+            "thread": "Main Thread",
+            "name": "JobHandle.Complete",
+            "calls": 1448,
+            "totalInclusiveMs": 335.82959897024559,
+            "maxCallMs": 0.7698000073432922
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.RenderPrepare",
+            "calls": 3120,
+            "totalInclusiveMs": 306.07839945280286,
+            "maxCallMs": 0.7799999713897705
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Gfx.WaitForGfxCommandsFromMainThread",
+            "calls": 4718,
+            "totalInclusiveMs": 288.0300990752803,
+            "maxCallMs": 2.9577999114990236
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Semaphore.WaitForSignal",
+            "calls": 4722,
+            "totalInclusiveMs": 286.72819899502067,
+            "maxCallMs": 2.9570999145507814
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UIEvents.IMGUIRenderOverlays",
+            "calls": 624,
+            "totalInclusiveMs": 235.81819969415666,
+            "maxCallMs": 1.2944999933242798
+        },
+        {
+            "thread": "Render Thread",
+            "name": "DrawScreenSpaceUI",
+            "calls": 1248,
+            "totalInclusiveMs": 229.59059972979595,
+            "maxCallMs": 1.344599962234497
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Gfx.PresentFrame",
+            "calls": 624,
+            "totalInclusiveMs": 214.6462994068861,
+            "maxCallMs": 1.0699000358581544
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Prototype.dll!Journey::PrototypeGame.OnGUI() [Invoke]",
+            "calls": 1248,
+            "totalInclusiveMs": 205.27269962988795,
+            "maxCallMs": 1.1952999830245972
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_UniversalRenderPipeline.RenderSingleCameraInternal: Player camera",
+            "calls": 624,
+            "totalInclusiveMs": 201.082499563694,
+            "maxCallMs": 0.560699999332428
+        },
+        {
+            "thread": "Render Thread",
+            "name": "GUI.Repaint",
+            "calls": 624,
+            "totalInclusiveMs": 171.88839944452048,
+            "maxCallMs": 1.2041000127792359
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.RenderSubmit",
+            "calls": 1872,
+            "totalInclusiveMs": 138.86639952493716,
+            "maxCallMs": 0.4481000006198883
+        },
+        {
+            "thread": "Render Thread",
+            "name": "GfxDeviceD3D11.RefreshSafeFrame",
+            "calls": 1248,
+            "totalInclusiveMs": 124.51479960064171,
+            "maxCallMs": 0.6237000226974487
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Simulation",
+            "calls": 624,
+            "totalInclusiveMs": 106.67169928976364,
+            "maxCallMs": 3.193199872970581
+        },
+        {
+            "thread": "Render Thread",
+            "name": "RenderLoopDevice.Idle",
+            "calls": 31338,
+            "totalInclusiveMs": 75.0062995856133,
+            "maxCallMs": 0.23409999907016755
+        },
+        {
+            "thread": "Worker 2",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 624,
+            "totalInclusiveMs": 71.07939984754194,
+            "maxCallMs": 0.20720000565052033
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 627,
+            "totalInclusiveMs": 70.98929974879138,
+            "maxCallMs": 0.19099999964237214
+        },
+        {
+            "thread": "Worker 3",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 621,
+            "totalInclusiveMs": 70.59279984259047,
+            "maxCallMs": 0.33559998869895937
+        },
+        {
+            "thread": "Worker 4",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 620,
+            "totalInclusiveMs": 70.35389983479399,
+            "maxCallMs": 0.262800008058548
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 1070,
+            "totalInclusiveMs": 70.13859990297351,
+            "maxCallMs": 0.2142000049352646
+        },
+        {
+            "thread": "Worker 5",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 618,
+            "totalInclusiveMs": 69.6005997536704,
+            "maxCallMs": 0.2549000084400177
+        },
+        {
+            "thread": "Worker 6",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 619,
+            "totalInclusiveMs": 68.76179981045425,
+            "maxCallMs": 0.19930000603199006
+        },
+        {
+            "thread": "Worker 7",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 622,
+            "totalInclusiveMs": 68.55109984055162,
+            "maxCallMs": 0.3610999882221222
+        },
+        {
+            "thread": "Worker 8",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 610,
+            "totalInclusiveMs": 65.62679988425225,
+            "maxCallMs": 0.32330000400543215
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Crowd",
+            "calls": 120,
+            "totalInclusiveMs": 63.91489991545677,
+            "maxCallMs": 0.7160000205039978
+        },
+        {
+            "thread": "Worker 9",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 574,
+            "totalInclusiveMs": 61.38609982933849,
+            "maxCallMs": 0.2393999993801117
+        },
+        {
+            "thread": "Render Thread",
+            "name": "IDXGISwapChain::Present",
+            "calls": 624,
+            "totalInclusiveMs": 61.300199776887897,
+            "maxCallMs": 1.0194000005722047
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Gfx.InitializeBuffer",
+            "calls": 1454,
+            "totalInclusiveMs": 52.739599785301837,
+            "maxCallMs": 0.2734000086784363
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_RecordRenderGraph",
+            "calls": 624,
+            "totalInclusiveMs": 51.376299761235717,
+            "maxCallMs": 0.2175000011920929
+        },
+        {
+            "thread": "Worker 10",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 491,
+            "totalInclusiveMs": 50.68779990426265,
+            "maxCallMs": 0.24950000643730164
+        },
+        {
+            "thread": "Worker 0",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 491,
+            "totalInclusiveMs": 49.662599830073308,
+            "maxCallMs": 0.34049999713897707
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_On Record Render Graph",
+            "calls": 624,
+            "totalInclusiveMs": 48.04229985550046,
+            "maxCallMs": 0.20990000665187837
+        },
+        {
+            "thread": "Worker 11",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 447,
+            "totalInclusiveMs": 44.21779985167086,
+            "maxCallMs": 0.21629999577999116
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_ExecuteRenderGraph",
+            "calls": 624,
+            "totalInclusiveMs": 39.88339987024665,
+            "maxCallMs": 0.24369999766349793
+        },
+        {
+            "thread": "Render Thread",
+            "name": "RenderLoop.DrawSRPBatcher",
+            "calls": 1472,
+            "totalInclusiveMs": 38.6807997841388,
+            "maxCallMs": 0.15060000121593476
+        },
+        {
+            "thread": "Worker 2",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 120,
+            "totalInclusiveMs": 37.14899995923042,
+            "maxCallMs": 0.47279998660087588
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 120,
+            "totalInclusiveMs": 37.08249977231026,
+            "maxCallMs": 0.44189998507499697
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 120,
+            "totalInclusiveMs": 36.70859998464584,
+            "maxCallMs": 0.35839998722076418
+        },
+        {
+            "thread": "Worker 5",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 120,
+            "totalInclusiveMs": 36.460499823093417,
+            "maxCallMs": 0.3580999970436096
+        },
+        {
+            "thread": "Worker 4",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 120,
+            "totalInclusiveMs": 36.42479994893074,
+            "maxCallMs": 0.35420000553131106
+        },
+        {
+            "thread": "Worker 3",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 120,
+            "totalInclusiveMs": 36.4028999209404,
+            "maxCallMs": 0.3587000072002411
+        },
+        {
+            "thread": "Worker 6",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 120,
+            "totalInclusiveMs": 36.17909985780716,
+            "maxCallMs": 0.3395000100135803
+        },
+        {
+            "thread": "Worker 7",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 119,
+            "totalInclusiveMs": 36.02729997038841,
+            "maxCallMs": 0.39430001378059389
+        },
+        {
+            "thread": "Worker 8",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 120,
+            "totalInclusiveMs": 35.950299978256229,
+            "maxCallMs": 0.3553999960422516
+        },
+        {
+            "thread": "Main Thread",
+            "name": "RenderLoop.DrawSRPBatcher",
+            "calls": 1470,
+            "totalInclusiveMs": 33.61779982410371,
+            "maxCallMs": 0.08259999752044678
+        },
+        {
+            "thread": "Worker 9",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 110,
+            "totalInclusiveMs": 32.48339995741844,
+            "maxCallMs": 0.3564000129699707
+        },
+        {
+            "thread": "Main Thread",
+            "name": "CullResults.CreateSharedRendererScene",
+            "calls": 624,
+            "totalInclusiveMs": 31.20969983935356,
+            "maxCallMs": 0.20239999890327454
+        },
+        {
+            "thread": "Worker 10",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 97,
+            "totalInclusiveMs": 27.698700120672585,
+            "maxCallMs": 0.3549000024795532
+        },
+        {
+            "thread": "Worker 0",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 95,
+            "totalInclusiveMs": 27.624399974942209,
+            "maxCallMs": 0.45010000467300417
+        },
+        {
+            "thread": "Worker 12",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 273,
+            "totalInclusiveMs": 26.224599952809514,
+            "maxCallMs": 0.18770000338554383
+        },
+        {
+            "thread": "Worker 11",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 91,
+            "totalInclusiveMs": 25.40459994599223,
+            "maxCallMs": 0.39430001378059389
+        },
+        {
+            "thread": "Main Thread",
+            "name": "EndRenderQueueExtraction",
+            "calls": 624,
+            "totalInclusiveMs": 24.17629984021187,
+            "maxCallMs": 0.19009999930858613
+        },
+        {
+            "thread": "Worker 13",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 256,
+            "totalInclusiveMs": 23.860299905762078,
+            "maxCallMs": 0.1437000036239624
+        },
+        {
+            "thread": "Render Thread",
+            "name": "DrawBuffersBatchMode",
+            "calls": 1472,
+            "totalInclusiveMs": 23.598899907432498,
+            "maxCallMs": 0.13099999725818635
+        },
+        {
+            "thread": "Worker 13",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 83,
+            "totalInclusiveMs": 22.52349992096424,
+            "maxCallMs": 0.33980000019073489
+        },
+        {
+            "thread": "Main Thread",
+            "name": "SRPBRender.ApplyShader",
+            "calls": 1470,
+            "totalInclusiveMs": 19.72819987568073,
+            "maxCallMs": 0.03680000081658363
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Projectiles",
+            "calls": 120,
+            "totalInclusiveMs": 16.95549999983632,
+            "maxCallMs": 0.6085000038146973
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Weapon",
+            "calls": 120,
+            "totalInclusiveMs": 16.66280001954874,
+            "maxCallMs": 1.1722999811172486
+        },
+        {
+            "thread": "Worker 14",
+            "name": "BurstInstances:BuildJob (Burst)",
+            "calls": 154,
+            "totalInclusiveMs": 14.39819993916899,
+            "maxCallMs": 0.218299999833107
+        },
+        {
+            "thread": "Render Thread",
+            "name": "GpuRecorder.FrameTick",
+            "calls": 624,
+            "totalInclusiveMs": 14.378999940119684,
+            "maxCallMs": 0.07909999787807465
+        },
+        {
+            "thread": "Render Thread",
+            "name": "PlayerEndOfFrame",
+            "calls": 624,
+            "totalInclusiveMs": 13.125000053158147,
+            "maxCallMs": 0.7515000104904175
+        },
+        {
+            "thread": "Worker 14",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 48,
+            "totalInclusiveMs": 12.50480006635189,
+            "maxCallMs": 0.3188000023365021
+        },
+        {
+            "thread": "Worker 12",
+            "name": "BurstCrowd:MoveJob (Burst)",
+            "calls": 48,
+            "totalInclusiveMs": 12.363500010222197,
+            "maxCallMs": 0.32109999656677248
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PostLateUpdate.UpdateAllRenderers",
+            "calls": 624,
+            "totalInclusiveMs": 11.610799948684872,
+            "maxCallMs": 0.10830000042915344
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 561,
+            "totalInclusiveMs": 11.570000012099627,
+            "maxCallMs": 0.37139999866485598
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BurstCrowd:GridJob (Burst)",
+            "calls": 120,
+            "totalInclusiveMs": 11.456999965012074,
+            "maxCallMs": 0.21209999918937684
+        },
+        {
+            "thread": "Worker 2",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 47,
+            "totalInclusiveMs": 10.503299981355668,
+            "maxCallMs": 0.266400009393692
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 47,
+            "totalInclusiveMs": 10.447099953889847,
+            "maxCallMs": 0.26579999923706057
+        },
+        {
+            "thread": "Main Thread",
+            "name": "StdRender.ApplyShader",
+            "calls": 1503,
+            "totalInclusiveMs": 10.43299994408153,
+            "maxCallMs": 0.08129999786615372
+        },
+        {
+            "thread": "Worker 3",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 47,
+            "totalInclusiveMs": 10.287299931049347,
+            "maxCallMs": 0.265500009059906
+        },
+        {
+            "thread": "Worker 4",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 47,
+            "totalInclusiveMs": 10.239899933338166,
+            "maxCallMs": 0.2644999921321869
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 47,
+            "totalInclusiveMs": 10.235499981092289,
+            "maxCallMs": 0.26350000500679018
+        },
+        {
+            "thread": "Worker 5",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 46,
+            "totalInclusiveMs": 10.211199939250946,
+            "maxCallMs": 0.3197000026702881
+        },
+        {
+            "thread": "Worker 7",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 47,
+            "totalInclusiveMs": 10.173699975013733,
+            "maxCallMs": 0.26269999146461489
+        },
+        {
+            "thread": "Worker 8",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 45,
+            "totalInclusiveMs": 9.899599999189377,
+            "maxCallMs": 0.387800008058548
+        },
+        {
+            "thread": "Worker 6",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 44,
+            "totalInclusiveMs": 9.678199976682663,
+            "maxCallMs": 0.2533000111579895
+        },
+        {
+            "thread": "Main Thread",
+            "name": "EngineJob",
+            "calls": 2958,
+            "totalInclusiveMs": 9.448199960286729,
+            "maxCallMs": 0.043699998408555987
+        },
+        {
+            "thread": "Render Thread",
+            "name": "GPUProfiler.BeginQueries",
+            "calls": 623,
+            "totalInclusiveMs": 9.374699948355556,
+            "maxCallMs": 0.07909999787807465
+        },
+        {
+            "thread": "Worker 4",
+            "name": "EngineJob",
+            "calls": 1920,
+            "totalInclusiveMs": 9.209099958134175,
+            "maxCallMs": 0.03009999915957451
+        },
+        {
+            "thread": "Worker 9",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 42,
+            "totalInclusiveMs": 9.035999968647957,
+            "maxCallMs": 0.2531999945640564
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_Setup Camera Properties",
+            "calls": 1248,
+            "totalInclusiveMs": 8.972999941790477,
+            "maxCallMs": 0.02539999969303608
+        },
+        {
+            "thread": "Worker 0",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 38,
+            "totalInclusiveMs": 8.092299982905388,
+            "maxCallMs": 0.2921999990940094
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PostLateUpdate.ClearImmediateRenderers",
+            "calls": 624,
+            "totalInclusiveMs": 8.069399954751134,
+            "maxCallMs": 0.055799998342990878
+        },
+        {
+            "thread": "Worker 4",
+            "name": "RenderLoop.Prepare",
+            "calls": 1094,
+            "totalInclusiveMs": 7.949399952427484,
+            "maxCallMs": 0.01759999990463257
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Abilities",
+            "calls": 120,
+            "totalInclusiveMs": 7.917199991643429,
+            "maxCallMs": 1.4384000301361085
+        },
+        {
+            "thread": "Worker 10",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 36,
+            "totalInclusiveMs": 7.863999977707863,
+            "maxCallMs": 0.5087000131607056
+        },
+        {
+            "thread": "Worker 5",
+            "name": "EngineJob",
+            "calls": 1548,
+            "totalInclusiveMs": 7.638999963790411,
+            "maxCallMs": 0.06599999964237213
+        },
+        {
+            "thread": "Worker 5",
+            "name": "RenderLoop.Prepare",
+            "calls": 1106,
+            "totalInclusiveMs": 7.616199957439676,
+            "maxCallMs": 0.065700002014637
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_UniversalRenderPipeline.CreateCameraData",
+            "calls": 624,
+            "totalInclusiveMs": 7.077699966728687,
+            "maxCallMs": 0.03550000116229057
+        },
+        {
+            "thread": "Worker 3",
+            "name": "EngineJob",
+            "calls": 1662,
+            "totalInclusiveMs": 6.98929996163497,
+            "maxCallMs": 0.05180000141263008
+        },
+        {
+            "thread": "Worker 11",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 33,
+            "totalInclusiveMs": 6.780000016093254,
+            "maxCallMs": 0.265500009059906
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_ScriptableRenderer.SetPerCameraShaderVariables",
+            "calls": 1248,
+            "totalInclusiveMs": 6.601999951526523,
+            "maxCallMs": 0.01899999938905239
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Setup Camera Properties",
+            "calls": 1248,
+            "totalInclusiveMs": 6.467099974281155,
+            "maxCallMs": 0.029099998995661737
+        },
+        {
+            "thread": "Worker 12",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 32,
+            "totalInclusiveMs": 6.425999969011173,
+            "maxCallMs": 0.4056999981403351
+        },
+        {
+            "thread": "Worker 1",
+            "name": "EngineJob",
+            "calls": 4454,
+            "totalInclusiveMs": 6.4243999598838859,
+            "maxCallMs": 0.9266999959945679
+        },
+        {
+            "thread": "Main Thread",
+            "name": "RenderLoop.CleanupNodeQueue",
+            "calls": 2494,
+            "totalInclusiveMs": 5.899399960726441,
+            "maxCallMs": 0.017899999395012857
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Profiler.FlushRenderCounters",
+            "calls": 624,
+            "totalInclusiveMs": 5.718499964568764,
+            "maxCallMs": 0.13529999554157258
+        },
+        {
+            "thread": "Render Thread",
+            "name": "GUITexture.Draw",
+            "calls": 2496,
+            "totalInclusiveMs": 5.589399973425316,
+            "maxCallMs": 0.01889999955892563
+        },
+        {
+            "thread": "Main Thread",
+            "name": "WatermarkRender",
+            "calls": 624,
+            "totalInclusiveMs": 5.567799974232912,
+            "maxCallMs": 0.016999999061226846
+        },
+        {
+            "thread": "Worker 3",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 51,
+            "totalInclusiveMs": 5.530299946665764,
+            "maxCallMs": 0.3547999858856201
+        },
+        {
+            "thread": "Worker 4",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 49,
+            "totalInclusiveMs": 5.4700000286102299,
+            "maxCallMs": 0.27959999442100527
+        },
+        {
+            "thread": "Worker 2",
+            "name": "EngineJob",
+            "calls": 4210,
+            "totalInclusiveMs": 5.34449995628529,
+            "maxCallMs": 0.027400000020861627
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_UniversalRenderPipeline.CreateRenderingData",
+            "calls": 624,
+            "totalInclusiveMs": 5.190599964465946,
+            "maxCallMs": 0.0210999995470047
+        },
+        {
+            "thread": "Main Thread",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 243,
+            "totalInclusiveMs": 5.135699976235628,
+            "maxCallMs": 0.04360000044107437
+        },
+        {
+            "thread": "Worker 5",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 42,
+            "totalInclusiveMs": 5.054599992930889,
+            "maxCallMs": 0.3174999952316284
+        },
+        {
+            "thread": "Worker 0",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 44,
+            "totalInclusiveMs": 4.984599985182285,
+            "maxCallMs": 0.23569999635219575
+        },
+        {
+            "thread": "Main Thread",
+            "name": "FinalizeUpdateRendererBoundingVolumes",
+            "calls": 1248,
+            "totalInclusiveMs": 4.965399964974495,
+            "maxCallMs": 0.0949999988079071
+        },
+        {
+            "thread": "Main Thread",
+            "name": "MeshRendererFinalizeUpdate",
+            "calls": 624,
+            "totalInclusiveMs": 4.670199977699667,
+            "maxCallMs": 0.09459999948740006
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_ComputeHashRenderGraph",
+            "calls": 624,
+            "totalInclusiveMs": 4.619099966716021,
+            "maxCallMs": 0.08609999716281891
+        },
+        {
+            "thread": "Worker 13",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 23,
+            "totalInclusiveMs": 4.589499995112419,
+            "maxCallMs": 0.2524000108242035
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Unity.RenderPipelines.Core.Runtime.dll!UnityEngine.Rendering::DebugUpdater.Update() [Invoke]",
+            "calls": 624,
+            "totalInclusiveMs": 4.405299975536764,
+            "maxCallMs": 0.023499999195337297
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_CompileRenderGraph",
+            "calls": 624,
+            "totalInclusiveMs": 4.36579997651279,
+            "maxCallMs": 0.018200000748038293
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Gfx.RequestAsyncReadbackData",
+            "calls": 42,
+            "totalInclusiveMs": 4.265000004321337,
+            "maxCallMs": 0.29330000281333926
+        },
+        {
+            "thread": "Worker 3",
+            "name": "RenderLoop.Prepare",
+            "calls": 562,
+            "totalInclusiveMs": 4.225199978565797,
+            "maxCallMs": 0.014600000344216824
+        },
+        {
+            "thread": "Worker 8",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 36,
+            "totalInclusiveMs": 4.208199970424175,
+            "maxCallMs": 0.2978000044822693
+        },
+        {
+            "thread": "Worker 4",
+            "name": "RenderLoop.Sort",
+            "calls": 612,
+            "totalInclusiveMs": 4.175899983616546,
+            "maxCallMs": 0.014999999664723874
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_NRPRGComp_ExecuteBeginRenderpassCommand",
+            "calls": 624,
+            "totalInclusiveMs": 4.130999976303428,
+            "maxCallMs": 0.015200000256299973
+        },
+        {
+            "thread": "Main Thread",
+            "name": "ScheduleUpdateRendererBoundingVolumes",
+            "calls": 624,
+            "totalInclusiveMs": 4.118199980352074,
+            "maxCallMs": 0.012000000104308129
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 38,
+            "totalInclusiveMs": 3.8018999824125787,
+            "maxCallMs": 0.2451999932527542
+        },
+        {
+            "thread": "Worker 7",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 31,
+            "totalInclusiveMs": 3.71509999781847,
+            "maxCallMs": 0.1899999976158142
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Gfx.SetRenderTarget",
+            "calls": 3828,
+            "totalInclusiveMs": 3.5515999738054235,
+            "maxCallMs": 0.01360000018030405
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Setup Camera Properties",
+            "calls": 1248,
+            "totalInclusiveMs": 3.54859997832682,
+            "maxCallMs": 0.061799999326467517
+        },
+        {
+            "thread": "Worker 6",
+            "name": "RenderLoop.Prepare",
+            "calls": 654,
+            "totalInclusiveMs": 3.5427999809617178,
+            "maxCallMs": 0.08389999717473984
+        },
+        {
+            "thread": "Worker 6",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 36,
+            "totalInclusiveMs": 3.5103999972343447,
+            "maxCallMs": 0.28600001335144045
+        },
+        {
+            "thread": "Worker 9",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 33,
+            "totalInclusiveMs": 3.417699985206127,
+            "maxCallMs": 0.2336999922990799
+        },
+        {
+            "thread": "Worker 10",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 31,
+            "totalInclusiveMs": 3.4123999923467638,
+            "maxCallMs": 0.22419999539852143
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_UniversalRenderPipeline.SetupPerCameraShaderConstants",
+            "calls": 624,
+            "totalInclusiveMs": 3.4026999790221454,
+            "maxCallMs": 0.015300000086426735
+        },
+        {
+            "thread": "Worker 6",
+            "name": "EngineJob",
+            "calls": 779,
+            "totalInclusiveMs": 3.3522999856286335,
+            "maxCallMs": 0.08420000225305557
+        },
+        {
+            "thread": "Worker 2",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 32,
+            "totalInclusiveMs": 3.2264999828475995,
+            "maxCallMs": 0.1860000044107437
+        },
+        {
+            "thread": "Worker 5",
+            "name": "RenderLoop.Sort",
+            "calls": 388,
+            "totalInclusiveMs": 3.109699990833178,
+            "maxCallMs": 0.01489999983459711
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Gfx.UpdateAsyncReadbackData",
+            "calls": 41,
+            "totalInclusiveMs": 2.8977999947965147,
+            "maxCallMs": 0.16040000319480897
+        },
+        {
+            "thread": "Worker 3",
+            "name": "RenderLoop.Sort",
+            "calls": 422,
+            "totalInclusiveMs": 2.8473999827401714,
+            "maxCallMs": 0.016999999061226846
+        },
+        {
+            "thread": "Worker 11",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 29,
+            "totalInclusiveMs": 2.7452999725937845,
+            "maxCallMs": 0.16689999401569367
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Gfx.WaitForPresentOnGfxThread",
+            "calls": 625,
+            "totalInclusiveMs": 2.6548999696969988,
+            "maxCallMs": 0.3562999963760376
+        },
+        {
+            "thread": "Worker 13",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 23,
+            "totalInclusiveMs": 2.5218000039458277,
+            "maxCallMs": 0.2533000111579895
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UpdateRendererBoundingVolumes",
+            "calls": 1862,
+            "totalInclusiveMs": 2.477899987185083,
+            "maxCallMs": 0.00930000003427267
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_UniversalRenderPipeline.SetupPerFrameShaderConstants",
+            "calls": 624,
+            "totalInclusiveMs": 2.4621999931987377,
+            "maxCallMs": 0.016200000420212747
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Gfx.DrawDynamic",
+            "calls": 2538,
+            "totalInclusiveMs": 2.438299977380666,
+            "maxCallMs": 0.0430000014603138
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Setup Forward Lights",
+            "calls": 624,
+            "totalInclusiveMs": 2.4298999898601325,
+            "maxCallMs": 0.019700000062584878
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_UniversalRenderPipeline.InitializeAdditionalCameraData",
+            "calls": 624,
+            "totalInclusiveMs": 2.399699990870431,
+            "maxCallMs": 0.013100000098347664
+        },
+        {
+            "thread": "Worker 2",
+            "name": "RenderLoop.Prepare",
+            "calls": 656,
+            "totalInclusiveMs": 2.3491999878315257,
+            "maxCallMs": 0.010400000028312207
+        },
+        {
+            "thread": "Worker 1",
+            "name": "RenderLoop.Prepare",
+            "calls": 638,
+            "totalInclusiveMs": 2.2566999924601989,
+            "maxCallMs": 0.012000000104308129
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BeginRenderQueueExtraction",
+            "calls": 624,
+            "totalInclusiveMs": 2.219099993351847,
+            "maxCallMs": 0.014600000344216824
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_UniversalRenderPipeline.InitializeStackedCameraData",
+            "calls": 624,
+            "totalInclusiveMs": 2.1829999927431347,
+            "maxCallMs": 0.008899999782443047
+        },
+        {
+            "thread": "Render Thread",
+            "name": "LightCookies",
+            "calls": 624,
+            "totalInclusiveMs": 2.1465999880456367,
+            "maxCallMs": 0.019199999049305917
+        },
+        {
+            "thread": "Worker 14",
+            "name": "BurstProjectiles:AdvanceJob (Burst)",
+            "calls": 11,
+            "totalInclusiveMs": 2.1054999735206367,
+            "maxCallMs": 0.24869999289512635
+        },
+        {
+            "thread": "Render Thread",
+            "name": "ScheduleGeometryJobs",
+            "calls": 224,
+            "totalInclusiveMs": 2.070999989286065,
+            "maxCallMs": 0.05770000070333481
+        },
+        {
+            "thread": "Worker 12",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 20,
+            "totalInclusiveMs": 2.047599971294403,
+            "maxCallMs": 0.210099995136261
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PostLateUpdate.UpdateCustomRenderTextures",
+            "calls": 624,
+            "totalInclusiveMs": 1.9862999888136984,
+            "maxCallMs": 0.014399999752640725
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_UniversalRenderPipeline.CreateLightData",
+            "calls": 624,
+            "totalInclusiveMs": 1.9789999907370657,
+            "maxCallMs": 0.016499999910593034
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UnityEngine.CoreModule.dll!UnityEngine.Experimental.Rendering::ScriptableRuntimeReflectionSystemWrapper.Internal_ScriptableRuntimeReflectionSystemWrapper_TickRealtimeProbes() [Invoke]",
+            "calls": 624,
+            "totalInclusiveMs": 1.9778999915579335,
+            "maxCallMs": 0.011500000022351742
+        },
+        {
+            "thread": "Worker 7",
+            "name": "EngineJob",
+            "calls": 503,
+            "totalInclusiveMs": 1.9739999881057884,
+            "maxCallMs": 0.025299999862909318
+        },
+        {
+            "thread": "Worker 14",
+            "name": "BurstInstances:CompactJob (Burst)",
+            "calls": 18,
+            "totalInclusiveMs": 1.9003000259399415,
+            "maxCallMs": 0.1988999992609024
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Profiler.CollectUsedTextureStats",
+            "calls": 624,
+            "totalInclusiveMs": 1.8977999982889742,
+            "maxCallMs": 0.13050000369548798
+        },
+        {
+            "thread": "Worker 14",
+            "name": "EngineJob",
+            "calls": 88,
+            "totalInclusiveMs": 1.8385999960592017,
+            "maxCallMs": 0.03440000116825104
+        },
+        {
+            "thread": "Worker 14",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 85,
+            "totalInclusiveMs": 1.811499996110797,
+            "maxCallMs": 0.03399999812245369
+        },
+        {
+            "thread": "Render Thread",
+            "name": "WaitForRenderJobs",
+            "calls": 625,
+            "totalInclusiveMs": 1.771399991121143,
+            "maxCallMs": 0.0210999995470047
+        },
+        {
+            "thread": "Main Thread",
+            "name": "CustomRenderTextures.Update",
+            "calls": 624,
+            "totalInclusiveMs": 1.6336999940685928,
+            "maxCallMs": 0.012500000186264515
+        },
+        {
+            "thread": "Worker 11",
+            "name": "EngineJob",
+            "calls": 112,
+            "totalInclusiveMs": 1.4322999990108656,
+            "maxCallMs": 0.031700000166893008
+        },
+        {
+            "thread": "Worker 13",
+            "name": "EngineJob",
+            "calls": 79,
+            "totalInclusiveMs": 1.3899999975110405,
+            "maxCallMs": 0.02930000051856041
+        },
+        {
+            "thread": "Main Thread",
+            "name": "EndGraphicsJobs",
+            "calls": 2496,
+            "totalInclusiveMs": 1.360699988923443,
+            "maxCallMs": 0.010900000110268593
+        },
+        {
+            "thread": "Worker 13",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 62,
+            "totalInclusiveMs": 1.3508999906480313,
+            "maxCallMs": 0.02889999933540821
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PreLateUpdate.EndGraphicsJobsAfterScriptUpdate",
+            "calls": 624,
+            "totalInclusiveMs": 1.3415999894496054,
+            "maxCallMs": 0.010999999940395356
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PrepareUpdateRendererBoundingVolumes",
+            "calls": 2496,
+            "totalInclusiveMs": 1.281899986868666,
+            "maxCallMs": 0.009800000116229058
+        },
+        {
+            "thread": "Worker 8",
+            "name": "EngineJob",
+            "calls": 301,
+            "totalInclusiveMs": 1.27069999431842,
+            "maxCallMs": 0.026799999177455903
+        },
+        {
+            "thread": "Worker 12",
+            "name": "EngineJob",
+            "calls": 71,
+            "totalInclusiveMs": 1.2564999958558474,
+            "maxCallMs": 0.029099998995661737
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_UniversalRenderPipeline.GetMainLightIndex",
+            "calls": 624,
+            "totalInclusiveMs": 1.2284999949624763,
+            "maxCallMs": 0.015200000256299973
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PostLateUpdate.RenderAs2DUpdate",
+            "calls": 624,
+            "totalInclusiveMs": 1.2204999949317426,
+            "maxCallMs": 0.00860000029206276
+        },
+        {
+            "thread": "Main Thread",
+            "name": "LineRenderer.ScheduleGeometryJobs",
+            "calls": 224,
+            "totalInclusiveMs": 1.2149000002536923,
+            "maxCallMs": 0.10970000177621842
+        },
+        {
+            "thread": "Worker 12",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 53,
+            "totalInclusiveMs": 1.2055999990552664,
+            "maxCallMs": 0.02889999933540821
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_UniversalRenderPipeline.CreateShadowData",
+            "calls": 624,
+            "totalInclusiveMs": 1.2015999959548936,
+            "maxCallMs": 0.006000000052154064
+        },
+        {
+            "thread": "Worker 7",
+            "name": "RenderLoop.Sort",
+            "calls": 105,
+            "totalInclusiveMs": 1.1888999927323312,
+            "maxCallMs": 0.015300000086426735
+        },
+        {
+            "thread": "Main Thread",
+            "name": "FrameEvents.NewInputBeforeRenderUpdate",
+            "calls": 624,
+            "totalInclusiveMs": 1.1666999947628938,
+            "maxCallMs": 0.031199999153614045
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_ScriptableRenderer.SetupCullingParameters",
+            "calls": 624,
+            "totalInclusiveMs": 1.1487999958917499,
+            "maxCallMs": 0.005200000014156103
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_ScriptableRenderer.ClearRenderingState",
+            "calls": 624,
+            "totalInclusiveMs": 1.1164999970933423,
+            "maxCallMs": 0.0058999997563660149
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UIEvents.WillRenderCanvases",
+            "calls": 624,
+            "totalInclusiveMs": 1.0635999927762896,
+            "maxCallMs": 0.02329999953508377
+        },
+        {
+            "thread": "Worker 6",
+            "name": "RenderLoop.Sort",
+            "calls": 107,
+            "totalInclusiveMs": 1.0590999908745289,
+            "maxCallMs": 0.014800000004470349
+        },
+        {
+            "thread": "Worker 0",
+            "name": "EngineJob",
+            "calls": 42,
+            "totalInclusiveMs": 1.0491999973310158,
+            "maxCallMs": 0.1664000004529953
+        },
+        {
+            "thread": "Worker 11",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 45,
+            "totalInclusiveMs": 1.0325999911874533,
+            "maxCallMs": 0.03139999881386757
+        },
+        {
+            "thread": "Worker 0",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 39,
+            "totalInclusiveMs": 1.0297999922186137,
+            "maxCallMs": 0.16609999537467957
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Gfx.EndAsyncJobFrame",
+            "calls": 625,
+            "totalInclusiveMs": 1.0288999954937027,
+            "maxCallMs": 0.010499999858438969
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UGUI.Rendering.UpdateBatches",
+            "calls": 624,
+            "totalInclusiveMs": 0.9381999919423834,
+            "maxCallMs": 0.023000000044703485
+        },
+        {
+            "thread": "Render Thread",
+            "name": "AsyncUploadManager.AsyncResourceUploadAll",
+            "calls": 1246,
+            "totalInclusiveMs": 0.9164999905624427,
+            "maxCallMs": 0.007499999832361937
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UnityEngine.CoreModule.dll!UnityEngine.Rendering::OnDemandRendering.GetRenderFrameInterval() [Invoke]",
+            "calls": 624,
+            "totalInclusiveMs": 0.8934999940684065,
+            "maxCallMs": 0.0632999986410141
+        },
+        {
+            "thread": "Main Thread",
+            "name": "WaitForRenderJobs",
+            "calls": 625,
+            "totalInclusiveMs": 0.8901999891968444,
+            "maxCallMs": 0.010400000028312207
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Graphics.Blit",
+            "calls": 42,
+            "totalInclusiveMs": 0.8891000002622604,
+            "maxCallMs": 0.12950000166893006
+        },
+        {
+            "thread": "Worker 8",
+            "name": "RenderLoop.Sort",
+            "calls": 73,
+            "totalInclusiveMs": 0.8807999957352877,
+            "maxCallMs": 0.016999999061226846
+        },
+        {
+            "thread": "Main Thread",
+            "name": "EarlyUpdate.RendererNotifyInvisible",
+            "calls": 624,
+            "totalInclusiveMs": 0.8648999931756407,
+            "maxCallMs": 0.004699999932199717
+        },
+        {
+            "thread": "Worker 1",
+            "name": "RenderLoop.Draw",
+            "calls": 1,
+            "totalInclusiveMs": 0.856499969959259,
+            "maxCallMs": 0.856499969959259
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 11,
+            "totalInclusiveMs": 0.839599996805191,
+            "maxCallMs": 0.12030000239610672
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BatchRenderer.Flush",
+            "calls": 1,
+            "totalInclusiveMs": 0.8331000208854675,
+            "maxCallMs": 0.8331000208854675
+        },
+        {
+            "thread": "Worker 10",
+            "name": "EngineJob",
+            "calls": 119,
+            "totalInclusiveMs": 0.8190999951257254,
+            "maxCallMs": 0.02969999983906746
+        },
+        {
+            "thread": "Main Thread",
+            "name": "CompileRenderGraph",
+            "calls": 624,
+            "totalInclusiveMs": 0.8171999931437313,
+            "maxCallMs": 0.0044999998062849049
+        },
+        {
+            "thread": "Worker 7",
+            "name": "RenderLoop.Prepare",
+            "calls": 162,
+            "totalInclusiveMs": 0.7902999955695123,
+            "maxCallMs": 0.01640000008046627
+        },
+        {
+            "thread": "Worker 3",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 330,
+            "totalInclusiveMs": 0.7797999963950133,
+            "maxCallMs": 0.00989999994635582
+        },
+        {
+            "thread": "Main Thread",
+            "name": "FrameEvents.OnBeforeRenderCallback",
+            "calls": 624,
+            "totalInclusiveMs": 0.7522999979555607,
+            "maxCallMs": 0.01209999993443489
+        },
+        {
+            "thread": "Worker 9",
+            "name": "EngineJob",
+            "calls": 133,
+            "totalInclusiveMs": 0.7446000000345521,
+            "maxCallMs": 0.03200000151991844
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UIEvents.CanvasManagerRenderOverlays",
+            "calls": 624,
+            "totalInclusiveMs": 0.7036999926785938,
+            "maxCallMs": 0.016899999231100084
+        },
+        {
+            "thread": "Render Thread",
+            "name": "DrawTransparentObjects",
+            "calls": 624,
+            "totalInclusiveMs": 0.6948999941232614,
+            "maxCallMs": 0.003700000001117587
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 56,
+            "totalInclusiveMs": 0.6466999957337976,
+            "maxCallMs": 0.021299999207258226
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Initialization.UpdateCameraMotionVectors",
+            "calls": 624,
+            "totalInclusiveMs": 0.5796999938320369,
+            "maxCallMs": 0.004000000189989805
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UnityEngine.CoreModule.dll!UnityEngine.Rendering::SupportedRenderingFeatures.IsUIOverlayRenderedBySRP() [Invoke]",
+            "calls": 624,
+            "totalInclusiveMs": 0.5659999915515073,
+            "maxCallMs": 0.011699999682605267
+        },
+        {
+            "thread": "Render Thread",
+            "name": "PutAllGeometryJobFence",
+            "calls": 624,
+            "totalInclusiveMs": 0.5625999931362458,
+            "maxCallMs": 0.004799999762326479
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UnityEngine.CoreModule.dll!UnityEngine.Rendering::RenderPipelineManager.HandleRenderPipelineChange() [Invoke]",
+            "calls": 1248,
+            "totalInclusiveMs": 0.555999987591349,
+            "maxCallMs": 0.002099999925121665
+        },
+        {
+            "thread": "Main Thread",
+            "name": "RenderTexture.GarbageCollectTemporary",
+            "calls": 624,
+            "totalInclusiveMs": 0.5501999925472774,
+            "maxCallMs": 0.004799999762326479
+        },
+        {
+            "thread": "Main Thread",
+            "name": "TextCoreRendering.Render",
+            "calls": 4992,
+            "totalInclusiveMs": 0.5178999867712264,
+            "maxCallMs": 0.028599999845027925
+        },
+        {
+            "thread": "Worker 1",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 24,
+            "totalInclusiveMs": 0.5109000001102686,
+            "maxCallMs": 0.027000000700354577
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Renderers.OncePerFrameUpdate",
+            "calls": 624,
+            "totalInclusiveMs": 0.49309999065008017,
+            "maxCallMs": 0.0034000000450760128
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UI.RenderOverlays",
+            "calls": 624,
+            "totalInclusiveMs": 0.4810999932815321,
+            "maxCallMs": 0.011500000022351742
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UnityEngine.CoreModule.dll!UnityEngine.Rendering::SupportedRenderingFeatures.IsLightmapBakeTypeSupportedByRef() [Invoke]",
+            "calls": 624,
+            "totalInclusiveMs": 0.4800999888102524,
+            "maxCallMs": 0.002899999963119626
+        },
+        {
+            "thread": "Main Thread",
+            "name": "RenderLoop.Prepare",
+            "calls": 50,
+            "totalInclusiveMs": 0.45159999560564759,
+            "maxCallMs": 0.016899999231100084
+        },
+        {
+            "thread": "Render Thread",
+            "name": "AsyncUploadManager.ScheduleAsyncCommands",
+            "calls": 1246,
+            "totalInclusiveMs": 0.43609999404725388,
+            "maxCallMs": 0.007400000002235174
+        },
+        {
+            "thread": "Main Thread",
+            "name": "EarlyUpdate.ExecuteMainThreadJobs",
+            "calls": 624,
+            "totalInclusiveMs": 0.4319999950239435,
+            "maxCallMs": 0.00279999990016222
+        },
+        {
+            "thread": "Render Thread",
+            "name": "PutGeometryJobFence",
+            "calls": 224,
+            "totalInclusiveMs": 0.42419999837875368,
+            "maxCallMs": 0.0038999998942017557
+        },
+        {
+            "thread": "Worker 5",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 5,
+            "totalInclusiveMs": 0.4116999953985214,
+            "maxCallMs": 0.12120000272989273
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UnityEngine.CoreModule.dll!UnityEngine::Application.InvokeOnBeforeRender() [Invoke]",
+            "calls": 624,
+            "totalInclusiveMs": 0.40099999486119489,
+            "maxCallMs": 0.0017999999690800906
+        },
+        {
+            "thread": "Worker 10",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 17,
+            "totalInclusiveMs": 0.39660000056028368,
+            "maxCallMs": 0.029400000348687173
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UGUI.Rendering.EmitWorldScreenspaceCameraGeometry",
+            "calls": 1248,
+            "totalInclusiveMs": 0.38809999005752618,
+            "maxCallMs": 0.0026000000070780517
+        },
+        {
+            "thread": "Render Thread",
+            "name": "CustomRenderTextures.Update",
+            "calls": 624,
+            "totalInclusiveMs": 0.3589999910618644,
+            "maxCallMs": 0.03399999812245369
+        },
+        {
+            "thread": "Worker 2",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 16,
+            "totalInclusiveMs": 0.35469999723136427,
+            "maxCallMs": 0.02710000053048134
+        },
+        {
+            "thread": "Worker 11",
+            "name": "RenderLoop.Sort",
+            "calls": 29,
+            "totalInclusiveMs": 0.34749999549239876,
+            "maxCallMs": 0.01360000018030405
+        },
+        {
+            "thread": "Worker 0",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 5,
+            "totalInclusiveMs": 0.34540000557899477,
+            "maxCallMs": 0.08640000224113465
+        },
+        {
+            "thread": "Worker 12",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 5,
+            "totalInclusiveMs": 0.3401999957859516,
+            "maxCallMs": 0.08259999752044678
+        },
+        {
+            "thread": "Worker 9",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 14,
+            "totalInclusiveMs": 0.3328999951481819,
+            "maxCallMs": 0.03179999813437462
+        },
+        {
+            "thread": "Worker 10",
+            "name": "RenderLoop.Sort",
+            "calls": 26,
+            "totalInclusiveMs": 0.31769999768584969,
+            "maxCallMs": 0.014100000262260437
+        },
+        {
+            "thread": "Render Thread",
+            "name": "ReflectionProbes.Update",
+            "calls": 624,
+            "totalInclusiveMs": 0.2778999936344917,
+            "maxCallMs": 0.002899999963119626
+        },
+        {
+            "thread": "Main Thread",
+            "name": "CleanUp.TextRenderingGarbageCollect",
+            "calls": 624,
+            "totalInclusiveMs": 0.2684999946432072,
+            "maxCallMs": 0.0024999999441206457
+        },
+        {
+            "thread": "Worker 9",
+            "name": "RenderLoop.Sort",
+            "calls": 22,
+            "totalInclusiveMs": 0.2665999960154295,
+            "maxCallMs": 0.0139999995008111
+        },
+        {
+            "thread": "Worker 11",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 3,
+            "totalInclusiveMs": 0.2639999985694885,
+            "maxCallMs": 0.12110000103712082
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Camera.Render",
+            "calls": 624,
+            "totalInclusiveMs": 0.2596999937813962,
+            "maxCallMs": 0.009499999694526196
+        },
+        {
+            "thread": "Main Thread",
+            "name": "RenderLoop.Sort",
+            "calls": 50,
+            "totalInclusiveMs": 0.25229999993462118,
+            "maxCallMs": 0.011300000362098217
+        },
+        {
+            "thread": "Worker 2",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 1,
+            "totalInclusiveMs": 0.2468000054359436,
+            "maxCallMs": 0.2468000054359436
+        },
+        {
+            "thread": "Main Thread",
+            "name": "MeshRendererPrepareDispatchUpdate",
+            "calls": 624,
+            "totalInclusiveMs": 0.22789999329688727,
+            "maxCallMs": 0.001500000013038516
+        },
+        {
+            "thread": "Render Thread",
+            "name": "UI.RenderOverlays",
+            "calls": 624,
+            "totalInclusiveMs": 0.2262999933300307,
+            "maxCallMs": 0.0010999999940395356
+        },
+        {
+            "thread": "Worker 8",
+            "name": "RenderLoop.Prepare",
+            "calls": 48,
+            "totalInclusiveMs": 0.22130000009201468,
+            "maxCallMs": 0.00860000029206276
+        },
+        {
+            "thread": "Worker 2",
+            "name": "RenderLoop.Sort",
+            "calls": 19,
+            "totalInclusiveMs": 0.21650000102818013,
+            "maxCallMs": 0.013000000268220902
+        },
+        {
+            "thread": "Worker 4",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 3,
+            "totalInclusiveMs": 0.2149999961256981,
+            "maxCallMs": 0.0843999981880188
+        },
+        {
+            "thread": "Worker 1",
+            "name": "RenderLoop.Sort",
+            "calls": 18,
+            "totalInclusiveMs": 0.21109999902546407,
+            "maxCallMs": 0.012600000016391278
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UnityEngine.UIModule.dll!UnityEngine::Canvas.SendPreWillRenderCanvases() [Invoke]",
+            "calls": 624,
+            "totalInclusiveMs": 0.20999999258492609,
+            "maxCallMs": 0.0015999999595806003
+        },
+        {
+            "thread": "Main Thread",
+            "name": "EarlyUpdate.TilemapRendererEarlyUpdate",
+            "calls": 624,
+            "totalInclusiveMs": 0.20659999513009098,
+            "maxCallMs": 0.0019000000320374966
+        },
+        {
+            "thread": "Worker 2",
+            "name": "SceneNodesInitJob",
+            "calls": 201,
+            "totalInclusiveMs": 0.20239999803015963,
+            "maxCallMs": 0.002199999988079071
+        },
+        {
+            "thread": "Worker 10",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 3,
+            "totalInclusiveMs": 0.19179999455809594,
+            "maxCallMs": 0.07109999656677246
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Render.LineOrTrail",
+            "calls": 224,
+            "totalInclusiveMs": 0.1799999984796159,
+            "maxCallMs": 0.005100000184029341
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PostLateUpdate.DirectorRenderImage",
+            "calls": 624,
+            "totalInclusiveMs": 0.17899999407381984,
+            "maxCallMs": 0.0013000000035390258
+        },
+        {
+            "thread": "Worker 9",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 2,
+            "totalInclusiveMs": 0.17829999327659608,
+            "maxCallMs": 0.08959999680519104
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Camera.Render",
+            "calls": 624,
+            "totalInclusiveMs": 0.1768999940759386,
+            "maxCallMs": 0.0011999999405816198
+        },
+        {
+            "thread": "Render Thread",
+            "name": "CompileRenderGraph",
+            "calls": 624,
+            "totalInclusiveMs": 0.1756999977878877,
+            "maxCallMs": 0.0010000000474974514
+        },
+        {
+            "thread": "Worker 3",
+            "name": "SceneNodesInitJob",
+            "calls": 112,
+            "totalInclusiveMs": 0.1717999970423989,
+            "maxCallMs": 0.05139999836683273
+        },
+        {
+            "thread": "Worker 1",
+            "name": "SceneNodesInitJob",
+            "calls": 174,
+            "totalInclusiveMs": 0.1658999974024482,
+            "maxCallMs": 0.002099999925121665
+        },
+        {
+            "thread": "Worker 1",
+            "name": "PrepareSceneNodesJob",
+            "calls": 203,
+            "totalInclusiveMs": 0.16379999805940316,
+            "maxCallMs": 0.0026000000070780517
+        },
+        {
+            "thread": "Main Thread",
+            "name": "CullSceneDynamicObjectsCombineJob",
+            "calls": 500,
+            "totalInclusiveMs": 0.1574999945005402,
+            "maxCallMs": 0.0011999999405816198
+        },
+        {
+            "thread": "Worker 5",
+            "name": "PrepareSceneNodesJob",
+            "calls": 190,
+            "totalInclusiveMs": 0.15469999713241124,
+            "maxCallMs": 0.003000000026077032
+        },
+        {
+            "thread": "Worker 3",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 7,
+            "totalInclusiveMs": 0.15089999698102475,
+            "maxCallMs": 0.02579999901354313
+        },
+        {
+            "thread": "Worker 4",
+            "name": "SceneNodesInitJob",
+            "calls": 129,
+            "totalInclusiveMs": 0.14869999862276019,
+            "maxCallMs": 0.004399999976158142
+        },
+        {
+            "thread": "Worker 14",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 2,
+            "totalInclusiveMs": 0.1460999995470047,
+            "maxCallMs": 0.08529999852180481
+        },
+        {
+            "thread": "Render Thread",
+            "name": "FillQuadIndexBuffer",
+            "calls": 666,
+            "totalInclusiveMs": 0.14579999615671114,
+            "maxCallMs": 0.0010999999940395356
+        },
+        {
+            "thread": "Worker 4",
+            "name": "PrepareSceneNodesJob",
+            "calls": 183,
+            "totalInclusiveMs": 0.1448999976273626,
+            "maxCallMs": 0.0027000000700354578
+        },
+        {
+            "thread": "Render Thread",
+            "name": "CreateGpuProgram",
+            "calls": 2,
+            "totalInclusiveMs": 0.1420999988913536,
+            "maxCallMs": 0.09019999951124191
+        },
+        {
+            "thread": "Worker 5",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 6,
+            "totalInclusiveMs": 0.14059999957680703,
+            "maxCallMs": 0.02500000037252903
+        },
+        {
+            "thread": "Worker 3",
+            "name": "PrepareSceneNodesJob",
+            "calls": 169,
+            "totalInclusiveMs": 0.13809999753721059,
+            "maxCallMs": 0.002099999925121665
+        },
+        {
+            "thread": "Worker 6",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 2,
+            "totalInclusiveMs": 0.1363999992609024,
+            "maxCallMs": 0.07010000199079514
+        },
+        {
+            "thread": "Worker 2",
+            "name": "PrepareSceneNodesJob",
+            "calls": 158,
+            "totalInclusiveMs": 0.1324999979842687,
+            "maxCallMs": 0.0023999998811632396
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_RenderPipeline.BeginCameraRendering",
+            "calls": 624,
+            "totalInclusiveMs": 0.12689999700523914,
+            "maxCallMs": 0.0008999999845400453
+        },
+        {
+            "thread": "Worker 3",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 2,
+            "totalInclusiveMs": 0.12610000371932984,
+            "maxCallMs": 0.06440000236034394
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Draw Main Light Shadowmap",
+            "calls": 624,
+            "totalInclusiveMs": 0.12399999609624502,
+            "maxCallMs": 0.0007999999797903001
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_RenderPipeline.BeginContextRendering",
+            "calls": 624,
+            "totalInclusiveMs": 0.11899999676825246,
+            "maxCallMs": 0.0008999999845400453
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Setup Debug Properties",
+            "calls": 624,
+            "totalInclusiveMs": 0.1182999963129987,
+            "maxCallMs": 0.000699999975040555
+        },
+        {
+            "thread": "Worker 6",
+            "name": "PrepareSceneNodesJob",
+            "calls": 145,
+            "totalInclusiveMs": 0.11689999848022126,
+            "maxCallMs": 0.002099999925121665
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Initialize Frame",
+            "calls": 624,
+            "totalInclusiveMs": 0.10789999687403906,
+            "maxCallMs": 0.000699999975040555
+        },
+        {
+            "thread": "Worker 2",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 46,
+            "totalInclusiveMs": 0.10769999876356451,
+            "maxCallMs": 0.006399999838322401
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_ScriptableRenderer.InternalFinishRenderingCommon",
+            "calls": 624,
+            "totalInclusiveMs": 0.10749999721883796,
+            "maxCallMs": 0.0010999999940395356
+        },
+        {
+            "thread": "Worker 2",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 8,
+            "totalInclusiveMs": 0.1072000004351139,
+            "maxCallMs": 0.019500000402331353
+        },
+        {
+            "thread": "Worker 1",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 46,
+            "totalInclusiveMs": 0.10539999955653912,
+            "maxCallMs": 0.0071000000461936
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UnityEngine.UIModule.dll!UnityEngine::Canvas.SendWillRenderCanvases() [Invoke]",
+            "calls": 624,
+            "totalInclusiveMs": 0.09959999781131046,
+            "maxCallMs": 0.004100000020116568
+        },
+        {
+            "thread": "Worker 7",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 4,
+            "totalInclusiveMs": 0.09390000067651272,
+            "maxCallMs": 0.025100000202655793
+        },
+        {
+            "thread": "Worker 5",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 8,
+            "totalInclusiveMs": 0.09109999798238278,
+            "maxCallMs": 0.014499999582767487
+        },
+        {
+            "thread": "Main Thread",
+            "name": "ParticleSystem.WaitForPreviousRenderingToFinish",
+            "calls": 624,
+            "totalInclusiveMs": 0.08929999771498842,
+            "maxCallMs": 0.0008999999845400453
+        },
+        {
+            "thread": "Worker 8",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 4,
+            "totalInclusiveMs": 0.08740000054240227,
+            "maxCallMs": 0.026399999856948854
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_RenderPipeline.EndCameraRendering",
+            "calls": 624,
+            "totalInclusiveMs": 0.08729999780189246,
+            "maxCallMs": 0.000699999975040555
+        },
+        {
+            "thread": "Worker 4",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 4,
+            "totalInclusiveMs": 0.08540000021457672,
+            "maxCallMs": 0.023900000378489496
+        },
+        {
+            "thread": "Worker 1",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 83,
+            "totalInclusiveMs": 0.08279999904334545,
+            "maxCallMs": 0.0017000000225380064
+        },
+        {
+            "thread": "Worker 9",
+            "name": "RenderLoop.Prepare",
+            "calls": 14,
+            "totalInclusiveMs": 0.07859999942593277,
+            "maxCallMs": 0.00839999970048666
+        },
+        {
+            "thread": "Worker 7",
+            "name": "PrepareSceneNodesJob",
+            "calls": 99,
+            "totalInclusiveMs": 0.07769999874290079,
+            "maxCallMs": 0.001500000013038516
+        },
+        {
+            "thread": "Worker 4",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 75,
+            "totalInclusiveMs": 0.07709999853977934,
+            "maxCallMs": 0.003000000026077032
+        },
+        {
+            "thread": "Worker 1",
+            "name": "CullSceneDynamicObjectsCombineJob",
+            "calls": 307,
+            "totalInclusiveMs": 0.07689999754074961,
+            "maxCallMs": 0.0010999999940395356
+        },
+        {
+            "thread": "Worker 2",
+            "name": "CullSceneDynamicObjectsCombineJob",
+            "calls": 289,
+            "totalInclusiveMs": 0.07669999757490587,
+            "maxCallMs": 0.0010999999940395356
+        },
+        {
+            "thread": "Worker 6",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 75,
+            "totalInclusiveMs": 0.07599999912781641,
+            "maxCallMs": 0.0026000000070780517
+        },
+        {
+            "thread": "Worker 13",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 1,
+            "totalInclusiveMs": 0.07599999755620957,
+            "maxCallMs": 0.07599999755620957
+        },
+        {
+            "thread": "Worker 5",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 67,
+            "totalInclusiveMs": 0.07469999935710803,
+            "maxCallMs": 0.002099999925121665
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_RenderPipeline.EndContextRendering",
+            "calls": 624,
+            "totalInclusiveMs": 0.07469999812019523,
+            "maxCallMs": 0.0008999999845400453
+        },
+        {
+            "thread": "Worker 6",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 6,
+            "totalInclusiveMs": 0.07120000012218952,
+            "maxCallMs": 0.013399999588727951
+        },
+        {
+            "thread": "Worker 7",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 5,
+            "totalInclusiveMs": 0.06400000024586916,
+            "maxCallMs": 0.014800000004470349
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 1,
+            "totalInclusiveMs": 0.061799999326467517,
+            "maxCallMs": 0.061799999326467517
+        },
+        {
+            "thread": "Worker 7",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 60,
+            "totalInclusiveMs": 0.06139999971492216,
+            "maxCallMs": 0.001500000013038516
+        },
+        {
+            "thread": "Worker 8",
+            "name": "BurstProjectiles:CompactJob (Burst)",
+            "calls": 1,
+            "totalInclusiveMs": 0.060600001364946368,
+            "maxCallMs": 0.060600001364946368
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Terrain.Trees.OnWillRender",
+            "calls": 624,
+            "totalInclusiveMs": 0.05959999849437736,
+            "maxCallMs": 0.0010000000474974514
+        },
+        {
+            "thread": "Worker 0",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 5,
+            "totalInclusiveMs": 0.05949999950826168,
+            "maxCallMs": 0.0139999995008111
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_ScriptableRenderer.AddRenderPasses",
+            "calls": 624,
+            "totalInclusiveMs": 0.059399998499429788,
+            "maxCallMs": 0.000699999975040555
+        },
+        {
+            "thread": "Worker 10",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 5,
+            "totalInclusiveMs": 0.05809999909251928,
+            "maxCallMs": 0.014299999922513962
+        },
+        {
+            "thread": "Worker 4",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 5,
+            "totalInclusiveMs": 0.05779999867081642,
+            "maxCallMs": 0.015699999406933786
+        },
+        {
+            "thread": "Worker 8",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 5,
+            "totalInclusiveMs": 0.055599999614059928,
+            "maxCallMs": 0.013100000098347664
+        },
+        {
+            "thread": "Worker 9",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 5,
+            "totalInclusiveMs": 0.05220000073313713,
+            "maxCallMs": 0.011099999770522118
+        },
+        {
+            "thread": "Worker 1",
+            "name": "RenderLoop.DrawSRPBatcher",
+            "calls": 2,
+            "totalInclusiveMs": 0.05159999802708626,
+            "maxCallMs": 0.03179999813437462
+        },
+        {
+            "thread": "Worker 2",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 55,
+            "totalInclusiveMs": 0.05079999944427982,
+            "maxCallMs": 0.001500000013038516
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_Sort Render Passes",
+            "calls": 624,
+            "totalInclusiveMs": 0.050799998694856188,
+            "maxCallMs": 0.000699999975040555
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PostLateUpdate.EndGraphicsJobsAfterScriptLateUpdate",
+            "calls": 624,
+            "totalInclusiveMs": 0.04979999872739427,
+            "maxCallMs": 0.0005999999702908099
+        },
+        {
+            "thread": "Worker 9",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 42,
+            "totalInclusiveMs": 0.04689999937545508,
+            "maxCallMs": 0.002199999988079071
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_UniversalRenderPipeline.GetPerObjectLightFlags",
+            "calls": 624,
+            "totalInclusiveMs": 0.04639999882783741,
+            "maxCallMs": 0.00019999999494757503
+        },
+        {
+            "thread": "Worker 3",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 49,
+            "totalInclusiveMs": 0.04499999975087121,
+            "maxCallMs": 0.0015999999595806003
+        },
+        {
+            "thread": "Worker 8",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 41,
+            "totalInclusiveMs": 0.043999999354127797,
+            "maxCallMs": 0.002099999925121665
+        },
+        {
+            "thread": "Worker 8",
+            "name": "PrepareSceneNodesJob",
+            "calls": 52,
+            "totalInclusiveMs": 0.04189999934169464,
+            "maxCallMs": 0.002300000051036477
+        },
+        {
+            "thread": "Worker 13",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 3,
+            "totalInclusiveMs": 0.04050000011920929,
+            "maxCallMs": 0.015399999916553498
+        },
+        {
+            "thread": "Worker 4",
+            "name": "CullSceneDynamicObjectsCombineJob",
+            "calls": 82,
+            "totalInclusiveMs": 0.03940000040165614,
+            "maxCallMs": 0.0010999999940395356
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 4,
+            "totalInclusiveMs": 0.03860000055283308,
+            "maxCallMs": 0.01080000028014183
+        },
+        {
+            "thread": "Worker 10",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 33,
+            "totalInclusiveMs": 0.038499999849591407,
+            "maxCallMs": 0.002199999988079071
+        },
+        {
+            "thread": "Worker 3",
+            "name": "CullSceneDynamicObjectsCombineJob",
+            "calls": 69,
+            "totalInclusiveMs": 0.0348999997950159,
+            "maxCallMs": 0.0007999999797903001
+        },
+        {
+            "thread": "Worker 10",
+            "name": "RenderLoop.Prepare",
+            "calls": 8,
+            "totalInclusiveMs": 0.03349999990314245,
+            "maxCallMs": 0.006099999882280827
+        },
+        {
+            "thread": "Worker 2",
+            "name": "UpdateRendererBoundingVolumes",
+            "calls": 20,
+            "totalInclusiveMs": 0.03099999974074308,
+            "maxCallMs": 0.0044999998062849049
+        },
+        {
+            "thread": "Worker 1",
+            "name": "SRPBRender.ApplyShader",
+            "calls": 2,
+            "totalInclusiveMs": 0.030100001022219659,
+            "maxCallMs": 0.020400000736117364
+        },
+        {
+            "thread": "Worker 11",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 2,
+            "totalInclusiveMs": 0.029700000770390035,
+            "maxCallMs": 0.016100000590085985
+        },
+        {
+            "thread": "Worker 1",
+            "name": "UpdateRendererBoundingVolumes",
+            "calls": 24,
+            "totalInclusiveMs": 0.027199999458389358,
+            "maxCallMs": 0.003499999875202775
+        },
+        {
+            "thread": "Main Thread",
+            "name": "CombineJobResults",
+            "calls": 743,
+            "totalInclusiveMs": 0.02379999939148547,
+            "maxCallMs": 0.00039999998989515007
+        },
+        {
+            "thread": "Worker 6",
+            "name": "ExecuteRenderQueueJob",
+            "calls": 1,
+            "totalInclusiveMs": 0.0215000007301569,
+            "maxCallMs": 0.0215000007301569
+        },
+        {
+            "thread": "Main Thread",
+            "name": "RenderTarget.GrabPixels",
+            "calls": 42,
+            "totalInclusiveMs": 0.016999999570543879,
+            "maxCallMs": 0.0008999999845400453
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UIEvents.AlignCanvasRectTransformWithCamera",
+            "calls": 624,
+            "totalInclusiveMs": 0.016699999578122516,
+            "maxCallMs": 0.00019999999494757503
+        },
+        {
+            "thread": "Worker 9",
+            "name": "PrepareSceneNodesJob",
+            "calls": 18,
+            "totalInclusiveMs": 0.015500000037718565,
+            "maxCallMs": 0.0017000000225380064
+        },
+        {
+            "thread": "Worker 11",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 12,
+            "totalInclusiveMs": 0.015399999741930515,
+            "maxCallMs": 0.0023999998811632396
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Gfx.WaitForRenderThread",
+            "calls": 1,
+            "totalInclusiveMs": 0.015200000256299973,
+            "maxCallMs": 0.015200000256299973
+        },
+        {
+            "thread": "Worker 13",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 13,
+            "totalInclusiveMs": 0.015099999902304262,
+            "maxCallMs": 0.001500000013038516
+        },
+        {
+            "thread": "Worker 7",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 6,
+            "totalInclusiveMs": 0.014399999374290929,
+            "maxCallMs": 0.004799999762326479
+        },
+        {
+            "thread": "Main Thread",
+            "name": "ConstraintManager::Update::JobSetup",
+            "calls": 624,
+            "totalInclusiveMs": 0.014099999629252125,
+            "maxCallMs": 0.00029999998514540493
+        },
+        {
+            "thread": "Worker 12",
+            "name": "RenderLoop.Sort",
+            "calls": 1,
+            "totalInclusiveMs": 0.01360000018030405,
+            "maxCallMs": 0.01360000018030405
+        },
+        {
+            "thread": "Worker 10",
+            "name": "PrepareSceneNodesJob",
+            "calls": 17,
+            "totalInclusiveMs": 0.013099999661790207,
+            "maxCallMs": 0.001500000013038516
+        },
+        {
+            "thread": "Worker 12",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 11,
+            "totalInclusiveMs": 0.01289999985601753,
+            "maxCallMs": 0.0017999999690800906
+        },
+        {
+            "thread": "Main Thread",
+            "name": "SortingGroup.UpdateRenderer",
+            "calls": 17,
+            "totalInclusiveMs": 0.012299999711103738,
+            "maxCallMs": 0.0010999999940395356
+        },
+        {
+            "thread": "Worker 1",
+            "name": "RenderLoop.CleanupNodeQueue",
+            "calls": 2,
+            "totalInclusiveMs": 0.012000000104308129,
+            "maxCallMs": 0.006300000008195639
+        },
+        {
+            "thread": "Worker 12",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 1,
+            "totalInclusiveMs": 0.01080000028014183,
+            "maxCallMs": 0.01080000028014183
+        },
+        {
+            "thread": "Worker 14",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 1,
+            "totalInclusiveMs": 0.010699999518692494,
+            "maxCallMs": 0.010699999518692494
+        },
+        {
+            "thread": "Worker 4",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 4,
+            "totalInclusiveMs": 0.010200000178883784,
+            "maxCallMs": 0.004900000058114529
+        },
+        {
+            "thread": "Worker 8",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 4,
+            "totalInclusiveMs": 0.00989999991725199,
+            "maxCallMs": 0.004900000058114529
+        },
+        {
+            "thread": "Worker 1",
+            "name": "StdRender.ApplyShader",
+            "calls": 1,
+            "totalInclusiveMs": 0.009599999524652958,
+            "maxCallMs": 0.009599999524652958
+        },
+        {
+            "thread": "Worker 6",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 4,
+            "totalInclusiveMs": 0.009299999859649688,
+            "maxCallMs": 0.004999999888241291
+        },
+        {
+            "thread": "Worker 3",
+            "name": "BurstCrowd:SumJob (Burst)",
+            "calls": 1,
+            "totalInclusiveMs": 0.008799999952316285,
+            "maxCallMs": 0.008799999952316285
+        },
+        {
+            "thread": "Worker 5",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 4,
+            "totalInclusiveMs": 0.008699999962118455,
+            "maxCallMs": 0.004699999932199717
+        },
+        {
+            "thread": "Worker 2",
+            "name": "CombineJobResults",
+            "calls": 305,
+            "totalInclusiveMs": 0.008199999829230365,
+            "maxCallMs": 0.0005000000237487257
+        },
+        {
+            "thread": "Worker 1",
+            "name": "CombineJobResults",
+            "calls": 331,
+            "totalInclusiveMs": 0.007599999844387639,
+            "maxCallMs": 0.0005000000237487257
+        },
+        {
+            "thread": "Worker 5",
+            "name": "SceneNodesInitJob",
+            "calls": 6,
+            "totalInclusiveMs": 0.006499999959487468,
+            "maxCallMs": 0.001500000013038516
+        },
+        {
+            "thread": "Worker 12",
+            "name": "PrepareSceneNodesJob",
+            "calls": 5,
+            "totalInclusiveMs": 0.006400000012945384,
+            "maxCallMs": 0.0019000000320374966
+        },
+        {
+            "thread": "Worker 14",
+            "name": "CombineJobResults",
+            "calls": 85,
+            "totalInclusiveMs": 0.006199999879754614,
+            "maxCallMs": 0.0005000000237487257
+        },
+        {
+            "thread": "Worker 12",
+            "name": "CombineJobResults",
+            "calls": 53,
+            "totalInclusiveMs": 0.005699999928765465,
+            "maxCallMs": 0.0005000000237487257
+        },
+        {
+            "thread": "Worker 11",
+            "name": "PrepareSceneNodesJob",
+            "calls": 6,
+            "totalInclusiveMs": 0.005499999941093847,
+            "maxCallMs": 0.0019000000320374966
+        },
+        {
+            "thread": "Worker 13",
+            "name": "CombineJobResults",
+            "calls": 62,
+            "totalInclusiveMs": 0.005399999856308568,
+            "maxCallMs": 0.00039999998989515007
+        },
+        {
+            "thread": "Worker 10",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 2,
+            "totalInclusiveMs": 0.005399999732617289,
+            "maxCallMs": 0.004799999762326479
+        },
+        {
+            "thread": "Worker 11",
+            "name": "CombineJobResults",
+            "calls": 45,
+            "totalInclusiveMs": 0.004599999898346141,
+            "maxCallMs": 0.0005000000237487257
+        },
+        {
+            "thread": "Worker 9",
+            "name": "LineRenderer.RenderGeometryJob",
+            "calls": 2,
+            "totalInclusiveMs": 0.004499999835388735,
+            "maxCallMs": 0.00419999985024333
+        },
+        {
+            "thread": "Worker 14",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 3,
+            "totalInclusiveMs": 0.003700000001117587,
+            "maxCallMs": 0.0017000000225380064
+        },
+        {
+            "thread": "Worker 0",
+            "name": "CombineJobResults",
+            "calls": 39,
+            "totalInclusiveMs": 0.0027999999292660506,
+            "maxCallMs": 0.00019999999494757503
+        },
+        {
+            "thread": "Worker 4",
+            "name": "CombineJobResults",
+            "calls": 86,
+            "totalInclusiveMs": 0.0025999999343184756,
+            "maxCallMs": 0.00009999999747378752
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 3,
+            "totalInclusiveMs": 0.0025000000023283066,
+            "maxCallMs": 0.0010000000474974514
+        },
+        {
+            "thread": "Worker 13",
+            "name": "PrepareSceneNodesJob",
+            "calls": 3,
+            "totalInclusiveMs": 0.0024999999441206457,
+            "maxCallMs": 0.0010999999940395356
+        },
+        {
+            "thread": "Worker 0",
+            "name": "PrepareSceneNodesCombineJob",
+            "calls": 2,
+            "totalInclusiveMs": 0.0023999999393709006,
+            "maxCallMs": 0.0015999999595806003
+        },
+        {
+            "thread": "Worker 3",
+            "name": "CombineJobResults",
+            "calls": 76,
+            "totalInclusiveMs": 0.0019999999494757505,
+            "maxCallMs": 0.00009999999747378752
+        },
+        {
+            "thread": "Worker 10",
+            "name": "CombineJobResults",
+            "calls": 17,
+            "totalInclusiveMs": 0.0018999999520019629,
+            "maxCallMs": 0.00039999998989515007
+        },
+        {
+            "thread": "Main Thread",
+            "name": "TextureStreamingManager.RemoveRenderer",
+            "calls": 17,
+            "totalInclusiveMs": 0.0018999999520019629,
+            "maxCallMs": 0.0007999999797903001
+        },
+        {
+            "thread": "Worker 9",
+            "name": "CombineJobResults",
+            "calls": 14,
+            "totalInclusiveMs": 0.0011999999696854503,
+            "maxCallMs": 0.00009999999747378752
+        },
+        {
+            "thread": "Main Thread",
+            "name": "RenderTarget.SetActive",
+            "calls": 42,
+            "totalInclusiveMs": 0.0010999999722116627,
+            "maxCallMs": 0.00009999999747378752
+        },
+        {
+            "thread": "Main Thread",
+            "name": "SceneNodesInitJob",
+            "calls": 2,
+            "totalInclusiveMs": 0.0009000000136438757,
+            "maxCallMs": 0.0005000000237487257
+        },
+        {
+            "thread": "Worker 5",
+            "name": "CullSceneDynamicObjectsCombineJob",
+            "calls": 1,
+            "totalInclusiveMs": 0.000699999975040555,
+            "maxCallMs": 0.000699999975040555
+        },
+        {
+            "thread": "Worker 8",
+            "name": "CombineJobResults",
+            "calls": 4,
+            "totalInclusiveMs": 0.00039999998989515007,
+            "maxCallMs": 0.00009999999747378752
+        },
+        {
+            "thread": "Worker 7",
+            "name": "CombineJobResults",
+            "calls": 4,
+            "totalInclusiveMs": 0.00029999999242136255,
+            "maxCallMs": 0.00009999999747378752
+        },
+        {
+            "thread": "Worker 5",
+            "name": "CombineJobResults",
+            "calls": 7,
+            "totalInclusiveMs": 0.00029999999242136255,
+            "maxCallMs": 0.00009999999747378752
+        },
+        {
+            "thread": "Main Thread",
+            "name": "GfxResource.Register",
+            "calls": 1487,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 7",
+            "name": "BeginJob",
+            "calls": 1611,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 6",
+            "name": "ScheduleAllocJob",
+            "calls": 2,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 5",
+            "name": "EndJob",
+            "calls": 2807,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Render Textures Changes Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 5",
+            "name": "BeginJob",
+            "calls": 2807,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 14",
+            "name": "BeginJob",
+            "calls": 482,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 6",
+            "name": "CombineJobResults",
+            "calls": 1,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 2",
+            "name": "ScheduleAllocJob",
+            "calls": 1871,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 3",
+            "name": "BeginJob",
+            "calls": 3296,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 3",
+            "name": "EndJob",
+            "calls": 3296,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 11",
+            "name": "EndJob",
+            "calls": 984,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 11",
+            "name": "BeginJob",
+            "calls": 984,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 1",
+            "name": "ScheduleJob",
+            "calls": 255,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 3",
+            "name": "ScheduleJob",
+            "calls": 749,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Batches Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 5",
+            "name": "ScheduleAllocJob",
+            "calls": 3,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Draw Calls Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Main Thread",
+            "name": "ScheduleJob",
+            "calls": 13431,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Triangles Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Vertices Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Main Thread",
+            "name": "KickJobs",
+            "calls": 5192,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "SetPass Calls Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Shadow Casters Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Visible Skinned Meshes Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Used Buffers Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 10",
+            "name": "ScheduleJob",
+            "calls": 2,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 7",
+            "name": "ScheduleAllocJob",
+            "calls": 1,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Indirect Draw Calls Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 9",
+            "name": "ScheduleJob",
+            "calls": 4,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Dynamic Batching Time",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Vertex Buffer Upload In Frame Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 0",
+            "name": "BeginJob",
+            "calls": 1028,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 0",
+            "name": "EndJob",
+            "calls": 1028,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 1",
+            "name": "BeginJob",
+            "calls": 7186,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 1",
+            "name": "EndJob",
+            "calls": 7186,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 13",
+            "name": "EndJob",
+            "calls": 658,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 1",
+            "name": "ScheduleAllocJob",
+            "calls": 1823,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Main Thread",
+            "name": "CPU Render Thread Frame Time",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 5",
+            "name": "ScheduleJob",
+            "calls": 520,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Render Textures Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 4",
+            "name": "ScheduleAllocJob",
+            "calls": 18,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Main Thread",
+            "name": "ScheduleAllocJob",
+            "calls": 3320,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Render Textures Bytes",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Gfx Used Memory",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Gfx Reserved Memory",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 2",
+            "name": "BeginJob",
+            "calls": 6848,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BeginJob",
+            "calls": 7122,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Main Thread",
+            "name": "EndJob",
+            "calls": 7122,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 2",
+            "name": "EndJob",
+            "calls": 6848,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 2",
+            "name": "ScheduleJob",
+            "calls": 334,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 9",
+            "name": "EndJob",
+            "calls": 1183,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 4",
+            "name": "BeginJob",
+            "calls": 3412,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 4",
+            "name": "EndJob",
+            "calls": 3412,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 4",
+            "name": "ScheduleJob",
+            "calls": 840,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 6",
+            "name": "BeginJob",
+            "calls": 1912,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 6",
+            "name": "EndJob",
+            "calls": 1912,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 9",
+            "name": "BeginJob",
+            "calls": 1183,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 10",
+            "name": "EndJob",
+            "calls": 1033,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 13",
+            "name": "BeginJob",
+            "calls": 658,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Used Textures Bytes",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "ScheduleJob",
+            "calls": 224,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Used Textures Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 3",
+            "name": "ScheduleAllocJob",
+            "calls": 26,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Vertex Buffer Upload In Frame Bytes",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 7",
+            "name": "EndJob",
+            "calls": 1611,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "GfxResource.Unregister",
+            "calls": 632,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 8",
+            "name": "ScheduleJob",
+            "calls": 18,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Index Buffer Upload In Frame Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 6",
+            "name": "ScheduleJob",
+            "calls": 65,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Index Buffer Upload In Frame Bytes",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Video Memory Bytes",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 7",
+            "name": "ScheduleJob",
+            "calls": 40,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 10",
+            "name": "BeginJob",
+            "calls": 1033,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Dynamic Batches Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Dynamic Batched Draw Calls Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Used Buffers Bytes",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 8",
+            "name": "BeginJob",
+            "calls": 1408,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Dynamic Batched Vertices Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 8",
+            "name": "EndJob",
+            "calls": 1408,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Static Batches Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 12",
+            "name": "BeginJob",
+            "calls": 661,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Static Batched Draw Calls Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Static Batched Triangles Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Static Batched Vertices Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Instanced Batches Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 12",
+            "name": "EndJob",
+            "calls": 661,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Instanced Batched Draw Calls Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Instanced Batched Triangles Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Instanced Batched Vertices Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "WaitForCompleted",
+            "calls": 224,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Render Thread",
+            "name": "Dynamic Batched Triangles Count",
+            "calls": 624,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        },
+        {
+            "thread": "Worker 14",
+            "name": "EndJob",
+            "calls": 482,
+            "totalInclusiveMs": 0.0,
+            "maxCallMs": 0.0
+        }
+    ],
+    "gpuMarkers": [
+        {
+            "thread": "Main Thread",
+            "name": "RenderLoop.ScheduleDraw",
+            "calls": 1242,
+            "totalInclusiveMs": 1324.3639967441559,
+            "maxCallMs": 1.6339999437332154
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Main Thread",
+            "calls": 621,
+            "totalInclusiveMs": 841.5019993782043,
+            "maxCallMs": 3.697000026702881
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PlayerLoop",
+            "calls": 621,
+            "totalInclusiveMs": 841.4899991750717,
+            "maxCallMs": 3.697000026702881
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PostLateUpdate.FinishFrameRendering",
+            "calls": 621,
+            "totalInclusiveMs": 822.2769981622696,
+            "maxCallMs": 3.671999931335449
+        },
+        {
+            "thread": "Main Thread",
+            "name": "ExecuteRenderGraph",
+            "calls": 621,
+            "totalInclusiveMs": 664.0319983959198,
+            "maxCallMs": 1.649999976158142
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UniversalRenderPipeline.RenderSingleCameraInternal: Player camera",
+            "calls": 621,
+            "totalInclusiveMs": 664.0319983959198,
+            "maxCallMs": 1.649999976158142
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_ScriptableRenderContext.Submit",
+            "calls": 621,
+            "totalInclusiveMs": 664.0319983959198,
+            "maxCallMs": 1.649999976158142
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_RenderCameraStack",
+            "calls": 621,
+            "totalInclusiveMs": 664.0319983959198,
+            "maxCallMs": 1.649999976158142
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Inl_UniversalRenderTotal",
+            "calls": 621,
+            "totalInclusiveMs": 664.0319983959198,
+            "maxCallMs": 1.649999976158142
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UnityEngine.CoreModule.dll!UnityEngine.Rendering::RenderPipelineManager.DoRenderLoop_Internal() [Invoke]",
+            "calls": 621,
+            "totalInclusiveMs": 664.0319983959198,
+            "maxCallMs": 1.649999976158142
+        },
+        {
+            "thread": "Main Thread",
+            "name": "DrawOpaqueObjects",
+            "calls": 621,
+            "totalInclusiveMs": 662.1819983720779,
+            "maxCallMs": 1.6339999437332154
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Device.Present",
+            "calls": 621,
+            "totalInclusiveMs": 17.929999886080624,
+            "maxCallMs": 0.9879999756813049
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Graphics.PresentAndSync",
+            "calls": 621,
+            "totalInclusiveMs": 17.929999886080624,
+            "maxCallMs": 0.9879999756813049
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PostLateUpdate.PresentAfterDraw",
+            "calls": 621,
+            "totalInclusiveMs": 17.929999886080624,
+            "maxCallMs": 0.9879999756813049
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Render.LineOrTrail",
+            "calls": 224,
+            "totalInclusiveMs": 10.636999949812889,
+            "maxCallMs": 0.08699999749660492
+        },
+        {
+            "thread": "Main Thread",
+            "name": "BatchRenderer.Flush",
+            "calls": 224,
+            "totalInclusiveMs": 10.636999949812889,
+            "maxCallMs": 0.08699999749660492
+        },
+        {
+            "thread": "Main Thread",
+            "name": "RenderLoop.Draw",
+            "calls": 224,
+            "totalInclusiveMs": 10.636999949812889,
+            "maxCallMs": 0.08699999749660492
+        },
+        {
+            "thread": "Main Thread",
+            "name": "GUITexture.Draw",
+            "calls": 1158,
+            "totalInclusiveMs": 6.586999983410351,
+            "maxCallMs": 0.029999999329447748
+        },
+        {
+            "thread": "Main Thread",
+            "name": "WatermarkRender",
+            "calls": 380,
+            "totalInclusiveMs": 5.136999941314571,
+            "maxCallMs": 0.029999999329447748
+        },
+        {
+            "thread": "Main Thread",
+            "name": "DrawScreenSpaceUI",
+            "calls": 621,
+            "totalInclusiveMs": 1.4720000206725672,
+            "maxCallMs": 0.029999999329447748
+        },
+        {
+            "thread": "Main Thread",
+            "name": "GUI.Repaint",
+            "calls": 620,
+            "totalInclusiveMs": 1.4500000212574378,
+            "maxCallMs": 0.029999999329447748
+        },
+        {
+            "thread": "Main Thread",
+            "name": "UIEvents.IMGUIRenderOverlays",
+            "calls": 620,
+            "totalInclusiveMs": 1.4500000212574378,
+            "maxCallMs": 0.029999999329447748
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Journey.Prototype.dll!Journey::PrototypeGame.OnGUI() [Invoke]",
+            "calls": 620,
+            "totalInclusiveMs": 1.4500000212574378,
+            "maxCallMs": 0.029999999329447748
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PostLateUpdate.PlayerSendFrameComplete",
+            "calls": 41,
+            "totalInclusiveMs": 1.282999999821186,
+            "maxCallMs": 0.035999998450279239
+        },
+        {
+            "thread": "Main Thread",
+            "name": "PlayerEndOfFrame",
+            "calls": 41,
+            "totalInclusiveMs": 1.282999999821186,
+            "maxCallMs": 0.035999998450279239
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Profiler.ScreenshotUpdate",
+            "calls": 41,
+            "totalInclusiveMs": 1.282999999821186,
+            "maxCallMs": 0.035999998450279239
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Profiler.RequestScreenshot",
+            "calls": 41,
+            "totalInclusiveMs": 1.282999999821186,
+            "maxCallMs": 0.035999998450279239
+        },
+        {
+            "thread": "Main Thread",
+            "name": "RenderTarget.GrabPixels",
+            "calls": 41,
+            "totalInclusiveMs": 0.9610000047832727,
+            "maxCallMs": 0.026000000536441804
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Graphics.Blit",
+            "calls": 82,
+            "totalInclusiveMs": 0.642000000923872,
+            "maxCallMs": 0.010999999940395356
+        },
+        {
+            "thread": "Main Thread",
+            "name": "Setup Camera Properties",
+            "calls": 239,
+            "totalInclusiveMs": 0.3780000163242221,
+            "maxCallMs": 0.004999999888241291
+        }
+    ],
+    "gpuThreadFrames": 621
+}

@@ -30,6 +30,8 @@ The prototype now includes Jobs/Burst simulation, culled instanced rendering, an
 
 Further [frame-spike experiments](docs/playtests/2026-09-30-frame-spike-experiments.md) compare effect rendering, identical-warning deduplication, concurrent preparation, and native state ownership. These experiments retain the original optimized path as the default and record visual diagnostics separately from performance acceptance.
 
+The next [renderer comparison](docs/playtests/2026-09-30-renderer-experiments.md) tests compact indirect projectiles, combined character meshes, and cached warning collection against native-state simulation. It includes separate CPU/GPU profiles and repeated visible release captures on the current desktop. Renderer variants remain selectable experiments; final-game performance still requires representative content.
+
 ## What we're aiming for
 
 - Finish a small game with a clear beginning, playable loop, and ending.

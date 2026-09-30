@@ -11,6 +11,9 @@ Write entries as `YYYY-MM-DD-short-title.md`. Keep them useful and honest: what 
 - [2026-09-30: Boss-scale stress testing](2026-09-30-boss-scale.md)
 - [2026-09-30: Jobs/Burst and rendering measurements](2026-09-30-jobs-burst.md)
 
+- [2026-09-30: Frame-spike experiments](2026-09-30-frame-spike-experiments.md)
+- [2026-09-30: Cheaper renderers](2026-09-30-renderer-experiments.md)
+
 ## Suggested entry shape
 
 - Goal for the session.

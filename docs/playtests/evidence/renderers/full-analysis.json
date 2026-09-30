@@ -1,0 +1,578 @@
+[
+  {
+    "run": "r1-characters",
+    "report": "20260930-100728-215-crowd20000-r1.json",
+    "source": {
+      "revision": "8fa326a4d08d180936f6f3056dd51ec71bb4bdb7",
+      "builtUtc": "2026-09-30T10:02:23.8860942Z",
+      "dirty": false
+    },
+    "fps": 316.94848023203775,
+    "p99Ms": 9.115399999998886,
+    "maxMs": 14.66649999999703,
+    "missPercent": 7.593206078771625,
+    "gpuMs": {
+      "samples": 18317,
+      "mean": 2.240930260413823,
+      "p99": 7.84896,
+      "max": 12.43853
+    },
+    "rejectedGpuTimings": 0,
+    "prepareMs": 0.6460429931114249,
+    "submitMs": 0.4643872482515634,
+    "batches": 72.2567176736604,
+    "mainThreadMs": 2.3768462586107146,
+    "renderThreadMs": 2.1201204658989274,
+    "phases": {
+      "denseProjectiles": {
+        "samples": 4406,
+        "mean": 6.131063073082161,
+        "p99": 10.5282,
+        "max": 14.6665
+      },
+      "warnings": {
+        "samples": 961,
+        "mean": 3.907076170655567,
+        "p99": 5.4462,
+        "max": 6.8241
+      },
+      "other": {
+        "samples": 13649,
+        "mean": 2.1415260092314456,
+        "p99": 3.3312,
+        "max": 6.168
+      }
+    },
+    "simulationKeptUp": true,
+    "projectilesSpawned": 720000,
+    "simulationTicks": 3600
+  },
+  {
+    "run": "r1-combined",
+    "report": "20260930-100902-690-crowd20000-r1.json",
+    "source": {
+      "revision": "8fa326a4d08d180936f6f3056dd51ec71bb4bdb7",
+      "builtUtc": "2026-09-30T10:02:23.8860942Z",
+      "dirty": false
+    },
+    "fps": 400.357002048638,
+    "p99Ms": 4.296899999999937,
+    "maxMs": 7.501800000000003,
+    "missPercent": 0.004162850720173175,
+    "gpuMs": {
+      "samples": 23629,
+      "mean": 1.3093963659063015,
+      "p99": 2.40435,
+      "max": 3.82157
+    },
+    "rejectedGpuTimings": 0,
+    "prepareMs": 0.5625079094163655,
+    "submitMs": 0.3287396761302144,
+    "batches": 40.71301307135126,
+    "mainThreadMs": 2.144375822163022,
+    "renderThreadMs": 1.6869145699775072,
+    "phases": {
+      "denseProjectiles": {
+        "samples": 9139,
+        "mean": 2.955225440420177,
+        "p99": 4.7393,
+        "max": 7.5018
+      },
+      "warnings": {
+        "samples": 1630,
+        "mean": 2.3006681595092027,
+        "p99": 3.6416,
+        "max": 4.452
+      },
+      "other": {
+        "samples": 13252,
+        "mean": 2.2065118472683367,
+        "p99": 3.4505,
+        "max": 5.2264
+      }
+    },
+    "simulationKeptUp": true,
+    "projectilesSpawned": 720000,
+    "simulationTicks": 3600
+  },
+  {
+    "run": "r1-indirect-cube",
+    "report": "20260930-100553-625-crowd20000-r1.json",
+    "source": {
+      "revision": "8fa326a4d08d180936f6f3056dd51ec71bb4bdb7",
+      "builtUtc": "2026-09-30T10:02:23.8860942Z",
+      "dirty": false
+    },
+    "fps": 218.9568709011908,
+    "p99Ms": 7.4101999999953705,
+    "maxMs": 11.802900000006389,
+    "missPercent": 2.001826762064241,
+    "gpuMs": {
+      "samples": 12814,
+      "mean": 3.4813051459341344,
+      "p99": 5.80813,
+      "max": 7.39738
+    },
+    "rejectedGpuTimings": 0,
+    "prepareMs": 1.0288793195311348,
+    "submitMs": 0.8090741208707608,
+    "batches": 82.46300806819912,
+    "mainThreadMs": 3.4304926396712077,
+    "renderThreadMs": 3.3416606637235464,
+    "phases": {
+      "denseProjectiles": {
+        "samples": 5316,
+        "mean": 5.078716196388262,
+        "p99": 7.9782,
+        "max": 11.8029
+      },
+      "warnings": {
+        "samples": 723,
+        "mean": 5.189946611341632,
+        "p99": 7.5905,
+        "max": 9.1955
+      },
+      "other": {
+        "samples": 7098,
+        "mean": 4.120708481262327,
+        "p99": 6.2833,
+        "max": 7.6151
+      }
+    },
+    "simulationKeptUp": true,
+    "projectilesSpawned": 720000,
+    "simulationTicks": 3600
+  },
+  {
+    "run": "r1-native",
+    "report": "20260930-100419-183-crowd20000-r1.json",
+    "source": {
+      "revision": "8fa326a4d08d180936f6f3056dd51ec71bb4bdb7",
+      "builtUtc": "2026-09-30T10:02:23.8860942Z",
+      "dirty": false
+    },
+    "fps": 198.79037755177404,
+    "p99Ms": 11.925099999999134,
+    "maxMs": 18.02650000000483,
+    "missPercent": 18.57813547954393,
+    "gpuMs": {
+      "samples": 11527,
+      "mean": 4.406834740175241,
+      "p99": 10.75712,
+      "max": 15.24736
+    },
+    "rejectedGpuTimings": 0,
+    "prepareMs": 1.0642488514419852,
+    "submitMs": 0.8588334842387689,
+    "batches": 119.22912474849095,
+    "mainThreadMs": 3.455593494299127,
+    "renderThreadMs": 3.68403896713615,
+    "phases": {
+      "denseProjectiles": {
+        "samples": 3363,
+        "mean": 8.029580582812965,
+        "p99": 12.8648,
+        "max": 18.0265
+      },
+      "warnings": {
+        "samples": 759,
+        "mean": 4.952325955204216,
+        "p99": 7.2163,
+        "max": 9.3077
+      },
+      "other": {
+        "samples": 7805,
+        "mean": 3.7458681614349776,
+        "p99": 5.7525,
+        "max": 8.7841
+      }
+    },
+    "simulationKeptUp": true,
+    "projectilesSpawned": 720000,
+    "simulationTicks": 3600
+  },
+  {
+    "run": "r2-characters",
+    "report": "20260930-101211-460-crowd20000-r1.json",
+    "source": {
+      "revision": "8fa326a4d08d180936f6f3056dd51ec71bb4bdb7",
+      "builtUtc": "2026-09-30T10:02:23.8860942Z",
+      "dirty": false
+    },
+    "fps": 321.4263599884529,
+    "p99Ms": 8.960500000000593,
+    "maxMs": 14.558399999998528,
+    "missPercent": 7.139894223789277,
+    "gpuMs": {
+      "samples": 18596,
+      "mean": 2.2305436271241126,
+      "p99": 7.82643,
+      "max": 12.73446
+    },
+    "rejectedGpuTimings": 0,
+    "prepareMs": 0.6371045628953635,
+    "submitMs": 0.45410900134812526,
+    "batches": 72.17727885512807,
+    "mainThreadMs": 2.3326761588717195,
+    "renderThreadMs": 2.0931981437312137,
+    "phases": {
+      "denseProjectiles": {
+        "samples": 4463,
+        "mean": 6.050803585032489,
+        "p99": 10.3412,
+        "max": 14.5584
+      },
+      "warnings": {
+        "samples": 972,
+        "mean": 3.86304012345679,
+        "p99": 5.12,
+        "max": 6.4636
+      },
+      "other": {
+        "samples": 13850,
+        "mean": 2.1111372202166065,
+        "p99": 3.3015,
+        "max": 7.0174
+      }
+    },
+    "simulationKeptUp": true,
+    "projectilesSpawned": 720000,
+    "simulationTicks": 3600
+  },
+  {
+    "run": "r2-combined",
+    "report": "20260930-101345-988-crowd20000-r1.json",
+    "source": {
+      "revision": "8fa326a4d08d180936f6f3056dd51ec71bb4bdb7",
+      "builtUtc": "2026-09-30T10:02:23.8860942Z",
+      "dirty": false
+    },
+    "fps": 421.6741935451863,
+    "p99Ms": 4.0429999999958,
+    "maxMs": 7.3441000000045165,
+    "missPercent": 0.003952412948104818,
+    "gpuMs": {
+      "samples": 24698,
+      "mean": 1.2881719734391448,
+      "p99": 2.29478,
+      "max": 3.8103
+    },
+    "rejectedGpuTimings": 0,
+    "prepareMs": 0.5296922176989035,
+    "submitMs": 0.2988921584127116,
+    "batches": 40.7111576617525,
+    "mainThreadMs": 1.9963312280146894,
+    "renderThreadMs": 1.5782871823248241,
+    "phases": {
+      "denseProjectiles": {
+        "samples": 9583,
+        "mean": 2.8181257748095585,
+        "p99": 4.317,
+        "max": 7.3441
+      },
+      "warnings": {
+        "samples": 1680,
+        "mean": 2.230484345238095,
+        "p99": 3.5107,
+        "max": 4.2302
+      },
+      "other": {
+        "samples": 14037,
+        "mean": 2.0834581249554747,
+        "p99": 3.1353,
+        "max": 5.2264
+      }
+    },
+    "simulationKeptUp": true,
+    "projectilesSpawned": 720000,
+    "simulationTicks": 3600
+  },
+  {
+    "run": "r2-indirect-cube",
+    "report": "20260930-101037-075-crowd20000-r1.json",
+    "source": {
+      "revision": "8fa326a4d08d180936f6f3056dd51ec71bb4bdb7",
+      "builtUtc": "2026-09-30T10:02:23.8860942Z",
+      "dirty": false
+    },
+    "fps": 239.2852349045813,
+    "p99Ms": 6.716199999999617,
+    "maxMs": 9.84700000000771,
+    "missPercent": 0.5920044574453266,
+    "gpuMs": {
+      "samples": 13811,
+      "mean": 3.2803647462167835,
+      "p99": 5.6832,
+      "max": 7.33491
+    },
+    "rejectedGpuTimings": 0,
+    "prepareMs": 0.9285043181501615,
+    "submitMs": 0.6620558086084447,
+    "batches": 82.3981752333194,
+    "mainThreadMs": 3.0326639573756817,
+    "renderThreadMs": 2.9492259228304736,
+    "phases": {
+      "denseProjectiles": {
+        "samples": 5842,
+        "mean": 4.622849263950702,
+        "p99": 7.0745,
+        "max": 9.847
+      },
+      "warnings": {
+        "samples": 763,
+        "mean": 4.915539187418086,
+        "p99": 5.9946,
+        "max": 7.2153
+      },
+      "other": {
+        "samples": 7752,
+        "mean": 3.772380843653251,
+        "p99": 5.6789,
+        "max": 8.4496
+      }
+    },
+    "simulationKeptUp": true,
+    "projectilesSpawned": 720000,
+    "simulationTicks": 3600
+  },
+  {
+    "run": "r2-native",
+    "report": "20260930-101520-361-crowd20000-r1.json",
+    "source": {
+      "revision": "8fa326a4d08d180936f6f3056dd51ec71bb4bdb7",
+      "builtUtc": "2026-09-30T10:02:23.8860942Z",
+      "dirty": false
+    },
+    "fps": 202.59791087787485,
+    "p99Ms": 11.62579999999025,
+    "maxMs": 15.479600000006144,
+    "missPercent": 18.36952945047713,
+    "gpuMs": {
+      "samples": 11820,
+      "mean": 4.378532006768189,
+      "p99": 10.60762,
+      "max": 14.61555
+    },
+    "rejectedGpuTimings": 0,
+    "prepareMs": 1.0444616814741698,
+    "submitMs": 0.8182799029285952,
+    "batches": 118.66913458374465,
+    "mainThreadMs": 3.3459898568608204,
+    "renderThreadMs": 3.6155594356696343,
+    "phases": {
+      "denseProjectiles": {
+        "samples": 3375,
+        "mean": 8.007664622222222,
+        "p99": 12.605,
+        "max": 15.4796
+      },
+      "warnings": {
+        "samples": 759,
+        "mean": 4.9339409749670615,
+        "p99": 6.74,
+        "max": 8.5891
+      },
+      "other": {
+        "samples": 8021,
+        "mean": 3.6437357935419525,
+        "p99": 5.444,
+        "max": 8.2795
+      }
+    },
+    "simulationKeptUp": true,
+    "projectilesSpawned": 720000,
+    "simulationTicks": 3600
+  },
+  {
+    "run": "r3-characters",
+    "report": "20260930-101654-790-crowd20000-r1.json",
+    "source": {
+      "revision": "8fa326a4d08d180936f6f3056dd51ec71bb4bdb7",
+      "builtUtc": "2026-09-30T10:02:23.8860942Z",
+      "dirty": false
+    },
+    "fps": 323.4983722640239,
+    "p99Ms": 8.723000000003367,
+    "maxMs": 14.045200000005309,
+    "missPercent": 6.63575476558475,
+    "gpuMs": {
+      "samples": 18603,
+      "mean": 2.2215312121700803,
+      "p99": 7.78035,
+      "max": 13.73082
+    },
+    "rejectedGpuTimings": 0,
+    "prepareMs": 0.6289469139618755,
+    "submitMs": 0.4337064811952621,
+    "batches": 72.62318392581143,
+    "mainThreadMs": 2.2738096754250288,
+    "renderThreadMs": 2.070053008758356,
+    "phases": {
+      "denseProjectiles": {
+        "samples": 4552,
+        "mean": 5.934644090509666,
+        "p99": 10.2154,
+        "max": 14.0452
+      },
+      "warnings": {
+        "samples": 961,
+        "mean": 3.9018813735691986,
+        "p99": 5.3143,
+        "max": 6.2659
+      },
+      "other": {
+        "samples": 13896,
+        "mean": 2.1037600388601034,
+        "p99": 3.3,
+        "max": 7.1668
+      }
+    },
+    "simulationKeptUp": true,
+    "projectilesSpawned": 720000,
+    "simulationTicks": 3600
+  },
+  {
+    "run": "r3-combined",
+    "report": "20260930-101829-247-crowd20000-r1.json",
+    "source": {
+      "revision": "8fa326a4d08d180936f6f3056dd51ec71bb4bdb7",
+      "builtUtc": "2026-09-30T10:02:23.8860942Z",
+      "dirty": false
+    },
+    "fps": 467.59979722465135,
+    "p99Ms": 3.742899999991778,
+    "maxMs": 5.939299999994319,
+    "missPercent": 0.0,
+    "gpuMs": {
+      "samples": 26742,
+      "mean": 1.2455539140677585,
+      "p99": 2.10125,
+      "max": 2.97677
+    },
+    "rejectedGpuTimings": 0,
+    "prepareMs": 0.4543890259115388,
+    "submitMs": 0.24856052322058558,
+    "batches": 40.70870014613109,
+    "mainThreadMs": 1.7378937626973612,
+    "renderThreadMs": 1.4090473215240402,
+    "phases": {
+      "denseProjectiles": {
+        "samples": 10480,
+        "mean": 2.57644463740458,
+        "p99": 4.1282,
+        "max": 5.9393
+      },
+      "warnings": {
+        "samples": 1971,
+        "mean": 1.904467935058346,
+        "p99": 3.1005,
+        "max": 3.6876
+      },
+      "other": {
+        "samples": 15605,
+        "mean": 1.8741045370073695,
+        "p99": 2.9427,
+        "max": 4.8686
+      }
+    },
+    "simulationKeptUp": true,
+    "projectilesSpawned": 720000,
+    "simulationTicks": 3600
+  },
+  {
+    "run": "r3-indirect-cube",
+    "report": "20260930-102137-938-crowd20000-r1.json",
+    "source": {
+      "revision": "8fa326a4d08d180936f6f3056dd51ec71bb4bdb7",
+      "builtUtc": "2026-09-30T10:02:23.8860942Z",
+      "dirty": false
+    },
+    "fps": 265.78603560168983,
+    "p99Ms": 6.3336999999989985,
+    "maxMs": 9.379700000003766,
+    "missPercent": 0.2508151492350138,
+    "gpuMs": {
+      "samples": 14769,
+      "mean": 3.035548597738506,
+      "p99": 5.65453,
+      "max": 6.40614
+    },
+    "rejectedGpuTimings": 0,
+    "prepareMs": 0.8052800601956362,
+    "submitMs": 0.49541880486581136,
+    "batches": 82.24805618259343,
+    "mainThreadMs": 2.6101110358665665,
+    "renderThreadMs": 2.5303550163029844,
+    "phases": {
+      "denseProjectiles": {
+        "samples": 6439,
+        "mean": 4.193583382512813,
+        "p99": 6.6246,
+        "max": 9.3797
+      },
+      "warnings": {
+        "samples": 772,
+        "mean": 4.859444689119171,
+        "p99": 5.901,
+        "max": 7.5986
+      },
+      "other": {
+        "samples": 8736,
+        "mean": 3.347845100732601,
+        "p99": 5.2809,
+        "max": 7.6103
+      }
+    },
+    "simulationKeptUp": true,
+    "projectilesSpawned": 720000,
+    "simulationTicks": 3600
+  },
+  {
+    "run": "r3-native",
+    "report": "20260930-102003-540-crowd20000-r1.json",
+    "source": {
+      "revision": "8fa326a4d08d180936f6f3056dd51ec71bb4bdb7",
+      "builtUtc": "2026-09-30T10:02:23.8860942Z",
+      "dirty": false
+    },
+    "fps": 214.1576852502771,
+    "p99Ms": 11.209299999997313,
+    "maxMs": 16.446600000001865,
+    "missPercent": 16.163424124513618,
+    "gpuMs": {
+      "samples": 12150,
+      "mean": 4.115937557201646,
+      "p99": 10.15706,
+      "max": 14.66982
+    },
+    "rejectedGpuTimings": 0,
+    "prepareMs": 0.9718892684824867,
+    "submitMs": 0.7157728404669278,
+    "batches": 118.87610894941635,
+    "mainThreadMs": 3.088126723735403,
+    "renderThreadMs": 3.335599237354098,
+    "phases": {
+      "denseProjectiles": {
+        "samples": 3602,
+        "mean": 7.496391032759578,
+        "p99": 12.1047,
+        "max": 16.4466
+      },
+      "warnings": {
+        "samples": 766,
+        "mean": 4.892492428198433,
+        "p99": 6.1141,
+        "max": 8.2601
+      },
+      "other": {
+        "samples": 8481,
+        "mean": 3.4489232166018158,
+        "p99": 6.0191,
+        "max": 7.5643
+      }
+    },
+    "simulationKeptUp": true,
+    "projectilesSpawned": 720000,
+    "simulationTicks": 3600
+  }
+]
