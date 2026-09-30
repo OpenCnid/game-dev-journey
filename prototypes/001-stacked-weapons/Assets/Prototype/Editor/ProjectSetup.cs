@@ -100,11 +100,13 @@ namespace Journey.Editor
             AssetDatabase.ImportAsset("Assets/Prototype/Resources/BuildInfo.json", ImportAssetOptions.ForceSynchronousImport);
             string path = Path.GetFullPath("build/StackLab/StackLab.exe");
             string[] args = Environment.GetCommandLineArgs();
+            bool development = Array.IndexOf(args, "-development") >= 0;
+            if (development) path = Path.GetFullPath("build/StackLab-Development/StackLab.exe");
             for (int i = 0; i < args.Length - 1; i++) if (args[i] == "-output") path = Path.GetFullPath(args[i + 1]);
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             BuildReport report = BuildPipeline.BuildPlayer(new BuildPlayerOptions {
                 scenes = new[] { ScenePath }, locationPathName = path,
-                target = BuildTarget.StandaloneWindows64, options = BuildOptions.None });
+                target = BuildTarget.StandaloneWindows64, options = development ? BuildOptions.Development : BuildOptions.None });
             if (report.summary.result != BuildResult.Succeeded)
                 throw new InvalidOperationException("Build failed: " + report.summary.result);
             Debug.Log("BUILD_READY " + path);

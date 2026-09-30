@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Unity.Profiling;
 
 namespace Journey
 {
@@ -7,7 +8,7 @@ namespace Journey
 
     // One owner, preallocated state, no per-enemy MonoBehaviour/rigidbody/Update.
     // Open arena only: local separation is not a substitute for obstacle pathfinding.
-    public sealed class CombatSimulation
+    public sealed class CombatSimulation : IDisposable
     {
         public const int Capacity = 20000;
         // Approximate soft separation: four rotating candidates per adjacent cell.
@@ -28,6 +29,12 @@ namespace Journey
         float fireRemaining, damageRemaining;
         RunState beforePause;
         int tick;
+        static readonly ProfilerMarker CrowdMarker = new ProfilerMarker("Journey.Crowd");
+        BurstCrowd burstCrowd;
+        public bool UseBurst { get; set; }
+        public int BatchSize { get; set; } = 128;
+        internal Vector3[] Positions => positions;
+        internal Vector3[] PreviousPositions => previous;
         public readonly BossAbilities Abilities = new BossAbilities();
         public int NeighborChecks { get; private set; }
 
@@ -85,52 +92,71 @@ namespace Journey
                     Mathf.Clamp(Player.z, -ArenaLimit, ArenaLimit));
             }
 
-            Array.Fill(cells, -1);
-            NeighborChecks = 0;
-            // Rotate insertion order so crowded cells do not always select the same IDs.
-            int start = Count == 0 ? 0 : (int)((long)tick++ * 977 % Count);
-            for (int n = 0; n < Count; n++)
+            StageProfile.Ticks++;
+            long crowdStart = StageProfile.Begin();
+            using (CrowdMarker.Auto())
             {
-                int i = (n + start) % Count;
-                previous[i] = positions[i];
-                int cell = Cell(positions[i]);
-                next[i] = cells[cell]; cells[cell] = i;
-            }
-            // Read all positions before applying velocities: no order-dependent neighbor motion.
-            for (int i = 0; i < Count; i++)
-            {
-                Vector3 toward = Player - positions[i]; toward.y = 0;
-                Vector3 separation = Vector3.zero;
-                int cx = CellX(positions[i].x), cz = CellX(positions[i].z);
-                for (int z = Mathf.Max(0, cz - 1); z <= Mathf.Min(GridWidth - 1, cz + 1); z++)
-                for (int x = Mathf.Max(0, cx - 1); x <= Mathf.Min(GridWidth - 1, cx + 1); x++)
+                int start = Count == 0 ? 0 : (int)((long)tick++ * 977 % Count);
+                if (UseBurst)
                 {
-                int visited = 0;
-                for (int j = cells[z * GridWidth + x]; j != -1 && visited < NeighborsPerCell; j = next[j], visited++)
+                    if (burstCrowd == null) burstCrowd = new BurstCrowd();
+                    Array.Copy(positions, previous, Count);
+                    NeighborChecks = burstCrowd.Step(positions, Count, start, Player, dt, BatchSize, out bool contact);
+                    if (contact && !Benchmark && damageRemaining <= 0)
+                    { PlayerHealth = Mathf.Max(0, PlayerHealth - 10); damageRemaining = .4f; }
+                }
+                else
                 {
-                    NeighborChecks++;
-                    if (j == i) continue;
-                    Vector3 delta = positions[i] - positions[j];
-                    float distance = delta.sqrMagnitude;
-                    if (distance > .0001f && distance < 1.44f)
-                        separation += delta * ((1.2f - Mathf.Sqrt(distance)) / Mathf.Sqrt(distance));
+                Array.Fill(cells, -1);
+                NeighborChecks = 0;
+                // Rotate insertion order so crowded cells do not always select the same IDs.
+                for (int n = 0; n < Count; n++)
+                {
+                    int i = (n + start) % Count;
+                    previous[i] = positions[i];
+                    int cell = Cell(positions[i]);
+                    next[i] = cells[cell]; cells[cell] = i;
+                }
+                // Read all positions before applying velocities: no order-dependent neighbor motion.
+                for (int i = 0; i < Count; i++)
+                {
+                    Vector3 toward = Player - positions[i]; toward.y = 0;
+                    Vector3 separation = Vector3.zero;
+                    int cx = CellX(positions[i].x), cz = CellX(positions[i].z);
+                    for (int z = Mathf.Max(0, cz - 1); z <= Mathf.Min(GridWidth - 1, cz + 1); z++)
+                    for (int x = Mathf.Max(0, cx - 1); x <= Mathf.Min(GridWidth - 1, cx + 1); x++)
+                    {
+                    int visited = 0;
+                    for (int j = cells[z * GridWidth + x]; j != -1 && visited < NeighborsPerCell; j = next[j], visited++)
+                    {
+                        NeighborChecks++;
+                        if (j == i) continue;
+                        Vector3 delta = positions[i] - positions[j];
+                        float distance = delta.sqrMagnitude;
+                        if (distance > .0001f && distance < 1.44f)
+                            separation += delta * ((1.2f - Mathf.Sqrt(distance)) / Mathf.Sqrt(distance));
+                    }
+                    }
+                    velocities[i] = Vector3.ClampMagnitude(toward.normalized * 3.1f + separation * 5, 5);
+                }
+                for (int i = 0; i < Count; i++)
+                {
+                    positions[i] += velocities[i] * dt;
+                    positions[i].x = Mathf.Clamp(positions[i].x, -ArenaLimit, ArenaLimit);
+                    positions[i].z = Mathf.Clamp(positions[i].z, -ArenaLimit, ArenaLimit);
+                    Vector3 delta = positions[i] - Player; delta.y = 0;
+                    if (!Benchmark && delta.sqrMagnitude < 1.25f && damageRemaining <= 0)
+                    { PlayerHealth = Mathf.Max(0, PlayerHealth - 10); damageRemaining = .4f; }
                 }
                 }
-                velocities[i] = Vector3.ClampMagnitude(toward.normalized * 3.1f + separation * 5, 5);
             }
-            for (int i = 0; i < Count; i++)
-            {
-                positions[i] += velocities[i] * dt;
-                positions[i].x = Mathf.Clamp(positions[i].x, -ArenaLimit, ArenaLimit);
-                positions[i].z = Mathf.Clamp(positions[i].z, -ArenaLimit, ArenaLimit);
-                Vector3 delta = positions[i] - Player; delta.y = 0;
-                if (!Benchmark && delta.sqrMagnitude < 1.25f && damageRemaining <= 0)
-                { PlayerHealth = Mathf.Max(0, PlayerHealth - 10); damageRemaining = .4f; }
-            }
+            StageProfile.CrowdMs += StageProfile.End(crowdStart);
             Abilities.Step(this, dt);
             if (PlayerHealth == 0) State = RunState.Lost;
             else if (!Benchmark && Elapsed >= Duration) State = RunState.Won;
         }
+
+        public void Dispose() { burstCrowd?.Dispose(); burstCrowd = null; Abilities.Dispose(); }
 
         internal void AbilityHit()
         {

@@ -24,7 +24,7 @@ The projectile pool has 131,072 slots. Overflow is counted, never treated as suc
 - Avoidance samples up to four candidates in each of nine adjacent spatial cells, with rotating insertion order. This bounds neighbor checks to 36 per enemy per tick. It is soft steering, not collision-free packing or obstacle navigation. `regular-v2` changes the earlier algorithm, so earlier `v1` timings are historical observations rather than identical workloads.
 - Boss geometry and health are still the same simple bodies and two-hit health as drones. “Boss” identifies the added ability workload, not a finished boss implementation.
 - No skeletal animation, ragdolls, complex colliders, transparent particle effects, shadows, summons, chained damage, pickups, or stacked-player-weapon load is represented yet. Opaque warning rings and projectile cubes do not establish the cost of final VFX.
-- Work is currently managed C# on the main thread, with GPU instancing. No Jobs/Burst speedup is claimed. Profile the measured bottleneck before migrating batched work to Jobs/Burst or changing rendering.
+- Both managed-reference and Jobs/Burst paths are now available, along with legacy and culled renderers. The workload semantics remain the same. See [profiling and comparison instructions](../profiling.md); do not treat a backend name alone as proof of speed or correctness.
 
 ## Acceptance and next evidence
 

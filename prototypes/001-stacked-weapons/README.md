@@ -6,6 +6,8 @@
 
 **Pinned tools:** Unity **6000.3.25f1** (`e1dba0a9aba4`), URP **17.3.0**, Input System **1.20.0**, Test Framework **1.6.0**. `ProjectSettings/ProjectVersion.txt`, `Packages/manifest.json`, and the Unity-generated `Packages/packages-lock.json` are authoritative. Transitive packages are locked too; do not regenerate the lockfile just to take newer versions.
 
+Burst **1.8.30**, Collections **2.6.8**, and Mathematics **1.3.3** are pinned direct dependencies. Jobs/Burst simulation and culled instance rendering are enabled by default; the managed simulation and original renderer remain selectable for comparisons. See [profiling and A/B instructions](../../docs/profiling.md).
+
 ## Open and play
 
 1. Install Unity Hub, sign in, and activate a valid Unity license.
@@ -67,13 +69,16 @@ Use `-playtest` to start combat immediately or `-screenshot "C:\captures\arena.p
 | --- | --- |
 | `Runtime/CombatSimulation.cs` | Preallocated enemy state, spatial buckets, movement, health, hits, cooldowns, run lifecycle |
 | `Runtime/BossAbilities.cs` | Per-boss area/burst state machine, pooled projectile movement and swept collision, workload counters |
+| `Runtime/BurstSimulation.cs` | Batched crowd and projectile jobs, deterministic grid/removal order, persistent staging buffers |
+| `Runtime/BurstInstances.cs` | Burst interpolation, conservative frustum culling, matrix generation and stable compaction |
+| `Runtime/StageProfile.cs` / `BurstStatus.cs` | Release stage timing and verification of native Burst execution |
 | `Runtime/ArenaPresentation.cs` | Arena geometry, instanced drones, camera, rifle, procedural shot audio |
 | `Runtime/PrototypeGame.cs` | Input, fixed simulation stepping, menus, HUD, benchmark orchestration |
 | `Runtime/BenchmarkCapture.cs` | Frame samples, percentile calculations, CSV/JSON export |
 | `Editor/ProjectSetup.cs` | Reproducible setup, scene creation, shader references, Windows build |
 | `Tests/` | Simulation/metric tests and runtime smoke test |
 
-Simulation currently runs on the main thread; no Jobs/Burst speedup is claimed. Local separation samples four rotating candidates per adjacent cell, bounding checks to 36 per enemy per tick. This approximates avoidance and allows dense overlap. Tick catch-up is bounded and reported; a run that reaches that bound cannot pass performance acceptance.
+The selectable Jobs/Burst path parallelizes crowd and projectile updates. Boss state transitions, input, hit resolution, and submission orchestration remain managed C#. Local separation samples four rotating candidates per adjacent cell, bounding checks to 36 per enemy per tick. This approximates avoidance and allows dense overlap. Tick catch-up is bounded and reported; a run that reaches that bound cannot pass performance acceptance. Backend comparisons must use the same workload and record actual simulated time.
 
 **Performance requirement:** target at least 144 FPS (6.944 ms per frame) in the supported encounter, with higher caps and uncapped rendering available. Follow the [performance plan](../../docs/performance.md): stock Intel Core i7-8700K plus the provisional GTX 1080 Ti GPU baseline, with 1080p proposed. Remaining system settings and the supported peak load remain open. [Initial local validation](../../docs/playtests/2026-09-30-prototype-performance.md) does not establish performance on that target.
 

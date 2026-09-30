@@ -1,6 +1,8 @@
 param(
-    [ValidateSet('Prepare','Test','Build','Open')][string]$Action = 'Prepare',
+    [ValidateSet('Prepare','Test','Build','Open','ProfileSummary')][string]$Action = 'Prepare',
     [ValidateSet('EditMode','PlayMode')][string]$TestPlatform = 'EditMode',
+    [switch]$Development,
+    [string]$ProfilePath,
     [string]$UnityPath = $env:UNITY_EDITOR_PATH
 )
 $ErrorActionPreference = 'Stop'
@@ -29,8 +31,16 @@ if ($Action -eq 'Open') {
 $taskArguments += '-batchmode'
 if ($Action -ne 'Test' -or $TestPlatform -eq 'EditMode') { $taskArguments += '-nographics' }
 switch ($Action) {
+    'ProfileSummary' {
+        if (-not $ProfilePath -or -not (Test-Path -LiteralPath $ProfilePath)) { throw 'Pass -ProfilePath for an existing binary capture.' }
+        $taskProfilePath = (Resolve-Path -LiteralPath $ProfilePath).Path
+        $taskArguments += @('-quit','-executeMethod','Journey.Editor.ProfileExport.Export','-profileInput',"`"$taskProfilePath`"")
+    }
     'Prepare' { $taskArguments += @('-quit','-executeMethod','Journey.Editor.ProjectSetup.Prepare') }
-    'Build' { $taskArguments += @('-quit','-executeMethod','Journey.Editor.ProjectSetup.BuildWindows') }
+    'Build' {
+        $taskArguments += @('-quit','-executeMethod','Journey.Editor.ProjectSetup.BuildWindows')
+        if ($Development) { $taskArguments += '-development' }
+    }
     'Test' {
         $taskResultPath = Join-Path $taskOutput "$TestPlatform.xml"
         if (Test-Path -LiteralPath $taskResultPath) { Remove-Item -LiteralPath $taskResultPath }

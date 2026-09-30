@@ -12,6 +12,7 @@ namespace Journey
     public sealed class PrototypeGame : MonoBehaviour
     {
         static readonly ProfilerMarker SimulationMarker = new ProfilerMarker("Journey.Simulation");
+        static readonly ProfilerMarker WeaponMarker = new ProfilerMarker("Journey.Weapon");
         readonly CombatSimulation sim = new CombatSimulation();
         readonly ArenaPresentation view = new ArenaPresentation();
         readonly BenchmarkCapture capture = new BenchmarkCapture();
@@ -22,9 +23,13 @@ namespace Journey
         int savedCap = 144, savedVSync, captureStartShots, captureStartKills;
         float yaw, pitch, accumulator, hitFlash, damageFlash;
         float warmup = 30, captureSeconds = 60, frameMs = 6.94f;
-        double runStarted, previousClock;
+        double runStarted, previousClock, captureStarted;
         string outputDirectory, lastResult = "", error = "", screenshotPath;
         string customCap = "144";
+        string profilePath;
+        float profileSeconds = 5;
+        double profileStarted;
+        bool profileActive, profileSaved;
         GUIStyle title, label, small, heading, button;
         public RunState State => sim.State;
         public int ShotsFired => sim.Shots;
@@ -36,7 +41,9 @@ namespace Journey
             view.Create(transform);
             outputDirectory = Path.Combine(Application.persistentDataPath, "BenchmarkResults");
             previousClock = Time.realtimeSinceStartupAsDouble;
+            sim.UseBurst = true;
             ParseArguments();
+            BurstStatus.Verify();
             if (!benchmark) SetCursor(false);
         }
 
@@ -53,6 +60,11 @@ namespace Journey
                 if (args[i] == "-crowd" && int.TryParse(value, out int c)) crowd = Mathf.Clamp(c, 0, CombatSimulation.Capacity);
                 if (args[i] == "-workload") bosses = value == "bosses";
                 if (args[i] == "-synchronizedAbilities") synchronizedAbilities = true;
+                if (args[i] == "-simulation") sim.UseBurst = value == "burst";
+                if (args[i] == "-rendering") view.CullInstances = value == "culled";
+                if (args[i] == "-jobBatch" && int.TryParse(value, out int batch)) sim.BatchSize = view.BatchSize = Mathf.Clamp(batch, 16, 1024);
+                if (args[i] == "-profile") profilePath = Path.GetFullPath(value);
+                if (args[i] == "-profileSeconds" && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out float ps)) profileSeconds = Mathf.Clamp(ps, 1, 30);
                 if (args[i] == "-seed" && int.TryParse(value, out int s)) seed = s;
                 if (args[i] == "-repeats" && int.TryParse(value, out int r)) repeats = Mathf.Clamp(r, 1, 20);
                 if (args[i] == "-warmup" && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out float w)) warmup = Mathf.Clamp(w, 0, 300);
@@ -66,6 +78,7 @@ namespace Journey
 
         void Update()
         {
+            StageProfile.Reset();
             double now = Time.realtimeSinceStartupAsDouble;
             double interval = (now - previousClock) * 1000; previousClock = now;
             frameMs = Mathf.Lerp(frameMs, (float)interval, .05f);
@@ -98,7 +111,7 @@ namespace Journey
             {
                 if (sim.State == RunState.Running)
                 {
-                    accumulator += Time.unscaledDeltaTime;
+                    accumulator += (float)(interval * .001);
                     int ticks = 0;
                     while (accumulator >= CombatSimulation.Tick && ticks < 8 && sim.State == RunState.Running)
                     {
@@ -110,8 +123,13 @@ namespace Journey
                             yaw = aim.eulerAngles.y; pitch = aim.eulerAngles.x;
                         }
                         Ray ray = new Ray(sim.Player + Vector3.up * 1.65f, Quaternion.Euler(pitch, yaw, 0) * Vector3.forward);
-                        if (sim.TryFire(ray, out Vector3 end, out bool killed))
-                        { view.ShowShot(end); if (killed || end != ray.origin + ray.direction * 65) hitFlash = .08f; }
+                        long weaponStart = StageProfile.Begin();
+                        using (WeaponMarker.Auto())
+                        {
+                            if (sim.TryFire(ray, out Vector3 end, out bool killed))
+                            { view.ShowShot(end); if (killed || end != ray.origin + ray.direction * 65) hitFlash = .08f; }
+                        }
+                        StageProfile.WeaponMs += StageProfile.End(weaponStart);
                         accumulator -= CombatSimulation.Tick; ticks++;
                     }
                     if (accumulator >= CombatSimulation.Tick)
@@ -129,13 +147,14 @@ namespace Journey
             {
                 double elapsed = now - runStarted;
                 if (!capture.Recording && elapsed >= warmup)
-                { capture.Begin(sim); captureStartShots = sim.Shots; captureStartKills = sim.Kills; }
+                { capture.Begin(sim); captureStarted = now; captureStartShots = sim.Shots; captureStartKills = sim.Kills; StartProfile(); }
                 else if (capture.Recording)
                 {
                     capture.Add(interval, simulationMs, cpuMs, gpuMs, sim, catchupLimit);
-                    if (elapsed >= warmup + captureSeconds) FinishCapture();
+                    if (now - captureStarted >= captureSeconds) FinishCapture(now - captureStarted);
                 }
             }
+            if (profileActive && now - profileStarted >= profileSeconds) StopProfile();
             if (!screenshotSaved && screenshotPath != null && sim.Elapsed >= 3)
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(screenshotPath));
@@ -163,12 +182,12 @@ namespace Journey
             sim.Reset(crowd, seed, true, bosses: bosses, synchronizedAbilities: synchronizedAbilities);
             runStarted = Time.realtimeSinceStartupAsDouble;
         }
-        void FinishCapture()
+        void FinishCapture(double actualSeconds)
         {
             try
             {
                 lastResult = capture.Save(outputDirectory, crowd, seed, repeat, warmup, captureSeconds,
-                    sim.Shots - captureStartShots, sim.Kills - captureStartKills, sim);
+                    sim.Shots - captureStartShots, sim.Kills - captureStartKills, sim, view.CullInstances, profilePath != null, actualSeconds);
                 Debug.Log("BENCHMARK_REPORT " + lastResult);
                 if (repeat++ < repeats) { ResetCapture(); return; }
                 CancelBenchmark();
@@ -182,6 +201,7 @@ namespace Journey
         }
         void CancelBenchmark()
         {
+            StopProfile();
             capture.Cancel(); benchmark = false; RestoreFrameSettings();
             if (sim.State == RunState.Running) sim.TogglePause(); SetCursor(false);
         }
@@ -190,7 +210,25 @@ namespace Journey
         {
             if (!focused && !benchmark && sim.State == RunState.Running) { sim.TogglePause(); SetCursor(false); }
         }
-        void OnDestroy() { view.Dispose(); SetCursor(false); }
+        void StartProfile()
+        {
+            if (profilePath == null || profileSaved) return;
+            if (!Debug.isDebugBuild) throw new InvalidOperationException("-profile requires a Development player build.");
+            Directory.CreateDirectory(Path.GetDirectoryName(profilePath));
+            UnityEngine.Profiling.Profiler.logFile = profilePath;
+            UnityEngine.Profiling.Profiler.enableBinaryLog = true;
+            UnityEngine.Profiling.Profiler.enabled = true;
+            profileStarted = Time.realtimeSinceStartupAsDouble; profileActive = true;
+        }
+        void StopProfile()
+        {
+            if (!profileActive) return;
+            UnityEngine.Profiling.Profiler.enabled = false;
+            UnityEngine.Profiling.Profiler.logFile = "";
+            profileActive = false; profileSaved = true;
+            Debug.Log("PROFILER_REPORT " + profilePath);
+        }
+        void OnDestroy() { StopProfile(); sim.Dispose(); view.Dispose(); SetCursor(false); }
         static void SetCursor(bool locked) { Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None; Cursor.visible = !locked; }
 
         void Styles()
@@ -231,7 +269,8 @@ namespace Journey
             }
             if (benchmark)
             {
-                float remaining = Mathf.Max(0, warmup + captureSeconds - (float)(Time.realtimeSinceStartupAsDouble - runStarted));
+                float remaining = capture.Recording ? Mathf.Max(0, captureSeconds - (float)(Time.realtimeSinceStartupAsDouble - captureStarted)) :
+                    Mathf.Max(0, warmup - (float)(Time.realtimeSinceStartupAsDouble - runStarted)) + captureSeconds;
                 GUI.Box(new Rect(width / 2 - 260, 110, 520, 80), "");
                 GUI.Label(new Rect(width / 2 - 240, 120, 480, 26), $"{(capture.Recording ? "CAPTURING" : "WARMING UP")} · {crowd} {(bosses ? "BOSSES" : "DRONES")} · {repeat}/{repeats}", label);
                 GUI.Label(new Rect(width / 2 - 240, 153, 480, 25), $"{remaining:F1}s left this repeat  /  {capture.Samples} samples  /  uncapped", small);
@@ -248,6 +287,8 @@ namespace Journey
                 if (GUILayout.Button("START / RESTART COMBAT", button)) StartCombat();
                 GUILayout.Space(12);
                 GUILayout.Label("REPEATABLE CROWD BENCHMARK", heading);
+                sim.UseBurst = GUILayout.Toggle(sim.UseBurst, " Jobs/Burst simulation");
+                view.CullInstances = GUILayout.Toggle(view.CullInstances, " Burst instance preparation + frustum culling");
                 GUILayout.Label($"{warmup:0}s warm-up + {captureSeconds:0}s capture, {repeats} repeats. Automated movement, autofire, invulnerability. Writes CSV + JSON.", small);
                 bosses = GUILayout.Toggle(bosses, " Boss workload: area attacks + projectile bursts");
                 synchronizedAbilities = GUILayout.Toggle(synchronizedAbilities, " Synchronized ability spike stress");

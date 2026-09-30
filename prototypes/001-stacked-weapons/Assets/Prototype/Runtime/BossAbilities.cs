@@ -1,10 +1,11 @@
 using UnityEngine;
+using Unity.Profiling;
 
 namespace Journey
 {
     // Synthetic boss workload: every enemy alternates a targeted area attack and
     // an eight-way projectile burst. All ability states/projectiles tick at 60 Hz.
-    public sealed class BossAbilities
+    public sealed class BossAbilities : System.IDisposable
     {
         public const int ProjectileCapacity = 131072;
         public const float Cooldown = 6f, TelegraphSeconds = .75f, AreaRadius = 2.5f;
@@ -19,6 +20,11 @@ namespace Journey
         readonly Vector3[] projectileVelocities = new Vector3[ProjectileCapacity];
         readonly float[] life = new float[ProjectileCapacity];
         readonly Vector3[] burstDirections = new Vector3[BurstSize];
+        static readonly ProfilerMarker AbilityMarker = new ProfilerMarker("Journey.Abilities");
+        static readonly ProfilerMarker ProjectileMarker = new ProfilerMarker("Journey.Projectiles");
+        BurstProjectiles burstProjectiles;
+        internal Vector3[] Positions => projectilePositions;
+        internal Vector3[] PreviousPositions => projectilePrevious;
         public bool Enabled { get; private set; }
         public bool Synchronized { get; private set; }
         public int Projectiles { get; private set; }
@@ -63,42 +69,65 @@ namespace Journey
         public void Step(CombatSimulation sim, float dt)
         {
             if (!Enabled) return;
-            StateUpdates += sim.Count;
-            for (int i = 0; i < sim.Count; i++)
+            long stageStart = StageProfile.Begin();
+            using (AbilityMarker.Auto())
             {
-                timers[i] -= dt;
-                if (timers[i] > 0) continue;
-                if (casting[i])
+                StateUpdates += sim.Count;
+                for (int i = 0; i < sim.Count; i++)
                 {
-                    casting[i] = false; Telegraphs--; Activations++;
-                    if ((targets[i] - sim.Player).sqrMagnitude <= AreaRadius * AreaRadius)
-                    { PlayerHits++; sim.AbilityHit(); }
-                    burstNext[i] = true; timers[i] += Cooldown;
+                    timers[i] -= dt;
+                    if (timers[i] > 0) continue;
+                    if (casting[i])
+                    {
+                        casting[i] = false; Telegraphs--; Activations++;
+                        if ((targets[i] - sim.Player).sqrMagnitude <= AreaRadius * AreaRadius)
+                        { PlayerHits++; sim.AbilityHit(); }
+                        burstNext[i] = true; timers[i] += Cooldown;
+                    }
+                    else if (burstNext[i])
+                    {
+                        Activations++;
+                        for (int j = 0; j < BurstSize; j++) Spawn(sim.Position(i), burstDirections[j]);
+                        burstNext[i] = false; timers[i] += Cooldown;
+                    }
+                    else
+                    {
+                        casting[i] = true; Telegraphs++;
+                        targets[i] = sim.Player; timers[i] += TelegraphSeconds;
+                    }
                 }
-                else if (burstNext[i])
+            }
+            StageProfile.AbilityMs += StageProfile.End(stageStart);
+            stageStart = StageProfile.Begin();
+            using (ProjectileMarker.Auto())
+            {
+                ProjectileUpdates += Projectiles;
+                if (sim.UseBurst)
                 {
-                    Activations++;
-                    for (int j = 0; j < BurstSize; j++) Spawn(sim.Position(i), burstDirections[j]);
-                    burstNext[i] = false; timers[i] += Cooldown;
+                    if (burstProjectiles == null) burstProjectiles = new BurstProjectiles();
+                    Projectiles = burstProjectiles.Step(projectilePositions, projectilePrevious, projectileVelocities,
+                        life, Projectiles, sim.Player, sim.PreviousPlayer, dt, sim.BatchSize, out int hits);
+                    PlayerHits += hits;
+                    if (hits > 0) sim.AbilityHit();
                 }
                 else
                 {
-                    casting[i] = true; Telegraphs++;
-                    targets[i] = sim.Player; timers[i] += TelegraphSeconds;
+                for (int i = Projectiles - 1; i >= 0; i--)
+                {
+                    Vector3 a = projectilePositions[i];
+                    Vector3 b = a + projectileVelocities[i] * dt;
+                    projectilePrevious[i] = a; projectilePositions[i] = b; life[i] -= dt;
+                    // Swept collision against the player, including relative player motion.
+                    bool hit = SegmentHitsPlayer(a - sim.PreviousPlayer, b - sim.Player);
+                    if (hit) { PlayerHits++; sim.AbilityHit(); }
+                    if (hit || life[i] <= 0) Remove(i);
+                }
                 }
             }
-            ProjectileUpdates += Projectiles;
-            for (int i = Projectiles - 1; i >= 0; i--)
-            {
-                Vector3 a = projectilePositions[i];
-                Vector3 b = a + projectileVelocities[i] * dt;
-                projectilePrevious[i] = a; projectilePositions[i] = b; life[i] -= dt;
-                // Swept collision against the player, including relative player motion.
-                bool hit = SegmentHitsPlayer(a - sim.PreviousPlayer, b - sim.Player);
-                if (hit) { PlayerHits++; sim.AbilityHit(); }
-                if (hit || life[i] <= 0) Remove(i);
-            }
+            StageProfile.ProjectileMs += StageProfile.End(stageStart);
         }
+
+        public void Dispose() { burstProjectiles?.Dispose(); burstProjectiles = null; }
 
         public static bool SegmentHitsPlayer(Vector3 a, Vector3 b)
         {

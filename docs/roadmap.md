@@ -24,6 +24,7 @@ This is a sequence of learning milestones, not a release-date promise. Update it
 - [x] Build a one-minute movement and shooting test with placeholder visuals.
 - [x] Implement standalone crowd benchmarks and frame-time reports; validate the capture path locally, explicitly marking missing GPU timings and non-target hardware.
 - [x] Extend the stress harness to 20,000 enemies with synthetic boss area attacks, projectile bursts, and synchronized attack spikes.
+- [x] Add stage profiling, a batched Jobs/Burst simulation path, culled instanced rendering, and selectable reference paths for controlled comparisons.
 - [ ] Validate more than 10,000 ability-heavy bosses at 144 FPS on target hardware, including representative boss visuals and the most expensive stacked weapon build.
 - [ ] Compare one weapon against three simultaneously firing weapons.
 - [ ] Add the proposed five-minute survival and upgrade loop if the combat test is promising.

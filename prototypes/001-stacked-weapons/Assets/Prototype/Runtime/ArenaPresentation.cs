@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using Unity.Collections;
+using Unity.Profiling;
 
 namespace Journey
 {
@@ -16,6 +18,13 @@ namespace Journey
         AudioSource audio;
         AudioClip shot;
         float flash, recoil;
+        readonly Plane[] frustum = new Plane[6];
+        readonly Vector3[] warningPositions = new Vector3[CombatSimulation.Capacity];
+        static readonly ProfilerMarker PrepareMarker = new ProfilerMarker("Journey.RenderPrepare");
+        static readonly ProfilerMarker SubmitMarker = new ProfilerMarker("Journey.RenderSubmit");
+        BurstInstances instances;
+        public bool CullInstances { get; set; } = true;
+        public int BatchSize { get; set; } = 128;
         public Camera Camera { get; private set; }
 
         public void Create(Transform root)
@@ -104,36 +113,103 @@ namespace Journey
             flash -= dt; tracer.enabled = flash > 0;
             recoil = Mathf.MoveTowards(recoil, 0, dt * .55f);
             weapon.localPosition = new Vector3(.28f, -.24f, .55f - recoil);
-            for (int i = 0; i < sim.Count; i++)
+            if (CullInstances) { DrawCulled(sim, alpha); return; }
+            long stageStart = StageProfile.Begin();
+            using (PrepareMarker.Auto())
             {
-                Vector3 p = sim.RenderPosition(i, alpha);
-                bodies[i] = ScaledTranslation(p + Vector3.up * .8f, new Vector3(.85f, 1.4f, .85f));
-                heads[i] = ScaledTranslation(p + Vector3.up * 1.6f, Vector3.one * .45f);
+                for (int i = 0; i < sim.Count; i++)
+                {
+                    Vector3 p = sim.RenderPosition(i, alpha);
+                    bodies[i] = ScaledTranslation(p + Vector3.up * .8f, new Vector3(.85f, 1.4f, .85f));
+                    heads[i] = ScaledTranslation(p + Vector3.up * 1.6f, Vector3.one * .45f);
+                }
             }
+            StageProfile.RenderPrepareMs += StageProfile.End(stageStart);
             if (sim.Count == 0) return;
             var bodyParams = new RenderParams(enemyMaterial) { shadowCastingMode = ShadowCastingMode.Off,
                 receiveShadows = false, worldBounds = new Bounds(Vector3.zero, new Vector3(65, 8, 65)) };
             var headParams = new RenderParams(headMaterial) { shadowCastingMode = ShadowCastingMode.Off,
                 receiveShadows = false, worldBounds = bodyParams.worldBounds };
             // Conservative batches also fit platforms with a smaller constant-buffer instance limit.
-            for (int offset = 0; offset < sim.Count; offset += 250)
+            stageStart = StageProfile.Begin();
+            using (SubmitMarker.Auto())
             {
-                int count = Mathf.Min(250, sim.Count - offset);
-                Graphics.RenderMeshInstanced(bodyParams, cube, 0, bodies, count, offset);
-                Graphics.RenderMeshInstanced(headParams, cube, 0, heads, count, offset);
+                for (int offset = 0; offset < sim.Count; offset += 250)
+                {
+                    int count = Mathf.Min(250, sim.Count - offset);
+                    Graphics.RenderMeshInstanced(bodyParams, cube, 0, bodies, count, offset);
+                    Graphics.RenderMeshInstanced(headParams, cube, 0, heads, count, offset);
+                    StageProfile.InstanceBatches += 2; StageProfile.SubmittedInstances += count * 2;
+                }
             }
+            StageProfile.RenderSubmitMs += StageProfile.End(stageStart);
             int warnings = 0;
             if (sim.Abilities.Enabled)
             {
-                for (int i = 0; i < sim.Count; i++)
-                    if (sim.Abilities.IsCasting(i)) telegraphs[warnings++] = ScaledTranslation(
-                        sim.Abilities.Target(i) + Vector3.up * .02f, Vector3.one * BossAbilities.AreaRadius);
-                for (int i = 0; i < sim.Abilities.Projectiles; i++)
-                    projectiles[i] = ScaledTranslation(sim.Abilities.RenderProjectile(i, alpha) + Vector3.up,
-                        Vector3.one * .18f);
+                stageStart = StageProfile.Begin();
+                using (PrepareMarker.Auto())
+                {
+                    for (int i = 0; i < sim.Count; i++)
+                        if (sim.Abilities.IsCasting(i)) telegraphs[warnings++] = ScaledTranslation(
+                            sim.Abilities.Target(i) + Vector3.up * .02f, Vector3.one * BossAbilities.AreaRadius);
+                    for (int i = 0; i < sim.Abilities.Projectiles; i++)
+                        projectiles[i] = ScaledTranslation(sim.Abilities.RenderProjectile(i, alpha) + Vector3.up,
+                            Vector3.one * .18f);
+                }
+                StageProfile.RenderPrepareMs += StageProfile.End(stageStart);
                 DrawInstances(projectileMaterial, cube, projectiles, sim.Abilities.Projectiles);
                 DrawInstances(telegraphMaterial, ring, telegraphs, warnings);
             }
+        }
+        void DrawCulled(CombatSimulation sim, float alpha)
+        {
+            if (instances == null) instances = new BurstInstances();
+            long begin = StageProfile.Begin();
+            int visible;
+            using (PrepareMarker.Auto())
+            {
+                GeometryUtility.CalculateFrustumPlanes(Camera, frustum);
+                visible = instances.Prepare(sim.Positions, sim.PreviousPositions, sim.Count, alpha, frustum,
+                    Vector3.up * .8f, new Vector3(.85f, 1.4f, .85f), Vector3.up * 1.6f, Vector3.one * .45f,
+                    Vector3.up, 1.2f, true, BatchSize);
+            }
+            StageProfile.RenderPrepareMs += StageProfile.End(begin);
+            DrawNative(enemyMaterial, cube, instances.A, visible); DrawNative(headMaterial, cube, instances.B, visible);
+            if (!sim.Abilities.Enabled) return;
+            begin = StageProfile.Begin();
+            using (PrepareMarker.Auto())
+                visible = instances.Prepare(sim.Abilities.Positions, sim.Abilities.PreviousPositions,
+                    sim.Abilities.Projectiles, alpha, frustum, Vector3.up, Vector3.one * .18f, Vector3.zero,
+                    Vector3.zero, Vector3.up, .17f, false, BatchSize);
+            StageProfile.RenderPrepareMs += StageProfile.End(begin);
+            DrawNative(projectileMaterial, cube, instances.A, visible);
+            begin = StageProfile.Begin();
+            using (PrepareMarker.Auto())
+            {
+                int warnings = 0;
+                for (int i = 0; i < sim.Count; i++) if (sim.Abilities.IsCasting(i)) warningPositions[warnings++] = sim.Abilities.Target(i);
+                visible = instances.Prepare(warningPositions, warningPositions, warnings, 1, frustum,
+                    Vector3.up * .02f, Vector3.one * BossAbilities.AreaRadius, Vector3.zero, Vector3.zero,
+                    Vector3.up * .02f, BossAbilities.AreaRadius, false, BatchSize);
+            }
+            StageProfile.RenderPrepareMs += StageProfile.End(begin);
+            DrawNative(telegraphMaterial, ring, instances.A, visible);
+        }
+        static void DrawNative(Material material, Mesh mesh, NativeArray<Matrix4x4> matrices, int total)
+        {
+            long begin = StageProfile.Begin();
+            using (SubmitMarker.Auto())
+            {
+                var parameters = new RenderParams(material) { shadowCastingMode = ShadowCastingMode.Off,
+                    receiveShadows = false, worldBounds = new Bounds(Vector3.zero, new Vector3(120, 8, 120)) };
+                for (int offset = 0; offset < total; offset += 500)
+                {
+                    int count = Mathf.Min(500, total - offset);
+                    Graphics.RenderMeshInstanced(parameters, mesh, 0, matrices, count, offset);
+                    StageProfile.InstanceBatches++; StageProfile.SubmittedInstances += count;
+                }
+            }
+            StageProfile.RenderSubmitMs += StageProfile.End(begin);
         }
         static Matrix4x4 ScaledTranslation(Vector3 p, Vector3 scale)
         {
@@ -143,10 +219,18 @@ namespace Journey
         }
         static void DrawInstances(Material material, Mesh mesh, Matrix4x4[] matrices, int total)
         {
-            var parameters = new RenderParams(material) { shadowCastingMode = ShadowCastingMode.Off,
-                receiveShadows = false, worldBounds = new Bounds(Vector3.zero, new Vector3(120, 8, 120)) };
-            for (int offset = 0; offset < total; offset += 250)
-                Graphics.RenderMeshInstanced(parameters, mesh, 0, matrices, Mathf.Min(250, total - offset), offset);
+            long begin = StageProfile.Begin();
+            using (SubmitMarker.Auto())
+            {
+                var parameters = new RenderParams(material) { shadowCastingMode = ShadowCastingMode.Off,
+                    receiveShadows = false, worldBounds = new Bounds(Vector3.zero, new Vector3(120, 8, 120)) };
+                for (int offset = 0; offset < total; offset += 250)
+                {
+                    Graphics.RenderMeshInstanced(parameters, mesh, 0, matrices, Mathf.Min(250, total - offset), offset);
+                    StageProfile.InstanceBatches++; StageProfile.SubmittedInstances += Mathf.Min(250, total - offset);
+                }
+            }
+            StageProfile.RenderSubmitMs += StageProfile.End(begin);
         }
         static Mesh CreateRing()
         {
@@ -165,7 +249,7 @@ namespace Journey
             mesh.RecalculateNormals(); mesh.RecalculateBounds(); return mesh;
         }
         public void ResetFeedback() { flash = recoil = 0; tracer.enabled = false; audio.Stop(); }
-        public void Dispose() { if (shot != null) Object.Destroy(shot); if (ring != null) Object.Destroy(ring); }
+        public void Dispose() { instances?.Dispose(); instances = null; if (shot != null) Object.Destroy(shot); if (ring != null) Object.Destroy(ring); }
 
         static Material Material(string name, Color color, bool unlit = false)
         {
