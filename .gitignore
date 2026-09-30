@@ -1,0 +1,28 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local credentials and environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local logs and temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+~$*
+
+# Generated exports and local dependencies
+**/build/
+**/builds/
+**/dist/
+**/node_modules/
+**/__pycache__/
+**/.venv/
+
+# Add engine-specific caches after selecting the engine.
