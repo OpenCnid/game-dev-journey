@@ -11,6 +11,6 @@ Add a row for each external or generated asset we keep. Group an asset pack into
 | Asset or pack | Source / creator | License or usage terms | Changes / generation notes | Runtime path |
 | --- | --- | --- | --- | --- |
 
-No assets have been added yet.
+The first prototype uses runtime-generated primitive geometry, flat materials, and a synthesized pulse sound implemented in `ArenaPresentation.cs`. No external art or audio is imported. The validation screenshot in `docs/playtests/evidence/` is captured from our own prototype. Editable external asset sources will be registered here when introduced.
 
 For generated assets, record the tool/model if known, generation date, a useful prompt summary, and the applicable usage terms. For original work, identify the creator. Check large-file storage needs before adding large audio or art source files.

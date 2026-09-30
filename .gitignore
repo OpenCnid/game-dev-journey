@@ -25,4 +25,21 @@ Desktop.ini
 **/__pycache__/
 **/.venv/
 
-# Add engine-specific caches after selecting the engine.
+# Unity generated caches and machine-local state (source .meta files stay tracked)
+**/[Ll]ibrary/
+**/[Tt]emp/
+**/[Oo]bj/
+**/[Ll]ogs/
+**/[Uu]ser[Ss]ettings/
+**/[Mm]emoryCaptures/
+**/[Rr]ecordings/
+**/.vs/
+**/*.csproj
+**/*.sln
+**/*.slnx
+**/TestResults/
+**/BenchmarkResults/
+**/artifacts/
+# Build-generated provenance, regenerated before exporting the player.
+/prototypes/001-stacked-weapons/Assets/Prototype/Resources/BuildInfo.json
+/prototypes/001-stacked-weapons/Assets/Prototype/Resources/BuildInfo.json.meta

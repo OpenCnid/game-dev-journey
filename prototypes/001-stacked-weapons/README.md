@@ -1,14 +1,74 @@
 # Experiment 001: stacked weapons
 
-**Status:** specification only; no code, engine project, or executable yet.
+**Status:** one-weapon combat and crowd benchmark implemented. The remaining stacked-weapon and upgrade slices below are future work. See the repository's validation notes for measured results and limitations.
 
 **Question:** does adding simultaneous weapons create satisfying power growth and distinct builds while keeping combat readable?
 
-**Tools:** Unity 6.3 LTS, C#, and URP, following [the accepted decision](../../docs/decisions/0001-engine-recommendation.md). Pin an exact editor patch and compatible packages when creating this folder's self-contained Unity project.
+**Pinned tools:** Unity **6000.3.25f1** (`e1dba0a9aba4`), URP **17.3.0**, Input System **1.20.0**, Test Framework **1.6.0**. `ProjectSettings/ProjectVersion.txt`, `Packages/manifest.json`, and the Unity-generated `Packages/packages-lock.json` are authoritative. Transitive packages are locked too; do not regenerate the lockfile just to take newer versions.
 
-**Run instructions:** pending project creation. The first implementation will combine the one-weapon combat slice with the repeatable crowd benchmark. No executable exists yet.
+## Open and play
 
-**Performance requirement:** target at least 144 FPS (6.944 ms per frame) in the supported encounter, with higher caps and uncapped rendering available. Follow the [performance plan](../../docs/performance.md): stock Intel Core i7-8700K plus the provisional GTX 1080 Ti GPU baseline, with 1080p proposed. Remaining system settings and the supported peak load remain open; no performance has been measured.
+1. Install Unity Hub, sign in, and activate a valid Unity license.
+2. Install [Unity 6000.3.25f1](https://unity.com/releases/editor/whats-new/6000.3.25f1) with Windows editor/player support. The initial build uses Mono and Direct3D 11; IL2CPP and Visual Studio build tools are not required for this slice.
+3. Add **this folder**, `prototypes/001-stacked-weapons/`, as the Unity project in Hub. Do not add the repository root.
+4. Open `Assets/Prototype/Scenes/Arena.unity` and press Play. Choose **Start / Restart Combat**.
+
+WASD moves; the mouse aims; the rifle fires automatically. Escape pauses/releases the cursor; R restarts. Survive 60 seconds against 35 drones. Each drone takes two hits, then respawns at the perimeter to maintain crowd pressure. Contact damage has a shared 0.4-second grace period. This is a bounded flat arena with simple local steering and geometric hit detection.
+
+The pause/start menu includes 144/240/custom/uncapped frame limits and a separate VSync setting. Benchmark mode temporarily disables both the cap and VSync, then restores them.
+
+## Prepare, test, and build
+
+From the repository root in PowerShell:
+
+```powershell
+.\tools\unity.ps1 -Action Prepare
+.\tools\unity.ps1 -Action Test -TestPlatform EditMode
+.\tools\unity.ps1 -Action Test -TestPlatform PlayMode
+.\tools\unity.ps1 -Action Build
+```
+
+The helper locates the pinned editor in the standard Hub directory or the local install directory. Pass `-UnityPath 'C:\path\to\Editor\Unity.exe'` or set `UNITY_EDITOR_PATH` for another installation. Close any editor instance using this project before running batch commands.
+
+`Prepare` creates missing scene/pipeline assets and applies the prototype's documented baseline settings. It preserves an existing arena scene. The same actions are available under the editor's **Journey** menu. Build output is `build/StackLab/StackLab.exe`; distribute its entire containing folder, not only the EXE. Logs and test XML go under `artifacts/`. Generated caches, builds, and captures are ignored by Git.
+
+## Capture a crowd benchmark
+
+The in-game menu runs 100, 500, or 1,000 drones with a scripted circular player route, continuous firing, and invulnerability. Each choice runs three repeats of 30 seconds warm-up plus 60 seconds capture. Seed 137 and fixed 60 Hz simulation make comparisons repeatable without claiming cross-platform determinism.
+
+For all three counts from a standalone player:
+
+```powershell
+.\tools\benchmark.ps1 -Visible
+# Short verification of launch/capture/reporting, not performance acceptance:
+.\tools\benchmark.ps1 -Smoke
+```
+
+The script reports output paths and saves invocation metadata. Full scripted captures require `-Visible`: keep the game window visible and unobstructed, since hidden or minimized windows can skip rendering and produce misleading throughput. Hidden `-Smoke` runs validate reporting only. In-game captures default to Unity's persistent data directory (`Application.persistentDataPath/BenchmarkResults`). Each repeat writes raw CSV samples and a JSON summary with the build revision/dirty flag, machine/settings, median/p95/p99/max frame times, budget misses, CPU/GPU timing availability, simulation time, and tick catch-up limit events. A shortened capture is marked nonstandard. Missing GPU timings remain unavailable rather than being interpreted as zero cost. FrameTimingManager samples can lag the current frame; raw timing columns are not a synchronized CPU/GPU trace.
+
+Advanced player arguments:
+
+```text
+-benchmark -crowd 500 -seed 137 -warmup 30 -seconds 60 -repeats 3
+-results "C:\captures\run-001" -quitAfterBenchmark
+```
+
+Use `-playtest` to start combat immediately or `-screenshot "C:\captures\arena.png"` to capture after three simulation seconds. Standard Unity player arguments can set resolution. A benchmark contains rendering, steering, firing, hits, respawns, sound, and HUD; it has placeholder meshes, no skeletal animation, and only one weapon. It cannot validate the eventual fully upgraded game's peak load. Keep developer-machine results separate from the i7-8700K / GTX 1080 Ti target.
+
+## Code map
+
+| Path under `Assets/Prototype/` | Responsibility |
+| --- | --- |
+| `Runtime/CombatSimulation.cs` | Preallocated enemy state, spatial buckets, movement, health, hits, cooldowns, run lifecycle |
+| `Runtime/ArenaPresentation.cs` | Arena geometry, instanced drones, camera, rifle, procedural shot audio |
+| `Runtime/PrototypeGame.cs` | Input, fixed simulation stepping, menus, HUD, benchmark orchestration |
+| `Runtime/BenchmarkCapture.cs` | Frame samples, percentile calculations, CSV/JSON export |
+| `Editor/ProjectSetup.cs` | Reproducible setup, scene creation, shader references, Windows build |
+| `Tests/` | Simulation/metric tests and runtime smoke test |
+
+Simulation currently runs on the main thread. The boundary is ready for profiling; no Jobs/Burst speedup is claimed. Local separation can still become expensive in dense clusters. Tick catch-up is bounded and reported; a run that reaches that bound needs investigation before accepting performance results.
+
+**Performance requirement:** target at least 144 FPS (6.944 ms per frame) in the supported encounter, with higher caps and uncapped rendering available. Follow the [performance plan](../../docs/performance.md): stock Intel Core i7-8700K plus the provisional GTX 1080 Ti GPU baseline, with 1080p proposed. Remaining system settings and the supported peak load remain open. [Initial local validation](../../docs/playtests/2026-09-30-prototype-performance.md) does not establish performance on that target.
 
 ## Build in three slices
 
@@ -85,6 +145,6 @@ For each of three short playtests, record:
 
 Use [playtest notes](../../docs/playtests/README.md). If weapons feel interchangeable, change their behavior before adding more. If combat becomes unreadable, reduce effects and crowd density before expanding scope. If the core is promising, document the result and promote selected work to `game/`.
 
-**Result:** not tested.
+**Result:** implementation and automated verification are recorded in the development journal; player enjoyment and target-hardware performance still require playtesting.
 
-**Disposition:** proposed experiment with engine selected; next work is Unity project setup, the first combat slice, and reference gameplay observations.
+**Disposition:** first combat and benchmark slice implemented; next evaluate feel and crowded performance before adding simultaneous weapons.

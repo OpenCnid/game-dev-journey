@@ -1,7 +1,7 @@
 # 0001: Use Unity and C# for the first prototype
 
 - **Date:** 2026-09-30
-- **Status:** accepted by the project owner on 2026-09-30. No Unity project has been created in this repository yet.
+- **Status:** accepted by the project owner on 2026-09-30; implemented in the first prototype.
 
 ## Context
 
@@ -9,7 +9,7 @@ We are building a first game around stacking weapons and creating powerful build
 
 ## Decision
 
-Use **Unity with C# and the Universal Render Pipeline (URP)**. Start from the **Unity 6.3 LTS** line and pin a specific supported patch plus compatible package versions when creating the project. Do not assume a package's newest release supports the selected editor.
+Use **Unity with C# and the Universal Render Pipeline (URP)**. The first prototype pins **6000.3.25f1** (`e1dba0a9aba4`), **URP 17.3.0**, **Input System 1.20.0**, and **Test Framework 1.6.0**, with transitive versions preserved in Unity's generated lockfile. URP and the test framework versions were verified against the installed editor's bundled packages. [Pinned editor release](https://unity.com/releases/editor/whats-new/6000.3.25f1).
 
 This version choice favors keeping our first prototype on a consistent editor/package baseline. Unity lists 6.3 LTS support through December 2027. Its own guidance generally recommends Supported Update releases for new projects; choosing LTS here is our workflow preference, not a claim that Update releases are unstable or unsuitable. Recheck available patches and relevant fixes at setup. [Unity release support](https://unity.com/releases/unity-6/support).
 
@@ -50,4 +50,4 @@ Once the project exists, assess the actual LLM on small representative tasks suc
 
 We must learn Unity's component lifecycle and asset workflow as well as C#. Performance work may require a more constrained style of C# than ordinary application code. Neither engine choice nor LLM assistance guarantees the frame budget.
 
-Revisit if the representative benchmark reveals an engine limitation that cannot reasonably be addressed, the actual LLM workflow causes persistent integration problems, or project requirements change. No benchmark or engine comparison has been run yet.
+Revisit if the representative benchmark reveals an engine limitation that cannot reasonably be addressed, the actual LLM workflow causes persistent integration problems, or project requirements change. Initial local benchmark diagnostics exist; no cross-engine comparison or target-hardware validation has been performed.

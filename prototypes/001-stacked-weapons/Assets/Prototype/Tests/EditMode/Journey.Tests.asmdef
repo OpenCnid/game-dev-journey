@@ -1,0 +1,7 @@
+{
+  "name": "Journey.Tests",
+  "rootNamespace": "Journey.Tests",
+  "references": ["Journey.Prototype"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

@@ -14,13 +14,13 @@ Two or three years ago, I wouldn't have felt ready to take this on this way. Tod
 | --- | --- |
 | Experience | Software engineering background; first game |
 | Game concept | First-person horde survival inspired by Vampire Hunters, focused on stacking weapons and powerful builds |
-| Engine and language | Unity 6.3 LTS + C# with URP; [accepted decision](docs/decisions/0001-engine-recommendation.md), exact patch pending project setup |
-| Target platform | Windows desktop proposed; not finalized |
-| Playable build | Not yet |
-| Current milestone | Study the reference and test a small stacked-weapon combat loop |
+| Engine and language | Unity **6000.3.25f1** + C#, URP **17.3.0**; editor and packages pinned |
+| Target platform | First prototype: Windows desktop, keyboard and mouse |
+| Playable build | One-weapon arena with health, pause/restart, and crowd benchmark |
+| Current milestone | Playtest the first combat slice and profile crowded encounters before adding stacked weapons |
 | Performance target | At least 144 FPS in supported crowded fights; higher caps and uncapped rendering supported by design; unmeasured |
 
-There is no game to run yet. Setup and launch instructions will live in [game/README.md](game/README.md) when the first project exists.
+Open [the prototype project](prototypes/001-stacked-weapons/README.md) for setup, controls, build commands, and benchmark instructions. The maintained game will move into `game/` after the experiment is evaluated.
 
 Our benchmark CPU is an Intel Core i7-8700K at stock settings, paired with the provisional GTX 1080 Ti GPU baseline; 1080p is the proposed starting resolution. See [the performance plan](docs/performance.md) for the 6.944 ms frame budget, benchmark scenarios, and remaining settings to define.
 
@@ -62,8 +62,8 @@ See [the architecture guide](docs/architecture.md) for placement rules.
 
 1. Read [the vision](docs/vision.md) and [roadmap](docs/roadmap.md).
 2. Read [the Vampire Hunters study](docs/design/vampire-hunters-study.md) and [proposed game brief](docs/design/game-brief.md).
-3. Set up the Unity prototype using [the accepted engine decision](docs/decisions/0001-engine-recommendation.md), and pin the exact editor and package versions.
-4. Start with the one-minute combat slice in [the stacked-weapons experiment](prototypes/001-stacked-weapons/README.md).
+3. Open the prototype with its pinned editor, following [the project instructions](prototypes/001-stacked-weapons/README.md).
+4. Play the one-minute combat slice and run its repeatable crowd benchmark.
 5. Play it, capture observations, and decide whether to keep, change, or discard it.
 
 Follow along in [the development journal](docs/devlog/README.md), starting with [day zero](docs/devlog/2026-09-30-day-zero.md). Our [workflow](docs/workflow.md) explains how we turn those lessons into the next change.

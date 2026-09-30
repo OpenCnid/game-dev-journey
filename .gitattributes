@@ -3,6 +3,14 @@
 *.yml text eol=lf
 *.yaml text eol=lf
 *.json text eol=lf
+*.cs text eol=lf
+*.ps1 text eol=lf
+*.asmdef text eol=lf
+# Unity's serializer writes a space after empty YAML values.
+*.meta text eol=lf whitespace=-blank-at-eol
+*.unity text eol=lf whitespace=-blank-at-eol
+*.asset text eol=lf whitespace=-blank-at-eol
+*.mat text eol=lf whitespace=-blank-at-eol
 *.png binary
 *.jpg binary
 *.jpeg binary

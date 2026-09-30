@@ -15,4 +15,4 @@ Prototypes may use rough code and placeholder assets. They still need enough ins
 
 ## Experiments
 
-- [001: Stacked weapons](001-stacked-weapons/README.md) - proposed first-person survival experiment; specification only, not executable yet.
+- [001: Stacked weapons](001-stacked-weapons/README.md) - playable one-weapon survival slice and repeatable crowd benchmark; stacking/upgrade slices remain future work.

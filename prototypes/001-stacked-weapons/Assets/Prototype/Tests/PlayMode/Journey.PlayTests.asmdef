@@ -1,0 +1,6 @@
+{
+  "name": "Journey.PlayTests",
+  "rootNamespace": "Journey.Tests",
+  "references": ["Journey.Prototype"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

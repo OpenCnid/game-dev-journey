@@ -6,4 +6,6 @@ Observe before explaining. Note where a player hesitates, what they try, and whe
 
 Use anonymous participant labels and leave personal information out of the repository.
 
-No playtests have been recorded yet. Link completed sessions below as they are added.
+## Records
+
+- [2026-09-30: First prototype validation](2026-09-30-prototype-performance.md) - automated tests and developer-machine benchmark diagnostics; not a user playtest.

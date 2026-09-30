@@ -2,7 +2,7 @@
 
 **Confirmed requirement:** target at least 144 FPS during supported gameplay, including crowded fights with stacked weapons. Allow higher frame rates when the user's hardware supports them.
 
-**Status:** requirement and proposed measurement plan only. No game build exists and no performance results have been collected. Use an Intel Core i7-8700K with the owner's provisional GTX 1080 Ti GPU baseline. RAM, final resolution, graphics preset, and supported peak encounter remain to be selected. Unity with C# and URP is the [accepted engine choice](decisions/0001-engine-recommendation.md); exact editor/package versions will be pinned at setup.
+**Status:** a standalone prototype and benchmark capture path now exist. Local developer-machine diagnostics are available, but the 144 FPS target has not been validated. Use an Intel Core i7-8700K with the owner's provisional GTX 1080 Ti GPU baseline. RAM, final resolution, graphics preset, and supported peak encounter remain to be selected. The prototype pins Unity 6000.3.25f1 and URP 17.3.0; see [the accepted engine decision](decisions/0001-engine-recommendation.md).
 
 ## Frame budget
 
@@ -77,4 +77,4 @@ When a scenario fails, identify the limiting CPU task, GPU workload, allocation 
 
 ## Results
 
-None yet. Save future benchmark reports under `docs/playtests/` with a `performance` suffix, link their build and scenario configuration, and add them here.
+See [initial prototype validation](playtests/2026-09-30-prototype-performance.md). Hidden-window smoke captures validate launch/export only. Full rendering captures must keep the player visible and unobstructed; the CLI helper requires `-Visible` for those runs. GPU timings may be unavailable and are explicitly marked as such in the JSON report.

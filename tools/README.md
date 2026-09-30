@@ -4,4 +4,9 @@ Put small reusable scripts here when a repeated task warrants automation: for ex
 
 Each tool should document its purpose, prerequisites, invocation, and output. Prefer the engine's existing tools where they already solve the problem.
 
-No custom tooling is required yet.
+## Unity prototype helpers
+
+- `unity.ps1`: prepare the pinned Unity project, run Edit Mode or Play Mode tests, build the Windows player, or open the editor. Requires an installed, licensed Unity 6000.3.25f1 editor. See [project instructions](../prototypes/001-stacked-weapons/README.md).
+- `benchmark.ps1`: run the built player at repeatable crowd loads and check that each repeat writes a report. `-Smoke` uses short captures to check the reporting path. Full captures and smoke captures serve different purposes.
+
+Run helpers from PowerShell. Each helper resolves the project relative to its own location; generated outputs remain under the prototype unless an explicit output path is supplied.

@@ -1,6 +1,6 @@
 # The game
 
-The maintained Unity game project will live here after the first prototype is evaluated. The accepted stack is Unity 6.3 LTS, C#, and URP; the exact editor patch will be pinned during setup. There is no executable project yet.
+The maintained Unity game project will live here after the first prototype is evaluated. The playable experiment currently lives under [prototypes/001-stacked-weapons](../prototypes/001-stacked-weapons/README.md), using Unity 6000.3.25f1, C#, and URP 17.3.0. This `game/` folder does not contain a second Unity project.
 
 Implementation starts in [the stacked-weapons prototype](../prototypes/001-stacked-weapons/README.md). Promote selected work here after the experiment establishes a promising direction.
 

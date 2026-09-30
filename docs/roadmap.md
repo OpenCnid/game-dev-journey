@@ -14,18 +14,18 @@ This is a sequence of learning milestones, not a release-date promise. Update it
 - [ ] Define baseline hardware, resolution, visual settings, and a supported peak encounter for [performance validation](performance.md).
 - [ ] Record a focused reference play session and refine the [stacked-weapons experiment](../prototypes/001-stacked-weapons/README.md).
 - [x] Choose Unity with C# and URP; accept [the engine decision](decisions/0001-engine-recommendation.md).
-- [ ] Confirm Windows desktop as the initial platform.
-- [ ] Create the first Unity prototype project and pin its Unity 6.3 LTS patch and compatible packages.
+- [x] Implement the initial prototype for Windows desktop.
+- [x] Create the Unity project; pin editor 6000.3.25f1, URP 17.3.0, Input System 1.20.0, and Test Framework 1.6.0 plus transitive dependencies.
 
 **Done when:** we can name the player's main action, the question our first prototype will answer, and the tools needed to build it.
 
 ## 1. Make one interaction playable
 
-- [ ] Build a one-minute movement and shooting test with placeholder visuals.
-- [ ] Benchmark repeatable crowd loads alongside development, recording CPU/GPU times and frame-time spikes in standalone builds.
+- [x] Build a one-minute movement and shooting test with placeholder visuals.
+- [x] Implement standalone crowd benchmarks and frame-time reports; validate the capture path locally, explicitly marking missing GPU timings and non-target hardware.
 - [ ] Compare one weapon against three simultaneously firing weapons.
 - [ ] Add the proposed five-minute survival and upgrade loop if the combat test is promising.
-- [ ] Add enough feedback to understand the action and its result.
+- [x] Add rifle feedback, shot audio, health/damage cues, kill count, and a run-ending state.
 - [ ] Play it and record what is promising or confusing.
 - [ ] Decide to continue, revise, or try another idea.
 

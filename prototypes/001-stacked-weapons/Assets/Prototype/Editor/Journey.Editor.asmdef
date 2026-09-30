@@ -1,0 +1,6 @@
+{
+  "name": "Journey.Editor",
+  "rootNamespace": "Journey.Editor",
+  "references": ["Journey.Prototype", "Unity.RenderPipelines.Universal.Runtime", "Unity.RenderPipelines.Universal.Editor", "Unity.RenderPipelines.Core.Runtime"],
+  "includePlatforms": ["Editor"]
+}

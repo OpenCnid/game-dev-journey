@@ -31,7 +31,7 @@ For a gameplay change, check the normal path, likely failure states, and restart
 
 For a build-related change, verify the exported game outside the editor. For documentation-only changes, check links, paths, and whether instructions describe the repository as it actually exists.
 
-There is no automated test suite or build pipeline yet. Add them once the engine and project supply something meaningful to execute.
+The prototype has Edit Mode simulation/metrics tests, a Play Mode runtime smoke test, and a Windows build helper. Use `tools/unity.ps1` as described in [the project instructions](../prototypes/001-stacked-weapons/README.md). Run relevant automated checks after code changes; verify rendering and gameplay separately. There is no hosted CI pipeline yet.
 
 ## A change is ready when
 
