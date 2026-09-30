@@ -4,7 +4,7 @@
 
 **Confirmed priority:** stacking weapons and creating powerful builds.
 
-**Confirmed performance requirement:** at least 144 FPS within the supported hardware/settings and encounter envelope, with higher caps and uncapped rendering available. GTX 1080 Ti is the owner's provisional GPU baseline; 1080p is a proposed starting resolution. The [performance plan](../performance.md) defines the measurements; CPU, final settings, and peak load are not finalized and the target is not yet verified.
+**Confirmed performance requirement:** at least 144 FPS within the supported hardware/settings and encounter envelope, with higher caps and uncapped rendering available. The benchmark CPU is a stock Intel Core i7-8700K, paired with the owner's provisional GTX 1080 Ti GPU baseline; 1080p is a proposed starting resolution. The [performance plan](../performance.md) defines the measurements; remaining system settings and peak load are not finalized and the target is not yet verified.
 
 **Status:** the scope and mechanics below are proposals for the first experiment, not finalized requirements. No playable implementation exists yet.
 

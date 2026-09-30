@@ -10,6 +10,7 @@ This is a sequence of learning milestones, not a release-date promise. Update it
 - [x] Identify the owner's priority: stacking weapons and creating powerful builds.
 - [x] Set the baseline performance goal to at least 144 FPS, with higher frame-rate options.
 - [x] Identify a provisional GPU baseline: GTX 1080 Ti.
+- [x] Choose an older high-end CPU baseline: Intel Core i7-8700K at stock settings.
 - [ ] Define baseline hardware, resolution, visual settings, and a supported peak encounter for [performance validation](performance.md).
 - [ ] Record a focused reference play session and refine the [stacked-weapons experiment](../prototypes/001-stacked-weapons/README.md).
 - [ ] Choose an initial platform and engine; record the decision.

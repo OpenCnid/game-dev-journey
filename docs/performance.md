@@ -2,7 +2,7 @@
 
 **Confirmed requirement:** target at least 144 FPS during supported gameplay, including crowded fights with stacked weapons. Allow higher frame rates when the user's hardware supports them.
 
-**Status:** requirement and proposed measurement plan only. No game build exists and no performance results have been collected. The owner suggested a GTX 1080 Ti as an older-hardware reference; use it as the provisional GPU baseline. CPU, final resolution, graphics preset, and supported peak encounter remain to be selected. Engine selection is still open.
+**Status:** requirement and proposed measurement plan only. No game build exists and no performance results have been collected. Use an Intel Core i7-8700K with the owner's provisional GTX 1080 Ti GPU baseline. RAM, final resolution, graphics preset, and supported peak encounter remain to be selected. Engine selection is still open.
 
 ## Frame budget
 
@@ -32,11 +32,18 @@ The target concerns natively rendered gameplay frames. Frame generation does not
 | --- | --- |
 | GPU | NVIDIA GeForce GTX 1080 Ti, provisionally selected by the owner |
 | Resolution | 1920 x 1080 at 100% render scale, proposed starting point, not yet confirmed |
-| CPU and RAM | Not selected; essential to validating crowded combat |
+| CPU | Intel Core i7-8700K, stock operation with normal Turbo Boost, no manual overclock or motherboard automatic overclock |
+| RAM | Capacity and configuration to be selected and recorded |
 | Visual preset | To be defined and fixed for comparisons |
 | Peak encounter | To be defined through the prototype's crowd and weapon benchmarks |
 
-The CPU and workload also need explicit limits before we can validate the complete system. Test on an actual GTX 1080 Ti when checking this baseline; a result from a faster GPU does not establish performance on the target.
+### Why the i7-8700K
+
+Selected on 2026-09-30 under the owner's request for a formerly high-end CPU that is old today and pairs with the GTX 1080 Ti. Intel lists a Q4 2017 launch, six cores, twelve threads, a 3.7 GHz base clock, and up to 4.7 GHz turbo. It provides a concrete older enthusiast-class CPU target for our crowd simulation. The maximum turbo figure is not an all-core benchmark frequency. [Intel specifications](https://www.intel.com/content/www/us/en/products/sku/126684/intel-core-i78700k-processor-12m-cache-up-to-4-70-ghz/specifications.html).
+
+Intel's contemporary reference configuration paired the i7-8700K with a GTX 1080 Ti, so this is an established platform combination. Use an appropriate Intel 300-series motherboard supporting the CPU; LGA1151 alone is insufficient because earlier 100/200-series boards are incompatible. [Intel reference configuration](https://www.intel.com/content/dam/www/public/us/en/documents/reference-guides/resellers-8th-gen-quick-start-selling-guide.pdf), [platform compatibility](https://www.intel.com/content/www/us/en/support/articles/000025694/processors/intel-core-processors.html).
+
+Record the motherboard, BIOS/power settings, actual CPU clocks, memory configuration, and cooling condition with captures. Keep stock CPU settings consistent across comparisons. Test on the selected CPU/GPU when validating this baseline; a result from faster hardware does not establish performance on the target. The supported workload still needs explicit limits before the 144 FPS goal can be validated.
 
 Record all of these before declaring the target met:
 

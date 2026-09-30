@@ -22,7 +22,7 @@ Two or three years ago, I wouldn't have felt ready to take this on this way. Tod
 
 There is no game to run yet. Setup and launch instructions will live in [game/README.md](game/README.md) when the first project exists.
 
-Our provisional GPU baseline is a GTX 1080 Ti, with 1080p proposed as the starting resolution. See [the performance plan](docs/performance.md) for the 6.944 ms frame budget, benchmark scenarios, and the CPU/settings we still need to define.
+Our benchmark CPU is an Intel Core i7-8700K at stock settings, paired with the provisional GTX 1080 Ti GPU baseline; 1080p is the proposed starting resolution. See [the performance plan](docs/performance.md) for the 6.944 ms frame budget, benchmark scenarios, and remaining settings to define.
 
 ## What we're aiming for
 

@@ -6,7 +6,7 @@
 
 **Tools and run instructions:** pending engine selection. This folder will own a self-contained prototype project once selected.
 
-**Performance requirement:** target at least 144 FPS (6.944 ms per frame) in the supported encounter, with higher caps and uncapped rendering available. Follow the [performance plan](../../docs/performance.md). Baseline hardware and the supported peak load remain open; no performance has been measured.
+**Performance requirement:** target at least 144 FPS (6.944 ms per frame) in the supported encounter, with higher caps and uncapped rendering available. Follow the [performance plan](../../docs/performance.md): stock Intel Core i7-8700K plus the provisional GTX 1080 Ti GPU baseline, with 1080p proposed. Remaining system settings and the supported peak load remain open; no performance has been measured.
 
 ## Build in three slices
 
