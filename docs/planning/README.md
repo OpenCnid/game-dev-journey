@@ -2,6 +2,8 @@
 
 Updated October 2, 2026. Read this and [current state](../current-state.md) at the start of every fresh planning or task session. These are the small shared root; follow only the links needed for the current outcome. Check the actual checkout/commit and task brief before acting. Current user instructions take precedence over recorded plans.
 
+Use the [planning/integration startup prompt](start-planning-session.md) to begin a fresh coordination session. It loads this root, checks the repo/board and prepares the next bounded task brief.
+
 ## Direction and reasoning
 
 Our first game tests whether stacking distinct weapons creates satisfying power growth while threats remain readable. The crowd investigation reduced a major technical risk, but the enjoyment question is still open. Carry the measured work forward deliberately, then return to a small playable weapon/upgrade loop. See [the game brief](../design/game-brief.md) and [milestone outcomes](../roadmap.md).
