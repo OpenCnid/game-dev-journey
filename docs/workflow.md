@@ -1,44 +1,69 @@
 # How we work
 
-## The development loop
+We are one developer working with AI. Keep one implementation task active, shorten the path from an edit to useful feedback, and finish small playable improvements. Change this system when it creates friction.
 
-1. Pick one observable improvement or question.
-2. Describe what a player should be able to do and how we'll check it.
-3. Make the smallest useful change.
-4. Run it and play through the affected behavior.
-5. Keep, revise, or remove the change based on what happened.
-6. Commit a coherent result and record any useful lesson.
+## Give each tool one job
 
-Use issues when work needs tracking. Keep the current focus small enough to complete in a focused session. A prototype should have a stopping condition so experiments do not quietly become permanent projects.
+| Tool | Owns |
+| --- | --- |
+| Linear | Priorities, task status, acceptance criteria, dependencies and links to results. |
+| GitHub | Code, versioned design/decisions, reproducible checks and evidence. |
+| AI chats | Working discussion, implementation and investigation for a bounded task. |
+| Unity and standalone builds | What the change actually does, looks like and feels like. |
 
-## Working with AI and LLMs
+Use [current state](current-state.md) to orient a new chat, then follow only the relevant design or evidence links. The [roadmap](roadmap.md) describes milestone outcomes; Linear owns the live task queue. Do not maintain a second copy of that queue in GitHub Issues or a Markdown checklist. GitHub Issues can still collect an outside report; link the item we choose to work on to Linear.
 
-Use AI for explanations, alternatives, small implementations, debugging hypotheses, code review, and repetitive work. Give it the current goal, engine/version when known, relevant files, constraints, and a way to check success.
+## The small board
 
-For changes we keep:
+Use the **Game Dev (GDJ)** team and one project: [First weapon-stacking playtest](https://linear.app/cnid/project/first-weapon-stacking-playtest-89b5952f722e). Its existing statuses mean:
 
-- Read the diff and understand the important behavior.
-- Verify APIs against the installed engine/version when there is uncertainty.
-- Run the affected code; a plausible explanation is not proof that it works.
-- Play the result; tests alone cannot establish game feel.
-- Record a useful lesson when AI saves time, gets stuck, or sends us in the wrong direction.
+| Stage | Meaning |
+| --- | --- |
+| Backlog | An idea or later step, with no commitment to start it. |
+| Todo | A small task with an outcome and a way to check it. Keep about three ready. |
+| In Progress | The one implementation task currently being worked on. |
+| In Review | The candidate is ready for review, a build check or a required human playtest. |
+| Done | The task's acceptance checks are satisfied and its result is linked. |
 
-Keep useful prompt summaries with the relevant experiment or devlog entry. We do not need to archive every chat. Never commit credentials or private conversation content. Track the origin and usage terms of external assets, including generated ones, in the asset register.
+A blocked task stays in its current stage with the blocking dependency or a short explanation. Do not add a status for every situation. Use no cycles, estimates or deadlines until a real scheduling problem calls for them. Split a task if it cannot reach a useful stopping point in a focused session or two; an experiment can finish with a measured answer instead of a shipped feature.
 
-## Verification
+## From issue to result
 
-For a gameplay change, check the normal path, likely failure states, and restarting or repeating the action. Add automated tests for deterministic rules or recurring bugs when they offer lasting value. Use playtests for clarity, challenge, and enjoyment.
+1. Pick one ready task. Its brief needs **Outcome, Done when, Context**; use the [brief template](planning/task-brief-template.md) when helpful.
+2. Give an AI task chat the issue link, starting commit and relevant files. Continue that chat while pursuing the same outcome. Keep one planning chat for priorities and accepting results; open another task chat when the objective changes.
+3. Make the smallest useful change. Use a short-lived branch/worktree when isolation helps. One writer owns a Unity project at a time; serialize its Editor, build and test operations.
+4. Review the diff and run the checks appropriate to the change. Fix failures before handoff.
+5. Link the commit or PR, checks, build/reproduction instructions and any observations to the issue. Put durable measurements or decisions in the existing repo documents, with a short result and link in Linear.
+6. Finish the required review/playtest, mark Done, and choose the next task. A merged PR does not establish that a change feels good.
 
-For a build-related change, verify the exported game outside the editor. For documentation-only changes, check links, paths, and whether instructions describe the repository as it actually exists.
+Use the Linear issue ID in task-chat titles, branch names and PR titles. [Linear's GitHub integration](https://linear.app/docs/github) can link them automatically. The Game Dev team's merge rule is configured to **In Review** so completion stays deliberate, including required human playtests. The GitHub integration's connection to this repository has not been verified; use explicit links until it is. Mark Done manually when the issue's checks are satisfied.
 
-The prototype has Edit Mode simulation/metrics tests, a Play Mode runtime smoke test, and a Windows build helper. Use `tools/unity.ps1` as described in [the project instructions](../prototypes/001-stacked-weapons/README.md). Run relevant automated checks after code changes; verify rendering and gameplay separately. There is no hosted CI pipeline yet.
+## Make game iteration easy for AI and humans
 
-## A change is ready when
+The useful analogy to a web preview is a reproducible game scenario: a known arena, seed, loadout and starting state that we can launch quickly, reset and compare. Build on our existing helpers rather than creating an agent orchestration service.
 
-- Its intended behavior has been verified, or its limitations are explicitly recorded.
-- It introduces no unexplained generated files or dependencies.
-- Any changed setup or run steps are documented.
-- Relevant credits and source records are updated.
-- The commit explains what changed and why.
+- Keep combat rules separable from rendering, input and UI so important rules can be checked cheaply.
+- Make weapon/enemy tuning and scenario settings explicit, easy to edit and review. Use Unity assets or code where they fit; use the visual editor when it helps author the result.
+- Prefer a script that launches a specific scenario and reports its build/source over a long list of manual setup steps. Our player already supports `-playtest`, `-screenshot` and repeatable benchmarks.
+- Let AI run repeatable checks and summarize evidence. You review consequential behavior and play the exact candidate for feel, readability and enjoyment. Screenshots and automated tests answer narrower questions.
 
-Small changes can go directly to the main branch during initial solo exploration. Use a short-lived branch and pull request when a change benefits from review or isolation. Keep unfinished experiments in their own prototype folders.
+## Match verification to the change
+
+| Change | Useful check |
+| --- | --- |
+| Documentation | Paths, links and consistency with the current repository. |
+| Combat rule or recurring bug | Focused Edit Mode tests for behavior and edge cases. |
+| Input, UI, visuals or lifecycle | Play Mode smoke check, affected scenario and pause/restart; human observation where required. |
+| Build or delivery | Standalone player launched outside the Editor; distribute its whole build folder. |
+| Simulation, rendering or dense content | Relevant visible release workload, equivalent work counters and frame-time distributions. Use a development build for focused profiler diagnosis. |
+| Playable checkpoint | A standalone candidate, brief human playtest and representative performance check. |
+
+Use `tools/unity.ps1` and the [prototype instructions](../prototypes/001-stacked-weapons/README.md). Do not run the full crowd matrix for every small edit. Run one performance capture at a time on the named desktop, with competing builds/benchmarks stopped. An isolated worktree does not isolate CPU/GPU load. There is no hosted CI pipeline yet.
+
+Tests must check meaningful behavior, parity, regressions or resource lifetime; avoid tests that simply repeat the implementation. Preserve reference paths for performance experiments. Record hardware, source/configuration, workload, repetitions and limitations with a measured conclusion. Keep external asset origins/terms in the [asset register](../assets/README.md).
+
+## Improve the workflow from evidence
+
+At a checkpoint, spend a few minutes asking: how long did an edit take to reach a useful test, which steps were manual, and how much review or rework did AI output need? Fix the largest repeated friction and remove unused process. Investigate import/reload times only if they are a measured bottleneck. Unity's [configurable Play Mode](https://docs.unity3d.com/6000.3/Documentation/Manual/configurable-enter-play-mode.html) can shorten waits, but disabled reloads require correct state reset; we have not changed those settings.
+
+The [October 2 journey review](planning/2026-10-02-development-system.md) preserves how we reached this point. Its [interactive development loop](planning/diagrams/development-loop.html) is a visual reference; this page defines our current working system.

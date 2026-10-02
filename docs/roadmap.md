@@ -2,6 +2,8 @@
 
 This is a sequence of learning milestones, not a release-date promise. Update it as playtests change what we know.
 
+These checkboxes describe capabilities and milestone evidence. Linear owns individual task priority, status and dependencies; see [our workflow](workflow.md).
+
 ## 0. Establish the starting point
 
 - [x] Capture the motivation and scope.

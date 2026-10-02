@@ -17,7 +17,7 @@ Two or three years ago, I wouldn't have felt ready to take this on this way. Tod
 | Engine and language | Unity **6000.3.25f1** + C#, URP **17.3.0**; editor and packages pinned |
 | Target platform | First prototype: Windows desktop, keyboard and mouse |
 | Playable build | One-weapon arena with health, pause/restart, and crowd/boss stress scenarios up to 20,000 enemies |
-| Current milestone | Playtest the first combat slice and profile crowded encounters before adding stacked weapons |
+| Current milestone | Evaluate one rifle, then compare it with three distinct simultaneous weapons and a small upgrade loop |
 | Performance target | At least 144 FPS in supported crowded fights; higher caps and uncapped rendering available; target not validated |
 
 Open [the prototype project](prototypes/001-stacked-weapons/README.md) for setup, controls, build commands, and benchmark instructions. The maintained game will move into `game/` after the experiment is evaluated.
@@ -48,12 +48,14 @@ Our first scope guardrail: **one core mechanic, one compact play space, and one 
 .
 |-- README.md
 |-- CONTRIBUTING.md
+|-- AGENTS.md               # Short entry point for AI tasks
 |-- .github/                 # Issue and pull request templates
 |-- docs/
 |   |-- vision.md            # Motivation, principles, and scope
 |   |-- roadmap.md           # Milestones with observable completion criteria
 |   |-- architecture.md      # Folder ownership and how the structure can grow
 |   |-- workflow.md          # Development loop and use of AI
+|   |-- current-state.md     # Current capability, evidence and constraints
 |   |-- design/              # Current game brief
 |   |-- decisions/           # Reasons behind significant choices
 |   |-- devlog/              # Dated progress and lessons
@@ -74,7 +76,9 @@ See [the architecture guide](docs/architecture.md) for placement rules.
 4. Play the one-minute combat slice and run its repeatable crowd benchmark.
 5. Play it, capture observations, and decide whether to keep, change, or discard it.
 
-Follow along in [the development journal](docs/devlog/README.md), starting with [day zero](docs/devlog/2026-09-30-day-zero.md). Our [workflow](docs/workflow.md) explains how we turn those lessons into the next change.
+Follow along in [the development journal](docs/devlog/README.md), starting with [day zero](docs/devlog/2026-09-30-day-zero.md). Start a development task with [current state](docs/current-state.md); our [workflow](docs/workflow.md) explains how Linear, GitHub and AI chats connect with little overhead. The live board is [First weapon-stacking playtest](https://linear.app/cnid/project/first-weapon-stacking-playtest-89b5952f722e), in the **Game Dev (GDJ)** Linear team.
+
+The [journey review and proposed AI-chat/build system](docs/planning/2026-10-02-development-system.md) connects our progress to a bounded task workflow, with an [interactive development loop](docs/planning/diagrams/development-loop.html) and a reusable task handoff template.
 
 ## Contributing and reuse
 

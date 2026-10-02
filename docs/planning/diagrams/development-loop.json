@@ -1,0 +1,32 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {"title": "Proposed game development loop", "locale": "en", "quality_profile": "showcase"},
+  "lanes": [
+    {"id": "delivery", "label": "One bounded task"},
+    {"id": "outcome", "label": "Evidence and next decision"}
+  ],
+  "mainPath": ["brief", "implement", "verify", "build", "evaluate", "record"],
+  "nodes": [
+    {"id": "brief", "lane": "delivery", "col": 0, "type": "frontend", "label": "Task brief", "sublabel": "benefit + done criteria", "width": 140},
+    {"id": "implement", "lane": "delivery", "col": 1, "type": "backend", "label": "Implement", "sublabel": "one chat + branch", "width": 140},
+    {"id": "verify", "lane": "delivery", "col": 2, "type": "security", "label": "Verify", "sublabel": "tests + diff review", "width": 140},
+    {"id": "build", "lane": "delivery", "col": 3, "type": "backend", "label": "Build player", "sublabel": "Unity + source stamp", "width": 140},
+    {"id": "evaluate", "lane": "delivery", "col": 4, "type": "frontend", "label": "Evaluate", "sublabel": "play + measure", "width": 140},
+    {"id": "record", "lane": "delivery", "col": 5, "type": "database", "label": "Record result", "sublabel": "evidence + handoff", "width": 140},
+    {"id": "followup", "lane": "outcome", "col": 4, "type": "messagebus", "label": "Next scoped task", "sublabel": "keep, revise, or park", "width": 140, "yOffset": 25}
+  ],
+  "edges": [
+    {"from": "brief", "to": "implement"},
+    {"from": "implement", "to": "verify"},
+    {"from": "verify", "to": "build", "label": "checks pass"},
+    {"from": "build", "to": "evaluate"},
+    {"from": "evaluate", "to": "record", "label": "observed outcome"},
+    {"from": "record", "to": "followup", "label": "prioritize", "role": "branch"}
+  ],
+  "cards": [
+    {"dot": "cyan", "title": "Gameplay evidence", "items": ["Play movement, aiming, feedback, and restart", "Compare one weapon with three after that feels good", "Record player observations before expanding scope"]},
+    {"dot": "emerald", "title": "Performance evidence", "items": ["Release build: frame-time distribution and workload counts", "Development build: focused CPU and GPU diagnosis", "One desktop benchmark at a time; preserve reference paths"]},
+    {"dot": "amber", "title": "Durable handoff", "items": ["Name the exact commit, configuration, and result", "Link task, decision, and evidence in the repository", "Failures return to implementation before integration"]}
+  ]
+}
