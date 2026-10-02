@@ -2,6 +2,8 @@
 
 Updated October 2, 2026. This is an orientation page, not a copy of the task board. Update it when the playable capability, accepted configuration or a major constraint changes.
 
+Start a fresh session with the [planning handoff](planning/README.md), then this page and the selected task's relevant context. Planning and task sessions write durable outcomes back before ending.
+
 ## What exists
 
 The active Unity project is [prototypes/001-stacked-weapons](../prototypes/001-stacked-weapons/README.md). Unity **6000.3.25f1** and its packages are pinned. `game/` is not the active project.

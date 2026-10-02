@@ -12,6 +12,18 @@ Use this in a Linear issue or bounded AI task. Most tasks need only the three fi
 
 The task's status, assignee and dependencies live in Linear's fields. A short completion note normally needs just the result, commit/build and checks/evidence links.
 
+## Resume across fresh sessions
+
+Add this to the issue when replacing a session with unfinished work. Use a linked `docs/planning/tasks/<issue-id>.md` only for a task that needs a longer plan. Keep live status/dependencies in Linear.
+
+- **Source:** exact revision and branch/worktree; identify any uncommitted work and relevant build/configuration.
+- **Completed:** the useful changes/findings already made, with file/evidence links.
+- **Checks:** what passed/failed, reproduction commands and what remains unverified.
+- **Remaining:** the next concrete action and unfinished acceptance criteria.
+- **Blockers/decisions:** open questions, current constraints and assumptions requiring verification.
+
+Read the planning handoff and current state first, then this task's resume note and relevant files. Do not require earlier chat history to continue. Write notes at useful checkpoints and before ending; a stopped task need not be marked Done to preserve its progress.
+
 ## Extra context when needed
 
 - **Task ID and outcome:** one player-visible improvement or one measurable question.
@@ -34,6 +46,6 @@ For performance work also name hardware/resolution, workload/version/seed, confi
 
 Example starting message:
 
-> Work on GDJ-1 using its Linear acceptance criteria. Start from the current committed revision and read docs/current-state.md, the renderer report and the relevant runtime setup. Preserve reference modes and keep gameplay scope unchanged. Finish with the commit, checks, reproduction command and durable evidence linked from the issue.
+> Work on GDJ-1 using its Linear acceptance criteria. Start fresh: read AGENTS.md, docs/planning/README.md and docs/current-state.md, check the current committed revision, then follow the renderer report and relevant runtime setup. Read any existing Resume section before changing code. Preserve reference modes and keep gameplay scope unchanged. Finish with the commit, checks, reproduction command and durable evidence linked from the issue; save a resume note if work remains.
 
 This is a reusable prompt example, not a request to begin [GDJ-1](https://linear.app/cnid/issue/GDJ-1/validate-and-name-the-measured-rendering-preset).

@@ -2,7 +2,7 @@
 
 Reviewed on October 2, 2026, against source `7414fac`, the available original conversation, all 18 repository commits, and the design, roadmap and benchmark reports. This is a proposed operating model; it does not promote renderer defaults, implement new gameplay, or create/reorganize chats.
 
-The subsequent solo/AI workflow discussion established [our current working system](../workflow.md): Linear for the live queue, GitHub for code/evidence, bounded task chats, and checks matched to each change. Use [current state](../current-state.md) to start a task; the proposal below preserves the reasoning and original suggested queue.
+The subsequent solo/AI workflow discussion established [our current working system](../workflow.md): Linear for the live queue, GitHub for code/evidence, bounded task chats, and checks matched to each change. The developer then replaced the permanent planning-chat idea with [a planning handoff](README.md) and fresh sessions; [the saved discussion](sessions/2026-10-02-solo-ai-system.md) records that correction. The proposal below preserves the reasoning and original suggested queue. Its planning-hub references describe the earlier proposal, not the current session policy.
 
 ## What the journey tells us
 

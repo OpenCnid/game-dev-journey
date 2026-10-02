@@ -11,7 +11,7 @@ We are one developer working with AI. Keep one implementation task active, short
 | AI chats | Working discussion, implementation and investigation for a bounded task. |
 | Unity and standalone builds | What the change actually does, looks like and feels like. |
 
-Use [current state](current-state.md) to orient a new chat, then follow only the relevant design or evidence links. The [roadmap](roadmap.md) describes milestone outcomes; Linear owns the live task queue. Do not maintain a second copy of that queue in GitHub Issues or a Markdown checklist. GitHub Issues can still collect an outside report; link the item we choose to work on to Linear.
+Start a fresh session with the [planning handoff](planning/README.md) and [current state](current-state.md), then follow only the relevant issue, design or evidence links. The [roadmap](roadmap.md) describes milestone outcomes; Linear owns the live task queue. Do not maintain a second copy of that queue in GitHub Issues or a Markdown checklist. GitHub Issues can still collect an outside report; link the item we choose to work on to Linear.
 
 ## The small board
 
@@ -30,10 +30,10 @@ A blocked task stays in its current stage with the blocking dependency or a shor
 ## From issue to result
 
 1. Pick one ready task. Its brief needs **Outcome, Done when, Context**; use the [brief template](planning/task-brief-template.md) when helpful.
-2. Give an AI task chat the issue link, starting commit and relevant files. Continue that chat while pursuing the same outcome. Keep one planning chat for priorities and accepting results; open another task chat when the objective changes.
+2. Start a fresh planning or task session with the issue/question, starting commit and relevant files. Planning/integration is a role; the repo's handoff preserves continuity between sessions. Keep the session bounded, and save a resume note at checkpoints before replacing a session that still has unfinished work.
 3. Make the smallest useful change. Use a short-lived branch/worktree when isolation helps. One writer owns a Unity project at a time; serialize its Editor, build and test operations.
 4. Review the diff and run the checks appropriate to the change. Fix failures before handoff.
-5. Link the commit or PR, checks, build/reproduction instructions and any observations to the issue. Put durable measurements or decisions in the existing repo documents, with a short result and link in Linear.
+5. Link the commit or PR, checks, build/reproduction instructions and any observations to the issue. Put durable measurements or decisions in the existing repo documents, with a short result and link in Linear. Update the planning handoff/current state when their facts change. For unfinished work, preserve exact revision, completed steps, remaining work, checks and blockers in the [Resume section](planning/task-brief-template.md).
 6. Finish the required review/playtest, mark Done, and choose the next task. A merged PR does not establish that a change feels good.
 
 Use the Linear issue ID in task-chat titles, branch names and PR titles. [Linear's GitHub integration](https://linear.app/docs/github) can link them automatically. The Game Dev team's merge rule is configured to **In Review** so completion stays deliberate, including required human playtests. The GitHub integration's connection to this repository has not been verified; use explicit links until it is. Mark Done manually when the issue's checks are satisfied.
