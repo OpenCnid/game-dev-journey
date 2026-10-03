@@ -1,6 +1,6 @@
 # Shared progression and personal upgrade pools
 
-GDJ-6 design checkpoint, October 2, 2026. [Decision 0003](../decisions/0003-shared-xp-personal-upgrade-draws.md) records accepted direction; the [first encounter](engine-kingdoms-first-encounter.md) uses it. These are design contracts and proposals, not implemented systems.
+GDJ-6 design checkpoint, October 3, 2026. [Decision 0003](../decisions/0003-shared-xp-personal-upgrade-draws.md) records accepted progression; [decision 0004](../decisions/0004-party-thinking-space.md) adds the accepted future selection feature. The [first encounter](engine-kingdoms-first-encounter.md) uses this direction. These are design contracts and proposals, not implemented systems.
 
 ## Owner direction
 
@@ -11,6 +11,7 @@ GDJ-6 design checkpoint, October 2, 2026. [Decision 0003](../decisions/0003-shar
 - When a player selects a legendary or another qualifying high-rarity upgrade, give that same upgrade to the team and visibly credit the original player. Appearance in an offer alone does not grant it. Qualifying tiers remain to define.
 - Account for future upgrades affecting loot pools and upgrade draw pools as well as weapons; magic-find percentage is the owner's example, with exact meaning still open.
 - Consider known long-term interactions, build strategies and scalability when creating features, while keeping each implementation bounded.
+- Accept party thinking space as a future feature: bank choices for planned breaks, with earlier invocation by a player who has an unspent choice; unlimited mental upgrade/loadout time during physical freeze; resume when all active players are ready. Baseline access belongs to every party. Exact cadence, presentation, loadout/draw/lifecycle handling remain open.
 
 **Owner clarification:** independent offers and player pool modifiers may overlap between teammates. Exclusive upgrade allocation was considered and left unselected. A reusable content catalog with player-specific eligibility and weights remains a proposed implementation boundary; no code structure is selected.
 
@@ -36,7 +37,7 @@ At a team level-up, each player receives their own choice opportunity. Build tha
 
 Offer count, uniqueness rules, rank/duplicate rules, exclusions and weighted sampling are still to define. The design chat recommends generating a concrete offer once per opportunity and preserving it while the menu is closed, so reopening does not become an unpriced reroll. When a pool-modifying choice starts affecting draws, and how queued choices behave, must be explicit before implementation.
 
-The owner requested [selection/accessibility scenario exploration](upgrade-selection-accessibility.md) before choosing live menus or shared pauses. Neither is selected. The owner then proposed unlimited party thinking time while physical time is frozen, allowing upgrades/loadout changes but no movement. The record compares automatic level freezes, planned frozen preparation and a requested/planned hybrid; trigger, item/ability availability and loadout scope remain proposals. Sequential reveal of banked choices is also proposed. Generating offers at earning versus first opening remains open.
+The owner requested [selection/accessibility exploration](upgrade-selection-accessibility.md), then accepted party thinking space as a future feature: planned breaks plus earlier player invocation, unlimited mental choice time while physical time freezes, and all-active-player readiness before resume. [GDJ-7](https://linear.app/cnid/issue/GDJ-7/build-party-thinking-space-for-cooperative-upgrades) tracks later work. Exact cadence, item/ability presentation and loadout scope remain open. Sequential reveal of banked choices remains a proposal; generating offers at earning versus first opening is not settled by feature acceptance.
 
 Do not regenerate offers every combat frame. Combat effects operate with the simulation; pool calculation and sampling happen at progression/draw events. Use independent, reproducible player random streams as a proposal for debugging and future shared-state consistency. Randomness does not imply an upgrade is exclusive to a teammate, and shared seeds do not prove whole-game simulation determinism.
 
@@ -75,4 +76,4 @@ Next bounded feasibility question after selection/lifecycle rules are chosen: ca
 
 ## Resume
 
-Accepted: shared XP, independent personal random choices/pool modifiers with possible overlap, team grants when qualifying high-rarity upgrades are selected, with original-player credit, and accounting for future weapon/loot/draw effects. Pending: qualifying tiers, cross-build applicability, repeat/stacking rules, menu timing, exact draw/loot semantics and downed/end/restart. The owner requested deeper selection/accessibility exploration instead of selecting live combat or shared pause; hypothetical scenarios and a safe-break comparison are saved. Keep GDJ-6 In Review while required owner evaluation remains outstanding. No gameplay implementation, Unity operations, benchmarks or validated balance/enjoyment evidence in this checkpoint.
+Accepted: shared XP, independent personal draws/pool modifiers with overlap, selected team rare grants with source credit, future weapon/loot/draw effects, and the party thinking-space hybrid as a future feature. Pending: qualifying tiers, cross-build applicability, repeats, detailed thinking-space cadence/loadout/draw handling and downed/end/restart. The selection/accessibility reasoning is saved; later feature work belongs to GDJ-7's milestone. Keep GDJ-6 In Review while encounter evaluation remains outstanding. No gameplay implementation, Unity operations, benchmarks or validated balance/enjoyment evidence in this checkpoint.

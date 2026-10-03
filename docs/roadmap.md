@@ -73,8 +73,12 @@ October 2 direction update: [decision 0002](decisions/0002-cooperative-pve-ai-wo
 
 **Done when:** someone else can obtain and play the game, and we have recorded the outcome.
 
+## Accepted future feature: Party thinking space
+
+The owner accepted the [thinking-space hybrid](decisions/0004-party-thinking-space.md) on October 3, 2026 and requested a Linear milestone for later work. Bank earned choices for planned breaks, allow earlier player invocation, freeze physical combat for unlimited mental upgrade/loadout decisions, then resume when all active players are ready. The **Party thinking space** milestone in the [Linear project](https://linear.app/cnid/project/first-weapon-stacking-playtest-89b5952f722e) and [GDJ-7](https://linear.app/cnid/issue/GDJ-7/build-party-thinking-space-for-cooperative-upgrades) own later planning and implementation. Begin with two players after minimal shared combat/progression/lifecycle feasibility; preserve 2-4 player and future draw/loot interactions. No date or immediate implementation is scheduled. Detailed behavior and human validation remain pending.
+
 ## Parking lot
 
 Put tempting ideas here without treating them as commitments. For each one, note the player benefit and what evidence would justify adding it.
 
-No deferred feature ideas yet.
+Accepted future features are recorded above; this space is for further uncommitted ideas.

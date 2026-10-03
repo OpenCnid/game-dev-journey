@@ -1,6 +1,6 @@
 # GDJ-6: The Engine Kingdoms first cooperative encounter
 
-Design discussion checkpoint, October 2, 2026. [GDJ-6](https://linear.app/cnid/issue/GDJ-6/design-the-first-engine-kingdoms-cooperative-encounter) owns acceptance and live status. The dedicated design chat has started; owner evaluation of the proposals below is pending. This is an unfinished design handoff, not an encounter approved for implementation.
+Design discussion checkpoint, October 3, 2026. [GDJ-6](https://linear.app/cnid/issue/GDJ-6/design-the-first-engine-kingdoms-cooperative-encounter) owns acceptance and live status. Owner evaluation of the remaining encounter proposals is pending. The thinking-space selection feature is accepted for later work; the complete encounter is still an unfinished design handoff.
 
 ## Source and accepted direction
 
@@ -59,7 +59,7 @@ Neither combination is selected yet. The earlier marking/consuming proposal rema
 
 **Current next discussion:** define only the level-up selection and team lifecycle rules needed to play and repeat the simple progression encounter. Further lore and special-combination design are deferred.
 
-The owner requested [selection/accessibility scenarios](upgrade-selection-accessibility.md) to explore frustration with waiting friends and access for players with reading or sight disabilities. No menu mode was selected. The owner then proposed an ability/item providing unlimited party thinking time while physical time freezes: upgrades/loadout changes are permitted, movement is not. The record compares automatic level freezes, planned frozen preparation and a requested/planned hybrid without claiming measured reactions or choosing a final trigger. If chosen, specify 60 seconds of active combat separately from untimed thinking-space wall time and the delay before earned upgrades become usable. This gameplay-linked fiction does not require further world history or a scripted opening.
+The owner requested [selection/accessibility scenarios](upgrade-selection-accessibility.md), then **accepted the party thinking-space hybrid as a future feature**: bank choices for planned breaks, with earlier invocation by a player who has an unspent choice; unlimited mental upgrade/loadout decisions while physical time freezes; resume when all active players are ready. [Decision 0004](../decisions/0004-party-thinking-space.md) records acceptance and [GDJ-7](https://linear.app/cnid/issue/GDJ-7/build-party-thinking-space-for-cooperative-upgrades) holds later implementation. Exact cadence, loadout scope and detailed draw/lifecycle handling remain open. Specify active combat seconds separately from untimed thinking-space wall time. This gameplay-linked fiction does not require further world history or a scripted opening.
 
 Write one concrete 60-second two-player encounter around moving, aiming, leveling and choosing build growth. Each player's simultaneously active weapons should visibly contribute to team survival. Select only the progression and lifecycle rules required to reach and repeat that moment.
 
@@ -74,14 +74,14 @@ Write one concrete 60-second two-player encounter around moving, aiming, levelin
 | Forbidden combination, contributions and enemy response | Special combinations deferred. Proposed first team contribution is complementary coverage/protection from independent growing builds. |
 | Arena, timing, threats and success action | Proposed: direct arena entry and 60-second survival against approaching enemies; no scripted escape required. |
 | Visual/audio treatment | Open; first prototype should communicate a few distinct player/enemy cues with placeholders. |
-| Progression/rewards and upgrade timing | Shared XP and independent personal random choices/pool modifiers accepted, with overlapping teammate draws permitted. Selecting a qualifying high-rarity upgrade grants it to the team and credits its originator. Qualifying tiers, draw details and menu timing remain open; global pause is not accepted. |
+| Progression/rewards and upgrade timing | Shared XP, independent personal draws/pool modifiers and selected team rare grants with source credit are accepted. The thinking-space hybrid is accepted for later work: planned breaks plus earlier invocation, physical freeze and unlimited mental choices, readiness-based resume. Qualifying tiers, draw ordering, exact cadence/loadout scope and departure handling remain open. |
 | Downed/revive, shared ending and restart | Open; local death precedence is not an accepted cooperative rule. |
 
 ## Pillars, scope and risks to resolve
 
 - **Perceptible power growth:** each chosen level-up should produce a noticeable capability change as the arsenal grows. Numbers alone are insufficient.
 - **Distinct builds and contribution:** personal random choices should lead to recognizable strengths and useful coverage/protection. Shared high-rarity rewards celebrate the original player's contribution without replacing personal builds. Future draw/loot modifiers can create present-versus-future tradeoffs; their balance needs evidence.
-- **Readable, responsive combat:** keep threats, aim and teammate contributions understandable as weapon count rises. Upgrade selection must work while a teammate is active. Readability at large counts remains an evidence question.
+- **Readable, responsive combat:** keep threats, aim and teammate contributions understandable as weapon count rises. Earn choices during active combat and resolve them in the accepted thinking-space direction; later work must verify a consistent shared freeze/resume and responsive menu interaction. Readability at large counts remains an evidence question.
 - **Production scope:** one graybox arena, one approaching enemy type and a small choice pool are sufficient for the initial experiment. A controlled rare reward can exercise sharing. Keep combat effects, player pools, offer generation and loot modifiers logically distinct so the current content slice does not prohibit known future effects. A full rarity/loot system or universal modifier engine is not required. Small prototype content is not the final stack limit.
 
 ## Later bounded feasibility question
@@ -92,8 +92,8 @@ Use the one-gun start, one earned team level-up with personal choices, a control
 
 ## Resume
 
-- **Completed:** prior world choices preserved as background; immediate one-gun/level-up/large-stack loop accepted. Foundation revision 7 and decision 0003 record accepted shared XP, independent personal draws with possible overlap, team grants on selection of qualifying high-rarity upgrades with originator credit, and future weapon/loot/draw effect support. Long-term feature-design instruction is recorded in AGENTS/workflow. Fixed grants, narrative escape and special-combination selection remain superseded as requirements.
-- **Owner evaluation outstanding:** resolve qualifying tiers and build applicability, menu timing and necessary downed/end/restart rules; evaluate the small progression encounter. Keep GDJ-6 In Review.
+- **Completed:** prior world choices preserved as background; immediate one-gun/level-up/large-stack loop, shared XP/personal draws and selected team rare grants accepted. Foundation revision 8 and decisions 0003/0004 also record the accepted future thinking-space hybrid; its Linear milestone and GDJ-7 preserve later work. Long-term feature-design instruction remains in AGENTS/workflow. Fixed grants, narrative escape and special-combination selection remain superseded as requirements.
+- **Owner evaluation outstanding:** resolve qualifying tiers/build applicability and necessary downed/end/restart rules; evaluate the small progression encounter. Detailed thinking-space cadence/loadout/draw/lifecycle handling belongs to later specification. Keep GDJ-6 In Review.
 - **Checks:** documentation link/anchor and whitespace checks apply to this revision; exact results and source belong in GDJ-6 after commit. No gameplay changes, Unity operations, benchmarks, human play observation or networking experiment occurred.
-- **Next action:** evaluate the saved selection/accessibility scenarios and choose a bounded menu rule before lifecycle/encounter completion. Selection-triggered rare sharing is accepted. Live selection, shared pauses, safe breaks and offer-generation timing remain proposals. Do not reopen lore or special-combination design as prerequisites.
+- **Next action:** continue qualifying-tier/applicability and downed/end/restart discussion. The thinking-space hybrid is accepted as a future feature; do not repeat its selection vote or start its implementation now. Offer-generation timing and detailed cadence/loadout handling remain open. Do not reopen deeper lore or special-combination design as prerequisites.
 - **Integration:** planning/integration reviews this durable record and accepted choices. No automatic message to the originating chat is required or authorized by receipt of its delegation alone.

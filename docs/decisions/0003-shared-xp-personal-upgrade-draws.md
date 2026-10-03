@@ -19,7 +19,7 @@ This is owner-selected design, not a conclusion from playtest evidence. Shared l
 
 ## Consequences and open details
 
-- The one-minute encounter uses shared XP and personal random choices. XP rewards, selection timing and team lifecycle still need explicit rules.
+- The one-minute encounter uses shared XP and personal random choices. The subsequent [decision 0004](0004-party-thinking-space.md) accepts a future thinking-space selection feature; XP rewards, exact cadence and team lifecycle still need explicit rules.
 - Distinguish an upgrade's gameplay effects from its eligibility and probability of appearing. Player-specific loot modifiers and upgrade-draw modifiers need separately understandable targets.
 - Preserve a small initial content scope while avoiding a weapon-only upgrade model. No all-purpose effect engine or complete future content roster is selected.
 - Shared high-rarity rewards need a clear original-player identity, one grant per recipient for the same reward event, and defined applicability across different builds. Tier threshold, handling of two genuine repeat pulls, repeat ranks, pool availability, magic-find scope, rarity formulas and join/downed behavior remain open.
