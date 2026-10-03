@@ -1,10 +1,12 @@
 # Project foundation: the game we are building
 
-**Product definition, revision 2 — October 2, 2026.** This page defines the intended game. Read it first to understand the project; implementation progress lives in [current state](current-state.md), and immediate work lives in the [planning handoff](planning/README.md).
+**Product definition, revision 3 — October 2, 2026.** This page defines the intended game. Read it first to understand the project; implementation progress lives in [current state](current-state.md), and immediate work lives in the [planning handoff](planning/README.md).
 
 ## What this project is
 
-We are building an **original, single-player, first-person horde-survival game centered on stacking simultaneous weapons and creating powerful builds**. The player moves and aims through crowded encounters while an expanding arsenal operates together. Choosing how that arsenal grows is central to the experience.
+We are building an **original, cooperative multiplayer PvE, first-person horde-survival game centered on stacking simultaneous weapons and creating powerful builds**. Design for **2-4 players on the same team**, with **two-player testing first**. Players move and aim through crowded encounters while expanding arsenals operate together. Choosing how those arsenals grow and contribute to the team is central to the experience.
+
+The selected world direction is **The Engine Kingdoms**: players arrive from another world into a magical world maintained by artificial intelligence. As outsiders, they can combine powers the governing system normally forbids, giving cooperative weapon stacking a place in the world's fiction. The AI's motives, physical versus simulated nature of the world, exact visual treatment and playable rule-breaking effects remain design questions. The [world comparison](design/ai-world-options.md) preserves the selected direction and alternatives. [Decision 0002](decisions/0002-cooperative-pve-ai-world.md) records the owner's change from the earlier single-player scope and subsequent world selection.
 
 The intended power fantasy is to begin with limited firepower and grow into a formidable build that can handle enormous crowds. Late encounters may contain more than 10,000 enemies, including large numbers of bosses with special abilities. The player must still be able to read threats and respond; smooth performance is part of how the combat should feel.
 
@@ -12,17 +14,17 @@ Vampire Hunters is our starting reference for this concept. We will develop our 
 
 ## The player's experience
 
-The game is aimed at players who enjoy fast action, visible power growth and experimenting with weapon combinations. We want a player to finish a run thinking: **“That combination became powerful. I want to try a different build.”** This is our design intention; human playtests must establish whether we deliver it.
+The game is aimed at players who enjoy fast action, visible power growth and experimenting with weapon combinations alongside teammates. We want a player to finish a run thinking: **“That combination became powerful. I want to try a different build with my team.”** This is our design intention; human cooperative playtests must establish whether we deliver it.
 
 Our intended run loop is:
 
-1. **Enter an encounter** with a modest starting arsenal.
-2. **Move, aim and fight** to survive the surrounding horde.
+1. **Enter an encounter as a team** with modest starting arsenals.
+2. **Move, aim and fight together** to survive the surrounding horde.
 3. **Make build choices** that add weapons or improve their behavior.
-4. **Use the growing combination** against increasing pressure and enemy abilities.
-5. **Reach an ending and restart**, carrying the lesson into another build attempt.
+4. **Use the growing combinations** and support teammates against increasing pressure and enemy abilities.
+5. **Reach a shared ending and restart**, carrying the lesson into another team build attempt.
 
-How choices are earned, presented and balanced is still a design question. The current experiment proposes pickups and upgrade choices; those mechanisms can change while preserving weapon stacking and build creation.
+How choices are earned, presented and balanced is still a design question. The earlier local experiment proposes pickups and paused upgrade choices; cooperative progression, resource sharing, upgrade timing, downed/revive rules and team ending conditions require design before implementation.
 
 ## The three design pillars
 
@@ -32,11 +34,11 @@ Adding a weapon or upgrade should change what the player can do, see and feel. A
 
 ### 2. Distinct builds
 
-Simultaneously active weapons should contribute recognizable behaviors and strengths. Combinations and upgrade paths should produce different results, giving the player a reason to choose and experiment. Weapon count alone does not establish build variety.
+Simultaneously active weapons should contribute recognizable behaviors and strengths. Combinations and upgrade paths should produce different results, giving the player a reason to choose and experiment. Players should understand their own contribution and opportunities to complement teammates. Weapon count alone does not establish build variety.
 
 ### 3. Readable, responsive combat
 
-The player should understand incoming threats, damage and the contribution of their weapons even when combat becomes crowded. Movement and aiming must remain responsive as enemies, projectiles and effects multiply. Visual spectacle must preserve the information needed to play.
+The player should understand incoming threats, damage and the contribution of their weapons even when combat becomes crowded. Movement and aiming must remain responsive as players, enemies, projectiles and effects multiply. Teammate effects and network behavior must preserve the information and responsiveness needed to play.
 
 ## The game's core systems
 
@@ -50,15 +52,16 @@ These describe the intended product, not a list of features already implemented.
 | Dense enemy encounters | Create pressure and opportunities to experience the build's increasing power. |
 | Enemy and boss abilities | Create threats that require attention and response beyond approaching the player. |
 | Combat feedback | Communicate weapon behavior, hits, damage and danger amid overlapping action. |
-| Run lifecycle | Provide a clear start, an understandable ending and a reliable restart. |
+| Cooperative session and shared combat | Keep players on one team in a consistent encounter, with understandable teammate contributions and shared authoritative outcomes. |
+| Run lifecycle | Provide a clear team start, an understandable shared ending and a reliable restart. |
 
 ## Scale, performance and scope
 
-Design for **144 FPS or higher** within a declared hardware/settings/encounter envelope, with higher caps and uncapped options. Our late-game ambition includes **more than 10,000 active enemies**, potentially ability-heavy bosses. Those are requirements to validate with representative gameplay; synthetic crowd results support only their measured workload. The [performance policy](performance.md) defines the current benchmark hardware and protocol.
+Design for **144 FPS or higher** within a declared hardware/settings/encounter envelope, with higher caps and uncapped options. Our late-game ambition includes **more than 10,000 active enemies**, potentially ability-heavy bosses. Those are requirements to validate with representative cooperative gameplay; synthetic local crowd results support only their measured workload. Network topology, latency/bandwidth targets and the supported multiplayer encounter envelope remain unvalidated. The [performance policy](performance.md) defines the current local benchmark hardware and protocol.
 
-Finish a small, complete version of this loop before expanding its content. Three weapons, six upgrades and five minutes are the [current prototype's test settings](design/game-brief.md), rather than the definition of the finished game. Multiplayer, accounts/online services, monetization, extensive procedural content and custom-engine work are deferred until that first complete loop exists.
+Finish a small, complete cooperative version of this loop before expanding its content. Three weapons, six upgrades and five minutes are the [earlier local prototype's test settings](design/game-brief.md), rather than the definition of the finished game. Networking is now part of the core game; validate a minimal two-player shared encounter before expanding multiplayer systems or content. Accounts, public matchmaking services, monetization, extensive procedural content and custom-engine work remain deferred.
 
-The final theme, visual style, weapon roster, enemy roster, run duration, progression rules and release destination remain open. They should develop around the game's identity and the three pillars above.
+The AI's motives and underlying world technology, exact visual style, weapon roster, enemy roster, run duration, cooperative progression rules, hosting/connection approach and release destination remain open. They should develop around The Engine Kingdoms direction, the game's identity and the three pillars above.
 
 ## How we are building it
 
@@ -72,3 +75,4 @@ The [game brief](design/game-brief.md) turns this product definition into specif
 | --- | --- | --- |
 | 1 | 2026-10-02 | Consolidated existing commitments as a session foundation. |
 | 2 | 2026-10-02 | Refocused the foundation on the game's identity, player experience, run loop and core systems following the owner's clarification. Moved documentation rules into the workflow. |
+| 3 | 2026-10-02 | Owner changed the game to cooperative multiplayer PvE for 2-4 players, testing two first, and selected The Engine Kingdoms: isekai into an AI-maintained magical world where teammates combine forbidden powers. Detailed mechanics and technology remain under design. |

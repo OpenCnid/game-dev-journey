@@ -4,12 +4,16 @@ This is a sequence of learning milestones, not a release-date promise. Update it
 
 These checkboxes describe capabilities and milestone evidence. Linear owns individual task priority, status and dependencies; see [our workflow](workflow.md).
 
+October 2 direction update: [decision 0002](decisions/0002-cooperative-pve-ai-world.md) changes the product to cooperative PvE for 2-4 players, testing two first, in an AI-controlled isekai world. Historical local milestones remain completed local capabilities; they do not establish multiplayer acceptance.
+
 ## 0. Establish the starting point
 
 - [x] Capture the motivation and scope.
 - [x] Create a repository structure and working documents.
 - [x] Select a reference direction: first-person horde survival inspired by Vampire Hunters.
 - [x] Identify the owner's priority: stacking weapons and creating powerful builds.
+- [x] Accept cooperative PvE and select The Engine Kingdoms AI-world isekai direction.
+- [ ] Define one small cooperative encounter from the [selected direction](design/ai-world-options.md).
 - [x] Set the baseline performance goal to at least 144 FPS, with higher frame-rate options.
 - [x] Use the current desktop as the development benchmark machine: i7-10700K, RTX 3090, approximately 64 GB RAM; retain existing 1080p captures for comparisons.
 - [ ] Finalize visual settings and a supported peak encounter for [performance validation](performance.md) on this desktop.
@@ -27,6 +31,8 @@ These checkboxes describe capabilities and milestone evidence. Linear owns indiv
 - [x] Extend the stress harness to 20,000 enemies with synthetic boss area attacks, projectile bursts, and synchronized attack spikes.
 - [x] Add stage profiling, a batched Jobs/Burst simulation path, culled instanced rendering, and selectable reference paths for controlled comparisons.
 - [x] Add controlled experiments for effect rendering, identical-warning deduplication, concurrent rendering preparation, and native state ownership; preserve reference paths and gameplay parity checks.
+- [ ] Verify a minimal two-player shared encounter: responsive control, consistent hits/state, team ending and restart; record latency/network and performance limits.
+- [ ] Revise progression and lifecycle rules for cooperative play before implementing the later slices.
 - [ ] Validate more than 10,000 ability-heavy bosses at 144 FPS on the current desktop, including representative boss visuals and the most expensive stacked weapon build.
 - [ ] Compare one weapon against three simultaneously firing weapons.
 - [ ] Add the proposed five-minute survival and upgrade loop if the combat test is promising.
@@ -34,7 +40,7 @@ These checkboxes describe capabilities and milestone evidence. Linear owns indiv
 - [ ] Play it and record what is promising or confusing.
 - [ ] Decide to continue, revise, or try another idea.
 
-**Done when:** the prototype answers its stated question and we have a written next decision. A discarded prototype can still satisfy this milestone.
+**Done when:** the prototype answers its stated question, including the new cooperative feasibility and contribution questions, and we have a written next decision. A discarded prototype can still satisfy this milestone.
 
 ## 2. Complete a tiny game loop
 
@@ -43,7 +49,7 @@ These checkboxes describe capabilities and milestone evidence. Linear owns indiv
 - [ ] Make controls and feedback understandable without explanation.
 - [ ] Observe someone else playing and record their difficulties.
 
-**Done when:** a new player can complete and restart a session without developer intervention.
+**Done when:** a small team can complete and restart a cooperative session without developer intervention.
 
 ## 3. Refine the experience
 

@@ -4,6 +4,8 @@ The owner reports that late Vampire Hunters runs can consist entirely of bosses 
 
 Unity/C# remains the chosen stack. A custom engine is not required by this count alone. The implementation and measured costs of AI, avoidance, abilities, collision, animation, and rendering decide whether the target is feasible. We will not infer feasibility from a lower-count cube benchmark.
 
+The October 2 [cooperative direction](../decisions/0002-cooperative-pve-ai-world.md) adds 2-4 players, with two-player testing first. These existing scenarios remain local one-player controls; network synchronization, latency, additional player/weapon load and cooperative enemy targeting are missing costs. The governing AI world premise does not establish an enemy implementation or a networking architecture.
+
 ## Current synthetic scenarios
 
 | Scenario | Work |

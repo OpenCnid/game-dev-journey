@@ -6,11 +6,11 @@ Use the [planning/integration startup prompt](start-planning-session.md) to begi
 
 ## Direction and reasoning
 
-Our first game tests whether stacking distinct weapons creates satisfying power growth while threats remain readable. The crowd investigation reduced a major technical risk, but the enjoyment question is still open. Carry the measured work forward deliberately, then return to a small playable weapon/upgrade loop. See [the game brief](../design/game-brief.md) and [milestone outcomes](../roadmap.md).
+Our game tests whether stacking distinct weapons creates satisfying power growth and useful team combinations while threats remain readable. The owner has changed the product to **cooperative PvE for 2-4 players, two-player testing first**, with **isekai into an AI-controlled world**; see [decision 0002](../decisions/0002-cooperative-pve-ai-world.md). The local crowd investigation reduced a rendering/simulation risk, but multiplayer feasibility and enjoyment remain open. Carry that evidence forward as a local control. See [the game brief](../design/game-brief.md) and [milestone outcomes](../roadmap.md).
 
 The [Game Dev (GDJ) Linear project](https://linear.app/cnid/project/first-weapon-stacking-playtest-89b5952f722e) owns live task priority, status and dependencies. Preset validation and observation of the current rifle are the entry points before weapon expansion. Consult the board for what is ready; this page records intent rather than a second task queue.
 
-The owner's current October 2 direction is **design first**, specifically the world's theme, visual identity and signature interaction. Use the [GDJ-6 design-session brief](tasks/GDJ-6.md) to compare a few original directions within the foundation before returning to implementation, performance validation or playtesting. No theme has been selected yet. This supersedes the earlier recommendation to start with the rifle playtest; the [GDJ-2 brief and inspection checkpoint](tasks/GDJ-2.md) remain available for later. The existing playtest and rendering-preset acceptance requirements still apply before weapon expansion.
+The owner's current October 2 direction is **design first**, developing the selected **Engine Kingdoms** world: an AI maintains a magical world, and outsiders combine forbidden powers. Use the [GDJ-6 design-session brief](tasks/GDJ-6.md) and [world comparison](../design/ai-world-options.md) to describe one 60-second cooperative encounter. The exact signature effect remains a hypothesis. Then scope minimal two-player network/combat feasibility before broadening the weapon/progression experiment. This supersedes the earlier recommendation to start with the rifle playtest; the [GDJ-2 brief and inspection checkpoint](tasks/GDJ-2.md) remain available as local evidence for later. Existing playtest/preset checks remain useful, but cannot establish cooperative acceptance. Re-scope the later tasks from the design/feasibility handoff before starting them.
 
 ## Accepted working choices
 
@@ -57,7 +57,8 @@ For work spanning sessions, add a short Resume section to the issue. Use `docs/p
 
 ## Questions still requiring evidence
 
-- Which world, visual identity and signature interaction best express the weapon-stacking fantasy? Design proposals remain hypotheses until selected and tested.
+- Which concrete cooperative signature and visual treatment best express The Engine Kingdoms weapon-stacking fantasy? Detailed design proposals remain hypotheses until selected and tested.
+- Can two players share responsive, consistent combat, hit results and a run ending/restart? Network ownership, upgrade timing, downed rules and multiplayer performance are unverified.
 - Does the current rifle/movement slice feel promising enough to expand?
 - Does the measured rendering preset hold up under staggered attacks and endurance, and which options should be promoted?
 - Do three weapons create readable power growth and different build strengths?

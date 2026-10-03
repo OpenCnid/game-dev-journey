@@ -4,6 +4,8 @@ Planning recommendation, October 2, 2026. Live status and dependencies remain in
 
 **Priority clarification:** the owner subsequently chose [theme/identity design first](GDJ-6.md). Preserve this playtest brief for later; it is no longer the immediate next session. The checkpoint below records the earlier inspection, not the current priority.
 
+**Scope clarification:** [decision 0002](../../decisions/0002-cooperative-pve-ai-world.md) changes the intended game to cooperative PvE. This brief still evaluates the existing local rifle as a control; it cannot establish shared-combat, cooperative pause/progression or multiplayer performance acceptance.
+
 ## Why this outcome
 
 The largest immediate player-experience gap is whether moving, aiming and reading damage in the existing combat slice feel promising enough to expand. Two short human runs can identify a specific problem before more weapons obscure its cause. This serves player movement/aiming, combat feedback and run lifecycle, especially the foundation's [readable, responsive combat pillar](../../foundation.md#3-readable-responsive-combat). It is an entry check for the later [power-growth and distinct-build experiment](../../design/game-brief.md#first-question-and-stopping-condition), not evidence that those pillars are already delivered.
