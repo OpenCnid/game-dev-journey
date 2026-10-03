@@ -8,7 +8,7 @@ GDJ-6 design checkpoint, October 2, 2026. [Decision 0003](../decisions/0003-shar
 - Share XP so friends receive aligned progression opportunities rather than competing for XP.
 - Give each player individual random upgrade choices and their own draw-pool state.
 - Draw independently with possible overlap between teammates; upgrade definitions are not exclusive to a player's pool.
-- When a player pulls a legendary or another qualifying high-rarity upgrade, give that same upgrade to the team and visibly credit the original player. Qualifying tiers and appearance-versus-selection trigger remain to define.
+- When a player selects a legendary or another qualifying high-rarity upgrade, give that same upgrade to the team and visibly credit the original player. Appearance in an offer alone does not grant it. Qualifying tiers remain to define.
 - Account for future upgrades affecting loot pools and upgrade draw pools as well as weapons; magic-find percentage is the owner's example, with exact meaning still open.
 - Consider known long-term interactions, build strategies and scalability when creating features, while keeping each implementation bounded.
 
@@ -32,7 +32,7 @@ These are logical boundaries, not a selected C# architecture, storage schema or 
 
 ## Proposed draw flow
 
-At a team level-up, each player receives their own choice opportunity. Build that player's eligible pool, apply the player's current draw modifiers, then sample the configured number of offers. The player chooses one; apply its declared effects to the player build. Ordinary upgrades affect that player. A qualifying high-rarity pull shares the selected upgrade definition with the team; its grant trigger remains to clarify. A draw modifier changes its recipient's subsequent offers, rather than rerolling existing offers or implicitly editing every teammate's pool. If that modifier is itself a shared high-rarity reward, its declared effects apply to all recipients.
+At a team level-up, each player receives their own choice opportunity. Build that player's eligible pool, apply the player's current draw modifiers, then sample the configured number of offers. The player chooses one; apply its declared effects to the player build. Ordinary upgrades affect that player. Selecting a qualifying high-rarity upgrade shares that upgrade definition with the team. Generating or viewing the offer does not grant it. A draw modifier changes its recipient's subsequent offers, rather than rerolling existing offers or implicitly editing every teammate's pool. If that modifier is itself a shared high-rarity reward, its declared effects apply to all recipients.
 
 Offer count, uniqueness rules, rank/duplicate rules, exclusions and weighted sampling are still to define. The design chat recommends generating a concrete offer once per opportunity and preserving it while the menu is closed, so reopening does not become an unpriced reroll. When a pool-modifying choice starts affecting draws, and how queued choices behave, must be explicit before implementation.
 
@@ -53,13 +53,13 @@ An early reward modifier creates a present-versus-future power decision. Multipl
 
 ## Shared high-rarity moment
 
-**Accepted:** one player pulling a legendary or qualifying high-rarity upgrade grants that upgrade to everyone and retains credit for who originally pulled it. Personal offers/pool modifiers otherwise remain independent. The threshold must be an explicit rarity rule, not a hardcoded check for one named item. A proposed banner is: “Darian found [Legendary Upgrade] — granted to the team.”
+**Accepted:** one player selecting a legendary or qualifying high-rarity upgrade grants that upgrade to everyone and retains credit for who originally pulled and selected it. Personal offers/pool modifiers otherwise remain independent. The threshold must be an explicit rarity rule, not a hardcoded check for one named item. A proposed banner is: “Darian found [Legendary Upgrade] — granted to the team.”
 
-**Pending owner clarification:** grant when the original player chooses the upgrade, or as soon as it appears in their random offers? The design chat prefers selection to preserve the meaning of choosing. Neither trigger is assumed yet.
+**Owner choice:** grant on selection. The original player must choose the qualifying upgrade; merely seeing it in their random offers does not grant it. This preserves the meaning of choosing. Appearance-triggered sharing is unselected.
 
 **Proposed grant rules:** treat this as one team reward event with the original player and explicit recipients. Give each recipient the upgrade once for that event. Receiving a shared grant does not count as a new pull and trigger another round of sharing. Keep teammates' pending personal offers and choices intact. The effect must tell each player what they received; a common upgrade definition does not guarantee identical strength in different builds.
 
-Weapon-specific prerequisites, already-owned/max-rank upgrades, incompatible choices, disconnected/downed players, two independent pulls of the same upgrade and whether a shared grant consumes the original choice remain to specify. Prefer effects that every recipient can use in the first shared-rare test; this is a content recommendation, not an accepted universal eligibility rule. Do not silently grant a weapon-only upgrade that has no effect for a teammate, nor invent a replacement reward without a rule.
+Weapon-specific prerequisites, already-owned/max-rank upgrades, incompatible choices, disconnected/downed players, two independent pulls of the same upgrade and detailed choice/stacking bookkeeping remain to specify. Prefer effects that every recipient can use in the first shared-rare test; this is a content recommendation, not an accepted universal eligibility rule. Do not silently grant a weapon-only upgrade that has no effect for a teammate, nor invent a replacement reward without a rule.
 
 A player who invests in draw luck may create a team benefit by generating more shared high-rarity moments. Evaluate this alongside individual early combat strength: shared rewards may make luck builds useful, but neither their strength nor team fairness is established by writing the rule. Exact sharing tiers, frequency and modifier formulas are balance questions.
 
@@ -73,4 +73,4 @@ Next bounded feasibility question after selection/lifecycle rules are chosen: ca
 
 ## Resume
 
-Accepted: shared XP, independent personal random choices/pool modifiers with possible overlap, team grants of qualifying high-rarity upgrades with original-player credit, and accounting for future weapon/loot/draw effects. Pending: rare-grant appearance-versus-selection trigger, qualifying tiers, cross-build applicability, repeat/stacking rules, menu timing, exact draw/loot semantics and downed/end/restart. Keep GDJ-6 In Review while required owner evaluation remains outstanding. No gameplay implementation, Unity operations, benchmarks or validated balance/enjoyment evidence in this checkpoint.
+Accepted: shared XP, independent personal random choices/pool modifiers with possible overlap, team grants when qualifying high-rarity upgrades are selected, with original-player credit, and accounting for future weapon/loot/draw effects. Pending: qualifying tiers, cross-build applicability, repeat/stacking rules, menu timing, exact draw/loot semantics and downed/end/restart. Keep GDJ-6 In Review while required owner evaluation remains outstanding. No gameplay implementation, Unity operations, benchmarks or validated balance/enjoyment evidence in this checkpoint.

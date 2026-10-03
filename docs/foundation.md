@@ -1,6 +1,6 @@
 # Project foundation: the game we are building
 
-**Product definition, revision 6 — October 2, 2026.** This page defines the intended game. Read it first to understand the project; implementation progress lives in [current state](current-state.md), and immediate work lives in the [planning handoff](planning/README.md).
+**Product definition, revision 7 — October 2, 2026.** This page defines the intended game. Read it first to understand the project; implementation progress lives in [current state](current-state.md), and immediate work lives in the [planning handoff](planning/README.md).
 
 ## What this project is
 
@@ -24,7 +24,7 @@ Our intended run loop is:
 4. **Use the growing combinations** and support teammates against increasing pressure and enemy abilities.
 5. **Reach a shared ending and restart**, carrying the lesson into another team build attempt.
 
-Starting with one gun and growing through player-selected level-ups is accepted. **XP is shared by the team; random upgrade offers and choices belong to each player.** Each player has their own draw-pool state and can develop a different build. Draws are independent with possible overlap between teammates; upgrades are not reserved exclusively to one player's pool. **A legendary or other qualifying high-rarity pull grants the same upgrade to everyone, with credit to the original player**, making it a group event. Exact qualifying tiers and whether the grant occurs on drawing or selecting remain open. The owner wants upgrades to support future effects on loot and upgrade draws as well as weapons, such as a magic-find percentage; exact effects and probabilities remain to define. Shared XP aligns level-up opportunities, but equal combat power is a balance goal to test, not a guaranteed result of shared levels. See [decision 0003](decisions/0003-shared-xp-personal-upgrade-draws.md) and [progression design](design/progression-and-upgrade-pools.md). Exact reward amounts, within-offer uniqueness/repeat rules, weapon limits, choice timing, downed/revive and team ending rules remain open. The earlier local global pause is not an accepted cooperative rule.
+Starting with one gun and growing through player-selected level-ups is accepted. **XP is shared by the team; random upgrade offers and choices belong to each player.** Each player has their own draw-pool state and can develop a different build. Draws are independent with possible overlap between teammates; upgrades are not reserved exclusively to one player's pool. **Selecting a legendary or other qualifying high-rarity upgrade grants the same upgrade to everyone, with credit to the original player**, making it a group event. Appearing in an offer does not grant it. Exact qualifying tiers remain open. The owner wants upgrades to support future effects on loot and upgrade draws as well as weapons, such as a magic-find percentage; exact effects and probabilities remain to define. Shared XP aligns level-up opportunities, but equal combat power is a balance goal to test, not a guaranteed result of shared levels. See [decision 0003](decisions/0003-shared-xp-personal-upgrade-draws.md) and [progression design](design/progression-and-upgrade-pools.md). Exact reward amounts, within-offer uniqueness/repeat rules, weapon limits, choice timing, downed/revive and team ending rules remain open. The earlier local global pause is not an accepted cooperative rule.
 
 ## The three design pillars
 
@@ -48,7 +48,7 @@ These describe the intended product, not a list of features already implemented.
 | --- | --- |
 | Player movement and aiming | Give the player direct control over positioning and combat in first person. |
 | Simultaneous weapon arsenal | Allow multiple distinct weapons to operate together as one growing build. |
-| Build progression | Share team XP with independent personal choices and pool modifiers; share qualifying high-rarity upgrades with the team and credit the original player. Upgrades can affect combat, loot and future draws. |
+| Build progression | Share team XP with independent personal choices and pool modifiers; selecting a qualifying high-rarity upgrade grants it to the team and credits the original player. Upgrades can affect combat, loot and future draws. |
 | Dense enemy encounters | Create pressure and opportunities to experience the build's increasing power. |
 | Enemy and boss abilities | Create threats that require attention and response beyond approaching the player. |
 | Combat feedback | Communicate weapon behavior, hits, damage and danger amid overlapping action. |
@@ -81,3 +81,4 @@ The [game brief](design/game-brief.md) turns this product definition into specif
 | 4 | 2026-10-02 | Owner selected a physical world with real kingdoms, people and magic sustained by AI systems, the AI's purpose of preventing another catastrophe, and accidental arrival through a failing world system with survival and finding a way home as the initial motivation. Forbidden combinations threaten the world, but outsiders may need them to save it. Specific history, enforcement and encounter mechanics remain open. |
 | 5 | 2026-10-02 | Owner redirected design to immediate combat: start with one gun, level up, choose improvements and grow a large weapon stack. Further lore, a scripted opening and special cooperative-combination selection are deferred; prior world choices remain background context. |
 | 6 | 2026-10-02 | Owner accepted shared XP, independent personal random draws/pool modifiers with possible overlap, and team-wide grants of legendary/qualifying high-rarity upgrades with credit to the original player. Upgrades must accommodate future loot/draw effects as well as weapons; features must consider long-term interactions. Exact grant trigger/tiers, repeat rules, magic-find behavior and lifecycle remain open. |
+| 7 | 2026-10-02 | Owner selected the shared rare-reward trigger: grant to the team when the original player selects the qualifying upgrade. Appearance in an offer alone does not grant it. |
