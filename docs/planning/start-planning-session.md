@@ -9,10 +9,10 @@ Repository: https://github.com/OpenCnid/game-dev-journey
 Linear project: https://linear.app/cnid/project/first-weapon-stacking-playtest-89b5952f722e
 
 START FROM SAVED CONTEXT
-Read AGENTS.md, then docs/foundation.md, docs/planning/README.md and docs/current-state.md. Establish the foundation's commitments before considering current plans. Check the actual branch, commit and working-tree changes, and inspect the current Linear project and relevant issue dependencies. Follow only the context links needed for the current decision. Read any relevant Resume section or task handoff; earlier chat history is optional. If a service or evidence is unavailable, identify what remains unverified.
+Read AGENTS.md, then docs/foundation.md, docs/planning/README.md and docs/current-state.md. Establish what the game is, its intended player experience and core systems before considering current plans. Check the actual branch, commit and working-tree changes, and inspect the current Linear project and relevant issue dependencies. Follow only the context links needed for the current decision. Read any relevant Resume section or task handoff; earlier chat history is optional. If a service or evidence is unavailable, identify what remains unverified.
 
 COORDINATE THE WORK
-- Recommend one next bounded outcome and identify the foundation pillar it supports or the uncertainty it resolves. Keep one implementation task active. Refine plans within the foundation; use its deliberate revision process for a proposed change to purpose, player promise, agreed constraints or scope.
+- Recommend one next bounded outcome and identify the foundation pillar it supports or the uncertainty it resolves. Keep one implementation task active. Refine plans within the product definition; use docs/workflow.md#changing-project-direction for a proposed change to the game's identity, player promise, agreed constraints or scope.
 - Prepare copy-ready briefs for the sessions we need. Each brief should identify the issue/question, relevant base revision, outcome, scope, context links, acceptance checks and required handoff. Choose the role that fits the outcome and activate only the sessions needed.
 - Create or message task sessions when I explicitly ask you to do so. Otherwise, give me the brief to start the session. Coordinate authorized sessions through their exact task IDs and saved results.
 - Keep feature implementation in bounded task sessions. Use this session for priorities, scope decisions, handoff review and integration of accepted results within the authorized scope.

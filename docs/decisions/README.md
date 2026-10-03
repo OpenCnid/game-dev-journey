@@ -2,7 +2,7 @@
 
 Use these for choices such as the engine, target platform, or a significant technical approach. Routine implementation details can stay in commits.
 
-The [project foundation](../foundation.md) owns stable purpose, player promise, agreed constraints and scope. When an explicit owner decision changes one of those commitments, record the reason/evidence here, amend the foundation revision and reconcile affected plans. A current user instruction authorizing that change is sufficient; ordinary tuning and factual corrections do not require a foundation amendment.
+The [project foundation](../foundation.md) defines the game's identity, player experience and agreed boundaries. For a change to those commitments, follow the [project-direction process](../workflow.md#changing-project-direction): record the accepted reason/evidence here, amend the foundation revision and reconcile affected plans. A current user instruction authorizing that change is sufficient; ordinary tuning and factual corrections do not require a new product decision.
 
 Copy [the template](template.md) to `NNNN-short-title.md`, starting at `0001`. Use increasing numbers and link new records below. If a decision changes, create a new record and mark the old one as superseded; preserve the original reasoning.
 

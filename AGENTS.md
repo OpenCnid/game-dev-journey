@@ -2,7 +2,7 @@
 
 ## Start each fresh session
 
-1. Read `docs/foundation.md` first (stable purpose, player promise and boundaries), then `docs/planning/README.md` (current planning intent and context branches) and `docs/current-state.md` (verified capability and constraints).
+1. Read `docs/foundation.md` first (what the game is, its player experience and core systems), then `docs/planning/README.md` (current planning intent and context branches) and `docs/current-state.md` (verified capability and constraints).
 2. Check the actual checkout/commit and the selected Linear issue or planning question. Read only the relevant branch's design, evidence, source and tests. Use `docs/workflow.md` for working/verification rules; do not load every historical session or report.
 3. Resume from the issue's Resume section or linked task plan when present. Connect the task to a foundation pillar or an uncertainty it resolves. If a summary disagrees with newer code/evidence or current user instructions, reconcile it before acting.
 
@@ -10,7 +10,7 @@ Planning/integration and task chats are replaceable sessions. At useful checkpoi
 
 ## Repository rules
 
-- Preserve the foundation during ordinary planning and implementation. Its revision process applies to changes in purpose, player promise, agreed constraints or scope; current user authorization already satisfies the owner-decision step. Task briefs and session summaries do not redefine these commitments.
+- Preserve the game's identity and pillars during ordinary planning and implementation. Use `docs/workflow.md#changing-project-direction` for changes to identity, player promise, agreed constraints or scope; current user authorization already satisfies the owner-decision step. Task briefs and session summaries do not redefine the product.
 - The active Unity project is `prototypes/001-stacked-weapons/`, not the repository root or `game/`. Its README has setup, controls and verification commands.
 - Preserve pinned editor/package versions unless the task requests an upgrade. Check uncertain APIs against the pinned version.
 - Implement one bounded outcome. Keep changes small enough to inspect, run and understand; avoid speculative systems and unrelated refactors.

@@ -2,7 +2,7 @@
 
 Updated October 2, 2026. This is an orientation page, not a copy of the task board. Update it when the playable capability, accepted configuration or a major constraint changes.
 
-Start a fresh session with the [project foundation](foundation.md), [planning handoff](planning/README.md), then this page and the selected task's relevant context. This page reports what exists; the foundation defines what sessions preserve. Planning and task sessions write durable outcomes back before ending.
+Start a fresh session with the [project foundation](foundation.md), [planning handoff](planning/README.md), then this page and the selected task's relevant context. The foundation defines the game; this page reports how much of it exists. Planning and task sessions write durable outcomes back before ending.
 
 ## What exists
 

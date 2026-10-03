@@ -51,7 +51,7 @@ Our first scope guardrail: **one core mechanic, one compact play space, and one 
 |-- AGENTS.md               # Short entry point for AI tasks
 |-- .github/                 # Issue and pull request templates
 |-- docs/
-|   |-- foundation.md        # Stable purpose, player promise and change boundaries
+|   |-- foundation.md        # What the game is: identity, player experience and systems
 |   |-- vision.md            # Motivation, principles, and scope
 |   |-- roadmap.md           # Milestones with observable completion criteria
 |   |-- architecture.md      # Folder ownership and how the structure can grow

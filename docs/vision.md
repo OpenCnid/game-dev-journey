@@ -1,6 +1,6 @@
 # Vision
 
-The [project foundation](foundation.md) is the authoritative session starting point for purpose, player promise, agreed constraints and scope. This page explains the motivation; update its wording consistently with the foundation. Routine planning belongs in the planning handoff, while changes to foundation commitments follow its revision process.
+The [project foundation](foundation.md) defines the game itself: identity, player experience, pillars and core systems. This page explains why we are making it; keep its wording consistent with the foundation. Routine planning belongs in the planning handoff; changes to project direction follow the [workflow](workflow.md#changing-project-direction).
 
 ## Why this exists
 

@@ -11,7 +11,30 @@ We are one developer working with AI. Keep one implementation task active, short
 | AI chats | Working discussion, implementation and investigation for a bounded task. |
 | Unity and standalone builds | What the change actually does, looks like and feels like. |
 
-Start a fresh session with the [project foundation](foundation.md), [planning handoff](planning/README.md) and [current state](current-state.md), then follow only the relevant issue, design or evidence links. The foundation sets stable commitments; plans can evolve within them. The [roadmap](roadmap.md) describes milestone outcomes; Linear owns the live task queue. Do not maintain a second copy of that queue in GitHub Issues or a Markdown checklist. GitHub Issues can still collect an outside report; link the item we choose to work on to Linear.
+Start a fresh session with the [project foundation](foundation.md), [planning handoff](planning/README.md) and [current state](current-state.md), then follow only the relevant issue, design or evidence links. The foundation defines the game we are building; plans can evolve within it. The [roadmap](roadmap.md) describes milestone outcomes; Linear owns the live task queue. Do not maintain a second copy of that queue in GitHub Issues or a Markdown checklist. GitHub Issues can still collect an outside report; link the item we choose to work on to Linear.
+
+## Documentation responsibilities
+
+| Record | Owns |
+| --- | --- |
+| [Project foundation](foundation.md) | What the game is: identity, intended player experience, design pillars, core systems and agreed boundaries. |
+| [Decisions](decisions/README.md) | Accepted consequential choices and their reasons; preserve superseded reasoning. |
+| [Game brief](design/game-brief.md) and [roadmap](roadmap.md) | Specific design experiments, test settings and milestone sequence. |
+| [Planning handoff](planning/README.md) | Near-term intent, open questions and context routing. |
+| [Current state](current-state.md) | What exists, checked against actual source and evidence. |
+| Playtest/benchmark reports | Dated evidence for exact candidates; preserve history and label corrections. |
+
+A task brief or session summary cannot silently redefine the game. Source and measurements establish facts; the foundation defines the intended product.
+
+## Changing project direction
+
+For a change to the game's identity, player promise, agreed constraints or scope:
+
+1. Name the affected commitment, proposed replacement, reason/evidence and impact on existing work.
+2. Follow an explicit decision from the project owner. A current user instruction already authorizing the change is sufficient. Routine implementation, tuning, clearer wording and factual corrections need no new product decision.
+3. Record accepted consequential decisions in `docs/decisions/`, update the foundation revision/history and reconcile affected plans/specs. Preserve previous rationale through Git history and superseded records.
+
+Bounded alternatives can be investigated without adopting a new direction. Save the result and the decision it informs.
 
 ## The small board
 
