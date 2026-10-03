@@ -60,6 +60,10 @@ The owner next requested comparison of frequent shared pauses and planned safe b
 
 One proposed Engine Kingdoms explanation: the outsiders can share a single suspended moment. Their minds keep working while the physical encounter remains still. A shared starting artifact could embody that ability. Exact origin and visual treatment are open. Fiction can make the pause understandable; it does not remove the real-world waiting measured above.
 
+### Working name: The Zone
+
+The owner's October 3 suggestion is **The Zone**, drawing on intense focus and mental practice. [Decision 0004](../decisions/0004-party-thinking-space.md#working-name-and-theme-the-zone) preserves this as a working name and thematic proposal. Upgrade selection could represent mentally understanding and rehearsing an earned change, connecting technological weapons, spell shaping and cultivated qi without requiring additional training mechanics. The accepted safe freeze and unlimited choice time remain accessible through ordinary game controls; players do not need to achieve a real-world focus state. This theme does not resolve the waiting and social-pressure questions above.
+
 ### Comparison using the same thinking-space rules
 
 | Candidate | When thinking time opens | Benefit to investigate | Cost to investigate |

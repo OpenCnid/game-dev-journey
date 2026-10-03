@@ -19,6 +19,16 @@ Retain [decision 0003](0003-shared-xp-personal-upgrade-draws.md): independent pe
 
 The intended benefit is safe, unhurried decision-making with control over interruption timing. Faster players still experience real-world waiting. Banking also delays earned power. Social pressure, clarity and combat momentum require human evidence; lore and hypothetical arithmetic do not prove that these problems are solved.
 
+## Working name and theme: The Zone
+
+On October 3 the owner suggested **The Zone** as a name for the thinking space, inspired by intense focus, absorption in a meaningful activity and mental practice. Preserve it as a working name and thematic proposal; the final name and its exact fictional explanation remain open.
+
+Proposed fiction: the party enters a shared state of focus where thought continues while the physical encounter stands still. Choosing an earned upgrade represents understanding and mentally rehearsing a change until it is ready to use. This could connect [technology, magic and cultivation](0005-technology-magic-and-cultivation.md): understanding a weapon's operation, shaping a spell pattern or refining a qi technique. These are examples of presentation, not new mastery prerequisites or selected resource rules.
+
+The brain-as-muscle and mental-muscle-memory language is a design metaphor. The game can make this state reliably available through its controls; entering a real-world focus state is not required. Unlimited decision time preserves the earned-choice loop rather than generating extra XP or upgrades through waiting. The accepted physical freeze, personal choices and all-player readiness rules remain in force.
+
+Proposed flavor line: **“The Zone: thought continues; the world stands still.”**
+
 ## Consequences and follow-up
 
 - Future work is recorded in the **Party thinking space** milestone in the [Linear project](https://linear.app/cnid/project/first-weapon-stacking-playtest-89b5952f722e), with [GDJ-7](https://linear.app/cnid/issue/GDJ-7/build-party-thinking-space-for-cooperative-upgrades) as its initial implementation task. Work begins after the necessary shared-combat/progression/lifecycle foundation is ready; no date or immediate implementation is scheduled.
