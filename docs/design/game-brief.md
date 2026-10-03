@@ -1,5 +1,7 @@
 # Game brief
 
+**MVP/alpha priority clarification, October 3:** keep the first-person cooperative run bounded. The permanent matrix/preparation/power proposals and optional third-person/dual-camera support are parked beyond MVP/alpha as extremely low-priority ideas in [GDJ-9](https://linear.app/cnid/issue/GDJ-9/idea-permanent-progression-matrix)/[GDJ-10](https://linear.app/cnid/issue/GDJ-10/idea-optional-first-and-third-person-views). Persistent discoveries remain a future direction; a full meta system is not an initial-run requirement.
+
 The [project foundation](../foundation.md) defines the game we are building, its player experience and core systems. This brief turns that definition into a testable design; its proposed mechanics, counts and timings can change within that foundation. Current implementation facts are summarized in [current state](../current-state.md).
 
 **Direction:** an original cooperative multiplayer PvE action roguelike/roguelite horde-survival game, designed for 2-4 players with two-player testing first. References include Vampire Hunters, Risk of Rain and Megabonk. First person is the current prototype view; third person alongside it is a proposal to evaluate. [Decision 0007](../decisions/0007-roguelike-run-identity-and-camera-exploration.md) records this clarification and persistent weapon/upgrade discoveries. Exact unlock/reset/ownership rules and permanent power remain open. The [permanent matrix exploration](permanent-progression-matrix.md) preserves the owner's tower-defense/Path of Exile inspiration as a proposal.

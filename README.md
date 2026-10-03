@@ -13,7 +13,7 @@ Two or three years ago, I wouldn't have felt ready to take this on this way. Tod
 | Area | Status |
 | --- | --- |
 | Experience | Software engineering background; first game |
-| Game concept | Cooperative PvE action roguelike/roguelite horde survival for 2-4 players, focused on stacking weapons and powerful builds; first-person prototype, third-person option under discussion; The Engine Kingdoms AI-world isekai direction |
+| Game concept | Cooperative PvE action roguelike/roguelite horde survival for 2-4 players, focused on stacking weapons and powerful builds; first person for MVP/alpha, optional third person parked for later; The Engine Kingdoms AI-world isekai direction |
 | Engine and language | Unity **6000.3.25f1** + C#, URP **17.3.0**; editor and packages pinned |
 | Target platform | First prototype: Windows desktop, keyboard and mouse |
 | Playable build | One-weapon arena with health, pause/restart, and crowd/boss stress scenarios up to 20,000 enemies |

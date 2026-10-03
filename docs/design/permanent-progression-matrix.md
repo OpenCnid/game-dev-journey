@@ -1,5 +1,7 @@
 # Permanent progression matrix exploration
 
+**Parked idea — beyond MVP/alpha, extremely low priority.** The owner deferred further matrix development on October 3, 2026 because of its scope. [GDJ-9](https://linear.app/cnid/issue/GDJ-9/idea-permanent-progression-matrix) preserves the idea; Linear owns its live priority/status. The sections below retain possibilities for later review, not current work or an implementation commitment. Persistent discoveries remain a future direction; a full matrix, permanent-power system and pool-preparation economy are outside MVP/alpha scope.
+
 GDJ-6 discussion, October 3, 2026. [Decision 0007](../decisions/0007-roguelike-run-identity-and-camera-exploration.md) records the owner's roguelike/roguelite identity and accepted weapon/upgrade discoveries across runs. The owner asked to understand this more deeply and explore permanent power through a branching matrix, citing tower-defense progression and Path of Exile's leveling tree. The matrix and all specific nodes below are proposals, not implemented or accepted content.
 
 ## Three kinds of growth
@@ -35,7 +37,7 @@ One model to compare: permanent progress unlocks more matrix options, and every 
 - **Ordering:** keep catalog discovery, run eligibility, offer generation, selected effects and permanent changes distinct. A persistent pool modifier and a run-earned modifier need an explicit combination rule, including protection for already revealed offers. Exact formulas/schema are open.
 - **Readable expansion:** new branches should introduce distinct choices rather than obligatory stat taxes. Costs, prerequisites, respecs, active-node budgets and how content is extended remain to define. Preserve safe thinking-space access for every party.
 
-## Next bounded investigation
+## If revisited after MVP/alpha
 
 Compare an experienced player's discoveries with a newer friend's options in one example run. First model availability-only unlocks, then add one proposed pool-shaping choice and one proposed permanent-power effect. Explain what each player can start with, earn, draw and share; identify changes to contribution without inventing fun/fairness scores. Select persistence and budget rules with the owner before implementation.
 

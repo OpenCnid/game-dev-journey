@@ -1,13 +1,15 @@
 # 0007: Roguelike identity permanent discovery and camera exploration
 
 - **Date:** 2026-10-03
-- **Status:** accepted roguelike/roguelite identity, reference direction and permanent weapon/upgrade discovery; third-person support and permanent-power matrix rules are proposals.
+- **Status:** accepted roguelike/roguelite identity, reference direction and future permanent weapon/upgrade discovery; matrix/power and dual-camera proposals parked beyond MVP/alpha.
 
 ## Context
 
 The owner clarified that the game is a roguelike/roguelite, combining inspiration from Risk of Rain and Megabonk with cooperative multiplayer. The current prototype is first person, and the owner suggested that third person might also be possible. The earlier Vampire Hunters reference remains relevant to simultaneous weapon stacking. The owner then confirmed unlocking new weapons/upgrades to discover between runs, while requesting deeper exploration of possible permanent power and a matrix inspired by tower-defense progression and Path of Exile's leveling tree.
 
 ## Decision and reasoning
+
+**Later owner priority direction, October 3:** save the permanent matrix and dual-camera proposals as ideas at extremely low priority because they are too much work for the MVP/alpha. [GDJ-9](https://linear.app/cnid/issue/GDJ-9/idea-permanent-progression-matrix) and [GDJ-10](https://linear.app/cnid/issue/GDJ-10/idea-optional-first-and-third-person-views) preserve them for possible later work. Linear uses its lowest available priority, Low, and Backlog. They are outside MVP/alpha scope, with no date or commitment to implement. The intended genre and persistent-discovery direction remain; their full meta system is not required for the initial cooperative run. Resume necessary run progression/rarity/lifecycle design instead of developing these ideas now.
 
 Record **cooperative PvE action roguelike/roguelite horde survival** as the intended genre. Retain the one-gun start, shared XP, independent personal random choices, selected team rare grants and large simultaneous weapon-stack growth. Repeatable runs and different build choices are central. **New weapons and upgrades can remain unlocked for discovery across runs.** Exact unlock conditions, ownership and how unlocked content enters later runs remain open; exact run resets are not yet selected. Permanent stat gains, procedural maps and a particular difficulty-scaling formula are not selected.
 
@@ -40,4 +42,4 @@ Compare equivalent encounters with familiar and unfamiliar builds, nearby enemie
 
 ## Revisit when
 
-Play evidence shows that the run structure fails to encourage new builds, camera framing obscures threats or maintaining two views costs more than their demonstrated value. This record adds genre clarity and an investigation option; it establishes no implementation, validated fun or multiplayer performance.
+Revisit the parked ideas after the core cooperative run is playable and evaluated, if a later owner decision gives them priority. Evidence about new-build variety, camera framing and implementation cost can then guide selection. This record adds genre clarity and preserves future ideas; it establishes no implementation, validated fun or multiplayer performance.

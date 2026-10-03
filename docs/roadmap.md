@@ -82,3 +82,8 @@ The owner accepted the [thinking-space hybrid](decisions/0004-party-thinking-spa
 Put tempting ideas here without treating them as commitments. For each one, note the player benefit and what evidence would justify adding it.
 
 Accepted future features are recorded above; this space is for further uncommitted ideas.
+
+The owner parked these beyond MVP/alpha on October 3, 2026 at extremely low priority. Linear owns their live status/priority; they do not gate the first-person cooperative run.
+
+- [Permanent progression matrix](https://linear.app/cnid/issue/GDJ-9/idea-permanent-progression-matrix): could give long-term build planning through discoveries, pool preparation and possible power. [Prior exploration](design/permanent-progression-matrix.md) retains details. Revisit after the core run is evaluated if the owner prioritizes it; require evidence about mixed-progression friends and draw-pool effects.
+- [Optional first-/third-person views](https://linear.app/cnid/issue/GDJ-10/idea-optional-first-and-third-person-views): could improve character/weapon visibility and view preference. [Camera exploration](decisions/0007-roguelike-run-identity-and-camera-exploration.md#camera-proposal-to-explore) retains questions. Revisit if later player evidence justifies aiming/collision/animation effort; keep first person for MVP/alpha.
