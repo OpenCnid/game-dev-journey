@@ -2,6 +2,8 @@
 
 Planning recommendation, October 2, 2026. Live status and dependencies remain in [GDJ-2](https://linear.app/cnid/issue/GDJ-2/play-the-current-rifle-slice-and-choose-the-next-gameplay-change). This brief prepares a review/playtest session; no task session or gameplay implementation was started by the planning inspection.
 
+**Priority clarification:** the owner subsequently chose [theme/identity design first](GDJ-6.md). Preserve this playtest brief for later; it is no longer the immediate next session. The checkpoint below records the earlier inspection, not the current priority.
+
 ## Why this outcome
 
 The largest immediate player-experience gap is whether moving, aiming and reading damage in the existing combat slice feel promising enough to expand. Two short human runs can identify a specific problem before more weapons obscure its cause. This serves player movement/aiming, combat feedback and run lifecycle, especially the foundation's [readable, responsive combat pillar](../../foundation.md#3-readable-responsive-combat). It is an entry check for the later [power-growth and distinct-build experiment](../../design/game-brief.md#first-question-and-stopping-condition), not evidence that those pillars are already delivered.
@@ -16,7 +18,7 @@ GDJ-2 explicitly permits the current default renderer while GDJ-1 is pending. Bo
 - **Historical automated evidence:** the [renderer report](../../playtests/2026-09-30-renderer-experiments.md) and [test summary](../../playtests/evidence/renderers/test-summary.json) record 33 Edit Mode and two Play Mode passes. Full release captures identify source `8fa326a`; their three combined runs recorded 400.4-467.6 average FPS and 3.743-4.297 ms p99 at 20,000 synchronized synthetic bosses. The [analysis](../../playtests/evidence/renderers/full-analysis.json) confirms 3,600 ticks and 720,000 projectile spawns per run. These results do not measure current human play or the eventual stacked build; occasional frames exceeded the 144 FPS budget.
 - **Board:** GDJ-1 and GDJ-2 have no blockers or existing Resume sections/comments. No issue in this project was In Progress or In Review, and no open repository PR was returned at inspection. This is an inspection snapshot, not a task queue.
 - **Unverified:** human combat observations, staggered/endurance preset validation and representative upgraded-game performance. No Unity tests/builds or captures were rerun in this planning session. No standalone player exists at this worktree's documented release output path.
-- **Next action:** start the review/playtest session below, build the exact candidate, then collect two developer runs. Recheck source and board before acting. This planning record leaves playable capability unchanged, so current state needs no update yet.
+- **Next action when resumed after design:** start the review/playtest session below, build the exact candidate, then collect two developer runs. Recheck source and board before acting. No playable capability changed during the planning inspection.
 
 ## Copy-ready session prompt
 

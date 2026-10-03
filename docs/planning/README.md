@@ -10,11 +10,12 @@ Our first game tests whether stacking distinct weapons creates satisfying power 
 
 The [Game Dev (GDJ) Linear project](https://linear.app/cnid/project/first-weapon-stacking-playtest-89b5952f722e) owns live task priority, status and dependencies. Preset validation and observation of the current rifle are the entry points before weapon expansion. Consult the board for what is ready; this page records intent rather than a second task queue.
 
-The October 2 planning recommendation is to observe the current rifle first, using the existing default configuration. This is the shortest check of movement, aiming and readable feedback before building more weapons; it does not need to wait for preset validation. Use the [GDJ-2 session brief and inspection checkpoint](tasks/GDJ-2.md). The rendering-preset decision still needs acceptance before starting weapon expansion. A proceed decision from the rifle playtest would authorize the next experiment, not establish that weapon stacking is fun.
+The owner's current October 2 direction is **design first**, specifically the world's theme, visual identity and signature interaction. Use the [GDJ-6 design-session brief](tasks/GDJ-6.md) to compare a few original directions within the foundation before returning to implementation, performance validation or playtesting. No theme has been selected yet. This supersedes the earlier recommendation to start with the rifle playtest; the [GDJ-2 brief and inspection checkpoint](tasks/GDJ-2.md) remain available for later. The existing playtest and rendering-preset acceptance requirements still apply before weapon expansion.
 
 ## Accepted working choices
 
 - Planning/integration is a repeatable role. Start a fresh session for a new planning decision or bounded task; any session can resume from committed files without earlier dialogue.
+- This chat's role is to orchestrate the other task chats: choose and scope outcomes, prepare briefs, coordinate authorized sessions, review their durable handoffs and integrate accepted results. Bounded design and implementation work belong in task chats. Create or message those chats only when the owner explicitly asks; otherwise provide the brief.
 - Keep one implementation task active. Gameplay, performance, design and review are context branches we use when needed; they do not require four simultaneous chats or agents.
 - GitHub holds source, accepted design/decisions and evidence. Linear holds the live queue. Chats hold temporary reasoning; save the useful project facts and outcomes before ending a session.
 - Keep the root concise. Link detailed rationale/history, task plans and raw evidence instead of copying them into every brief. [Workflow](../workflow.md) covers checks and completion.
@@ -56,6 +57,7 @@ For work spanning sessions, add a short Resume section to the issue. Use `docs/p
 
 ## Questions still requiring evidence
 
+- Which world, visual identity and signature interaction best express the weapon-stacking fantasy? Design proposals remain hypotheses until selected and tested.
 - Does the current rifle/movement slice feel promising enough to expand?
 - Does the measured rendering preset hold up under staggered attacks and endurance, and which options should be promoted?
 - Do three weapons create readable power growth and different build strengths?
