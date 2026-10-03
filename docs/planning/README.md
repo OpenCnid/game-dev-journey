@@ -1,6 +1,6 @@
 # Planning handoff
 
-Updated October 2, 2026. Read this and [current state](../current-state.md) at the start of every fresh planning or task session. These are the small shared root; follow only the links needed for the current outcome. Check the actual checkout/commit and task brief before acting. Current user instructions take precedence over recorded plans.
+Updated October 2, 2026. Read the [project foundation](../foundation.md) first, then this handoff and [current state](../current-state.md) at the start of every fresh planning or task session. The foundation defines the stable commitments; this page can change near-term plans within them. Follow only the links needed for the current outcome. Check the actual checkout/commit and task brief before acting. Current user instructions take precedence over recorded plans.
 
 Use the [planning/integration startup prompt](start-planning-session.md) to begin a fresh coordination session. It loads this root, checks the repo/board and prepares the next bounded task brief.
 
@@ -19,7 +19,7 @@ The [Game Dev (GDJ) Linear project](https://linear.app/cnid/project/first-weapon
 
 ## Follow the relevant branch
 
-| Task | Read after this root and current state |
+| Task | Read after the foundation, this handoff and current state |
 | --- | --- |
 | Planning/integration | Selected Linear issue, [roadmap](../roadmap.md), relevant [design](../design/game-brief.md) or [decision](../decisions/README.md); completed task handoff/evidence. |
 | Gameplay | Selected issue, [prototype specification and code map](../../prototypes/001-stacked-weapons/README.md), affected code/tests; relevant design or playtest findings. |
@@ -29,7 +29,8 @@ The [Game Dev (GDJ) Linear project](https://linear.app/cnid/project/first-weapon
 
 ```mermaid
 flowchart TD
-  A[AGENTS.md] --> P[Planning handoff]
+  A[AGENTS.md] --> B[Stable project foundation]
+  B --> P[Planning handoff]
   P --> S[Current state]
   S --> T[Selected issue or planning question]
   T --> G[Gameplay context]
@@ -47,7 +48,7 @@ flowchart TD
 
 ## Write back, then start fresh
 
-At a useful checkpoint and before ending a session, preserve the result, exact source/build/configuration, checks, unresolved questions and next action in the issue and relevant repo record. Update this page when intent or accepted choices change; update current state when capabilities or constraints change. Small changes do not need a new session log or decision document.
+At a useful checkpoint and before ending a session, preserve the result, exact source/build/configuration, checks, unresolved questions and next action in the issue and relevant repo record. Update this page when near-term intent changes; update current state when capabilities or constraints change. Use the foundation's deliberate revision process for changes to its commitments. Small changes do not need a new session log or decision document.
 
 For work spanning sessions, add a short Resume section to the issue. Use `docs/planning/tasks/<issue-id>.md` only when a longer execution/resume plan earns its place; link it from the issue. See the [brief and resume template](task-brief-template.md). Never depend on a previous chat being readable or on a compaction retaining every detail. A branch means selecting relevant context, not reading the entire tree.
 

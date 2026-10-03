@@ -1,5 +1,7 @@
 # Vision
 
+The [project foundation](foundation.md) is the authoritative session starting point for purpose, player promise, agreed constraints and scope. This page explains the motivation; update its wording consistently with the foundation. Routine planning belongs in the planning handoff, while changes to foundation commitments follow its revision process.
+
 ## Why this exists
 
 We want to discover whether a software engineer with no game-development experience can use AI assistance to learn the craft and finish a fun, small game. The finished game matters, and so does understanding how we got there.

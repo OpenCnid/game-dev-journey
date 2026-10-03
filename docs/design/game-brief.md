@@ -1,5 +1,7 @@
 # Game brief
 
+The [project foundation](../foundation.md) owns the stable player promise and boundaries. This brief owns the current testable design; its proposed mechanics, counts and timings can change within that foundation. Current implementation facts are summarized in [current state](../current-state.md).
+
 **Direction:** an original first-person horde-survival game inspired by playing Vampire Hunters.
 
 **Confirmed priority:** stacking weapons and creating powerful builds.

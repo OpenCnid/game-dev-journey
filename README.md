@@ -51,6 +51,7 @@ Our first scope guardrail: **one core mechanic, one compact play space, and one 
 |-- AGENTS.md               # Short entry point for AI tasks
 |-- .github/                 # Issue and pull request templates
 |-- docs/
+|   |-- foundation.md        # Stable purpose, player promise and change boundaries
 |   |-- vision.md            # Motivation, principles, and scope
 |   |-- roadmap.md           # Milestones with observable completion criteria
 |   |-- architecture.md      # Folder ownership and how the structure can grow
@@ -70,13 +71,13 @@ See [the architecture guide](docs/architecture.md) for placement rules.
 
 ## Start here
 
-1. Read [the vision](docs/vision.md) and [roadmap](docs/roadmap.md).
+1. Read [the project foundation](docs/foundation.md), then [the vision](docs/vision.md) and [roadmap](docs/roadmap.md) as needed.
 2. Read [the Vampire Hunters study](docs/design/vampire-hunters-study.md) and [proposed game brief](docs/design/game-brief.md).
 3. Open the prototype with its pinned editor, following [the project instructions](prototypes/001-stacked-weapons/README.md).
 4. Play the one-minute combat slice and run its repeatable crowd benchmark.
 5. Play it, capture observations, and decide whether to keep, change, or discard it.
 
-Follow along in [the development journal](docs/devlog/README.md), starting with [day zero](docs/devlog/2026-09-30-day-zero.md). Start every fresh planning/task session with the [planning handoff](docs/planning/README.md) and [current state](docs/current-state.md), then the selected task's relevant context. Our [workflow](docs/workflow.md) explains how Linear, GitHub and replaceable AI sessions connect with little overhead. The live board is [First weapon-stacking playtest](https://linear.app/cnid/project/first-weapon-stacking-playtest-89b5952f722e), in the **Game Dev (GDJ)** Linear team.
+Follow along in [the development journal](docs/devlog/README.md), starting with [day zero](docs/devlog/2026-09-30-day-zero.md). Start every fresh planning/task session with the [project foundation](docs/foundation.md), [planning handoff](docs/planning/README.md) and [current state](docs/current-state.md), then the selected task's relevant context. Our [workflow](docs/workflow.md) explains how Linear, GitHub and replaceable AI sessions connect with little overhead. The live board is [First weapon-stacking playtest](https://linear.app/cnid/project/first-weapon-stacking-playtest-89b5952f722e), in the **Game Dev (GDJ)** Linear team.
 
 The [journey review and proposed AI-chat/build system](docs/planning/2026-10-02-development-system.md) connects our progress to a bounded task workflow, with an [interactive development loop](docs/planning/diagrams/development-loop.html) and a reusable task handoff template.
 

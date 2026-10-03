@@ -11,7 +11,7 @@ We are one developer working with AI. Keep one implementation task active, short
 | AI chats | Working discussion, implementation and investigation for a bounded task. |
 | Unity and standalone builds | What the change actually does, looks like and feels like. |
 
-Start a fresh session with the [planning handoff](planning/README.md) and [current state](current-state.md), then follow only the relevant issue, design or evidence links. The [roadmap](roadmap.md) describes milestone outcomes; Linear owns the live task queue. Do not maintain a second copy of that queue in GitHub Issues or a Markdown checklist. GitHub Issues can still collect an outside report; link the item we choose to work on to Linear.
+Start a fresh session with the [project foundation](foundation.md), [planning handoff](planning/README.md) and [current state](current-state.md), then follow only the relevant issue, design or evidence links. The foundation sets stable commitments; plans can evolve within them. The [roadmap](roadmap.md) describes milestone outcomes; Linear owns the live task queue. Do not maintain a second copy of that queue in GitHub Issues or a Markdown checklist. GitHub Issues can still collect an outside report; link the item we choose to work on to Linear.
 
 ## The small board
 
@@ -29,7 +29,7 @@ A blocked task stays in its current stage with the blocking dependency or a shor
 
 ## From issue to result
 
-1. Pick one ready task. Its brief needs **Outcome, Done when, Context**; use the [brief template](planning/task-brief-template.md) when helpful.
+1. Pick one ready task that serves a foundation pillar or resolves an uncertainty about delivering it. Its brief needs **Outcome, Done when, Context**; use the [brief template](planning/task-brief-template.md) when helpful.
 2. Start a fresh planning or task session with the issue/question, starting commit and relevant files. Planning/integration is a role; the repo's handoff preserves continuity between sessions. Keep the session bounded, and save a resume note at checkpoints before replacing a session that still has unfinished work.
 3. Make the smallest useful change. Use a short-lived branch/worktree when isolation helps. One writer owns a Unity project at a time; serialize its Editor, build and test operations.
 4. Review the diff and run the checks appropriate to the change. Fix failures before handoff.
