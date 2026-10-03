@@ -1,10 +1,12 @@
 # Project foundation: the game we are building
 
-**Product definition, revision 10 — October 3, 2026.** This page defines the intended game. Read it first to understand the project; implementation progress lives in [current state](current-state.md), and immediate work lives in the [planning handoff](planning/README.md).
+**Product definition, revision 11 — October 3, 2026.** This page defines the intended game. Read it first to understand the project; implementation progress lives in [current state](current-state.md), and immediate work lives in the [planning handoff](planning/README.md).
 
 ## What this project is
 
-We are building an **original, cooperative multiplayer PvE, first-person horde-survival game centered on stacking simultaneous weapons and creating powerful builds**. Design for **2-4 players on the same team**, with **two-player testing first**. Players move and aim through crowded encounters while expanding arsenals operate together. Choosing how those arsenals grow and contribute to the team is central to the experience.
+We are building an **original, cooperative multiplayer PvE action roguelike/roguelite horde-survival game centered on stacking simultaneous weapons and creating powerful builds**. Design for **2-4 players on the same team**, with **two-player testing first**. Players move and aim through crowded encounters while expanding arsenals operate together. Choosing how those arsenals grow and contribute to the team is central to the experience.
+
+**First person is the current prototype view.** The owner suggested third person alongside it as an option to explore; support for both and per-player switching are not selected. [Decision 0007](decisions/0007-roguelike-run-identity-and-camera-exploration.md) records the genre clarification, camera investigation and **new weapon/upgrade discoveries that remain unlocked across runs**. Unlock conditions/ownership and exact run resets remain open. A branching permanent-upgrade matrix inspired by tower-defense progression and Path of Exile is a proposal; permanent-power effects and their rules need deeper design.
 
 The selected world direction is **The Engine Kingdoms**: a failing world system accidentally pulls players from another world into a **physical magical world** maintained by artificial intelligence. They initially seek survival and a way home. Kingdoms, people and magic are real; the AI maintains the systems that sustain them. As outsiders, players can combine powers the governing system normally forbids, giving cooperative weapon stacking a place in the world's fiction. The owner selected the AI's purpose: **prevent another catastrophe**. Forbidden combinations threaten the world, but outsiders may need them to save it. Details of the earlier catastrophe and enforcement, exact visual treatment and playable rule-breaking effects remain design questions. The [world comparison](design/ai-world-options.md) preserves the selected setting and alternatives; the [first encounter record](design/engine-kingdoms-first-encounter.md) records the world choices and developing design. [Decision 0002](decisions/0002-cooperative-pve-ai-world.md) records the owner's change from the earlier single-player scope and subsequent world choices.
 
@@ -14,7 +16,7 @@ The owner accepted **capacity, mastery and prepared power** as the weapon-growth
 
 The intended power fantasy is to **enter combat with one gun, level up, choose how to improve the build, and grow into a large simultaneous weapon stack**. The owner wants players dropped straight into the game. Detailed gun-framework development is recorded for later; extensive world history and a scripted narrative opening remain deferred. The Engine Kingdoms remains background context. A special cooperative combination is a later possibility, rather than a prerequisite for this basic loop. Late encounters may contain more than 10,000 enemies, including large numbers of bosses with special abilities. The player must still be able to read threats and respond; smooth performance is part of how the combat should feel.
 
-Vampire Hunters is our starting reference for this concept. We will develop our own game, mechanics, presentation and assets, informed by what we enjoy and what we want to improve through play.
+Vampire Hunters is our starting reference for simultaneous weapon stacking. The owner also names **Risk of Rain and Megabonk** as references for the intended roguelike/roguelite combination. We will develop our own game, mechanics, presentation and assets, informed by what we enjoy and what we want to improve through play.
 
 ## The player's experience
 
@@ -52,7 +54,7 @@ These describe the intended product, not a list of features already implemented.
 
 | System | Its role in the game |
 | --- | --- |
-| Player movement and aiming | Give the player direct control over positioning and combat in first person. |
+| Player movement and aiming | Give the player direct control over positioning and combat; first person is the current view, with third person an option to explore. |
 | Simultaneous weapon arsenal | Allow multiple distinct weapons to operate together as one growing build. |
 | Build progression | Share team XP with independent personal choices and pool modifiers; selecting a qualifying high-rarity upgrade grants it to the team and credits the original player. Upgrades can affect combat, loot and future draws. |
 | Party thinking space | Bank earned choices for planned breaks or invoke earlier; freeze physical combat for unlimited mental upgrade/loadout decisions and resume when all active players are ready. Accepted future feature, implementation deferred. |
@@ -92,3 +94,4 @@ The [game brief](design/game-brief.md) turns this product definition into specif
 | 8 | 2026-10-03 | Owner accepted party thinking space as a future feature and requested a Linear milestone: bank choices for planned breaks or invoke earlier, unlimited mental upgrade/loadout time during physical freeze, and resume when all active players are ready. Detailed cadence, presentation, loadout/draw/lifecycle rules and implementation remain deferred. |
 | 9 | 2026-10-03 | Owner established advanced AI/technology, mage-level-dependent fantasy magic and murim/dantian cultivation together, and confirmed that mixing all three in a single gun is central to builds. Focused gun lore is the current design discussion; exact limits, ranks, sources and implementation remain open. |
 | 10 | 2026-10-03 | Owner accepted capacity, mastery and prepared power as a weapon-growth direction and requested later development in Linear. Guns provide usable baseline prepared capability; capacity can grow through earned upgrades and personal mastery strengthens/specializes expression. Detailed rules and implementation remain deferred. |
+| 11 | 2026-10-03 | Owner clarified roguelike/roguelite identity with Risk of Rain and Megabonk references, suggested third person alongside the current first-person view, and confirmed persistent weapon/upgrade discoveries. A permanent-upgrade matrix inspired by tower-defense progression/Path of Exile, permanent power, exact reset/ownership rules and camera support remain open. |
