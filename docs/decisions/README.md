@@ -8,3 +8,4 @@ Copy [the template](template.md) to `NNNN-short-title.md`, starting at `0001`. U
 
 - [0001: Use Unity and C# for the first prototype](0001-engine-recommendation.md) - accepted and implemented; exact versions pinned in the prototype.
 - [0002: Cooperative PvE in an AI-controlled world](0002-cooperative-pve-ai-world.md) - owner accepted 2-4 players with two-player testing first and selected The Engine Kingdoms isekai premise; detailed mechanics and network implementation remain open.
+- [0003: Shared XP and personal upgrade draws](0003-shared-xp-personal-upgrade-draws.md) - owner accepted shared XP, independent personal draws, team grants of qualifying high-rarity upgrades with original-player credit, and future weapon/loot/draw effects; exact grant/draw rules and implementation remain open.

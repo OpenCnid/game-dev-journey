@@ -10,7 +10,7 @@ Our game tests whether stacking distinct weapons creates satisfying power growth
 
 The [Game Dev (GDJ) Linear project](https://linear.app/cnid/project/first-weapon-stacking-playtest-89b5952f722e) owns live task priority, status and dependencies. Preset validation and observation of the current rifle are the entry points before weapon expansion. Consult the board for what is ready; this page records intent rather than a second task queue.
 
-The owner's latest October 2 direction is **immediate combat and progression**: start each player with one gun, earn levels, choose improvements and grow a large simultaneous weapon stack. Further lore, scripted arrival/escape and special-combination selection are deferred. The Engine Kingdoms and previously selected world facts remain background. The dedicated GDJ-6 design chat's [encounter record](../design/engine-kingdoms-first-encounter.md) and [session brief](tasks/GDJ-6.md) preserve the correction and a simple 60-second two-player survival proposal. Resolve only cooperative progression and lifecycle rules needed for that encounter, then scope minimal two-player shared-combat/level-up feasibility. This supersedes the earlier signature-selection gate. The [GDJ-2 brief](tasks/GDJ-2.md) remains available as local evidence; existing rifle/preset checks cannot establish cooperative acceptance. Re-scope later weapon/progression tasks from the design/feasibility handoff before starting them.
+The owner's latest October 2 direction is **immediate combat and progression**: one gun, shared team XP, independent personal random choices/pool modifiers, and large-stack growth. Teammate draws may overlap. Qualifying high-rarity pulls grant the same upgrade to the team and credit the original player. Future upgrades can affect loot/draws as well as weapons; see [decision 0003](../decisions/0003-shared-xp-personal-upgrade-draws.md) and [progression design](../design/progression-and-upgrade-pools.md). The [encounter record](../design/engine-kingdoms-first-encounter.md) and [session brief](tasks/GDJ-6.md) preserve a simple 60-second survival proposal and unresolved grant/selection/lifecycle rules. Further lore and special combinations are deferred. Resolve those necessary rules, then scope minimal shared-combat/progression feasibility. Existing [rifle/preset evidence](tasks/GDJ-2.md) cannot establish cooperative acceptance; re-scope later work from the handoff.
 
 ## Accepted working choices
 
@@ -57,7 +57,7 @@ For work spanning sessions, add a short Resume section to the issue. Use `docs/p
 
 ## Questions still requiring evidence
 
-- Which earned level-up choices make the growing weapon stack powerful, distinct and readable? Shared XP/personal choices are proposed; lore and special signatures are deferred.
+- Which level-up choices make builds powerful, distinct and readable at shared XP levels? How do loot/draw modifiers and shared rare rewards affect team usefulness and later build strategies? Their balance remains unverified.
 - Can two players share responsive, consistent combat, hit results and a run ending/restart? Network ownership, upgrade timing, downed rules and multiplayer performance are unverified.
 - Does the current rifle/movement slice feel promising enough to expand?
 - Does the measured rendering preset hold up under staggered attacks and endurance, and which options should be promoted?
