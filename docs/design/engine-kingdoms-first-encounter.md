@@ -63,6 +63,40 @@ The owner requested [selection/accessibility scenarios](upgrade-selection-access
 
 Write one concrete 60-second two-player encounter around moving, aiming, leveling and choosing build growth. Each player's simultaneously active weapons should visibly contribute to team survival. Select only the progression and lifecycle rules required to reach and repeat that moment.
 
+## Gun lore technology magic and cultivation
+
+**Accepted owner direction, October 3:** The Engine Kingdoms permits broad technological possibilities through advanced AI, fantasy magic depending on mage level, and murim martial artists with dantian cultivation. The owner confirmed that a single gun can combine technology, magic and cultivated qi and that mixing is central to builds. [Decision 0005](../decisions/0005-technology-magic-and-cultivation.md) records this expansion. This is the current focused lore discussion; extensive history and a scripted introduction remain deferred.
+
+**Proposed common role:** a gun gives the player a controllable way to express power as a ranged attack. Its firing behavior, source of power and spell/technique expression are separate questions. These are lore/design distinctions, not a fixed three-slot crafting system or C# schema. The traditions can contribute to any of those questions, rather than each being one damage type.
+
+| Tradition | Proposed contribution to a gun | Example possibilities, not an accepted roster |
+| --- | --- | --- |
+| Technology | Constructs, accelerates, targets or sustains the attack | Ballistics, beams, reactors, intelligent targeting, gravity/spatial devices and floating weapon mounts |
+| Mage magic | Shapes an effect through spells, inscriptions or prepared magical sources, with mastery-dependent possibilities | Fire/lightning, portals, curses, summoning or changes to projectile behavior |
+| Martial cultivation | Channels/refines qi through a dantian and expresses a learned martial technique | A shot carrying palm force, a cutting strike, compressed qi or a practitioner's intent |
+
+These are proposals for this game's fiction, not claims that every murim story uses identical qi/realm rules. AI terminology does not supply a finished weapon limitation system.
+
+**Proposed hybrid example:** a rifle accelerates a physical round technologically, a thunder inscription makes its impact arc between enemies, and a cultivated palm technique adds a readable force burst. One gun visibly expresses all three. A floating gun carrying a sword-like qi strike through a homing spell is another possible example; levitating supports could later explain many simultaneously active guns without requiring more hands. Neither example, mount behavior nor autonomous targeting is accepted content or a first-slice obligation.
+
+### Proposed limits to discuss
+
+Allow broad categories of power to exist in the world, while giving current weapons/builds limits that earned upgrades can expand:
+
+- **Capacity:** hardware or a magical/cultivated vessel determines what output it can sustain. The proposal is that a basic gun grows into more powerful techniques rather than starting with unlimited output. Exact reservoirs, costs and whether these appear as gameplay resources remain open; multiple resource bars or manual ammunition management are not implied.
+- **Mastery:** mage level controls personally shaped spell capability, as directed by the owner. Qi control and learned techniques could distinguish cultivation builds. Decide whether a gun contains prepared power for a baseline effect or requires the operator to supply all power. The design chat proposes a usable baseline from the weapon with personal mastery enabling stronger/specialized expression; this is unselected.
+- **Compatibility:** combining power is allowed and central, while sustaining a particular combination may require better control or construction. The AI's catastrophe-prevention restrictions could target unstable combinations; do not turn this into arbitrary punishment for the central stacking mechanic. Exact instability/enforcement consequences remain proposals.
+
+This separates possible world technology from current player access. It is a recommended progression rule, not an accepted universal ban on free energy, particular magic or high-tier technology. The owner has not selected an output ceiling, mandatory class, realm ladder or requirement to manufacture every gun.
+
+The already accepted thinking-space feature has a specific boundary: mental selections can change, while movement/attacks and the physical encounter remain frozen. A future time-manipulation weapon would need its own explicit combat rule rather than silently allowing attacks within that thinking space.
+
+### Long-term interactions and next decision
+
+Keep sources, firing behavior and authored effects distinct so future hybrids and weapon/player/loot/draw modifiers fit. A qi- or spell-themed upgrade could affect a future pool rather than only bullet damage. Shared rare grants still need applicability rules if one teammate lacks a particular source, training or weapon. Mage/cultivation mastery is not automatically the same number as shared team XP; that relationship is open.
+
+Next gun decision: whether weapons provide baseline prepared power and the player's mastery amplifies it, or whether each operator must supply the necessary magic/qi personally. Then choose only enough capacity/control rules to explain earned growth. Record limitations as proposals until the owner chooses them; do not expand into a full cultivation roster or technology tree.
+
 ## Encounter specification still to select
 
 | Element | Current status |
@@ -92,8 +126,8 @@ Use the one-gun start, one earned team level-up with personal choices, a control
 
 ## Resume
 
-- **Completed:** prior world choices preserved as background; immediate one-gun/level-up/large-stack loop, shared XP/personal draws and selected team rare grants accepted. Foundation revision 8 and decisions 0003/0004 also record the accepted future thinking-space hybrid; its Linear milestone and GDJ-7 preserve later work. Long-term feature-design instruction remains in AGENTS/workflow. Fixed grants, narrative escape and special-combination selection remain superseded as requirements.
+- **Completed:** world background, immediate progression and future thinking-space direction are preserved. Foundation revision 9 and decisions 0002-0005 record the owner's expanded technology/magic/murim cultivation setting and mixing all three in one gun as central to builds. GDJ-7 retains later thinking-space implementation. Long-term feature-design instruction remains in AGENTS/workflow. Fixed grants, narrative escape and special-combination selection remain superseded as requirements.
 - **Owner evaluation outstanding:** resolve qualifying tiers/build applicability and necessary downed/end/restart rules; evaluate the small progression encounter. Detailed thinking-space cadence/loadout/draw/lifecycle handling belongs to later specification. Keep GDJ-6 In Review.
 - **Checks:** documentation link/anchor and whitespace checks apply to this revision; exact results and source belong in GDJ-6 after commit. No gameplay changes, Unity operations, benchmarks, human play observation or networking experiment occurred.
-- **Next action:** continue qualifying-tier/applicability and downed/end/restart discussion. The thinking-space hybrid is accepted as a future feature; do not repeat its selection vote or start its implementation now. Offer-generation timing and detailed cadence/loadout handling remain open. Do not reopen deeper lore or special-combination design as prerequisites.
+- **Next action:** follow the owner's current gun-lore discussion: technology/magic/cultivation coexist and mixing in a single gun is accepted. Evaluate the proposed baseline-power/mastery and capacity/control rules, then return to remaining qualifying-tier/applicability and downed/end/restart details. Thinking space stays accepted for later GDJ-7 work. Extensive history, a scripted opening and special-combination production remain deferred.
 - **Integration:** planning/integration reviews this durable record and accepted choices. No automatic message to the originating chat is required or authorized by receipt of its delegation alone.

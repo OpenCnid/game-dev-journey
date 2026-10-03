@@ -14,6 +14,8 @@ The owner's direction is **immediate combat and progression**: one gun, shared t
 
 ## Accepted working choices
 
+The current owner discussion is [gun lore and boundaries](../design/engine-kingdoms-first-encounter.md#gun-lore-technology-magic-and-cultivation). Foundation revision 9/[decision 0005](../decisions/0005-technology-magic-and-cultivation.md) accept technology, mage magic and murim/dantian cultivation together, with mixing all three in a single gun central to builds. Baseline weapon power versus personal mastery, capacity/control and specific effects remain proposals. Continue this bounded design discussion before returning to unresolved rare/lifecycle details; extensive history and scripted introductions remain deferred.
+
 - Planning/integration is a repeatable role. Start a fresh session for a new planning decision or bounded task; any session can resume from committed files without earlier dialogue.
 - This chat's role is to orchestrate the other task chats: choose and scope outcomes, prepare briefs, coordinate authorized sessions, review their durable handoffs and integrate accepted results. Bounded design and implementation work belong in task chats. Create or message those chats only when the owner explicitly asks; otherwise provide the brief.
 - Keep one implementation task active. Gameplay, performance, design and review are context branches we use when needed; they do not require four simultaneous chats or agents.

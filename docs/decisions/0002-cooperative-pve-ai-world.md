@@ -15,6 +15,8 @@ The [world comparison](../design/ai-world-options.md) preserves that selection a
 
 ## Consequences
 
+**Later world expansion, October 3:** [decision 0005](0005-technology-magic-and-cultivation.md) adds advanced AI/technology, mage-level-dependent magic and murim/dantian cultivation to the accepted physical world. The owner confirmed that mixing all three in a single gun is central to builds and authorized focused gun lore. This extends the setting without replacing the earlier catastrophe-prevention purpose or requiring a narrative introduction.
+
 **Later owner clarification, October 2:** keep the selected world as background and defer deeper lore. Players should enter combat with one gun, level up, choose improvements and grow a large simultaneous weapon stack. A scripted arrival/escape and choosing a special cooperative combination are not gates for the first encounter. This clarification preserves the earlier setting choices while prioritizing the core progression fantasy; [foundation revision 5](../foundation.md) and the [encounter record](../design/engine-kingdoms-first-encounter.md) reflect it.
 
 - Multiplayer moves from deferred expansion into the core product definition. Accounts, public matchmaking services and commercial infrastructure remain deferred.
