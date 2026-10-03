@@ -54,8 +54,51 @@ Timing access, text access and narration are separate needs. Faster menus do not
 
 When a qualifying rare is selected during a safe break, grant immediately to the team with original-player credit, even if some teammates are still reading. Preserve their revealed offers and focus. A shared draw modifier would affect only their later unrevealed draws under the proposed rule. Ordering simultaneous choices, recipients with incompatible builds and repeated grants remain unresolved; document them before implementation. Do not make someone's patience or reading speed an unstated rarity mechanic.
 
+## Owner proposal: unlimited thinking within frozen time
+
+The owner next requested comparison of frequent shared pauses and planned safe breaks, including a hybrid gameplay mechanic connected to the lore. Their example is a player ability or item that freezes time around the party: players can upgrade or change loadouts, but cannot move through space or otherwise act physically. They have unlimited thinking time. **This is an owner-authored concept to explore, not selection of a final trigger, item, character, pause mode or free-respec rule.** The earlier lore deferral still applies; only enough fiction to explain the selection mechanic is needed.
+
+One proposed Engine Kingdoms explanation: the outsiders can share a single suspended moment. Their minds keep working while the physical encounter remains still. A shared starting artifact could embody that ability. Exact origin and visual treatment are open. Fiction can make the pause understandable; it does not remove the real-world waiting measured above.
+
+### Comparison using the same thinking-space rules
+
+| Candidate | When thinking time opens | Benefit to investigate | Cost to investigate |
+| --- | --- | --- | --- |
+| Automatic freeze at every shared level | A team level-up immediately freezes the encounter | Earned growth can be selected and used promptly; nobody must ask for safe reading time | Repeated interruptions, including during satisfying combat sequences; fastest chooser still waits |
+| Planned frozen preparation | Shared levels bank choices until a predictable wave/checkpoint break | Longer continuous combat segments and predictable selection phases | Earned power is delayed; queued choices can become a reading backlog |
+| Requested freeze plus planned breaks | Level-ups bank choices without opening menus; any player with an unspent choice can invoke a party freeze, and planned breaks also resolve choices | Group can bank familiar choices or stop for one consequential/unfamiliar draw, using one consistent fiction and safe state | An invocation can still interrupt friends; someone may feel guilty about requesting it; the party may still freeze every level |
+
+The requested/planned hybrid is the design chat's **candidate to compare**, not a proven winner or accepted rule. A player should not need permission from a host/majority to access the proposed thinking space. A normal planned break also opens it, so requesting extra time is not the only route. Exact trigger/input, checkpoint cadence and departure/AFK handling remain open. Accessibility timing is not limited by a scarce charge, cooldown, rarity or character selection in this proposal. If the fiction uses an item, give every party baseline access; an optional tactical time-stop combat item would need separate rules.
+
+### Arithmetic and concrete situations
+
+For A taking 3 seconds and B taking 25 seconds on each of six choices, automatic freezing still produces six stops and 150 seconds of additional wall time, including 132 seconds A spends waiting. Planned pairs produce three stops with the same 150/132 seconds. A hypothetical hybrid where they bank the first two pairs, request a separate freeze for choice five, then take choice six at a planned break produces **four stops, 150 seconds stopped and 132 seconds of A waiting**. This schedule is an invented example of player behavior, not a guaranteed reduction. It ignores menu transitions and extra deliberation caused by batching.
+
+**A new or complex effect:** a player wants to hear all options and compare details. Automatic freezing grants access immediately. Planned freezing requires reaching the break first. Requested freezing grants safe access now, but can create “I'm stopping my friends again” pressure. A standard shared notification and a default preparation phase could help normalize it; whether they do needs observation.
+
+**An exciting combat sequence:** a player is clearing a large pack with a new weapon combination. Automatic freezing may break that momentum. Planned freezing lets the sequence continue. The hybrid permits banking the choice, while preserving another player's ability to request a stop. It offers control over timing rather than a guarantee of uninterrupted combat.
+
+**One shared legendary:** the originator selects the legendary during thinking time; teammates receive its grant and source-player credit without advancing the physical encounter. Their own offers and navigation focus remain intact. A group may enjoy discussing its effect before resuming, or pressure the originator to take it. Do not infer that the lore makes this social tension disappear.
+
+**Four-player party:** with hypothetical per-choice times of 3, 5, 8 and 25 seconds, six simultaneous selection rounds still stop the world for 150 seconds, not the sum of all players' choosing times. Combined idle time is 354 player-seconds (132 + 120 + 102 + 0). Fewer stops alone cannot remove that idle time. Evaluating two players first must not treat their social/pacing results as four-player proof.
+
+### Proposed frozen-state contract
+
+- Suspend the shared combat encounter and its combat/progression clocks, including enemies, movement, attacks, projectiles, damage-over-time, regeneration, cooldowns, timed buffs and spawn schedules. A literal small-radius bubble with an active outside world would create additional threat/boundary rules; use the encounter-wide interpretation for the first comparison. These are proposed behavior requirements, not a networking implementation.
+- Players navigate, read/listen, compare earned options, select upgrades and inspect or configure an already available loadout. No spatial movement, firing, retargeting an attack or collecting loot occurs. The allowed scope of loadout changes, respecs and refunds is not yet selected; no unlimited free rebuild is implied.
+- Logical selections, pool modifiers and selection-triggered shared reward grants can be recorded while physical simulation is stopped. Weapon/projectile behavior changes become observable when combat resumes. A shared grant is still triggered on selection, not deferred until resume; receiving it still does not create a new pull.
+- Preserve revealed offers and focus when a teammate selects a shared reward. First-reveal versus earning-time offer generation remains open. If later queued draws depend on newly selected modifiers, define shared-event ordering without making reading speed an unstated rarity mechanic.
+- Players explicitly mark themselves ready. Resume after every active participant is ready, or after explicit lifecycle handling for a departed player. No countdown, forced selection or host/majority override is part of this candidate. A finished player may keep reading build/loadout information or cancel readiness before resumption. These are proposals, not an accepted cooperative lifecycle.
+- Keep useful waiting activities inside the owner's mental-only premise: build comparison, effect information and party discussion. A firing range would break this premise unless separately presented as a mental preview; it is unnecessary for the first slice. Retain scalable text, narration and predictable navigation within the thinking space.
+
+### Next comparison to run if implementation is later authorized
+
+Use the same arena, XP events, upgrade content and random seed schedule for two-player comparisons, varying only automatic level freezes, planned freezes and requested/planned freezes. For fairness, freeze offers or use controlled draws in this comparison so opening time does not change the test's content; this is an experimental control, not selection of the final draw rule. Exercise one unfamiliar choice and one controlled shared rare grant. Then investigate four-player pacing separately.
+
+Measure interruption count, real-world selection time, delay from earning a choice to using its power, and time other players spend ready. Collect player reports of interrupted momentum, boredom, pressure to hurry or choose the team reward, ability to understand choices, and whether they could use their preferred text/narration/input settings. Aggregate internal readiness timing for evaluation without a public waiting timer. Do not fake these reports with computed annoyance scores. Include players who use relevant access features. Define a success criterion with the owner before a playtest; no universal winner is established by this document.
+
 ## Evidence and next action
 
 The inline scenario calculator was checked for the stated arithmetic, scenario interaction and responsive presentation. This establishes only the calculator's behavior. No gameplay implementation, observed annoyance, accessibility validation, multiplayer experiment or enjoyment evidence exists here.
 
-Next owner discussion: compare the experience of frequent untimed shared pauses with small planned safe breaks, including delayed power, social pressure and reading/narration needs. Then specify the chosen rule in the first encounter and hand off one bounded feasibility question. Keep GDJ-6 In Review while encounter evaluation remains outstanding. Foundation revision 7 and accepted progression direction are unchanged.
+Next owner discussion: evaluate automatic level freezes, planned frozen preparation and the requested/planned thinking-space hybrid. The owner's frozen-time/mental-only example is preserved; the design chat recommends comparing the hybrid without claiming it is best. Decide trigger/availability and loadout scope before specifying the selected rule in the first encounter and handing off one bounded feasibility question. Keep GDJ-6 In Review while encounter evaluation remains outstanding. Foundation revision 7 and accepted progression direction are unchanged.
