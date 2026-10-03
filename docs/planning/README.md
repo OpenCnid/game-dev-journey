@@ -10,6 +10,8 @@ Our first game tests whether stacking distinct weapons creates satisfying power 
 
 The [Game Dev (GDJ) Linear project](https://linear.app/cnid/project/first-weapon-stacking-playtest-89b5952f722e) owns live task priority, status and dependencies. Preset validation and observation of the current rifle are the entry points before weapon expansion. Consult the board for what is ready; this page records intent rather than a second task queue.
 
+The October 2 planning recommendation is to observe the current rifle first, using the existing default configuration. This is the shortest check of movement, aiming and readable feedback before building more weapons; it does not need to wait for preset validation. Use the [GDJ-2 session brief and inspection checkpoint](tasks/GDJ-2.md). The rendering-preset decision still needs acceptance before starting weapon expansion. A proceed decision from the rifle playtest would authorize the next experiment, not establish that weapon stacking is fun.
+
 ## Accepted working choices
 
 - Planning/integration is a repeatable role. Start a fresh session for a new planning decision or bounded task; any session can resume from committed files without earlier dialogue.
