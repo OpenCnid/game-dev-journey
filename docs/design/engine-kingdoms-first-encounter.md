@@ -12,6 +12,8 @@ The existing game remains a local one-player 60-second arena. Networking, cooper
 
 ## First discussion: why does the AI forbid combinations?
 
+**Historical background discussion:** the owner subsequently deferred further lore work. The choices below remain background direction and do not require a narrative introduction, arrival sequence or special-combination encounter.
+
 These interpretations concern the purpose of the AI within the selected world. The owner selected the first purpose; its detailed history, enforcement and playable consequences remain proposals. The other two purposes are unselected alternatives.
 
 | Interpretation | Purpose and conflict | What gaining power could mean in play |
@@ -26,7 +28,15 @@ Do not convert fictional instability into an arbitrary punishment for using the 
 
 ## Pending owner preference and next design step
 
-**Current question:** Which first cooperative combination appeals to the owner: gravity plus force, or lightning plus fire?
+**Current owner direction:** keep this simple and drop players straight into combat. Each player starts with one gun, levels up, chooses improvements and grows a large simultaneous weapon stack. Further lore is deferred. The gravity/force versus lightning/fire question is retired from the immediate task; neither option was selected.
+
+**Accepted versus proposed:** the one-gun start, level-ups, player choice and large-stack growth are owner direction. Shared XP with individual upgrade choices is the design chat's current proposal, not an owner-selected reward rule. Adding a gun or strengthening an equipped gun are proposed choice categories; exact pools, duplicate rules and caps remain open.
+
+**Revised first encounter proposal:** two players enter a simple arena directly with one gun each and survive 60 seconds against approaching enemies. Defeating enemies awards shared team XP; each player chooses their own upgrade on level-up. Existing weapons keep operating as guns are added or improved. Tune the short encounter to offer at least two earned choices per player; this is a prototype exposure target, not a final pace, cap or fixed weapon grant. One player's growing build can clear an approach while the other covers another direction or protects a teammate. Test whether both can notice growth and explain their contributions. No authored elemental combination is needed to observe that moment.
+
+**Next bounded design question:** how can one player select a level-up upgrade while the teammate continues fighting? Shared XP/personal choices are proposed; upgrade timing, menu behavior, downed/revive and shared ending/restart need a small explicit rule set and owner evaluation. Do not carry local global pause or death precedence into co-op by default.
+
+The opening, combination and fixed-grant ideas below are parked proposals from before this correction; they are not current encounter requirements.
 
 **Proposed world image:** kingdoms have lived under emergency restrictions for so long they treat them as laws of nature. A town depends on a guardian that also attacks outsiders for combining powers. The AI's rules have both a sustaining purpose and a human cost. This illustration has been offered to the owner; it is not selected lore or required encounter content.
 
@@ -45,11 +55,11 @@ The design chat recommended a physical world with real inhabitants and AI-mainta
 
 Neither combination is selected yet. The earlier marking/consuming proposal remains available reasoning, not an accepted rule. These proposals do not establish permanent classes or require a teammate for all future builds.
 
-**Progression proposal:** each player begins with one weapon and gains a second during the encounter while the first keeps firing. The combination creates breathing room that the starting weapons could not. Fixed weapon grants are sufficient to test the first moment; menus, currency and a broader upgrade economy can remain deferred. Exact grants, timing and lifecycle rules require the encounter specification and owner evaluation.
+**Superseded progression proposal:** fixed second-weapon grants were proposed to expose a special combination. The owner's latest direction instead requires earning levels and choosing improvements. Fixed grants do not substitute for that loop.
 
-**Next discussion:** choose or revise one combination, then write the encounter's actions, cues, enemy response and ending. Develop only the progression, downed/revive and shared restart rules needed to play and repeat it.
+**Current next discussion:** define only the level-up selection and team lifecycle rules needed to play and repeat the simple progression encounter. Further lore and special-combination design are deferred.
 
-Once that is understood, write one concrete 60-second two-player encounter. Explain what each player aims at or moves toward, how their simultaneously active weapons contribute, and the observable cooperative moment. The combination must change what the team can do, with a result both players can attribute to their actions. Select only the progression and lifecycle rules required to reach and repeat that moment.
+Write one concrete 60-second two-player encounter around moving, aiming, leveling and choosing build growth. Each player's simultaneously active weapons should visibly contribute to team survival. Select only the progression and lifecycle rules required to reach and repeat that moment.
 
 ## Encounter specification still to select
 
@@ -58,30 +68,30 @@ Once that is understood, write one concrete 60-second two-player encounter. Expl
 | AI purpose | Accepted: prevent another catastrophe; forbidden combinations threaten the world, but outsiders may need them to save it. Specific history and enforcement remain open. |
 | Player arrival | Accepted: accidental arrival through a failing world system; initial motivation is survival and finding a way home. Inhabitants' relationship to the system remains open. |
 | Nature of the world | Accepted: physical, with real kingdoms, people and magic; the AI maintains systems that sustain them. |
-| Starting weapons and simultaneous weapon growth | Open; existing rifle is an available control, not a creative obligation. |
-| Forbidden combination, contributions and enemy response | Owner comparing gravity + force with lightning + fire; neither selected yet. Marking/consuming remains a prior proposal. |
-| Arena, timing, threats and success action | Open; target is one 60-second encounter for two players. |
+| Starting weapons and simultaneous weapon growth | Accepted: start with one gun, level up, choose improvements and grow a large stack. Gun identity and exact choice pools remain open. |
+| Forbidden combination, contributions and enemy response | Special combinations deferred. Proposed first team contribution is complementary coverage/protection from independent growing builds. |
+| Arena, timing, threats and success action | Proposed: direct arena entry and 60-second survival against approaching enemies; no scripted escape required. |
 | Visual/audio treatment | Open; first prototype should communicate a few distinct player/enemy cues with placeholders. |
-| Progression/rewards and upgrade timing | Open; local global pause is not an accepted cooperative rule. |
+| Progression/rewards and upgrade timing | Earned levels and player choices accepted. Shared XP/personal choices proposed; selection timing remains open. Local global pause is not accepted. |
 | Downed/revive, shared ending and restart | Open; local death precedence is not an accepted cooperative rule. |
 
 ## Pillars, scope and risks to resolve
 
-- **Perceptible power growth:** the encounter should show a before/after capability change when the forbidden combination becomes available. Numbers alone are insufficient.
-- **Distinct builds and contribution:** each player must have useful independent combat and a recognizable contribution to the combination. Avoid making one player wait to enable the other's enjoyment.
-- **Readable, responsive combat:** communicate the combination's setup, result and hostile response without covering aim or hiding incoming threats. Distinguish friendly effects with shape/motion as well as color. Readability at large crowd counts remains an evidence question.
-- **Production scope:** keep the first candidate to one graybox arena, a small authored enemy response and one combination. Extensive story, dynamic terrain, arbitrary spell composition, polished assets and broader content are deferred. A complex AI motive can remain background context rather than adding systems to the first encounter.
+- **Perceptible power growth:** each chosen level-up should produce a noticeable capability change as the arsenal grows. Numbers alone are insufficient.
+- **Distinct builds and contribution:** individual choices should lead to recognizable strengths and useful coverage/protection. No fixed support role or special combo is required for the first encounter.
+- **Readable, responsive combat:** keep threats, aim and teammate contributions understandable as weapon count rises. Upgrade selection must work while a teammate is active. Readability at large counts remains an evidence question.
+- **Production scope:** one graybox arena, one approaching enemy type and a small choice pool are sufficient for the initial experiment. A small prototype arsenal is an experiment, not the finished game's large-stack limit. Further lore, scripted arrival/escape, special combos, dynamic terrain and polished assets are deferred.
 
 ## Later bounded feasibility question
 
-**Provisional question, to specialize after encounter selection:** Can two players receive one consistent forbidden-combination result and the same shared ending/restart, while movement and aiming remain responsive?
+**Provisional question, to specialize after progression/lifecycle selection:** Can two players fight in one shared encounter, receive consistent XP/levels and chosen upgrades, and reach the same ending/restart while movement and aiming remain responsive?
 
-Use only the selected interaction and the smallest crowd needed to observe it. Inspect existing combat ownership, state and lifecycle requirements; then propose a bounded feasibility experiment to planning/integration. Hosting, networking package, replication approach and measured latency/bandwidth/encounter envelope remain unresolved. This record does not authorize implementation or choose a package.
+Use the one-gun start, one earned level-up with a personal choice, and the smallest crowd needed to observe shared results. Inspect existing combat ownership, progression and lifecycle requirements; then propose a bounded feasibility experiment to planning/integration. Hosting, networking package, replication approach and measured latency/bandwidth/encounter envelope remain unresolved. This record does not authorize implementation or choose a package.
 
 ## Resume
 
-- **Completed:** accepted context and current issue/Resume read; dedicated design chat started; comparisons recorded. Owner selected preventing another catastrophe, a physical world with real inhabitants and magic, and accidental arrival through a failing system. Foundation revision 4, decision 0002 and the game brief reconcile these accepted choices. Two combination proposals and an opening/progression proposal are offered for discussion.
-- **Owner evaluation outstanding:** choose or revise a combination, then develop and evaluate the concrete encounter and its necessary lifecycle rules. Keep GDJ-6 In Review while required owner evaluation remains outstanding.
-- **Checks:** 73 local Markdown links/anchors across the eight changed documents passed; `git diff --cached --check` passed. Only documentation changed. Exact source/PR belong in GDJ-6 after commit. No Unity operations, benchmarks, human play observation or networking experiment occurred.
-- **Next action:** continue from the pending gravity/force versus lightning/fire question. Save owner choices explicitly before treating them as rules; develop the encounter afterward.
+- **Completed:** prior world choices preserved as background. Owner redirected design to immediate combat: one gun, earned levels, player-selected improvements and large-stack growth. Foundation revision 5 and decision 0002 record this clarification. Fixed grants, narrative escape and special-combination selection are superseded as immediate requirements. Shared XP with personal choices is proposed.
+- **Owner evaluation outstanding:** resolve level-up selection during co-op combat and the necessary downed/end/restart rules; evaluate the small progression encounter. Keep GDJ-6 In Review.
+- **Checks:** documentation link/anchor and whitespace checks apply to this revision; exact results and source belong in GDJ-6 after commit. No gameplay changes, Unity operations, benchmarks, human play observation or networking experiment occurred.
+- **Next action:** discuss the smallest cooperative level-up selection rule. Do not reopen lore or gravity/force versus lightning/fire as prerequisites.
 - **Integration:** planning/integration reviews this durable record and accepted choices. No automatic message to the originating chat is required or authorized by receipt of its delegation alone.

@@ -15,6 +15,8 @@ The [world comparison](../design/ai-world-options.md) preserves that selection a
 
 ## Consequences
 
+**Later owner clarification, October 2:** keep the selected world as background and defer deeper lore. Players should enter combat with one gun, level up, choose improvements and grow a large simultaneous weapon stack. A scripted arrival/escape and choosing a special cooperative combination are not gates for the first encounter. This clarification preserves the earlier setting choices while prioritizing the core progression fantasy; [foundation revision 5](../foundation.md) and the [encounter record](../design/engine-kingdoms-first-encounter.md) reflect it.
+
 - Multiplayer moves from deferred expansion into the core product definition. Accounts, public matchmaking services and commercial infrastructure remain deferred.
 - The existing local Unity prototype and dense-crowd evidence remain useful controls. They implement neither a cooperative session nor multiplayer performance/latency acceptance. Preserve them rather than rewriting their historical results.
 - Re-scope the weapon and upgrade experiment for team contribution, shared combat outcomes and progression that works while other players are active. The local pause/restart rules cannot silently become cooperative rules.

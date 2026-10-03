@@ -6,7 +6,7 @@ The [project foundation](../foundation.md) defines the game we are building, its
 
 **World premise:** The Engine Kingdoms, selected by the owner: a failing system accidentally pulls outsiders into a physical AI-maintained magical world where kingdoms, people and magic are real and teammates can combine forbidden powers. They initially seek survival and a way home. The AI tries to prevent another catastrophe; forbidden combinations threaten the world, but outsiders may need them to save it. [Decision 0002](../decisions/0002-cooperative-pve-ai-world.md) records the accepted direction; the [world comparison](ai-world-options.md) preserves setting alternatives and proposed mechanics, and the [first encounter record](engine-kingdoms-first-encounter.md) preserves the developing world discussion. Design one small cooperative encounter before implementation.
 
-**Confirmed priority:** stacking weapons and creating powerful builds.
+**Confirmed priority:** enter combat with one gun, level up, choose improvements and grow a large simultaneous weapon stack. The owner wants immediate gameplay; further lore and scripted introductions are deferred. The selected world is background context.
 
 **Late-game workload:** more than 10,000 active enemies, potentially all bosses with special abilities. The [boss workload specification](late-game-workload.md) defines synthetic tests up to 20,000 while the final encounter envelope remains open.
 
@@ -22,7 +22,7 @@ The [reference study](vampire-hunters-study.md) distinguishes the source game's 
 
 ## Cooperative design and feasibility gate
 
-Describe a 60-second two-player encounter in The Engine Kingdoms that contains one understandable cooperative moment. Resolve the actions and ending needed for that encounter, then scope one minimal networked-combat feasibility task: consistent player/enemy state, hits, shared ending/restart and responsive player control. Hosting, networking package, replication approach, latency/bandwidth targets and supported crowd count require explicit investigation; no library or topology is selected yet.
+Describe a 60-second two-player survival encounter that starts each player with one gun and provides earned level-up choices to grow the arsenal. Show a readable contribution from each player's build, such as one clearing approaching enemies while the other covers another direction or protects a teammate. A special combination and narrative escape objective are deferred. Resolve progression and team lifecycle rules needed for that encounter, then scope one minimal networked-combat feasibility task: consistent player/enemy state, hits, level rewards and chosen upgrades, shared ending/restart and responsive player control. Hosting, networking package, replication approach, latency/bandwidth targets and supported crowd count require explicit investigation; no library or topology is selected yet.
 
 Cooperative progression must decide personal/shared rewards, how upgrade choices occur while teammates are active, downed/revive behavior and team wipe/win conditions. Existing local global pause and player-death precedence do not answer those questions. Keep this gate small; richer classes, infrastructure and content follow evidence.
 
@@ -61,7 +61,7 @@ Additional arenas, a full arsenal, finished boss content, character classes, per
 
 - What do the initial combat playtests and target-hardware captures tell us to change before adding weapons?
 - What do focused play sessions reveal about the weapon combinations we enjoy most?
-- Which specific rule-breaking interaction and visual treatment express the selected Engine Kingdoms direction?
+- Which level-up choices make the growing stack feel powerful and create distinct builds? Further lore and special rule-breaking mechanics are deferred.
 - Which cooperative rules and networking approach can support the selected encounter with readable, responsive shared combat?
 
 Automated checks and developer-machine benchmark diagnostics are recorded separately from player enjoyment observations. Reference-game observations and user playtests remain outstanding.

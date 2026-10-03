@@ -1,6 +1,6 @@
 # Project foundation: the game we are building
 
-**Product definition, revision 4 — October 2, 2026.** This page defines the intended game. Read it first to understand the project; implementation progress lives in [current state](current-state.md), and immediate work lives in the [planning handoff](planning/README.md).
+**Product definition, revision 5 — October 2, 2026.** This page defines the intended game. Read it first to understand the project; implementation progress lives in [current state](current-state.md), and immediate work lives in the [planning handoff](planning/README.md).
 
 ## What this project is
 
@@ -8,7 +8,7 @@ We are building an **original, cooperative multiplayer PvE, first-person horde-s
 
 The selected world direction is **The Engine Kingdoms**: a failing world system accidentally pulls players from another world into a **physical magical world** maintained by artificial intelligence. They initially seek survival and a way home. Kingdoms, people and magic are real; the AI maintains the systems that sustain them. As outsiders, players can combine powers the governing system normally forbids, giving cooperative weapon stacking a place in the world's fiction. The owner selected the AI's purpose: **prevent another catastrophe**. Forbidden combinations threaten the world, but outsiders may need them to save it. Details of the earlier catastrophe and enforcement, exact visual treatment and playable rule-breaking effects remain design questions. The [world comparison](design/ai-world-options.md) preserves the selected setting and alternatives; the [first encounter record](design/engine-kingdoms-first-encounter.md) records the world choices and developing design. [Decision 0002](decisions/0002-cooperative-pve-ai-world.md) records the owner's change from the earlier single-player scope and subsequent world choices.
 
-The intended power fantasy is to begin with limited firepower and grow into a formidable build that can handle enormous crowds. Late encounters may contain more than 10,000 enemies, including large numbers of bosses with special abilities. The player must still be able to read threats and respond; smooth performance is part of how the combat should feel.
+The intended power fantasy is to **enter combat with one gun, level up, choose how to improve the build, and grow into a large simultaneous weapon stack**. The owner wants players dropped straight into the game; further lore development and a scripted narrative opening are deferred. The Engine Kingdoms remains background context. A special cooperative combination is a later possibility, rather than a prerequisite for this basic loop. Late encounters may contain more than 10,000 enemies, including large numbers of bosses with special abilities. The player must still be able to read threats and respond; smooth performance is part of how the combat should feel.
 
 Vampire Hunters is our starting reference for this concept. We will develop our own game, mechanics, presentation and assets, informed by what we enjoy and what we want to improve through play.
 
@@ -18,13 +18,13 @@ The game is aimed at players who enjoy fast action, visible power growth and exp
 
 Our intended run loop is:
 
-1. **Enter an encounter as a team** with modest starting arsenals.
+1. **Enter combat as a team**, each player starting with one gun.
 2. **Move, aim and fight together** to survive the surrounding horde.
-3. **Make build choices** that add weapons or improve their behavior.
+3. **Level up and make build choices** that grow the simultaneous arsenal and improve its capabilities.
 4. **Use the growing combinations** and support teammates against increasing pressure and enemy abilities.
 5. **Reach a shared ending and restart**, carrying the lesson into another team build attempt.
 
-How choices are earned, presented and balanced is still a design question. The earlier local experiment proposes pickups and paused upgrade choices; cooperative progression, resource sharing, upgrade timing, downed/revive rules and team ending conditions require design before implementation.
+Starting with one gun and growing through player-selected level-ups is accepted. Exact experience rewards, choice pools, weapon limits, duplicate weapons and balance remain design questions. The earlier local experiment proposes pickups and paused upgrade choices; cooperative progression, resource sharing, upgrade timing, downed/revive rules and team ending conditions require design before implementation.
 
 ## The three design pillars
 
@@ -77,3 +77,4 @@ The [game brief](design/game-brief.md) turns this product definition into specif
 | 2 | 2026-10-02 | Refocused the foundation on the game's identity, player experience, run loop and core systems following the owner's clarification. Moved documentation rules into the workflow. |
 | 3 | 2026-10-02 | Owner changed the game to cooperative multiplayer PvE for 2-4 players, testing two first, and selected The Engine Kingdoms: isekai into an AI-maintained magical world where teammates combine forbidden powers. Detailed mechanics and technology remain under design. |
 | 4 | 2026-10-02 | Owner selected a physical world with real kingdoms, people and magic sustained by AI systems, the AI's purpose of preventing another catastrophe, and accidental arrival through a failing world system with survival and finding a way home as the initial motivation. Forbidden combinations threaten the world, but outsiders may need them to save it. Specific history, enforcement and encounter mechanics remain open. |
+| 5 | 2026-10-02 | Owner redirected design to immediate combat: start with one gun, level up, choose improvements and grow a large weapon stack. Further lore, a scripted opening and special cooperative-combination selection are deferred; prior world choices remain background context. |
