@@ -1,6 +1,6 @@
 # Project foundation: the game we are building
 
-**Product definition, revision 9 — October 3, 2026.** This page defines the intended game. Read it first to understand the project; implementation progress lives in [current state](current-state.md), and immediate work lives in the [planning handoff](planning/README.md).
+**Product definition, revision 10 — October 3, 2026.** This page defines the intended game. Read it first to understand the project; implementation progress lives in [current state](current-state.md), and immediate work lives in the [planning handoff](planning/README.md).
 
 ## What this project is
 
@@ -10,7 +10,9 @@ The selected world direction is **The Engine Kingdoms**: a failing world system 
 
 The owner established that this world supports **advanced AI and broad technological possibilities, fantasy magic depending on mage level, and murim martial artists with dantian cultivation**. **A single gun can mix technology, magic and cultivated qi, and this mixing is central to weapon builds.** [Decision 0005](decisions/0005-technology-magic-and-cultivation.md) records this direction. The exact AI label, power/rank rules and gun limits remain to define; technological openness is a fiction premise, not a real-world claim of omnipotence.
 
-The intended power fantasy is to **enter combat with one gun, level up, choose how to improve the build, and grow into a large simultaneous weapon stack**. The owner wants players dropped straight into the game and has now authorized focused gun-lore/boundary design. Extensive world history and a scripted narrative opening remain deferred. The Engine Kingdoms remains background context. A special cooperative combination is a later possibility, rather than a prerequisite for this basic loop. Late encounters may contain more than 10,000 enemies, including large numbers of bosses with special abilities. The player must still be able to read threats and respond; smooth performance is part of how the combat should feel.
+The owner accepted **capacity, mastery and prepared power** as the weapon-growth framework: a gun provides usable baseline prepared capability, capacity governs what the current weapon/build can sustain and earned upgrades can expand, and personal mastery strengthens or specializes its expression. [Decision 0006](decisions/0006-capacity-mastery-and-prepared-power.md) records acceptance and later design work. Exact costs, progression mappings, compatibility and numerical rules remain open.
+
+The intended power fantasy is to **enter combat with one gun, level up, choose how to improve the build, and grow into a large simultaneous weapon stack**. The owner wants players dropped straight into the game. Detailed gun-framework development is recorded for later; extensive world history and a scripted narrative opening remain deferred. The Engine Kingdoms remains background context. A special cooperative combination is a later possibility, rather than a prerequisite for this basic loop. Late encounters may contain more than 10,000 enemies, including large numbers of bosses with special abilities. The player must still be able to read threats and respond; smooth performance is part of how the combat should feel.
 
 Vampire Hunters is our starting reference for this concept. We will develop our own game, mechanics, presentation and assets, informed by what we enjoy and what we want to improve through play.
 
@@ -89,3 +91,4 @@ The [game brief](design/game-brief.md) turns this product definition into specif
 | 7 | 2026-10-02 | Owner selected the shared rare-reward trigger: grant to the team when the original player selects the qualifying upgrade. Appearance in an offer alone does not grant it. |
 | 8 | 2026-10-03 | Owner accepted party thinking space as a future feature and requested a Linear milestone: bank choices for planned breaks or invoke earlier, unlimited mental upgrade/loadout time during physical freeze, and resume when all active players are ready. Detailed cadence, presentation, loadout/draw/lifecycle rules and implementation remain deferred. |
 | 9 | 2026-10-03 | Owner established advanced AI/technology, mage-level-dependent fantasy magic and murim/dantian cultivation together, and confirmed that mixing all three in a single gun is central to builds. Focused gun lore is the current design discussion; exact limits, ranks, sources and implementation remain open. |
+| 10 | 2026-10-03 | Owner accepted capacity, mastery and prepared power as a weapon-growth direction and requested later development in Linear. Guns provide usable baseline prepared capability; capacity can grow through earned upgrades and personal mastery strengthens/specializes expression. Detailed rules and implementation remain deferred. |
