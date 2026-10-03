@@ -1,13 +1,15 @@
 # 0002: Cooperative PvE in an AI-controlled world
 
 - **Date:** 2026-10-02
-- **Status:** accepted by explicit owner direction; implementation pending.
+- **Status:** world/cooperative direction accepted; original 2-4 range extended to 1-4 solo/cooperative by decision 0008; implementation pending.
 
 ## Context
 
 Foundation revision 2 defined a single-player weapon-stacking horde-survival game and deferred multiplayer. During design planning the owner instead requested multiplayer, all players on the same team against AI in PvE, and an isekai premise in an AI-controlled world. The owner then selected 2-4 players with two-player testing first. These instructions supply the owner decision required by the [direction-change workflow](../workflow.md#changing-project-direction); no additional approval of these commitments is needed.
 
 ## Decision and reasoning
+
+**Later owner clarification, October 3:** [decision 0008](0008-bullet-heaven-solo-play-and-core-experience.md) extends support to **1-4 players, solo or cooperative**, with friends preferred and solo players welcome. Two-player cooperative testing remains the initial networking investigation. Bullet-heaven survival is the current genre language. Preserve the original world/cooperative rationale below as history.
 
 Adopt cooperative multiplayer PvE, intended for 2-4 players, while retaining first-person horde survival, simultaneous weapon stacking, powerful builds and the existing three pillars. Start cooperative verification with two players. Adopt arrival from another world into one governed by AI as the world premise. The owner subsequently selected **The Engine Kingdoms** from the three options: an AI maintains a magical world, and teammates combine forbidden powers to break its rules. The change follows the owner's desired game and creative direction; it is not a conclusion from playtest or benchmark evidence.
 

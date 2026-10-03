@@ -6,6 +6,8 @@ These checkboxes describe capabilities and milestone evidence. Linear owns indiv
 
 October 2 direction update: [decision 0002](decisions/0002-cooperative-pve-ai-world.md) changes the product to cooperative PvE for 2-4 players, testing two first, in an AI-controlled isekai world. Historical local milestones remain completed local capabilities; they do not establish multiplayer acceptance.
 
+October 3 clarification: [decision 0008](decisions/0008-bullet-heaven-solo-play-and-core-experience.md) extends support to **1-4 players, solo or cooperative**, using bullet-heaven survival roguelite language. Prioritize quick entry, pleasant level-ups and the performant core. League of Legends/Valorant are broad hardware/responsiveness aspirations; exact low-end support and surrounding run structure remain open.
+
 ## 0. Establish the starting point
 
 - [x] Capture the motivation and scope.
@@ -32,7 +34,7 @@ October 2 direction update: [decision 0002](decisions/0002-cooperative-pve-ai-wo
 - [x] Add stage profiling, a batched Jobs/Burst simulation path, culled instanced rendering, and selectable reference paths for controlled comparisons.
 - [x] Add controlled experiments for effect rendering, identical-warning deduplication, concurrent rendering preparation, and native state ownership; preserve reference paths and gameplay parity checks.
 - [ ] Verify a minimal two-player shared encounter: responsive control, consistent hits/state, team ending and restart; record latency/network and performance limits.
-- [ ] Revise progression and lifecycle rules for cooperative play before implementing the later slices.
+- [ ] Revise progression and lifecycle rules for 1-4 player solo/cooperative play before implementing the later slices.
 - [ ] Validate more than 10,000 ability-heavy bosses at 144 FPS on the current desktop, including representative boss visuals and the most expensive stacked weapon build.
 - [ ] Compare one weapon against three simultaneously firing weapons.
 - [ ] Add the proposed five-minute survival and upgrade loop if the combat test is promising.
@@ -75,7 +77,11 @@ October 2 direction update: [decision 0002](decisions/0002-cooperative-pve-ai-wo
 
 ## Accepted future feature: Party thinking space
 
-The owner accepted the [thinking-space hybrid](decisions/0004-party-thinking-space.md) on October 3, 2026 and requested a Linear milestone for later work. Bank earned choices for planned breaks, allow earlier player invocation, freeze physical combat for unlimited mental upgrade/loadout decisions, then resume when all active players are ready. The **Party thinking space** milestone in the [Linear project](https://linear.app/cnid/project/first-weapon-stacking-playtest-89b5952f722e) and [GDJ-7](https://linear.app/cnid/issue/GDJ-7/build-party-thinking-space-for-cooperative-upgrades) own later planning and implementation. Begin with two players after minimal shared combat/progression/lifecycle feasibility; preserve 2-4 player and future draw/loot interactions. No date or immediate implementation is scheduled. Detailed behavior and human validation remain pending.
+The owner accepted the [thinking-space hybrid](decisions/0004-party-thinking-space.md) on October 3, 2026 and requested a Linear milestone for later work. Bank earned choices for planned breaks, allow earlier player invocation, freeze physical combat for unlimited mental upgrade/loadout decisions, then resume when all active players are ready. The **Party thinking space** milestone in the [Linear project](https://linear.app/cnid/project/first-weapon-stacking-playtest-89b5952f722e) and [GDJ-7](https://linear.app/cnid/issue/GDJ-7/build-party-thinking-space-for-cooperative-upgrades) own later planning and implementation. Begin with two players after minimal shared combat/progression/lifecycle feasibility; preserve 1-4 player and future draw/loot interactions, including single-player readiness and reward behavior. No date or immediate implementation is scheduled. Detailed behavior and human validation remain pending.
+
+## Future weapon presentation and accessibility research
+
+[Decision 0009](decisions/0009-weapon-control-and-accessible-combat.md) accepts configurable auto-shoot, varied targeting and through-wall enemy visibility, with detailed rules open. The owner requested [GDJ-11: weapon-position experiments](https://linear.app/cnid/issue/GDJ-11/experiment-with-weapon-positioning-and-arsenal-visibility) and [GDJ-12: deep combat-readability/accessibility research](https://linear.app/cnid/issue/GDJ-12/research-combat-readability-and-accessibility). They are future Backlog work at Medium and High respectively, with no date or implementation commitment. Readability remains a core design priority; these tasks will produce bounded recommendations and human evidence, preserving the performant 1-4 player loop.
 
 ## Parking lot
 

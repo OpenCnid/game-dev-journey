@@ -13,12 +13,12 @@ Two or three years ago, I wouldn't have felt ready to take this on this way. Tod
 | Area | Status |
 | --- | --- |
 | Experience | Software engineering background; first game |
-| Game concept | Cooperative PvE action roguelike/roguelite horde survival for 2-4 players, focused on stacking weapons and powerful builds; first person for MVP/alpha, optional third person parked for later; The Engine Kingdoms AI-world isekai direction |
+| Game concept | Bullet-heaven survival roguelite for 1-4 players, solo or cooperative PvE, focused on pleasant level-ups, stacking weapons and powerful builds; first person for MVP/alpha, optional third person parked for later; The Engine Kingdoms AI-world isekai direction |
 | Engine and language | Unity **6000.3.25f1** + C#, URP **17.3.0**; editor and packages pinned |
 | Target platform | First prototype: Windows desktop, keyboard and mouse |
 | Playable build | One-weapon arena with health, pause/restart, and crowd/boss stress scenarios up to 20,000 enemies |
 | Current milestone | Design a small Engine Kingdoms cooperative encounter, then validate minimal two-player shared combat; existing playable build remains local |
-| Performance target | At least 144 FPS in supported crowded fights; higher caps and uncapped rendering available; target not validated |
+| Performance target | At least 144 FPS in the declared supported envelope; broad hardware reach inspired by League of Legends/Valorant; final-game and low-end targets not validated |
 
 Open [the prototype project](prototypes/001-stacked-weapons/README.md) for setup, controls, build commands, and benchmark instructions. The maintained game will move into `game/` after the experiment is evaluated.
 

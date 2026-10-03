@@ -4,6 +4,8 @@ GDJ-6 design checkpoint, October 3, 2026. [Decision 0003](../decisions/0003-shar
 
 ## Owner direction
 
+[Decision 0008](../decisions/0008-bullet-heaven-solo-play-and-core-experience.md) clarifies 1-4 player solo/cooperative bullet-heaven survival, pleasant level-ups and a performant core. Killing is an expected XP route; future non-kill XP sources remain possible. The adding/deepening-capabilities distinction remains exploratory.
+
 - Enter combat with one gun, earn levels, choose improvements and grow a large simultaneous weapon stack.
 - Share XP so friends receive aligned progression opportunities rather than competing for XP.
 - Give each player individual random upgrade choices and their own draw-pool state.
@@ -21,7 +23,7 @@ Shared XP aligns opportunities and level counts. Random choices, synergies and r
 
 | Responsibility | What it owns | Future interaction to preserve |
 | --- | --- | --- |
-| Team progression | XP earned by the encounter and level thresholds | Personal draw/loot luck should not silently grant extra personal levels. Rules for join/downed states still need design. |
+| Team progression | XP earned by declared encounter events and level thresholds, usable with one player or a party | Personal draw/loot luck should not silently grant extra personal levels. Rules for join/downed states still need design. |
 | Player build | Selected upgrades, weapon instances and active player effects | Upgrades can affect a weapon, the player, loot generation or future upgrade draws. |
 | Player draw pool | Upgrades currently eligible for that player, with their draw weights | Unlocks, exclusions, ranks, tags or luck can change later offers without rewriting combat effects. |
 | Offer generation | A concrete random offer for one player and level-up opportunity | Random state and offer ownership belong to that player; consuming another player's draw must not consume this player's sequence. |
@@ -66,7 +68,7 @@ Weapon-specific prerequisites, already-owned/max-rank upgrades, incompatible cho
 
 A player who invests in draw luck may create a team benefit by generating more shared high-rarity moments. Evaluate this alongside individual early combat strength: shared rewards may make luck builds useful, but neither their strength nor team fairness is established by writing the rule. Exact sharing tiers, frequency and modifier formulas are balance questions.
 
-Account for party size: four independent player draws create more opportunities for a qualifying team reward than two, and every such reward benefits more recipients. Evaluate rarity frequency and compounding draw modifiers across the accepted 2-4 player range rather than assuming two-player tuning transfers unchanged. Preserve original-pull credit and one grant per recipient as party size grows; recipients never generate additional pull events from the shared grant.
+Account for party size: four independent player draws create more opportunities for a qualifying team reward than two, and every such reward benefits more recipients. Evaluate rarity frequency and compounding draw modifiers across the accepted 1-4 player range rather than assuming two-player tuning transfers unchanged. Preserve original-pull credit and one grant per recipient as party size grows; recipients never generate additional pull events from the shared grant. Solo selection should apply the upgrade once without a second self-grant. Keep the core choice experience available alone; exact party-size reward/difficulty tuning remains open.
 
 ## Small first slice and later feasibility
 

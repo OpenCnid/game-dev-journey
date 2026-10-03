@@ -23,7 +23,7 @@ Further design is recorded in [GDJ-8: Develop hybrid gun capacity, mastery and p
 
 Specify the relationship between shared XP, personal choices, weapon capacity and mastery through a small hybrid-weapon example. Resource costs/bars, capacity measurements, mastery levels, cultivation realms, classes and numerical ceilings remain open. Compatibility, instability and AI enforcement are separate proposals; this acceptance does not select their consequences.
 
-Preserve future weapon/player/loot/draw effects and 2-4 player builds. Shared rare rewards still need applicability rules when recipients lack matching training, power sources or weapons. The Zone's proposed mental-rehearsal theme can present earned changes; its unlimited decision time does not supply free XP or upgrades.
+Preserve future weapon/player/loot/draw effects and 1-4 player builds under [decision 0008](0008-bullet-heaven-solo-play-and-core-experience.md). Qi/murim remain internal lore references; the approachable player-facing energy name is not selected yet. Shared rare rewards still need applicability rules when recipients lack matching training, power sources or weapons. The Zone's proposed mental-rehearsal theme can present earned changes; its unlimited decision time does not supply free XP or upgrades.
 
 The first encounter can use a small authored subset. Detailed lore development is not an additional gate requiring a full technology tree, cultivation system or weapon roster. [GDJ-6](https://linear.app/cnid/issue/GDJ-6/design-the-first-engine-kingdoms-cooperative-encounter) still needs qualifying-rare/applicability and lifecycle rules before encounter evaluation.
 

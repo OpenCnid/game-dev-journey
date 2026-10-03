@@ -31,9 +31,11 @@ Proposed flavor line: **â€œThe Zone: thought continues; the world stands still.â
 
 ## Consequences and follow-up
 
+**Later solo clarification:** [decision 0008](0008-bullet-heaven-solo-play-and-core-experience.md) extends support to 1-4 players. The same unlimited decision space must make sense alone; all-active-player readiness has one participant in a solo run. Exact controls remain later specification.
+
 - Future work is recorded in the **Party thinking space** milestone in the [Linear project](https://linear.app/cnid/project/first-weapon-stacking-playtest-89b5952f722e), with [GDJ-7](https://linear.app/cnid/issue/GDJ-7/build-party-thinking-space-for-cooperative-upgrades) as its initial implementation task. Work begins after the necessary shared-combat/progression/lifecycle foundation is ready; no date or immediate implementation is scheduled.
 - Exact activation input, checkpoint cadence, allowed loadout changes/respecs, narration/navigation behavior, offer-generation/modifier ordering and departure/downed/AFK handling need specification before implementation. Acceptance does not imply unrestricted free rebuilding or selection of the first-reveal draw proposal.
-- Preserve progression, offer ownership, selected effects and shared reward events independently of freeze presentation. Account for future loot/draw modifiers and 2-4 player behavior, while keeping the first implementation two-player scope.
+- Preserve progression, offer ownership, selected effects and shared reward events independently of freeze presentation. Account for future loot/draw modifiers and 1-4 player behavior, while keeping the first implementation two-player scope.
 - Define and validate all time-dependent encounter behavior across freeze/resume. This selects no networking package, data schema or performance budget.
 - Record accessible UI and human findings about understanding, waiting and pressure. Frozen time alone does not establish readable text, usable narration or whole-game accessibility.
 
