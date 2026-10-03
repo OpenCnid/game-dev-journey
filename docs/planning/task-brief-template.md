@@ -6,11 +6,11 @@ Use this in a Linear issue or bounded AI task. Most tasks need only the three fi
 
 **Outcome:** one observable improvement or one question to answer.
 
-State briefly which foundation pillar the outcome supports or which uncertainty it resolves; link the foundation rather than copying it into the brief.
+State briefly which game system and foundation pillar the outcome serves, and the player benefit or uncertainty being investigated. Link the relevant foundation section rather than copying the product definition into the brief.
 
 **Done when:** the behavior/measurement and checks that establish completion; say whether a human playtest is required.
 
-**Context:** relevant files/design/evidence links. Add the starting commit and worktree when giving the task to AI.
+**Context:** the relevant foundation section and files/design/evidence links. Add the starting commit and worktree when giving the task to AI. Read the foundation first to understand the game, then the planning handoff, current state and this task's context.
 
 The task's status, assignee and dependencies live in Linear's fields. A short completion note normally needs just the result, commit/build and checks/evidence links.
 
