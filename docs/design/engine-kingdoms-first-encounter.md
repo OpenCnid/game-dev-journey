@@ -59,6 +59,8 @@ Neither combination is selected yet. The earlier marking/consuming proposal rema
 
 **Current next discussion:** define only the level-up selection and team lifecycle rules needed to play and repeat the simple progression encounter. Further lore and special-combination design are deferred.
 
+The owner requested [selection/accessibility scenarios](upgrade-selection-accessibility.md) to explore frustration with waiting friends and access for players with reading or sight disabilities. No menu mode was selected. That record compares hypothetical shared waits, live combat/menu overlap and planned safe breaks; it proposes a comparison without claiming measured reactions. If safe breaks are chosen, specify 60 seconds of active combat separately from untimed preparation wall time and the delay before earned upgrades become usable.
+
 Write one concrete 60-second two-player encounter around moving, aiming, leveling and choosing build growth. Each player's simultaneously active weapons should visibly contribute to team survival. Select only the progression and lifecycle rules required to reach and repeat that moment.
 
 ## Encounter specification still to select
@@ -93,5 +95,5 @@ Use the one-gun start, one earned team level-up with personal choices, a control
 - **Completed:** prior world choices preserved as background; immediate one-gun/level-up/large-stack loop accepted. Foundation revision 7 and decision 0003 record accepted shared XP, independent personal draws with possible overlap, team grants on selection of qualifying high-rarity upgrades with originator credit, and future weapon/loot/draw effect support. Long-term feature-design instruction is recorded in AGENTS/workflow. Fixed grants, narrative escape and special-combination selection remain superseded as requirements.
 - **Owner evaluation outstanding:** resolve qualifying tiers and build applicability, menu timing and necessary downed/end/restart rules; evaluate the small progression encounter. Keep GDJ-6 In Review.
 - **Checks:** documentation link/anchor and whitespace checks apply to this revision; exact results and source belong in GDJ-6 after commit. No gameplay changes, Unity operations, benchmarks, human play observation or networking experiment occurred.
-- **Next action:** choose the smallest cooperative upgrade-selection/lifecycle rules, with selection-triggered rare sharing accepted. Do not reopen lore or special-combination design as prerequisites.
+- **Next action:** evaluate the saved selection/accessibility scenarios and choose a bounded menu rule before lifecycle/encounter completion. Selection-triggered rare sharing is accepted. Live selection, shared pauses, safe breaks and offer-generation timing remain proposals. Do not reopen lore or special-combination design as prerequisites.
 - **Integration:** planning/integration reviews this durable record and accepted choices. No automatic message to the originating chat is required or authorized by receipt of its delegation alone.

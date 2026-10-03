@@ -36,6 +36,8 @@ At a team level-up, each player receives their own choice opportunity. Build tha
 
 Offer count, uniqueness rules, rank/duplicate rules, exclusions and weighted sampling are still to define. The design chat recommends generating a concrete offer once per opportunity and preserving it while the menu is closed, so reopening does not become an unpriced reroll. When a pool-modifying choice starts affecting draws, and how queued choices behave, must be explicit before implementation.
 
+The owner requested [selection/accessibility scenario exploration](upgrade-selection-accessibility.md) before choosing live menus or shared pauses. Neither is selected. That record compares hypothetical waiting/interruptions and proposes safe breaks plus sequential reveal of banked choices; these are proposals, not accepted timing or draw rules. Generating offers at earning versus first opening remains open.
+
 Do not regenerate offers every combat frame. Combat effects operate with the simulation; pool calculation and sampling happen at progression/draw events. Use independent, reproducible player random streams as a proposal for debugging and future shared-state consistency. Randomness does not imply an upgrade is exclusive to a teammate, and shared seeds do not prove whole-game simulation determinism.
 
 ## Effect examples and choices still open
@@ -73,4 +75,4 @@ Next bounded feasibility question after selection/lifecycle rules are chosen: ca
 
 ## Resume
 
-Accepted: shared XP, independent personal random choices/pool modifiers with possible overlap, team grants when qualifying high-rarity upgrades are selected, with original-player credit, and accounting for future weapon/loot/draw effects. Pending: qualifying tiers, cross-build applicability, repeat/stacking rules, menu timing, exact draw/loot semantics and downed/end/restart. Keep GDJ-6 In Review while required owner evaluation remains outstanding. No gameplay implementation, Unity operations, benchmarks or validated balance/enjoyment evidence in this checkpoint.
+Accepted: shared XP, independent personal random choices/pool modifiers with possible overlap, team grants when qualifying high-rarity upgrades are selected, with original-player credit, and accounting for future weapon/loot/draw effects. Pending: qualifying tiers, cross-build applicability, repeat/stacking rules, menu timing, exact draw/loot semantics and downed/end/restart. The owner requested deeper selection/accessibility exploration instead of selecting live combat or shared pause; hypothetical scenarios and a safe-break comparison are saved. Keep GDJ-6 In Review while required owner evaluation remains outstanding. No gameplay implementation, Unity operations, benchmarks or validated balance/enjoyment evidence in this checkpoint.
