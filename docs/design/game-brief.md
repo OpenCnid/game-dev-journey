@@ -4,7 +4,7 @@ The [project foundation](../foundation.md) defines the game we are building, its
 
 **Direction:** an original cooperative multiplayer PvE first-person horde-survival game, designed for 2-4 players with two-player testing first, inspired by playing Vampire Hunters.
 
-**World premise:** The Engine Kingdoms, selected by the owner: isekai into an AI-maintained magical world where teammates can combine forbidden powers. [Decision 0002](../decisions/0002-cooperative-pve-ai-world.md) records the accepted direction; the [world comparison](ai-world-options.md) preserves alternatives and proposed mechanics. Design one small cooperative encounter before implementation.
+**World premise:** The Engine Kingdoms, selected by the owner: a failing system accidentally pulls outsiders into a physical AI-maintained magical world where kingdoms, people and magic are real and teammates can combine forbidden powers. They initially seek survival and a way home. The AI tries to prevent another catastrophe; forbidden combinations threaten the world, but outsiders may need them to save it. [Decision 0002](../decisions/0002-cooperative-pve-ai-world.md) records the accepted direction; the [world comparison](ai-world-options.md) preserves setting alternatives and proposed mechanics, and the [first encounter record](engine-kingdoms-first-encounter.md) preserves the developing world discussion. Design one small cooperative encounter before implementation.
 
 **Confirmed priority:** stacking weapons and creating powerful builds.
 

@@ -1,12 +1,12 @@
 # Project foundation: the game we are building
 
-**Product definition, revision 3 — October 2, 2026.** This page defines the intended game. Read it first to understand the project; implementation progress lives in [current state](current-state.md), and immediate work lives in the [planning handoff](planning/README.md).
+**Product definition, revision 4 — October 2, 2026.** This page defines the intended game. Read it first to understand the project; implementation progress lives in [current state](current-state.md), and immediate work lives in the [planning handoff](planning/README.md).
 
 ## What this project is
 
 We are building an **original, cooperative multiplayer PvE, first-person horde-survival game centered on stacking simultaneous weapons and creating powerful builds**. Design for **2-4 players on the same team**, with **two-player testing first**. Players move and aim through crowded encounters while expanding arsenals operate together. Choosing how those arsenals grow and contribute to the team is central to the experience.
 
-The selected world direction is **The Engine Kingdoms**: players arrive from another world into a magical world maintained by artificial intelligence. As outsiders, they can combine powers the governing system normally forbids, giving cooperative weapon stacking a place in the world's fiction. The AI's motives, physical versus simulated nature of the world, exact visual treatment and playable rule-breaking effects remain design questions. The [world comparison](design/ai-world-options.md) preserves the selected direction and alternatives. [Decision 0002](decisions/0002-cooperative-pve-ai-world.md) records the owner's change from the earlier single-player scope and subsequent world selection.
+The selected world direction is **The Engine Kingdoms**: a failing world system accidentally pulls players from another world into a **physical magical world** maintained by artificial intelligence. They initially seek survival and a way home. Kingdoms, people and magic are real; the AI maintains the systems that sustain them. As outsiders, players can combine powers the governing system normally forbids, giving cooperative weapon stacking a place in the world's fiction. The owner selected the AI's purpose: **prevent another catastrophe**. Forbidden combinations threaten the world, but outsiders may need them to save it. Details of the earlier catastrophe and enforcement, exact visual treatment and playable rule-breaking effects remain design questions. The [world comparison](design/ai-world-options.md) preserves the selected setting and alternatives; the [first encounter record](design/engine-kingdoms-first-encounter.md) records the world choices and developing design. [Decision 0002](decisions/0002-cooperative-pve-ai-world.md) records the owner's change from the earlier single-player scope and subsequent world choices.
 
 The intended power fantasy is to begin with limited firepower and grow into a formidable build that can handle enormous crowds. Late encounters may contain more than 10,000 enemies, including large numbers of bosses with special abilities. The player must still be able to read threats and respond; smooth performance is part of how the combat should feel.
 
@@ -61,7 +61,7 @@ Design for **144 FPS or higher** within a declared hardware/settings/encounter e
 
 Finish a small, complete cooperative version of this loop before expanding its content. Three weapons, six upgrades and five minutes are the [earlier local prototype's test settings](design/game-brief.md), rather than the definition of the finished game. Networking is now part of the core game; validate a minimal two-player shared encounter before expanding multiplayer systems or content. Accounts, public matchmaking services, monetization, extensive procedural content and custom-engine work remain deferred.
 
-The AI's motives and underlying world technology, exact visual style, weapon roster, enemy roster, run duration, cooperative progression rules, hosting/connection approach and release destination remain open. They should develop around The Engine Kingdoms direction, the game's identity and the three pillars above.
+The AI's enforcement and the earlier catastrophe, underlying world technology, exact visual style, weapon roster, enemy roster, run duration, cooperative progression rules, hosting/connection approach and release destination remain open. They should develop around The Engine Kingdoms direction, the game's identity and the three pillars above.
 
 ## How we are building it
 
@@ -76,3 +76,4 @@ The [game brief](design/game-brief.md) turns this product definition into specif
 | 1 | 2026-10-02 | Consolidated existing commitments as a session foundation. |
 | 2 | 2026-10-02 | Refocused the foundation on the game's identity, player experience, run loop and core systems following the owner's clarification. Moved documentation rules into the workflow. |
 | 3 | 2026-10-02 | Owner changed the game to cooperative multiplayer PvE for 2-4 players, testing two first, and selected The Engine Kingdoms: isekai into an AI-maintained magical world where teammates combine forbidden powers. Detailed mechanics and technology remain under design. |
+| 4 | 2026-10-02 | Owner selected a physical world with real kingdoms, people and magic sustained by AI systems, the AI's purpose of preventing another catastrophe, and accidental arrival through a failing world system with survival and finding a way home as the initial motivation. Forbidden combinations threaten the world, but outsiders may need them to save it. Specific history, enforcement and encounter mechanics remain open. |

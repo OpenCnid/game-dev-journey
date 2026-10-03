@@ -1,6 +1,6 @@
 # AI-controlled world: options for cooperative weapon stacking
 
-October 2, 2026. **The Engine Kingdoms is the owner-selected world direction; detailed mechanics remain proposals, not validated gameplay.** The owner accepted cooperative PvE for 2-4 players, two-player testing first, and isekai into an AI-controlled world, then selected option A. See [foundation revision 3](../foundation.md) and [decision 0002](../decisions/0002-cooperative-pve-ai-world.md). The planning/integration chat prepared this comparison to scope [GDJ-6](../planning/tasks/GDJ-6.md); that brief now records the dedicated design chat created by explicit owner request.
+October 2, 2026. **The Engine Kingdoms is the owner-selected world direction; detailed mechanics remain proposals, not validated gameplay.** The owner accepted cooperative PvE for 2-4 players, two-player testing first, and isekai into an AI-controlled world, then selected option A. See the [foundation](../foundation.md) and [decision 0002](../decisions/0002-cooperative-pve-ai-world.md). The planning/integration chat offers this comparison to scope [GDJ-6](../planning/tasks/GDJ-6.md). The dedicated design chat has started; its [world discussion and encounter record](engine-kingdoms-first-encounter.md) preserve the owner's later selection of preventing another catastrophe as the AI's purpose, along with unresolved choices.
 
 ## Shared design intention
 
