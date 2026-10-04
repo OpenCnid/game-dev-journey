@@ -29,6 +29,26 @@ A collected orb credits the shared pool once, including overlapping collectors o
 
 The owner wants dead players to remain involved, access gear upgrades through earned choices and return to active play. Timed revival is the direction to investigate, with multiple lives/longer timers as possibilities. **All players dead and waiting to respawn ends the run, including solo; pending respawn timers do not keep it active.** One living party member keeps this defeat condition from being met. New XP/choice eligibility during death, active-versus-banked choices, effects on living teammates, thinking-space invocation/readiness, participant eligibility/event ordering and restart coordination/reset details remain open. **The party restarts through a Retry button** after the run ends. [GDJ-13](https://linear.app/cnid/issue/GDJ-13/research-death-revival-and-continued-player-participation) is prioritized future multiplayer research; no death timer or lives count is selected now.
 
+## Weapon traits and offer eligibility
+
+[Decision 0011](../decisions/0011-weapon-traits-and-upgrade-eligibility.md) accepts **ordinary upgrades that improve existing traits, plus specific compatible special unlocks that can add a trait and open its upgrades**. Guns retain distinct capabilities without requiring immutable upgrade pools.
+
+Keep three questions separate: what traits the weapon can accept, what traits it currently has, and whether the proposed upgrade enhances or grants a trait. A zero piercing count does not by itself tell us whether a gun could gain piercing through a compatible item.
+
+| Illustrative weapon state | Ordinary piercing enhancement | Specific gain-piercing item |
+| --- | --- | --- |
+| Already has active piercing | Eligible if rank/cap and target rules permit | Follow explicit redundancy/stacking rules, still to define |
+| No active piercing, but compatible with a declared unlock | Ineligible until it gains the trait | Can be eligible under that item's requirements |
+| Incompatible with piercing | Ineligible | Ineligible unless an explicit compatible transformation changes the weapon |
+
+These are rule examples, not selected starting traits for the rifle. The same distinction can apply to ricochet and other authored traits. A player owning several weapons can receive an enhancement for an eligible weapon even when another weapon lacks that trait; name the affected weapon(s). Exact one-instance, type-wide or all-compatible targeting remains open.
+
+Filter ordinary enhancements by legal current targets before applying personal draw weights. Draw luck should change eligible outcomes rather than silently add unsupported behavior. Explicit capability/pool-changing effects can change later eligibility. Player/loot/draw effects such as pickup range and magic find use their own declared requirements, rather than inheriting every gun-trait filter.
+
+After a compatible item or transformation adds piercing, piercing enhancements can enter future offers. Offer-generation timing for banked choices, already-generated offers, trait removal/transformation, empty pools and ranks/caps still need rules. Opening new trait families affects future choices; exact weights and balance remain open. Eligibility/weights belong to progression events, without requiring a full trait system or per-frame pool rebuilding now.
+
+Shared qualifying rares still grant to the party. A trait-enhancing reward does not automatically grant the missing trait to a teammate; a trait-granting reward must declare compatibility. GDJ-14 researches that recipient case without selecting substitute rewards or conversions here. Piercing/ricochet count, falloff, bounce targets and combined effect order remain content questions; later work must measure hit/effect costs and readability.
+
 ## Proposed separation of responsibilities
 
 | Responsibility | What it owns | Future interaction to preserve |
@@ -91,4 +111,4 @@ Next bounded feasibility question after selection/lifecycle rules are chosen: ca
 
 ## Resume
 
-Accepted: pickup-required enemy-drop XP orbs, magnet collection, percentage pickup-range upgrades, gear-upgrade access during death, all-dead/waiting-to-respawn defeat (including solo), Retry-button restart, and shared XP, independent personal draws/pool modifiers with overlap, selected team rare grants with source credit, future weapon/loot/draw effects, and the party thinking-space hybrid as a future feature. Pending: qualifying tiers, cross-build applicability, repeats, detailed thinking-space cadence/loadout/draw handling and downed/revival details, event ordering and restart coordination/reset details. The selection/accessibility reasoning is saved; later feature work belongs to GDJ-7's milestone. GDJ-13 prioritizes death/revival participation research for multiplayer; GDJ-14 covers shared legendary edge cases. Keep GDJ-6 In Review while encounter evaluation remains outstanding. No gameplay implementation, Unity operations, benchmarks or validated balance/enjoyment evidence in this checkpoint.
+Accepted: ordinary enhancement of existing weapon traits and compatible special trait unlocks that open future upgrades; pickup-required enemy-drop XP orbs, magnet collection, percentage pickup-range upgrades, gear-upgrade access during death, all-dead/waiting-to-respawn defeat (including solo), Retry-button restart, and shared XP, independent personal draws/pool modifiers with overlap, selected team rare grants with source credit, future weapon/loot/draw effects, and the party thinking-space hybrid as a future feature. Pending: qualifying tiers, cross-build applicability, repeats, detailed thinking-space cadence/loadout/draw handling and downed/revival details, event ordering and restart coordination/reset details. The selection/accessibility reasoning is saved; later feature work belongs to GDJ-7's milestone. GDJ-13 prioritizes death/revival participation research for multiplayer; GDJ-14 covers shared legendary edge cases. Keep GDJ-6 In Review while encounter evaluation remains outstanding. No gameplay implementation, Unity operations, benchmarks or validated balance/enjoyment evidence in this checkpoint.

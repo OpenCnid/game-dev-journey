@@ -1,6 +1,6 @@
 # Project foundation: the game we are building
 
-**Product definition, revision 16 — October 3, 2026.** This page defines the intended game. Read it first to understand the project; implementation progress lives in [current state](current-state.md), and immediate work lives in the [planning handoff](planning/README.md).
+**Product definition, revision 17 — October 3, 2026.** This page defines the intended game. Read it first to understand the project; implementation progress lives in [current state](current-state.md), and immediate work lives in the [planning handoff](planning/README.md).
 
 ## What this project is
 
@@ -32,7 +32,7 @@ Our intended run loop is:
 4. **Use the growing combinations**, supporting teammates when playing cooperatively.
 5. **Reach an ending and restart**, carrying the lesson into another build attempt; party endings are shared. The run ends when all players are dead and waiting to respawn; the party restarts through a **Retry button**.
 
-**First gun to explore:** the owner selected a **steady rifle with predictable, frequent shots** as the next design starting point. Its detailed baseline and upgrade pool are still to design; bullet changes, trails and after-effects are possibilities. Chosen effects such as raw damage or area damage should determine the usefulness and feel of growth. The [first-gun discussion](design/engine-kingdoms-first-encounter.md#first-gun-and-readable-growth--discussion-checkpoint) distinguishes the selected archetype from proposed firing, feedback and upgrade details.
+**First gun to explore:** the owner selected a **steady rifle with predictable, frequent shots** as the next design starting point. Its detailed baseline and upgrade pool are still to design; bullet changes, trails and after-effects are possibilities. Chosen effects such as raw damage or area damage should determine the usefulness and feel of growth. The [first-gun discussion](design/engine-kingdoms-first-encounter.md#first-gun-and-readable-growth--discussion-checkpoint) distinguishes the selected archetype from proposed firing, feedback and upgrade details. **Ordinary trait upgrades improve traits a gun already has; a specific compatible item or transformation can add a trait and open its upgrades.** [Decision 0011](decisions/0011-weapon-traits-and-upgrade-eligibility.md) records this rule. The rifle's starting piercing/ricochet traits and compatible additions remain to design.
 
 Future non-kill progression remains possible, without selecting sources now. Adding and deepening capabilities are examples to expand, not a fixed two-part upgrade taxonomy. Exact duration, waves, endless/extraction/boss structure and final objectives remain open; build and measure the performant core before selecting surrounding structure.
 
@@ -114,3 +114,4 @@ The [game brief](design/game-brief.md) turns this product definition into specif
 | 14 | 2026-10-03 | Owner selected the shared defeat condition: all players dead and waiting to respawn ends the run, including solo. Pending respawn timers do not continue a defeated run. Restart interaction, revival details, participant eligibility and event ordering remain open. |
 | 15 | 2026-10-03 | Owner selected a Retry button to restart the party after the run ends. Activation/readiness coordination and exact reset details remain open; revival timing and participant/event rules remain future work. |
 | 16 | 2026-10-03 | Owner selected a steady rifle with predictable, frequent shots as the first gun archetype to explore. Detailed baseline, upgrades and visuals remain open. Growth usefulness depends on the chosen effect; changed bullets/trails/after-effects are possibilities. Late-run chaos can contribute to the fun while players retain useful screen information. |
+| 17 | 2026-10-03 | Owner accepted ordinary enhancement of traits a gun already has, with specific compatible items/transformations able to add a trait and open its future upgrades. Starting rifle traits, compatibility lists, numerical rules, pending-offer behavior and shared-recipient policies remain open. |

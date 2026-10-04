@@ -12,6 +12,12 @@ The developer describes a first-person survivors-style roguelite with enemy hord
 
 We have not inspected the game's code, measured a run, or verified its internal algorithms. Its exact damage math, targeting, spawn scheduling, upgrade probabilities, and progression rules remain unknown. The systems and values proposed elsewhere in this repository are our design hypotheses.
 
+## Trait-specific and trait-granting effects — October 3 desk check
+
+The developer's [official announcement notes](https://steamcommunity.com/app/2206270/announcements/), accessed 2026-10-03, describe Bounce of Wrath removing ricochet damage reduction and Drill Bullet Charm removing piercing damage reduction. They also describe Cryo Sigil giving weapons freeze and Toxic Infusion giving weapons poison. These are developer-described effects, not our gameplay measurements.
+
+This supports distinguishing enhancement of an existing behavior from effects that grant behavior. It does not establish which guns accept each effect, whether an offer is hidden when nothing benefits, the current complete weapon roster or the hidden offer-generation algorithm. Our accepted compatibility/eligibility rule is in [decision 0011](../decisions/0011-weapon-traits-and-upgrade-eligibility.md); do not label it a verified copy of Vampire Hunters.
+
 ## What might make this combination work
 
 These are interpretations to test, not verified facts about the reference:
