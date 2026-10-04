@@ -26,7 +26,7 @@ namespace Journey
         readonly Impact[] impacts = new Impact[ImpactCapacity];
         readonly HealthBar[] bars = new HealthBar[BarCapacity];
         int nextImpact, previousHealth = 100;
-        float hitMarkerRemaining, killMarkerRemaining;
+        float hitMarkerRemaining, killMarkerRemaining, criticalMarkerRemaining;
         readonly Rect[] barBounds = new Rect[VisibleBarCapacity];
         readonly int[] visibleBars = new int[VisibleBarCapacity];
         readonly int[] labelOwners = new int[VisibleBarCapacity], labelVersions = new int[VisibleBarCapacity];
@@ -51,6 +51,11 @@ namespace Journey
         public int PlayerDamage { get; private set; }
         public bool KillMarkerVisible => killMarkerRemaining > 0;
         public bool HitMarkerVisible => hitMarkerRemaining > 0;
+        public bool CriticalMarkerVisible => criticalMarkerRemaining > 0;
+        public HitRegion PreviewRegion { get; private set; }
+        // Dynamic state only; GDJ-18 can supply static reticle appearance separately.
+        public Color CrosshairColor => PreviewRegion == HitRegion.Head ? new Color(1, .75f, .15f) :
+            PreviewRegion == HitRegion.Body ? new Color(.35f, 1, .4f) : Color.white;
         public int ImpactCount
         {
             get { int count = 0; for (int i = 0; i < impacts.Length; i++) if (impacts[i].Remaining > 0) count++; return count; }
@@ -64,6 +69,7 @@ namespace Journey
                 Remaining = shot.Killed ? KillLifetime : HitLifetime };
             nextImpact = (nextImpact + 1) % ImpactCapacity;
             hitMarkerRemaining = .12f;
+            if (shot.Critical) criticalMarkerRemaining = .25f;
             if (shot.Killed) killMarkerRemaining = KillLifetime;
         }
 
@@ -85,6 +91,7 @@ namespace Journey
             for (int i = 0; i < VisibleBarCapacity; i++) revealDelay[i] = Mathf.Max(0, revealDelay[i] - dt);
             hitMarkerRemaining = Mathf.Max(0, hitMarkerRemaining - dt);
             killMarkerRemaining = Mathf.Max(0, killMarkerRemaining - dt);
+            criticalMarkerRemaining = Mathf.Max(0, criticalMarkerRemaining - dt);
             PlayerPulseRemaining = Mathf.Max(0, PlayerPulseRemaining - dt);
             PlayerLabelRemaining = Mathf.Max(0, PlayerLabelRemaining - dt);
             for (int i = 0; i < impacts.Length; i++)
@@ -102,10 +109,13 @@ namespace Journey
         {
             BarCount = 0;
             FocusAimed = false; FocusEnemy = -1; FocusHealth = 0;
+            PreviewRegion = HitRegion.None;
             if (sim.Benchmark || (sim.State != RunState.Running && sim.State != RunState.Paused))
                 return;
             Vector3 eye = camera.transform.position;
-            int target = sim.AimTarget(new Ray(eye, camera.transform.forward), out _, alpha);
+            AimResult aim = sim.QueryAim(new Ray(eye, camera.transform.forward), alpha);
+            int target = aim.EnemyIndex;
+            if (sim.State == RunState.Running) PreviewRegion = aim.Region;
             if (target >= 0)
             {
                 FocusEnemy = target; FocusHealth = sim.EnemyHealth(target);
@@ -184,8 +194,7 @@ namespace Journey
         }
         static HealthBar ProjectBar(Camera camera, Vector3 p, int enemy, int version, int health, float distance, int priority)
         {
-            Matrix4x4 core = BurstInstances.CharacterMatrix(p, Vector3.up * 1.6f, Vector3.one * .45f,
-                health < CombatSimulation.EnemyMaxHealth, core: true);
+            Matrix4x4 core = EnemyGeometry.Head(p, health < CombatSimulation.EnemyMaxHealth);
             Vector3 owner = core.MultiplyPoint3x4(new Vector3(0, .55f, 0));
             Vector3 ownerViewport = camera.WorldToViewportPoint(owner);
             Vector3 viewport = camera.WorldToViewportPoint(owner + Vector3.up * OverheadHeight);
@@ -262,6 +271,11 @@ namespace Journey
                 GUI.Label(new Rect(width / 2 - 110, height - 124, 220, 32), $"DAMAGE  -{PlayerDamage} HP", cueStyle);
             }
             if (HitMarkerVisible) Marker(width, height, 9, Color.white);
+            if (CriticalMarkerVisible)
+            {
+                GUI.color = new Color(1, .75f, .15f);
+                GUI.Label(new Rect(width / 2 - 60, height / 2 - 58, 120, 26), "CRIT ×2", cueStyle);
+            }
             if (KillMarkerVisible)
             {
                 Color gold = new Color(1, .75f, .15f);
@@ -312,8 +326,9 @@ namespace Journey
             System.Array.Clear(impacts, 0, impacts.Length);
             nextImpact = BarCount = VisibleBarCount = PlayerDamage = 0; previousHealth = playerHealth;
             FocusEnemy = -1; FocusHealth = 0; FocusAimed = false;
+            PreviewRegion = HitRegion.None;
             for (int i = 0; i < VisibleBarCapacity; i++) { labelOwners[i] = -1; labelVersions[i] = 0; revealDelay[i] = 0; }
-            hitMarkerRemaining = killMarkerRemaining = PlayerPulseRemaining = PlayerLabelRemaining = 0;
+            hitMarkerRemaining = killMarkerRemaining = criticalMarkerRemaining = PlayerPulseRemaining = PlayerLabelRemaining = 0;
         }
     }
 }

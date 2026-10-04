@@ -14,7 +14,7 @@ namespace Journey.Tests
             Assert.That(Vector3.Distance(transform.MultiplyPoint3x4(pivot + Vector3.right * 10), pivot * scale), Is.EqualTo(10 * scale).Within(.001f));
         }
 
-        static Ray AtEnemy(CombatSimulation sim) => new Ray(sim.Position(0) + Vector3.up * 1.1f - Vector3.forward * 3, Vector3.forward);
+        static Ray AtEnemy(CombatSimulation sim) => new Ray(sim.Position(0) + Vector3.up * .8f - Vector3.forward * 3, Vector3.forward);
 
         [TestCase(false, false)] [TestCase(true, false)] [TestCase(true, true)]
         public void HitOutcomeMatchesHealthAndKeepsDeathSeparateFromRespawn(bool burst, bool native)
@@ -33,11 +33,11 @@ namespace Journey.Tests
                 feedback.RecordShot(sim, blocked);
                 Assert.That(feedback.ImpactCount, Is.EqualTo(1), "Cooldown must not create another damage cue.");
                 sim.Step(Vector3.zero, .12f);
-                Vector3 oldPosition = sim.Position(0);
+                Ray deathRay = AtEnemy(sim); AimResult aim = sim.QueryAim(deathRay);
                 Assert.That(sim.TryFire(AtEnemy(sim), out ShotResult death), Is.True);
                 Assert.That(death.Killed, Is.True); Assert.That(death.HealthAfter, Is.Zero);
                 Assert.That(death.SpawnVersion, Is.EqualTo(incarnation));
-                Assert.That(Vector3.Distance(death.End, oldPosition + Vector3.up * 1.1f), Is.EqualTo(CombatSimulation.EnemyRadius).Within(.001));
+                Assert.That(Vector3.Distance(death.End, deathRay.GetPoint(aim.Distance)), Is.LessThan(.001));
                 Assert.That(sim.EnemyHealth(0), Is.EqualTo(40));
                 Assert.That(sim.EnemySpawnVersion(0), Is.Not.EqualTo(incarnation));
                 feedback.RecordShot(sim, death); feedback.Advance(sim, 0);

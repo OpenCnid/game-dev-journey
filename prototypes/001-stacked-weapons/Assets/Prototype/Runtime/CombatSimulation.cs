@@ -9,11 +9,16 @@ namespace Journey
     public readonly struct ShotResult
     {
         public readonly Vector3 End;
-        public readonly int EnemyIndex, SpawnVersion, Damage, HealthAfter;
+        public readonly int EnemyIndex, SpawnVersion, Damage, HealthBefore, HealthAfter, RequestedDamage;
+        public readonly HitRegion Region;
         public bool Hit => Damage > 0;
         public bool Killed => Hit && HealthAfter == 0;
+        public bool Critical => Hit && Region == HitRegion.Head;
         public ShotResult(Vector3 end, int enemyIndex, int spawnVersion, int damage, int healthAfter)
-        { End = end; EnemyIndex = enemyIndex; SpawnVersion = spawnVersion; Damage = damage; HealthAfter = healthAfter; }
+            : this(end, enemyIndex, spawnVersion, damage > 0 ? HitRegion.Body : HitRegion.None, damage, damage + healthAfter, damage, healthAfter) { }
+        public ShotResult(Vector3 end, int enemyIndex, int spawnVersion, HitRegion region, int requestedDamage, int healthBefore, int damage, int healthAfter)
+        { End = end; EnemyIndex = enemyIndex; SpawnVersion = spawnVersion; Region = region; RequestedDamage = requestedDamage;
+            HealthBefore = healthBefore; Damage = damage; HealthAfter = healthAfter; }
     }
 
     public enum RunState { Ready, Running, Paused, Won, Lost }
@@ -29,6 +34,7 @@ namespace Journey
         public const float ArenaLimit = 29f;
         public const float Tick = 1f / 60f;
         public const float EnemyRadius = .62f;
+        public const float RifleRange = 65;
         public const int EnemyMaxHealth = 40;
         public const float DefaultRifleInterval = .12f, DefaultRifleRate = 1f / DefaultRifleInterval;
         public const float MinRifleRate = .5f, MaxRifleRate = 120;
@@ -234,18 +240,21 @@ namespace Journey
 
         public bool TryFire(Ray ray, out ShotResult shot, float alpha = 1)
         {
-            shot = new ShotResult(ray.origin + ray.direction * 65, -1, 0, 0, 0);
+            shot = new ShotResult(ray.GetPoint(RifleRange), -1, 0, 0, 0);
             if (State != RunState.Running || fireRemaining > 0) return false;
             // Simulation time drives cadence; render FPS does not change damage output.
             fireRemaining += rifleInterval;
             Shots++;
-            int target = AimTarget(ray, out float nearest, alpha);
-            Vector3 end = ray.origin + ray.direction * nearest;
+            AimResult aim = QueryAim(ray, alpha);
+            int target = aim.EnemyIndex;
+            Vector3 end = ray.GetPoint(aim.Distance);
             if (target >= 0)
             {
-                int damage = Mathf.Min(20, health[target]);
+                int requested = aim.Region == HitRegion.Head ? 40 : 20;
+                int before = health[target], damage = Mathf.Min(requested, before);
                 health[target] -= damage;
-                shot = new ShotResult(end, target, spawnVersions[target], damage, health[target]);
+                StateVersion++;
+                shot = new ShotResult(end, target, aim.SpawnVersion, aim.Region, requested, before, damage, health[target]);
                 if (health[target] <= 0)
                 { Kills++; Respawn(target); }
             }
@@ -254,17 +263,35 @@ namespace Journey
 
         public int AimTarget(Ray ray, out float nearest, float alpha = 1)
         {
-            nearest = 65;
-            int target = -1;
+            AimResult aim = QueryAim(ray, alpha);
+            nearest = aim.Distance;
+            return aim.EnemyIndex;
+        }
+
+        public AimResult QueryAim(Ray ray, float alpha = 1)
+        {
+            AimResult result = AimResult.Miss;
+            if (!EnemyGeometry.ValidRay(ray)) return result;
             for (int i = 0; i < Count; i++)
             {
-                // Normal combat queries the same interpolated pose that is displayed.
-                // Default alpha preserves the original fixed-state benchmark/reference query.
-                Vector3 p = alpha >= 1 ? Position(i) : RenderPosition(i, alpha);
-                if (RaySphere(ray, p + Vector3.up * 1.1f, EnemyRadius, out float hit) && hit < nearest)
-                { nearest = hit; target = i; }
+                Vector3 p = Benchmark || alpha >= 1 ? Position(i) : RenderPosition(i, alpha);
+                if (Benchmark)
+                {
+                    // Preserve the historical targeting/workload; benchmark has no critical regions.
+                    if (RaySphere(ray, p + Vector3.up * 1.1f, EnemyRadius, out float hit) && hit < result.Distance)
+                        result = new AimResult(i, spawnVersions[i], HitRegion.Body, hit);
+                    continue;
+                }
+                bool wounded = health[i] < EnemyMaxHealth;
+                bool body = EnemyGeometry.RayCube(ray, EnemyGeometry.Body(p, wounded), out float bodyDistance);
+                bool head = EnemyGeometry.RayCube(ray, EnemyGeometry.Head(p, wounded), out float headDistance);
+                if (!body && !head) continue;
+                bool critical = head && (!body || headDistance <= bodyDistance);
+                float distance = critical ? headDistance : bodyDistance;
+                if (distance <= RifleRange && (!result.Hit || distance < result.Distance))
+                    result = new AimResult(i, spawnVersions[i], critical ? HitRegion.Head : HitRegion.Body, distance);
             }
-            return target;
+            return result;
         }
 
         public static bool RaySphere(Ray ray, Vector3 center, float radius, out float distance)
