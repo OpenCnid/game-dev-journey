@@ -8,7 +8,8 @@ Use anonymous participant labels and leave personal information out of the repos
 
 ## Records
 
-- [2026-10-03: Fixed target HP and retained wounded bars](2026-10-03-focused-health-feedback.md) - fixed panel/body brackets and stable owner slots with overlap recovery delay; 49 automated passes and exact player, human comparison pending.
+- [2026-10-03: Body brackets without central HP panels](2026-10-03-aimed-health-feedback.md) - retained useful brackets, attached target HP, stable wounded owners; 49 checks and fresh build, latest clutter/stability comparison pending.
+- [2026-10-03: Fixed target HP and retained wounded bars](2026-10-03-focused-health-feedback.md) - 49 passes; P1 liked body brackets but rejected the central defeated/HP panel as distracting at high kill rates.
 - [2026-10-03: Attached-bar readability revision](2026-10-03-damage-readability-revision.md) - 48 automated passes; P1 rejected target ownership/clutter/flicker and prompted fixed target HP with retained wounded owners.
 - [2026-10-03: First damage-readability candidate](2026-10-03-damage-readability.md) - 42 automated passes; P1 identified wounds/player damage and requested improved enemy effects/stacked bars, then found the intermediate floating-bar layout unclear.
 - [2026-10-03: Current rifle baseline](2026-10-03-rifle-baseline.md) - exact candidate, 35 current test passes, two active developer attempts and pause/reset confirmation; selects enemy health/damage readability before stacking.

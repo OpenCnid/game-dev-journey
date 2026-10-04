@@ -1,0 +1,54 @@
+{
+  "candidateId": "GDJ-16-damage-v5-2026-10-03",
+  "source": {
+    "revision": "25d8157c97c58fe66331c2401c1e4cac58c91a6f",
+    "builtUtc": "2026-10-04T04:14:57.6233079Z",
+    "dirty": false
+  },
+  "baselineSource": "28ca1bce4d71d0af82326a93f65a528ebfd1cd5c",
+  "build": {
+    "release": true,
+    "platform": "Windows x64",
+    "editor": "6000.3.25f1",
+    "manifest": "build-manifest.json",
+    "manifestSha256": "157f5745f1323ad4eb0750ba74165880036c40c9eb7361f40d86f52d24c70dd0",
+    "fileCount": 166,
+    "totalBytes": 96914658
+  },
+  "encounter": {
+    "enemies": 35,
+    "durationSeconds": 60,
+    "seed": 137,
+    "enemyHP": 40,
+    "rifleDamage": 20,
+    "simulation": "burst",
+    "nativeState": false,
+    "rendering": "culled",
+    "combinedCharacters": false,
+    "projectileRenderer": "cube",
+    "resolution": "1920x1080 windowed",
+    "fpsCap": 144,
+    "vSync": 0
+  },
+  "checks": {
+    "editMode": {
+      "passed": 46,
+      "failed": 0
+    },
+    "playMode": {
+      "passed": 3,
+      "failed": 0
+    },
+    "humanComparison": "Final panel-removal build pending; P1 liked retained brackets in the preceding candidate",
+    "performanceCapture": "None"
+  },
+  "feedback": {
+    "candidateBars": 64,
+    "visibleBars": 3,
+    "rangeMetres": 40,
+    "priority": "Retained wounded owners, then fill free slots",
+    "overlap": "Suppress in retained slot order; 0.25-second reveal delay",
+    "woundedPose": "Skewed/compressed body and core; original sphere unchanged"
+  },
+  "targetCue": "Cyan body/core brackets and matching attached HP bar, only while aiming at a living enemy; no central/recent/dead-target HP UI"
+}
