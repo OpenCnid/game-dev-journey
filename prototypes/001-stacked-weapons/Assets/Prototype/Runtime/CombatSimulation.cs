@@ -95,6 +95,7 @@ namespace Journey
         public float Duration { get; private set; }
         public Vector3 Position(int index) => NativeState ? NativePositions[index] : positions[index];
         public int EnemyHealth(int index) => health[index];
+        public int HealthMaximum { get; private set; } = EnemyMaxHealth;
         public int EnemySpawnVersion(int index) => spawnVersions[index];
         public Vector3 RenderPosition(int index, float alpha) => NativeState ?
             Vector3.Lerp(NativePrevious[index], NativePositions[index], alpha) : Vector3.Lerp(previous[index], positions[index], alpha);
@@ -111,6 +112,7 @@ namespace Journey
                 NativePrevious = new NativeArray<Vector3>(Capacity, Allocator.Persistent);
             }
             Count = Mathf.Clamp(count, 0, Capacity);
+            HealthMaximum = EnemyMaxHealth;
             random = new System.Random(seed);
             Benchmark = benchmark;
             Duration = duration;
@@ -282,7 +284,7 @@ namespace Journey
                         result = new AimResult(i, spawnVersions[i], HitRegion.Body, hit);
                     continue;
                 }
-                bool wounded = health[i] < EnemyMaxHealth;
+                bool wounded = health[i] < HealthMaximum;
                 bool body = EnemyGeometry.RayCube(ray, EnemyGeometry.Body(p, wounded), out float bodyDistance);
                 bool head = EnemyGeometry.RayCube(ray, EnemyGeometry.Head(p, wounded), out float headDistance);
                 if (!body && !head) continue;
@@ -294,6 +296,20 @@ namespace Journey
             return result;
         }
 
+        // Read-only projection for the accepted renderer/feedback. SharedEncounter alone owns damage.
+        internal void ProjectShared(SharedSnapshot snapshot, int player, Vector3 cameraPosition)
+        {
+            NativeState = false; Benchmark = false; Count = snapshot.State == SharedState.Waiting ? 0 : snapshot.Enemies.Length; HealthMaximum = SharedEncounter.EnemyHealth;
+            State = snapshot.State == SharedState.Running ? RunState.Running : snapshot.State == SharedState.Complete ? RunState.Won : RunState.Lost;
+            Player = PreviousPlayer = cameraPosition; PlayerHealth = snapshot.Players[player].Health;
+            Elapsed = snapshot.Elapsed; Duration = SharedEncounter.Duration;
+            Shots = snapshot.Players[player].Shots; Kills = snapshot.Players[0].Kills + snapshot.Players[1].Kills; StateVersion++;
+            for (int i = 0; i < Count; i++)
+            {
+                positions[i] = previous[i] = snapshot.Enemies[i].Position;
+                health[i] = snapshot.Enemies[i].Health; spawnVersions[i] = snapshot.Enemies[i].Incarnation;
+            }
+        }
         public static bool RaySphere(Ray ray, Vector3 center, float radius, out float distance)
         {
             Vector3 relative = ray.origin - center;

@@ -29,6 +29,23 @@ Normal-enemy HP bars appear only while wounded; aiming at a healthy enemy does n
 
 The pause/start menu includes 144/240/custom/uncapped frame limits and a separate VSync setting. Benchmark mode temporarily disables both the cap and VSync, then restores them.
 
+## Two-player shared rifle feasibility (GDJ-20 candidate)
+
+The main menu also offers **Host (A)** and **Join (B)**. Direct IPv4 UDP port 7777, fixed two-player roster, 12 shared 60-HP drones, one baseline 20/40-damage rifle each, 60 seconds. Host owns damage, incarnations, personal health/contact grace and endings. No friendly obstruction/damage. One death follows the living teammate's view and returns after five active seconds with one second of visible contact immunity. All-dead defeat precedes return/completion. After defeat/completion both players click Retry (or R); R does nothing during shared combat. Escape/focus loss releases local input while the encounter continues. Click **Resume local input** to resume. Connection loss aborts; restart both processes to form a fresh pair.
+
+Use two separate games on this desktop without a second person/machine:
+
+```powershell
+.\tools\shared-combat.ps1                        # both manual; switch windows
+.\tools\shared-combat.ps1 -ScriptedCompanion     # human host A, automated client B
+.\tools\shared-combat.ps1 -ScriptedCompanion -HumanRole client
+.\tools\shared-combat.ps1 -Scripted -QuitAtEnd -Uncapped  # actual shared posed combat capture
+```
+
+Run these from the repo root after building. `-PlayerFolder` selects an archived whole player; `-Results`, `-Port`, `-Width`, `-Height` override paths/settings. Launch only one pair capture at a time. The automated companion is labelled diagnostic input in evidence, not a human teammate observation. CLI equivalents are `-host` / `-join 127.0.0.1`, `-sharedScripted`, `-sharedUncapped`, `-sharedQuit`, `-sharedResults <path>`. The new capture writes per-frame shared counters, attributed hit/rejection events and a terminal source/settings summary. Frame distributions omit the first three active seconds; hit delay is software emission-to-confirmed-feedback, not a physical input/display measurement. Verify window visibility before accepting performance results. Two processes share CPU/GPU; loopback cannot establish LAN/internet support or four-player/dense feasibility.
+
+Unity Transport **2.7.4** is the one added pinned package; existing editor/dependency versions remain unchanged. [Authority, history/reset policies, owner-agreed budgets and pending evidence](../../docs/planning/tasks/GDJ-20.md) define the bounded candidate. XP/orbs/offers/upgrades and thinking space remain absent; this stage does not complete earned progression. Original solo and synthetic benchmarks below retain their controls and workload.
+
 ## Prepare, test, and build
 
 From the repository root in PowerShell:

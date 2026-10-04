@@ -28,6 +28,7 @@ namespace Journey
         string customCap = "144";
         string customRifleRate = CombatSimulation.DefaultRifleRate.ToString("G8", CultureInfo.InvariantCulture), rateError = "";
         Vector2 menuScroll;
+        string sharedAddress = "127.0.0.1";
         string profilePath;
         float profileSeconds = 5;
         double profileStarted;
@@ -47,7 +48,7 @@ namespace Journey
             sim.UseBurst = true;
             ParseArguments();
             BurstStatus.Verify();
-            if (!benchmark) SetCursor(false);
+            if (enabled && !benchmark) SetCursor(false);
         }
 
         void ParseArguments()
@@ -92,7 +93,13 @@ namespace Journey
             if (view.DiagnosticOnly && !autoBenchmark) throw new InvalidOperationException("Hidden effects require -benchmark.");
             if (!view.CullInstances && (view.DiagnosticOnly || view.DeduplicateWarnings || view.OverlapPreparation || view.ProjectileRenderer != "cube" || view.CacheWarnings || view.CombinedCharacters))
                 throw new InvalidOperationException("Rendering experiments require -rendering culled.");
-            if (autoBenchmark) StartBenchmark(crowd);
+            bool host = Array.IndexOf(args, "-host") >= 0;
+            int join = Array.IndexOf(args, "-join");
+            ushort port = 7777;
+            int portArg = Array.IndexOf(args, "-port");
+            if (portArg >= 0 && portArg + 1 < args.Length) port = ushort.Parse(args[portArg + 1], CultureInfo.InvariantCulture);
+            if (host || join >= 0) StartShared(host, join >= 0 && join + 1 < args.Length ? args[join + 1] : "127.0.0.1", port);
+            else if (autoBenchmark) StartBenchmark(crowd);
             else if (autoPlay) StartCombat();
         }
 
@@ -201,6 +208,18 @@ namespace Journey
             benchmark = false; capture.Cancel(); error = "";
             yaw = pitch = accumulator = 0;
             view.ResetFeedback(); sim.Reset(35, seed, false); SetCursor(true);
+        }
+        void StartShared(bool host, string address, ushort port = 7777)
+        {
+            try
+            {
+                if (benchmark) CancelBenchmark();
+                sim.Reset(0, 137, false);
+                view.ResetFeedback();
+                var shared = gameObject.AddComponent<SharedGame>();
+                shared.Initialize(view, sim, host, address, port); enabled = false;
+            }
+            catch (Exception exception) { error = exception.Message; Debug.LogException(exception); }
         }
         public bool TrySetRifleRate(string value)
         {
@@ -348,6 +367,14 @@ namespace Journey
                 GUILayout.Space(8);
                 if (sim.State == RunState.Paused && !sim.Benchmark && GUILayout.Button("RESUME", button)) { sim.TogglePause(); SetCursor(true); }
                 if (GUILayout.Button("START / RESTART COMBAT", button)) StartCombat();
+                GUILayout.Space(8);
+                GUILayout.Label("TWO-PLAYER SHARED RIFLE TEST", heading);
+                sharedAddress = GUILayout.TextField(sharedAddress, 48);
+                GUILayout.BeginHorizontal();
+                if (GUILayout.Button("Host (A)", button)) StartShared(true, "0.0.0.0");
+                if (GUILayout.Button("Join (B)", button)) StartShared(false, sharedAddress);
+                GUILayout.EndHorizontal();
+                GUILayout.Label("Fixed pair · 12 shared 60-HP drones · UDP 7777 · Run continues while local input is released", small);
                 GUILayout.Space(12);
                 GUILayout.Label("REPEATABLE CROWD BENCHMARK", heading);
                 sim.UseBurst = GUILayout.Toggle(sim.UseBurst, " Jobs/Burst simulation");

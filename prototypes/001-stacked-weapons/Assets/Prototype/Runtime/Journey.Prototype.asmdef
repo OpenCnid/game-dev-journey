@@ -1,5 +1,5 @@
 {
   "name": "Journey.Prototype",
   "rootNamespace": "Journey",
-  "references": ["Unity.InputSystem", "Unity.RenderPipelines.Universal.Runtime", "Unity.RenderPipelines.Core.Runtime", "Unity.Burst", "Unity.Collections", "Unity.Mathematics"]
+  "references": ["Unity.InputSystem", "Unity.RenderPipelines.Universal.Runtime", "Unity.RenderPipelines.Core.Runtime", "Unity.Burst", "Unity.Collections", "Unity.Mathematics", "Unity.Networking.Transport"]
 }

@@ -180,7 +180,7 @@ namespace Journey
                 for (int i = 0; i < sim.Count; i++)
                 {
                     Vector3 p = sim.RenderPosition(i, alpha);
-                    bool wounded = !sim.Benchmark && sim.EnemyHealth(i) < CombatSimulation.EnemyMaxHealth;
+                    bool wounded = !sim.Benchmark && sim.EnemyHealth(i) < sim.HealthMaximum;
                     bodies[i] = EnemyGeometry.Body(p, wounded);
                     heads[i] = EnemyGeometry.Head(p, wounded);
                 }
@@ -294,7 +294,7 @@ namespace Journey
             if (!sim.Benchmark)
             {
                 mask = woundMask;
-                for (int i = 0; i < sim.Count; i++) mask[i] = (byte)(sim.EnemyHealth(i) < CombatSimulation.EnemyMaxHealth ? 1 : 0);
+                for (int i = 0; i < sim.Count; i++) mask[i] = (byte)(sim.EnemyHealth(i) < sim.HealthMaximum ? 1 : 0);
             }
             if (sim.NativeState)
                 buffer.ScheduleNative(sim.NativePositions, sim.NativePrevious, sim.Count, alpha, frustum,
