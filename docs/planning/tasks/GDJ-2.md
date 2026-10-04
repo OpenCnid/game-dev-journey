@@ -2,7 +2,7 @@
 
 Planning recommendation, October 2, 2026. Live status and dependencies remain in [GDJ-2](https://linear.app/cnid/issue/GDJ-2/play-the-current-rifle-slice-and-choose-the-next-gameplay-change). This brief prepares a review/playtest session; no task session or gameplay implementation was started by the planning inspection.
 
-**Priority clarification:** the owner subsequently chose [theme/identity design first](GDJ-6.md). Preserve this playtest brief for later; it is no longer the immediate next session. The checkpoint below records the earlier inspection, not the current priority.
+**Current priority clarification, October 3:** after the accepted theme/core-design discussion, the owner questioned assigning rifle traits before the gun has been tested enough. Return to baseline rifle observations before assigning traits or expanding its upgrade pool. [GDJ-6](GDJ-6.md) preserves the broader design and accepted eligibility rule; finishing those detailed weapon/encounter specifications is not a gate for observing the existing rifle. The October 2 theme-first priority and inspection below are historical.
 
 **Scope clarification:** [decision 0002](../../decisions/0002-cooperative-pve-ai-world.md) changes the intended game to cooperative PvE. This brief still evaluates the existing local rifle as a control; it cannot establish shared-combat, cooperative pause/progression or multiplayer performance acceptance.
 
@@ -20,7 +20,7 @@ GDJ-2 explicitly permits the current default renderer while GDJ-1 is pending. Bo
 - **Historical automated evidence:** the [renderer report](../../playtests/2026-09-30-renderer-experiments.md) and [test summary](../../playtests/evidence/renderers/test-summary.json) record 33 Edit Mode and two Play Mode passes. Full release captures identify source `8fa326a`; their three combined runs recorded 400.4-467.6 average FPS and 3.743-4.297 ms p99 at 20,000 synchronized synthetic bosses. The [analysis](../../playtests/evidence/renderers/full-analysis.json) confirms 3,600 ticks and 720,000 projectile spawns per run. These results do not measure current human play or the eventual stacked build; occasional frames exceeded the 144 FPS budget.
 - **Board:** GDJ-1 and GDJ-2 have no blockers or existing Resume sections/comments. No issue in this project was In Progress or In Review, and no open repository PR was returned at inspection. This is an inspection snapshot, not a task queue.
 - **Unverified:** human combat observations, staggered/endurance preset validation and representative upgraded-game performance. No Unity tests/builds or captures were rerun in this planning session. No standalone player exists at this worktree's documented release output path.
-- **Next action when resumed after design:** start the review/playtest session below, build the exact candidate, then collect two developer runs. Recheck source and board before acting. No playable capability changed during the planning inspection.
+- **Next action when resumed for the baseline check:** start the review/playtest session below, build the exact candidate, then collect two developer runs. Recheck source and board before acting. No playable capability changed during the planning inspection.
 
 ## Copy-ready session prompt
 

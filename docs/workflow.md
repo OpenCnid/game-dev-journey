@@ -70,6 +70,12 @@ The useful analogy to a web preview is a reproducible game scenario: a known are
 - Prefer a script that launches a specific scenario and reports its build/source over a long list of manual setup steps. Our player already supports `-playtest`, `-screenshot` and repeatable benchmarks.
 - Let AI run repeatable checks and summarize evidence. You review consequential behavior and play the exact candidate for feel, readability and enjoyment. Screenshots and automated tests answer narrower questions.
 
+## Design for the game's future
+
+The owner asks that new features account for the future game and its interactions, not only the current prototype. Before implementing a feature, identify its relevant consumers, state ownership and known extension needs in the design or task record. Explain how it could affect future content, build strategies and balance. Progression is the current example: upgrades can affect weapons, loot generation and future upgrade draws; a weapon-only definition would exclude an already identified need.
+
+Implement a bounded slice with explicit places for those known extensions. Expand through ordinary content and focused effect types as needs become concrete; an all-purpose rules engine is not required. Validate current behavior and the boundaries affected by the known future cases. Preserve measured scalability requirements and describe risks without claiming that extensibility proves performance or balance.
+
 ## Match verification to the change
 
 | Change | Useful check |

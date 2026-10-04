@@ -1,7 +1,7 @@
 # 0002: Cooperative PvE in an AI-controlled world
 
 - **Date:** 2026-10-02
-- **Status:** accepted by explicit owner direction; implementation pending.
+- **Status:** world/cooperative direction accepted; original 2-4 range extended to 1-4 solo/cooperative by decision 0008; implementation pending.
 
 ## Context
 
@@ -9,11 +9,19 @@ Foundation revision 2 defined a single-player weapon-stacking horde-survival gam
 
 ## Decision and reasoning
 
+**Later owner clarification, October 3:** [decision 0008](0008-bullet-heaven-solo-play-and-core-experience.md) extends support to **1-4 players, solo or cooperative**, with friends preferred and solo players welcome. Two-player cooperative testing remains the initial networking investigation. Bullet-heaven survival is the current genre language. Preserve the original world/cooperative rationale below as history.
+
 Adopt cooperative multiplayer PvE, intended for 2-4 players, while retaining first-person horde survival, simultaneous weapon stacking, powerful builds and the existing three pillars. Start cooperative verification with two players. Adopt arrival from another world into one governed by AI as the world premise. The owner subsequently selected **The Engine Kingdoms** from the three options: an AI maintains a magical world, and teammates combine forbidden powers to break its rules. The change follows the owner's desired game and creative direction; it is not a conclusion from playtest or benchmark evidence.
 
-The [world comparison](../design/ai-world-options.md) preserves that selection and the unselected alternatives. The AI's motives, physical versus simulated world, exact visual style and signature effect remain open. Marking/consuming targets is a proposed first rule-breaking test, not an accepted weapon mechanic. Hosting, networking library, resource/progression ownership, upgrade timing, revive rules and team failure/restart rules are also unresolved.
+The [world comparison](../design/ai-world-options.md) preserves that selection and the unselected alternatives. In the dedicated GDJ-6 design discussion, the owner subsequently selected **prevent another catastrophe** as the AI's purpose: forbidden combinations threaten the world, but outsiders may need them to save it. This establishes a reason for the restrictions and a conflict between enforced safety and the players' power growth. The owner also chose a **physical world**: kingdoms, people and magic are real, and the AI maintains the systems that sustain them. Its maintenance therefore has consequences for the inhabitants. For arrival, the owner chose **an accident**: a failing world system pulls outsiders in, and they initially seek survival and a way home. Deliberate summons was considered and left unselected. The [first encounter record](../design/engine-kingdoms-first-encounter.md) preserves the interpretations and owner choices. Specific catastrophe history, whether the AI's assessment is correct, its enforcement, exact visual style and signature effect remain open. Marking/consuming targets is a proposed first rule-breaking test, not an accepted weapon mechanic. Hosting, networking library, resource/progression ownership, upgrade timing, revive rules and team failure/restart rules are also unresolved.
 
 ## Consequences
+
+**Later genre clarification, October 3:** [decision 0007](0007-roguelike-run-identity-and-camera-exploration.md) records cooperative roguelike/roguelite identity, Risk of Rain/Megabonk references and persistent weapon/upgrade discoveries. First person remains the current prototype view; third person alongside it is an option to explore. Permanent matrix/power rules and camera support/switching remain open. This extends the intended run structure without selecting a second camera or changing the physical-world premise.
+
+**Later world expansion, October 3:** [decision 0005](0005-technology-magic-and-cultivation.md) adds advanced AI/technology, mage-level-dependent magic and murim/dantian cultivation to the accepted physical world. The owner confirmed that mixing all three in a single gun is central to builds and authorized focused gun lore. This extends the setting without replacing the earlier catastrophe-prevention purpose or requiring a narrative introduction.
+
+**Later owner clarification, October 2:** keep the selected world as background and defer deeper lore. Players should enter combat with one gun, level up, choose improvements and grow a large simultaneous weapon stack. A scripted arrival/escape and choosing a special cooperative combination are not gates for the first encounter. This clarification preserves the earlier setting choices while prioritizing the core progression fantasy; [foundation revision 5](../foundation.md) and the [encounter record](../design/engine-kingdoms-first-encounter.md) reflect it.
 
 - Multiplayer moves from deferred expansion into the core product definition. Accounts, public matchmaking services and commercial infrastructure remain deferred.
 - The existing local Unity prototype and dense-crowd evidence remain useful controls. They implement neither a cooperative session nor multiplayer performance/latency acceptance. Preserve them rather than rewriting their historical results.

@@ -1,6 +1,8 @@
 # Performance target and benchmark plan
 
-**Confirmed requirement:** target at least 144 FPS during supported gameplay, including crowded fights with stacked weapons. Allow higher frame rates when the user's hardware supports them.
+**Confirmed requirement:** target at least 144 FPS during supported gameplay within a declared hardware/settings/encounter envelope, including crowded fights with stacked weapons. Allow higher frame rates when the user's hardware supports them.
+
+**Owner priority clarification, October 3:** the performant, responsive core comes before surrounding run structure. [Decision 0008](decisions/0008-bullet-heaven-solo-play-and-core-experience.md) names League of Legends/Valorant as aspirations for broad hardware reach, high FPS on capable rigs and a useful low-end experience. Exact minimum hardware, low-end settings/FPS and supported workloads remain open. Retain the desktop benchmark plan below; this adds no measured parity or validated support. Frame pacing, input response and network latency require separate evidence across 1-4 players. High FPS alone does not establish low ping.
 
 **Late-game scope:** the owner wants more than 10,000 simultaneously active enemies, potentially all bosses with special abilities. The original 1,000-drone capture was only an initial diagnostic. It does not cover this requirement. The current stress harness supports up to 20,000 enemies; this is a test capacity, not an agreed final gameplay cap or a performance promise. See [the late-game workload](design/late-game-workload.md).
 
