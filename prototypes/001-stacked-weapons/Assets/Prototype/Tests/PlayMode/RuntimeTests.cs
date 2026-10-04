@@ -36,11 +36,11 @@ namespace Journey.Tests
                         yield return null;
                     }
                     Assert.That(view.Feedback.ImpactCount, Is.EqualTo(1));
-                    Assert.That(view.Feedback.FocusVisible, Is.True);
                     Assert.That(view.Feedback.HitMarkerVisible, Is.True);
                     if (outcome == 1) Assert.That(view.Feedback.KillMarkerVisible, Is.True);
                     if (outcome == 0)
                     {
+                        Assert.That(view.Feedback.FocusVisible, Is.True);
                         Assert.That(view.Feedback.BarCount, Is.EqualTo(1));
                         Assert.That(view.Feedback.Bar(0).Health, Is.EqualTo(20));
                         Assert.That(view.Feedback.FocusHealth, Is.EqualTo(20));

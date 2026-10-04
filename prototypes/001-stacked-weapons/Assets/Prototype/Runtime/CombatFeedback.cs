@@ -30,8 +30,8 @@ namespace Journey
         readonly int[] visibleBars = new int[VisibleBarCapacity];
         readonly int[] labelOwners = new int[VisibleBarCapacity], labelVersions = new int[VisibleBarCapacity];
         readonly float[] revealDelay = new float[VisibleBarCapacity];
-        float focusRemaining;
         Rect focusViewport;
+        HealthBar focusBar;
         GUIStyle cueStyle;
         public CombatFeedback() { Reset(); }
         public int BarCount { get; private set; }
@@ -43,7 +43,7 @@ namespace Journey
         public int FocusEnemy { get; private set; } = -1;
         public int FocusHealth { get; private set; }
         public bool FocusAimed { get; private set; }
-        public bool FocusVisible => focusRemaining > 0;
+        public bool FocusVisible => FocusAimed && FocusHealth > 0;
         public float PlayerPulseRemaining { get; private set; }
         public float PlayerLabelRemaining { get; private set; }
         public int PlayerDamage { get; private set; }
@@ -63,7 +63,6 @@ namespace Journey
             nextImpact = (nextImpact + 1) % ImpactCapacity;
             hitMarkerRemaining = .12f;
             if (shot.Killed) killMarkerRemaining = KillLifetime;
-            FocusEnemy = shot.EnemyIndex; FocusHealth = shot.HealthAfter; focusRemaining = .35f;
         }
 
         public void ObservePlayerHealth(int health)
@@ -81,7 +80,6 @@ namespace Journey
             if (sim.Benchmark || sim.State == RunState.Ready) { Reset(sim.PlayerHealth); return; }
             if (sim.State == RunState.Paused) return;
             dt = Mathf.Max(0, dt);
-            focusRemaining = Mathf.Max(0, focusRemaining - dt);
             for (int i = 0; i < VisibleBarCapacity; i++) revealDelay[i] = Mathf.Max(0, revealDelay[i] - dt);
             hitMarkerRemaining = Mathf.Max(0, hitMarkerRemaining - dt);
             killMarkerRemaining = Mathf.Max(0, killMarkerRemaining - dt);
@@ -101,15 +99,20 @@ namespace Journey
         public void CollectBars(CombatSimulation sim, Camera camera, float alpha)
         {
             BarCount = 0;
-            FocusAimed = false;
+            FocusAimed = false; FocusEnemy = -1; FocusHealth = 0;
             if (sim.Benchmark || (sim.State != RunState.Running && sim.State != RunState.Paused))
-            { focusRemaining = 0; return; }
+                return;
             Vector3 eye = camera.transform.position;
             int target = sim.AimTarget(new Ray(eye, camera.transform.forward), out _);
             if (target >= 0)
             {
-                FocusEnemy = target; FocusHealth = sim.EnemyHealth(target); focusRemaining = .35f;
+                FocusEnemy = target; FocusHealth = sim.EnemyHealth(target);
                 FocusAimed = true; focusViewport = TargetBounds(sim, camera, target, alpha);
+                Vector3 p = sim.RenderPosition(target, alpha);
+                Matrix4x4 core = BurstInstances.CharacterMatrix(p, Vector3.up * 1.6f, Vector3.one * .45f, FocusHealth < CombatSimulation.EnemyMaxHealth, core: true);
+                Vector3 owner = core.MultiplyPoint3x4(new Vector3(0, .55f, 0));
+                focusBar = new HealthBar(target, sim.EnemySpawnVersion(target), FocusHealth,
+                    camera.WorldToViewportPoint(owner + Vector3.up * .2f), camera.WorldToViewportPoint(owner), Vector3.Distance(p, eye), 0);
             }
             for (int i = 0; i < sim.Count; i++)
             {
@@ -150,16 +153,17 @@ namespace Journey
                 if (candidate < 0 && revealDelay[slot] <= 0)
                     for (int i = 0; i < BarCount; i++)
                     {
-                        if (bars[i].Health >= CombatSimulation.EnemyMaxHealth) continue;
+                        if (bars[i].Health >= CombatSimulation.EnemyMaxHealth || (FocusVisible && bars[i].EnemyIndex == FocusEnemy)) continue;
                         bool held = false;
                         for (int j = 0; j < VisibleBarCapacity; j++) if (labelOwners[j] == bars[i].EnemyIndex) held = true;
                         Rect proposed = LabelBounds(bars[i], width, height);
-                        if (held || !Fits(proposed, width, height) || Overlaps(proposed)) continue;
+                        if (held || !Fits(proposed, width, height) || Overlaps(proposed, width, height)) continue;
                         candidate = i; labelOwners[slot] = bars[i].EnemyIndex; labelVersions[slot] = bars[i].SpawnVersion; break;
                     }
                 if (candidate < 0) continue;
+                if (FocusVisible && bars[candidate].EnemyIndex == FocusEnemy) continue;
                 Rect rect = LabelBounds(bars[candidate], width, height);
-                if (!Fits(rect, width, height) || Overlaps(rect)) { revealDelay[slot] = .25f; continue; }
+                if (!Fits(rect, width, height) || Overlaps(rect, width, height)) { revealDelay[slot] = .25f; continue; }
                 if (revealDelay[slot] > 0) continue;
                 visibleBars[VisibleBarCount] = candidate; barBounds[VisibleBarCount++] = rect;
             }
@@ -167,12 +171,15 @@ namespace Journey
         static Rect LabelBounds(HealthBar bar, float width, float height)
         {
             float w = Mathf.Clamp(52 - bar.Distance * .5f, 30, 50) + 4;
-            return new Rect(bar.Viewport.x * width - w / 2, (1 - bar.Viewport.y) * height - 2, w, 9);
+            if (bar.Priority == 0) w += 8;
+            return new Rect(bar.Viewport.x * width - w / 2, (1 - bar.Viewport.y) * height - 2, w, bar.Priority == 0 ? 11 : 9);
         }
         static bool Fits(Rect rect, float width, float height) => rect.yMin >= 95 && rect.yMax <= height - 85 && rect.xMin >= 16 && rect.xMax <= width - 16;
-        bool Overlaps(Rect rect)
+        bool Overlaps(Rect rect, float width, float height)
         {
             Rect padded = new Rect(rect.x - 4, rect.y - 4, rect.width + 8, rect.height + 8);
+            Rect target = LabelBounds(focusBar, width, height);
+            if (FocusVisible && Fits(target, width, height) && padded.Overlaps(target)) return true;
             for (int i = 0; i < VisibleBarCount; i++) if (padded.Overlaps(barBounds[i])) return true;
             return false;
         }
@@ -242,15 +249,15 @@ namespace Journey
             }
             if (FocusVisible)
             {
-                Color focus = new Color(.35f, .95f, 1, FocusAimed ? 1 : Mathf.Clamp01(focusRemaining / .2f));
-                Rect panel = new Rect(width / 2 - 84, height / 2 + 72, 168, 42);
-                Paint(panel, new Color(.015f, .025f, .035f, .9f * focus.a));
-                Paint(new Rect(panel.x, panel.y, panel.width, 2), focus);
-                Paint(new Rect(panel.x + 8, panel.y + 29, 152, 7), new Color(.26f, .29f, .32f, focus.a));
-                Paint(new Rect(panel.x + 8, panel.y + 29, 152 * FocusHealth / CombatSimulation.EnemyMaxHealth, 7), new Color(1, .68f, .15f, focus.a));
-                GUI.color = focus;
-                string label = FocusAimed ? "TARGET" : FocusHealth == 0 ? "DEFEATED" : "LAST TARGET";
-                GUI.Label(new Rect(panel.x, panel.y + 2, panel.width, 26), $"{label}  {FocusHealth}/{CombatSimulation.EnemyMaxHealth}", cueStyle);
+                Color focus = new Color(.35f, .95f, 1);
+                Rect targetBar = LabelBounds(focusBar, width, height);
+                if (Fits(targetBar, width, height))
+                {
+                    Paint(targetBar, focus);
+                    Paint(new Rect(targetBar.x + 2, targetBar.y + 2, targetBar.width - 4, 7), new Color(.26f, .29f, .32f));
+                    Paint(new Rect(targetBar.x + 2, targetBar.y + 2, (targetBar.width - 4) * FocusHealth / CombatSimulation.EnemyMaxHealth, 7),
+                        FocusHealth < CombatSimulation.EnemyMaxHealth ? new Color(1, .68f, .15f) : new Color(.35f, .95f, .72f));
+                }
                 if (FocusAimed && focusViewport.width > 0)
                 {
                     Rect b = new Rect(focusViewport.x * width - 4, focusViewport.y * height - 4, focusViewport.width * width + 8, focusViewport.height * height + 8);
@@ -323,7 +330,7 @@ namespace Journey
         {
             System.Array.Clear(impacts, 0, impacts.Length);
             nextImpact = BarCount = VisibleBarCount = PlayerDamage = 0; previousHealth = playerHealth;
-            FocusEnemy = -1; FocusHealth = 0; FocusAimed = false; focusRemaining = 0;
+            FocusEnemy = -1; FocusHealth = 0; FocusAimed = false;
             for (int i = 0; i < VisibleBarCapacity; i++) { labelOwners[i] = -1; labelVersions[i] = 0; revealDelay[i] = 0; }
             hitMarkerRemaining = killMarkerRemaining = PlayerPulseRemaining = PlayerLabelRemaining = 0;
         }

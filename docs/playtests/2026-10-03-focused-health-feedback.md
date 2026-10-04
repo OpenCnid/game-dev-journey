@@ -3,7 +3,7 @@
 - **Date:** October 3, 2026 (America/Chicago).
 - **Issue / review:** [GDJ-16](https://linear.app/cnid/issue/GDJ-16/show-enemy-health-and-enemyplayer-damage-clearly), [draft PR #4](https://github.com/OpenCnid/game-dev-journey/pull/4).
 - **Candidate:** `GDJ-16-damage-v4-2026-10-03`, clean source `42f6a5d10f77627532cf669cfee4f534138ed112`.
-- **Disposition:** replacement candidate ready; human bracket/panel ownership and wounded-bar stability comparison pending. No new performance result.
+- **Disposition:** P1 found the cyan body brackets helpful for target identification, but rejected the central DEFEATED/HP panel as distracting at high kill rates. Remove that panel while retaining brackets and stable wounded owners. No new performance result.
 
 ## Why this replaces the previous layout
 
@@ -42,4 +42,4 @@ The GDJ-2 control is preserved in its separate worktree. Earlier GDJ-16 builds r
 - Fresh release build succeeded from clean source. Standalone startup loaded on Direct3D 11 / RTX 3090 without reported runtime exceptions. All 166 build hashes and the manifest fingerprint verified. Documentation paths and whitespace were checked before the evidence commit.
 - No performance capture, inferred enjoyment or human acceptance from automated checks. Bracket ownership and in-motion stability still need the focused human comparison.
 
-The player opened at its menu (PID 25612 at handoff; recheck before acting). A concise question asks whether cyan brackets make the fixed HP panel's owner clear and whether wounded bars remain stable while kiting. Record that answer and remaining clutter before marking GDJ-16 Done. PR #4 is still stacked on open draft PR #3; retarget after #3 merges. GDJ-15 retains tracer alignment, GDJ-17 critical targeting, and other saved requests remain separate.
+P1 reported that cyan body brackets were helpful and made it clear who to target. The central black DEFEATED/HP panel was far too distracting given hundreds of mob kills per minute. They did not explicitly confirm wounded-bar stability. Remove the central panel and recent/dead-target health display; pair the retained body brackets with a small attached HP bar only for the currently aimed living enemy. Technical QA additionally saw the long LAST TARGET text wrap/clip; removing the panel also removes that text layout. Keep the issue In Progress for this correction; remaining clutter/stability needs comparison. PR #4 is stacked on open draft PR #3. GDJ-15 retains tracer alignment, GDJ-17 critical targeting, and other saved requests remain separate.

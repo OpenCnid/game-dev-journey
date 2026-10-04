@@ -205,13 +205,14 @@ namespace Journey.Tests
                     for (int i = 0; i < owners.Length; i++) Assert.That(feedback.LabelOwner(i), Is.EqualTo(owners[i]), "Small camera/distance changes cannot reassign live wounded labels.");
                     camera.fieldOfView = 179;
                     feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
-                    Assert.That(feedback.VisibleBarCount, Is.EqualTo(1), "Compressing the cluster hides overlapping labels.");
+                    Assert.That(feedback.VisibleBarCount, Is.Zero, "The target bar reserves the compressed cluster; overlapping wound labels hide.");
                     camera.fieldOfView = 85;
                     feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
-                    Assert.That(feedback.VisibleBarCount, Is.EqualTo(1), "A brief clear frame cannot make hidden bars flash back on.");
+                    for (int i = 0; i < feedback.VisibleBarCount; i++)
+                        Assert.That(System.Array.IndexOf(owners, feedback.VisibleBar(i).EnemyIndex), Is.EqualTo(-1), "A brief clear frame cannot make suppressed owners flash back on; free slots may fill.");
                     feedback.Advance(sim, .3f); feedback.LayoutBars(1280, 720);
-                    Assert.That(feedback.VisibleBarCount, Is.EqualTo(firstBounds.Length));
-                    for (int i = 0; i < owners.Length; i++) Assert.That(feedback.LabelOwner(i), Is.EqualTo(owners[i]), "Overlap recovery must keep the same owners.");
+                    Assert.That(feedback.VisibleBarCount, Is.GreaterThanOrEqualTo(firstBounds.Length));
+                    for (int i = 0; i < owners.Length; i++) if (owners[i] >= 0) Assert.That(feedback.LabelOwner(i), Is.EqualTo(owners[i]), "Overlap recovery must keep the same owners.");
                     Assert.That(sim.Shots, Is.EqualTo(shots)); Assert.That(sim.Kills, Is.EqualTo(kills));
                     Assert.That(sim.EnemyHealth(visible), Is.EqualTo(health), "Target preview and label layout cannot apply damage.");
                 }
@@ -220,7 +221,7 @@ namespace Journey.Tests
         }
 
         [Test]
-        public void FocusPanelRetainsLastHealthAcrossAimMissAndClearsOnReset()
+        public void TargetHealthOnlyShowsForLivingAimedEnemyAndClearsOnReset()
         {
             var root = new GameObject("Focus panel");
             try
@@ -232,15 +233,19 @@ namespace Journey.Tests
                     camera.transform.position = sim.Position(0) + Vector3.up * 1.1f - Vector3.forward * 3;
                     feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
                     Assert.That(feedback.FocusAimed, Is.True); Assert.That(feedback.FocusHealth, Is.EqualTo(40));
-                    Assert.That(feedback.VisibleBarCount, Is.Zero, "Full-health targets use the fixed panel, not a floating label.");
+                    Assert.That(feedback.VisibleBarCount, Is.Zero, "A target uses its own bar, without a duplicate wounded label.");
                     sim.TryFire(AtEnemy(sim), out ShotResult wound); feedback.RecordShot(sim, wound);
                     feedback.CollectBars(sim, camera, 1); Assert.That(feedback.FocusHealth, Is.EqualTo(20));
                     camera.transform.rotation = Quaternion.Euler(0, 180, 0);
                     feedback.CollectBars(sim, camera, 1);
-                    Assert.That(feedback.FocusAimed, Is.False); Assert.That(feedback.FocusVisible, Is.True);
-                    Assert.That(feedback.FocusHealth, Is.EqualTo(20));
+                    Assert.That(feedback.FocusAimed, Is.False); Assert.That(feedback.FocusVisible, Is.False);
+                    Assert.That(feedback.FocusEnemy, Is.EqualTo(-1));
+                    camera.transform.rotation = Quaternion.identity; feedback.CollectBars(sim, camera, 1);
                     sim.TogglePause(); feedback.Advance(sim, 1); Assert.That(feedback.FocusVisible, Is.True);
-                    sim.TogglePause(); feedback.Advance(sim, .4f); Assert.That(feedback.FocusVisible, Is.False);
+                    sim.TogglePause(); sim.Step(Vector3.zero, .13f);
+                    sim.TryFire(AtEnemy(sim), out ShotResult kill); Assert.That(kill.Killed, Is.True);
+                    feedback.RecordShot(sim, kill); feedback.CollectBars(sim, camera, 1);
+                    Assert.That(feedback.FocusVisible, Is.False, "A killed incarnation must not retain defeated HP UI.");
                     feedback.Reset(); Assert.That(feedback.FocusEnemy, Is.EqualTo(-1));
                     for (int i = 0; i < CombatFeedback.VisibleBarCapacity; i++) Assert.That(feedback.LabelOwner(i), Is.EqualTo(-1));
                 }
