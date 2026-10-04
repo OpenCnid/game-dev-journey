@@ -1,12 +1,12 @@
 # GDJ-6: The Engine Kingdoms first cooperative encounter
 
-Design discussion checkpoint, October 4, 2026. [GDJ-6](https://linear.app/cnid/issue/GDJ-6/design-the-first-engine-kingdoms-cooperative-encounter) owns acceptance and live status. Owner evaluation of the remaining encounter proposals is pending. The thinking-space selection feature is accepted for later work; the complete encounter is still an unfinished design handoff.
+Design checkpoint, October 4, 2026. [GDJ-6](https://linear.app/cnid/issue/GDJ-6/design-the-first-engine-kingdoms-cooperative-encounter) owns live status. The owner accepts revision 1 of the first earned-level-up test contract below. Broader encounter/rarity/selection/revival work remains deferred; design acceptance does not establish gameplay or enjoyment.
 
-## Current bounded proposal — first earned level-up
+## Current accepted test — first earned level-up
 
-The [revision 1 contract](first-earned-level-up.md) specializes this encounter to one ordinary earned choice per player after the accepted rifle/precision revisions. It covers pickup-to-shared-level, independent personal choices, damage versus cadence improvements, explicit dead participation/ending/retry, a human comparison and one staged two-player combat-feasibility brief. Its 60-HP drones, ten-XP threshold, live selection, five-second return and readiness rules are **proposals awaiting owner evaluation**, not accepted balance or observed fun. Qualifying rare content and thinking space are excluded from this first fixture while their accepted product rules remain intact.
+The owner accepts [revision 1](first-earned-level-up.md), exact content `abde9100e03165f3437f739d40e265c05f52219c`: “Let's accept revision 1 as the test contract, it looks good.” It covers pickup-to-shared-level, independent personal choices, damage versus cadence improvements, explicit dead participation/ending/retry, a human comparison and one staged two-player combat-feasibility brief. Its 60-HP drones, ten-XP threshold, live selection, five-second return and readiness rules are **accepted for this bounded test**, with numerical values/intended effects still hypotheses. Qualifying rare content and thinking space are excluded while their accepted product rules remain intact.
 
-The older two-choice/controlled-rare encounter proposal below is retained context, not this fixture's acceptance. GDJ-17 is accepted/merged through PR #8; the October 3 baseline-first instruction below has been fulfilled through the rifle revisions and does not require repeating the old rifle vote. Main/session base is `dae613cbc9950f309f1bf944b1d13ff581090539`; exact candidate/source and stale-handoff reconciliation are in the contract. GDJ-6 remains In Review, with owner evaluation required before treating revision 1 as selected. No gameplay, Unity checks, networking package or new task is launched.
+The older two-choice/controlled-rare encounter proposal below is retained context, not this fixture's acceptance. GDJ-17 is accepted/merged through PR #8; the October 3 baseline-first instruction below has been fulfilled through the rifle revisions. Main/session base is `dae613cbc9950f309f1bf944b1d13ff581090539`; exact candidate/source and stale-handoff reconciliation are in the contract. GDJ-6's bounded design outcome is complete; its live status belongs in Linear. No gameplay, Unity checks, networking package or new task is launched.
 
 ## Source and accepted direction
 
@@ -164,7 +164,7 @@ Later GDJ-8 work will develop the accepted baseline-plus-mastery and expandable-
 
 ## Later bounded feasibility question
 
-**Current specialization:** use [the staged combat-feasibility brief](first-earned-level-up.md#one-bounded-technical-feasibility-handoff) after owner evaluation. It first tests shared rifle hits/HP/incarnations, death/return, ending and retry with 12 drones; XP/choices attach in a subsequent bounded step. This first combat step does not complete the earned-level-up experiment. The earlier combined progression/controlled-rare question below remains later context, not a requirement to include rares now.
+**Current specialization after owner acceptance:** [the staged combat-feasibility brief](first-earned-level-up.md#one-bounded-technical-feasibility-handoff) first tests shared rifle hits/HP/incarnations, death/return, ending and retry with 12 drones; XP/choices attach in a subsequent bounded step. This first combat step does not complete the earned-level-up experiment. The earlier combined progression/controlled-rare question below remains later context, not a requirement to include rares now.
 
 **Provisional question, to specialize after progression/lifecycle selection:** Can two players fight in one shared encounter, receive the same team levels and independent personal offers, apply their selections consistently, share one qualifying rare upgrade with correct credit, and reach the same ending/restart while movement and aiming remain responsive?
 
@@ -172,7 +172,11 @@ Use the one-gun start, one earned team level-up with personal choices, a control
 
 ## Resume
 
-- **October 4 current checkpoint:** [first earned level-up revision 1](first-earned-level-up.md#resume-and-verification) is ready for owner evaluation from main `dae613c`, after verifying GDJ-17 Done/PR #8 merged and unchanged accepted runtime. New detailed rules/values are hypotheses; owner reasoning/acceptance remains missing. Review this bounded proposal or identify one precise objection, then return its saved result to orchestration. The older next-action paragraph below is historical baseline-first context. No gameplay or capability change; exact proposal commit/PR and documentation checks belong in GDJ-6 Resume.
+- **October 4 current checkpoint:** [first earned level-up revision 1](first-earned-level-up.md#resume-and-verification) is owner accepted as the test contract, exact content `abde9100e03165f3437f739d40e265c05f52219c`, from main `dae613c`. Detailed test rules are selected; values/intended effects remain hypotheses. Return the accepted result and staged feasibility brief to orchestration. No gameplay/capability change; exact acceptance/integration commit/PR and documentation checks belong in GDJ-6 Resume.
+
+### Historical Resume before revision 1 acceptance
+
+The remaining bullets preserve earlier discussion/research context; outstanding owner-evaluation/baseline-first actions are superseded by the accepted bounded test above.
 - **Completed:** foundation revision 17 and decisions 0002-0011 retain world background, immediate progression, thinking space and hybrid guns/capacity/mastery/prepared power. They add roguelike/roguelite identity, Risk of Rain/Megabonk references and persistent weapon/upgrade discoveries. Third person and permanent matrix/power are proposals. GDJ-8 holds later detailed gun design; GDJ-7 retains later thinking-space implementation. Long-term feature-design instruction remains in AGENTS/workflow. Fixed grants, narrative escape and special-combination selection remain superseded as requirements.
 - **Owner evaluation outstanding:** resolve qualifying tiers/build applicability and necessary downed/revival and restart coordination/reset rules; the all-dead/waiting-to-respawn defeat trigger and Retry-button restart are accepted; evaluate the small progression encounter. Detailed thinking-space cadence/loadout/draw/lifecycle handling belongs to later specification. Keep GDJ-6 In Review.
 - **Checks:** documentation link/anchor and whitespace checks apply to this revision; exact results and source belong in GDJ-6 after commit. No gameplay changes, Unity operations, benchmarks, human play observation or networking experiment occurred.
