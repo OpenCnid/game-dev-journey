@@ -8,7 +8,8 @@ Use anonymous participant labels and leave personal information out of the repos
 
 ## Records
 
-- [2026-10-03: Attached-bar readability revision](2026-10-03-damage-readability-revision.md) - focused target/wounded bars, simple wounded silhouette and independent cues; 48 automated passes and exact player, final crowd comparison pending.
+- [2026-10-03: Fixed target HP and retained wounded bars](2026-10-03-focused-health-feedback.md) - fixed panel/body brackets and stable owner slots with overlap recovery delay; 49 automated passes and exact player, human comparison pending.
+- [2026-10-03: Attached-bar readability revision](2026-10-03-damage-readability-revision.md) - 48 automated passes; P1 rejected target ownership/clutter/flicker and prompted fixed target HP with retained wounded owners.
 - [2026-10-03: First damage-readability candidate](2026-10-03-damage-readability.md) - 42 automated passes; P1 identified wounds/player damage and requested improved enemy effects/stacked bars, then found the intermediate floating-bar layout unclear.
 - [2026-10-03: Current rifle baseline](2026-10-03-rifle-baseline.md) - exact candidate, 35 current test passes, two active developer attempts and pause/reset confirmation; selects enemy health/damage readability before stacking.
 - [2026-09-30: First prototype validation](2026-09-30-prototype-performance.md) - automated tests and developer-machine benchmark diagnostics; not a user playtest.
