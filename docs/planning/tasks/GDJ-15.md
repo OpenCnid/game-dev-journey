@@ -34,3 +34,7 @@ Start from current merged main in an isolated checkout. Read AGENTS, foundation/
 - Run focused regression/render checks with the pinned serialized Unity tooling, build an exact standalone and record P1's fast-turn/tracking comparison against the preserved accepted player. Tests and screenshots alone do not establish shooting feel.
 
 Resolve this foundation before GDJ-17 target coloring and pose-aligned ×2 critical regions. GDJ-18 customization/sharing, ammo/reload, target-gated autofire, jumping, ranged threats and progression remain separate. No external asset copying, automatic target lock, shader/backend promotion or unverified weapon tuning is required.
+
+## Resume — technical candidate ready
+
+Runtime source `d93e867837915c9dae4a5b68947a7ecdfad703d3` implements the contract on `feat/gdj-15-shot-alignment` in the reused managed GDJ-16 checkout. [The October 4 report](../../playtests/2026-10-04-shot-alignment.md) records exact build/control archives, failing control reproduction, passing query/cadence/render checks and startup evidence. Human fast-turn/tracking comparison remains required; retain GDJ-15 in review and preserve accepted v7. Do not merge or move on to critical regions based on automated passes alone.

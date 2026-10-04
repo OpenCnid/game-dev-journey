@@ -1,0 +1,841 @@
+{
+  "source": {
+    "revision": "d93e867837915c9dae4a5b68947a7ecdfad703d3",
+    "builtUtc": "2026-10-04T05:26:22.9890758Z",
+    "dirty": false
+  },
+  "fileCount": 166,
+  "totalBytes": 96914690,
+  "files": [
+    {
+      "path": "D3D12/D3D12Core.dll",
+      "bytes": 4725304,
+      "sha256": "625bd40005b1c3708695d5256ecf230d278e6b8edba5a88af70f3d91324f3052"
+    },
+    {
+      "path": "MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll",
+      "bytes": 7828904,
+      "sha256": "d5f7dd6aa2f367a220a6c61a6e85afade4db7730139779bcd869bcdf69fa1d79"
+    },
+    {
+      "path": "MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll",
+      "bytes": 611240,
+      "sha256": "7f94544ce4de8b184823965fc0fea9ebf2b9ca4ac6056764dec67ce9589f4104"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser",
+      "bytes": 1605,
+      "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx",
+      "bytes": 60575,
+      "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/machine.config",
+      "bytes": 29066,
+      "sha256": "e91782a27fa39fc6c1d6ee8b08529f5d35052310d0006034b878eb04b8f2af30"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/settings.map",
+      "bytes": 2622,
+      "sha256": "49c6160f9d54af4270a3b4e997fc4a8301f79b9e2070118fa46ddbcbbc44f9a2"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/web.config",
+      "bytes": 11635,
+      "sha256": "cf2b54339e069b9e42f7d6795eecbf562c50c1011f4ca8f65f578fe52d97ff92"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser",
+      "bytes": 1605,
+      "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx",
+      "bytes": 60575,
+      "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/machine.config",
+      "bytes": 33598,
+      "sha256": "e60aec2c5115d65b3acb3c55ea21576dbd770f579166c017125571e46ae560ed"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/settings.map",
+      "bytes": 2622,
+      "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/web.config",
+      "bytes": 18802,
+      "sha256": "e38bb8cc68fe5b4edecdfd288d094b9e8ced7629039b2a347682aba0d8bd7492"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/Browsers/Compat.browser",
+      "bytes": 1605,
+      "sha256": "8a1082057ac5681dcd4e9c227ed7fb8eb42ac1618963b5de3b65739dd77e2741"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx",
+      "bytes": 60575,
+      "sha256": "751861040b69ea63a3827507b7c8da9c7f549dc181c1c8af4b7ca78cc97d710a"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/machine.config",
+      "bytes": 34056,
+      "sha256": "ee950004b576fb28dc85f4b0435ed04bf96612de2e8b53be84d07afe85a0de6c"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/settings.map",
+      "bytes": 2622,
+      "sha256": "ce1db1ad8a9512073164e3eccdc193f7eda036e1a9733caec4635de21b2865c8"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/web.config",
+      "bytes": 18811,
+      "sha256": "c4cbddd4fd9347b58cc5a72b36dc4ba1ad2bb699e65869d05cd3fb9865f0d824"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/browscap.ini",
+      "bytes": 311984,
+      "sha256": "4ddd50f31fb968f30bedefc253a46dc3f2890192d05cdaa9e0a64a056eee807e"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/config",
+      "bytes": 3815,
+      "sha256": "5776169973a26a387b8b3e5c0f2301a7ab9a6dd7c7d3efa22a96abc47fbf8662"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/mconfig/config.xml",
+      "bytes": 25817,
+      "sha256": "0c56e34c69124510fa8c19e7b4c2ca6c1c4ff460ae19f798dd0ca035809e396d"
+    },
+    {
+      "path": "Stack Lab_BurstDebugInformation_DoNotShip/Data/Plugins/x86_64/lib_burst_generated.txt",
+      "bytes": 213523,
+      "sha256": "68ece8f553983bfe6ed8086ee17aa4d91e25ce59d52eee460210d9c604e500b2"
+    },
+    {
+      "path": "StackLab_Data/app.info",
+      "bytes": 26,
+      "sha256": "01b5da977137478fd35ada87d1e2dbbe1bb818121221f55b5c4cd19673159f01"
+    },
+    {
+      "path": "StackLab_Data/boot.config",
+      "bytes": 156,
+      "sha256": "b632173fb450e6cba179bc062737c606b37f3e5f56149c04957d18d8167b5979"
+    },
+    {
+      "path": "StackLab_Data/globalgamemanagers",
+      "bytes": 180820,
+      "sha256": "6e08effcfdc6450c6da9789132bb108eb3b02b9b8c019085632930bddc1cd487"
+    },
+    {
+      "path": "StackLab_Data/globalgamemanagers.assets",
+      "bytes": 431288,
+      "sha256": "01c0fae8d8f1d8d2427b9afac48d817bcff8a51aceebb29e1f15a9e37e916a36"
+    },
+    {
+      "path": "StackLab_Data/globalgamemanagers.assets.resS",
+      "bytes": 2816736,
+      "sha256": "fa17cbffcba886c81d7e30fbb839bcb97932cedb8b38686ab06cc2c1e8cb4c99"
+    },
+    {
+      "path": "StackLab_Data/level0",
+      "bytes": 1152,
+      "sha256": "8a7d1897385e15423f23031ba9c0b62546b2252a6522ffccbd0797a91c34cd52"
+    },
+    {
+      "path": "StackLab_Data/Managed/Journey.Prototype.dll",
+      "bytes": 81408,
+      "sha256": "63832060caf4a466f3fce61f11a985c884901f6355bbeac7b4f4e09ac41ed8f2"
+    },
+    {
+      "path": "StackLab_Data/Managed/Mono.Security.dll",
+      "bytes": 241152,
+      "sha256": "82df31404def10ffd69c09e3a8c454e76552f3a37675d1b7b8c743cfd3d1af6f"
+    },
+    {
+      "path": "StackLab_Data/Managed/mscorlib.dll",
+      "bytes": 4632064,
+      "sha256": "194417662b72e9fdc29df44aa07fb693a9cf2194d84e327231f3eeff1104ae0f"
+    },
+    {
+      "path": "StackLab_Data/Managed/netstandard.dll",
+      "bytes": 90112,
+      "sha256": "6ae62e082dc494a2433984177f60ca4db5fae69b1f360a8b33754172b310b8c5"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.ComponentModel.Composition.dll",
+      "bytes": 257024,
+      "sha256": "9373a420101d4c674b9f74bce93a45c58ddb3548c130d9b65ab87235d0a4ed30"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.Configuration.dll",
+      "bytes": 124928,
+      "sha256": "d3acb14b8ebaf7482d2d3e26e8c04685299e2b471a513a30508bd0cab8336354"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.Core.dll",
+      "bytes": 1113088,
+      "sha256": "ebf140bf5f8d49ccac20c14935625b0ae0a46c30aa4f90b2808f3b9678822470"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.Data.DataSetExtensions.dll",
+      "bytes": 29696,
+      "sha256": "79a01061129709358567a9254684ba52ba66371e01e0354e7fa4852a9f62e59f"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.Data.dll",
+      "bytes": 2125312,
+      "sha256": "5d0807269bfcf112aa844951232ef105bbb642abb1e14c2e78dd70fb9245e98a"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.dll",
+      "bytes": 2641920,
+      "sha256": "9e8a5190797e35428b1ae9bce6d47d39a1dbc3e974f14239e44678913dc6194a"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.Drawing.dll",
+      "bytes": 489984,
+      "sha256": "76dca8fbe098c285b03de79369f9f2aa141dec44de99ebcc0478c7e762024204"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.EnterpriseServices.dll",
+      "bytes": 44544,
+      "sha256": "d8a3d6c1929ec028793ff07df92781c03ebb38c63005d4c12c35e3116d04fcaf"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.IO.Compression.dll",
+      "bytes": 114688,
+      "sha256": "7370dc2d3a6f02dbda1a69ca596f2ae96fc464809b3bbca6071fc1fc1edfbb2d"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.IO.Compression.FileSystem.dll",
+      "bytes": 18432,
+      "sha256": "40ef91246d44d6c4d8a1505e1210b0c54963a12938ba0458959bb064d62f36f4"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.Net.Http.dll",
+      "bytes": 122880,
+      "sha256": "c46d5b5dc68af8ce1b34e8ace4372b157e2e85ab63d6b5eea938ca71dc7fb064"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.Numerics.dll",
+      "bytes": 119296,
+      "sha256": "74f6771aedd33262470e8e653fc0f4e04a659bcdadbeb44b2f8826fba7053f77"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.Runtime.dll",
+      "bytes": 12288,
+      "sha256": "e0a7334b7ba419aaab6bd3bb6992d693e689341a9178172c9bf99c2aa6a085bd"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.Runtime.Serialization.dll",
+      "bytes": 934400,
+      "sha256": "2aa92fb930200ddb3c9c3ffaaff39bd6cdc6d689f19614f6c3b84a15060800f0"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.Security.dll",
+      "bytes": 320000,
+      "sha256": "95a29120e164e5bdb7ff5dcb2cb4641e5ea0aca7c1ad0854b0e9b2b0ff5abe2d"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.ServiceModel.Internals.dll",
+      "bytes": 215040,
+      "sha256": "6738a31088136d38a50354371feb83a4fd1558acca2a5f8b165c34a859e08c47"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.Transactions.dll",
+      "bytes": 35328,
+      "sha256": "cfac784408e3b7da6c6e94ec04c162c6d902372fab19353c02aeda3464ce185f"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.Xml.dll",
+      "bytes": 3160064,
+      "sha256": "f90799a0c38f3d45e390f9768ab467bf681a052e1b807f4c59fabef5f7edaffa"
+    },
+    {
+      "path": "StackLab_Data/Managed/System.Xml.Linq.dll",
+      "bytes": 136704,
+      "sha256": "ed219710472b837fddf45cc73c912e04b4d6b8ca833ea074ec1f73bc00157b05"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.Burst.dll",
+      "bytes": 296960,
+      "sha256": "bd07ad83d3b8a7f0833f0fd5becfdbf4eb4c2b6528a79dc1b6dc1bd6bd2f4a54"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.Burst.Unsafe.dll",
+      "bytes": 5632,
+      "sha256": "9d9c1ff52411decbee5d9f0d1cd61ebeaa222077aa77a52101ea3debafae98e2"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.Collections.dll",
+      "bytes": 432128,
+      "sha256": "0dd7c5a3b807e28e3cbf2c747845d23453e887ec87163ee46743b7bdde0ed4a1"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.Collections.LowLevel.ILSupport.dll",
+      "bytes": 5120,
+      "sha256": "ff50383f807f9692e4913b97e47d86fefcb8faa33d6d48cd3e3fd6fc7ffb448d"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.InputSystem.dll",
+      "bytes": 1089536,
+      "sha256": "a64eb65a1aadecf7cdbe7d52b7c2fd76b315e934fbd057cbf293837a365926c4"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.InputSystem.ForUI.dll",
+      "bytes": 15360,
+      "sha256": "ccfc213087aef261417ef254d3909bccb69fde6c20f32347386a22e1c0cd791a"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.InternalAPIEngineBridge.004.dll",
+      "bytes": 4096,
+      "sha256": "0f717b3e5fd923b8f63bf01ed2b4aaabdeffe9eca78f5af93661855a617a3fdc"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.Mathematics.dll",
+      "bytes": 737280,
+      "sha256": "36d3042b6241dbaa1561b8110c689382e98d6918eb206ef69eb7a9ffc498ca44"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.RenderPipeline.Universal.ShaderLibrary.dll",
+      "bytes": 7680,
+      "sha256": "93713d5ae9ae11920c6bd6614862cc31b528d682dd9deab1a3420044f709a62f"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.RenderPipelines.Core.Runtime.dll",
+      "bytes": 1131520,
+      "sha256": "4f79d619822bca88d4f8b76a5bfb02ca727baaabba0f9b1d38c8f5f8d6c98f5c"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.RenderPipelines.Core.Runtime.Shared.dll",
+      "bytes": 4608,
+      "sha256": "9155f7ec61123406af280c76c5f902d0777e65fb2dc6af1a938217d2fb213822"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.RenderPipelines.Core.ShaderLibrary.dll",
+      "bytes": 3584,
+      "sha256": "726ff8ac9c106377d4af17a18b584618b24156abf5f1094021a4f4070f12c083"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.RenderPipelines.GPUDriven.Runtime.dll",
+      "bytes": 220160,
+      "sha256": "c10ebc9c3bda78b221bd31d48489a512499fb470932f9f102c1294850be22576"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll",
+      "bytes": 3584,
+      "sha256": "13e37640b0a622da085b139a924c87f3a06dc81c47b8874e540e5ec490d3e908"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.RenderPipelines.Universal.2D.Runtime.dll",
+      "bytes": 216064,
+      "sha256": "2ae5c8dd816377d44be69c4b7a646c696147460198ed82c950cd3ff6bb54bcbd"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.RenderPipelines.Universal.Config.Runtime.dll",
+      "bytes": 4096,
+      "sha256": "a146b6bb97595cd9fb7ef82abfb1694e64d35624eb78acf5db65293c7c80b852"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.RenderPipelines.Universal.Runtime.dll",
+      "bytes": 699392,
+      "sha256": "d9fe367def5c4814a5f83ce51eacc3a0fae0b4c08ef6aae4b1c8ced0dd301984"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.RenderPipelines.Universal.Shaders.dll",
+      "bytes": 3584,
+      "sha256": "88dc9737169319b05299aacd366b71de16e311d4e2e5f92578d481b136514624"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.TextMeshPro.dll",
+      "bytes": 436736,
+      "sha256": "125422d3ffec25d063cc8a6343e682b79d8672069d8f67eefdd41c985a35eef8"
+    },
+    {
+      "path": "StackLab_Data/Managed/Unity.UnifiedRayTracing.Runtime.dll",
+      "bytes": 88576,
+      "sha256": "2ef348894a0c862ac2647850d3d747666d470632467305c6e14dfe469d5ede5f"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.AccessibilityModule.dll",
+      "bytes": 51112,
+      "sha256": "6f1cf81e05dae2cdc12879f36ebc10528c4748e4350a6e0d5bd1f7b324e29c4f"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.AdaptivePerformanceModule.dll",
+      "bytes": 125360,
+      "sha256": "4093d92a25a73337d3af601e8b600094652f0e10ea434a5f3220c5e7cd031405"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.AIModule.dll",
+      "bytes": 77232,
+      "sha256": "bfd77673e8375b9dbfe40d87bbe9c862756dfb55204199335cc656047269087c"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.AMDModule.dll",
+      "bytes": 21928,
+      "sha256": "ba0aff5bc872c12ad28910648dda93ba0819c8d21bb0875555f83d54786aa2e5"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.AndroidJNIModule.dll",
+      "bytes": 121776,
+      "sha256": "10488feef0b9c49ddbbaef9e8334ea28dd11bd012c0ff9f66f0fe0d1856dfb0b"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.AnimationModule.dll",
+      "bytes": 225200,
+      "sha256": "bcf3685b1c0c26787c11060022cafe7bc07b7ba2f462ed8a1d9217d2e69bb962"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.ARModule.dll",
+      "bytes": 25512,
+      "sha256": "ca14560f1babc465677c6402ae50df08e24d1b82ec3d65b030d34f7c042ac700"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.AssetBundleModule.dll",
+      "bytes": 41896,
+      "sha256": "22c8aad951e7b9a1f2d01bf7e11e468b9bcef761e63329034b56a5dfc3e2642d"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.AudioModule.dll",
+      "bytes": 142760,
+      "sha256": "02fdd7ba741b956968addd15f158719362bc0dab1ff6de5ea040b950120d8c06"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.ClothModule.dll",
+      "bytes": 36272,
+      "sha256": "6f9f8b08d43a78b2dd42d056cd5fdd0b1d810a8fcc62b2be20c69cac3c80dc61"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.ClusterInputModule.dll",
+      "bytes": 28072,
+      "sha256": "7b2ccf54b94b707a7f0b3139be7a7715b02095de5c067b677a62db7ecf4d1028"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.ClusterRendererModule.dll",
+      "bytes": 26536,
+      "sha256": "4e916bfe9295fc0b2309975347f2afc8c9a463c1c0a3998a0e556af7c6fe5512"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.ContentLoadModule.dll",
+      "bytes": 32688,
+      "sha256": "52755ffdbafc033b8a8852cf0c438e56804f6510182d05e6f01b2c4ae33369fa"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.CoreModule.dll",
+      "bytes": 1985960,
+      "sha256": "9f5141e8dd6c34b82bb03f151e6f0773129f55a7a2e816fe1e31e549737f4a71"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.CrashReportingModule.dll",
+      "bytes": 26536,
+      "sha256": "cfa0dec00bbd83f20338fccb798a21e51609710b6da663a7e0a65db7f815206e"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.DirectorModule.dll",
+      "bytes": 41896,
+      "sha256": "ae6aedab02ce4b6b54fdf3e3a534e10385421f97a013cb6e89002c8e4196623d"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.dll",
+      "bytes": 197544,
+      "sha256": "2f3b62a8e929949fce922811700777d1dbbea8541a1aff93a0273e885f3bf5c8"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.DSPGraphModule.dll",
+      "bytes": 31664,
+      "sha256": "adb3ccc3f0f286fde45966825403628cddd699c50f21f0b1f7963fb15df70bab"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.GameCenterModule.dll",
+      "bytes": 46000,
+      "sha256": "2e0e3ea555b0bb2ef3b8a4018bb184b98c68521243c5c14c58b4e01443720e9f"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.GIModule.dll",
+      "bytes": 24488,
+      "sha256": "82ece4b5f8754718920f170e5315750f7e9e9230b9745244606b45ed925f70b1"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.GraphicsStateCollectionSerializerModule.dll",
+      "bytes": 14248,
+      "sha256": "eff16cbd65b7429a07ae0ca99d82be386db9530737e881aaa6f54db74698c8aa"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.GridModule.dll",
+      "bytes": 30640,
+      "sha256": "93a7a1cc2d30b78867afde6d95730d5ea1cf78f4423cb3616e9a0eb0b9197360"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.HierarchyCoreModule.dll",
+      "bytes": 109488,
+      "sha256": "858bfd1efb2fafaf4ffdd9493c6e5263ff6cb4660f44ed2aad78c328e56dfa1f"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.HierarchyModule.dll",
+      "bytes": 102320,
+      "sha256": "e3dbf5559b4c4750e35f7c2abded8fb41b5fc13756997a9345f442f59bb94edb"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.HotReloadModule.dll",
+      "bytes": 24488,
+      "sha256": "a5b03928e808d2c2d90be6036dd11c4a8d3f4138b062656c19095eb950dbb88b"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.IdentifiersModule.dll",
+      "bytes": 16808,
+      "sha256": "f517e4042af0a46eb38a2c11dc3b4f64eb866597969921c177b99e06c2f1a10d"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.ImageConversionModule.dll",
+      "bytes": 31152,
+      "sha256": "7d4f34875058cfd2259960bae2077be6761d382c0c1d2183fe8b12dc57f5fcb9"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.IMGUIModule.dll",
+      "bytes": 214448,
+      "sha256": "32c68f4fff2f9d5918323c66f08fd6a6f51b31d9d72dbd4dc8b2b59237c89cb7"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.InputForUIModule.dll",
+      "bytes": 57776,
+      "sha256": "48fbd7049b785d02b81df6f7bcc370883052edea365aa9da3dd59fd3c69e17cd"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.InputLegacyModule.dll",
+      "bytes": 45488,
+      "sha256": "438877c35972e395fe24a1d15ef8605e2b1d971232b8d52c55091946c7889027"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.InputModule.dll",
+      "bytes": 28592,
+      "sha256": "2ce6bf203759134cc65f4be3e6cfde6bcf5ba166dab9b1068fad8e1aff489327"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.InsightsModule.dll",
+      "bytes": 14256,
+      "sha256": "5d2ee24494000c673ce892dd398f248d4ed51f6b5ea21fcbaa083b2f67b92090"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.JSONSerializeModule.dll",
+      "bytes": 27056,
+      "sha256": "08c89e611bb81e0d4315468d1c23562b40d59f4b479d549c6a97cf80ee01044a"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.LocalizationModule.dll",
+      "bytes": 27048,
+      "sha256": "a34a90cec3a649585ba68a12c0faf141b0624c5c2b7ea3720186c937a539f61e"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.MarshallingModule.dll",
+      "bytes": 83880,
+      "sha256": "6babb60eae89f3d1ade0a2b501063c560530aeedfd06ed1bc8d30e99d91fbfe8"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.MultiplayerModule.dll",
+      "bytes": 17832,
+      "sha256": "476354eb35c1cbd777c967eac4c42321d58f47cf4bd9163de553f45a295cb640"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.NVIDIAModule.dll",
+      "bytes": 40880,
+      "sha256": "89746ddbf40b2bd208d3fa052fd6e12bf4e71406cd0eb20ac3a70a1a5ee19c7a"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.ParticleSystemModule.dll",
+      "bytes": 171952,
+      "sha256": "106663a51b42d63ed661ba5b140f5712143b2fc8036d11c97c88a2b58c6cb694"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.PerformanceReportingModule.dll",
+      "bytes": 25008,
+      "sha256": "5f90ecd446b7ac2fdebd2037d5afc8649b26a492f166037a688f2ee87c98a08f"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.Physics2DModule.dll",
+      "bytes": 586672,
+      "sha256": "3d3235f1e531dcc241315227f0d23ea5c64ea97a2e3bac5e90be39fd93c3d3dc"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.PhysicsBackendPhysXModule.dll",
+      "bytes": 14248,
+      "sha256": "06f2bd9db50020622daf782db57b7323e499e08021f26c703b5d8617f297d761"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.PhysicsModule.dll",
+      "bytes": 183720,
+      "sha256": "69449b49645e412905addb2058758ecc1b731d9344f454c210b486e6b6b267ce"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.PropertiesModule.dll",
+      "bytes": 134064,
+      "sha256": "5a874b51fe386506fe69c9ee59e72b39e2f7de2dd6ce51bb36a35048ec8dffc0"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.RenderAs2DModule.dll",
+      "bytes": 25512,
+      "sha256": "f47dc88c2b076a13f66bd333466871d84505a2047a7ba9de208f3eab5c56d657"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll",
+      "bytes": 24496,
+      "sha256": "eb32176384e1c5b2519d97ebc434b2965559cacc017779d20f78dd823eab47b1"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.ScreenCaptureModule.dll",
+      "bytes": 26544,
+      "sha256": "e79237323bf494f0b7ffb312767b524b6ba05657443cdfcbee16d57e90f74c97"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.ShaderRuntimeModule.dll",
+      "bytes": 25520,
+      "sha256": "8cb9be008c81192fa401a815753e927e50333e707cfe5f076c6a1bf37b638bba"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.ShaderVariantAnalyticsModule.dll",
+      "bytes": 24496,
+      "sha256": "f712ac6d73e55846cada26d93dbb233356a51487b203e8face19b1c56084ce13"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.SharedInternalsModule.dll",
+      "bytes": 38312,
+      "sha256": "5280a4e04628a90df183d7d06e576fa7d4875cb26958bf6695dfad584dac50d7"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.SpriteMaskModule.dll",
+      "bytes": 28584,
+      "sha256": "22bcf62b39964faff66acccc7210174e2c3b653297517dff42cc7ae031191f23"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.SpriteShapeModule.dll",
+      "bytes": 32688,
+      "sha256": "24dd5faa4e09321603f9b121281c283e86ecfc566e4a1d5e346da05d8583ab6a"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.StreamingModule.dll",
+      "bytes": 26032,
+      "sha256": "8346cf3fd1a30ecd74b70f8ef2e5fc4ed5f872d6806382948fcf96312fdec7cf"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.SubstanceModule.dll",
+      "bytes": 29104,
+      "sha256": "60525d79b9c67561f73e6ec28fc9acadac100141e27193d5ae6063f97c5e9f13"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.SubsystemsModule.dll",
+      "bytes": 41896,
+      "sha256": "76bc7ff82e40d2173809760a9796a9211692c4b67e87e6afdfe2ad2615c4d04a"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.TerrainModule.dll",
+      "bytes": 134056,
+      "sha256": "450b52731db19619e2f5ee4459dd5806af11f47f1e5b3fda4643dd7594774112"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.TerrainPhysicsModule.dll",
+      "bytes": 25512,
+      "sha256": "2534e373c7eae56437d1a6522bf9a66d89a58d129bea79137fe2e793c6dd98f5"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll",
+      "bytes": 91560,
+      "sha256": "3150cdc6e66f995833333eb40cc5823800e3dc89026078b12408549a77d70193"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll",
+      "bytes": 334760,
+      "sha256": "71aef37035fa1cef816a1c012d3867df58032c540570956876147847e940395e"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.TextRenderingModule.dll",
+      "bytes": 39336,
+      "sha256": "939efb1afbb1164fa7e4889c283175cb5df12e5165526e745748227ad122a17e"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.TilemapModule.dll",
+      "bytes": 58792,
+      "sha256": "31a6602a4cb06c890121b104b61eaf594b12820d5cab5a2b52d19b235538e761"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.TLSModule.dll",
+      "bytes": 32168,
+      "sha256": "6f588a524d92fa0b80bb27d70d563c78a9c7033a4d1c061e92c70e34789688dd"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.UI.dll",
+      "bytes": 260608,
+      "sha256": "69b75b34e255c0ee35398f454aa462c3a3b300a38f843cdea761f694b6b77590"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.UIElementsModule.dll",
+      "bytes": 2452904,
+      "sha256": "457d5fed14283986093aff2e018d4e14aa623c3ac21e50eed9b72884c4070d90"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.UIModule.dll",
+      "bytes": 50088,
+      "sha256": "c1371370e9bcbbff39929f8582a1f089a5171eabb03b5f8ba9f87deaee28fc85"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.UmbraModule.dll",
+      "bytes": 24496,
+      "sha256": "a953a1f5b7387abc0ba4ff1569b85cdb03da1eae87a8f865bf475eaaa4865dca"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.dll",
+      "bytes": 35760,
+      "sha256": "6bd6cded7374476c190a6717491e83b3f6c6fda0249362ea50d213d07ba55968"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.UnityAnalyticsModule.dll",
+      "bytes": 60840,
+      "sha256": "f15560029bf8864121f636b848e0fa12e210478d80e08e31fa642875defb822d"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.UnityConnectModule.dll",
+      "bytes": 27568,
+      "sha256": "a849884a4dd02f6abb733b2d9f5d80ec8790d54caa52782a7b9d231d82b89093"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.UnityConsentModule.dll",
+      "bytes": 16304,
+      "sha256": "400dac88b326b2ca4d56fc596eb547ca7dead2a805254d17363ded61656ce172"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.UnityCurlModule.dll",
+      "bytes": 26024,
+      "sha256": "78f943dcdcf9d87af61c0c3bac2d1ee9b3f79dd6a7eaef77a936d5c767f3b2cc"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll",
+      "bytes": 28584,
+      "sha256": "9ef1ec6f7ed38b12d54317cefb15b68bba71364f043b96cd245172d8e0a8f6ea"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll",
+      "bytes": 28592,
+      "sha256": "969db83a3315a421b54a588575f6ee217bee0d42c2df468a9c5f1fe8a406e88c"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.UnityWebRequestModule.dll",
+      "bytes": 70056,
+      "sha256": "ea42e7a2842ba8d84f3578d9ee14df0644b9e21fe86fd0211010b5507de18a1e"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll",
+      "bytes": 27568,
+      "sha256": "12d6c724f26a3bc3497d3632ac5af434d6681ffad7aeb9e3adf4a326f7989bd0"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll",
+      "bytes": 36784,
+      "sha256": "e3a346e7bfa559072d74cdd91baa3caa52227cf3acb3eb61edcf80d039a33c92"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.VectorGraphicsModule.dll",
+      "bytes": 252840,
+      "sha256": "619302708f35460a7d1a798357cd345b7c05c6d2d246043fc49507be6dd75a70"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.VehiclesModule.dll",
+      "bytes": 31664,
+      "sha256": "28d6f5e646a355d9bb9e5fd49fd9d53e2b59612804bf9a2c91ab0e637d55fe61"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.VFXModule.dll",
+      "bytes": 78256,
+      "sha256": "20fb0e54ea97e9c4f01c28031958b81258018d3d0ac0fc4c3b0c9ea4c100bc5a"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.VideoModule.dll",
+      "bytes": 49072,
+      "sha256": "b2e4904d12e73724f18458ca4a6a6bb6183442a6466cc6799cc21312680cc798"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.VirtualTexturingModule.dll",
+      "bytes": 42928,
+      "sha256": "e906a2a2b3c2b8036a058fbe57c26204530a3a149958d6eb34136651c2cc16b5"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.VRModule.dll",
+      "bytes": 31664,
+      "sha256": "abf634b2a5a8a792196afaa3a35067f85f99847f923939faf1eb1739210db86a"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.WindModule.dll",
+      "bytes": 26544,
+      "sha256": "d052ddff4e734b1ac7b33c3ee7e2e4acd87a19a18c8e87fd1011b4968d01af84"
+    },
+    {
+      "path": "StackLab_Data/Managed/UnityEngine.XRModule.dll",
+      "bytes": 88496,
+      "sha256": "4e5415493a11e22d4ba70d29f24430cc243f42ed5b5b3bd1f3482c2282abaed5"
+    },
+    {
+      "path": "StackLab_Data/Plugins/x86_64/lib_burst_generated.dll",
+      "bytes": 462848,
+      "sha256": "514f7f2a1284a567be1d2b68704bc40b1eec8f6454ac07755da7a7f59bafaa1d"
+    },
+    {
+      "path": "StackLab_Data/resources.assets",
+      "bytes": 407256,
+      "sha256": "24fcd89d76569ee14e619a345a133bb636000baa04ab0ff60289b932498d02f4"
+    },
+    {
+      "path": "StackLab_Data/resources.assets.resS",
+      "bytes": 7232,
+      "sha256": "f12f30b4c1648273e460dab9f8ec974e616980f7a3027d54ac4ca0f19ba89cd3"
+    },
+    {
+      "path": "StackLab_Data/Resources/unity default resources",
+      "bytes": 5883716,
+      "sha256": "32b58bdb9cf090212b46a8ca7436dcdae89e4ef43e9d55a835233c21d1347734"
+    },
+    {
+      "path": "StackLab_Data/Resources/unity_builtin_extra",
+      "bytes": 396472,
+      "sha256": "8376fc41629f29cc41395fd76a4d18513ae13954e07a2f80fe4b60cd9ba69673"
+    },
+    {
+      "path": "StackLab_Data/RuntimeInitializeOnLoads.json",
+      "bytes": 3066,
+      "sha256": "3ab0216f9a01a02c04acb0b95a95ce4a047fe932591359185a260a714504f358"
+    },
+    {
+      "path": "StackLab_Data/ScriptingAssemblies.json",
+      "bytes": 4025,
+      "sha256": "9a0b1efeb8b97baa687e24f96b4877cd00464e00e64ba752afddaef53c373ede"
+    },
+    {
+      "path": "StackLab_Data/sharedassets0.assets",
+      "bytes": 7920,
+      "sha256": "b9c22a96bf3e4af991ed2fbc82b3c7fedadf0e4d9b6c313381a28b6165492714"
+    },
+    {
+      "path": "StackLab_Data/sharedassets0.assets.resS",
+      "bytes": 524288,
+      "sha256": "393efe6399536384aa91bdfc4e64f244b4d3e1fbb6a4ff145c483ffee64ccb36"
+    },
+    {
+      "path": "StackLab.exe",
+      "bytes": 667136,
+      "sha256": "3070e580e019576b9afcdeb4fec18d03cebc119f6ae84d597412905c749ad653"
+    },
+    {
+      "path": "UnityCrashHandler64.exe",
+      "bytes": 1669552,
+      "sha256": "e259a8df190b5993aefa91d61ad608566185dede3f9c8ce284188f6f068cd84b"
+    },
+    {
+      "path": "UnityPlayer.dll",
+      "bytes": 36824488,
+      "sha256": "7e362b4c6ecee6fb493b1872cda5a5a0caf44f3b131b3c4bad132f0d1309f436"
+    }
+  ]
+}
