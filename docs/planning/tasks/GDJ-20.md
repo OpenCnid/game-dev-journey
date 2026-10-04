@@ -1,0 +1,36 @@
+# GDJ-20: shared rifle combat and lifecycle
+
+October 4, 2026. [Live issue](https://linear.app/cnid/issue/GDJ-20/verify-two-player-shared-rifle-combat-and-lifecycle). Base `fa82f6b20b99fa1e0f412ccc2ba72678f574138b`, branch `implementation/gdj-20-shared-rifle`. One Unity writer in managed checkout `C:/Users/Darian/.codex/worktrees/gdj-20-shared-rifle/new-game-dev`. This stage resolves cooperative consistency/responsiveness, foundation pillar 3. It does not complete [accepted earned progression](../../design/first-earned-level-up.md).
+
+## Authority and connection envelope (before runtime edits)
+
+Fixed A host / B client, Windows direct IPv4 UDP, default port 7777. Wait for the pair before beginning; no late joins, migration, reconnect, matchmaking or relay. Start with loopback functional checks; actual LAN human comparison is required before claiming LAN feasibility. Internet/NAT reachability, encryption/authentication and hostile-client enforcement are outside this trusted-friends prototype envelope. Connection loss/timeout aborts the fixed roster on both sides; never reduce it to a solo win.
+
+Select Unity Transport **2.7.4**. The [Unity 6000.3 package table](https://docs.unity3d.com/6000.3/Documentation/Manual/com.unity.transport.html) lists it as released. Unity registry metadata reports minimum Unity 2022.3 and dependencies Burst 1.8.24, Collections 2.2.1, Mathematics 1.3.2; the existing pinned 1.8.30/2.6.8/1.3.3 satisfy them. Verify the generated lock and actual import. [Netcode for GameObjects](https://docs.unity3d.com/6000.3/Documentation/Manual/com.unity.netcode.gameobjects.html) is a compatible higher-level alternative; the current array simulation/instanced rendering has no enemy GameObjects to replicate. A bounded Transport adapter preserves that ownership without introducing object-per-drone replication. [Pipelines](https://docs.unity3d.com/Packages/com.unity.transport@2.7/manual/pipelines-usage.html) provide ordered reliable traffic. Use one identical reliable pipeline at both endpoints for small bounded snapshots/commands/results; measure head-of-line latency before expanding the envelope. No other package/editor upgrade.
+
+Host owns a 60-Hz encounter: shared enemy HP/incarnations, independent player HP/contact grace/return timers, shot validation/cadence, attributed actual damage, terminal state/readiness/reset. Local presentation owns aim, predicted movement and immediate muzzle/tracer/audio, never damage/death. Player IDs are stable A=0/B=1, rifle instance IDs separate. Per-player weapon parameters live in authority so later personal upgrades need not become global settings.
+
+## Displayed pose and message policy
+
+Publish small complete snapshots at 60 Hz. Initially display the exact latest snapshot's enemy transforms, avoiding undocumented interpolation rewind. Retain a bounded host pose history; each shot carries run, pose tick, source weapon/event, player life, ray, and local emission time. Host re-queries the retained displayed healthy/wounded body/head matrices, accepts only a recent pose, and checks current incarnation before damage. Never trust client region/damage/kill declarations. Nearest intersected surface/head tie remains the accepted query. A reused enemy slot cannot receive old-incarnation damage. Local camera is immediate; local movement prediction is reconciled against accepted input/position, and death/return resets it.
+
+Process queued shots in stable source-ID/event order before contact/terminal checks. Positive-to-zero damage creates one immutable death snapshot before respawn. Actual damage is capped at current HP. Duplicate event sequences, invalid rays, obsolete run/life/weapon IDs, expired history and post-ending submissions reject; old-run retry messages reject too. Reliable transport does not replace application validation. Bound queue/history sizes and surface overflow/timeout failures. Retry increments run ID and clears pending queues, history, counters, cooldowns, readiness and feedback. Five-second return and one-second contact immunity use active authority time. All-dead defeat precedes duration completion and expiring return. Original solo and benchmark modes retain their own paths/preferences.
+
+## Future consumers
+
+Death/shot records retain run, source player/weapon/event, enemy slot/incarnation, region, requested/actual damage, before/after HP and death position. Later orb creation consumes authoritative death records exactly once; collector attribution remains separate. Shared XP/level, personal entitlements/offers/random streams and weapon/loot/draw effects attach separately. Dead participants retain per-player state. Qualifying rare grants and physical thinking-space freeze require later explicit rules; no XP/orb/upgrade/pause implementation in this stage.
+
+## Budgets and required human evidence
+
+Proposal sent to owner in this chat; **agreement pending**: 12 drones, one baseline rifle/player, 60 seconds, 60-Hz authority, 1080p; known i7-10700K/RTX 3090 visible release p95 frame ≤6.94 ms and p99 ≤10 ms; local shot cue by next rendered frame; confirmed-hit p95 ≤100 ms on LAN with measured RTT ≤20 ms; zero state/death/reset discrepancies. These are proposed prototype gates, not measurements or an internet guarantee. Second machine CPU/GPU, participants, connection and availability requested. Continue independent implementation/checks; do not claim gate acceptance without agreement and actual evidence. Same-machine two windows share desktop resources and are only a loopback envelope.
+
+## Execution and resume
+
+1. Save this plan before edits; add pinned Transport/import; review lock preservation.
+2. Implement bounded authority model, displayed-pose history, transport, client presentation and pair launch/menu. Preserve local controls and whole accepted player archives.
+3. Check two sources sharing one incarnation/one death, duplicate/stale events, independent contact grace, nearest-live targeting, return/immunity, wipe/expiry/completion ordering, both-ready reset and abort. Serialize tools/unity.ps1 Edit Mode, Play Mode and release build.
+4. Commit clean source, build, archive entire player with hashes and source/config manifest. Launch actual pair functional checks; distinguish them from visible performance/human comparison.
+5. Arrange human A/B comparison in this chat: same target body/head, movement/aim, one death/return, all-dead, time end, Retry, disconnect. Capture per-player frame distributions/emission-to-confirm delay, equal shared counters and discrepancy reports under declared conditions. Record actual player words.
+6. Save evidence and one proceed/revise conclusion, push candidate, draft PR/attach, issue Resume with exact source/checks/build/remaining gates. Coordinator reviews/integrates; no auto-merge. Keep In Review/draft if human/second-machine evidence remains unavailable.
+
+Current checkpoint: base/context/issue verified, isolated branch created, primary package/registry compatibility investigated, budgets and participants requested. No runtime changes/tests/build/network/human evidence yet.
