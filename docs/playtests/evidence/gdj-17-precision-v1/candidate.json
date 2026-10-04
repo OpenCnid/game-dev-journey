@@ -12,7 +12,7 @@
     "editor": "6000.3.25f1",
     "platform": "Windows x64 Mono / D3D11",
     "manifest": "build-manifest.json",
-    "manifestSha256": "bd0816f623232030c91da066fdfb4363d5360ea99cb59f0380a545d470a91198",
+    "manifestSha256": "8eb9699b6b3bc4b5573f1830f74b860fe2af61f3b61405069ab132e5fc24b2b4",
     "fileCount": 166,
     "totalBytes": 96919497.0,
     "archiveMatches": true
