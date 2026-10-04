@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="92" result="Passed" total="92" passed="92" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:10Z" duration="2.7215908">
+  <test-suite type="TestSuite" id="1000" name="Stack Lab" fullname="Stack Lab" runstate="Runnable" testcasecount="92" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:10Z" duration="2.721591" total="92" passed="92" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1112" name="Journey.Tests.dll" fullname="C:/Users/Darian/.codex/worktrees/gdj-20-shared-rifle/new-game-dev/prototypes/001-stacked-weapons/Library/ScriptAssemblies/Journey.Tests.dll" runstate="Runnable" testcasecount="92" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:10Z" duration="2.713866" total="92" passed="92" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="2212" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1113" name="Journey" fullname="Journey" runstate="Runnable" testcasecount="92" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:10Z" duration="2.713256" total="92" passed="92" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1114" name="Tests" fullname="Journey.Tests" runstate="Runnable" testcasecount="92" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:10Z" duration="2.712948" total="92" passed="92" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="BurstTests" fullname="Journey.Tests.BurstTests" classname="Journey.Tests.BurstTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.431389" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1007" name="BossJobsPreserveActivationsProjectileOrderCollisionAndReset" fullname="Journey.Tests.BurstTests.BossJobsPreserveActivationsProjectileOrderCollisionAndReset" methodname="BossJobsPreserveActivationsProjectileOrderCollisionAndReset" classname="Journey.Tests.BurstTests" runstate="Runnable" seed="1005447260" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.137250" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1008" name="CulledInstancesKeepVisibleAndFrustumEdgeGeometryInStableOrder" fullname="Journey.Tests.BurstTests.CulledInstancesKeepVisibleAndFrustumEdgeGeometryInStableOrder" methodname="CulledInstancesKeepVisibleAndFrustumEdgeGeometryInStableOrder" classname="Journey.Tests.BurstTests" runstate="Runnable" seed="1203487877" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.013574" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1006" name="DenseCrowdJobMatchesReferenceAndDoesNotSkipNeighbors" fullname="Journey.Tests.BurstTests.DenseCrowdJobMatchesReferenceAndDoesNotSkipNeighbors" classname="Journey.Tests.BurstTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.261825" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1003" name="DenseCrowdJobMatchesReferenceAndDoesNotSkipNeighbors(64)" fullname="Journey.Tests.BurstTests.DenseCrowdJobMatchesReferenceAndDoesNotSkipNeighbors(64)" methodname="DenseCrowdJobMatchesReferenceAndDoesNotSkipNeighbors" classname="Journey.Tests.BurstTests" runstate="Runnable" seed="172983755" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.140688" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1004" name="DenseCrowdJobMatchesReferenceAndDoesNotSkipNeighbors(128)" fullname="Journey.Tests.BurstTests.DenseCrowdJobMatchesReferenceAndDoesNotSkipNeighbors(128)" methodname="DenseCrowdJobMatchesReferenceAndDoesNotSkipNeighbors" classname="Journey.Tests.BurstTests" runstate="Runnable" seed="1086683267" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.060369" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1005" name="DenseCrowdJobMatchesReferenceAndDoesNotSkipNeighbors(256)" fullname="Journey.Tests.BurstTests.DenseCrowdJobMatchesReferenceAndDoesNotSkipNeighbors(256)" methodname="DenseCrowdJobMatchesReferenceAndDoesNotSkipNeighbors" classname="Journey.Tests.BurstTests" runstate="Runnable" seed="1644853856" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.056780" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1002" name="JobsActuallyUseBurst" fullname="Journey.Tests.BurstTests.JobsActuallyUseBurst" methodname="JobsActuallyUseBurst" classname="Journey.Tests.BurstTests" runstate="Runnable" seed="651790354" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.001538" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1009" name="CombatTests" fullname="Journey.Tests.CombatTests" classname="Journey.Tests.CombatTests" runstate="Runnable" testcasecount="15" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.161425" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1024" name="BossesTelegraphBurstCollideAndResetWithoutSkippingStateUpdates" fullname="Journey.Tests.CombatTests.BossesTelegraphBurstCollideAndResetWithoutSkippingStateUpdates" methodname="BossesTelegraphBurstCollideAndResetWithoutSkippingStateUpdates" classname="Journey.Tests.CombatTests" runstate="Runnable" seed="1456086152" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.019237" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1020" name="CombatEndsAndBenchmarkDoesNotUseCombatDuration" fullname="Journey.Tests.CombatTests.CombatEndsAndBenchmarkDoesNotUseCombatDuration" methodname="CombatEndsAndBenchmarkDoesNotUseCombatDuration" classname="Journey.Tests.CombatTests" runstate="Runnable" seed="358063576" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.003901" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1019" name="ContactDamageHasGracePeriodAndCanEndTheRun" fullname="Journey.Tests.CombatTests.ContactDamageHasGracePeriodAndCanEndTheRun" methodname="ContactDamageHasGracePeriodAndCanEndTheRun" classname="Journey.Tests.CombatTests" runstate="Runnable" seed="1665102195" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.011807" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1023" name="DenseCrowdBoundsNeighborWorkAndKeepsAllEnemiesActive" fullname="Journey.Tests.CombatTests.DenseCrowdBoundsNeighborWorkAndKeepsAllEnemiesActive" methodname="DenseCrowdBoundsNeighborWorkAndKeepsAllEnemiesActive" classname="Journey.Tests.CombatTests" runstate="Runnable" seed="1641073077" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.085432" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1022" name="NearestRankPercentilesExposeTailSpikes" fullname="Journey.Tests.CombatTests.NearestRankPercentilesExposeTailSpikes" methodname="NearestRankPercentilesExposeTailSpikes" classname="Journey.Tests.CombatTests" runstate="Runnable" seed="1319029529" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.002075" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1011" name="PauseFreezesMovementClockAndWeapon" fullname="Journey.Tests.CombatTests.PauseFreezesMovementClockAndWeapon" methodname="PauseFreezesMovementClockAndWeapon" classname="Journey.Tests.CombatTests" runstate="Runnable" seed="1521867069" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.001584" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1021" name="RaySphereRejectsBehindAndZeroDirectionAndReturnsNearestSurface" fullname="Journey.Tests.CombatTests.RaySphereRejectsBehindAndZeroDirectionAndReturnsNearestSurface" methodname="RaySphereRejectsBehindAndZeroDirectionAndReturnsNearestSurface" classname="Journey.Tests.CombatTests" runstate="Runnable" seed="401907784" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.000845" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1016" name="RenderRateDoesNotChangeFixedTickMovementOrShotCount" fullname="Journey.Tests.CombatTests.RenderRateDoesNotChangeFixedTickMovementOrShotCount" classname="Journey.Tests.CombatTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.005161" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1012" name="RenderRateDoesNotChangeFixedTickMovementOrShotCount(60)" fullname="Journey.Tests.CombatTests.RenderRateDoesNotChangeFixedTickMovementOrShotCount(60)" methodname="RenderRateDoesNotChangeFixedTickMovementOrShotCount" classname="Journey.Tests.CombatTests" runstate="Runnable" seed="502179375" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.001925" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1013" name="RenderRateDoesNotChangeFixedTickMovementOrShotCount(144)" fullname="Journey.Tests.CombatTests.RenderRateDoesNotChangeFixedTickMovementOrShotCount(144)" methodname="RenderRateDoesNotChangeFixedTickMovementOrShotCount" classname="Journey.Tests.CombatTests" runstate="Runnable" seed="1634683798" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.000776" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1014" name="RenderRateDoesNotChangeFixedTickMovementOrShotCount(240)" fullname="Journey.Tests.CombatTests.RenderRateDoesNotChangeFixedTickMovementOrShotCount(240)" methodname="RenderRateDoesNotChangeFixedTickMovementOrShotCount" classname="Journey.Tests.CombatTests" runstate="Runnable" seed="220534795" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.000812" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1015" name="RenderRateDoesNotChangeFixedTickMovementOrShotCount(360)" fullname="Journey.Tests.CombatTests.RenderRateDoesNotChangeFixedTickMovementOrShotCount(360)" methodname="RenderRateDoesNotChangeFixedTickMovementOrShotCount" classname="Journey.Tests.CombatTests" runstate="Runnable" seed="2017417476" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.000931" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1018" name="RestartClearsRunStateAndDoesNotExceedCapacity" fullname="Journey.Tests.CombatTests.RestartClearsRunStateAndDoesNotExceedCapacity" methodname="RestartClearsRunStateAndDoesNotExceedCapacity" classname="Journey.Tests.CombatTests" runstate="Runnable" seed="711280074" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.015665" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1010" name="SameSeedReproducesCrowdAndDifferentSeedChangesIt" fullname="Journey.Tests.CombatTests.SameSeedReproducesCrowdAndDifferentSeedChangesIt" methodname="SameSeedReproducesCrowdAndDifferentSeedChangesIt" classname="Journey.Tests.CombatTests" runstate="Runnable" seed="1542662369" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.010315" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1025" name="SweptProjectileCollisionDoesNotTunnelAcrossPlayer" fullname="Journey.Tests.CombatTests.SweptProjectileCollisionDoesNotTunnelAcrossPlayer" methodname="SweptProjectileCollisionDoesNotTunnelAcrossPlayer" classname="Journey.Tests.CombatTests" runstate="Runnable" seed="1187031926" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.000311" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1017" name="TwoHitsKillAndOnlyOneKillIsAwardedBeforeRespawn" fullname="Journey.Tests.CombatTests.TwoHitsKillAndOnlyOneKillIsAwardedBeforeRespawn" methodname="TwoHitsKillAndOnlyOneKillIsAwardedBeforeRespawn" classname="Journey.Tests.CombatTests" runstate="Runnable" seed="2021806976" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.002323" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1026" name="ExperimentTests" fullname="Journey.Tests.ExperimentTests" classname="Journey.Tests.ExperimentTests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:09Z" duration="1.805162" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1038" name="CompactProjectilesMatchMatrixCullingInterpolationAndEmptyReset" fullname="Journey.Tests.ExperimentTests.CompactProjectilesMatchMatrixCullingInterpolationAndEmptyReset" methodname="CompactProjectilesMatchMatrixCullingInterpolationAndEmptyReset" classname="Journey.Tests.ExperimentTests" runstate="Runnable" seed="1659867137" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.009125" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1040" name="ConcurrentPreparationMatchesSequentialAndCannotReusePendingBuffers" fullname="Journey.Tests.ExperimentTests.ConcurrentPreparationMatchesSequentialAndCannotReusePendingBuffers" methodname="ConcurrentPreparationMatchesSequentialAndCannotReusePendingBuffers" classname="Journey.Tests.ExperimentTests" runstate="Runnable" seed="1606506590" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.013813" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1036" name="EngineTimingRejectsUnavailableAndDisjointQueries" fullname="Journey.Tests.ExperimentTests.EngineTimingRejectsUnavailableAndDisjointQueries" classname="Journey.Tests.ExperimentTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.002147" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1030" name="EngineTimingRejectsUnavailableAndDisjointQueries(4.2d,True)" fullname="Journey.Tests.ExperimentTests.EngineTimingRejectsUnavailableAndDisjointQueries(4.2d,True)" methodname="EngineTimingRejectsUnavailableAndDisjointQueries" classname="Journey.Tests.ExperimentTests" runstate="Runnable" seed="1283688408" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.000710" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1031" name="EngineTimingRejectsUnavailableAndDisjointQueries(0.0d,False)" fullname="Journey.Tests.ExperimentTests.EngineTimingRejectsUnavailableAndDisjointQueries(0.0d,False)" methodname="EngineTimingRejectsUnavailableAndDisjointQueries" classname="Journey.Tests.ExperimentTests" runstate="Runnable" seed="599986381" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.000144" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1032" name="EngineTimingRejectsUnavailableAndDisjointQueries(-1.0d,False)" fullname="Journey.Tests.ExperimentTests.EngineTimingRejectsUnavailableAndDisjointQueries(-1.0d,False)" methodname="EngineTimingRejectsUnavailableAndDisjointQueries" classname="Journey.Tests.ExperimentTests" runstate="Runnable" seed="748624126" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.000081" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1033" name="EngineTimingRejectsUnavailableAndDisjointQueries(double.NaN,False)" fullname="Journey.Tests.ExperimentTests.EngineTimingRejectsUnavailableAndDisjointQueries(double.NaN,False)" methodname="EngineTimingRejectsUnavailableAndDisjointQueries" classname="Journey.Tests.ExperimentTests" runstate="Runnable" seed="1437155720" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.000066" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1034" name="EngineTimingRejectsUnavailableAndDisjointQueries(double.PositiveInfinity,False)" fullname="Journey.Tests.ExperimentTests.EngineTimingRejectsUnavailableAndDisjointQueries(double.PositiveInfinity,False)" methodname="EngineTimingRejectsUnavailableAndDisjointQueries" classname="Journey.Tests.ExperimentTests" runstate="Runnable" seed="275452507" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.000059" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1035" name="EngineTimingRejectsUnavailableAndDisjointQueries(1000000000.0d,False)" fullname="Journey.Tests.ExperimentTests.EngineTimingRejectsUnavailableAndDisjointQueries(1000000000.0d,False)" methodname="EngineTimingRejectsUnavailableAndDisjointQueries" classname="Journey.Tests.ExperimentTests" runstate="Runnable" seed="864895854" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:07Z" duration="0.000060" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1029" name="NativeOwnershipPreservesCombatProjectilesInterpolationAndReset" fullname="Journey.Tests.ExperimentTests.NativeOwnershipPreservesCombatProjectilesInterpolationAndReset" classname="Journey.Tests.ExperimentTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:09Z" duration="1.764310" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1027" name="NativeOwnershipPreservesCombatProjectilesInterpolationAndReset(100,False,720)" fullname="Journey.Tests.ExperimentTests.NativeOwnershipPreservesCombatProjectilesInterpolationAndReset(100,False,720)" methodname="NativeOwnershipPreservesCombatProjectilesInterpolationAndReset" classname="Journey.Tests.ExperimentTests" runstate="Runnable" seed="232774043" result="Passed" start-time="2026-10-04 07:18:07Z" end-time="2026-10-04 07:18:08Z" duration="0.202134" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1028" name="NativeOwnershipPreservesCombatProjectilesInterpolationAndReset(20000,True,190)" fullname="Journey.Tests.ExperimentTests.NativeOwnershipPreservesCombatProjectilesInterpolationAndReset(20000,True,190)" methodname="NativeOwnershipPreservesCombatProjectilesInterpolationAndReset" classname="Journey.Tests.ExperimentTests" runstate="Runnable" seed="72701239" result="Passed" start-time="2026-10-04 07:18:08Z" end-time="2026-10-04 07:18:09Z" duration="1.561551" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1037" name="WarningCacheTracksTicksResetAndDeduplicationMode" fullname="Journey.Tests.ExperimentTests.WarningCacheTracksTicksResetAndDeduplicationMode" methodname="WarningCacheTracksTicksResetAndDeduplicationMode" classname="Journey.Tests.ExperimentTests" runstate="Runnable" seed="575915392" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.013479" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1039" name="WarningDeduplicationPreservesDistinctTargetsAndDeadlines" fullname="Journey.Tests.ExperimentTests.WarningDeduplicationPreservesDistinctTargetsAndDeadlines" methodname="WarningDeduplicationPreservesDistinctTargetsAndDeadlines" classname="Journey.Tests.ExperimentTests" runstate="Runnable" seed="1024658207" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000966" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1041" name="FeedbackTests" fullname="Journey.Tests.FeedbackTests" classname="Journey.Tests.FeedbackTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.122668" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1051" name="ActualPlayerHealthLossPulsesOnceFreezesOnPauseAndClearsOnRestart" fullname="Journey.Tests.FeedbackTests.ActualPlayerHealthLossPulsesOnceFreezesOnPauseAndClearsOnRestart" methodname="ActualPlayerHealthLossPulsesOnceFreezesOnPauseAndClearsOnRestart" classname="Journey.Tests.FeedbackTests" runstate="Runnable" seed="116389947" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.011355" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1052" name="BarsReadAuthoritativeWoundsAndFilterBehindCameraAndDistance" fullname="Journey.Tests.FeedbackTests.BarsReadAuthoritativeWoundsAndFilterBehindCameraAndDistance" methodname="BarsReadAuthoritativeWoundsAndFilterBehindCameraAndDistance" classname="Journey.Tests.FeedbackTests" runstate="Runnable" seed="1821981757" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.009524" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1054" name="CrowdedLabelsDoNotOverlapAndPreserveWoundedAndAimedEnemies" fullname="Journey.Tests.FeedbackTests.CrowdedLabelsDoNotOverlapAndPreserveWoundedAndAimedEnemies" methodname="CrowdedLabelsDoNotOverlapAndPreserveWoundedAndAimedEnemies" classname="Journey.Tests.FeedbackTests" runstate="Runnable" seed="913738018" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.055574" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1049" name="HitOutcomeMatchesHealthAndKeepsDeathSeparateFromRespawn" fullname="Journey.Tests.FeedbackTests.HitOutcomeMatchesHealthAndKeepsDeathSeparateFromRespawn" classname="Journey.Tests.FeedbackTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.032040" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1046" name="HitOutcomeMatchesHealthAndKeepsDeathSeparateFromRespawn(False,False)" fullname="Journey.Tests.FeedbackTests.HitOutcomeMatchesHealthAndKeepsDeathSeparateFromRespawn(False,False)" methodname="HitOutcomeMatchesHealthAndKeepsDeathSeparateFromRespawn" classname="Journey.Tests.FeedbackTests" runstate="Runnable" seed="1655508117" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.006034" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1047" name="HitOutcomeMatchesHealthAndKeepsDeathSeparateFromRespawn(True,False)" fullname="Journey.Tests.FeedbackTests.HitOutcomeMatchesHealthAndKeepsDeathSeparateFromRespawn(True,False)" methodname="HitOutcomeMatchesHealthAndKeepsDeathSeparateFromRespawn" classname="Journey.Tests.FeedbackTests" runstate="Runnable" seed="1632377376" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.024148" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1048" name="HitOutcomeMatchesHealthAndKeepsDeathSeparateFromRespawn(True,True)" fullname="Journey.Tests.FeedbackTests.HitOutcomeMatchesHealthAndKeepsDeathSeparateFromRespawn(True,True)" methodname="HitOutcomeMatchesHealthAndKeepsDeathSeparateFromRespawn" classname="Journey.Tests.FeedbackTests" runstate="Runnable" seed="598907913" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000841" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1045" name="HudRotationKeepsMarkersAndConnectorsAtTheirScaledAnchor" fullname="Journey.Tests.FeedbackTests.HudRotationKeepsMarkersAndConnectorsAtTheirScaledAnchor" classname="Journey.Tests.FeedbackTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.002048" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1042" name="HudRotationKeepsMarkersAndConnectorsAtTheirScaledAnchor(1.0f)" fullname="Journey.Tests.FeedbackTests.HudRotationKeepsMarkersAndConnectorsAtTheirScaledAnchor(1.0f)" methodname="HudRotationKeepsMarkersAndConnectorsAtTheirScaledAnchor" classname="Journey.Tests.FeedbackTests" runstate="Runnable" seed="1915172415" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.001359" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1043" name="HudRotationKeepsMarkersAndConnectorsAtTheirScaledAnchor(1.5f)" fullname="Journey.Tests.FeedbackTests.HudRotationKeepsMarkersAndConnectorsAtTheirScaledAnchor(1.5f)" methodname="HudRotationKeepsMarkersAndConnectorsAtTheirScaledAnchor" classname="Journey.Tests.FeedbackTests" runstate="Runnable" seed="1314144769" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000086" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1044" name="HudRotationKeepsMarkersAndConnectorsAtTheirScaledAnchor(2.0f)" fullname="Journey.Tests.FeedbackTests.HudRotationKeepsMarkersAndConnectorsAtTheirScaledAnchor(2.0f)" methodname="HudRotationKeepsMarkersAndConnectorsAtTheirScaledAnchor" classname="Journey.Tests.FeedbackTests" runstate="Runnable" seed="1081694409" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000054" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1050" name="MissDoesNotCreateDamageAndPausedOrTerminalShotsAreRejected" fullname="Journey.Tests.FeedbackTests.MissDoesNotCreateDamageAndPausedOrTerminalShotsAreRejected" methodname="MissDoesNotCreateDamageAndPausedOrTerminalShotsAreRejected" classname="Journey.Tests.FeedbackTests" runstate="Runnable" seed="1656753326" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.001097" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1055" name="NormalTargetHealthAppearsAfterDamageAndRespawnHidesIt" fullname="Journey.Tests.FeedbackTests.NormalTargetHealthAppearsAfterDamageAndRespawnHidesIt" methodname="NormalTargetHealthAppearsAfterDamageAndRespawnHidesIt" classname="Journey.Tests.FeedbackTests" runstate="Runnable" seed="158225372" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.002195" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1053" name="RapidFireHitsRemainVisibleDuringLongerKillConfirmation" fullname="Journey.Tests.FeedbackTests.RapidFireHitsRemainVisibleDuringLongerKillConfirmation" methodname="RapidFireHitsRemainVisibleDuringLongerKillConfirmation" classname="Journey.Tests.FeedbackTests" runstate="Runnable" seed="864109404" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000788" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1056" name="WoundedCulledPoseChangesSilhouetteAndReturnsToNormalWithoutMask" fullname="Journey.Tests.FeedbackTests.WoundedCulledPoseChangesSilhouetteAndReturnsToNormalWithoutMask" methodname="WoundedCulledPoseChangesSilhouetteAndReturnsToNormalWithoutMask" classname="Journey.Tests.FeedbackTests" runstate="Runnable" seed="161622049" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.006231" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1057" name="PrecisionAimTests" fullname="Journey.Tests.PrecisionAimTests" classname="Journey.Tests.PrecisionAimTests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.051322" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1071" name="BenchmarkRetainsFixedSphereBodyDamageEvenOnVisibleHeadRay" fullname="Journey.Tests.PrecisionAimTests.BenchmarkRetainsFixedSphereBodyDamageEvenOnVisibleHeadRay" methodname="BenchmarkRetainsFixedSphereBodyDamageEvenOnVisibleHeadRay" classname="Journey.Tests.PrecisionAimTests" runstate="Runnable" seed="329058010" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.001480" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1069" name="FirstSurfaceWinsOverlapHeadWinsExactRegionTieAndSlotWinsEnemyTie" fullname="Journey.Tests.PrecisionAimTests.FirstSurfaceWinsOverlapHeadWinsExactRegionTieAndSlotWinsEnemyTie" methodname="FirstSurfaceWinsOverlapHeadWinsExactRegionTieAndSlotWinsEnemyTie" classname="Journey.Tests.PrecisionAimTests" runstate="Runnable" seed="743330132" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.002721" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1061" name="FreshCriticalAndWoundedCriticalCaptureActualDamageBeforeSingleRespawn" fullname="Journey.Tests.PrecisionAimTests.FreshCriticalAndWoundedCriticalCaptureActualDamageBeforeSingleRespawn" classname="Journey.Tests.PrecisionAimTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.006019" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1058" name="FreshCriticalAndWoundedCriticalCaptureActualDamageBeforeSingleRespawn(False,False)" fullname="Journey.Tests.PrecisionAimTests.FreshCriticalAndWoundedCriticalCaptureActualDamageBeforeSingleRespawn(False,False)" methodname="FreshCriticalAndWoundedCriticalCaptureActualDamageBeforeSingleRespawn" classname="Journey.Tests.PrecisionAimTests" runstate="Runnable" seed="753353644" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.001967" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1059" name="FreshCriticalAndWoundedCriticalCaptureActualDamageBeforeSingleRespawn(True,False)" fullname="Journey.Tests.PrecisionAimTests.FreshCriticalAndWoundedCriticalCaptureActualDamageBeforeSingleRespawn(True,False)" methodname="FreshCriticalAndWoundedCriticalCaptureActualDamageBeforeSingleRespawn" classname="Journey.Tests.PrecisionAimTests" runstate="Runnable" seed="715338040" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.001093" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1060" name="FreshCriticalAndWoundedCriticalCaptureActualDamageBeforeSingleRespawn(True,True)" fullname="Journey.Tests.PrecisionAimTests.FreshCriticalAndWoundedCriticalCaptureActualDamageBeforeSingleRespawn(True,True)" methodname="FreshCriticalAndWoundedCriticalCaptureActualDamageBeforeSingleRespawn" classname="Journey.Tests.PrecisionAimTests" runstate="Runnable" seed="1825729171" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.002035" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1068" name="InclusiveBoundariesInsideBehindZeroAndRangeAreExplicit" fullname="Journey.Tests.PrecisionAimTests.InclusiveBoundariesInsideBehindZeroAndRangeAreExplicit" methodname="InclusiveBoundariesInsideBehindZeroAndRangeAreExplicit" classname="Journey.Tests.PrecisionAimTests" runstate="Runnable" seed="477527615" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.003364" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1070" name="MissConsumesCooldownWithoutDamageAndPreviewDoesNotMutateState" fullname="Journey.Tests.PrecisionAimTests.MissConsumesCooldownWithoutDamageAndPreviewDoesNotMutateState" methodname="MissConsumesCooldownWithoutDamageAndPreviewDoesNotMutateState" classname="Journey.Tests.PrecisionAimTests" runstate="Runnable" seed="171369874" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.003597" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1066" name="RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette" fullname="Journey.Tests.PrecisionAimTests.RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette" classname="Journey.Tests.PrecisionAimTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.029431" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1062" name="RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette(False,Body)" fullname="Journey.Tests.PrecisionAimTests.RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette(False,Body)" methodname="RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette" classname="Journey.Tests.PrecisionAimTests" runstate="Runnable" seed="2085738371" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.003138" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1063" name="RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette(False,Head)" fullname="Journey.Tests.PrecisionAimTests.RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette(False,Head)" methodname="RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette" classname="Journey.Tests.PrecisionAimTests" runstate="Runnable" seed="773703148" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000953" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1064" name="RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette(True,Body)" fullname="Journey.Tests.PrecisionAimTests.RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette(True,Body)" methodname="RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette" classname="Journey.Tests.PrecisionAimTests" runstate="Runnable" seed="891498681" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.004635" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1065" name="RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette(True,Head)" fullname="Journey.Tests.PrecisionAimTests.RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette(True,Head)" methodname="RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette" classname="Journey.Tests.PrecisionAimTests" runstate="Runnable" seed="1330660592" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.019635" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1067" name="WoundMovesHeadAndCompressesBodyInsteadOfKeepingHealthyHitRegions" fullname="Journey.Tests.PrecisionAimTests.WoundMovesHeadAndCompressesBodyInsteadOfKeepingHealthyHitRegions" methodname="WoundMovesHeadAndCompressesBodyInsteadOfKeepingHealthyHitRegions" classname="Journey.Tests.PrecisionAimTests" runstate="Runnable" seed="1351793865" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.002382" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1072" name="RifleRateTests" fullname="Journey.Tests.RifleRateTests" classname="Journey.Tests.RifleRateTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.054217" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1083" name="BaselineDecimalInputRestoresTheExactOriginalInterval" fullname="Journey.Tests.RifleRateTests.BaselineDecimalInputRestoresTheExactOriginalInterval" methodname="BaselineDecimalInputRestoresTheExactOriginalInterval" classname="Journey.Tests.RifleRateTests" runstate="Runnable" seed="354398745" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.002406" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1081" name="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks" fullname="Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks" classname="Journey.Tests.RifleRateTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.047481" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1073" name="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(0.5f,30)" fullname="Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(0.5f,30)" methodname="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks" classname="Journey.Tests.RifleRateTests" runstate="Runnable" seed="490248511" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.002665" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1074" name="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(2,144)" fullname="Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(2,144)" methodname="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks" classname="Journey.Tests.RifleRateTests" runstate="Runnable" seed="382409430" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.004125" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1075" name="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(8.333334f,240)" fullname="Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(8.333334f,240)" methodname="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks" classname="Journey.Tests.RifleRateTests" runstate="Runnable" seed="683052825" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.005482" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1076" name="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(30,60)" fullname="Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(30,60)" methodname="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks" classname="Journey.Tests.RifleRateTests" runstate="Runnable" seed="1149065591" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.002504" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1077" name="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(120,8)" fullname="Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(120,8)" methodname="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks" classname="Journey.Tests.RifleRateTests" runstate="Runnable" seed="1159961823" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.002548" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1078" name="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(120,30)" fullname="Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(120,30)" methodname="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks" classname="Journey.Tests.RifleRateTests" runstate="Runnable" seed="1248636364" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.019893" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1079" name="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(120,144)" fullname="Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(120,144)" methodname="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks" classname="Journey.Tests.RifleRateTests" runstate="Runnable" seed="518755616" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.003786" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1080" name="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(120,240)" fullname="Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(120,240)" methodname="ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks" classname="Journey.Tests.RifleRateTests" runstate="Runnable" seed="1012893256" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.004923" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1084" name="InvalidRatesCannotPoisonTheWeaponClock" fullname="Journey.Tests.RifleRateTests.InvalidRatesCannotPoisonTheWeaponClock" methodname="InvalidRatesCannotPoisonTheWeaponClock" classname="Journey.Tests.RifleRateTests" runstate="Runnable" seed="691548649" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.001259" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1082" name="RateChangesPreserveCooldownProgressWhilePauseAndRestartKeepTheirRules" fullname="Journey.Tests.RifleRateTests.RateChangesPreserveCooldownProgressWhilePauseAndRestartKeepTheirRules" methodname="RateChangesPreserveCooldownProgressWhilePauseAndRestartKeepTheirRules" classname="Journey.Tests.RifleRateTests" runstate="Runnable" seed="824300847" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.001142" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1085" name="SharedEncounterTests" fullname="Journey.Tests.SharedEncounterTests" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" testcasecount="15" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.021505" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1099" name="AbortNeverBecomesSuccessOrAllowsRetry" fullname="Journey.Tests.SharedEncounterTests.AbortNeverBecomesSuccessOrAllowsRetry" methodname="AbortNeverBecomesSuccessOrAllowsRetry" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" seed="2011402052" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.004747" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1093" name="BothPlayersHaveIndependentContactGrace" fullname="Journey.Tests.SharedEncounterTests.BothPlayersHaveIndependentContactGrace" methodname="BothPlayersHaveIndependentContactGrace" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" seed="1688332803" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000556" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1097" name="BothReadyResetInvalidatesAllOldRunInputsShotsAndRetry" fullname="Journey.Tests.SharedEncounterTests.BothReadyResetInvalidatesAllOldRunInputsShotsAndRetry" methodname="BothReadyResetInvalidatesAllOldRunInputsShotsAndRetry" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" seed="2038351190" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.002659" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1088" name="DuplicateAndOldIncarnationCannotDamageReplacement" fullname="Journey.Tests.SharedEncounterTests.DuplicateAndOldIncarnationCannotDamageReplacement" methodname="DuplicateAndOldIncarnationCannotDamageReplacement" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" seed="1838458918" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.002664" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1090" name="ExpiredHistoryInvalidRayAndWrongWeaponReject" fullname="Journey.Tests.SharedEncounterTests.ExpiredHistoryInvalidRayAndWrongWeaponReject" methodname="ExpiredHistoryInvalidRayAndWrongWeaponReject" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" seed="864782759" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000891" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1089" name="HostRequeriesHistoricalDisplayedPoseRatherThanCurrentPosition" fullname="Journey.Tests.SharedEncounterTests.HostRequeriesHistoricalDisplayedPoseRatherThanCurrentPosition" methodname="HostRequeriesHistoricalDisplayedPoseRatherThanCurrentPosition" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" seed="1615132343" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000306" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1095" name="LastDeathBeatsExpiringReturnAndCompletion" fullname="Journey.Tests.SharedEncounterTests.LastDeathBeatsExpiringReturnAndCompletion" methodname="LastDeathBeatsExpiringReturnAndCompletion" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" seed="1552255558" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000243" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1098" name="LifeTokenRejectsShotsAndInputsAfterReturn" fullname="Journey.Tests.SharedEncounterTests.LifeTokenRejectsShotsAndInputsAfterReturn" methodname="LifeTokenRejectsShotsAndInputsAfterReturn" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" seed="152155264" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000267" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1092" name="NearestLivingUsesStableTieAndIgnoresDead" fullname="Journey.Tests.SharedEncounterTests.NearestLivingUsesStableTieAndIgnoresDead" methodname="NearestLivingUsesStableTieAndIgnoresDead" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" seed="312216168" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000250" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1087" name="OverkillAttributesOnlyRemainingActualDamage" fullname="Journey.Tests.SharedEncounterTests.OverkillAttributesOnlyRemainingActualDamage" methodname="OverkillAttributesOnlyRemainingActualDamage" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" seed="31259462" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000318" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1091" name="ReadOnlyPreviewCannotGrantDamage" fullname="Journey.Tests.SharedEncounterTests.ReadOnlyPreviewCannotGrantDamage" methodname="ReadOnlyPreviewCannotGrantDamage" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" seed="286293898" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000495" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1094" name="ReturnTakesFiveSecondsAndProvidesOneSecondImmunity" fullname="Journey.Tests.SharedEncounterTests.ReturnTakesFiveSecondsAndProvidesOneSecondImmunity" methodname="ReturnTakesFiveSecondsAndProvidesOneSecondImmunity" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" seed="329997162" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.001835" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1100" name="SnapshotWireRoundTripPreservesBothPlayersAndIncarnations" fullname="Journey.Tests.SharedEncounterTests.SnapshotWireRoundTripPreservesBothPlayersAndIncarnations" methodname="SnapshotWireRoundTripPreservesBothPlayersAndIncarnations" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" seed="1058858178" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.002296" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1096" name="TimedCompletionFreezesDeadReturnAndShots" fullname="Journey.Tests.SharedEncounterTests.TimedCompletionFreezesDeadReturnAndShots" methodname="TimedCompletionFreezesDeadReturnAndShots" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" seed="10944817" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000340" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1086" name="TwoSourcesShareHealthAndExactlyOneDeathSnapshot" fullname="Journey.Tests.SharedEncounterTests.TwoSourcesShareHealthAndExactlyOneDeathSnapshot" methodname="TwoSourcesShareHealthAndExactlyOneDeathSnapshot" classname="Journey.Tests.SharedEncounterTests" runstate="Runnable" seed="1193366220" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.000714" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1101" name="ShotAlignmentTests" fullname="Journey.Tests.ShotAlignmentTests" classname="Journey.Tests.ShotAlignmentTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:10Z" duration="0.063354" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1111" name="FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup" fullname="Journey.Tests.ShotAlignmentTests.FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup" classname="Journey.Tests.ShotAlignmentTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:10Z" duration="0.058681" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1106" name="FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup(8)" fullname="Journey.Tests.ShotAlignmentTests.FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup(8)" methodname="FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup" classname="Journey.Tests.ShotAlignmentTests" runstate="Runnable" seed="1531282899" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.003437" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1107" name="FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup(30)" fullname="Journey.Tests.ShotAlignmentTests.FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup(30)" methodname="FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup" classname="Journey.Tests.ShotAlignmentTests" runstate="Runnable" seed="1249486925" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.003835" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1108" name="FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup(60)" fullname="Journey.Tests.ShotAlignmentTests.FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup(60)" methodname="FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup" classname="Journey.Tests.ShotAlignmentTests" runstate="Runnable" seed="1936455435" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.005331" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1109" name="FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup(144)" fullname="Journey.Tests.ShotAlignmentTests.FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup(144)" methodname="FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup" classname="Journey.Tests.ShotAlignmentTests" runstate="Runnable" seed="38319034" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:09Z" duration="0.029642" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1110" name="FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup(240)" fullname="Journey.Tests.ShotAlignmentTests.FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup(240)" methodname="FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup" classname="Journey.Tests.ShotAlignmentTests" runstate="Runnable" seed="1152614332" result="Passed" start-time="2026-10-04 07:18:09Z" end-time="2026-10-04 07:18:10Z" duration="0.015382" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1105" name="HitsUseDisplayedEnemyPoseAndWoundSparksStartAtResolvedSurface" fullname="Journey.Tests.ShotAlignmentTests.HitsUseDisplayedEnemyPoseAndWoundSparksStartAtResolvedSurface" classname="Journey.Tests.ShotAlignmentTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-04 07:18:10Z" end-time="2026-10-04 07:18:10Z" duration="0.004015" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1102" name="HitsUseDisplayedEnemyPoseAndWoundSparksStartAtResolvedSurface(False,False)" fullname="Journey.Tests.ShotAlignmentTests.HitsUseDisplayedEnemyPoseAndWoundSparksStartAtResolvedSurface(False,False)" methodname="HitsUseDisplayedEnemyPoseAndWoundSparksStartAtResolvedSurface" classname="Journey.Tests.ShotAlignmentTests" runstate="Runnable" seed="177124540" result="Passed" start-time="2026-10-04 07:18:10Z" end-time="2026-10-04 07:18:10Z" duration="0.002148" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1103" name="HitsUseDisplayedEnemyPoseAndWoundSparksStartAtResolvedSurface(True,False)" fullname="Journey.Tests.ShotAlignmentTests.HitsUseDisplayedEnemyPoseAndWoundSparksStartAtResolvedSurface(True,False)" methodname="HitsUseDisplayedEnemyPoseAndWoundSparksStartAtResolvedSurface" classname="Journey.Tests.ShotAlignmentTests" runstate="Runnable" seed="833935156" result="Passed" start-time="2026-10-04 07:18:10Z" end-time="2026-10-04 07:18:10Z" duration="0.000497" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1104" name="HitsUseDisplayedEnemyPoseAndWoundSparksStartAtResolvedSurface(True,True)" fullname="Journey.Tests.ShotAlignmentTests.HitsUseDisplayedEnemyPoseAndWoundSparksStartAtResolvedSurface(True,True)" methodname="HitsUseDisplayedEnemyPoseAndWoundSparksStartAtResolvedSurface" classname="Journey.Tests.ShotAlignmentTests" runstate="Runnable" seed="515362676" result="Passed" start-time="2026-10-04 07:18:10Z" end-time="2026-10-04 07:18:10Z" duration="0.000685" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: C:/Users/Darian/AppData/LocalLow/Game Dev Journey/Stack Lab\TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
