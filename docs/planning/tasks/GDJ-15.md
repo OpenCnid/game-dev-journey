@@ -2,7 +2,7 @@
 
 ## Outcome
 
-Make the existing rifle's displayed shot agree with an immediate crosshair hit while moving and turning. [GDJ-15](https://linear.app/cnid/issue/GDJ-15/align-rifle-hitscan-and-tracer-feedback-during-fast-turns) was selected on October 4, 2026 after P1 accepted [GDJ-16's overhead-HP player](../../playtests/2026-10-03-overhead-health.md). Implementation follows the investigation and timing contract below; human acceptance remains pending.
+Make the existing rifle's displayed shot agree with an immediate crosshair hit while moving and turning. [GDJ-15](https://linear.app/cnid/issue/GDJ-15/align-rifle-hitscan-and-tracer-feedback-during-fast-turns) was selected on October 4, 2026 after P1 accepted [GDJ-16's overhead-HP player](../../playtests/2026-10-03-overhead-health.md). P1 accepted the resulting aiming revision, reporting smooth, undelayed shots.
 
 ## Context and evidence
 
@@ -35,6 +35,6 @@ Start from current merged main in an isolated checkout. Read AGENTS, foundation/
 
 Resolve this foundation before GDJ-17 target coloring and pose-aligned ×2 critical regions. GDJ-18 customization/sharing, ammo/reload, target-gated autofire, jumping, ranged threats and progression remain separate. No external asset copying, automatic target lock, shader/backend promotion or unverified weapon tuning is required.
 
-## Resume — technical candidate ready
+## Resume — accepted
 
-Runtime source `d93e867837915c9dae4a5b68947a7ecdfad703d3` implements the contract on `feat/gdj-15-shot-alignment` in the reused managed GDJ-16 checkout. [The October 4 report](../../playtests/2026-10-04-shot-alignment.md) records exact build/control archives, failing control reproduction, passing query/cadence/render checks and startup evidence. Human fast-turn/tracking comparison remains required; retain GDJ-15 in review and preserve accepted v7. Do not merge or move on to critical regions based on automated passes alone.
+Runtime source `d93e867837915c9dae4a5b68947a7ecdfad703d3` implements the contract on `feat/gdj-15-shot-alignment` in the reused managed GDJ-16 checkout. [The October 4 report](../../playtests/2026-10-04-shot-alignment.md) records exact build/control archives, failing control reproduction, passing query/cadence/render checks, startup evidence and P1's acceptance. Preserve accepted `StackLab-GDJ15-v1` and GDJ-16 v7. PR #5 is ready for review but remains unmerged. The selected follow-up is testing/benchmark fire-rate controls; critical regions remain separate.

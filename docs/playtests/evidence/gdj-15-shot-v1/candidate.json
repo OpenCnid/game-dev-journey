@@ -33,7 +33,7 @@
     "rendering": "culled"
   },
   "checks": {
-    "humanComparison": "Pending",
+    "humanComparison": "Accepted by P1 on October 4: looks good, no delay and very smooth; no detailed run metrics supplied",
     "editMode": {
       "failed": 0,
       "passed": 54

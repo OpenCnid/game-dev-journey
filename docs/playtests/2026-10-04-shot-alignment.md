@@ -1,6 +1,6 @@
 # GDJ-15: rifle shots during fast turns
 
-**October 4, 2026 — technical candidate; human comparison pending.** P1 selected this revision after accepting and merging [GDJ-16's overhead health](2026-10-03-overhead-health.md). It addresses the earlier lagging/multiple-line and projectile-like rifle report. It serves responsive aiming and crowded-combat readability; no new weapon traits or critical regions are introduced.
+**October 4, 2026 — candidate accepted by P1.** P1 selected this revision after accepting and merging [GDJ-16's overhead health](2026-10-03-overhead-health.md). It addresses the earlier lagging/multiple-line and projectile-like rifle report. It serves responsive aiming and crowded-combat readability; no new weapon traits or critical regions are introduced.
 
 ## Exact candidate and controls
 
@@ -35,6 +35,8 @@ Exact [Edit Mode](evidence/gdj-15-shot-v1/EditMode.xml) / [Play Mode](evidence/g
 
 These checks establish timing, geometry, lifecycle and functional startup. They do not establish subjective immediacy, streak visibility at high FPS, enjoyment, actual human run metrics or a performance improvement. These are local Unity checks; no GitHub CI result is claimed.
 
-## Human comparison still needed
+## Human comparison and acceptance
 
-P1 should press R, sweep sharply while strafing, then track a moving drone. Compare against the accepted v7 control if useful. Record whether old/extra lines remain, whether damage feels immediate under the crosshair and whether the single-frame tracer is too faint. Confirm accepted wounded HP and white/gold cues remain readable. GDJ-15 stays in review until this comparison supports acceptance; no merge is authorized for this candidate yet.
+The comparison prompt asked P1 to sweep sharply while strafing and track a moving drone, noting extra lines, immediate crosshair hits and tracer visibility. P1 subsequently said the candidate looked good, was not delayed and felt very smooth. This accepts the aiming revision; no detailed attempt metrics, specific visibility threshold or performance result was supplied. The complete accepted `StackLab-GDJ15-v1` player remains preserved. PR #5 can leave draft; it has not been merged.
+
+P1's selected follow-up is an adjustable testing/benchmark rifle fire rate, spanning slow early-game-like shots and continuous mid/late-game-like fire. This is a testing configuration request, not accepted progression balance or an upgrade system.
