@@ -1,0 +1,24 @@
+{
+  "targetFps": 30,
+  "players": [
+    {
+      "role": "host",
+      "frames": 106,
+      "changedFrames": 106,
+      "seconds": 4.059846700052731,
+      "deliveredFps": 26.109360237327,
+      "bytes": 2070963,
+      "lastFrameSha256": "f0bb48abdd30bd2f85e5ef913c85308b516a815a3bf853f513b1c5d1812ad0b2"
+    },
+    {
+      "role": "client",
+      "frames": 104,
+      "changedFrames": 104,
+      "seconds": 4.028270400012843,
+      "deliveredFps": 25.817532010678434,
+      "bytes": 2135358,
+      "lastFrameSha256": "2668eebd0e5138ee19e2cfa8a4d33dba1169ac3933894673b8ad560d2a540185"
+    }
+  ],
+  "performanceAcceptanceEligible": false
+}

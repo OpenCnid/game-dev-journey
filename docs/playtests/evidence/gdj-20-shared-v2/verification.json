@@ -1,0 +1,14 @@
+{
+  "discrepancyCount": 0,
+  "inputDesktopUnchanged": true,
+  "source": "55f952edbc1af3b571518c7819df5bba9b2bd338",
+  "ticks": 3600,
+  "state": "Complete",
+  "enemiesEqual": true,
+  "capture": "Both legacy screenshots black; native rendering/visible performance not established. Functional only.",
+  "playersEqual": true,
+  "catchupLimits": [
+    0,
+    0
+  ]
+}

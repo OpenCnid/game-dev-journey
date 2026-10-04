@@ -1,0 +1,59 @@
+{
+  "connection": "two processes on one desktop, IPv4 loopback UDP",
+  "player": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v1\\StackLab.exe",
+  "height": 1080,
+  "visibility": "Verify both unobstructed windows before treating capture as performance evidence.",
+  "processes": [
+    {
+      "arguments": [
+        "-screen-fullscreen",
+        "0",
+        "-screen-width",
+        1920,
+        "-screen-height",
+        1080,
+        "-force-d3d11",
+        "-port",
+        7777,
+        "-sharedResults",
+        "\"C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\shared-v1-visible\\host\"",
+        "-logFile",
+        "\"C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\shared-v1-visible\\host\\player.log\"",
+        "-host",
+        "-sharedScripted",
+        "-sharedUncapped"
+      ],
+      "pid": 18700,
+      "role": "host"
+    },
+    {
+      "arguments": [
+        "-screen-fullscreen",
+        "0",
+        "-screen-width",
+        1920,
+        "-screen-height",
+        1080,
+        "-force-d3d11",
+        "-port",
+        7777,
+        "-sharedResults",
+        "\"C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\shared-v1-visible\\client\"",
+        "-logFile",
+        "\"C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\shared-v1-visible\\client\\player.log\"",
+        "-join",
+        "127.0.0.1",
+        "-sharedScripted",
+        "-sharedUncapped"
+      ],
+      "pid": 15452,
+      "role": "client"
+    }
+  ],
+  "scriptedCompanion": false,
+  "scripted": true,
+  "started": "2026-10-04T02:20:21.7715454-05:00",
+  "width": 1920,
+  "humanRole": "host",
+  "uncapped": true
+}

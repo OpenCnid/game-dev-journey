@@ -1,0 +1,10 @@
+{
+  "visibility": "Unverified/covered; functional only, not performance",
+  "machine": "One i7-10700K / RTX 3090 desktop, loopback",
+  "next": "Revised scripted driver and unobstructed capture",
+  "playerParity": true,
+  "ticks": 966,
+  "enemyParity": true,
+  "state": "Defeat",
+  "humanObservation": "none"
+}

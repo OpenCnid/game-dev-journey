@@ -1,0 +1,187 @@
+{
+    "role": "client B",
+    "source": "{\n    \"revision\": \"75ebd7e6e09d482e40aede07b11585eca2e7b41a\",\n    \"builtUtc\": \"2026-10-04T07:18:36.7731616Z\",\n    \"dirty\": false\n}",
+    "machine": "Intel(R) Core(TM) i7-10700K CPU @ 3.80GHz",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "connection": "Direct IPv4 UDP; declare actual address/machine/visibility separately",
+    "reason": "",
+    "scripted": true,
+    "development": false,
+    "run": 1,
+    "ticks": 966,
+    "enemies": 12,
+    "catchupLimits": 0,
+    "frameSamples": 10391,
+    "confirmedHits": 95,
+    "width": 1920,
+    "height": 1080,
+    "frameCap": -1,
+    "vsync": 0,
+    "frameP50": 0.8304999999992901,
+    "frameP95": 3.776600000001906,
+    "frameP99": 5.7323000000018,
+    "frameMax": 10.340499999998088,
+    "confirmP50": 29.204499999998747,
+    "confirmP95": 40.45490000000029,
+    "confirmMax": 43.38830000000016,
+    "rttMs": 1.7978999999996859,
+    "state": 3,
+    "players": [
+        {
+            "Position": {
+                "x": -16.981813430786134,
+                "y": 0.0,
+                "z": -0.786110520362854
+            },
+            "Yaw": 293.15325927734377,
+            "Pitch": 4.146876811981201,
+            "ReturnAt": 18.30000114440918,
+            "ImmuneUntil": 0.0,
+            "ContactUntil": 13.700000762939454,
+            "Health": 0,
+            "Life": 1,
+            "Shots": 111,
+            "Hits": 111,
+            "Damage": 2320,
+            "Kills": 97,
+            "Weapon": 1,
+            "BodyDamage": 20,
+            "RifleInterval": 0.11999999731779099,
+            "Ready": false
+        },
+        {
+            "Position": {
+                "x": 12.812605857849121,
+                "y": 0.0,
+                "z": 11.173035621643067
+            },
+            "Yaw": 257.9522399902344,
+            "Pitch": 0.08774565160274506,
+            "ReturnAt": 21.100000381469728,
+            "ImmuneUntil": 0.0,
+            "ContactUntil": 16.5,
+            "Health": 0,
+            "Life": 1,
+            "Shots": 134,
+            "Hits": 95,
+            "Damage": 3800,
+            "Kills": 1,
+            "Weapon": 2,
+            "BodyDamage": 20,
+            "RifleInterval": 0.11999999731779099,
+            "Ready": false
+        }
+    ],
+    "enemyStates": [
+        {
+            "Position": {
+                "x": -19.081207275390626,
+                "y": 0.0,
+                "z": 4.386014938354492
+            },
+            "Health": 20,
+            "Incarnation": 90
+        },
+        {
+            "Position": {
+                "x": -11.365592002868653,
+                "y": 0.0,
+                "z": 15.256136894226075
+            },
+            "Health": 60,
+            "Incarnation": 3
+        },
+        {
+            "Position": {
+                "x": 12.964539527893067,
+                "y": 0.0,
+                "z": 10.993971824645996
+            },
+            "Health": 20,
+            "Incarnation": 2
+        },
+        {
+            "Position": {
+                "x": 15.319933891296387,
+                "y": 0.0,
+                "z": 2.1221280097961427
+            },
+            "Health": 60,
+            "Incarnation": 2
+        },
+        {
+            "Position": {
+                "x": 15.2603178024292,
+                "y": 0.0,
+                "z": -10.83206558227539
+            },
+            "Health": 60,
+            "Incarnation": 2
+        },
+        {
+            "Position": {
+                "x": 15.218695640563965,
+                "y": 0.0,
+                "z": 6.005285263061523
+            },
+            "Health": 20,
+            "Incarnation": 1
+        },
+        {
+            "Position": {
+                "x": -4.281458377838135,
+                "y": 0.0,
+                "z": 7.539253234863281
+            },
+            "Health": 20,
+            "Incarnation": 2
+        },
+        {
+            "Position": {
+                "x": 11.195114135742188,
+                "y": 0.0,
+                "z": -5.456892967224121
+            },
+            "Health": 60,
+            "Incarnation": 2
+        },
+        {
+            "Position": {
+                "x": -6.013887882232666,
+                "y": 0.0,
+                "z": 6.426126003265381
+            },
+            "Health": 20,
+            "Incarnation": 1
+        },
+        {
+            "Position": {
+                "x": -8.570335388183594,
+                "y": 0.0,
+                "z": 2.018876552581787
+            },
+            "Health": 60,
+            "Incarnation": 3
+        },
+        {
+            "Position": {
+                "x": 15.310644149780274,
+                "y": 0.0,
+                "z": 4.3420209884643559
+            },
+            "Health": 60,
+            "Incarnation": 1
+        },
+        {
+            "Position": {
+                "x": -7.1446332931518559,
+                "y": 0.0,
+                "z": 5.25929069519043
+            },
+            "Health": 20,
+            "Incarnation": 1
+        }
+    ],
+    "sentBytes": 42956,
+    "receivedBytes": 408284
+}

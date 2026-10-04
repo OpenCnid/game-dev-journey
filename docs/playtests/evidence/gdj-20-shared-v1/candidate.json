@@ -1,0 +1,14 @@
+{
+  "editor": "6000.3.25f1",
+  "fileCount": 167,
+  "manifestSha256": "332bf61c84c893dbd8190fef8dad14023e4d656a57bb49b3e362e04996682027",
+  "release": true,
+  "archive": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v1",
+  "networking": "Unity Transport 2.7.4, direct IPv4 UDP",
+  "source": {
+    "revision": "75ebd7e6e09d482e40aede07b11585eca2e7b41a",
+    "builtUtc": "2026-10-04T07:18:36.7731616Z",
+    "dirty": false
+  },
+  "player": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab\\StackLab.exe"
+}
