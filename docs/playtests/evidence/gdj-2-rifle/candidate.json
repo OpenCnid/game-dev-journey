@@ -1,0 +1,77 @@
+{
+  "candidate": "GDJ-2-rifle-2026-10-03",
+  "source": {
+    "revision": "28ca1bce4d71d0af82326a93f65a528ebfd1cd5c",
+    "builtUtc": "2026-10-04T02:40:51.7367682Z",
+    "dirty": false
+  },
+  "branch": "review/gdj-2-rifle-baseline",
+  "worktree": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-2-rifle-playtest\\new-game-dev",
+  "buildCompletedLogLastWriteUtc": "2026-10-04T02:41:58.7014811Z",
+  "launchArguments": [
+    "-playtest",
+    "-seed",
+    "137",
+    "-simulation",
+    "burst",
+    "-rendering",
+    "culled",
+    "-screen-width",
+    "1920",
+    "-screen-height",
+    "1080",
+    "-screen-fullscreen",
+    "0"
+  ],
+  "runtime": {
+    "enemyCount": 35,
+    "durationSeconds": 60,
+    "automaticRifle": true,
+    "simulation": "Jobs/Burst with staged state",
+    "rendering": "culled instances, cube projectiles, separate characters",
+    "frameCap": 144,
+    "vSync": 0,
+    "graphicsApi": "Direct3D 11",
+    "developmentBuild": false
+  },
+  "hardware": {
+    "cpu": "Intel Core i7-10700K",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "ramGiB": 63.83,
+    "gpuDriver": "32.0.15.9186",
+    "desktopResolution": "3840x1600",
+    "osReportedDesktopRefreshHz": 143,
+    "requestedPlayerResolution": "1920x1080 windowed"
+  },
+  "tests": [
+    {
+      "platform": "EditMode",
+      "result": "Passed",
+      "total": 33,
+      "passed": 33,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 2.1565133,
+      "startedUtc": "2026-10-04 02:43:07Z",
+      "endedUtc": "2026-10-04 02:43:09Z"
+    },
+    {
+      "platform": "PlayMode",
+      "result": "Passed",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 1.1386446,
+      "startedUtc": "2026-10-04 02:42:29Z",
+      "endedUtc": "2026-10-04 02:42:31Z"
+    }
+  ],
+  "localBuildLog": "prototypes/001-stacked-weapons/artifacts/Build.log",
+  "buildLogSha256": "770272b0e10763fd0229c3c696e342258ee80be519764244e9eee30068cbe211",
+  "playerLog": "prototypes/001-stacked-weapons/artifacts/GDJ-2-player.log",
+  "manifestSha256": "5abc23aed34c66b50d6f662703ac28538476078358bf694837f303721937c503",
+  "humanObservations": "at least two active attempts confirmed; Escape freezes countdown; R restores 100 HP, 60 seconds, 0 kills; unreadable wounded enemies impede group-kiting; laggy/multiple tracer lines and projectile-like feel; ammo, target-gating, jump and threat requests saved",
+  "decision": "revise damage readability before stacking; next change GDJ-16, separate rifle aim/tracer follow-up GDJ-15",
+  "acceptance": "completed; revise damage readability before stacking"
+}
