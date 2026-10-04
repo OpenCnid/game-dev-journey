@@ -21,6 +21,12 @@ The owner wants an auto-shoot preference, weapon-specific crosshair/targeted/gui
 
 The owner's suggested Alan Turing effect is a working fictional association, not a real vision phenomenon. Turing's [Computing Machinery and Intelligence](https://www.cse.msu.edu/~cse841/papers/Turing.html) describes the imitation game using written questions and answers to assess machine imitation; it does not describe x-ray perception. **Turing Sense** is a possible game name, unselected. Enemy outlines need no additional lore gate before they can be studied.
 
+## Later owner clarification: first gun, growth and spectacle
+
+Detailed first-gun design remains open. The owner selected a **steady rifle with predictable, frequent shots** as the archetype to explore first; this selects the design starting point, not the complete weapon specification. Define its baseline before choosing a concrete upgrade pool. The owner expects raw damage, area damage and other chosen effects to determine the usefulness and feel of growth. Changed bullets, trails and after-effects are possibilities rather than a selected visual treatment.
+
+The screen should remain understandable as weapons accumulate. The owner also sees possible late-run chaos as part of the fun. Preserve useful threat/aim/ally information while investigating spectacle, comfort and performance; no readability or enjoyment result is established. GDJ-12 should include this tension in later research. The [encounter record](../design/engine-kingdoms-first-encounter.md#first-gun-and-readable-growth--discussion-checkpoint) contains the selected rifle archetype and proposed baseline/growth examples, and the [readability record](../design/weapon-control-and-combat-readability.md#owner-clarification-effect-dependent-growth-and-late-run-chaos) preserves these constraints.
+
 ## Consequences and later work
 
 The [weapon-control and readability record](../design/weapon-control-and-combat-readability.md) separates firing activation, aiming/target choice, projectile guidance and visual arrangement. Automatic firing does not automatically choose upgrades or ready the player. The accepted thinking-space rule still prevents attacks while physical time is frozen.

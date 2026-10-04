@@ -31,6 +31,14 @@ The player should perceive an earned level-up, understand the choice and notice 
 
 Proposed investigations include configurable weapon offsets/visibility, outline style/contrast/thickness, prioritizing nearby threats, readable crosshairs and health bars, HUD/text scaling, reducing obstructive effects, and controlling motion/shake/flash. Distinct shape and audio cues can complement color. Preserve gameplay outcomes when presentation changes; through-wall perception is separate from firing through walls.
 
+## Owner clarification: effect-dependent growth and late-run chaos
+
+The owner selected a steady rifle with predictable, frequent shots as the first archetype to explore; its detailed design and upgrade visuals remain open. Design the baseline gun before committing a concrete upgrade pool. Raw damage, area damage and other chosen capabilities should determine what feels useful against enemies. Bullet changes, trails and after-effects are possibilities; no rule requires every numerical increase to add more particles or change the bullet model.
+
+The owner expects the screen to remain understandable as the arsenal grows and sees possible late-run chaos as part of the fun. Research spectacle together with threat recognition, aiming, ally identification, comfort and performance. Configurable presentation should preserve combat outcomes and useful cues. Candidate visual treatments and their actual enjoyment/accessibility remain unvalidated.
+
+The [first-gun discussion](engine-kingdoms-first-encounter.md#first-gun-and-readable-growth--discussion-checkpoint) records the selected steady-rifle archetype to explore, a proposed baseline and illustrative direct-damage, piercing and area-impact growth. It does not select a final gun, weapon roster or visual-effect system.
+
 ## Future tasks and research seeds
 
 - [GDJ-11: Experiment with weapon positioning and arsenal visibility](https://linear.app/cnid/issue/GDJ-11/experiment-with-weapon-positioning-and-arsenal-visibility): future Backlog at Medium. Compare a few arrangements against the same build/encounter, observe weapon/threat obstruction and visible power growth, measure frame costs, then recommend one bounded implementation.
