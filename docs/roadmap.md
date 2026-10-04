@@ -83,6 +83,10 @@ The owner accepted the [thinking-space hybrid](decisions/0004-party-thinking-spa
 
 [Decision 0009](decisions/0009-weapon-control-and-accessible-combat.md) accepts configurable auto-shoot, varied targeting and through-wall enemy visibility, with detailed rules open. The owner requested [GDJ-11: weapon-position experiments](https://linear.app/cnid/issue/GDJ-11/experiment-with-weapon-positioning-and-arsenal-visibility) and [GDJ-12: deep combat-readability/accessibility research](https://linear.app/cnid/issue/GDJ-12/research-combat-readability-and-accessibility). They are future Backlog work at Medium and High respectively, with no date or implementation commitment. Readability remains a core design priority; these tasks will produce bounded recommendations and human evidence, preserving the performant 1-4 player loop.
 
+## Future death participation and shared reward research
+
+[Decision 0010](decisions/0010-xp-pickups-and-death-participation.md) accepts collected enemy-drop XP orbs, magnets, percentage pickup-range upgrades and gear-upgrade access while dead. [GDJ-13](https://linear.app/cnid/issue/GDJ-13/research-death-revival-and-continued-player-participation) is future High-priority research when focusing on multiplayer, with timed revival/lives/participation and solo/full-party outcomes open. [GDJ-14](https://linear.app/cnid/issue/GDJ-14/research-shared-legendary-compatibility-and-reward-rules) researches rare compatibility, duplicates, player-state eligibility and pending choices. No dates, immediate implementation or completed research; a bounded first test still needs minimal explicit rules.
+
 ## Parking lot
 
 Put tempting ideas here without treating them as commitments. For each one, note the player benefit and what evidence would justify adding it.
