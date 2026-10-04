@@ -8,6 +8,7 @@ Use anonymous participant labels and leave personal information out of the repos
 
 ## Records
 
+- [2026-10-03: Current rifle baseline](2026-10-03-rifle-baseline.md) - exact candidate, 35 current test passes, two active developer attempts and pause/reset confirmation; selects enemy health/damage readability before stacking.
 - [2026-09-30: First prototype validation](2026-09-30-prototype-performance.md) - automated tests and developer-machine benchmark diagnostics; not a user playtest.
 - [2026-09-30: Boss-scale stress testing](2026-09-30-boss-scale.md) - larger synthetic workloads and a failed performance baseline.
 - [2026-09-30: Jobs/Burst and rendering comparison](2026-09-30-jobs-burst.md) - controlled backend comparisons, stage costs, and profiler evidence.
