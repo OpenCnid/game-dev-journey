@@ -2,11 +2,13 @@
 
 - **Date / issue:** October 3, 2026 (America/Chicago), [GDJ-16](https://linear.app/cnid/issue/GDJ-16/show-enemy-health-and-enemyplayer-damage-clearly), [draft PR #4](https://github.com/OpenCnid/game-dev-journey/pull/4).
 - **Candidate:** `GDJ-16-damage-v5-2026-10-03`, clean source `25d8157c97c58fe66331c2401c1e4cac58c91a6f`, built `2026-10-04T04:14:57.6233079Z`, dirty `false`.
-- **Disposition:** requested panel removal implemented; latest crowd stability/clutter comparison remains pending. P1's positive bracket observation applies to the preceding candidate. No performance result.
+- **Disposition:** P1 rejected full HP bars on healthy normal targets and requested damage-only visibility. Brackets remain helpful; supersede the bar policy. No performance result.
 
 ## Human finding and resulting behavior
 
 P1 found the [preceding candidate's cyan body brackets](2026-10-03-focused-health-feedback.md) helpful for knowing who to target. The central black DEFEATED/HP panel was far too distracting when killing hundreds of mobs per minute. Wounded-bar stability was not explicitly confirmed. The [fourth revision contract](../planning/tasks/GDJ-16.md#fourth-human-revision-contract) retains the useful cue and removes the distracting one.
+
+P1's next comparison disliked the healthy target's full cyan bar and could not tell whether hover or shooting triggered it. The aim query enabled the full bar before damage. They requested bars only after normal enemies become damaged, with bosses as a future always-visible exception, and requested research into easily imported custom crosshairs. The fifth revision changes HP visibility independently of body brackets and saves crosshair research separately.
 
 The currently aimed living enemy has cyan brackets around its projected body/core and one small matching HP bar above its core. The brackets use both healthy/wounded pose matrices. There is no central HP panel, per-kill HP message or recent/dead-target health retention. On a miss or death, that target display ends; the existing brief hit/kill cues communicate outcomes.
 

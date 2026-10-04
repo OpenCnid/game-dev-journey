@@ -22,6 +22,12 @@ namespace Journey.Tests
             {
                 view.Create(root.transform); sim.Reset(1, 15, false);
                 root.AddComponent<FeedbackHudProbe>().Feedback = view.Feedback;
+                Quaternion healthyAim = Quaternion.LookRotation(sim.Position(0) + Vector3.up * 1.1f - (sim.Player + Vector3.up * 1.65f));
+                view.Draw(sim, 1, healthyAim.eulerAngles.y, healthyAim.eulerAngles.x, 0);
+                yield return null;
+                Assert.That(view.Feedback.FocusVisible, Is.True);
+                Assert.That(view.Feedback.TargetHealthBarVisible, Is.False, "A healthy hovered normal enemy has brackets without an HP bar.");
+                Assert.That(sim.Shots, Is.Zero);
                 for (int outcome = 0; outcome < 2; outcome++)
                 {
                     if (outcome > 0) sim.Step(Vector3.zero, .12f);
@@ -44,6 +50,7 @@ namespace Journey.Tests
                         Assert.That(view.Feedback.BarCount, Is.EqualTo(1));
                         Assert.That(view.Feedback.Bar(0).Health, Is.EqualTo(20));
                         Assert.That(view.Feedback.FocusHealth, Is.EqualTo(20));
+                        Assert.That(view.Feedback.TargetHealthBarVisible, Is.True);
                     }
                     Assert.That(sim.EnemyHealth(0), Is.EqualTo(outcome == 0 ? 20 : 40));
                     Assert.That(sim.Kills, Is.EqualTo(outcome));

@@ -44,6 +44,7 @@ namespace Journey
         public int FocusHealth { get; private set; }
         public bool FocusAimed { get; private set; }
         public bool FocusVisible => FocusAimed && FocusHealth > 0;
+        public bool TargetHealthBarVisible => FocusVisible && FocusHealth < CombatSimulation.EnemyMaxHealth;
         public float PlayerPulseRemaining { get; private set; }
         public float PlayerLabelRemaining { get; private set; }
         public int PlayerDamage { get; private set; }
@@ -153,7 +154,7 @@ namespace Journey
                 if (candidate < 0 && revealDelay[slot] <= 0)
                     for (int i = 0; i < BarCount; i++)
                     {
-                        if (bars[i].Health >= CombatSimulation.EnemyMaxHealth || (FocusVisible && bars[i].EnemyIndex == FocusEnemy)) continue;
+                        if (bars[i].Health >= CombatSimulation.EnemyMaxHealth || (TargetHealthBarVisible && bars[i].EnemyIndex == FocusEnemy)) continue;
                         bool held = false;
                         for (int j = 0; j < VisibleBarCapacity; j++) if (labelOwners[j] == bars[i].EnemyIndex) held = true;
                         Rect proposed = LabelBounds(bars[i], width, height);
@@ -161,7 +162,7 @@ namespace Journey
                         candidate = i; labelOwners[slot] = bars[i].EnemyIndex; labelVersions[slot] = bars[i].SpawnVersion; break;
                     }
                 if (candidate < 0) continue;
-                if (FocusVisible && bars[candidate].EnemyIndex == FocusEnemy) continue;
+                if (TargetHealthBarVisible && bars[candidate].EnemyIndex == FocusEnemy) continue;
                 Rect rect = LabelBounds(bars[candidate], width, height);
                 if (!Fits(rect, width, height) || Overlaps(rect, width, height)) { revealDelay[slot] = .25f; continue; }
                 if (revealDelay[slot] > 0) continue;
@@ -179,7 +180,7 @@ namespace Journey
         {
             Rect padded = new Rect(rect.x - 4, rect.y - 4, rect.width + 8, rect.height + 8);
             Rect target = LabelBounds(focusBar, width, height);
-            if (FocusVisible && Fits(target, width, height) && padded.Overlaps(target)) return true;
+            if (TargetHealthBarVisible && Fits(target, width, height) && padded.Overlaps(target)) return true;
             for (int i = 0; i < VisibleBarCount; i++) if (padded.Overlaps(barBounds[i])) return true;
             return false;
         }
@@ -251,7 +252,7 @@ namespace Journey
             {
                 Color focus = new Color(.35f, .95f, 1);
                 Rect targetBar = LabelBounds(focusBar, width, height);
-                if (Fits(targetBar, width, height))
+                if (TargetHealthBarVisible && Fits(targetBar, width, height))
                 {
                     Paint(targetBar, focus);
                     Paint(new Rect(targetBar.x + 2, targetBar.y + 2, targetBar.width - 4, 7), new Color(.26f, .29f, .32f));

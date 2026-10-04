@@ -205,7 +205,7 @@ namespace Journey.Tests
                     for (int i = 0; i < owners.Length; i++) Assert.That(feedback.LabelOwner(i), Is.EqualTo(owners[i]), "Small camera/distance changes cannot reassign live wounded labels.");
                     camera.fieldOfView = 179;
                     feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
-                    Assert.That(feedback.VisibleBarCount, Is.Zero, "The target bar reserves the compressed cluster; overlapping wound labels hide.");
+                    Assert.That(feedback.VisibleBarCount, Is.EqualTo(feedback.TargetHealthBarVisible ? 0 : 1), "Only a wounded target bar reserves space; healthy aim brackets cannot hide wound labels.");
                     camera.fieldOfView = 85;
                     feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
                     for (int i = 0; i < feedback.VisibleBarCount; i++)
@@ -221,7 +221,7 @@ namespace Journey.Tests
         }
 
         [Test]
-        public void TargetHealthOnlyShowsForLivingAimedEnemyAndClearsOnReset()
+        public void NormalTargetHealthAppearsAfterDamageAndRespawnHidesIt()
         {
             var root = new GameObject("Focus panel");
             try
@@ -233,9 +233,12 @@ namespace Journey.Tests
                     camera.transform.position = sim.Position(0) + Vector3.up * 1.1f - Vector3.forward * 3;
                     feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
                     Assert.That(feedback.FocusAimed, Is.True); Assert.That(feedback.FocusHealth, Is.EqualTo(40));
+                    Assert.That(feedback.FocusVisible, Is.True, "Healthy targets retain body brackets.");
+                    Assert.That(feedback.TargetHealthBarVisible, Is.False, "Aiming alone must not show normal enemy HP.");
                     Assert.That(feedback.VisibleBarCount, Is.Zero, "A target uses its own bar, without a duplicate wounded label.");
                     sim.TryFire(AtEnemy(sim), out ShotResult wound); feedback.RecordShot(sim, wound);
                     feedback.CollectBars(sim, camera, 1); Assert.That(feedback.FocusHealth, Is.EqualTo(20));
+                    Assert.That(feedback.TargetHealthBarVisible, Is.True, "Actual health loss enables the bar.");
                     camera.transform.rotation = Quaternion.Euler(0, 180, 0);
                     feedback.CollectBars(sim, camera, 1);
                     Assert.That(feedback.FocusAimed, Is.False); Assert.That(feedback.FocusVisible, Is.False);
@@ -246,6 +249,9 @@ namespace Journey.Tests
                     sim.TryFire(AtEnemy(sim), out ShotResult kill); Assert.That(kill.Killed, Is.True);
                     feedback.RecordShot(sim, kill); feedback.CollectBars(sim, camera, 1);
                     Assert.That(feedback.FocusVisible, Is.False, "A killed incarnation must not retain defeated HP UI.");
+                    camera.transform.position = sim.Position(0) + Vector3.up * 1.1f - Vector3.forward * 3;
+                    feedback.CollectBars(sim, camera, 1);
+                    Assert.That(feedback.FocusVisible, Is.True); Assert.That(feedback.TargetHealthBarVisible, Is.False, "The fresh full-health respawn must not inherit the wounded bar.");
                     feedback.Reset(); Assert.That(feedback.FocusEnemy, Is.EqualTo(-1));
                     for (int i = 0; i < CombatFeedback.VisibleBarCapacity; i++) Assert.That(feedback.LabelOwner(i), Is.EqualTo(-1));
                 }
