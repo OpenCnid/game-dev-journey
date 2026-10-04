@@ -11,6 +11,10 @@ namespace Journey
         readonly Matrix4x4[] heads = new Matrix4x4[CombatSimulation.Capacity];
         readonly Matrix4x4[] projectiles = new Matrix4x4[BossAbilities.ProjectileCapacity];
         readonly Matrix4x4[] telegraphs = new Matrix4x4[CombatSimulation.Capacity];
+        readonly Matrix4x4[] hitSparks = new Matrix4x4[CombatFeedback.ImpactCapacity * 8];
+        readonly Matrix4x4[] killSparks = new Matrix4x4[CombatFeedback.ImpactCapacity * 8];
+        Material hitMaterial, killMaterial;
+        public readonly CombatFeedback Feedback = new CombatFeedback();
         Mesh cube, ring, octahedron, character;
         Texture2D characterAtlas;
         Material characterMaterial;
@@ -94,6 +98,9 @@ namespace Journey
             enemyMaterial = Material("Drone body", new Color(.94f, .23f, .19f));
             headMaterial = Material("Drone core", new Color(1, .72f, .27f));
             enemyMaterial.enableInstancing = headMaterial.enableInstancing = true;
+            hitMaterial = Material("Damage sparks", Color.white, true);
+            killMaterial = Material("Death sparks", new Color(1, .72f, .12f), true);
+            hitMaterial.enableInstancing = killMaterial.enableInstancing = true;
             projectileMaterial = Material("Boss projectiles", new Color(1, .15f, .75f), true);
             telegraphMaterial = Material("Area warning", new Color(1, .4f, .06f), true);
             projectileMaterial.enableInstancing = telegraphMaterial.enableInstancing = true;
@@ -131,6 +138,14 @@ namespace Journey
             flash -= dt; tracer.enabled = flash > 0;
             recoil = Mathf.MoveTowards(recoil, 0, dt * .55f);
             weapon.localPosition = new Vector3(.28f, -.24f, .55f - recoil);
+            Feedback.Advance(sim, dt);
+            Feedback.CollectBars(sim, Camera, alpha);
+            if (!sim.Benchmark)
+            {
+                Feedback.BuildSparks(sim, alpha, hitSparks, killSparks, out int hits, out int kills);
+                DrawInstances(hitMaterial, cube, hitSparks, hits);
+                DrawInstances(killMaterial, cube, killSparks, kills);
+            }
             if (CullInstances) { DrawCulled(sim, alpha); return; }
             long stageStart = StageProfile.Begin();
             using (PrepareMarker.Auto())
@@ -331,8 +346,19 @@ namespace Journey
             var mesh = new Mesh { name = "Area warning ring", vertices = vertices, triangles = indices };
             mesh.RecalculateNormals(); mesh.RecalculateBounds(); return mesh;
         }
-        public void ResetFeedback() { flash = recoil = 0; tracer.enabled = false; audio.Stop(); }
-        public void Dispose() { compactProjectiles?.Dispose(); compactProjectiles = null; if (octahedron != null) Object.Destroy(octahedron); if (character != null) Object.Destroy(character); if (characterMaterial != null) Object.Destroy(characterMaterial); if (characterAtlas != null) Object.Destroy(characterAtlas); instances?.Dispose(); instances = null; projectileInstances?.Dispose(); projectileInstances = null; warningInstances?.Dispose(); warningInstances = null; if (shot != null) Object.Destroy(shot); if (ring != null) Object.Destroy(ring); }
+        public void ResetFeedback() { Feedback.Reset(); flash = recoil = 0; tracer.enabled = false; audio.Stop(); }
+        public void Dispose()
+        {
+            Feedback.Reset();
+            if (hitMaterial != null) Object.Destroy(hitMaterial);
+            if (killMaterial != null) Object.Destroy(killMaterial);
+            compactProjectiles?.Dispose(); compactProjectiles = null;
+            if (octahedron != null) Object.Destroy(octahedron); if (character != null) Object.Destroy(character);
+            if (characterMaterial != null) Object.Destroy(characterMaterial); if (characterAtlas != null) Object.Destroy(characterAtlas);
+            instances?.Dispose(); instances = null; projectileInstances?.Dispose(); projectileInstances = null;
+            warningInstances?.Dispose(); warningInstances = null;
+            if (shot != null) Object.Destroy(shot); if (ring != null) Object.Destroy(ring);
+        }
 
         static Material Material(string name, Color color, bool unlit = false)
         {

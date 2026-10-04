@@ -19,9 +19,9 @@ namespace Journey
         readonly FrameTiming[] timings = new FrameTiming[1];
         bool benchmark, quitAfterBenchmark, screenshotSaved;
         bool bosses = true, synchronizedAbilities;
-        int crowd = 100, seed = 137, repeat = 1, repeats = 3, previousHealth = 100;
+        int crowd = 100, seed = 137, repeat = 1, repeats = 3;
         int savedCap = 144, savedVSync, captureStartShots, captureStartKills;
-        float yaw, pitch, accumulator, hitFlash, damageFlash;
+        float yaw, pitch, accumulator;
         float warmup = 30, captureSeconds = 60, frameMs = 6.94f;
         double runStarted, previousClock, captureStarted;
         string outputDirectory, lastResult = "", error = "", screenshotPath;
@@ -141,8 +141,8 @@ namespace Journey
                         long weaponStart = StageProfile.Begin();
                         using (WeaponMarker.Auto())
                         {
-                            if (sim.TryFire(ray, out Vector3 end, out bool killed))
-                            { view.ShowShot(end); if (killed || end != ray.origin + ray.direction * 65) hitFlash = .08f; }
+                            if (sim.TryFire(ray, out ShotResult shot))
+                            { view.ShowShot(shot.End); view.Feedback.RecordShot(sim, shot); }
                         }
                         StageProfile.WeaponMs += StageProfile.End(weaponStart);
                         accumulator -= CombatSimulation.Tick; ticks++;
@@ -153,9 +153,7 @@ namespace Journey
                 }
             }
             double simulationMs = (Stopwatch.GetTimestamp() - begin) * 1000d / Stopwatch.Frequency;
-            if (sim.PlayerHealth < previousHealth) damageFlash = .2f;
-            previousHealth = sim.PlayerHealth;
-            hitFlash -= Time.unscaledDeltaTime; damageFlash -= Time.unscaledDeltaTime;
+            if (!benchmark) view.Feedback.ObservePlayerHealth(sim.PlayerHealth);
             view.Draw(sim, accumulator / CombatSimulation.Tick, yaw, pitch, Time.unscaledDeltaTime);
 
             if (benchmark)
@@ -183,7 +181,7 @@ namespace Journey
         {
             if (benchmark) RestoreFrameSettings();
             benchmark = false; capture.Cancel(); error = "";
-            yaw = pitch = accumulator = 0; previousHealth = 100;
+            yaw = pitch = accumulator = 0;
             view.ResetFeedback(); sim.Reset(35, seed, false); SetCursor(true);
         }
         void StartBenchmark(int count)
@@ -273,7 +271,7 @@ namespace Journey
             GUI.Label(new Rect(width - 320, 59, 300, 25), "144 FPS TARGET  ·  6.94 ms BUDGET", small);
             if (sim.State == RunState.Running)
             {
-                GUI.color = hitFlash > 0 ? Color.yellow : Color.white;
+                GUI.color = Color.white;
                 GUI.DrawTexture(new Rect(width / 2 - 7, height / 2 - 1, 14, 2), Texture2D.whiteTexture);
                 GUI.DrawTexture(new Rect(width / 2 - 1, height / 2 - 7, 2, 14), Texture2D.whiteTexture);
                 GUI.color = Color.white;
@@ -281,11 +279,7 @@ namespace Journey
                 GUI.Label(new Rect(32, height - 38, 700, 28), benchmark ? "SCRIPTED ORBIT + AUTOFIRE  /  ESC CANCELS" : "WASD MOVE  /  MOUSE AIM  /  AUTO FIRE  /  ESC PAUSE  /  R RESTART", small);
                 if (!benchmark) GUI.Label(new Rect(width - 200, height - 65, 180, 32), $"{Mathf.Max(0, 60 - sim.Elapsed):F1}s", heading);
             }
-            if (damageFlash > 0)
-            {
-                GUI.color = new Color(1, .12f, .05f, damageFlash * 1.5f);
-                GUI.DrawTexture(new Rect(0, 0, width, height), Texture2D.whiteTexture); GUI.color = Color.white;
-            }
+            if (!benchmark) view.Feedback.DrawHUD(width, height);
             if (benchmark)
             {
                 if (view.DiagnosticOnly) GUI.Label(new Rect(32, 100, 800, 30), "DIAGNOSTIC: EFFECTS HIDDEN / NOT AN ACCEPTANCE RUN", heading);

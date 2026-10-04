@@ -19,6 +19,8 @@ Burst **1.8.30**, Collections **2.6.8**, and Mathematics **1.3.3** are pinned di
 
 WASD moves; the mouse aims; the rifle fires automatically. Escape pauses/releases the cursor; R restarts. Survive 60 seconds against 35 drones. Each drone takes two hits, then respawns at the perimeter to maintain crowd pressure. Contact damage has a shared 0.4-second grace period. This is a bounded flat arena with simple local steering and geometric hit detection.
 
+Enemy bars have two segments: full mint bars indicate 40 HP, half-filled amber bars indicate a wounded 20-HP drone. White impact sparks/markers confirm a hit; a larger gold burst and gold KILL marker confirm death. Player health loss produces red screen-edge pulses and a brief damage amount. These cues freeze on pause and clear on restart. Bars cover the nearest 64 on-screen enemies within 40 metres, excluding the top/bottom HUD; they do not test occlusion in this flat arena. Synthetic benchmarks omit these new combat cues.
+
 The pause/start menu includes 144/240/custom/uncapped frame limits and a separate VSync setting. Benchmark mode temporarily disables both the cap and VSync, then restores them.
 
 ## Prepare, test, and build
@@ -75,6 +77,7 @@ Use `-playtest` to start combat immediately or `-screenshot "C:\captures\arena.p
 | `Runtime/BurstInstances.cs` | Burst interpolation, conservative frustum culling, matrix generation and stable compaction |
 | `Runtime/StageProfile.cs` / `BurstStatus.cs` | Release stage timing and verification of native Burst execution |
 | `Runtime/ArenaPresentation.cs` | Arena geometry, instanced drones, camera, rifle, procedural shot audio |
+| `Runtime/CombatFeedback.cs` | Bounded health-bar selection, impact sparks, hit/kill markers and player damage cues; reads simulation outcomes |
 | `Runtime/PrototypeGame.cs` | Input, fixed simulation stepping, menus, HUD, benchmark orchestration |
 | `Runtime/BenchmarkCapture.cs` | Frame samples, percentile calculations, CSV/JSON export |
 | `Editor/ProjectSetup.cs` | Reproducible setup, scene creation, shader references, Windows build |
