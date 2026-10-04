@@ -1,0 +1,24 @@
+# Candidate: overhead HP without cyan brackets
+
+- **Date / issue:** October 3, 2026 (America/Chicago), [GDJ-16](https://linear.app/cnid/issue/GDJ-16/show-enemy-health-and-enemyplayer-damage-clearly), [draft PR #4](https://github.com/OpenCnid/game-dev-journey/pull/4).
+- **Candidate:** `GDJ-16-damage-v7-2026-10-03`, clean source `0deb52d8dd7e2790b1651985f8a57642b37ce8d2`, built `2026-10-04T04:43:37.8997807Z`, dirty `false`.
+- **Disposition:** correctness/render smoke checks and release build pass; latest overhead-bar human comparison pending. No new performance or pixel-readability acceptance.
+
+## Finding and resulting behavior
+
+P1 [rejects the previous candidate's cyan body brackets and selected HP border](2026-10-03-damaged-only-health.md): matching cyan treatments are confusing, brackets obscure HP, and bars sit at the head. They request removing brackets and floating HP clearly above the head, like an MMO status display perceived by players isekai'ed into the physical world. The [sixth revision contract](../planning/tasks/GDJ-16.md#sixth-human-revision-contract) supersedes earlier bracket retention before code changes.
+
+Body brackets and cyan selected-HP decoration are removed. Aimed and background wounded HP use the same dark border/amber fill and a restrained gray owner connector. Bars are anchored 0.45 metres above the posed head and lifted further when needed so their entire bottom edge clears its highest projected corner by at least 12 logical HUD units (18 screen pixels at the usual 1080p/1.5× scale). Clearance includes the wounded head shear and camera pitch. Bars remain horizontally attached to their owners, without collision-driven floating rows.
+
+Normal HP still appears only after actual damage. Healthy aim produces no enemy decoration or label-space reservation; the read-only target query remains for wounded-bar priority. Full-health respawn/reset hides HP, and miss/death ends selected-target UI. The existing three retained background owner/incarnation slots, overlap recovery delay, health authority, approximate hit sphere, wound pose and hit/kill/player feedback remain. A full-health boss exception is future policy. [Crosshair customization/sharing research](../design/crosshair-customization-and-imports.md) is corrected so a later editor will not reintroduce the rejected brackets; customization is still unimplemented.
+
+## Reproduction and evidence
+
+- Worktree `C:\Users\Darian\.codex\worktrees\gdj-16-damage-feedback\new-game-dev`, branch `feat/gdj-16-damage-feedback`. Whole player folder `prototypes/001-stacked-weapons/build/StackLab`; pinned Unity `6000.3.25f1`, release Windows x64 Mono / Direct3D 11.
+- Seed 137, 35 drones, 60 seconds, Jobs/Burst with culled instances and separate character meshes, cube projectiles; 1920×1080 windowed, 144 FPS cap, VSync off. See [configuration](evidence/gdj-16-damage-v7/candidate.json).
+- [166-file build manifest](evidence/gdj-16-damage-v7/build-manifest.json), 96,914,146 bytes, SHA-256 `9af266135534fcc563822d6e367b23f3cf8c126fd7fa3592c238aeaacf1f9495`. Embedded source/time and every build hash verified. [Startup](evidence/gdj-16-damage-v7/standalone-startup.txt) has no reported runtime exception.
+- [46/46 Edit Mode](evidence/gdj-16-damage-v7/EditMode.xml) and [3/3 Play Mode](evidence/gdj-16-damage-v7/PlayMode.xml) passes. Existing projection/layout tests now check the entire aimed bar above actual posed head corners at 3/38 metres and several coordinate sizes, plus background/crowd clearance. Live rendering checks exercise both reference/culled paths. Damage-only visibility, owner retention, overlap recovery, pause/reset/respawn and benchmark omission retain coverage. The suite contains 14 feedback cases and 35 existing simulation/render regression cases; it is not 49 new readability experiments. Rendering smoke coverage does not judge pixels or establish in-motion clarity/flicker tolerance.
+
+Rebuild an isolated exact-source checkout with `.\tools\unity.ps1 -Action Build`, Editor/output player closed. Follow the [standalone launch command](2026-10-03-damage-readability-revision.md#exact-player-and-reproduction), with `artifacts/GDJ-16-v7-player.log` and optional `artifacts/GDJ-16-v7-human-run.png`. The new player opened at its menu (PID 8628 at handoff; recheck): focus and press R. WASD moves, mouse aims, automatic firing continues, Escape pauses; R resets. No screenshot was present at evidence collection and no active attempt is inferred from opening it.
+
+The GDJ-2 control and complete earlier GDJ-16 v1–v6 players are preserved; v2–v6 archive hashes match their manifests. Record whether the new bars visibly clear heads and keep ownership/clutter understandable while kiting a crowd. Keep GDJ-16 In Review until that result is recorded. PR #4 is stacked on open draft #3; GDJ-15/17/18 retain their separate tracer, critical-targeting and customization work.

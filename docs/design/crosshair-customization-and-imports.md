@@ -1,6 +1,6 @@
 # Crosshair customization and easy imports
 
-Research checkpoint, October 3, 2026 (America/Chicago). The owner requests a custom crosshair people can import easily, with Aimlabs, KovaaK's and VALORANT as references. [GDJ-18](https://linear.app/cnid/issue/GDJ-18/customize-and-share-crosshair-presets) holds the later implementation recommended here; this document adds no crosshair editor or import support to the current build. The accompanying [GDJ-16 revision](../playtests/2026-10-03-damaged-only-health.md) implements damaged-only normal-enemy HP.
+Research checkpoint, October 3, 2026 (America/Chicago). The owner requests a custom crosshair people can import easily, with Aimlabs, KovaaK's and VALORANT as references. [GDJ-18](https://linear.app/cnid/issue/GDJ-18/customize-and-share-crosshair-presets) holds the later implementation recommended here; this document adds no crosshair editor or import support to the current build. The accompanying [GDJ-16 revision](../playtests/2026-10-03-overhead-health.md) implements damaged-only overhead HP and removes subsequently rejected cyan brackets.
 
 ## Findings from the reference products
 

@@ -8,7 +8,8 @@ Use anonymous participant labels and leave personal information out of the repos
 
 ## Records
 
-- [2026-10-03: Normal-enemy HP only after damage](2026-10-03-damaged-only-health.md) - useful brackets retained, healthy-target bars hidden, stable wounded owners; 49 checks and fresh build, latest crowd comparison pending.
+- [2026-10-03: Overhead HP without cyan brackets](2026-10-03-overhead-health.md) - brackets/cyan HP decoration removed, clear head gap and consistent wounded colors; head-clearance/visibility/render checks pass, latest crowd comparison pending.
+- [2026-10-03: Normal-enemy HP only after damage](2026-10-03-damaged-only-health.md) - 49 checks; P1 rejects overlapping cyan brackets/HP and head-level placement, prompting higher overhead bars.
 - [2026-10-03: Body brackets without central HP panels](2026-10-03-aimed-health-feedback.md) - 49 checks; P1 rejected full cyan HP on healthy normal targets, prompting damaged-only visibility.
 - [2026-10-03: Fixed target HP and retained wounded bars](2026-10-03-focused-health-feedback.md) - 49 passes; P1 liked body brackets but rejected the central defeated/HP panel as distracting at high kill rates.
 - [2026-10-03: Attached-bar readability revision](2026-10-03-damage-readability-revision.md) - 48 automated passes; P1 rejected target ownership/clutter/flicker and prompted fixed target HP with retained wounded owners.
