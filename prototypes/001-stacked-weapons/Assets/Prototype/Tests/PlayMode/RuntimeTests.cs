@@ -36,12 +36,14 @@ namespace Journey.Tests
                         yield return null;
                     }
                     Assert.That(view.Feedback.ImpactCount, Is.EqualTo(1));
+                    Assert.That(view.Feedback.FocusVisible, Is.True);
                     Assert.That(view.Feedback.HitMarkerVisible, Is.True);
                     if (outcome == 1) Assert.That(view.Feedback.KillMarkerVisible, Is.True);
                     if (outcome == 0)
                     {
                         Assert.That(view.Feedback.BarCount, Is.EqualTo(1));
                         Assert.That(view.Feedback.Bar(0).Health, Is.EqualTo(20));
+                        Assert.That(view.Feedback.FocusHealth, Is.EqualTo(20));
                     }
                     Assert.That(sim.EnemyHealth(0), Is.EqualTo(outcome == 0 ? 20 : 40));
                     Assert.That(sim.Kills, Is.EqualTo(outcome));
@@ -55,12 +57,14 @@ namespace Journey.Tests
                 yield return null;
                 view.ResetFeedback(); sim.Reset(1, 15, false);
                 Assert.That(view.Feedback.ImpactCount, Is.Zero); Assert.That(view.Feedback.PlayerPulseRemaining, Is.Zero);
+                Assert.That(view.Feedback.FocusVisible, Is.False);
                 Assert.That(muzzle.activeSelf, Is.False);
                 view.Draw(sim, 1, 0, 0, CombatSimulation.Tick);
                 yield return null;
                 view.ShowShot(Vector3.forward * 5); sim.Reset(1, 15, true);
                 view.Draw(sim, 1, 0, 0, 0);
                 Assert.That(muzzle.activeSelf, Is.False, "Synthetic benchmark must not acquire the new muzzle effect.");
+                Assert.That(view.Feedback.FocusVisible, Is.False);
             }
             finally { view.Dispose(); sim.Dispose(); Object.Destroy(root); }
             yield return null; LogAssert.NoUnexpectedReceived();

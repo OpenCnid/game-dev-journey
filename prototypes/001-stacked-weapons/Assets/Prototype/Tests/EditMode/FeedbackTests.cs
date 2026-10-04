@@ -185,7 +185,7 @@ namespace Journey.Tests
                     Assert.That(woundedCandidates, Is.GreaterThan(feedback.VisibleBarCount), "Overlapping wounded labels must actually yield space.");
                     bool woundedVisible = false;
                     int target = sim.AimTarget(new Ray(camera.transform.position, camera.transform.forward), out _);
-                    if (target >= 0) Assert.That(feedback.VisibleBar(0).EnemyIndex, Is.EqualTo(target));
+                    if (target >= 0) Assert.That(feedback.FocusEnemy, Is.EqualTo(target));
                     var firstBounds = new Rect[feedback.VisibleBarCount];
                     for (int i = 0; i < feedback.VisibleBarCount; i++)
                     {
@@ -198,8 +198,51 @@ namespace Journey.Tests
                     Assert.That(woundedVisible, Is.True);
                     feedback.LayoutBars(1280, 720);
                     for (int i = 0; i < firstBounds.Length; i++) Assert.That(feedback.VisibleBarBounds(i), Is.EqualTo(firstBounds[i]), "Repeated layout must not shuffle static labels.");
+                    var owners = new int[CombatFeedback.VisibleBarCapacity];
+                    for (int i = 0; i < owners.Length; i++) owners[i] = feedback.LabelOwner(i);
+                    camera.transform.position += Vector3.right * .01f;
+                    feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
+                    for (int i = 0; i < owners.Length; i++) Assert.That(feedback.LabelOwner(i), Is.EqualTo(owners[i]), "Small camera/distance changes cannot reassign live wounded labels.");
+                    camera.fieldOfView = 179;
+                    feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
+                    Assert.That(feedback.VisibleBarCount, Is.EqualTo(1), "Compressing the cluster hides overlapping labels.");
+                    camera.fieldOfView = 85;
+                    feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
+                    Assert.That(feedback.VisibleBarCount, Is.EqualTo(1), "A brief clear frame cannot make hidden bars flash back on.");
+                    feedback.Advance(sim, .3f); feedback.LayoutBars(1280, 720);
+                    Assert.That(feedback.VisibleBarCount, Is.EqualTo(firstBounds.Length));
+                    for (int i = 0; i < owners.Length; i++) Assert.That(feedback.LabelOwner(i), Is.EqualTo(owners[i]), "Overlap recovery must keep the same owners.");
                     Assert.That(sim.Shots, Is.EqualTo(shots)); Assert.That(sim.Kills, Is.EqualTo(kills));
                     Assert.That(sim.EnemyHealth(visible), Is.EqualTo(health), "Target preview and label layout cannot apply damage.");
+                }
+            }
+            finally { Object.DestroyImmediate(root); }
+        }
+
+        [Test]
+        public void FocusPanelRetainsLastHealthAcrossAimMissAndClearsOnReset()
+        {
+            var root = new GameObject("Focus panel");
+            try
+            {
+                var camera = root.AddComponent<Camera>();
+                using (var sim = new CombatSimulation())
+                {
+                    sim.Reset(1, 137, false); var feedback = new CombatFeedback();
+                    camera.transform.position = sim.Position(0) + Vector3.up * 1.1f - Vector3.forward * 3;
+                    feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
+                    Assert.That(feedback.FocusAimed, Is.True); Assert.That(feedback.FocusHealth, Is.EqualTo(40));
+                    Assert.That(feedback.VisibleBarCount, Is.Zero, "Full-health targets use the fixed panel, not a floating label.");
+                    sim.TryFire(AtEnemy(sim), out ShotResult wound); feedback.RecordShot(sim, wound);
+                    feedback.CollectBars(sim, camera, 1); Assert.That(feedback.FocusHealth, Is.EqualTo(20));
+                    camera.transform.rotation = Quaternion.Euler(0, 180, 0);
+                    feedback.CollectBars(sim, camera, 1);
+                    Assert.That(feedback.FocusAimed, Is.False); Assert.That(feedback.FocusVisible, Is.True);
+                    Assert.That(feedback.FocusHealth, Is.EqualTo(20));
+                    sim.TogglePause(); feedback.Advance(sim, 1); Assert.That(feedback.FocusVisible, Is.True);
+                    sim.TogglePause(); feedback.Advance(sim, .4f); Assert.That(feedback.FocusVisible, Is.False);
+                    feedback.Reset(); Assert.That(feedback.FocusEnemy, Is.EqualTo(-1));
+                    for (int i = 0; i < CombatFeedback.VisibleBarCapacity; i++) Assert.That(feedback.LabelOwner(i), Is.EqualTo(-1));
                 }
             }
             finally { Object.DestroyImmediate(root); }
