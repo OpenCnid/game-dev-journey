@@ -14,6 +14,8 @@ Combat draws paired meshes, including when the combined-character experiment is 
 
 ## Exact release and controls
 
+Implementation/evidence are proposed against main `888a32d` in [draft PR #8](https://github.com/OpenCnid/game-dev-journey/pull/8). The PR stays draft for coordinator review; P1 has accepted the exact candidate below.
+
 - Clean source **`2e721214a51f7a8b5bb5ce22305abed4bb3dc48b`**, stamped **`2026-10-04T06:25:15.8539409Z`**, built using `tools/unity.ps1 -Action Build`. Unity **6000.3.25f1**, release Windows x64 Mono/D3D11; pinned packages/render settings unchanged. Later evidence commits do not change this runtime.
 - [Candidate metadata](evidence/gdj-17-precision-v1/candidate.json) / [whole-player manifest](evidence/gdj-17-precision-v1/build-manifest.json): **166 files / 96,919,497 bytes**, manifest SHA256 `8eb9699b6b3bc4b5573f1830f74b860fe2af61f3b61405069ab132e5fc24b2b4`. Every archived file matches the live player's manifest.
 - Player: `C:/Users/Darian/.codex/worktrees/gdj-17-precision-hits/new-game-dev/prototypes/001-stacked-weapons/build/StackLab/StackLab.exe`. Whole-player archive: sibling **`StackLab-GDJ17-v1`**. Distribute its whole folder.

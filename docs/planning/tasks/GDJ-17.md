@@ -20,4 +20,6 @@ Focused boundaries/overlap/nearest, healthy/wounded pose and displayed interpola
 
 ## Resume
 
+[Draft PR #8](https://github.com/OpenCnid/game-dev-journey/pull/8) targets main `888a32d`; source/evidence are pushed, code review/integration pending.
+
 Isolated worktree: `C:/Users/Darian/.codex/worktrees/gdj-17-precision-hits/new-game-dev`, branch `gdj-17-precision-hits`. Runtime source **`2e721214a51f7a8b5bb5ce22305abed4bb3dc48b`**. Shared posed query, snapshots, reticle and independent critical feedback implemented. Serialized pinned-editor checks pass **77 Edit Mode / 7 Play Mode** cases; release build and 2/s + 120/s reference smokes pass. Complete candidate **StackLab-GDJ17-v1** is archived and opened for P1. GDJ-15/16/19 control archives reverified against their complete saved manifests (166 files each, no hash mismatches). [Release report/evidence and reproduction](../../playtests/2026-10-04-precision-aim.md) preserve exact source/configuration/manifest and the comparison brief. P1 accepts the presented slow/rapid aim/region/feedback comparison: “Yes, that all looks good.” No detailed rate/run/performance data supplied. Next coordinator code review/integration; keep In Review and draft PR. No merge instruction was supplied in this chat.
