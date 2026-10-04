@@ -164,14 +164,25 @@ namespace Journey.Tests
                 {
                     sim.Reset(1000, 137, false); var feedback = new CombatFeedback();
                     feedback.CollectBars(sim, camera, 1);
+                    var crowd = new int[feedback.BarCount];
+                    for (int i = 0; i < crowd.Length; i++) crowd[i] = feedback.Bar(i).EnemyIndex;
+                    // Wound a dense cluster so overlap checks exercise multiple eligible bars.
+                    for (int i = 0; i < Mathf.Min(32, crowd.Length); i++)
+                    {
+                        sim.Step(Vector3.zero, .13f);
+                        if (sim.EnemyHealth(crowd[i]) == CombatSimulation.EnemyMaxHealth)
+                            sim.TryFire(new Ray(sim.Position(crowd[i]) + Vector3.up * 1.1f, Vector3.forward), out ShotResult _);
+                    }
+                    feedback.CollectBars(sim, camera, 1);
                     int visible = feedback.Bar(0).EnemyIndex;
                     camera.transform.rotation = Quaternion.LookRotation(sim.Position(visible) + Vector3.up * 1.1f - camera.transform.position);
-                    sim.TryFire(new Ray(camera.transform.position, camera.transform.forward), out ShotResult wound);
-                    Assert.That(wound.Hit, Is.True);
-                    int shots = sim.Shots, kills = sim.Kills, health = sim.EnemyHealth(wound.EnemyIndex);
+                    int shots = sim.Shots, kills = sim.Kills, health = sim.EnemyHealth(visible);
                     feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
-                    Assert.That(feedback.VisibleBarCount, Is.InRange(1, CombatFeedback.VisibleBarCapacity));
+                    Assert.That(feedback.VisibleBarCount, Is.InRange(2, CombatFeedback.VisibleBarCapacity));
                     Assert.That(feedback.VisibleBarCount, Is.LessThan(feedback.BarCount));
+                    int woundedCandidates = 0;
+                    for (int i = 0; i < feedback.BarCount; i++) if (feedback.Bar(i).Health < CombatSimulation.EnemyMaxHealth) woundedCandidates++;
+                    Assert.That(woundedCandidates, Is.GreaterThan(feedback.VisibleBarCount), "Overlapping wounded labels must actually yield space.");
                     bool woundedVisible = false;
                     int target = sim.AimTarget(new Ray(camera.transform.position, camera.transform.forward), out _);
                     if (target >= 0) Assert.That(feedback.VisibleBar(0).EnemyIndex, Is.EqualTo(target));
@@ -180,7 +191,7 @@ namespace Journey.Tests
                     {
                         Assert.That(feedback.VisibleBar(i).Priority, Is.LessThan(2), "Healthy background labels must not fill the cluster.");
                         Assert.That(feedback.VisibleBarBounds(i).y, Is.EqualTo((1 - feedback.VisibleBar(i).Viewport.y) * 720 - 2).Within(.001), "Do not detach labels into floating rows.");
-                        if (feedback.VisibleBar(i).EnemyIndex == wound.EnemyIndex) woundedVisible = true;
+                        if (feedback.VisibleBar(i).Health < CombatSimulation.EnemyMaxHealth) woundedVisible = true;
                         firstBounds[i] = feedback.VisibleBarBounds(i);
                         for (int j = 0; j < i; j++) Assert.That(firstBounds[i].Overlaps(firstBounds[j]), Is.False);
                     }
@@ -188,7 +199,7 @@ namespace Journey.Tests
                     feedback.LayoutBars(1280, 720);
                     for (int i = 0; i < firstBounds.Length; i++) Assert.That(feedback.VisibleBarBounds(i), Is.EqualTo(firstBounds[i]), "Repeated layout must not shuffle static labels.");
                     Assert.That(sim.Shots, Is.EqualTo(shots)); Assert.That(sim.Kills, Is.EqualTo(kills));
-                    Assert.That(sim.EnemyHealth(wound.EnemyIndex), Is.EqualTo(health), "Target preview and label layout cannot apply damage.");
+                    Assert.That(sim.EnemyHealth(visible), Is.EqualTo(health), "Target preview and label layout cannot apply damage.");
                 }
             }
             finally { Object.DestroyImmediate(root); }
