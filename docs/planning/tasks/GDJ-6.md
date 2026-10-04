@@ -1,5 +1,30 @@
 # GDJ-6: Design the first Engine Kingdoms cooperative encounter
 
+## Current outcome and Resume — October 4, 2026
+
+**Revision 1 of [the first earned-level-up contract](../../design/first-earned-level-up.md) is a proposal awaiting owner evaluation.** Serve foundation pillar 1 through collection-triggered shared XP, one personal ordinary choice and noticeable rifle growth in a short solo/two-player fixture. All existing identity/shared-reward commitments remain intact; new test values and lifecycle/control details are hypotheses. No implementation chat is launched.
+
+- **Exact base:** clean main/session HEAD `dae613cbc9950f309f1bf944b1d13ff581090539`; proposal branch `docs/gdj-6-first-earned-level-up`, worktree `C:/Users/Darian/.codex/worktrees/aedc/new-game-dev`. The supplied recommendation's open/draft PR #8 and main `888a32d` facts are superseded: PR #8 merged at `a90c61986721a7d280cda07dbccce05934b21f13`, and GDJ-17 is Done. Accepted handoff `cb18757d199188683a5016742fb7a22862c46120` and release `2e721214a51f7a8b5bb5ce22305abed4bb3dc48b` are exact controls; runtime/tooling did not change between handoff and session base. [Precision report](../../playtests/2026-10-04-precision-aim.md) preserves prior checks/acceptance.
+- **Completed design:** pickup/once-only XP, ten-XP shared level, individually owned offers, damage/cadence candidates with legal rifle targets, selection/application timing, dead-player choices/return, all-dead and timed ending, shared retry/reset, attribution/extension boundaries and human comparison. [Encounter](../../design/engine-kingdoms-first-encounter.md) and [progression](../../design/progression-and-upgrade-pools.md) route to this contract.
+- **Proposal reasoning:** 60-HP drones make the +50% damage choice observably change body/head hit counts, unlike the accepted 40-HP baseline; +50% cadence instead shortens shot gaps. One earned choice and no qualifying rares isolate ordinary growth. The two-card pool exposes overlapping personal offers/independent application, not broad random variety. Live selection explicitly defers accepted future thinking space; its under-pressure cost must be reported.
+- **Owner reasoning/acceptance:** outstanding. The accepted rifle feedback supplies a tested baseline, not approval of these numerical, selection or lifecycle proposals. Keep GDJ-6 In Review; no live priority/dependency change. The wider GDJ-6 rarity/selection/revival research stays deferred rather than being declared resolved by this fixture.
+- **Checks passed / limits:** 62 local Markdown links/anchors across four changed documents, hit-count/rate/kill-time/actual-damage arithmetic, current runtime-baseline/source consistency, GitHub/Linear integration state and diff whitespace. Exact proposal commit/PR linked in GDJ-6. No new Unity test/build, benchmark, play observation or network evidence. Foundation, current state and planning root are unchanged because this is a pending test proposal, with no capability or accepted direction change.
+- **Next action:** owner accepts revision 1 as a test contract or identifies one precise objection. Save that reasoning in the contract/issue, then return to orchestration with [one bounded staged combat-feasibility brief](../../design/first-earned-level-up.md#one-bounded-technical-feasibility-handoff). The first technical step tests shared rifle combat/death/reset with 12 drones; XP/choices attach later. No networking technology is selected here.
+
+## Current copy-ready continuation
+
+```text
+Resume GDJ-6's first earned-level-up design, not the historical world/baseline discussion below. Read AGENTS.md, docs/foundation.md, docs/planning/README.md and docs/current-state.md first; verify actual checkout and Linear GDJ-6/GDJ-17. Session base was dae613cbc9950f309f1bf944b1d13ff581090539; GDJ-17 is merged/Done, with accepted release 2e721214a51f7a8b5bb5ce22305abed4bb3dc48b and handoff cb18757d199188683a5016742fb7a22862c46120. Do not assume main is still 888a32d or PR #8 is still open.
+
+Read docs/design/first-earned-level-up.md revision 1 and any newer owner decision/issue Resume. The complete proposed pickup → shared level → personal choice → visible growth → death/ending → retry contract is there. It has one rifle/one earned choice, damage versus cadence effects, explicit test-only live selection and lifecycle rules, and excludes qualifying rares without changing their accepted shared-grant rules. Numbers are hypotheses. Distinguish existing commitments from proposed rules and owner acceptance from human enjoyment/network evidence.
+
+Current required outcome: evaluate that concrete contract with the owner, record acceptance and reasoning or one precise objection, revise only what is needed, and return the durable result plus the staged combat-feasibility brief to orchestration. Preserve solo/dead choices, actual damage attribution, all-dead defeat, full reset and future weapon/loot/draw interactions. Do not reopen world/genre or broaden weapon content. Documentation checks suffice; no gameplay implementation, networking-package selection or new chat here.
+```
+
+## Historical context — October 2–3
+
+The current contract/Resume above supersedes the old baseline-first next action and combined two-choice/controlled-rare prompt below. Preserve their product commitments and later research, rather than dispatching this historical prompt unchanged.
+
 Owner direction, October 2, 2026: work on design first, specifically theme/identity. This supersedes the earlier rifle-playtest recommendation. [GDJ-6](https://linear.app/cnid/issue/GDJ-6/design-the-first-engine-kingdoms-cooperative-encounter) owns live status/acceptance. The owner explicitly requested the dedicated design chat, thread `01a0ffc6-3bd6-71f1-ae91-fe17298a4ee0`, host `local`, from accepted context `c1a933eea86dde769d1de1eae6d6b95b8deb5d37`. The planning/integration chat remains the orchestrator. The design chat's [world discussion and encounter record](../../design/engine-kingdoms-first-encounter.md) preserve progress and unresolved choices.
 
 The owner initially accepted **cooperative PvE for 2-4 players, testing two first**, with **isekai into an AI-controlled world**, then selected **The Engine Kingdoms**: an AI maintains a magical world and teammates combine forbidden powers. [Decision 0002](../../decisions/0002-cooperative-pve-ai-world.md) and the foundation supersede the earlier single-player constraint. In this design chat the owner selected preventing another catastrophe as the AI's purpose; forbidden combinations threaten the world, but outsiders may need them to save it. The [world comparison](../../design/ai-world-options.md) preserves setting choices; the [encounter record](../../design/engine-kingdoms-first-encounter.md) preserves the later world discussion. Detailed mechanics remain proposals.
@@ -20,7 +45,7 @@ The planning/integration chat orchestrates other task chats: scope their work, p
 
 The [foundation](../../foundation.md) accepts the solo/cooperative bullet-heaven identity and world background. Progression accepts shared XP, independent personal draws/pool modifiers with possible overlap, and selected team rare grants with source-player credit. The owner requires considering future weapon/loot/draw effects and long-term interactions, and accepted party thinking space as a future feature. Read [decision 0003](../../decisions/0003-shared-xp-personal-upgrade-draws.md), [decision 0004](../../decisions/0004-party-thinking-space.md) and [progression design](../../design/progression-and-upgrade-pools.md). Retain first-person bullet-heaven survival and solo support and growing simultaneous weapons. Explain perceptible growth, distinct builds, readable contributions and the shared rare moment. Written design establishes neither enjoyment nor performance.
 
-## Copy-ready design-session prompt
+## Historical design-session prompt — superseded as immediate work
 
 ```text
 Act as the design task session for GDJ-6: Design the first Engine Kingdoms cooperative encounter.
@@ -39,7 +64,7 @@ Acceptance: the encounter can be explained through concrete player actions and o
 Handoff: save the comparison and owner decision/reasoning in the relevant docs/design/ record; link exact commit/PR, accepted choices, open questions and one next task from GDJ-6. Update the game brief/planning intent only for accepted choices, and update the foundation plus decision record only if an accepted commitment changes. Do not claim implementation or validated fun/performance. If unfinished, preserve exact source, completed discussion/options, outstanding owner decision, blockers and next action in Resume. Keep the issue In Review while its required owner evaluation is outstanding.
 ```
 
-## Resume checkpoint
+## Historical Resume checkpoint
 
 **Current priority override, October 3:** the owner parked the matrix/preparation/permanent-power proposals and optional third-person/dual-camera support as extremely low-priority ideas beyond MVP/alpha. [GDJ-9](https://linear.app/cnid/issue/GDJ-9/idea-permanent-progression-matrix)/[GDJ-10](https://linear.app/cnid/issue/GDJ-10/idea-optional-first-and-third-person-views) preserve later review. Keep the first-person cooperative run bounded; intended persistent discoveries remain a future direction and require no full meta system now. This supersedes the earlier instruction below to deepen the matrix as the next discussion.
 

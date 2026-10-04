@@ -1,6 +1,12 @@
 # Shared progression and personal upgrade pools
 
-GDJ-6 design checkpoint, October 3, 2026. [Decision 0003](../decisions/0003-shared-xp-personal-upgrade-draws.md) records accepted progression; [decision 0004](../decisions/0004-party-thinking-space.md) adds the accepted future selection feature. The [first encounter](engine-kingdoms-first-encounter.md) uses this direction. These are design contracts and proposals, not implemented systems.
+GDJ-6 design checkpoint, October 4, 2026. [Decision 0003](../decisions/0003-shared-xp-personal-upgrade-draws.md) records accepted progression; [decision 0004](../decisions/0004-party-thinking-space.md) adds the accepted future selection feature. The [first encounter](engine-kingdoms-first-encounter.md) uses this direction. These are design contracts and proposals, not implemented systems.
+
+## Current first earned-choice proposal
+
+[Revision 1](first-earned-level-up.md) is a concrete solo/two-player fixture awaiting owner evaluation: ten collected one-XP orbs earn shared level 2 and one independently owned choice per roster member, including dead members, between damage and cadence enhancements to the existing rifle. Both definitions appear in the two-card pool; independent ordering/state is exercised, while pool variety and rarity probabilities are not. Live selection and the detailed lifecycle/reset rules are temporary test proposals, not replacements for accepted future thinking space. The fixture exposes one earned choice, superseding the earlier at-least-two exposure proposal for this test alone.
+
+Qualifying rare content is excluded, retaining the accepted selection-triggered shared grants/credit without inventing missing applicability policy. Weapon/player/loot/draw ownership and future legal-target requirements remain preserved. [Attribution and extension boundaries](first-earned-level-up.md#attribution-and-future-boundaries) and [human comparison](first-earned-level-up.md#human-comparison-and-decision) define the implementation handoff and evidence limits. No pickups, growth or networking is implemented by this proposal.
 
 ## Owner direction
 
@@ -105,10 +111,14 @@ Account for party size: four independent player draws create more opportunities 
 
 ## Small first slice and later feasibility
 
+**October 4 specialization:** the [first earned-level-up contract](first-earned-level-up.md) is the current proposal for this question, pending owner evaluation. Its first technical step is shared combat/lifecycle without progression; the subsequent earned-choice fixture omits controlled rare content. The broader two-choice/rare feasibility question below is retained for later work, rather than an immediate implementation gate.
+
 For the 60-second two-player proposal, implement only the eventual approved one-gun start, enemy-drop XP orbs collected into shared XP and personal random choices from a small content pool. Keep the upgrade/effect design compatible with the known loot/draw modifiers. A complete loot system, rarity ladder or all-purpose modifier engine is not required for that slice. The proposed exposure target is at least two earned choices per player, not a final progression rate or weapon cap.
 
 Next bounded feasibility question after selection/lifecycle rules are chosen: can both players receive the same team level-up, keep their own random offers and selected build effects consistent, and share one qualifying rare reward with the right original-player credit before a shared ending/restart? Minimal evidence should include an ordinary choice leaving the teammate's offer intact and one controlled qualifying reward granted once per recipient without retriggering. Controls must remain responsive. Hosting, package and replication details remain open.
 
 ## Resume
+
+**October 4 current checkpoint:** evaluate [revision 1](first-earned-level-up.md) before treating its detailed values/rules as selected. Accepted rifle revisions satisfy the earlier baseline-first sequencing; no new gun/world vote is needed. Owner acceptance/reasoning and new human/network evidence remain outstanding. Exact proposal commit/PR, checks and next action belong in GDJ-6 Resume. The accepted rules and wider open research below remain intact.
 
 Accepted: ordinary enhancement of existing weapon traits and compatible special trait unlocks that open future upgrades; pickup-required enemy-drop XP orbs, magnet collection, percentage pickup-range upgrades, gear-upgrade access during death, all-dead/waiting-to-respawn defeat (including solo), Retry-button restart, and shared XP, independent personal draws/pool modifiers with overlap, selected team rare grants with source credit, future weapon/loot/draw effects, and the party thinking-space hybrid as a future feature. Pending: qualifying tiers, cross-build applicability, repeats, detailed thinking-space cadence/loadout/draw handling and downed/revival details, event ordering and restart coordination/reset details. The selection/accessibility reasoning is saved; later feature work belongs to GDJ-7's milestone. GDJ-13 prioritizes death/revival participation research for multiplayer; GDJ-14 covers shared legendary edge cases. Keep GDJ-6 In Review while encounter evaluation remains outstanding. No gameplay implementation, Unity operations, benchmarks or validated balance/enjoyment evidence in this checkpoint.
