@@ -1,0 +1,14 @@
+{
+  "note": "Live offscreen camera preview, actual same-machine loopback; other desktop load uncontrolled. Human combat feel and native visible performance gates pending.",
+  "source": "9b68fcf324494f9d4d2c9e48ff1a5f3aa40cc76b",
+  "state": "Complete",
+  "catchupLimits": [
+    0,
+    0
+  ],
+  "playersEqual": true,
+  "ticks": 3600,
+  "enemiesEqual": true,
+  "performanceEligible": false,
+  "terminalDiscrepancyCount": 0
+}

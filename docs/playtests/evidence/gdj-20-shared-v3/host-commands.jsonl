@@ -1,0 +1,11 @@
+{"command":{"sequence":1,"action":"idle","run":1,"life":1,"moveX":0.0,"moveZ":0.0,"yaw":0.0,"pitch":0.0,"duration":0.0,"fire":false},"result":"Applied idle"}
+{"command":{"sequence":2,"action":"input","run":1,"life":1,"moveX":-1.0,"moveZ":0.0,"yaw":90.0,"pitch":0.0,"duration":0.5,"fire":true},"result":"Applied input"}
+{"command":{"sequence":3,"action":"scripted","run":1,"life":1,"moveX":0.0,"moveZ":0.0,"yaw":0.0,"pitch":0.0,"duration":0.0,"fire":false},"result":"Applied scripted"}
+{"command":{"sequence":4,"action":"input","run":1,"life":1,"moveX":0.0,"moveZ":0.0,"yaw":169.00575256347657,"pitch":1.278725504875183,"duration":0.5,"fire":true},"result":"Applied input"}
+{"command":{"sequence":5,"action":"input","run":1,"life":1,"moveX":0.0,"moveZ":0.0,"yaw":-159.90591430664063,"pitch":0.17065288126468659,"duration":0.5,"fire":true},"result":"Applied input"}
+{"command":{"sequence":6,"action":"input","run":1,"life":1,"moveX":-0.3435627520084381,"moveZ":-0.9391297101974487,"yaw":200.09408569335938,"pitch":0.17065288126468659,"duration":0.5,"fire":true},"result":"Applied input"}
+{"command":{"sequence":7,"action":"input","run":1,"life":1,"moveX":-0.3435627520084381,"moveZ":-0.9391297101974487,"yaw":200.09408569335938,"pitch":0.17065288126468659,"duration":0.5,"fire":true},"result":"Applied input"}
+{"command":{"sequence":8,"action":"input","run":1,"life":1,"moveX":-0.3435627520084381,"moveZ":-0.9391297101974487,"yaw":200.09408569335938,"pitch":0.17065288126468659,"duration":0.5,"fire":true},"result":"Applied input"}
+{"command":{"sequence":9,"action":"input","run":1,"life":1,"moveX":-0.3435627520084381,"moveZ":-0.9391297101974487,"yaw":200.09408569335938,"pitch":0.17065288126468659,"duration":0.5,"fire":true},"result":"Applied input"}
+{"command":{"sequence":10,"action":"scripted","run":1,"life":1,"moveX":0.0,"moveZ":0.0,"yaw":0.0,"pitch":0.0,"duration":0.0,"fire":false},"result":"Applied scripted"}
+{"command":{"sequence":11,"action":"retry","run":1,"life":1,"moveX":0.0,"moveZ":0.0,"yaw":0.0,"pitch":0.0,"duration":0.0,"fire":false},"result":"Applied retry"}

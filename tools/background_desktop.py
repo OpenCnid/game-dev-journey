@@ -230,7 +230,7 @@ def main():
                 self.send_header("Cache-Control", "no-store")
                 self.end_headers()
                 previous = None
-                while not stop.wait(1 / 30):
+                while not stop.wait(1 / 60):
                     try:
                         path = results / parts[0] / "preview.jpg"
                         modified = path.stat().st_mtime_ns

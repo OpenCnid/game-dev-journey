@@ -1,0 +1,41 @@
+# GDJ-20 shared rifle and background preview
+
+October 4, 2026. Draft [PR #10](https://github.com/OpenCnid/game-dev-journey/pull/10), branch `implementation/gdj-20-shared-rifle`, base `fa82f6b20b99fa1e0f412ccc2ba72678f574138b`. Resolves stage-one cooperative consistency and test access under [GDJ-6 revision 1](../design/first-earned-level-up.md). **Revise before progression:** actual loopback functionality and background preview work; native visible frame/latency acceptance and P1 host/client combat feel remain pending. No merge or earned-progression acceptance.
+
+## Verified candidate and checks
+
+Fixed two Windows processes, host A/client B, one machine, direct IPv4 UDP loopback, 12 shared 60-HP drones, 60-Hz host authority, one rifle per player, 60 seconds. Owner agreed the provisional frame/latency/discrepancy gates and selected same-machine testing without another person/hardware dependency. LAN/internet, four players and dense cooperative workloads remain unverified. [Authority/reconciliation/consumer plan](../planning/tasks/GDJ-20.md) preserves ownership and future progression seams.
+
+| Player | Clean runtime source | Build stamp UTC | Evidence |
+| --- | --- | --- | --- |
+| v1 | `75ebd7e6e09d482e40aede07b11585eca2e7b41a` | 2026-10-04T07:18:36.7731616Z | [Manifest](evidence/gdj-20-shared-v1/candidate.json), exact 16.1-second all-dead defeat parity. Covered windows; no performance claim. |
+| v2 | `55f952edbc1af3b571518c7819df5bba9b2bd338` | 2026-10-04T07:23:06.8282097Z | [Manifest](evidence/gdj-20-shared-v2/candidate.json), 3600-tick completion parity and client return. Legacy hidden screenshots black. |
+| v3 | `d00fe91a2b3ce4110db83051735e8f3abe9b6767` | 2026-10-04T07:46:05.9782071Z | [Manifest](evidence/gdj-20-shared-v3/candidate.json), camera/control bridge, [input expiry](evidence/gdj-20-shared-v3/control-verification.json), [full parity/Retry](evidence/gdj-20-shared-v3/lifecycle-verification.json). |
+| v4 | `9b68fcf324494f9d4d2c9e48ff1a5f3aa40cc76b` | 2026-10-04T07:50:57.7761832Z | [Manifest](evidence/gdj-20-shared-v4/candidate.json), smoother JPEG streams and [full completion parity](evidence/gdj-20-shared-v4/verification.json). |
+
+Each whole-player archive has 167 files under this task worktree's `prototypes/001-stacked-weapons/build/StackLab-GDJ20-vN`. v4 manifest SHA-256 is `3d4b445f412d0996f1014e93ac72d3c49d345848826bd0c2468f196f81a49fad`. Old archives are preserved. [Accepted GDJ17/GDJ19/GDJ15/GDJ16 controls](evidence/gdj-20-shared-v2/preserved-controls.json) retain all 166 files each, with zero hash mismatches.
+
+Unity helper checks: 95 Edit Mode / 8 Play Mode passed at b3ee986, including real Transport handshake/shared damage/death/Retry/disconnect and preview generation/input bounds. Later camera/file-sharing changes pass clean release builds and actual standalone checks below. Two actual Win32 launcher tests pass on the final launcher: exact desktop/Unicode/quoted arguments, owned descendants terminating on job close, and pre-launch rejection on changed input context. [Managed/legacy 2 shots/s](evidence/gdj-20-shared-v3/managed-reference-smoke.json) and [Burst/culled 120 shots/s](evidence/gdj-20-shared-v3/burst-reference-smoke.json) 35-drone reference reporting smokes passed on d00fe91, with zero catch-up limits. Short hidden smokes are functional reporting checks.
+
+## Separate desktop, control and capture
+
+Owner explicitly requested a same-login **Win32 desktop object**, following [Strata DesktopProcess](https://github.com/OpenCnid/strata-bench/blob/f3b009e4b2a265633fdc86a6ff8b32984238ab5d/src/mcbench/desktop_process.py). The launcher uses CreateDesktopW and suspended CreateProcessW/STARTUPINFO.lpDesktop, binds the process tree to a kill-on-close Job Object before resume, monitors unchanged input context and bounds the session to 15 minutes. It never switches the input desktop or injects OS input. Actual pair launches/stops retain input desktop `Default`; only the final two owned Stack Lab processes remain running at this checkpoint. This shares the machine's CPU/GPU and same-user permissions.
+
+Unity needs visible windows on the non-input desktop for rendering. SW_HIDE yielded black swap-chain and camera-texture images despite advancing simulation. SW_SHOWNORMAL on the separate desktop produces the actual arena/drone/rifle views while preserving the main input desktop. `-sharedPreview` supplies an in-process game bridge: live snapshots, sequenced/run/life-scoped ordinary input, autoplay/idle, terminal Retry and quit. Half-second host input moved 4.08 metres, then both movement and firing expired; the client stayed scripted. Inactive-player input rejects. Both-ready Retry increments run and resets both life identities; one-ready alone does not restart.
+
+The camera renders at 1920×1080 into a texture, with asynchronous readback and 960×540 JPEG previews. Immediate-mode window HUD is separate; the viewer shows live shared state and a crosshair alongside the camera. Controls still pass through ordinary movement/shot/authority paths and cannot grant health/damage/deaths. Windows readers allow replacement while Unity atomically publishes state/images; sequences advance only after successful command publication.
+
+P1 asked for a smoother view than the first two-frame/s preview. Continuous multipart streams target 30 Hz. The first transport poll delivered about 21 frames/s; polling more frequently preserves more source frames. The final [four-second simultaneous stream check](evidence/gdj-20-shared-v4/stream-verification.json) delivered **26.11 host / 25.82 client frames/s**, with every sampled JPEG changing during play. Both actual camera images and viewer were inspected. This is delivery evidence for the preview, not game frame-time or responsiveness acceptance.
+
+Reproduce from the task checkout after a build:
+
+```powershell
+.\tools\shared-combat.ps1 -Background -PlayerFolder prototypes/001-stacked-weapons/build/StackLab-GDJ20-v4
+python tools/tests/probe_shared_preview.py <new-results-directory>
+```
+
+Pass `-PythonPath` if using a different Python 3 interpreter. The launcher prints a loopback-only viewer address and saves it in ignored results, with per-player frames/events/commands/state and terminal summaries. **Stop both games** closes the owned pair; a deadline or input-context loss also stops it. Both players have Retry controls. For native human role comparison, preserve `-ScriptedCompanion` and reverse `-HumanRole client` in the original visible launcher.
+
+## Remaining acceptance
+
+Preview readback/JPEG/server cost and uncontrolled competing desktop work exclude these runs from the agreed native visible p95/p99 frame gates. The window HUD differs from the preview overlay. Software emission-to-confirmed-feedback and ping/pong delay are retained in summaries but do not establish physical input/display timing or LAN RTT. Capture an equivalent native visible release workload with other 3D work idle, then gather P1's host/client aim, damage/critical cues, return, ending, Retry and disconnect observations. Automated consistency, images and stream smoothness do not establish combat fun. Keep the candidate draft/In Review and progression separate.

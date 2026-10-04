@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="8" result="Passed" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-04 07:39:00Z" end-time="2026-10-04 07:39:02Z" duration="2.1788936">
+  <test-suite type="TestSuite" id="1020" name="Stack Lab" fullname="Stack Lab" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-04 07:39:00Z" end-time="2026-10-04 07:39:02Z" duration="2.178894" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1014" name="Journey.PlayTests.dll" fullname="C:/Users/Darian/.codex/worktrees/gdj-20-shared-rifle/new-game-dev/prototypes/001-stacked-weapons/Library/ScriptAssemblies/Journey.PlayTests.dll" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-04 07:39:00Z" end-time="2026-10-04 07:39:02Z" duration="2.170490" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="6176" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1015" name="Journey" fullname="Journey" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-04 07:39:00Z" end-time="2026-10-04 07:39:02Z" duration="2.169948" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1016" name="Tests" fullname="Journey.Tests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-04 07:39:00Z" end-time="2026-10-04 07:39:02Z" duration="2.169628" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="PrecisionFeedbackTests" fullname="Journey.Tests.PrecisionFeedbackTests" classname="Journey.Tests.PrecisionFeedbackTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-10-04 07:39:00Z" end-time="2026-10-04 07:39:00Z" duration="0.118739" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1002" name="PreviewTracksDisplayedPoseMissCooldownPauseAndResetWithIndependentCriticalCue" fullname="Journey.Tests.PrecisionFeedbackTests.PreviewTracksDisplayedPoseMissCooldownPauseAndResetWithIndependentCriticalCue" methodname="PreviewTracksDisplayedPoseMissCooldownPauseAndResetWithIndependentCriticalCue" classname="Journey.Tests.PrecisionFeedbackTests" runstate="Runnable" seed="836133543" result="Passed" start-time="2026-10-04 07:39:00Z" end-time="2026-10-04 07:39:00Z" duration="0.106447" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[PRECISION_FEEDBACK_REPRO bodyPreview=true missWhite=true woundedHeadCritical=true actualDamage=20 pauseFreeze=true resetClear=true
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1003" name="RifleRateControlTests" fullname="Journey.Tests.RifleRateControlTests" classname="Journey.Tests.RifleRateControlTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-10-04 07:39:00Z" end-time="2026-10-04 07:39:01Z" duration="0.629070" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1004" name="MenuRateValidationAndCombatRestartUseTheChosenRate" fullname="Journey.Tests.RifleRateControlTests.MenuRateValidationAndCombatRestartUseTheChosenRate" methodname="MenuRateValidationAndCombatRestartUseTheChosenRate" classname="Journey.Tests.RifleRateControlTests" runstate="Runnable" seed="1096030068" result="Passed" start-time="2026-10-04 07:39:00Z" end-time="2026-10-04 07:39:01Z" duration="0.628369" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1005" name="RuntimeTests" fullname="Journey.Tests.RuntimeTests" classname="Journey.Tests.RuntimeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-04 07:39:01Z" end-time="2026-10-04 07:39:02Z" duration="1.062091" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1008" name="ArenaStartsFiresAndRestartsWithoutRuntimeErrors" fullname="Journey.Tests.RuntimeTests.ArenaStartsFiresAndRestartsWithoutRuntimeErrors" methodname="ArenaStartsFiresAndRestartsWithoutRuntimeErrors" classname="Journey.Tests.RuntimeTests" runstate="Runnable" seed="1987556215" result="Passed" start-time="2026-10-04 07:39:01Z" end-time="2026-10-04 07:39:02Z" duration="0.634795" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1006" name="DamagePresentationRendersBothOutcomesAndRestartClearsIt" fullname="Journey.Tests.RuntimeTests.DamagePresentationRendersBothOutcomesAndRestartClearsIt" methodname="DamagePresentationRendersBothOutcomesAndRestartClearsIt" classname="Journey.Tests.RuntimeTests" runstate="Runnable" seed="918109605" result="Passed" start-time="2026-10-04 07:39:02Z" end-time="2026-10-04 07:39:02Z" duration="0.070477" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1007" name="ExperimentalRenderingPreservesSimulationAndDisposesBuffers" fullname="Journey.Tests.RuntimeTests.ExperimentalRenderingPreservesSimulationAndDisposesBuffers" methodname="ExperimentalRenderingPreservesSimulationAndDisposesBuffers" classname="Journey.Tests.RuntimeTests" runstate="Runnable" seed="196923187" result="Passed" start-time="2026-10-04 07:39:02Z" end-time="2026-10-04 07:39:02Z" duration="0.349732" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1009" name="SharedConnectionTests" fullname="Journey.Tests.SharedConnectionTests" classname="Journey.Tests.SharedConnectionTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-10-04 07:39:02Z" end-time="2026-10-04 07:39:02Z" duration="0.292177" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1010" name="RealLoopbackHandshakeSnapshotAndRetryRoundTrip" fullname="Journey.Tests.SharedConnectionTests.RealLoopbackHandshakeSnapshotAndRetryRoundTrip" methodname="RealLoopbackHandshakeSnapshotAndRetryRoundTrip" classname="Journey.Tests.SharedConnectionTests" runstate="Runnable" seed="1945447321" result="Passed" start-time="2026-10-04 07:39:02Z" end-time="2026-10-04 07:39:02Z" duration="0.285153" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1011" name="ShotPresentationTests" fullname="Journey.Tests.ShotPresentationTests" classname="Journey.Tests.ShotPresentationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-04 07:39:02Z" end-time="2026-10-04 07:39:02Z" duration="0.066282" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1012" name="FastTurnUsesCurrentMuzzleAndDoesNotLeaveAnOldLine" fullname="Journey.Tests.ShotPresentationTests.FastTurnUsesCurrentMuzzleAndDoesNotLeaveAnOldLine" methodname="FastTurnUsesCurrentMuzzleAndDoesNotLeaveAnOldLine" classname="Journey.Tests.ShotPresentationTests" runstate="Runnable" seed="343114480" result="Passed" start-time="2026-10-04 07:39:02Z" end-time="2026-10-04 07:39:02Z" duration="0.028555" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[SHOT_ALIGNMENT_REPRO muzzleErrorMetres=0.000000 endpointViewport=(0.500000, 0.500000, 65.000000) birthVisible=True retainedAfterTurn=False lineRenderers=1
+]]></output>
+            </test-case>
+            <test-case id="1013" name="FreshShotsSurviveLongFrameButLinesClearOnPauseAndRestart" fullname="Journey.Tests.ShotPresentationTests.FreshShotsSurviveLongFrameButLinesClearOnPauseAndRestart" methodname="FreshShotsSurviveLongFrameButLinesClearOnPauseAndRestart" classname="Journey.Tests.ShotPresentationTests" runstate="Runnable" seed="184227512" result="Passed" start-time="2026-10-04 07:39:02Z" end-time="2026-10-04 07:39:02Z" duration="0.029557" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: C:/Users/Darian/AppData/LocalLow/Game Dev Journey/Stack Lab\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

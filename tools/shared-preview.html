@@ -11,7 +11,7 @@
 <footer>Continuous game-camera streams target 30 frames/s, with shared state below. Camera previews use offscreen rendering; the game's window HUD is represented by live state here. This session has preview overhead and shares your CPU/GPU. Performance acceptance needs a separate controlled capture.</footer>
 </main>
 <script>
-const states={},busy={},seen={},base=location.pathname;
+const states={},busy={},base=location.pathname;
 for(const role of ['host','client']){
  const card=document.createElement('article');
  card.innerHTML=`<h2>${role==='host'?'A · Host':'B · Client'}</h2><div class="camera"><img alt="${role} game camera"><span class="crosshair">+</span></div><div class="status">Waiting for game state…</div><div class="controls"><button data-action="scripted">Autoplay</button><button data-action="idle">Hold input</button><button data-action="body">Aim + fire body</button><button data-action="head">Aim + fire head</button><button data-action="forward">Forward</button><button data-action="left">Left</button><button data-action="back">Back</button><button data-action="right">Right</button><button data-action="retry">Retry</button></div><div class="receipt"></div>`;
@@ -39,7 +39,7 @@ for(const role of ['host','client']){
    const response=await fetch(base+role+'/state.json');if(!response.ok)throw Error('Waiting for bridge');
    const s=await response.json();states[role]=s;
    let source='';try{source=JSON.parse(s.source).revision.slice(0,7)}catch{}
-   card.querySelector('.status').textContent=`${s.state} · run ${s.run} · ${(60-s.elapsed).toFixed(1)}s remaining · ${s.width}×${s.height} · source ${source}\nA: ${s.players[0].Health} HP / ${s.players[0].Damage} damage · B: ${s.players[1].Health} HP / ${s.players[1].Damage} damage`;
+   card.querySelector('.status').textContent=`${s.state} · run ${s.run} · ${Math.max(0,60-s.elapsed).toFixed(1)}s remaining · ${s.width}×${s.height} · source ${source}\nA: ${s.players[0].Health} HP / ${s.players[0].Damage} damage · B: ${s.players[1].Health} HP / ${s.players[1].Damage} damage`;
    card.querySelector('.status').style.whiteSpace='pre-line';
    card.querySelector('.receipt').textContent=`${s.scripted?'Autoplay':'Remote input'} · frame ${s.frameSequence} · ${s.captureError||s.commandResult||'Ready'}`;
    card.querySelectorAll('button').forEach(b=>b.disabled=!!busy[role]||(b.dataset.action==='retry'&&!['Complete','Defeat'].includes(s.state)));

@@ -1,0 +1,12 @@
+{
+  "manifestSha256": "3d4b445f412d0996f1014e93ac72d3c49d345848826bd0c2468f196f81a49fad",
+  "source": {
+    "revision": "9b68fcf324494f9d4d2c9e48ff1a5f3aa40cc76b",
+    "builtUtc": "2026-10-04T07:50:57.7761832Z",
+    "dirty": false
+  },
+  "release": true,
+  "fileCount": 167,
+  "archive": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v4",
+  "editor": "6000.3.25f1"
+}

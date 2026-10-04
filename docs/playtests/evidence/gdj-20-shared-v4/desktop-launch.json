@@ -1,0 +1,15 @@
+{
+  "desktop": "StackLab-b58f15d2f2de31bbdffe496f",
+  "viewerSha256": "706d1c4dcd9b78c95e221bd7f6b4b0b6ca1834ec8afc708b928243f0186f9ab3",
+  "source": "9b68fcf324494f9d4d2c9e48ff1a5f3aa40cc76b",
+  "playerPids": [
+    27768,
+    28844
+  ],
+  "capture": "Unity camera JPEG stream, target 30 Hz. Preview overhead and other desktop load invalidate performance acceptance.",
+  "inputDesktopBefore": "Default",
+  "durationLimitSeconds": 900,
+  "launcherSha256": "f09d09e943de6042233f6c268c010ad70c92680f8e2299e9c92d8a6a840d4214",
+  "startedUtc": "2026-10-04T07:53:51Z",
+  "inputDesktopAfterLaunch": "Default"
+}
