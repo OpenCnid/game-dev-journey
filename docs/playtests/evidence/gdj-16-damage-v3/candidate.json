@@ -1,0 +1,53 @@
+{
+  "candidateId": "GDJ-16-damage-v3-2026-10-03",
+  "source": {
+    "revision": "34f5244648d4df77090bd3b9d0e59c71697c424e",
+    "builtUtc": "2026-10-04T03:54:52.4248649Z",
+    "dirty": false
+  },
+  "baselineSource": "28ca1bce4d71d0af82326a93f65a528ebfd1cd5c",
+  "build": {
+    "release": true,
+    "platform": "Windows x64",
+    "editor": "6000.3.25f1",
+    "manifest": "build-manifest.json",
+    "manifestSha256": "1edfefc434afdf8fbfa7919a8a9a95b72346526554cdc6a92f261a5588bb9e26",
+    "fileCount": 166,
+    "totalBytes": 96911586
+  },
+  "encounter": {
+    "enemies": 35,
+    "durationSeconds": 60,
+    "seed": 137,
+    "enemyHP": 40,
+    "rifleDamage": 20,
+    "simulation": "burst",
+    "nativeState": false,
+    "rendering": "culled",
+    "combinedCharacters": false,
+    "projectileRenderer": "cube",
+    "resolution": "1920x1080 windowed",
+    "fpsCap": 144,
+    "vSync": 0
+  },
+  "checks": {
+    "editMode": {
+      "passed": 45,
+      "failed": 0
+    },
+    "playMode": {
+      "passed": 3,
+      "failed": 0
+    },
+    "humanComparison": "Pending attached-bar comparison; earlier feedback recorded in reports",
+    "performanceCapture": "None"
+  },
+  "feedback": {
+    "candidateBars": 64,
+    "visibleBars": 6,
+    "rangeMetres": 40,
+    "priority": "Aimed enemy, then nearest wounded enemies",
+    "overlap": "Suppress lower-priority attached label; no upward shifts",
+    "woundedPose": "Skewed/compressed body and core; original sphere unchanged"
+  }
+}

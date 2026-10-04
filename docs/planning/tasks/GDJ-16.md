@@ -28,12 +28,16 @@ Supersede the twelve-label upward-offset strategy: display one prominent bar for
 
 ## Known future interactions
 
+### Third human revision contract
+
+P1 rejected source `34f5244648d4df77090bd3b9d0e59c71697c424e`: the wide target bar still had no clear owner, the scene was really cluttered, and labels flickered despite wounded bars helping somewhat. They warned about higher-health enemies. Replace the floating target label with one fixed HP panel below the crosshair and matching brackets around the projected body/core. Briefly retain the last health result when aim leaves an enemy, marking it as last-hit information; never imply continued target lock or apply damage from UI state. Keep up to three small wounded labels with retained owner/incarnation slots rather than reselecting by distance each frame. Suppress collisions in slot order, and delay reappearance for 0.25 seconds after an overlap to prevent threshold flicker. Respawn/reset must discard stale owners. Preserve the simple wounded cue and current hit geometry. Higher health remains a future enemy rule; presentation must read health rather than rely on two hit animations.
+
 Shot results carry target incarnation and health outcome rather than encoding a rifle-specific animation. Later weapons can use the same damage-result contract, and future authoritative cooperative events can add source/owner attribution. Health maxima currently belong to the one drone type; new enemy types need per-type/per-entity maxima. The bounded presentation pool may replace older effects under simultaneous weapon bursts; it must never drop authoritative damage. Later through-wall visibility, ranged threats, upgrades and accessibility settings should revise presentation without moving health ownership.
 
 Ammo, crosshair-gated autofire, jump, ranged enemies, traits and rifle tracer alignment are outside this change. GDJ-15 owns the tracer follow-up. A 35-drone check cannot establish performance at 20,000 enemies.
 
 ## Verification and acceptance
 
-The [first candidate report](../../playtests/2026-10-03-damage-readability.md) records its exact source/build, 42 passing automated checks, and P1's human comparison. The requested readability revision needs updated checks and a fresh human comparison.
+The [first candidate report](../../playtests/2026-10-03-damage-readability.md) records its exact source/build, 42 passing automated checks, and P1's human comparison. The [attached-bar revision report](../../playtests/2026-10-03-damage-readability-revision.md) records clean source `34f5244648d4df77090bd3b9d0e59c71697c424e`, 48 passing automated checks, the preserved intermediate player and a fresh release build. Final crowd ownership/kiting comparison is pending.
 
 Check hit/miss/cooldown outcomes, wounded health, lethal health snapshot and fresh incarnation, restart, pause/terminal feedback and visible-bar filtering. Run relevant Edit/Play Mode checks and a fresh standalone build with `tools/unity.ps1`; inspect the player log and captures. Human comparison must establish first-hit wound, second-hit death, player damage, usefulness for kiting and clutter. Save exact source/configuration and checks in a playtest report; keep the issue In Review until the human result is recorded.
