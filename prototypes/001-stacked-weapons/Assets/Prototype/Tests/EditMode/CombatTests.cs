@@ -54,11 +54,11 @@ namespace Journey.Tests
         {
             var sim = new CombatSimulation(); sim.Reset(1, 15, false);
             Vector3 initial = sim.Position(0);
-            Ray ray = new Ray(initial + Vector3.up * 1.1f - Vector3.forward * 3, Vector3.forward);
+            Ray ray = new Ray(initial + Vector3.up * .8f - Vector3.forward * 3, Vector3.forward);
             Assert.That(sim.TryFire(ray, out _, out bool killed), Is.True); Assert.That(killed, Is.False);
             Assert.That(sim.TryFire(ray, out _, out _), Is.False, "Cannot fire twice without cooldown.");
             sim.Step(Vector3.zero, .12f);
-            ray = new Ray(sim.Position(0) + Vector3.up * 1.1f - Vector3.forward * 3, Vector3.forward);
+            ray = new Ray(sim.Position(0) + Vector3.up * .8f - Vector3.forward * 3, Vector3.forward);
             sim.TryFire(ray, out _, out killed);
             Assert.That(killed, Is.True); Assert.That(sim.Kills, Is.EqualTo(1));
             Assert.That(sim.Count, Is.EqualTo(1));

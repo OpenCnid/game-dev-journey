@@ -22,7 +22,7 @@ namespace Journey.Tests
             {
                 view.Create(root.transform); sim.Reset(1, 15, false);
                 root.AddComponent<FeedbackHudProbe>().Feedback = view.Feedback;
-                Quaternion healthyAim = Quaternion.LookRotation(sim.Position(0) + Vector3.up * 1.1f - (sim.Player + Vector3.up * 1.65f));
+                Quaternion healthyAim = Quaternion.LookRotation(sim.Position(0) + Vector3.up * .56f - (sim.Player + Vector3.up * 1.65f));
                 view.Draw(sim, 1, healthyAim.eulerAngles.y, healthyAim.eulerAngles.x, 0);
                 yield return null;
                 Assert.That(view.Feedback.FocusVisible, Is.True);
@@ -31,7 +31,7 @@ namespace Journey.Tests
                 for (int outcome = 0; outcome < 2; outcome++)
                 {
                     if (outcome > 0) sim.Step(Vector3.zero, .12f);
-                    var ray = new Ray(sim.Position(0) + Vector3.up * 1.1f - Vector3.forward * 3, Vector3.forward);
+                    var ray = new Ray(sim.Position(0) + Vector3.up * .56f - Vector3.forward * 3, Vector3.forward);
                     Assert.That(sim.TryFire(ray, out ShotResult shot), Is.True);
                     Quaternion aim = Quaternion.LookRotation(shot.End - (sim.Player + Vector3.up * 1.65f));
                     view.BeginFrame(sim, 1, aim.eulerAngles.y, aim.eulerAngles.x, CombatSimulation.Tick);

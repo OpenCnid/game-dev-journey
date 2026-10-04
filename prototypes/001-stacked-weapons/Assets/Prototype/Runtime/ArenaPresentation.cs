@@ -181,8 +181,8 @@ namespace Journey
                 {
                     Vector3 p = sim.RenderPosition(i, alpha);
                     bool wounded = !sim.Benchmark && sim.EnemyHealth(i) < CombatSimulation.EnemyMaxHealth;
-                    bodies[i] = BurstInstances.CharacterMatrix(p, Vector3.up * .8f, new Vector3(.85f, 1.4f, .85f), wounded);
-                    heads[i] = BurstInstances.CharacterMatrix(p, Vector3.up * 1.6f, Vector3.one * .45f, wounded, core: true);
+                    bodies[i] = EnemyGeometry.Body(p, wounded);
+                    heads[i] = EnemyGeometry.Head(p, wounded);
                 }
             }
             StageProfile.RenderPrepareMs += StageProfile.End(stageStart);
@@ -247,7 +247,7 @@ namespace Journey
                 StageProfile.RenderPrepareMs += StageProfile.End(begin);
             }
             int visible = FinishPreparation(instances);
-            if (CombinedCharacters) DrawNative(characterMaterial, character, instances.A, visible);
+            if (CombinedCharacters && sim.Benchmark) DrawNative(characterMaterial, character, instances.A, visible);
             else { DrawNative(enemyMaterial, cube, instances.A, visible); DrawNative(headMaterial, cube, instances.B, visible); }
             if (showProjectiles && IndirectProjectiles)
             {
@@ -287,6 +287,9 @@ namespace Journey
         }
         void ScheduleEnemies(BurstInstances buffer, CombatSimulation sim, float alpha)
         {
+            // Combined mesh is a reference experiment with a different wound transform.
+            // Precision combat always displays the same paired regions that it queries.
+            bool combined = CombinedCharacters && sim.Benchmark;
             byte[] mask = null;
             if (!sim.Benchmark)
             {
@@ -295,11 +298,11 @@ namespace Journey
             }
             if (sim.NativeState)
                 buffer.ScheduleNative(sim.NativePositions, sim.NativePrevious, sim.Count, alpha, frustum,
-                    CombinedCharacters ? Vector3.zero : Vector3.up * .8f, CombinedCharacters ? Vector3.one : new Vector3(.85f, 1.4f, .85f), Vector3.up * 1.6f, Vector3.one * .45f,
-                    Vector3.up, 1.2f, !CombinedCharacters, BatchSize, mask);
+                    combined ? Vector3.zero : EnemyGeometry.BodyOffset, combined ? Vector3.one : EnemyGeometry.BodyScale, EnemyGeometry.HeadOffset, EnemyGeometry.HeadScale,
+                    Vector3.up, 1.2f, !combined, BatchSize, mask);
             else buffer.Schedule(sim.Positions, sim.PreviousPositions, sim.Count, alpha, frustum,
-                    CombinedCharacters ? Vector3.zero : Vector3.up * .8f, CombinedCharacters ? Vector3.one : new Vector3(.85f, 1.4f, .85f), Vector3.up * 1.6f, Vector3.one * .45f,
-                    Vector3.up, 1.2f, !CombinedCharacters, BatchSize, mask);
+                    combined ? Vector3.zero : EnemyGeometry.BodyOffset, combined ? Vector3.one : EnemyGeometry.BodyScale, EnemyGeometry.HeadOffset, EnemyGeometry.HeadScale,
+                    Vector3.up, 1.2f, !combined, BatchSize, mask);
         }
         void ScheduleProjectiles(BurstInstances buffer, CombatSimulation sim, float alpha)
         {
