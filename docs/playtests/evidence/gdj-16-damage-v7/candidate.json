@@ -39,7 +39,7 @@
       "passed": 3,
       "failed": 0
     },
-    "humanComparison": "Overhead HP without cyan brackets pending; P1 rejected bracket/HP overlap and head-level bars in v6",
+    "humanComparison": "Accepted by P1 on 2026-10-04: good playtest and explicit commit/merge authorization; no new detailed run metrics supplied",
     "performanceCapture": "None"
   },
   "feedback": {
