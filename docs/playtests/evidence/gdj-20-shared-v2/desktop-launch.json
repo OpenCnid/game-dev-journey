@@ -1,0 +1,19 @@
+{
+  "desktop": "StackLab-6bd4c17f2eaceacc7951d349",
+  "inputBefore": "Default",
+  "processes": [
+    {
+      "role": "host",
+      "pid": 16456
+    },
+    {
+      "role": "client",
+      "pid": 15484
+    }
+  ],
+  "inputAfter": "Default",
+  "screenshots": {
+    "host": true,
+    "client": true
+  }
+}

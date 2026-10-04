@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stack Lab · Background pair</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#11151b;color:#e8eef6;font:15px system-ui,sans-serif}main{max-width:1600px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;align-items:center;gap:20px}h1{font-size:25px;margin:0 0 6px}p{color:#aebbc9;line-height:1.5;margin:8px 0 18px}.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}article{background:#1b222c;border:1px solid #344153;border-radius:12px;overflow:hidden}h2{font-size:18px;margin:16px 18px}.camera{position:relative;aspect-ratio:16/9;background:#05080c}.camera img{width:100%;height:100%;object-fit:contain}.crosshair{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#fff;font-size:24px;pointer-events:none}.status{margin:14px 18px;color:#b7c8da;min-height:42px}.controls{display:flex;flex-wrap:wrap;gap:8px;margin:14px 18px}button{font:inherit;color:#e7eff8;background:#29384a;border:1px solid #51667f;border-radius:7px;padding:8px 12px;cursor:pointer}button:hover{background:#3b536e}button:disabled{opacity:.45;cursor:default}.receipt{color:#89d3c5;margin:12px 18px;min-height:23px;font-size:13px}footer{margin-top:18px;color:#8195ab;font-size:13px}#stop{background:#54313a;border-color:#95616f}@media(max-width:850px){.pair{grid-template-columns:1fr}main{padding:14px}header{align-items:flex-start}}
+</style>
+<main>
+<header><div><h1>Stack Lab · Background pair</h1><p>Two games on a separate Win32 desktop. Your main desktop stays active.</p></div><button id="stop">Stop both games</button></header>
+<div class="pair" id="pair"></div>
+<footer>Live game cameras at 2 frames/s, with shared state below. Camera previews use offscreen rendering; the game's window HUD is represented by live state here. This session has preview overhead and shares your CPU/GPU. Performance acceptance needs a separate controlled capture.</footer>
+</main>
+<script>
+const states={},busy={},seen={},base=location.pathname;
+for(const role of ['host','client']){
+ const card=document.createElement('article');
+ card.innerHTML=`<h2>${role==='host'?'A · Host':'B · Client'}</h2><div class="camera"><img alt="${role} game camera"><span class="crosshair">+</span></div><div class="status">Waiting for game state…</div><div class="controls"><button data-action="scripted">Autoplay</button><button data-action="idle">Hold input</button><button data-action="body">Aim + fire body</button><button data-action="head">Aim + fire head</button><button data-action="forward">Forward</button><button data-action="left">Left</button><button data-action="back">Back</button><button data-action="right">Right</button><button data-action="retry">Retry</button></div><div class="receipt"></div>`;
+ document.querySelector('#pair').append(card);
+ card.querySelector('.controls').onclick=async e=>{
+  const action=e.target.dataset.action;if(!action||!states[role])return;
+  const s=states[role],p=s.players[s.local],command={action};
+  if(['forward','back','left','right','body','head'].includes(action)){
+   Object.assign(command,{action:'input',duration:.5,yaw:s.yaw,pitch:s.pitch,fire:true,moveX:0,moveZ:0});
+   if(action==='body'||action==='head'){
+    let enemy=s.enemies.filter(e=>e.Health>0).sort((a,b)=>distance(a.Position,p.Position)-distance(b.Position,p.Position))[0];
+    if(!enemy)return;
+    const dx=enemy.Position.x-p.Position.x,dz=enemy.Position.z-p.Position.z,dy=(action==='head'?1.6:.8)-1.65;
+    command.yaw=Math.atan2(dx,dz)*180/Math.PI;command.pitch=-Math.atan2(dy,Math.hypot(dx,dz))*180/Math.PI;
+   }else{
+    const yaw=(s.yaw+({forward:0,back:180,left:-90,right:90}[action]))*Math.PI/180;
+    command.moveX=Math.sin(yaw);command.moveZ=Math.cos(yaw);
+   }
+  }
+  await send(role,command,card);
+ };
+ async function refresh(){
+  try{
+   const response=await fetch(base+role+'/state.json');if(!response.ok)throw Error('Waiting for bridge');
+   const s=await response.json();states[role]=s;
+   let source='';try{source=JSON.parse(s.source).revision.slice(0,7)}catch{}
+   card.querySelector('.status').textContent=`${s.state} · run ${s.run} · ${(60-s.elapsed).toFixed(1)}s remaining · ${s.width}×${s.height} · source ${source}\nA: ${s.players[0].Health} HP / ${s.players[0].Damage} damage · B: ${s.players[1].Health} HP / ${s.players[1].Damage} damage`;
+   card.querySelector('.status').style.whiteSpace='pre-line';
+   card.querySelector('.receipt').textContent=`${s.scripted?'Autoplay':'Remote input'} · frame ${s.frameSequence} · ${s.captureError||s.commandResult||'Ready'}`;
+   if(s.frameSequence>0&&seen[role]!==s.frameSequence){card.querySelector('img').src=base+role+'/preview.png?frame='+s.frameSequence;seen[role]=s.frameSequence}
+   card.querySelectorAll('button').forEach(b=>b.disabled=!!busy[role]||(b.dataset.action==='retry'&&!['Complete','Defeat'].includes(s.state)));
+  }catch(error){card.querySelector('.receipt').textContent=error.message}
+ }
+ refresh();setInterval(refresh,300);
+}
+function distance(a,b){return(a.x-b.x)**2+(a.z-b.z)**2}
+async function send(role,command,card){
+ busy[role]=true;
+ try{const r=await fetch(base+role,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(command)});if(!r.ok)throw Error((await r.json()).error||'Command rejected')}
+ catch(error){card.querySelector('.receipt').textContent=error.message}
+ finally{busy[role]=false}
+}
+document.querySelector('#stop').onclick=async()=>{await fetch(base+'stop',{method:'POST'});document.querySelector('#stop').disabled=true;document.querySelector('#stop').textContent='Stopped';};
+</script>
+</html>

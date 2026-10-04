@@ -8,7 +8,9 @@ param(
     [switch]$ScriptedCompanion,
     [ValidateSet('host','client')][string]$HumanRole = 'host',
     [switch]$QuitAtEnd,
-    [switch]$Uncapped
+    [switch]$Uncapped,
+    [switch]$Background,
+    [string]$PythonPath
 )
 $ErrorActionPreference = 'Stop'
 $taskRoot = Split-Path -Parent $PSScriptRoot
@@ -16,6 +18,29 @@ if (-not $PlayerFolder) { $PlayerFolder = Join-Path $taskRoot 'prototypes/001-st
 $taskPlayer = Join-Path $PlayerFolder 'StackLab.exe'
 if (-not (Test-Path -LiteralPath $taskPlayer)) { throw "No player at $taskPlayer. Build with tools/unity.ps1 first." }
 if (-not $Results) { $Results = Join-Path $taskRoot ('prototypes/001-stacked-weapons/artifacts/shared-' + (Get-Date -Format 'yyyyMMdd-HHmmss')) }
+if ($Background) {
+    if ($ScriptedCompanion -or $QuitAtEnd) { throw 'Background preview starts both scripted players and exposes per-player controls in its viewer.' }
+    if (-not $PythonPath) {
+        $PythonPath = Join-Path $env:USERPROFILE '.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
+        if (-not (Test-Path -LiteralPath $PythonPath)) { throw 'Pass -PythonPath for a Python 3 interpreter. No installation is required by the launcher.' }
+    }
+    $taskResults = [IO.Path]::GetFullPath($Results)
+    if (Test-Path -LiteralPath $taskResults) { throw 'Use a new Results directory for every background session.' }
+    New-Item -ItemType Directory -Path (Split-Path -Parent $taskResults) -Force | Out-Null
+    $taskLauncher = Join-Path $PSScriptRoot 'background_desktop.py'
+    $taskArgs = @(('"' + $taskLauncher + '"'),'--player-folder',('"' + [IO.Path]::GetFullPath($PlayerFolder) + '"'),
+        '--results',('"' + $taskResults + '"'),'--port',$Port,'--width',$Width,'--height',$Height)
+    if ($Uncapped) { $taskArgs += '--uncapped' }
+    $taskProcess = Start-Process -FilePath $PythonPath -ArgumentList $taskArgs -WindowStyle Hidden -PassThru `
+        -RedirectStandardOutput ($taskResults + '-launcher.log') -RedirectStandardError ($taskResults + '-launcher-error.log')
+    $taskDeadline = (Get-Date).AddSeconds(30)
+    while (-not (Test-Path -LiteralPath (Join-Path $taskResults 'invocation.json')) -and -not $taskProcess.HasExited -and (Get-Date) -lt $taskDeadline) { Start-Sleep -Milliseconds 200 }
+    if (-not (Test-Path -LiteralPath (Join-Path $taskResults 'invocation.json'))) { throw "Background launch failed or timed out. Read $taskResults-launcher-error.log" }
+    $taskInvocation = Get-Content -Raw -LiteralPath (Join-Path $taskResults 'invocation.json') | ConvertFrom-Json
+    Write-Output "Background pair started. Viewer: $($taskInvocation.viewer)"
+    Write-Output "Launcher process: $($taskProcess.Id). Results: $taskResults"
+    return
+}
 New-Item -ItemType Directory -Path $Results -Force | Out-Null
 $taskResults = (Resolve-Path -LiteralPath $Results).Path
 $taskProcesses = @()

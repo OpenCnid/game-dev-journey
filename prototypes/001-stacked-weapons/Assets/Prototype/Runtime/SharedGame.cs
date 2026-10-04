@@ -28,7 +28,15 @@ namespace Journey
         string reason = "", output = "", screenshot = "";
         StreamWriter frameLog, hitLog;
         GUIStyle heading, small;
+        SharedPreview preview;
+        Vector3 previewMovement;
+        double previewInputUntil;
+        bool previewFire;
         public SharedSnapshot Snapshot => display;
+        public int LocalPlayer => local;
+        public bool Scripted => scripted;
+        public float LocalYaw => yaw;
+        public float LocalPitch => pitch;
         public void Initialize(ArenaPresentation arena, CombatSimulation sim, bool host, string address, ushort port)
         {
             view = arena; projection = sim; local = host ? 0 : 1;
@@ -42,6 +50,8 @@ namespace Journey
             }
             if (output.Length == 0) output = Path.Combine(Application.persistentDataPath, "SharedCombat", DateTime.UtcNow.ToString("yyyyMMdd-HHmmss"), host ? "host" : "client");
             Directory.CreateDirectory(output);
+            if (Array.IndexOf(args, "-sharedPreview") >= 0)
+            { preview = gameObject.AddComponent<SharedPreview>(); preview.Initialize(this, view.Camera, output); }
             frameLog = new StreamWriter(Path.Combine(output, "frames.csv"));
             frameLog.WriteLine("wall_seconds,frame_ms,run,tick,state,A_shots,B_shots,A_hits,B_hits,A_damage,B_damage,A_kills,B_kills,A_hp,B_hp,enemies,rtt_ms");
             hitLog = new StreamWriter(Path.Combine(output, "events.csv"));
@@ -57,7 +67,7 @@ namespace Journey
             allyShot.sharedMaterial = new Material(Resources.Load<Material>("Trail")); allyShot.sharedMaterial.color = new Color(.1f, .9f, .8f);
             allyShot.enabled = false;
             previousClock = Time.realtimeSinceStartupAsDouble;
-            SetCursor(!scripted); Debug.Log("SHARED_SESSION " + (host ? "HOST" : "CLIENT") + " " + address + ":" + port + " " + output);
+            SetCursor(!scripted && preview == null); Debug.Log("SHARED_SESSION " + (host ? "HOST" : "CLIENT") + " " + address + ":" + port + " " + output);
         }
         void Receive(SharedConnection.Message message, BinaryReader r)
         {
@@ -105,6 +115,7 @@ namespace Journey
             bool newRun = display.Run != run; run = display.Run; life = player.Life;
             predicted = player.Position; yaw = player.Yaw; pitch = player.Pitch;
             inputTime = inputRemaining = shotRemaining = 0; inputSequence = 0; view.ResetFeedback();
+            previewInputUntil = 0; previewMovement = Vector3.zero; previewFire = false;
             if (newRun)
             {
                 shotSequence = 0; emitted.Clear(); feedback.Clear(); saved = false;
@@ -117,14 +128,16 @@ namespace Journey
             double now = Time.realtimeSinceStartupAsDouble, frame = (now - previousClock) * 1000; previousClock = now;
             connection.Poll();
             SyncGeneration();
+            preview?.Poll();
             SharedPlayer player = display.Players[local];
-            Keyboard keyboard = Keyboard.current;
+            Keyboard keyboard = preview == null ? Keyboard.current : null;
             if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame) { inputActive = !inputActive; SetCursor(inputActive && display.State == SharedState.Running); }
             if (keyboard != null && keyboard.rKey.wasPressedThisFrame) Retry();
             float dt = Mathf.Min(.05f, (float)(frame * .001));
             bool active = display.State == SharedState.Running && player.Health > 0;
             Vector3 movement = Vector3.zero;
-            if (active && (inputActive || scripted))
+            bool previewActive = preview != null && now <= previewInputUntil;
+            if (active && (scripted || (preview == null ? inputActive : previewActive)))
             {
                 if (scripted)
                 {
@@ -138,6 +151,7 @@ namespace Journey
                     Vector3 to = display.Enemies[target].Position + Vector3.up * (local == 0 ? .8f : 1.6f) - (predicted + Vector3.up * 1.65f);
                     Quaternion aim = Quaternion.LookRotation(to); yaw = aim.eulerAngles.y; pitch = aim.eulerAngles.x; if (pitch > 180) pitch -= 360;
                 }
+                else if (preview != null) movement = previewMovement;
                 else
                 {
                     if (Mouse.current != null) { Vector2 mouse = Mouse.current.delta.ReadValue(); yaw += mouse.x * .09f; pitch = Mathf.Clamp(pitch - mouse.y * .09f, -80, 80); }
@@ -195,7 +209,7 @@ namespace Journey
                     else { allyShot.SetPosition(0, hit.Source.Ray.origin); allyShot.SetPosition(1, s.End); allyShot.enabled = true; }
                 }
             }
-            if (active && (inputActive || scripted))
+            if (active && (scripted || (preview == null ? inputActive : previewActive && previewFire)))
             {
                 shotRemaining -= dt;
                 if (shotRemaining <= 0)
@@ -230,12 +244,28 @@ namespace Journey
             if (display.State != SharedState.Complete && display.State != SharedState.Defeat) return;
             if (authority != null) { authority.Retry(run, local); Publish(); }
             else connection.Send(SharedConnection.Message.Retry, w => w.Write(run));
-            inputActive = true; SetCursor(!scripted);
+            inputActive = true; SetCursor(!scripted && preview == null);
+        }
+        public string ApplyPreviewCommand(SharedPreviewCommand command)
+        {
+            string error = command.Validate(display, local);
+            if (error.Length > 0) return error;
+            if (command.action == "quit") { Application.Quit(); return ""; }
+            if (command.action == "retry") { Retry(); return ""; }
+            scripted = command.action == "scripted";
+            previewInputUntil = 0; previewMovement = Vector3.zero; previewFire = false;
+            if (command.action == "input")
+            {
+                previewMovement = new Vector3(command.moveX, 0, command.moveZ);
+                yaw = Mathf.Repeat(command.yaw, 360); pitch = command.pitch; previewFire = command.fire;
+                previewInputUntil = Time.realtimeSinceStartupAsDouble + command.duration;
+            }
+            SetCursor(false); return "";
         }
         [Serializable] sealed class Report
         {
             public string role, source, machine, gpu, connection, reason;
-            public bool scripted, development;
+            public bool scripted, development, previewEnabled;
             public int run, ticks, enemies, catchupLimits, frameSamples, confirmedHits, width, height, frameCap, vsync;
             public double frameP50, frameP95, frameP99, frameMax, confirmP50, confirmP95, confirmMax, rttMs;
             public SharedState state;
@@ -249,7 +279,7 @@ namespace Journey
             TextAsset stamp = Resources.Load<TextAsset>("BuildInfo");
             var report = new Report { role = local == 0 ? "host A" : "client B", source = stamp == null ? "Editor" : stamp.text,
                 machine = SystemInfo.processorType, gpu = SystemInfo.graphicsDeviceName, connection = "Direct IPv4 UDP; declare actual address/machine/visibility separately",
-                reason = reason, scripted = scripted, development = Debug.isDebugBuild, run = run, ticks = display.Tick, enemies = 12,
+                reason = reason, scripted = scripted, development = Debug.isDebugBuild, previewEnabled = preview != null, run = run, ticks = display.Tick, enemies = 12,
                 catchupLimits = catchupLimits, width = Screen.width, height = Screen.height, frameCap = Application.targetFrameRate,
                 vsync = QualitySettings.vSyncCount, frameSamples = frames.Count, confirmedHits = confirms.Count, frameP50 = Percentile(frames, .5),
                 frameP95 = Percentile(frames, .95), frameP99 = Percentile(frames, .99), frameMax = Percentile(frames, 1),
@@ -265,7 +295,7 @@ namespace Journey
             return copy[Math.Max(0, (int)Math.Ceiling(percentile * copy.Length) - 1)];
         }
         void OnApplicationFocus(bool focused)
-        { if (!scripted && !focused) { inputActive = false; SetCursor(false); } }
+        { if (preview == null && !scripted && !focused) { inputActive = false; SetCursor(false); } }
         void OnGUI()
         {
             if (connection == null) return;
