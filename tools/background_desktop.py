@@ -47,6 +47,29 @@ def atomic_json(path, value):
     os.replace(temporary, path)
 
 
+def read_shared(path):
+    # Allow Unity to atomically replace state/images while an HTTP reader holds the old file.
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel.CreateFileW.argtypes = [w.LPCWSTR, w.DWORD, w.DWORD, ctypes.c_void_p, w.DWORD, w.DWORD, w.HANDLE]
+    kernel.CreateFileW.restype = w.HANDLE
+    kernel.GetFileSizeEx.argtypes = [w.HANDLE, ctypes.POINTER(ctypes.c_int64)]
+    kernel.ReadFile.argtypes = [w.HANDLE, ctypes.c_void_p, w.DWORD, ctypes.POINTER(w.DWORD), ctypes.c_void_p]
+    kernel.CloseHandle.argtypes = [w.HANDLE]
+    handle = kernel.CreateFileW(str(path), 0x80000000, 7, None, 3, 0x80, None)
+    if handle == ctypes.c_void_p(-1).value:
+        raise ctypes.WinError(ctypes.get_last_error())
+    try:
+        size = ctypes.c_int64()
+        if not kernel.GetFileSizeEx(handle, ctypes.byref(size)) or not 0 <= size.value <= 4 * 1024 * 1024:
+            raise OSError("Preview file unavailable or too large")
+        content, actual = ctypes.create_string_buffer(size.value), w.DWORD()
+        if not kernel.ReadFile(handle, content, size.value, ctypes.byref(actual), None) or actual.value != size.value:
+            raise ctypes.WinError(ctypes.get_last_error())
+        return content.raw
+    finally:
+        kernel.CloseHandle(handle)
+
+
 class OwnedDesktop:
     def __init__(self):
         if os.name != "nt":
@@ -120,7 +143,7 @@ class OwnedDesktop:
         info, startup = Process(), Startup()
         startup.cb = ctypes.sizeof(startup)
         startup.desktop = self.station + "\\" + self.name
-        startup.flags, startup.show = 0x81, 0  # Hidden startup; no feedback cursor.
+        startup.flags, startup.show = 0x81, 1  # Visible on the non-input desktop; no feedback cursor.
         command = ctypes.create_unicode_buffer(subprocess.list2cmdline([str(a) for a in argv]))
         environment = ctypes.create_unicode_buffer("\0".join(f"{k}={v}" for k, v in sorted(os.environ.items(), key=lambda p: p[0].lower())) + "\0\0")
         self.check(self.kernel.CreateProcessW(str(argv[0]), command, None, None, False,
@@ -202,7 +225,7 @@ def main():
             if len(parts) != 2 or parts[0] not in sequences or parts[1] not in ("state.json", "preview.png"):
                 return self.reply(404, b"{}")
             try:
-                content = (results / parts[0] / parts[1]).read_bytes()
+                content = read_shared(results / parts[0] / parts[1])
                 self.reply(200, content, "image/png" if parts[1].endswith("png") else "application/json")
             except (OSError, ValueError):
                 self.reply(503, b"{}")
@@ -224,15 +247,15 @@ def main():
                 if command.get("action") not in ("input", "scripted", "idle", "retry", "quit"):
                     raise ValueError("Unknown action")
                 with lock:
-                    state = json.loads((results / role / "state.json").read_text(encoding="utf-8-sig"))
+                    state = json.loads(read_shared(results / role / "state.json"))
                     if state["lastSequence"] < sequences[role]:
                         return self.reply(409, b'{"error":"Previous command not yet acknowledged"}')
-                    sequences[role] += 1
-                    command.update(sequence=sequences[role], run=state["run"], life=state["life"])
+                    command.update(sequence=sequences[role] + 1, run=state["run"], life=state["life"])
                     atomic_json(results / role / "command.json", command)
+                    sequences[role] += 1
                     self.reply(202, json.dumps(command).encode())
-            except (OSError, ValueError, KeyError, TypeError):
-                self.reply(400, b'{"error":"Invalid command or player not ready"}')
+            except (OSError, ValueError, KeyError, TypeError) as error:
+                self.reply(400, json.dumps({"error": "Invalid command or player not ready", "detail": str(error)}).encode())
 
     with ThreadingHTTPServer(("127.0.0.1", 0), Handler) as server:
         desktop = OwnedDesktop()

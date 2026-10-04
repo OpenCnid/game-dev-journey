@@ -1,0 +1,34 @@
+[
+  {
+    "hashMismatches": [],
+    "actualFiles": 166,
+    "expectedFiles": 166,
+    "checkedUtc": "2026-10-04T07:41:43.0553426Z",
+    "archive": "C:/Users/Darian/.codex/worktrees/gdj-17-precision-hits/new-game-dev/prototypes/001-stacked-weapons/build/StackLab-GDJ17-v1",
+    "name": "GDJ17-v1"
+  },
+  {
+    "hashMismatches": [],
+    "actualFiles": 166,
+    "expectedFiles": 166,
+    "checkedUtc": "2026-10-04T07:41:50.4558982Z",
+    "archive": "C:/Users/Darian/.codex/worktrees/gdj-16-damage-feedback/new-game-dev/prototypes/001-stacked-weapons/build/StackLab-GDJ19-v2",
+    "name": "GDJ19-v2"
+  },
+  {
+    "hashMismatches": [],
+    "actualFiles": 166,
+    "expectedFiles": 166,
+    "checkedUtc": "2026-10-04T07:41:57.8724220Z",
+    "archive": "C:/Users/Darian/.codex/worktrees/gdj-16-damage-feedback/new-game-dev/prototypes/001-stacked-weapons/build/StackLab-GDJ15-v1",
+    "name": "GDJ15-v1"
+  },
+  {
+    "hashMismatches": [],
+    "actualFiles": 166,
+    "expectedFiles": 166,
+    "checkedUtc": "2026-10-04T07:42:06.2576961Z",
+    "archive": "C:/Users/Darian/.codex/worktrees/gdj-16-damage-feedback/new-game-dev/prototypes/001-stacked-weapons/build/StackLab-GDJ16-v7",
+    "name": "GDJ16-v7"
+  }
+]

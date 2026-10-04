@@ -75,7 +75,9 @@ namespace Journey
             {
                 if (File.Exists(commandPath) && new FileInfo(commandPath).Length <= 2048)
                 {
-                    var command = JsonUtility.FromJson<SharedPreviewCommand>(File.ReadAllText(commandPath));
+                    SharedPreviewCommand command;
+                    using (var stream = new FileStream(commandPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
+                    using (var reader = new StreamReader(stream)) command = JsonUtility.FromJson<SharedPreviewCommand>(reader.ReadToEnd());
                     if (command != null && command.sequence > lastSequence)
                     {
                         lastSequence = command.sequence;
