@@ -85,7 +85,7 @@ The owner accepted the [thinking-space hybrid](decisions/0004-party-thinking-spa
 
 ## Future death participation and shared reward research
 
-[Decision 0010](decisions/0010-xp-pickups-and-death-participation.md) accepts collected enemy-drop XP orbs, magnets, percentage pickup-range upgrades and gear-upgrade access while dead. [GDJ-13](https://linear.app/cnid/issue/GDJ-13/research-death-revival-and-continued-player-participation) is future High-priority research when focusing on multiplayer, with timed revival/lives/participation and solo/full-party outcomes open. [GDJ-14](https://linear.app/cnid/issue/GDJ-14/research-shared-legendary-compatibility-and-reward-rules) researches rare compatibility, duplicates, player-state eligibility and pending choices. No dates, immediate implementation or completed research; a bounded first test still needs minimal explicit rules.
+[Decision 0010](decisions/0010-xp-pickups-and-death-participation.md) accepts collected enemy-drop XP orbs, magnets, percentage pickup-range upgrades and gear-upgrade access while dead. [GDJ-13](https://linear.app/cnid/issue/GDJ-13/research-death-revival-and-continued-player-participation) is future High-priority research when focusing on multiplayer, with timed revival/lives/participation, participant eligibility/event ordering and restart open. All players dead and waiting to respawn is the accepted run-ending condition, including solo, despite pending timers. [GDJ-14](https://linear.app/cnid/issue/GDJ-14/research-shared-legendary-compatibility-and-reward-rules) researches rare compatibility, duplicates, player-state eligibility and pending choices. No dates, immediate implementation or completed research; a bounded first test still needs minimal explicit rules.
 
 ## Parking lot
 
