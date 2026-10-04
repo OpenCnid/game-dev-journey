@@ -17,3 +17,7 @@
 Start `feat/rifle-fire-rate-controls` from accepted GDJ-15 source/report branch at `04267ebccc4dfb9eeea3aa32fc77571caff9d43f`, stacked on unmerged PR #5. Reuse the existing managed checkout; preserve complete `StackLab-GDJ15-v1`, GDJ-16 v7 and GDJ-2 players. One Unity writer; pinned editor/packages/renderer settings unchanged.
 
 Check default equivalence, slow/high cadence across frame rates, >60/s benchmark firing, pause/reset/rate-change behavior, invalid input and metadata. Use serialized `tools/unity.ps1` tests/build, record exact release source/configuration, then run slow/high standalone reporting smoke. Open the candidate at the menu so P1 can change rates and resume/start manually. Save result and remaining observations in a dated report; no new performance or progression-balance conclusion follows from this control.
+
+## Candidate resume
+
+Final release source `bb7a0c6dae1906b2e8baf7ef7656eca9b0f1e841` implements the controls with exact baseline decimal normalization. [The result report](../../playtests/2026-10-04-rifle-rate-controls.md) links 65 Edit Mode/six Play Mode passes, exact full-player manifest, visually inspected menu and slow/baseline/stress standalone counts (10/42/600 shots in 300 capture ticks). Complete `StackLab-GDJ19-v2` and accepted controls remain preserved. The live player is open at the menu with default rate, ready for manual testing; no human rate feedback or new performance conclusion is recorded. Keep the feature review separate from accepted GDJ-15.
