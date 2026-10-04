@@ -13,6 +13,7 @@ Get-ChildItem -LiteralPath $InputDirectory -Recurse -Filter '*-crowd*-r*.json' |
         OverlapPreparation = [bool]$taskReport.overlapPreparation
         DiagnosticOnly = [bool]$taskReport.diagnosticOnly
         Crowd = $taskReport.crowd
+        RifleRate = if ($null -ne $taskReport.rifleShotsPerSecond) { $taskReport.rifleShotsPerSecond } else { 1.0 / 0.12 }
         Repeat = $taskReport.repeat
         AverageFps = [math]::Round($taskReport.averageFps, 2)
         P99Ms = [math]::Round($taskReport.p99Ms, 3)

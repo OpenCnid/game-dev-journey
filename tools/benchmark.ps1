@@ -5,6 +5,7 @@ param(
     [ValidateSet('managed','burst')][string]$Simulation = 'burst',
     [ValidateSet('legacy','culled')][string]$Rendering = 'culled',
     [ValidateRange(16,1024)][int]$JobBatch = 128,
+    [ValidateRange(0.5,120)][ValidateScript({ -not [double]::IsNaN($_) -and -not [double]::IsInfinity($_) })][double]$RifleRate = (1.0 / 0.12),
     [switch]$HideWarnings,
     [switch]$HideProjectiles,
     [switch]$DeduplicateWarnings,
@@ -48,6 +49,7 @@ foreach ($taskCount in $Counts) {
     [pscustomobject]@{startedUtc=[DateTime]::UtcNow.ToString('o');visible=[bool]$Visible;smoke=[bool]$Smoke;
         crowd=$taskCount;workload=$Workload;synchronizedAbilities=[bool]$SynchronizedAbilities;
         simulation=$Simulation;rendering=$Rendering;jobBatch=$JobBatch;profile=[bool]$Profile;
+        rifleShotsPerSecond=$RifleRate;
         hideWarnings=[bool]$HideWarnings;hideProjectiles=[bool]$HideProjectiles;deduplicateWarnings=[bool]$DeduplicateWarnings;
         overlapPreparation=[bool]$OverlapPreparation;nativeState=[bool]$NativeState;
         projectileRenderer=$ProjectileRenderer;combinedCharacters=[bool]$CombinedCharacters;cacheWarnings=[bool]$CacheWarnings;
@@ -56,6 +58,7 @@ foreach ($taskCount in $Counts) {
         ConvertTo-Json | Set-Content -LiteralPath (Join-Path $taskRunFolder 'invocation.json')
     $taskArgs = @('-benchmark','-workload',$Workload,'-simulation',$Simulation,'-rendering',$Rendering,'-jobBatch',$JobBatch,
         '-crowd',$taskCount,'-warmup',$WarmupSeconds,'-seconds',$CaptureSeconds,
+        '-rifleRate',$RifleRate.ToString('R',[Globalization.CultureInfo]::InvariantCulture),
         '-repeats',$Repeats,'-results',"`"$taskRunFolder`"",'-quitAfterBenchmark',
         '-screen-width','1920','-screen-height','1080','-screen-fullscreen','0',
         '-logFile',"`"$taskRunFolder\player.log`"")
@@ -87,12 +90,21 @@ foreach ($taskCount in $Counts) {
         if ($taskResult.renderingBackend -ne $(if ($Rendering -eq 'culled') { 'burst-culled-v1' } else { 'legacy-instanced' })) { throw 'Player did not use the requested rendering backend.' }
         if ($null -eq $taskResult.captureStartSimulationSeconds -or $taskResult.captureStartSimulationSeconds -lt $WarmupSeconds) { throw 'Player did not align simulation warm-up; rebuild the player.' }
         if ($taskResult.schema -ne 'journey-benchmark-v5') { throw 'Rebuild the player for experiment metadata.' }
+        if ($null -eq $taskResult.rifleShotsPerSecond) {
+            # Historical v5 players had the fixed 0.12 s baseline and ignore -rifleRate.
+            if ([Math]::Abs($RifleRate - (1.0 / 0.12)) -gt 0.0001) { throw 'This player does not report configurable rifle rate. Rebuild before testing a nondefault rate.' }
+        } elseif ([double]::IsNaN($taskResult.rifleShotsPerSecond) -or [double]::IsInfinity($taskResult.rifleShotsPerSecond) -or
+            [Math]::Abs($taskResult.rifleShotsPerSecond - $RifleRate) -gt 0.0001 -or $null -eq $taskResult.rifleIntervalSeconds -or
+            [double]::IsNaN($taskResult.rifleIntervalSeconds) -or [double]::IsInfinity($taskResult.rifleIntervalSeconds) -or
+            [Math]::Abs($taskResult.rifleIntervalSeconds - (1.0 / $RifleRate)) -gt 0.00001) {
+            throw 'Player rifle rate/interval does not match the requested workload.'
+        }
         if ($taskResult.hideWarnings -ne [bool]$HideWarnings -or $taskResult.hideProjectiles -ne [bool]$HideProjectiles -or
             $taskResult.deduplicateWarnings -ne [bool]$DeduplicateWarnings -or $taskResult.overlapPreparation -ne [bool]$OverlapPreparation -or
             $taskResult.nativeState -ne [bool]$NativeState -or $taskResult.diagnosticOnly -ne [bool]($HideWarnings -or $HideProjectiles)) { throw 'Player experiment settings do not match the invocation.' }
         if ($taskResult.projectileRenderer -ne $ProjectileRenderer -or $taskResult.combinedCharacters -ne [bool]$CombinedCharacters -or $taskResult.cacheWarnings -ne [bool]$CacheWarnings) { throw 'Renderer experiments do not match invocation.' }
         if (($Simulation -eq 'burst' -or $Rendering -eq 'culled') -and -not $taskResult.burstCompiled) { throw 'Jobs are running without Burst compilation.' }
-        [pscustomobject]@{Crowd=$taskResult.crowd;Workload=$taskResult.workload;Repeat=$taskResult.repeat;MedianMs=$taskResult.medianMs;P99Ms=$taskResult.p99Ms;MaxMs=$taskResult.maxMs;PeakProjectiles=$taskResult.peakProjectiles;DroppedProjectiles=$taskResult.droppedProjectilesIncludingWarmup;CatchupLimitFrames=$taskResult.catchupLimitFrames;Samples=$taskResult.samples;Report=$taskReport.FullName}
+        [pscustomobject]@{Crowd=$taskResult.crowd;Workload=$taskResult.workload;RifleRate=$RifleRate;Repeat=$taskResult.repeat;MedianMs=$taskResult.medianMs;P99Ms=$taskResult.p99Ms;MaxMs=$taskResult.maxMs;PeakProjectiles=$taskResult.peakProjectiles;DroppedProjectiles=$taskResult.droppedProjectilesIncludingWarmup;CatchupLimitFrames=$taskResult.catchupLimitFrames;Samples=$taskResult.samples;Report=$taskReport.FullName}
     }
     if ($Profile -and -not (Test-Path -LiteralPath (Join-Path $taskRunFolder 'profile.raw'))) { throw 'Development player did not create a binary profile.' }
 }
