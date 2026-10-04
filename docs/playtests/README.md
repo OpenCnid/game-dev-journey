@@ -8,7 +8,8 @@ Use anonymous participant labels and leave personal information out of the repos
 
 ## Records
 
-- [2026-10-03: Body brackets without central HP panels](2026-10-03-aimed-health-feedback.md) - retained useful brackets, attached target HP, stable wounded owners; 49 checks and fresh build, latest clutter/stability comparison pending.
+- [2026-10-03: Normal-enemy HP only after damage](2026-10-03-damaged-only-health.md) - useful brackets retained, healthy-target bars hidden, stable wounded owners; 49 checks and fresh build, latest crowd comparison pending.
+- [2026-10-03: Body brackets without central HP panels](2026-10-03-aimed-health-feedback.md) - 49 checks; P1 rejected full cyan HP on healthy normal targets, prompting damaged-only visibility.
 - [2026-10-03: Fixed target HP and retained wounded bars](2026-10-03-focused-health-feedback.md) - 49 passes; P1 liked body brackets but rejected the central defeated/HP panel as distracting at high kill rates.
 - [2026-10-03: Attached-bar readability revision](2026-10-03-damage-readability-revision.md) - 48 automated passes; P1 rejected target ownership/clutter/flicker and prompted fixed target HP with retained wounded owners.
 - [2026-10-03: First damage-readability candidate](2026-10-03-damage-readability.md) - 42 automated passes; P1 identified wounds/player damage and requested improved enemy effects/stacked bars, then found the intermediate floating-bar layout unclear.

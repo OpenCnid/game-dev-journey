@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Passed" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-04 04:24:31Z" end-time="2026-10-04 04:24:33Z" duration="1.2016523">
+  <test-suite type="TestSuite" id="1011" name="Stack Lab" fullname="Stack Lab" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-04 04:24:31Z" end-time="2026-10-04 04:24:33Z" duration="1.201652" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1005" name="Journey.PlayTests.dll" fullname="C:/Users/Darian/.codex/worktrees/gdj-16-damage-feedback/new-game-dev/prototypes/001-stacked-weapons/Library/ScriptAssemblies/Journey.PlayTests.dll" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-04 04:24:31Z" end-time="2026-10-04 04:24:33Z" duration="1.191032" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="26704" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1006" name="Journey" fullname="Journey" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-04 04:24:31Z" end-time="2026-10-04 04:24:33Z" duration="1.190362" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1007" name="Tests" fullname="Journey.Tests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-04 04:24:31Z" end-time="2026-10-04 04:24:33Z" duration="1.190078" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="RuntimeTests" fullname="Journey.Tests.RuntimeTests" classname="Journey.Tests.RuntimeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-04 04:24:31Z" end-time="2026-10-04 04:24:33Z" duration="1.188263" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1004" name="ArenaStartsFiresAndRestartsWithoutRuntimeErrors" fullname="Journey.Tests.RuntimeTests.ArenaStartsFiresAndRestartsWithoutRuntimeErrors" methodname="ArenaStartsFiresAndRestartsWithoutRuntimeErrors" classname="Journey.Tests.RuntimeTests" runstate="Runnable" seed="958514064" result="Passed" start-time="2026-10-04 04:24:31Z" end-time="2026-10-04 04:24:32Z" duration="0.707313" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1002" name="DamagePresentationRendersBothOutcomesAndRestartClearsIt" fullname="Journey.Tests.RuntimeTests.DamagePresentationRendersBothOutcomesAndRestartClearsIt" methodname="DamagePresentationRendersBothOutcomesAndRestartClearsIt" classname="Journey.Tests.RuntimeTests" runstate="Runnable" seed="229755815" result="Passed" start-time="2026-10-04 04:24:32Z" end-time="2026-10-04 04:24:32Z" duration="0.068019" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1003" name="ExperimentalRenderingPreservesSimulationAndDisposesBuffers" fullname="Journey.Tests.RuntimeTests.ExperimentalRenderingPreservesSimulationAndDisposesBuffers" methodname="ExperimentalRenderingPreservesSimulationAndDisposesBuffers" classname="Journey.Tests.RuntimeTests" runstate="Runnable" seed="321015824" result="Passed" start-time="2026-10-04 04:24:32Z" end-time="2026-10-04 04:24:33Z" duration="0.400797" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: C:/Users/Darian/AppData/LocalLow/Game Dev Journey/Stack Lab\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
