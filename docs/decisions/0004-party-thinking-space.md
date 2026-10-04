@@ -38,6 +38,7 @@ Proposed flavor line: **â€œThe Zone: thought continues; the world stands still.â
 - Preserve progression, offer ownership, selected effects and shared reward events independently of freeze presentation. Account for future loot/draw modifiers and 1-4 player behavior, while keeping the first implementation two-player scope.
 - Define and validate all time-dependent encounter behavior across freeze/resume. This selects no networking package, data schema or performance budget.
 - Record accessible UI and human findings about understanding, waiting and pressure. Frozen time alone does not establish readable text, usable narration or whole-game accessibility.
+- **October 4 recovery clarification:** [decision 0012](0012-disconnect-recovery-and-preserved-return.md) accepts a five-minute total automatic disconnect-freeze allowance per run and preserved late return. Recovery can use The Zone's physical freeze/presentation, while ordinary earned-choice thinking time remains unlimited. [The recovery draft](../design/cooperative-session-recovery.md) proposes independent pause reasons and withdrawing absent participants from readiness after grace; expiry must not silently clear an unrelated upgrade pause. Detailed participant/reward and host-loss rules remain proposed.
 
 ## Revisit when
 

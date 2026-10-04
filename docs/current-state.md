@@ -32,6 +32,8 @@ This establishes a local synthetic percentile result. It does not establish mult
 
 ## Direction and constraints
 
+**Recovery direction, October 4:** [decision 0012](decisions/0012-disconnect-recovery-and-preserved-return.md) records the owner's five-minute total automatic disconnect-freeze allowance per run and preserved late return. The [research/design draft](design/cooperative-session-recovery.md) proposes withdrawal/readiness/reward rules and separates live-host reconnection from checkpoint-backed host recovery. These features are absent from the current fixed prototype, which still aborts on disconnect. Ordinary upgrade-thinking time remains unlimited; no service/package choice or new runtime evidence.
+
 **Baseline-first sequencing correction, October 3:** observe the current rifle before assigning traits or a concrete upgrade pool. [GDJ-2](planning/tasks/GDJ-2.md) already owns the human play observations and proceed/revise decision; use those findings to choose one next revision or progression experiment. The accepted eligibility rule remains saved for later. No new build, play observation or playable capability accompanies this correction.
 
 **Weapon-trait clarification:** [decision 0011](decisions/0011-weapon-traits-and-upgrade-eligibility.md) accepts ordinary enhancement of existing traits and specific compatible items/transformations that add a trait and open future upgrades. Starting rifle traits, exact compatibility and offer/shared-recipient timing remain open. No trait/eligibility/upgrade system is implemented by this documentation checkpoint.
