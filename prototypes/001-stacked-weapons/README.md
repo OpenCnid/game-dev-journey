@@ -2,6 +2,8 @@
 
 **Status:** one-weapon combat and crowd benchmark implemented. The remaining stacked-weapon and upgrade slices below are future work. See the repository's validation notes for measured results and limitations.
 
+**Product direction update, October 2:** the [foundation](../../docs/foundation.md) now defines cooperative PvE for 2-4 players with two-player testing first, in an AI-controlled isekai world. This project currently implements only local one-player combat. Slices B/C and their global pause/progression/end rules below preserve the earlier local proposal; re-scope them after [world/encounter design](../../docs/planning/tasks/GDJ-6.md) and two-player feasibility. Their local checks do not establish multiplayer acceptance.
+
 **Question:** does adding simultaneous weapons create satisfying power growth and distinct builds while keeping combat readable?
 
 **Pinned tools:** Unity **6000.3.25f1** (`e1dba0a9aba4`), URP **17.3.0**, Input System **1.20.0**, Test Framework **1.6.0**. `ProjectSettings/ProjectVersion.txt`, `Packages/manifest.json`, and the Unity-generated `Packages/packages-lock.json` are authoritative. Transitive packages are locked too; do not regenerate the lockfile just to take newer versions.

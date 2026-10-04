@@ -10,7 +10,7 @@ The interesting question is not just whether we can generate working code. It is
 
 ## What success looks like
 
-- Someone can start, understand the basic action, complete a short session, and restart without developer help.
+- A small team can start, understand the basic action, complete a cooperative session, and restart without developer help.
 - The core interaction gives us a reason to keep playing.
 - A build runs on the chosen target platform using documented steps.
 - Crowded combat targets at least 144 FPS on the agreed baseline configuration, with higher frame rates available on capable hardware; see [performance requirements](performance.md).
@@ -28,6 +28,6 @@ The interesting question is not just whether we can generate working code. It is
 
 ## Initial boundaries
 
-Until the first complete playable loop exists, defer multiplayer, accounts, online services, monetization, extensive procedural content, and custom engine work. These are scope choices for this project, not judgments about what a game should be.
+The owner accepted cooperative multiplayer PvE for 2-4 players, with two-player testing first, on October 2; [decision 0002](decisions/0002-cooperative-pve-ai-world.md) supersedes the earlier multiplayer deferral. Finish a small cooperative loop first. Accounts, public matchmaking services, monetization, extensive procedural content and custom engine work remain deferred.
 
-The starting direction is first-person horde survival, inspired by the owner's time playing Vampire Hunters, with a focus on stacking weapons and creating powerful builds. The [game brief](design/game-brief.md) proposes a small test of growing firepower. Unity with C# and URP is the [accepted engine choice](decisions/0001-engine-recommendation.md). Visual style, final platform, and release destination remain open; choose them around the experiment and the time we can realistically spend.
+The direction is cooperative first-person horde survival, inspired by the owner's time playing Vampire Hunters, with a focus on stacking weapons and creating powerful builds. Players arrive from another world into one controlled by AI; the [specific world/visual options](design/ai-world-options.md) remain proposals. The [game brief](design/game-brief.md) connects the existing local experiment to the required cooperative work. Unity with C# and URP is the [accepted engine choice](decisions/0001-engine-recommendation.md). Visual style, final platform, and release destination remain open; choose them around the experiment and the time we can realistically spend.
