@@ -20,4 +20,6 @@ Ammo, crosshair-gated autofire, jump, ranged enemies, traits and rifle tracer al
 
 ## Verification and acceptance
 
+The [candidate report](../../playtests/2026-10-03-damage-readability.md) records the implementation, exact release source/build and 42 passing automated checks. Human comparison is the remaining acceptance step.
+
 Check hit/miss/cooldown outcomes, wounded health, lethal health snapshot and fresh incarnation, restart, pause/terminal feedback and visible-bar filtering. Run relevant Edit/Play Mode checks and a fresh standalone build with `tools/unity.ps1`; inspect the player log and captures. Human comparison must establish first-hit wound, second-hit death, player damage, usefulness for kiting and clutter. Save exact source/configuration and checks in a playtest report; keep the issue In Review until the human result is recorded.

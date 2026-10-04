@@ -1,0 +1,45 @@
+{
+  "candidateId": "GDJ-16-damage-2026-10-03",
+  "source": {
+    "revision": "52650ce35aebd3ac43311a547218cd1d317fb200",
+    "builtUtc": "2026-10-04T03:20:40.4026084Z",
+    "dirty": false
+  },
+  "baselineSource": "28ca1bce4d71d0af82326a93f65a528ebfd1cd5c",
+  "build": {
+    "release": true,
+    "platform": "Windows x64",
+    "editor": "6000.3.25f1",
+    "manifest": "build-manifest.json",
+    "manifestSha256": "0333da646efb1cd45cb8cf8605528ed0e1aa302151b50d24e80891632a33aa1b",
+    "fileCount": 166,
+    "totalBytes": 96908002
+  },
+  "encounter": {
+    "enemies": 35,
+    "durationSeconds": 60,
+    "seed": 137,
+    "enemyHP": 40,
+    "rifleDamage": 20,
+    "simulation": "burst",
+    "nativeState": false,
+    "rendering": "culled",
+    "combinedCharacters": false,
+    "projectileRenderer": "cube",
+    "resolution": "1920x1080 windowed",
+    "fpsCap": 144,
+    "vSync": 0
+  },
+  "checks": {
+    "editMode": {
+      "passed": 39,
+      "failed": 0
+    },
+    "playMode": {
+      "passed": 3,
+      "failed": 0
+    },
+    "humanComparison": "Pending",
+    "performanceCapture": "None"
+  }
+}
