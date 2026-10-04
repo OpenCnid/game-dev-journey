@@ -65,6 +65,17 @@ namespace Journey.Tests
         }
 
         [Test]
+        public void BaselineDecimalInputRestoresTheExactOriginalInterval()
+        {
+            using (var sim = new CombatSimulation { RifleRate = 120 })
+            {
+                sim.RifleRate = float.Parse("8.333333333333334", System.Globalization.CultureInfo.InvariantCulture);
+                Assert.That(sim.RifleRate, Is.EqualTo(CombatSimulation.DefaultRifleRate));
+                Assert.That(sim.RifleInterval, Is.EqualTo(.12f));
+            }
+        }
+
+        [Test]
         public void InvalidRatesCannotPoisonTheWeaponClock()
         {
             using (var sim = new CombatSimulation())

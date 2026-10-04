@@ -53,6 +53,9 @@ namespace Journey
             {
                 if (!(value >= MinRifleRate && value <= MaxRifleRate))
                     throw new ArgumentOutOfRangeException(nameof(value), "Rifle rate must be 0.5–120 shots/second.");
+                // Text/CLI decimal round trips can land on the adjacent float. Preserve
+                // the original interval when a value expresses the baseline rate.
+                if (Mathf.Abs(value - DefaultRifleRate) < .00001f) value = DefaultRifleRate;
                 float interval = value == DefaultRifleRate ? DefaultRifleInterval : 1f / value;
                 // Keep cooldown progress, including through a paused testing-menu edit.
                 fireRemaining *= (double)interval / rifleInterval;

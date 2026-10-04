@@ -16,6 +16,8 @@ namespace Journey.Tests
             {
                 yield return null;
                 Assert.That(game.State, Is.EqualTo(RunState.Ready));
+                Assert.That(game.TrySetRifleRate("8.333333"), Is.True);
+                Assert.That(game.RifleRate, Is.EqualTo(CombatSimulation.DefaultRifleRate));
                 Assert.That(game.TrySetRifleRate("2"), Is.True);
                 Assert.That(game.TrySetRifleRate("NaN"), Is.False);
                 Assert.That(game.TrySetRifleRate("121"), Is.False);

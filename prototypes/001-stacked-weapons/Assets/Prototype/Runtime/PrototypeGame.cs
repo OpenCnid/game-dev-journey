@@ -26,7 +26,7 @@ namespace Journey
         double runStarted, previousClock, captureStarted;
         string outputDirectory, lastResult = "", error = "", screenshotPath;
         string customCap = "144";
-        string customRifleRate = "8.333333", rateError = "";
+        string customRifleRate = CombatSimulation.DefaultRifleRate.ToString("G8", CultureInfo.InvariantCulture), rateError = "";
         Vector2 menuScroll;
         string profilePath;
         float profileSeconds = 5;
@@ -212,7 +212,7 @@ namespace Journey
         void SetRifleRate(float rate)
         {
             sim.RifleRate = rate;
-            customRifleRate = rate.ToString("G8", CultureInfo.InvariantCulture); rateError = "";
+            customRifleRate = sim.RifleRate.ToString("G8", CultureInfo.InvariantCulture); rateError = "";
         }
         void RifleRateControls()
         {
