@@ -1,7 +1,7 @@
 # 0010: XP pickups and death participation
 
 - **Date:** 2026-10-03
-- **Status:** accepted XP-orb pickup, magnet collection, upgradable pickup range and gear-upgrade access during death, plus all-dead/waiting-to-respawn defeat; detailed revival/participation and shared-rare policies remain future research.
+- **Status:** accepted XP-orb pickup, magnet collection, upgradable pickup range and gear-upgrade access during death, plus all-dead/waiting-to-respawn defeat and Retry-button restart; detailed revival/participation and shared-rare policies remain future research.
 
 ## Context
 
@@ -27,7 +27,7 @@ Dead players should remain meaningfully involved, retain access to gear upgrades
 
 **The run ends when all players are dead and waiting to respawn.** Pending respawn timers do not keep a defeated party in the run. While at least one party member is alive, this defeat condition is not met; later revival rules can return dead teammates to that continuing run. With one player, their death meets the condition. The owner has not selected a solo exception.
 
-This selects the defeat trigger, not an automatic restart. Whether retry is automatic or requires a party-ready/button interaction, what run state resets, how downed/disconnected players count and how simultaneous death/respawn events are ordered remain open. No timer length, lives count or extra ending objective is selected. GDJ-13 should preserve this boundary while researching continued participation and return to play.
+**Subsequent owner clarification: the party restarts through a Retry button after the run ends.** This selects the restart method. Who can activate it, any party readiness/confirmation coordination, what run state resets, how downed/disconnected players count and how simultaneous death/respawn events are ordered remain open. No timer length, lives count or extra ending objective is selected. GDJ-13 should preserve this boundary while researching continued participation and return to play.
 
 ## Shared legendary research
 
@@ -37,4 +37,4 @@ This selects the defeat trigger, not an automatic restart. Whether retry is auto
 
 Keep collectible world state, collection/range/magnet effects, shared XP and personal offers logically distinct. Orb collection must credit the shared pool once, including competing collectors or magnet overlap; this is a correctness requirement, not a selected networking architecture. Preserve collection behavior across freeze/resume, endings and restarts without selecting pooling, aggregation or orb limits now. Measure eventual orb density and collection costs alongside the growing weapon/crowd workload.
 
-The [progression record](../design/progression-and-upgrade-pools.md) reconciles kill/drop/collection semantics and links both research tasks. [Foundation revision 14](../foundation.md) and the encounter/brief preserve accepted rules. GDJ-13/GDJ-14 have no dates or immediate implementation commitment. Full research remains later; a bounded first test still needs explicit minimal lifecycle and reward rules. No gameplay code, Unity operation, benchmark or human study accompanies this checkpoint.
+The [progression record](../design/progression-and-upgrade-pools.md) reconciles kill/drop/collection semantics and links both research tasks. [Foundation revision 15](../foundation.md) and the encounter/brief preserve accepted rules. GDJ-13/GDJ-14 have no dates or immediate implementation commitment. Full research remains later; a bounded first test still needs explicit minimal lifecycle and reward rules. No gameplay code, Unity operation, benchmark or human study accompanies this checkpoint.
