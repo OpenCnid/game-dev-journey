@@ -4,7 +4,7 @@
 - **Issue:** [GDJ-16](https://linear.app/cnid/issue/GDJ-16/show-enemy-health-and-enemyplayer-damage-clearly).
 - **Candidate:** `GDJ-16-damage-2026-10-03`, release Windows player from clean source `52650ce35aebd3ac43311a547218cd1d317fb200`.
 - **Question:** can the developer recognize wounded drones, deaths and player damage, and use that information while kiting a group?
-- **Disposition:** implementation and automated checks complete; standalone human comparison pending. This is not human acceptance or a performance result.
+- **Disposition:** human comparison completed for this first candidate; revise enemy/crowd readability. Wounded health and player damage/death were readable, but enemy death cues and stacked bars need improvement. No performance result.
 - **Control:** the exact [GDJ-2 rifle player](2026-10-03-rifle-baseline.md), built from `28ca1bce4d71d0af82326a93f65a528ebfd1cd5c`, remains untouched in its separate worktree.
 
 ## Behavior and ownership
@@ -27,14 +27,14 @@ The new feedback path is disabled in synthetic benchmarks. Bar selection still s
 - Unity: `6000.3.25f1` (`e1dba0a9aba4`), release Windows x64 Mono/Direct3D 11.
 - Embedded build time: `2026-10-04T03:20:40.4026084Z`; dirty flag `false`.
 - Configuration: 35 drones, 60 seconds, seed 137, staged Jobs/Burst, culled instances, separate character meshes, cube projectiles, 1920x1080 windowed, 144 FPS cap, VSync off.
-- Whole build folder: `prototypes\001-stacked-weapons\build\StackLab` under that worktree; 166 files, approximately 92.42 MiB. Distribute the whole folder.
+- Preserved whole build folder: `prototypes\001-stacked-weapons\build\StackLab-GDJ16-v1` under that worktree; 166 files, approximately 92.42 MiB. The archive matches the original manifest. Distribute the whole folder.
 - [Configuration](evidence/gdj-16-damage/candidate.json), [complete SHA-256 build manifest](evidence/gdj-16-damage/build-manifest.json) and [startup log](evidence/gdj-16-damage/standalone-startup.txt).
 - Live log under that worktree: `prototypes/001-stacked-weapons/artifacts/GDJ-16-player.log`.
 
 With the Editor closed, build an isolated checkout of the source revision using `.\tools\unity.ps1 -Action Build`. Launch the human candidate at its menu:
 
 ```powershell
-$candidatePlayer = Join-Path (Get-Location).Path 'prototypes\001-stacked-weapons\build\StackLab\StackLab.exe'
+$candidatePlayer = Join-Path (Get-Location).Path 'prototypes\001-stacked-weapons\build\StackLab-GDJ16-v1\StackLab.exe'
 $candidateLog = Join-Path (Get-Location).Path 'prototypes\001-stacked-weapons\artifacts\GDJ-16-player.log'
 $candidateScreenshot = Join-Path (Get-Location).Path 'prototypes\001-stacked-weapons\artifacts\GDJ-16-human-run.png'
 Start-Process -FilePath $candidatePlayer -ArgumentList @(
@@ -58,6 +58,10 @@ Click the newest Stack Lab window and press R or choose Start / Restart Combat. 
 
 ## Human comparison and resume
 
-Pending. The developer has been asked whether they could identify a first-hit wound, a second-hit death and a player damage moment, whether these helped group-kiting and whether the bars/effects were cluttered or difficult to see. Record the answer here and inspect the current log/capture before completing GDJ-16; revise if necessary.
+P1 confirmed seeing a wounded drone after one hit and recognizing death through particles. They found the death particles too small, requested a deformed wounded body, and reported white feedback being masked by yellow during the rifle's rapid firing. Player damage and death were clear. They did not explicitly report a kiting improvement. The [first-run capture](evidence/gdj-16-damage/first-human-run.png) and [player log](evidence/gdj-16-damage/human-player-log.txt) are technical context; the log contains no reported runtime errors.
 
-The candidate was left at its start menu. There may be two Stack Lab windows; select the most recently opened one. Rifle aim/tracer alignment remains [GDJ-15](https://linear.app/cnid/issue/GDJ-15/align-rifle-hitscan-and-tracer-feedback-during-fast-turns); ammo, target-gated autofire, jump, ranged threats and progression remain saved follow-ups.
+P1 then supplied a [clustered-group screenshot](evidence/gdj-16-damage/human-stacked-bars.png) and asked how to handle stacked enemy/bar visibility. Its mint bars form overlapping strips, obscuring ownership. Visible HUD values are 70 player HP, 19 kills and 49.8 seconds remaining; these describe the screenshot, not an inferred complete run. This is concrete clutter evidence. Revise with priority-based, non-overlapping labels and owner connectors, plus persistent wounded silhouette and independent hit/kill feedback. Physical enemy spacing is a separate simulation question.
+
+P1 additionally requested crosshair coloring on an enemy and head ×2/body ×1 damage, with provisional critical chakra-point/death-qi/dantian language. [GDJ-17](https://linear.app/cnid/issue/GDJ-17/highlight-aimed-enemies-and-add-2-critical-head-hits) records that targeting/damage follow-up; these rules are not implemented in this first candidate or selected as final lore names.
+
+The played binary is archived before the revised build replaces the working player folder. The [revision contract](../planning/tasks/GDJ-16.md#human-revision-contract-recorded-before-implementation) records the next implementation/checks. Rifle aim/tracer alignment remains [GDJ-15](https://linear.app/cnid/issue/GDJ-15/align-rifle-hitscan-and-tracer-feedback-during-fast-turns); ammo, target-gated autofire, jump, ranged threats and progression remain saved follow-ups.

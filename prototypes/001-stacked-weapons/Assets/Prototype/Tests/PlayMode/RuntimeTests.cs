@@ -36,6 +36,8 @@ namespace Journey.Tests
                         yield return null;
                     }
                     Assert.That(view.Feedback.ImpactCount, Is.EqualTo(1));
+                    Assert.That(view.Feedback.HitMarkerVisible, Is.True);
+                    if (outcome == 1) Assert.That(view.Feedback.KillMarkerVisible, Is.True);
                     if (outcome == 0)
                     {
                         Assert.That(view.Feedback.BarCount, Is.EqualTo(1));
@@ -48,11 +50,17 @@ namespace Journey.Tests
                 sim.TogglePause(); view.Draw(sim, 1, 0, 0, 1);
                 Assert.That(view.Feedback.KillMarkerVisible, Is.True);
                 Assert.That(view.Feedback.PlayerDamage, Is.EqualTo(10));
+                var muzzle = root.transform.Find("Player camera/Pulse rifle/Muzzle pulse").gameObject;
+                Assert.That(muzzle.activeSelf, Is.True, "A shot pulse remains frozen during pause.");
                 yield return null;
                 view.ResetFeedback(); sim.Reset(1, 15, false);
                 Assert.That(view.Feedback.ImpactCount, Is.Zero); Assert.That(view.Feedback.PlayerPulseRemaining, Is.Zero);
+                Assert.That(muzzle.activeSelf, Is.False);
                 view.Draw(sim, 1, 0, 0, CombatSimulation.Tick);
                 yield return null;
+                view.ShowShot(Vector3.forward * 5); sim.Reset(1, 15, true);
+                view.Draw(sim, 1, 0, 0, 0);
+                Assert.That(muzzle.activeSelf, Is.False, "Synthetic benchmark must not acquire the new muzzle effect.");
             }
             finally { view.Dispose(); sim.Dispose(); Object.Destroy(root); }
             yield return null; LogAssert.NoUnexpectedReceived();

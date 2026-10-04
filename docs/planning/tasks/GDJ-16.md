@@ -12,6 +12,14 @@ Implement [GDJ-16](https://linear.app/cnid/issue/GDJ-16/show-enemy-health-and-en
 - Replace the existing 0.2-second full-screen red wash with a 0.35-second edge pulse and 0.65-second actual-health-loss label, keeping the aim area readable. Health loss, not contact proximity, triggers it.
 - Freeze transient damage cues during pause. Let the last cues expire after a win/loss; clear them on restart, ready state and benchmark entry. Enemy health bars remain inspectable while paused and disappear after the run ends. Disable the new feedback path in synthetic benchmarks to preserve their workload definition.
 
+## Human revision contract, recorded before implementation
+
+P1 recognized first-hit wounds and player damage/death, but found death particles small and rapid-fire white feedback masked by gold. A subsequent screenshot shows clustered mint bars merging into a ribbon. Revise the same readability outcome: independent inner white hit and outer gold kill markers, a larger/longer death burst, a brief muzzle pulse for every shot, and a persistent skewed/squashed wounded body/core pose tied to actual health. The pose is presentation-only; current hit geometry and damage stay unchanged. Apply it in both reference and culled paths, omitting it from benchmark workloads.
+
+For clustered bars, keep up to 64 projected candidates but display at most 12. Prioritize the nearest enemy intersected by the current aim ray, then wounded enemies, then other nearby enemies. Try the original position and small upward offsets, retain a prior offset while it remains free, and draw a short owner connector. Hide lower-priority bars when bounded label space runs out. Never merge different enemies' health into one number. The target query is read-only and shared with firing. Physical crowd separation stays unchanged; bar layout cannot solve body overlap.
+
+Crosshair target coloring and body ×1/head ×2 critical damage are saved in [GDJ-17](https://linear.app/cnid/issue/GDJ-17/highlight-aimed-enemies-and-add-2-critical-head-hits), with chakra-point/death-qi/dantian naming provisional. Future critical regions must remain aligned with any wounded visual pose. Revised clutter/deformation and rapid-fire readability need another human comparison; the first candidate's confirmations are retained as evidence rather than treated as final acceptance.
+
 ## Known future interactions
 
 Shot results carry target incarnation and health outcome rather than encoding a rifle-specific animation. Later weapons can use the same damage-result contract, and future authoritative cooperative events can add source/owner attribution. Health maxima currently belong to the one drone type; new enemy types need per-type/per-entity maxima. The bounded presentation pool may replace older effects under simultaneous weapon bursts; it must never drop authoritative damage. Later through-wall visibility, ranged threats, upgrades and accessibility settings should revise presentation without moving health ownership.
@@ -20,6 +28,6 @@ Ammo, crosshair-gated autofire, jump, ranged enemies, traits and rifle tracer al
 
 ## Verification and acceptance
 
-The [candidate report](../../playtests/2026-10-03-damage-readability.md) records the implementation, exact release source/build and 42 passing automated checks. Human comparison is the remaining acceptance step.
+The [first candidate report](../../playtests/2026-10-03-damage-readability.md) records its exact source/build, 42 passing automated checks, and P1's human comparison. The requested readability revision needs updated checks and a fresh human comparison.
 
 Check hit/miss/cooldown outcomes, wounded health, lethal health snapshot and fresh incarnation, restart, pause/terminal feedback and visible-bar filtering. Run relevant Edit/Play Mode checks and a fresh standalone build with `tools/unity.ps1`; inspect the player log and captures. Human comparison must establish first-hit wound, second-hit death, player damage, usefulness for kiting and clutter. Save exact source/configuration and checks in a playtest report; keep the issue In Review until the human result is recorded.

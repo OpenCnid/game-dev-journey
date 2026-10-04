@@ -218,13 +218,7 @@ namespace Journey
             // Simulation time drives cadence; render FPS does not change damage output.
             fireRemaining += .12f;
             Shots++;
-            float nearest = 65;
-            int target = -1;
-            for (int i = 0; i < Count; i++)
-            {
-                if (RaySphere(ray, Position(i) + Vector3.up * 1.1f, EnemyRadius, out float hit) && hit < nearest)
-                { nearest = hit; target = i; }
-            }
+            int target = AimTarget(ray, out float nearest);
             Vector3 end = ray.origin + ray.direction * nearest;
             if (target >= 0)
             {
@@ -235,6 +229,18 @@ namespace Journey
                 { Kills++; Respawn(target); }
             }
             return true;
+        }
+
+        public int AimTarget(Ray ray, out float nearest)
+        {
+            nearest = 65;
+            int target = -1;
+            for (int i = 0; i < Count; i++)
+            {
+                if (RaySphere(ray, Position(i) + Vector3.up * 1.1f, EnemyRadius, out float hit) && hit < nearest)
+                { nearest = hit; target = i; }
+            }
+            return target;
         }
 
         public static bool RaySphere(Ray ray, Vector3 center, float radius, out float distance)
