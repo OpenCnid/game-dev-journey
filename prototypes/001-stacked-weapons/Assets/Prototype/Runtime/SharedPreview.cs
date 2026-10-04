@@ -52,7 +52,7 @@ namespace Journey
         RenderTexture full, thumbnail;
         long lastSequence;
         int frameSequence;
-        double lastPoll, lastCapture;
+        double lastPoll, lastCapture, lastRequested;
         bool pending, closing;
         string result = "", captureError = "";
         public void Initialize(SharedGame owner, Camera target, string directory)
@@ -104,7 +104,8 @@ namespace Journey
             while (!closing)
             {
                 yield return end;
-                if (pending || Time.realtimeSinceStartupAsDouble - lastCapture < .5) continue;
+                if (pending || Time.realtimeSinceStartupAsDouble - lastRequested < 1.0 / 30) continue;
+                lastRequested = Time.realtimeSinceStartupAsDouble;
                 Graphics.Blit(full, thumbnail); pending = true;
                 AsyncGPUReadback.Request(thumbnail, 0, TextureFormat.RGBA32, request => {
                     pending = false;
@@ -112,9 +113,9 @@ namespace Journey
                     if (request.hasError) { captureError = "GPU readback failed"; return; }
                     try
                     {
-                        byte[] png = ImageConversion.EncodeArrayToPNG(request.GetData<byte>().ToArray(),
-                            GraphicsFormat.R8G8B8A8_UNorm, 960, 540);
-                        WriteAtomic(Path.Combine(output, "preview.png"), png);
+                        byte[] jpeg = ImageConversion.EncodeArrayToJPG(request.GetData<byte>().ToArray(),
+                            GraphicsFormat.R8G8B8A8_UNorm, 960, 540, 0, 75);
+                        WriteAtomic(Path.Combine(output, "preview.jpg"), jpeg);
                         lastCapture = Time.realtimeSinceStartupAsDouble; frameSequence++; captureError = "";
                     }
                     catch (IOException error) { captureError = error.GetType().Name; }

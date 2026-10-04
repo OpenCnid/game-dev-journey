@@ -222,11 +222,33 @@ def main():
             if path == "":
                 return self.reply(200, html, "text/html; charset=utf-8")
             parts = path.split("/")
-            if len(parts) != 2 or parts[0] not in sequences or parts[1] not in ("state.json", "preview.png"):
+            if len(parts) != 2 or parts[0] not in sequences or parts[1] not in ("state.json", "preview.jpg", "stream"):
                 return self.reply(404, b"{}")
+            if parts[1] == "stream":
+                self.send_response(200)
+                self.send_header("Content-Type", "multipart/x-mixed-replace; boundary=frame")
+                self.send_header("Cache-Control", "no-store")
+                self.end_headers()
+                previous = None
+                while not stop.wait(1 / 30):
+                    try:
+                        path = results / parts[0] / "preview.jpg"
+                        modified = path.stat().st_mtime_ns
+                        if modified == previous:
+                            continue
+                        content = read_shared(path)
+                        previous = modified
+                    except OSError:
+                        continue
+                    try:
+                        self.wfile.write(b"--frame\r\nContent-Type: image/jpeg\r\nContent-Length: " + str(len(content)).encode() + b"\r\n\r\n" + content + b"\r\n")
+                        self.wfile.flush()
+                    except OSError:
+                        return
+                return
             try:
                 content = read_shared(results / parts[0] / parts[1])
-                self.reply(200, content, "image/png" if parts[1].endswith("png") else "application/json")
+                self.reply(200, content, "image/jpeg" if parts[1].endswith("jpg") else "application/json")
             except (OSError, ValueError):
                 self.reply(503, b"{}")
 
@@ -263,7 +285,7 @@ def main():
                       "viewer": f"http://127.0.0.1:{server.server_port}{route}/", "results": str(results),
                       "startedUtc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                       "durationLimitSeconds": args.duration, "processes": [],
-                      "capture": "Unity framebuffer preview, 2 Hz. Preview overhead and other desktop load invalidate performance acceptance."}
+                      "capture": "Unity camera JPEG stream, target 30 Hz. Preview overhead and other desktop load invalidate performance acceptance."}
         thread = None
         try:
             for role in sequences:
