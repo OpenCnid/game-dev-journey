@@ -1,0 +1,55 @@
+{
+  "candidateId": "GDJ-17-precision-v1-2026-10-04",
+  "source": {
+    "revision": "2e721214a51f7a8b5bb5ce22305abed4bb3dc48b",
+    "builtUtc": "2026-10-04T06:25:15.8539409Z",
+    "dirty": false
+  },
+  "player": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-17-precision-hits\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab\\StackLab.exe",
+  "archive": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-17-precision-hits\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ17-v1",
+  "build": {
+    "release": true,
+    "editor": "6000.3.25f1",
+    "platform": "Windows x64 Mono / D3D11",
+    "manifest": "build-manifest.json",
+    "manifestSha256": "bd0816f623232030c91da066fdfb4363d5360ea99cb59f0380a545d470a91198",
+    "fileCount": 166,
+    "totalBytes": 96919497.0,
+    "archiveMatches": true
+  },
+  "encounter": {
+    "seed": 137,
+    "enemies": 35,
+    "durationSeconds": 60,
+    "simulation": "burst",
+    "rendering": "culled",
+    "combinedCharacters": false,
+    "resolution": "1920x1080 windowed",
+    "fpsCap": 144,
+    "vSync": 0
+  },
+  "rifle": {
+    "bodyDamage": 20,
+    "headMultiplier": 2,
+    "enemyHealth": 40,
+    "defaultRate": 8.333333333333334,
+    "rangeMetres": 65,
+    "presets": [
+      2,
+      8.333333333333334,
+      30,
+      120
+    ],
+    "referenceBenchmark": "fixed-state sphere; body-only 20 damage; no critical cues/wounded poses"
+  },
+  "checks": {
+    "editMode": 77,
+    "playMode": 7,
+    "releaseBuild": "passed",
+    "controlManifests": "three complete archives match saved hashes",
+    "standaloneSmokes": "passed 2/s and 120/s; each 300 capture ticks, 10/600 shots; zero catch-up-limit frames/dropped projectiles; reference benchmark only",
+    "menuInspection": "passed; source description and all retained controls readable; startup log has no Exception/ERROR/Crash matches"
+  },
+  "humanAcceptance": "Accepted October 4, 2026: P1 responds to presented slow/rapid aim, wounded-region and cue comparison, Yes, that all looks good. No detailed rates/run counts/performance supplied. Coordinator review/integration remains; no merge instruction in task chat.",
+  "performance": "No new performance conclusion. Reference smokes do not exercise precision combat."
+}

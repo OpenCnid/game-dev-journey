@@ -1,0 +1,28 @@
+{
+  "player": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-17-precision-hits\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab\\StackLab.exe",
+  "processId": 25508,
+  "arguments": [
+    "-seed",
+    "137",
+    "-simulation",
+    "burst",
+    "-rendering",
+    "culled",
+    "-screen-width",
+    "1920",
+    "-screen-height",
+    "1080",
+    "-screen-fullscreen",
+    "0",
+    "-logFile",
+    "\"C:\\Users\\Darian\\.codex\\worktrees\\gdj-17-precision-hits\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\GDJ-17-v1-player.log\"",
+    "-screenshot",
+    "\"C:\\Users\\Darian\\.codex\\worktrees\\gdj-17-precision-hits\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\GDJ-17-v1-menu.png\"",
+    "-screenshotAtMenu"
+  ],
+  "screenshot": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-17-precision-hits\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\GDJ-17-v1-menu.png",
+  "log": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-17-precision-hits\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\GDJ-17-v1-player.log",
+  "mode": "manual-start menu; candidate for P1",
+  "logErrorMatches": [],
+  "screenshotInspection": "1920x1080 menu inspected: description, rate presets, start, benchmark and frame controls legible; startup FPS is not a performance measurement"
+}
