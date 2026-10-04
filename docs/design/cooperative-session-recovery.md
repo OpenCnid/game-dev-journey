@@ -2,6 +2,8 @@
 
 **Design draft, October 4, 2026.** Research and policy design for [GDJ-13](https://linear.app/cnid/issue/GDJ-13/research-death-revival-and-continued-player-participation), with [GDJ-7](https://linear.app/cnid/issue/GDJ-7/build-party-thinking-space-for-cooperative-upgrades) and GDJ-20 as consumers. Serves perceptible power growth and readable, responsive co-op: a connection failure should not discard a build or immobilize the remaining party indefinitely. No recovery code, play evidence or service/package selection accompanies this document.
 
+The broader [multiplayer boundary proposal](multiplayer-boundaries.md) places this policy within common solo/co-op rules, session/configuration ownership, ordered control commits, personal progression, replication/persistence and the separate test runner. It defines small implementation outcomes without changing accepted fixture rules or selecting a networking service.
+
 ## Accepted direction and proposal boundary
 
 The owner requests a disconnect freeze presented through **The Zone**, initially describing five minutes to reconnect, and explicitly selects:
