@@ -33,12 +33,14 @@ namespace Journey.Tests
                     if (outcome > 0) sim.Step(Vector3.zero, .12f);
                     var ray = new Ray(sim.Position(0) + Vector3.up * 1.1f - Vector3.forward * 3, Vector3.forward);
                     Assert.That(sim.TryFire(ray, out ShotResult shot), Is.True);
-                    view.ShowShot(shot.End); view.Feedback.RecordShot(sim, shot);
                     Quaternion aim = Quaternion.LookRotation(shot.End - (sim.Player + Vector3.up * 1.65f));
+                    view.BeginFrame(sim, 1, aim.eulerAngles.y, aim.eulerAngles.x, CombatSimulation.Tick);
+                    view.ShowShot(shot.End); view.Feedback.RecordShot(sim, shot);
                     for (int mode = 0; mode < 2; mode++)
                     {
                         view.CullInstances = mode == 0;
-                        view.Draw(sim, 1, aim.eulerAngles.y, aim.eulerAngles.x, CombatSimulation.Tick);
+                        if (mode == 0) view.Draw(sim, 1);
+                        else view.Draw(sim, 1, aim.eulerAngles.y, aim.eulerAngles.x, CombatSimulation.Tick);
                         yield return null;
                     }
                     Assert.That(view.Feedback.ImpactCount, Is.EqualTo(1));
@@ -70,7 +72,7 @@ namespace Journey.Tests
                 Assert.That(muzzle.activeSelf, Is.False);
                 view.Draw(sim, 1, 0, 0, CombatSimulation.Tick);
                 yield return null;
-                view.ShowShot(Vector3.forward * 5); sim.Reset(1, 15, true);
+                view.ShowShot(Vector3.forward * 5, benchmark: true); sim.Reset(1, 15, true);
                 view.Draw(sim, 1, 0, 0, 0);
                 Assert.That(muzzle.activeSelf, Is.False, "Synthetic benchmark must not acquire the new muzzle effect.");
                 Assert.That(view.Feedback.FocusVisible, Is.False);

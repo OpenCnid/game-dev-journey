@@ -1,0 +1,54 @@
+{
+  "candidateId": "GDJ-15-shot-v1-2026-10-04",
+  "source": {
+    "revision": "d93e867837915c9dae4a5b68947a7ecdfad703d3",
+    "builtUtc": "2026-10-04T05:26:22.9890758Z",
+    "dirty": false
+  },
+  "controlSource": "0deb52d8dd7e2790b1651985f8a57642b37ce8d2",
+  "build": {
+    "fileCount": 166,
+    "totalBytes": 96914690,
+    "platform": "Windows x64 Mono / D3D11",
+    "release": true,
+    "manifest": "build-manifest.json",
+    "editor": "6000.3.25f1",
+    "manifestSha256": "95ebe3880d31fea34faf3e71b364eaaa02b74043fb804c9818a4f9fa030a720f"
+  },
+  "encounter": {
+    "combinedCharacters": false,
+    "resolution": "1920x1080 windowed",
+    "enemies": 35,
+    "seed": 137,
+    "vSync": 0,
+    "simulation": "burst",
+    "rifleIntervalSeconds": 0.12,
+    "nativeState": false,
+    "fpsCap": 144,
+    "rifleRangeMetres": 65,
+    "rifleDamage": 20,
+    "enemyHP": 40,
+    "projectileRenderer": "cube",
+    "durationSeconds": 60,
+    "rendering": "culled"
+  },
+  "checks": {
+    "humanComparison": "Accepted by P1 on October 4: looks good, no delay and very smooth; no detailed run metrics supplied",
+    "editMode": {
+      "failed": 0,
+      "passed": 54
+    },
+    "performanceCapture": "None; short hidden startup/report smoke only",
+    "playMode": {
+      "failed": 0,
+      "passed": 5
+    }
+  },
+  "shooting": {
+    "tracer": "One emission frame, current recoiled muzzle to immediate resolved endpoint",
+    "queryPose": "Displayed interpolated camera and enemy pose",
+    "benchmark": "Original per-tick firing and 45 ms legacy tracer retained",
+    "criticalRegions": "Approximate sphere unchanged; critical regions remain future work",
+    "muzzleSeconds": 0.045
+  }
+}

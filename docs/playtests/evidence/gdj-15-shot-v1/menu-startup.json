@@ -1,0 +1,10 @@
+{
+  "checkedUtc": "2026-10-04T05:29:51.1981016Z",
+  "pid": 17120,
+  "source": "d93e867837915c9dae4a5b68947a7ecdfad703d3",
+  "autoPlay": false,
+  "initialState": "Ready/menu by default",
+  "exceptionScan": "No Exception/ERROR/Crash matches in startup log",
+  "arguments": "\"C:\\Users\\Darian\\.codex\\worktrees\\gdj-16-damage-feedback\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab\\StackLab.exe\" -seed 137 -simulation burst -rendering culled -screen-width 1920 -screen-height 1080 -screen-fullscreen 0 -logFile \"C:\\Users\\Darian\\.codex\\worktrees\\gdj-16-damage-feedback\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\GDJ-15-v1-player.log\" -screenshot \"C:\\Users\\Darian\\.codex\\worktrees\\gdj-16-damage-feedback\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\GDJ-15-v1-human-run.png\"",
+  "humanAttempt": "Not inferred from process or log"
+}
