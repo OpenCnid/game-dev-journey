@@ -129,9 +129,13 @@ namespace Journey
                 if (scripted)
                 {
                     float t = display.Elapsed;
-                    Vector3 goal = new Vector3(Mathf.Cos(t * .24f + local * Mathf.PI) * 17, 0, Mathf.Sin(t * .24f + local * Mathf.PI) * 17);
+                    Vector3 goal = new Vector3(Mathf.Cos(t * .30f + local * Mathf.PI) * 22, 0, Mathf.Sin(t * .30f + local * Mathf.PI) * 22);
                     movement = (goal - predicted).normalized;
-                    int target = 0; Vector3 to = display.Enemies[target].Position + Vector3.up * (local == 0 ? .8f : 1.6f) - (predicted + Vector3.up * 1.65f);
+                    // Shared slot for the opening, then clear nearby threats. No invulnerability/fixture damage changes.
+                    int target = 0;
+                    if (t > 2) for (int i = 1; i < display.Enemies.Length; i++)
+                        if ((display.Enemies[i].Position - predicted).sqrMagnitude < (display.Enemies[target].Position - predicted).sqrMagnitude) target = i;
+                    Vector3 to = display.Enemies[target].Position + Vector3.up * (local == 0 ? .8f : 1.6f) - (predicted + Vector3.up * 1.65f);
                     Quaternion aim = Quaternion.LookRotation(to); yaw = aim.eulerAngles.y; pitch = aim.eulerAngles.x; if (pitch > 180) pitch -= 360;
                 }
                 else
