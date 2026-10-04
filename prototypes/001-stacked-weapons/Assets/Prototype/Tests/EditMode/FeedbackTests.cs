@@ -5,6 +5,15 @@ namespace Journey.Tests
 {
     public sealed class FeedbackTests
     {
+        [TestCase(1f)] [TestCase(1.5f)] [TestCase(2f)]
+        public void HudRotationKeepsMarkersAndConnectorsAtTheirScaledAnchor(float scale)
+        {
+            Vector3 pivot = new Vector3(640, 360, 0);
+            Matrix4x4 transform = CombatFeedback.RotateGUI(Matrix4x4.Scale(Vector3.one * scale), pivot, 45);
+            Assert.That(Vector3.Distance(transform.MultiplyPoint3x4(pivot), pivot * scale), Is.LessThan(.001f));
+            Assert.That(Vector3.Distance(transform.MultiplyPoint3x4(pivot + Vector3.right * 10), pivot * scale), Is.EqualTo(10 * scale).Within(.001f));
+        }
+
         static Ray AtEnemy(CombatSimulation sim) => new Ray(sim.Position(0) + Vector3.up * 1.1f - Vector3.forward * 3, Vector3.forward);
 
         [TestCase(false, false)] [TestCase(true, false)] [TestCase(true, true)]
@@ -101,6 +110,8 @@ namespace Journey.Tests
                     Assert.That(feedback.BarCount, Is.EqualTo(1)); Assert.That(feedback.Bar(0).Health, Is.EqualTo(40));
                     sim.TryFire(AtEnemy(sim), out _); feedback.CollectBars(sim, camera, 1);
                     Assert.That(feedback.Bar(0).Health, Is.EqualTo(20));
+                    Vector3 woundedCoreTip = camera.WorldToViewportPoint(sim.Position(0) + new Vector3(.246f, 1.4775f, 0));
+                    Assert.That(Vector2.Distance(feedback.Bar(0).OwnerViewport, woundedCoreTip), Is.LessThan(.001f), "Connector must end at the wounded silhouette, not at the old bar position.");
                     sim.TogglePause(); feedback.CollectBars(sim, camera, 1); Assert.That(feedback.BarCount, Is.EqualTo(1));
                     camera.transform.rotation = Quaternion.Euler(0, 180, 0); feedback.CollectBars(sim, camera, 1);
                     Assert.That(feedback.BarCount, Is.Zero);
@@ -154,7 +165,8 @@ namespace Journey.Tests
                     sim.Reset(1000, 137, false); var feedback = new CombatFeedback();
                     feedback.CollectBars(sim, camera, 1);
                     int visible = feedback.Bar(0).EnemyIndex;
-                    sim.TryFire(new Ray(sim.Position(visible) + Vector3.up * 1.1f - Vector3.forward, Vector3.forward), out ShotResult wound);
+                    camera.transform.rotation = Quaternion.LookRotation(sim.Position(visible) + Vector3.up * 1.1f - camera.transform.position);
+                    sim.TryFire(new Ray(camera.transform.position, camera.transform.forward), out ShotResult wound);
                     Assert.That(wound.Hit, Is.True);
                     int shots = sim.Shots, kills = sim.Kills, health = sim.EnemyHealth(wound.EnemyIndex);
                     feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
@@ -166,6 +178,8 @@ namespace Journey.Tests
                     var firstBounds = new Rect[feedback.VisibleBarCount];
                     for (int i = 0; i < feedback.VisibleBarCount; i++)
                     {
+                        Assert.That(feedback.VisibleBar(i).Priority, Is.LessThan(2), "Healthy background labels must not fill the cluster.");
+                        Assert.That(feedback.VisibleBarBounds(i).y, Is.EqualTo((1 - feedback.VisibleBar(i).Viewport.y) * 720 - 2).Within(.001), "Do not detach labels into floating rows.");
                         if (feedback.VisibleBar(i).EnemyIndex == wound.EnemyIndex) woundedVisible = true;
                         firstBounds[i] = feedback.VisibleBarBounds(i);
                         for (int j = 0; j < i; j++) Assert.That(firstBounds[i].Overlaps(firstBounds[j]), Is.False);
