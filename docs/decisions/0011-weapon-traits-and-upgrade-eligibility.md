@@ -31,6 +31,6 @@ Piercing/ricochet counts, damage falloff, enemy versus surface bounces, targetin
 
 ## Next design step and limits
 
-Define the steady rifle's baseline traits, which additions it can accept, and a few distinguishable earned choices. Use a small authored subset for the first test. The capacity/mastery/prepared-power framework remains later [GDJ-8](https://linear.app/cnid/issue/GDJ-8/develop-hybrid-gun-capacity-mastery-and-prepared-power-rules) work; this record does not select training costs or a full weapon tree.
+**Subsequent owner sequencing clarification:** observe the existing rifle before assigning its traits or a concrete upgrade pool. [GDJ-2's baseline playtest brief](../planning/tasks/GDJ-2.md) owns the current observation and proceed/revise decision. Keep this eligibility rule saved for later; it does not require a trait implementation or full gun specification before that check. After observations support a bounded progression experiment, define only its needed traits, compatible additions and earned choices. The capacity/mastery/prepared-power framework remains later [GDJ-8](https://linear.app/cnid/issue/GDJ-8/develop-hybrid-gun-capacity-mastery-and-prepared-power-rules) work; this record does not select training costs or a full weapon tree.
 
 No gameplay implementation, Unity operation, benchmark or human play evidence accompanies this decision.

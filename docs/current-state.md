@@ -20,6 +20,8 @@ This establishes a local synthetic percentile result. It does not establish mult
 
 ## Direction and constraints
 
+**Baseline-first sequencing correction, October 3:** observe the current rifle before assigning traits or a concrete upgrade pool. [GDJ-2](planning/tasks/GDJ-2.md) already owns the human play observations and proceed/revise decision; use those findings to choose one next revision or progression experiment. The accepted eligibility rule remains saved for later. No new build, play observation or playable capability accompanies this correction.
+
 **Weapon-trait clarification:** [decision 0011](decisions/0011-weapon-traits-and-upgrade-eligibility.md) accepts ordinary enhancement of existing traits and specific compatible items/transformations that add a trait and open future upgrades. Starting rifle traits, exact compatibility and offer/shared-recipient timing remain open. No trait/eligibility/upgrade system is implemented by this documentation checkpoint.
 
 **First-gun/growth clarification:** the owner selected a steady rifle with predictable, frequent shots as the archetype to explore first. Its detailed baseline, upgrades and visual effects remain open; the existing prototype rifle does not establish their acceptance. Chosen effects determine usefulness, and possible late-run chaos should retain useful screen information. The [first-gun discussion](design/engine-kingdoms-first-encounter.md#first-gun-and-readable-growth--discussion-checkpoint) contains selected direction and proposed details. No playable capability changes.
