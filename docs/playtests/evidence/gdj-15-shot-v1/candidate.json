@@ -13,7 +13,7 @@
     "release": true,
     "manifest": "build-manifest.json",
     "editor": "6000.3.25f1",
-    "manifestSha256": "d2dd82da8258c6efe620ade58a5a98ad2fca450899a7d1d140b2df34e02b70b7"
+    "manifestSha256": "95ebe3880d31fea34faf3e71b364eaaa02b74043fb804c9818a4f9fa030a720f"
   },
   "encounter": {
     "combinedCharacters": false,

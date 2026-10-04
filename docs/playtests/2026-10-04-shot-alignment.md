@@ -7,7 +7,7 @@
 - Source: `d93e867837915c9dae4a5b68947a7ecdfad703d3`, clean release Windows x64 Mono/D3D11 player built `2026-10-04T05:26:22.9890758Z`.
 - Unity 6000.3.25f1 (`e1dba0a9aba4`), URP 17.3.0, Input System 1.20.0, Test Framework 1.6.0, Burst 1.8.30; package/editor settings unchanged.
 - Seed 137, 35 drones, 60 seconds, 40 enemy HP / 20 rifle damage, 65 m range / 0.12 s interval. Burst simulation, culled separate meshes, cube projectile renderer, 1920×1080 windowed, 144 cap, VSync off.
-- [Candidate metadata](evidence/gdj-15-shot-v1/candidate.json) and [whole-player manifest](evidence/gdj-15-shot-v1/build-manifest.json): 166 files / 96,914,690 bytes; manifest SHA256 `d2dd82da8258c6efe620ade58a5a98ad2fca450899a7d1d140b2df34e02b70b7`. Live output and complete archive hashes match.
+- [Candidate metadata](evidence/gdj-15-shot-v1/candidate.json) and [whole-player manifest](evidence/gdj-15-shot-v1/build-manifest.json): 166 files / 96,914,690 bytes; manifest SHA256 `95ebe3880d31fea34faf3e71b364eaaa02b74043fb804c9818a4f9fa030a720f`. Live output and complete archive hashes match.
 - Working player: `C:/Users/Darian/.codex/worktrees/gdj-16-damage-feedback/new-game-dev/prototypes/001-stacked-weapons/build/StackLab/StackLab.exe`. Complete candidate archive: sibling `StackLab-GDJ15-v1`.
 - Accepted GDJ-16 control: sibling `StackLab-GDJ16-v7`, source `0deb52d8dd7e2790b1651985f8a57642b37ce8d2`. All 166 archived files reverified before replacing the live output. Original GDJ-2 control remains in its baseline worktree, source `28ca1bce4d71d0af82326a93f65a528ebfd1cd5c`.
 
