@@ -30,6 +30,8 @@ namespace Journey
         public const float Tick = 1f / 60f;
         public const float EnemyRadius = .62f;
         public const int EnemyMaxHealth = 40;
+        public const float DefaultRifleInterval = .12f, DefaultRifleRate = 1f / DefaultRifleInterval;
+        public const float MinRifleRate = .5f, MaxRifleRate = 120;
         const float CellSize = 2f;
         const int GridWidth = 32;
         readonly Vector3[] positions = new Vector3[Capacity];
@@ -40,7 +42,26 @@ namespace Journey
         readonly int[] next = new int[Capacity];
         readonly int[] cells = new int[GridWidth * GridWidth];
         System.Random random;
-        float fireRemaining, damageRemaining;
+        double fireRemaining;
+        float damageRemaining;
+        float rifleRate = DefaultRifleRate, rifleInterval = DefaultRifleInterval;
+        public float RifleInterval => rifleInterval;
+        public float RifleRate
+        {
+            get => rifleRate;
+            set
+            {
+                if (!(value >= MinRifleRate && value <= MaxRifleRate))
+                    throw new ArgumentOutOfRangeException(nameof(value), "Rifle rate must be 0.5–120 shots/second.");
+                // Text/CLI decimal round trips can land on the adjacent float. Preserve
+                // the original interval when a value expresses the baseline rate.
+                if (Mathf.Abs(value - DefaultRifleRate) < .00001f) value = DefaultRifleRate;
+                float interval = value == DefaultRifleRate ? DefaultRifleInterval : 1f / value;
+                // Keep cooldown progress, including through a paused testing-menu edit.
+                fireRemaining *= (double)interval / rifleInterval;
+                rifleRate = value; rifleInterval = interval;
+            }
+        }
         RunState beforePause;
         int tick;
         static readonly ProfilerMarker CrowdMarker = new ProfilerMarker("Journey.Crowd");
@@ -216,7 +237,7 @@ namespace Journey
             shot = new ShotResult(ray.origin + ray.direction * 65, -1, 0, 0, 0);
             if (State != RunState.Running || fireRemaining > 0) return false;
             // Simulation time drives cadence; render FPS does not change damage output.
-            fireRemaining += .12f;
+            fireRemaining += rifleInterval;
             Shots++;
             int target = AimTarget(ray, out float nearest, alpha);
             Vector3 end = ray.origin + ray.direction * nearest;

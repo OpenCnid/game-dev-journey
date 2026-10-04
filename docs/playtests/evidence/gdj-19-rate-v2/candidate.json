@@ -1,0 +1,59 @@
+{
+  "candidateId": "GDJ-19-rate-v2-2026-10-04",
+  "source": {
+    "revision": "bb7a0c6dae1906b2e8baf7ef7656eca9b0f1e841",
+    "builtUtc": "2026-10-04T05:57:26.731399Z",
+    "dirty": false
+  },
+  "controlSource": "d93e867837915c9dae4a5b68947a7ecdfad703d3",
+  "build": {
+    "release": true,
+    "fileCount": 166,
+    "editor": "6000.3.25f1",
+    "manifestSha256": "637bc99257e402c0925be7261959f311c0212361fe3380532d17db59825609ad",
+    "totalBytes": 96916770,
+    "platform": "Windows x64 Mono / D3D11",
+    "manifest": "build-manifest.json"
+  },
+  "encounter": {
+    "fpsCap": 144,
+    "seed": 137,
+    "durationSeconds": 60,
+    "resolution": "1920x1080 windowed",
+    "enemies": 35,
+    "simulation": "burst",
+    "vSync": 0,
+    "rendering": "culled"
+  },
+  "rifle": {
+    "defaultIntervalSeconds": 0.12,
+    "presets": [
+      2,
+      8.333333333333334,
+      30,
+      120
+    ],
+    "units": "shots/second",
+    "minimumRate": 0.5,
+    "testedSmokeRates": [
+      2,
+      8.333333333333334,
+      120
+    ],
+    "maximumRate": 120,
+    "resetPolicy": "Retain rate, reset encounter/cooldown",
+    "baselineDecimalPolicy": "Normalize adjacent float representations to original 0.12f interval"
+  },
+  "checks": {
+    "performanceCapture": "None; functional smoke only",
+    "humanRateComparison": "Accepted by P1 on October 4, 2026: tested and looks good; merge authorized. No detailed rate-specific observations or performance measurements supplied.",
+    "editMode": {
+      "failed": 0,
+      "passed": 65
+    },
+    "playMode": {
+      "failed": 0,
+      "passed": 6
+    }
+  }
+}

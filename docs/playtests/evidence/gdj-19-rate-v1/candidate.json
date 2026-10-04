@@ -1,0 +1,58 @@
+{
+  "candidateId": "GDJ-19-rate-v1-2026-10-04",
+  "source": {
+    "revision": "c1bb5bf68da6bdb2d0915eb2500c524a4716f402",
+    "builtUtc": "2026-10-04T05:50:18.8832756Z",
+    "dirty": false
+  },
+  "controlSource": "d93e867837915c9dae4a5b68947a7ecdfad703d3",
+  "build": {
+    "platform": "Windows x64 Mono / D3D11",
+    "totalBytes": 96916770,
+    "release": true,
+    "manifestSha256": "4d41f864e21dbd28800bab2bc7b9a36239d54d4d98fe4975e1e0c358a30e1e66",
+    "editor": "6000.3.25f1",
+    "fileCount": 166,
+    "manifest": "build-manifest.json"
+  },
+  "encounter": {
+    "fpsCap": 144,
+    "enemies": 35,
+    "seed": 137,
+    "vSync": 0,
+    "simulation": "burst",
+    "durationSeconds": 60,
+    "rendering": "culled",
+    "resolution": "1920x1080 windowed"
+  },
+  "rifle": {
+    "minimum": 0.5,
+    "defaultRate": 8.333333333333334,
+    "presets": [
+      2,
+      8.333333333333334,
+      30,
+      120
+    ],
+    "units": "shots/second",
+    "testedSmokeRates": [
+      2,
+      8.333333333333334,
+      120
+    ],
+    "resetPolicy": "Retain rate, reset encounter/cooldown",
+    "maximum": 120
+  },
+  "checks": {
+    "playMode": {
+      "passed": 6,
+      "failed": 0
+    },
+    "humanRateComparison": "Pending",
+    "editMode": {
+      "passed": 64,
+      "failed": 0
+    },
+    "performanceCapture": "None; functional smoke only"
+  }
+}

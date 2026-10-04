@@ -44,6 +44,7 @@ namespace Journey
         public int frameCap, vSync, samples, framesOverBudget, framesOverDoubleBudget, catchupLimitFrames;
         public bool editor, developmentBuild, gpuTimingAvailable, standardDuration, batchMode;
         public float warmupSeconds, captureSeconds;
+        public float rifleShotsPerSecond, rifleIntervalSeconds;
         public double medianMs, p95Ms, p99Ms, maxMs, averageFps, meanSimulationMs, meanCpuFrameMs, meanGpuFrameMs;
         public int cpuTimingSamples, gpuTimingSamples, shots, kills;
         public int rejectedCpuTimings, rejectedGpuTimings;
@@ -120,6 +121,7 @@ namespace Journey
                 quality = QualitySettings.names[QualitySettings.GetQualityLevel()],
                 warmupSeconds = warmup, captureSeconds = seconds, standardDuration = warmup >= 30 && seconds >= 60,
                 shots = shots, kills = kills,
+                rifleShotsPerSecond = sim.RifleRate, rifleIntervalSeconds = sim.RifleInterval,
                 workload = sim.Abilities.Enabled ? "boss-mixed-v1" : "regular-v2",
                 bossCount = sim.Abilities.Enabled ? sim.Count : 0, synchronizedAbilities = sim.Abilities.Synchronized,
                 abilityActivations = sim.Abilities.Activations - startActivations,

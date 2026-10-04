@@ -17,7 +17,7 @@ namespace Journey
         readonly ArenaPresentation view = new ArenaPresentation();
         readonly BenchmarkCapture capture = new BenchmarkCapture();
         readonly FrameTiming[] timings = new FrameTiming[1];
-        bool benchmark, quitAfterBenchmark, screenshotSaved;
+        bool benchmark, quitAfterBenchmark, screenshotSaved, screenshotAtMenu;
         bool bosses = true, synchronizedAbilities;
         int crowd = 100, seed = 137, repeat = 1, repeats = 3;
         int savedCap = 144, savedVSync, captureStartShots, captureStartKills;
@@ -26,6 +26,8 @@ namespace Journey
         double runStarted, previousClock, captureStarted;
         string outputDirectory, lastResult = "", error = "", screenshotPath;
         string customCap = "144";
+        string customRifleRate = CombatSimulation.DefaultRifleRate.ToString("G8", CultureInfo.InvariantCulture), rateError = "";
+        Vector2 menuScroll;
         string profilePath;
         float profileSeconds = 5;
         double profileStarted;
@@ -33,6 +35,7 @@ namespace Journey
         GUIStyle title, label, small, heading, button;
         public RunState State => sim.State;
         public int ShotsFired => sim.Shots;
+        public float RifleRate => sim.RifleRate;
 
         void Awake()
         {
@@ -57,6 +60,7 @@ namespace Journey
                 if (args[i] == "-benchmark") autoBenchmark = true;
                 if (args[i] == "-playtest") autoPlay = true;
                 if (args[i] == "-quitAfterBenchmark") quitAfterBenchmark = true;
+                if (args[i] == "-screenshotAtMenu") screenshotAtMenu = true;
                 if (args[i] == "-crowd" && int.TryParse(value, out int c)) crowd = Mathf.Clamp(c, 0, CombatSimulation.Capacity);
                 if (args[i] == "-workload") bosses = value == "bosses";
                 if (args[i] == "-hideWarnings") view.HideWarnings = true;
@@ -74,6 +78,7 @@ namespace Journey
                 if (args[i] == "-profile") profilePath = Path.GetFullPath(value);
                 if (args[i] == "-profileSeconds" && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out float ps)) profileSeconds = Mathf.Clamp(ps, 1, 30);
                 if (args[i] == "-seed" && int.TryParse(value, out int s)) seed = s;
+                if (args[i] == "-rifleRate" && !TrySetRifleRate(value)) throw new ArgumentException(rateError);
                 if (args[i] == "-repeats" && int.TryParse(value, out int r)) repeats = Mathf.Clamp(r, 1, 20);
                 if (args[i] == "-warmup" && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out float w)) warmup = Mathf.Clamp(w, 0, 300);
                 if (args[i] == "-seconds" && float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out float t)) captureSeconds = Mathf.Clamp(t, 1, 600);
@@ -143,7 +148,7 @@ namespace Journey
                             Ray ray = new Ray(sim.Player + Vector3.up * 1.65f, Quaternion.Euler(pitch, yaw, 0) * Vector3.forward);
                             long weaponStart = StageProfile.Begin();
                             using (WeaponMarker.Auto())
-                                if (sim.TryFire(ray, out ShotResult shot)) view.ShowShot(shot.End, benchmark: true);
+                                while (sim.TryFire(ray, out ShotResult shot)) view.ShowShot(shot.End, benchmark: true);
                             StageProfile.WeaponMs += StageProfile.End(weaponStart);
                         }
                         accumulator -= CombatSimulation.Tick; ticks++;
@@ -183,7 +188,7 @@ namespace Journey
                 }
             }
             if (profileActive && now - profileStarted >= profileSeconds) StopProfile();
-            if (!screenshotSaved && screenshotPath != null && sim.Elapsed >= 3)
+            if (!screenshotSaved && screenshotPath != null && (screenshotAtMenu ? sim.State == RunState.Ready : sim.Elapsed >= 3))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(screenshotPath));
                 ScreenCapture.CaptureScreenshot(screenshotPath); screenshotSaved = true;
@@ -196,6 +201,34 @@ namespace Journey
             benchmark = false; capture.Cancel(); error = "";
             yaw = pitch = accumulator = 0;
             view.ResetFeedback(); sim.Reset(35, seed, false); SetCursor(true);
+        }
+        public bool TrySetRifleRate(string value)
+        {
+            if (!float.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out float rate) ||
+                !(rate >= CombatSimulation.MinRifleRate && rate <= CombatSimulation.MaxRifleRate))
+            { rateError = "Enter a rifle rate from 0.5 to 120 shots/sec."; return false; }
+            SetRifleRate(rate); return true;
+        }
+        void SetRifleRate(float rate)
+        {
+            sim.RifleRate = rate;
+            customRifleRate = sim.RifleRate.ToString("G8", CultureInfo.InvariantCulture); rateError = "";
+        }
+        void RifleRateControls()
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Rifle rate (shots/sec)", small, GUILayout.Width(160));
+            customRifleRate = GUILayout.TextField(customRifleRate, 12, GUILayout.Width(90), GUILayout.Height(28));
+            if (GUILayout.Button("Apply", GUILayout.Height(28))) TrySetRifleRate(customRifleRate);
+            GUILayout.Label($"Active: {sim.RifleRate:0.##}/s", small, GUILayout.Width(110));
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Slow 2/s", GUILayout.Height(26))) SetRifleRate(2);
+            if (GUILayout.Button("Baseline 8.33/s", GUILayout.Height(26))) SetRifleRate(CombatSimulation.DefaultRifleRate);
+            if (GUILayout.Button("Rapid 30/s", GUILayout.Height(26))) SetRifleRate(30);
+            if (GUILayout.Button("Stress 120/s", GUILayout.Height(26))) SetRifleRate(120);
+            GUILayout.EndHorizontal();
+            GUILayout.Label(rateError.Length > 0 ? rateError : "Combat + benchmark · 0.5–120 shots/sec · Restart keeps the selected rate.", small);
         }
         void StartBenchmark(int count)
         {
@@ -279,7 +312,7 @@ namespace Journey
             GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one * scale);
             float width = Screen.width / scale, height = Screen.height / scale;
             GUI.Label(new Rect(30, 20, 500, 50), "STACK / LAB", title);
-            GUI.Label(new Rect(32, 69, 520, 24), "01   /   PULSE RIFLE     ·     CROWD SIMULATION", small);
+            GUI.Label(new Rect(32, 69, 700, 24), $"01   /   PULSE RIFLE     ·     {sim.RifleRate:0.##} SHOTS/SEC     ·     CROWD SIMULATION", small);
             GUI.Label(new Rect(width - 320, 26, 300, 30), $"{1000 / Mathf.Max(.01f, frameMs):F0} FPS   /   {frameMs:F2} ms", heading);
             GUI.Label(new Rect(width - 320, 59, 300, 25), "144 FPS TARGET  ·  6.94 ms BUDGET", small);
             if (sim.State == RunState.Running)
@@ -305,11 +338,14 @@ namespace Journey
             else if (sim.State != RunState.Running)
             {
                 GUILayout.BeginArea(new Rect(width / 2 - 280, 130, 560, height - 155), GUI.skin.box);
+                menuScroll = GUILayout.BeginScrollView(menuScroll);
                 GUILayout.Space(18);
                 string status = sim.State == RunState.Won ? "ENCOUNTER COMPLETE" : sim.State == RunState.Lost ? "RIG OFFLINE" : sim.State == RunState.Paused ? "SIMULATION PAUSED" : "ONE WEAPON. HOLD THE LINE.";
                 GUILayout.Label(status, heading);
                 GUILayout.Label("Survive 60 seconds. Aim the pulse rifle at the approaching drones; movement keeps you alive. Two hits destroy a drone.", label);
                 GUILayout.Space(12);
+                RifleRateControls();
+                GUILayout.Space(8);
                 if (sim.State == RunState.Paused && !sim.Benchmark && GUILayout.Button("RESUME", button)) { sim.TogglePause(); SetCursor(true); }
                 if (GUILayout.Button("START / RESTART COMBAT", button)) StartCombat();
                 GUILayout.Space(12);
@@ -337,6 +373,7 @@ namespace Journey
                 bool sync = GUILayout.Toggle(QualitySettings.vSyncCount > 0, " VSync (display refresh takes precedence over the cap)"); QualitySettings.vSyncCount = sync ? 1 : 0;
                 if (lastResult.Length > 0) GUILayout.Label("Saved: " + lastResult, small);
                 if (error.Length > 0) GUILayout.Label(error, small);
+                GUILayout.EndScrollView();
                 GUILayout.EndArea();
             }
         }

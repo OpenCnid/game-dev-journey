@@ -1,0 +1,10 @@
+{
+  "source": "bb7a0c6dae1906b2e8baf7ef7656eca9b0f1e841",
+  "pid": 16452,
+  "checkedUtc": "2026-10-04T06:01:47.2378816Z",
+  "autoPlay": false,
+  "initialRateNominal": 8.333333333333334,
+  "exceptionScan": "No Exception/ERROR/Crash matches",
+  "screenshot": "menu.png",
+  "arguments": "-seed 137 -simulation burst -rendering culled -screen-width 1920 -screen-height 1080 -screen-fullscreen 0 -logFile \"C:\\Users\\Darian\\.codex\\worktrees\\gdj-16-damage-feedback\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\GDJ-19-v2-player.log\" -screenshot \"C:\\Users\\Darian\\.codex\\worktrees\\gdj-16-damage-feedback\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\GDJ-19-v2-menu.png\" -screenshotAtMenu"
+}
