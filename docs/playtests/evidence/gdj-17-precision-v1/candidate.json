@@ -50,6 +50,16 @@
     "standaloneSmokes": "passed 2/s and 120/s; each 300 capture ticks, 10/600 shots; zero catch-up-limit frames/dropped projectiles; reference benchmark only",
     "menuInspection": "passed; source description and all retained controls readable; startup log has no Exception/ERROR/Crash matches"
   },
-  "humanAcceptance": "Accepted October 4, 2026: P1 responds to presented slow/rapid aim, wounded-region and cue comparison, Yes, that all looks good. No detailed rates/run counts/performance supplied. Coordinator review/integration remains; no merge instruction in task chat.",
-  "performance": "No new performance conclusion. Reference smokes do not exercise precision combat."
+  "humanAcceptance": "Accepted October 4, 2026: P1 approves the presented slow/rapid aim, wounded-region and cue comparison, then explicitly requests commit/PR/merge. No detailed rates/run counts/performance supplied.",
+  "performance": "No new performance conclusion. Reference smokes do not exercise precision combat.",
+  "integration": {
+    "pullRequest": "https://github.com/OpenCnid/game-dev-journey/pull/8",
+    "merged": true,
+    "mergeCommit": "a90c61986721a7d280cda07dbccce05934b21f13",
+    "mergedHead": "cb18757d199188683a5016742fb7a22862c46120",
+    "ownerAuthorized": "October 4, 2026",
+    "runtimeMatchesAcceptedRelease": true,
+    "newRuntimeChanges": false,
+    "checksRerunForDocumentation": false
+  }
 }

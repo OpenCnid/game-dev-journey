@@ -14,7 +14,7 @@ Combat draws paired meshes, including when the combined-character experiment is 
 
 ## Exact release and controls
 
-Implementation/evidence are proposed against main `888a32d` in [draft PR #8](https://github.com/OpenCnid/game-dev-journey/pull/8). The PR stays draft for coordinator review; P1 has accepted the exact candidate below.
+Implementation/evidence merged from base main `888a32d` through [PR #8](https://github.com/OpenCnid/game-dev-journey/pull/8) at **`a90c61986721a7d280cda07dbccce05934b21f13`** on October 4, following the owner's explicit commit/PR/merge instruction. The merged runtime matches the accepted release source below. Integration documentation adds no runtime change or new Unity check.
 
 - Clean source **`2e721214a51f7a8b5bb5ce22305abed4bb3dc48b`**, stamped **`2026-10-04T06:25:15.8539409Z`**, built using `tools/unity.ps1 -Action Build`. Unity **6000.3.25f1**, release Windows x64 Mono/D3D11; pinned packages/render settings unchanged. Later evidence commits do not change this runtime.
 - [Candidate metadata](evidence/gdj-17-precision-v1/candidate.json) / [whole-player manifest](evidence/gdj-17-precision-v1/build-manifest.json): **166 files / 96,919,497 bytes**, manifest SHA256 `8eb9699b6b3bc4b5573f1830f74b860fe2af61f3b61405069ab132e5fc24b2b4`. Every archived file matches the live player's manifest.
@@ -60,4 +60,4 @@ Comparison brief supplied to P1:
 
 After opening this exact candidate, P1 was asked to compare Slow 2/s and Rapid 30/s, target color against aim, wounded-region agreement and critical/rapid-fire cue clarity. P1 responds: **“Yes, that all looks good.”** This accepts the presented aiming/region/feedback comparison. No detailed rate selections, run counts or performance measurements were supplied. The acceptance changes documentation/metadata only; runtime source and whole-player hashes remain unchanged.
 
-Keep GDJ-17 **In Review** with a draft PR for coordinator code review/integration. P1's comparison is satisfied; no merge instruction was supplied in this chat. This is local single-player combat; high-count precision gameplay cost, multiplayer/weapon attribution, accessibility/color alternatives and final critical naming remain unverified/deferred. Historical crowd throughput cannot validate the new posed query at late-game scale.
+P1 subsequently says: **“Looks good to me, let's go and commit, make a PR, and merge.”** PR #8 is now merged at `a90c61986721a7d280cda07dbccce05934b21f13`; GDJ-17's implementation, comparison and integration are complete. The accepted release source/archive remain unchanged. This is local single-player combat; high-count precision gameplay cost, multiplayer/weapon attribution, accessibility/color alternatives and final critical naming remain unverified/deferred. Historical crowd throughput cannot validate the new posed query at late-game scale.
