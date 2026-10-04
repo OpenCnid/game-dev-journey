@@ -8,7 +8,7 @@ Use anonymous participant labels and leave personal information out of the repos
 
 ## Records
 
-- [2026-10-04: Rifle fire-rate controls](2026-10-04-rifle-rate-controls.md) - custom 0.5–120/s and four presets for combat/benchmarks; cadence/reset/input/render/startup checks and slow/baseline/stress report counts pass; developer rate comparison remains open.
+- [2026-10-04: Rifle fire-rate controls](2026-10-04-rifle-rate-controls.md) - custom 0.5–120/s and four presets for combat/benchmarks; cadence/reset/input/render/startup checks and slow/baseline/stress report counts pass; P1 tests, accepts and authorizes integration on October 4.
 - [2026-10-04: Rifle shot alignment during fast turns](2026-10-04-shot-alignment.md) - stale muzzle/retained line reproduced; displayed-pose hits and one-frame tracers pass checks/build/startup; P1 accepts smooth, undelayed aiming.
 - [2026-10-03: Overhead HP without cyan brackets](2026-10-03-overhead-health.md) - P1 accepts on October 4 and authorizes merge; clear head gap/consistent wounded colors, head-clearance/visibility/render checks pass; GDJ-15 selected next.
 - [2026-10-03: Normal-enemy HP only after damage](2026-10-03-damaged-only-health.md) - 49 checks; P1 rejects overlapping cyan brackets/HP and head-level placement, prompting higher overhead bars.

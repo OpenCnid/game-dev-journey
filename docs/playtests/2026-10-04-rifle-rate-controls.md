@@ -1,6 +1,6 @@
 # GDJ-19: rifle rate testing controls
 
-**October 4, 2026 — implemented technical candidate, open for developer review.** P1 accepted [GDJ-15's aiming fix](2026-10-04-shot-alignment.md) as smooth and undelayed, then requested an option to test slow early-game-like shooting and continuous mid/late-game-like shooting. This adds a local testing configuration, not progression balance or upgrades.
+**October 4, 2026 — developer-tested and accepted.** P1 accepted [GDJ-15's aiming fix](2026-10-04-shot-alignment.md) as smooth and undelayed, then requested an option to test slow early-game-like shooting and continuous mid/late-game-like shooting. This adds a local testing configuration, not progression balance or upgrades.
 
 ## Behavior
 
@@ -41,4 +41,8 @@ The [1920×1080 startup-menu capture](evidence/gdj-19-rate-v2/menu.png) was visu
 
 ## Review and limits
 
-Implementation lives on `feat/rifle-fire-rate-controls`, stacked on accepted, unmerged PR #5. P1 can choose Slow or Stress, press R, then Escape/change/Resume to compare intensity without resetting the run. Presets are diagnostic samples; no human rate-comparison observations or progression balance conclusions are supplied yet. Future ammo/reload, weapon racks/upgrades and networking need their own per-weapon timing contracts. The [bounded brief](../planning/tasks/GDJ-19.md) preserves this scope.
+Implementation lives on `feat/rifle-fire-rate-controls` in [PR #6](https://github.com/OpenCnid/game-dev-journey/pull/6), originally stacked on PR #5. The accepted aiming parent merged at `522640716d6627c7b9837f638436a921798301ad` before rate-control integration. Choose Slow or Stress, press R, then Escape/change/Resume to compare intensity without resetting the run. Presets are diagnostic samples. Future ammo/reload, weapon racks/upgrades and networking need their own per-weapon timing contracts. The [bounded brief](../planning/tasks/GDJ-19.md) preserves this scope.
+
+## Human acceptance — October 4
+
+P1 reports: “Okay we tested it and it looks good.” They explicitly request committing, making a PR and merging it. This accepts the presented v2 candidate; no detailed rate selections, run counts or performance measurements are supplied. The acceptance updates documentation and metadata only: runtime/build source and preserved whole-player hashes above remain unchanged. Recommend GDJ-17 next to align healthy/wounded critical hit regions and target coloring with the accepted aim, then compare precision at slow and continuous rates.
