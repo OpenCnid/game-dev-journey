@@ -1,0 +1,23 @@
+# GDJ-17: precision aim and critical head hits
+
+Started October 4, 2026 from main `888a32dcaff93482b41745cbc86e51f7d6bf3185`.
+Serves foundation pillar 3, readable, responsive combat. [Issue](https://linear.app/cnid/issue/GDJ-17/highlight-aimed-enemies-and-add-2-critical-head-hits) owns live status.
+
+## Contract recorded before runtime edits
+
+- Simulation owns cadence, health, incarnation, hit resolution and death. Rendering supplies the GDJ-15 displayed camera ray/interpolation alpha. A read-only `QueryAim` returns enemy/incarnation, region and nearest surface distance; preview and firing use that same function. Firing queries again when due; cached UI state never grants damage.
+- Combat regions are the actual unit-cube body and head transformed by the healthy/wounded render matrices, including compression, offset and shear. The exposed head is critical; body is ordinary. Select the first surface along the ray across both regions and all enemies. Exactly coincident body/head surfaces prefer head, exactly coincident enemies prefer lower slot index. No selection through a nearer body to a farther head. Inclusive boundaries, inside starts at distance zero, zero-direction/behind/out-of-range rays miss. Rifle range remains 65 m.
+- Interpolation owns position only; current authoritative HP selects the wounded pose immediately after a hit. Normal and culled combat renderers share these matrices. The combined-character experiment remains benchmark-only at draw time; combat uses the paired meshes so its wounded shapes agree with targeting.
+- Body uses 20 base damage ×1, head ×2. Outcomes capture region, requested damage, actual damage, health before/after and incarnation before respawn. A fresh 40-HP critical kills once; a wounded critical reports 20 actual damage, not 40. No new attribution/weapon/network system here; snapshots are a boundary for those later consumers.
+- Existing fixed-clock cadence and render-frame emission remain. Misses consume due shots/cooldown, continuous autofire continues; preview works during cooldown and clears on the next displayed miss. Pause/end hide targeting color; pause freezes transient hit/kill/player cues, restart resets them.
+- White reticle means miss, green means valid body, gold means valid head. Critical hit feedback adds a short gold CRIT cue independently of the white hit and outer gold KILL cues. No body outline/brackets, full-health HP, central enemy HP/dead-target display, aim assist or target-gated autofire. Names/colors are candidate choices for P1 comparison; lore naming stays provisional.
+- GDJ-18 can consume the preview's region state and supply static reticle appearance later; import/persistence/editor work stays separate. Later weapons may reuse the query or introduce their own explicit region/multiplier policies. Cooperative authority must revalidate incarnation/pose and own attribution; local preview is never authority.
+- Synthetic benchmark preserves its historical fixed-state sphere, 20 damage, unwounded paired/combined poses and legacy tracer. `QueryAim` explicitly selects this reference path for benchmark mode, so benchmark counters remain comparable. It does not exercise critical gameplay. No performance claim from hidden smokes.
+
+## Verification and human comparison
+
+Focused boundaries/overlap/nearest, healthy/wounded pose and displayed interpolation, cooldown/miss/read-only preview, actual damage/incarnation/death, managed/Burst/native parity, feedback pause/reset, legacy benchmark isolation. Run Edit Mode and Play Mode serially using `tools/unity.ps1`, then commit clean runtime before release build. Preserve accepted GDJ-15/16/19 archives without modifying their checkout. Archive the whole candidate player with source/configuration/hash manifest. Launch it for P1 at slow/baseline/rapid rates; acceptance remains pending until P1 compares aiming, wounds, critical kills and continuous feedback.
+
+## Resume
+
+Isolated worktree: `C:/Users/Darian/.codex/worktrees/gdj-17-precision-hits/new-game-dev`, branch `gdj-17-precision-hits`. Shared posed query, snapshots, reticle and independent critical feedback implemented. Serialized pinned-editor checks pass **77 Edit Mode / 7 Play Mode** cases. GDJ-15/16/19 control archives reverified against their complete saved manifests (166 files each, no hash mismatches). Next build/archive/launch this committed clean source, save exact release evidence and open a draft PR. Human acceptance pending; no merge authorization for this candidate.

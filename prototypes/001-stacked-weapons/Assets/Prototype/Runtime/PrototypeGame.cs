@@ -317,7 +317,7 @@ namespace Journey
             GUI.Label(new Rect(width - 320, 59, 300, 25), "144 FPS TARGET  ·  6.94 ms BUDGET", small);
             if (sim.State == RunState.Running)
             {
-                GUI.color = Color.white;
+                GUI.color = benchmark ? Color.white : view.Feedback.CrosshairColor;
                 GUI.DrawTexture(new Rect(width / 2 - 7, height / 2 - 1, 14, 2), Texture2D.whiteTexture);
                 GUI.DrawTexture(new Rect(width / 2 - 1, height / 2 - 7, 2, 14), Texture2D.whiteTexture);
                 GUI.color = Color.white;
@@ -342,7 +342,7 @@ namespace Journey
                 GUILayout.Space(18);
                 string status = sim.State == RunState.Won ? "ENCOUNTER COMPLETE" : sim.State == RunState.Lost ? "RIG OFFLINE" : sim.State == RunState.Paused ? "SIMULATION PAUSED" : "ONE WEAPON. HOLD THE LINE.";
                 GUILayout.Label(status, heading);
-                GUILayout.Label("Survive 60 seconds. Aim the pulse rifle at the approaching drones; movement keeps you alive. Two hits destroy a drone.", label);
+                GUILayout.Label("Survive 60 seconds. Two body hits or one head hit destroy a fresh drone. Crosshair: green body ×1, gold head ×2, white miss. Movement keeps you alive.", label);
                 GUILayout.Space(12);
                 RifleRateControls();
                 GUILayout.Space(8);

@@ -14,13 +14,14 @@ namespace Journey.Tests
                 Vector3 previous = sim.Position(0);
                 sim.Step(Vector3.right, CombatSimulation.Tick);
                 const float alpha = .25f;
-                Vector3 center = Vector3.Lerp(previous, sim.Position(0), alpha) + Vector3.up * 1.1f;
-                Vector3 away = (previous - sim.Position(0)).normalized;
-                Vector3 direction = Vector3.Cross(away, Vector3.up).normalized;
-                var ray = new Ray(center + away * .61f - direction * 3, direction);
+                Vector3 center = Vector3.Lerp(previous, sim.Position(0), alpha) + Vector3.up * .8f;
+                Vector3 delta = previous - sim.Position(0);
+                Vector3 away = Mathf.Abs(delta.x) > Mathf.Abs(delta.z) ? Vector3.right * Mathf.Sign(delta.x) : Vector3.forward * Mathf.Sign(delta.z);
+                Vector3 direction = Vector3.Cross(away, Vector3.up);
+                var ray = new Ray(center + away * .424f - direction * 3, direction);
                 Assert.That(sim.AimTarget(ray, out _), Is.EqualTo(-1), "The current fixed pose is outside this silhouette-edge ray.");
                 Assert.That(sim.AimTarget(ray, out float distance, alpha), Is.EqualTo(0), "The visibly interpolated enemy occupies this ray.");
-                Assert.That(CombatSimulation.RaySphere(ray, center, CombatSimulation.EnemyRadius, out float surface), Is.True);
+                Assert.That(EnemyGeometry.RayCube(ray, EnemyGeometry.Body(sim.RenderPosition(0, alpha), false), out float surface), Is.True);
                 Assert.That(distance, Is.EqualTo(surface).Within(.00001f));
                 Assert.That(sim.TryFire(ray, out ShotResult shot, alpha), Is.True);
                 Assert.That(shot.Hit && !shot.Killed, Is.True);
@@ -35,7 +36,7 @@ namespace Journey.Tests
                     "Interpolation must not offset a fresh hit spark away from the resolved surface.");
                 Assert.That(sim.Shots, Is.EqualTo(1));
                 sim.Step(Vector3.zero, .12f);
-                ray = new Ray(sim.Position(0) + Vector3.up * 1.1f - Vector3.forward * 3, Vector3.forward);
+                ray = new Ray(sim.Position(0) + Vector3.up * .56f - Vector3.forward * 3, Vector3.forward);
                 Assert.That(sim.TryFire(ray, out ShotResult death), Is.True);
                 Assert.That(death.Killed, Is.True);
                 feedback.RecordShot(sim, death);
