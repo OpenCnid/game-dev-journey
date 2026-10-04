@@ -121,7 +121,7 @@ namespace Journey
                 movement = Quaternion.Euler(0, yaw, 0) * new Vector3(x, 0, z);
             }
             long begin = Stopwatch.GetTimestamp();
-            bool catchupLimit = false;
+            bool catchupLimit = false, stepped = false;
             using (SimulationMarker.Auto())
             {
                 if (sim.State == RunState.Running)
@@ -131,20 +131,21 @@ namespace Journey
                     while (accumulator >= CombatSimulation.Tick && ticks < 8 && sim.State == RunState.Running)
                     {
                         sim.Step(movement, CombatSimulation.Tick);
+                        stepped = true;
                         if (benchmark)
                         {
                             Vector3 direction = -sim.Player; direction.y = -.35f;
                             Quaternion aim = Quaternion.LookRotation(direction);
                             yaw = aim.eulerAngles.y; pitch = aim.eulerAngles.x;
                         }
-                        Ray ray = new Ray(sim.Player + Vector3.up * 1.65f, Quaternion.Euler(pitch, yaw, 0) * Vector3.forward);
-                        long weaponStart = StageProfile.Begin();
-                        using (WeaponMarker.Auto())
+                        if (benchmark)
                         {
-                            if (sim.TryFire(ray, out ShotResult shot))
-                            { view.ShowShot(shot.End); view.Feedback.RecordShot(sim, shot); }
+                            Ray ray = new Ray(sim.Player + Vector3.up * 1.65f, Quaternion.Euler(pitch, yaw, 0) * Vector3.forward);
+                            long weaponStart = StageProfile.Begin();
+                            using (WeaponMarker.Auto())
+                                if (sim.TryFire(ray, out ShotResult shot)) view.ShowShot(shot.End, benchmark: true);
+                            StageProfile.WeaponMs += StageProfile.End(weaponStart);
                         }
-                        StageProfile.WeaponMs += StageProfile.End(weaponStart);
                         accumulator -= CombatSimulation.Tick; ticks++;
                     }
                     if (accumulator >= CombatSimulation.Tick)
@@ -153,8 +154,20 @@ namespace Journey
                 }
             }
             double simulationMs = (Stopwatch.GetTimestamp() - begin) * 1000d / Stopwatch.Frequency;
+            float alpha = accumulator / CombatSimulation.Tick;
+            // Prepare the displayed pose and age old cues before consuming new shot events.
+            view.BeginFrame(sim, alpha, yaw, pitch, Time.unscaledDeltaTime);
             if (!benchmark) view.Feedback.ObservePlayerHealth(sim.PlayerHealth);
-            view.Draw(sim, accumulator / CombatSimulation.Tick, yaw, pitch, Time.unscaledDeltaTime);
+            if (!benchmark && stepped)
+            {
+                Ray ray = new Ray(view.Camera.transform.position, view.Camera.transform.forward);
+                long weaponStart = StageProfile.Begin();
+                using (WeaponMarker.Auto())
+                    while (sim.TryFire(ray, out ShotResult shot, alpha))
+                    { view.ShowShot(shot.End); view.Feedback.RecordShot(sim, shot, alpha); }
+                StageProfile.WeaponMs += StageProfile.End(weaponStart);
+            }
+            view.Draw(sim, alpha);
 
             if (benchmark)
             {

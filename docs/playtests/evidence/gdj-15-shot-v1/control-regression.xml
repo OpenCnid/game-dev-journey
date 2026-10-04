@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Failed(Child)" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-04 05:20:58Z" end-time="2026-10-04 05:20:59Z" duration="1.1694822">
+  <test-suite type="TestSuite" id="1013" name="Stack Lab" fullname="Stack Lab" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-10-04 05:20:58Z" end-time="2026-10-04 05:20:59Z" duration="1.169482" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1007" name="Journey.PlayTests.dll" fullname="C:/Users/Darian/.codex/worktrees/gdj-16-damage-feedback/new-game-dev/prototypes/001-stacked-weapons/Library/ScriptAssemblies/Journey.PlayTests.dll" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-10-04 05:20:58Z" end-time="2026-10-04 05:20:59Z" duration="1.160928" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="4772" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1008" name="Journey" fullname="Journey" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-10-04 05:20:58Z" end-time="2026-10-04 05:20:59Z" duration="1.160353" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1009" name="Tests" fullname="Journey.Tests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-10-04 05:20:58Z" end-time="2026-10-04 05:20:59Z" duration="1.160097" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1001" name="RuntimeTests" fullname="Journey.Tests.RuntimeTests" classname="Journey.Tests.RuntimeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-04 05:20:58Z" end-time="2026-10-04 05:20:59Z" duration="1.124025" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1004" name="ArenaStartsFiresAndRestartsWithoutRuntimeErrors" fullname="Journey.Tests.RuntimeTests.ArenaStartsFiresAndRestartsWithoutRuntimeErrors" methodname="ArenaStartsFiresAndRestartsWithoutRuntimeErrors" classname="Journey.Tests.RuntimeTests" runstate="Runnable" seed="43599848" result="Passed" start-time="2026-10-04 05:20:58Z" end-time="2026-10-04 05:20:59Z" duration="0.694223" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1002" name="DamagePresentationRendersBothOutcomesAndRestartClearsIt" fullname="Journey.Tests.RuntimeTests.DamagePresentationRendersBothOutcomesAndRestartClearsIt" methodname="DamagePresentationRendersBothOutcomesAndRestartClearsIt" classname="Journey.Tests.RuntimeTests" runstate="Runnable" seed="1818461119" result="Passed" start-time="2026-10-04 05:20:59Z" end-time="2026-10-04 05:20:59Z" duration="0.065243" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1003" name="ExperimentalRenderingPreservesSimulationAndDisposesBuffers" fullname="Journey.Tests.RuntimeTests.ExperimentalRenderingPreservesSimulationAndDisposesBuffers" methodname="ExperimentalRenderingPreservesSimulationAndDisposesBuffers" classname="Journey.Tests.RuntimeTests" runstate="Runnable" seed="2054980767" result="Passed" start-time="2026-10-04 05:20:59Z" end-time="2026-10-04 05:20:59Z" duration="0.353007" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1005" name="ShotPresentationTests" fullname="Journey.Tests.ShotPresentationTests" classname="Journey.Tests.ShotPresentationTests" runstate="Runnable" testcasecount="1" result="Failed" site="Child" start-time="2026-10-04 05:20:59Z" end-time="2026-10-04 05:20:59Z" duration="0.034924" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1006" name="FastTurnUsesCurrentMuzzleAndDoesNotLeaveAnOldLine" fullname="Journey.Tests.ShotPresentationTests.FastTurnUsesCurrentMuzzleAndDoesNotLeaveAnOldLine" methodname="FastTurnUsesCurrentMuzzleAndDoesNotLeaveAnOldLine" classname="Journey.Tests.ShotPresentationTests" runstate="Runnable" seed="662990097" result="Failed" start-time="2026-10-04 05:20:59Z" end-time="2026-10-04 05:20:59Z" duration="0.029852" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  A fresh shot must start at this frame's rendered muzzle, including yaw/pitch and recoil.
+  Expected: less than 0.00100000005f
+  But was:  1.3192426f
+]]></message>
+                <stack-trace><![CDATA[at Journey.Tests.ShotPresentationTests+<FastTurnUsesCurrentMuzzleAndDoesNotLeaveAnOldLine>d__0.MoveNext () [0x00276] in C:\Users\Darian\.codex\worktrees\gdj-16-damage-feedback\new-game-dev\prototypes\001-stacked-weapons\Assets\Prototype\Tests\PlayMode\ShotPresentationTests.cs:34
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0003a] in .\Library\PackageCache\com.unity.test-framework@bd7f943e9647\UnityEngine.TestRunner\NUnitExtensions\Attributes\TestEnumerator.cs:44
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[SHOT_ALIGNMENT_REPRO muzzleErrorMetres=1.319243 endpointViewport=(0.500215, 0.499731, 65.088310) birthVisible=True retainedAfterTurn=True lineRenderers=1
+Saving results to: C:/Users/Darian/AppData/LocalLow/Game Dev Journey/Stack Lab\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

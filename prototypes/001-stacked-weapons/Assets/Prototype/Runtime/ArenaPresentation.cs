@@ -136,20 +136,36 @@ namespace Journey
             shot.SetData(samples, 0);
         }
 
-        public void ShowShot(Vector3 end)
+        // Combat calls this after BeginFrame, with the resolved camera-ray endpoint.
+        // Benchmark calls it before BeginFrame to retain its original presentation workload.
+        public void ShowShot(Vector3 end, bool benchmark = false)
         {
-            tracer.SetPosition(0, weapon.TransformPoint(new Vector3(0, .035f, .5f)));
-            tracer.SetPosition(1, end); flash = .045f; recoil = .065f;
+            flash = .045f; recoil = .065f;
+            if (!benchmark) weapon.localPosition = new Vector3(.28f, -.24f, .55f - recoil);
+            tracer.SetPosition(0, benchmark ? weapon.TransformPoint(new Vector3(0, .035f, .5f)) : muzzlePulse.position);
+            tracer.SetPosition(1, end); tracer.enabled = true;
+            if (!benchmark) muzzlePulse.gameObject.SetActive(true);
             audio.PlayOneShot(shot);
         }
-        public void Draw(CombatSimulation sim, float alpha, float yaw, float pitch, float dt)
+        public void BeginFrame(CombatSimulation sim, float alpha, float yaw, float pitch, float dt)
         {
             Camera.transform.SetPositionAndRotation(sim.RenderPlayer(alpha) + Vector3.up * 1.65f, Quaternion.Euler(pitch, yaw, 0));
             if (sim.State != RunState.Paused) flash -= dt;
-            tracer.enabled = flash > 0; muzzlePulse.gameObject.SetActive(!sim.Benchmark && flash > 0);
-            recoil = Mathf.MoveTowards(recoil, 0, dt * .55f);
+            // An immediate combat tracer exists for its emission frame only. Do not keep
+            // projecting an old world segment through new camera poses during a swivel.
+            tracer.enabled = sim.Benchmark && flash > 0;
+            muzzlePulse.gameObject.SetActive(!sim.Benchmark && flash > 0);
+            if (sim.State != RunState.Paused || sim.Benchmark) recoil = Mathf.MoveTowards(recoil, 0, dt * .55f);
             weapon.localPosition = new Vector3(.28f, -.24f, .55f - recoil);
             Feedback.Advance(sim, dt);
+        }
+        public void Draw(CombatSimulation sim, float alpha, float yaw, float pitch, float dt)
+        {
+            BeginFrame(sim, alpha, yaw, pitch, dt);
+            Draw(sim, alpha);
+        }
+        public void Draw(CombatSimulation sim, float alpha)
+        {
             Feedback.CollectBars(sim, Camera, alpha);
             if (!sim.Benchmark)
             {

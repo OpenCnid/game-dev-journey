@@ -1,0 +1,42 @@
+using System.Collections;
+using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.TestTools;
+
+namespace Journey.Tests
+{
+    public sealed class ShotPresentationTests
+    {
+        [UnityTest]
+        public IEnumerator FastTurnUsesCurrentMuzzleAndDoesNotLeaveAnOldLine()
+        {
+            var root = new GameObject("Fast turn shot test");
+            var sim = new CombatSimulation(); var view = new ArenaPresentation();
+            try
+            {
+                view.Create(root.transform); sim.Reset(0, 137, false);
+                view.Draw(sim, 1, 0, 0, 0);
+                sim.Step(Vector3.right, CombatSimulation.Tick);
+                var ray = new Ray(sim.Player + Vector3.up * 1.65f,
+                    Quaternion.Euler(-20, 70, 0) * Vector3.forward);
+                Assert.That(sim.TryFire(ray, out ShotResult result), Is.True);
+                view.ShowShot(result.End);
+                view.Draw(sim, .25f, 70, -20, 1f / 144);
+                var line = root.GetComponentInChildren<LineRenderer>();
+                var muzzle = root.transform.Find("Player camera/Pulse rifle/Muzzle pulse");
+                float originError = Vector3.Distance(line.GetPosition(0), muzzle.position);
+                Vector3 endpoint = view.Camera.WorldToViewportPoint(line.GetPosition(1));
+                bool birthVisible = line.enabled;
+                yield return null;
+                view.Draw(sim, .75f, 85, -10, 1f / 144);
+                bool retainedAfterTurn = line.enabled;
+                Debug.Log($"SHOT_ALIGNMENT_REPRO muzzleErrorMetres={originError:F6} endpointViewport={endpoint:F6} birthVisible={birthVisible} retainedAfterTurn={retainedAfterTurn} lineRenderers={root.GetComponentsInChildren<LineRenderer>().Length}");
+                Assert.That(originError, Is.LessThan(.001f), "A fresh shot must start at this frame's rendered muzzle, including yaw/pitch and recoil.");
+                Assert.That(birthVisible, Is.True);
+                Assert.That(retainedAfterTurn, Is.False, "A hitscan shot must not leave its old world line across later turning frames.");
+            }
+            finally { view.Dispose(); sim.Dispose(); Object.Destroy(root); }
+            yield return null;
+        }
+    }
+}

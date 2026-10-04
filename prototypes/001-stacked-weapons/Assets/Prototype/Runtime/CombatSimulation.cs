@@ -211,14 +211,14 @@ namespace Journey
             return fired;
         }
 
-        public bool TryFire(Ray ray, out ShotResult shot)
+        public bool TryFire(Ray ray, out ShotResult shot, float alpha = 1)
         {
             shot = new ShotResult(ray.origin + ray.direction * 65, -1, 0, 0, 0);
             if (State != RunState.Running || fireRemaining > 0) return false;
             // Simulation time drives cadence; render FPS does not change damage output.
             fireRemaining += .12f;
             Shots++;
-            int target = AimTarget(ray, out float nearest);
+            int target = AimTarget(ray, out float nearest, alpha);
             Vector3 end = ray.origin + ray.direction * nearest;
             if (target >= 0)
             {
@@ -231,13 +231,16 @@ namespace Journey
             return true;
         }
 
-        public int AimTarget(Ray ray, out float nearest)
+        public int AimTarget(Ray ray, out float nearest, float alpha = 1)
         {
             nearest = 65;
             int target = -1;
             for (int i = 0; i < Count; i++)
             {
-                if (RaySphere(ray, Position(i) + Vector3.up * 1.1f, EnemyRadius, out float hit) && hit < nearest)
+                // Normal combat queries the same interpolated pose that is displayed.
+                // Default alpha preserves the original fixed-state benchmark/reference query.
+                Vector3 p = alpha >= 1 ? Position(i) : RenderPosition(i, alpha);
+                if (RaySphere(ray, p + Vector3.up * 1.1f, EnemyRadius, out float hit) && hit < nearest)
                 { nearest = hit; target = i; }
             }
             return target;

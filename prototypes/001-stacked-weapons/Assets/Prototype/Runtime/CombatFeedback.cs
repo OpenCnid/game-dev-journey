@@ -56,11 +56,11 @@ namespace Journey
             get { int count = 0; for (int i = 0; i < impacts.Length; i++) if (impacts[i].Remaining > 0) count++; return count; }
         }
 
-        public void RecordShot(CombatSimulation sim, ShotResult shot)
+        public void RecordShot(CombatSimulation sim, ShotResult shot, float alpha = 1)
         {
             if (sim.Benchmark || !shot.Hit) return;
             // A wound follows that incarnation; a death burst stays at the captured hit point.
-            impacts[nextImpact] = new Impact { Shot = shot, Anchor = shot.Killed ? shot.End : shot.End - sim.Position(shot.EnemyIndex),
+            impacts[nextImpact] = new Impact { Shot = shot, Anchor = shot.Killed ? shot.End : shot.End - sim.RenderPosition(shot.EnemyIndex, alpha),
                 Remaining = shot.Killed ? KillLifetime : HitLifetime };
             nextImpact = (nextImpact + 1) % ImpactCapacity;
             hitMarkerRemaining = .12f;
@@ -105,7 +105,7 @@ namespace Journey
             if (sim.Benchmark || (sim.State != RunState.Running && sim.State != RunState.Paused))
                 return;
             Vector3 eye = camera.transform.position;
-            int target = sim.AimTarget(new Ray(eye, camera.transform.forward), out _);
+            int target = sim.AimTarget(new Ray(eye, camera.transform.forward), out _, alpha);
             if (target >= 0)
             {
                 FocusEnemy = target; FocusHealth = sim.EnemyHealth(target);
@@ -209,6 +209,10 @@ namespace Journey
                 Impact impact = impacts[i];
                 if (impact.Remaining <= 0) continue;
                 bool killed = impact.Shot.Killed;
+                // A new shot can respawn this slot after old cues were aged for the frame.
+                // Never draw its previous incarnation's wound on the replacement enemy.
+                if (!killed && (impact.Shot.EnemyIndex >= sim.Count ||
+                    impact.Shot.SpawnVersion != sim.EnemySpawnVersion(impact.Shot.EnemyIndex))) continue;
                 float progress = 1 - impact.Remaining / (killed ? KillLifetime : HitLifetime);
                 Vector3 center = killed ? impact.Anchor : sim.RenderPosition(impact.Shot.EnemyIndex, alpha) + impact.Anchor;
                 int count = killed ? 8 : 5;
