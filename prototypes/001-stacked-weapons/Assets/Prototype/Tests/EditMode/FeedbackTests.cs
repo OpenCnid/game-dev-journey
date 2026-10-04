@@ -112,6 +112,33 @@ namespace Journey.Tests
                     Assert.That(feedback.Bar(0).Health, Is.EqualTo(20));
                     Vector3 woundedCoreTip = camera.WorldToViewportPoint(sim.Position(0) + new Vector3(.246f, 1.4775f, 0));
                     Assert.That(Vector2.Distance(feedback.Bar(0).OwnerViewport, woundedCoreTip), Is.LessThan(.001f), "Connector must end at the wounded silhouette, not at the old bar position.");
+                    foreach (float distance in new[] { 3f, 38f })
+                    {
+                        camera.transform.position = sim.Position(0) - Vector3.forward * distance + Vector3.up * 1.65f;
+                        Quaternion aim = Quaternion.LookRotation(sim.Position(0) + Vector3.up * 1.3f - camera.transform.position);
+                        camera.transform.rotation = aim;
+                        feedback.CollectBars(sim, camera, 1);
+                        Assert.That(feedback.TargetHealthBarVisible, Is.True);
+                        Matrix4x4 head = BurstInstances.CharacterMatrix(sim.Position(0), Vector3.up * 1.6f, Vector3.one * .45f, true, core: true);
+                        float highestHead = 0;
+                        for (int corner = 0; corner < 8; corner++)
+                        {
+                            Vector3 vertex = new Vector3((corner & 1) == 0 ? -.5f : .5f,
+                                (corner & 2) == 0 ? -.5f : .5f, (corner & 4) == 0 ? -.5f : .5f);
+                            highestHead = Mathf.Max(highestHead, camera.WorldToViewportPoint(head.MultiplyPoint3x4(vertex)).y);
+                        }
+                        foreach (float scale in new[] { 1f, 1.5f, 2f })
+                            Assert.That(feedback.TargetBarBounds(1280 * scale, 720 * scale).yMax,
+                                Is.LessThanOrEqualTo((1 - highestHead) * 720 * scale - 12 + .001f), "The entire aimed bar must clear the posed head, near or far.");
+                        camera.transform.rotation = aim * Quaternion.Euler(0, 25, 0);
+                        feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
+                        Assert.That(feedback.TargetHealthBarVisible, Is.False);
+                        Assert.That(feedback.VisibleBarCount, Is.EqualTo(1));
+                        Assert.That(feedback.VisibleBarBounds(0).yMax, Is.LessThanOrEqualTo((1 - feedback.VisibleBar(0).HeadTopViewport) * 720 - 12 + .001f),
+                            "Background wounded bars use the same overhead clearance rule.");
+                    }
+                    camera.transform.position = sim.Position(0) - Vector3.forward * 5 + Vector3.up * 1.65f;
+                    camera.transform.rotation = Quaternion.identity;
                     sim.TogglePause(); feedback.CollectBars(sim, camera, 1); Assert.That(feedback.BarCount, Is.EqualTo(1));
                     camera.transform.rotation = Quaternion.Euler(0, 180, 0); feedback.CollectBars(sim, camera, 1);
                     Assert.That(feedback.BarCount, Is.Zero);
@@ -190,7 +217,8 @@ namespace Journey.Tests
                     for (int i = 0; i < feedback.VisibleBarCount; i++)
                     {
                         Assert.That(feedback.VisibleBar(i).Priority, Is.LessThan(2), "Healthy background labels must not fill the cluster.");
-                        Assert.That(feedback.VisibleBarBounds(i).y, Is.EqualTo((1 - feedback.VisibleBar(i).Viewport.y) * 720 - 2).Within(.001), "Do not detach labels into floating rows.");
+                        Assert.That(feedback.VisibleBarBounds(i).center.x, Is.EqualTo(feedback.VisibleBar(i).Viewport.x * 1280).Within(.001), "Keep each overhead bar anchored to its owner, not a floating row.");
+                        Assert.That(feedback.VisibleBarBounds(i).yMax, Is.LessThanOrEqualTo((1 - feedback.VisibleBar(i).HeadTopViewport) * 720 - 12 + .001f), "Crowded bars must stay above the head.");
                         if (feedback.VisibleBar(i).Health < CombatSimulation.EnemyMaxHealth) woundedVisible = true;
                         firstBounds[i] = feedback.VisibleBarBounds(i);
                         for (int j = 0; j < i; j++) Assert.That(firstBounds[i].Overlaps(firstBounds[j]), Is.False);
@@ -205,7 +233,7 @@ namespace Journey.Tests
                     for (int i = 0; i < owners.Length; i++) Assert.That(feedback.LabelOwner(i), Is.EqualTo(owners[i]), "Small camera/distance changes cannot reassign live wounded labels.");
                     camera.fieldOfView = 179;
                     feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
-                    Assert.That(feedback.VisibleBarCount, Is.EqualTo(feedback.TargetHealthBarVisible ? 0 : 1), "Only a wounded target bar reserves space; healthy aim brackets cannot hide wound labels.");
+                    Assert.That(feedback.VisibleBarCount, Is.EqualTo(feedback.TargetHealthBarVisible ? 0 : 1), "Only a wounded target bar reserves space; healthy aim cannot hide wound labels.");
                     camera.fieldOfView = 85;
                     feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
                     for (int i = 0; i < feedback.VisibleBarCount; i++)
@@ -233,7 +261,7 @@ namespace Journey.Tests
                     camera.transform.position = sim.Position(0) + Vector3.up * 1.1f - Vector3.forward * 3;
                     feedback.CollectBars(sim, camera, 1); feedback.LayoutBars(1280, 720);
                     Assert.That(feedback.FocusAimed, Is.True); Assert.That(feedback.FocusHealth, Is.EqualTo(40));
-                    Assert.That(feedback.FocusVisible, Is.True, "Healthy targets retain body brackets.");
+                    Assert.That(feedback.FocusVisible, Is.True, "Healthy aim remains a read-only query, without an HP display.");
                     Assert.That(feedback.TargetHealthBarVisible, Is.False, "Aiming alone must not show normal enemy HP.");
                     Assert.That(feedback.VisibleBarCount, Is.Zero, "A target uses its own bar, without a duplicate wounded label.");
                     sim.TryFire(AtEnemy(sim), out ShotResult wound); feedback.RecordShot(sim, wound);

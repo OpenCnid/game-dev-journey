@@ -2,11 +2,13 @@
 
 - **Date / issue:** October 3, 2026 (America/Chicago), [GDJ-16](https://linear.app/cnid/issue/GDJ-16/show-enemy-health-and-enemyplayer-damage-clearly), [draft PR #4](https://github.com/OpenCnid/game-dev-journey/pull/4).
 - **Candidate:** `GDJ-16-damage-v6-2026-10-03`, clean source `586b1f5b9a655ad8bd0684771088b050c55a5897`, built `2026-10-04T04:25:48.0323038Z`, dirty `false`.
-- **Disposition:** technical checks/build pass; latest damage-only crowd comparison pending. No new performance result or crosshair-editor implementation.
+- **Disposition:** P1 rejects overlapping cyan brackets/selected HP decoration and requests higher overhead bars. Supersede that presentation while retaining damaged-only HP. No new performance result or crosshair-editor implementation.
 
 ## Human finding and correction
 
-P1 disliked the [preceding candidate's full cyan normal-target HP bar](2026-10-03-aimed-health-feedback.md) and could not tell whether aiming or shooting triggered it. It was enabled by the aim query before damage. They request bars only after normal enemies become damaged, with a future full-health exception for bosses. They still find the cyan body brackets useful and request easily imported custom crosshairs. The [fifth revision contract](../planning/tasks/GDJ-16.md#fifth-human-revision-contract) was recorded before implementation.
+P1 disliked the [preceding candidate's full cyan normal-target HP bar](2026-10-03-aimed-health-feedback.md) and could not tell whether aiming or shooting triggered it. It was enabled by the aim query before damage. They request bars only after normal enemies become damaged, with a future full-health exception for bosses. At that checkpoint they still found the cyan body brackets useful and requested easily imported custom crosshairs. The [fifth revision contract](../planning/tasks/GDJ-16.md#fifth-human-revision-contract) was recorded before implementation.
+
+The next comparison supersedes bracket retention: P1 reports that the cyan brackets and selected cyan HP border are confusing and overlap, and that bars sit at the head rather than clearly above it. They request removing the brackets and lifting HP into an overhead MMO-like status display consistent with the isekai premise. The sixth revision contract records removal, consistent wounded colors and head clearance before the next implementation.
 
 Aiming at a healthy normal enemy now shows the cyan body brackets without an HP bar. An actual health loss enables its attached bar; only wounded background enemies are eligible for the retained small bars. Healthy target brackets neither reserve HP-label space nor hide an eligible wounded owner. Full-health respawns/reset hide bars immediately. Miss/death clears aimed-target UI; existing hit/kill cues communicate outcomes. The accepted brackets, simple wounded silhouette and independent damage cues remain. There is no central or recent/dead-target HP panel.
 

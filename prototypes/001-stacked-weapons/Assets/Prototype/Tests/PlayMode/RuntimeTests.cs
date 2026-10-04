@@ -26,7 +26,7 @@ namespace Journey.Tests
                 view.Draw(sim, 1, healthyAim.eulerAngles.y, healthyAim.eulerAngles.x, 0);
                 yield return null;
                 Assert.That(view.Feedback.FocusVisible, Is.True);
-                Assert.That(view.Feedback.TargetHealthBarVisible, Is.False, "A healthy hovered normal enemy has brackets without an HP bar.");
+                Assert.That(view.Feedback.TargetHealthBarVisible, Is.False, "A healthy aimed normal enemy has no HP display.");
                 Assert.That(sim.Shots, Is.Zero);
                 for (int outcome = 0; outcome < 2; outcome++)
                 {
@@ -51,6 +51,8 @@ namespace Journey.Tests
                         Assert.That(view.Feedback.Bar(0).Health, Is.EqualTo(20));
                         Assert.That(view.Feedback.FocusHealth, Is.EqualTo(20));
                         Assert.That(view.Feedback.TargetHealthBarVisible, Is.True);
+                        Assert.That(view.Feedback.TargetBarBounds(1280, 720).yMax,
+                            Is.LessThanOrEqualTo((1 - view.Feedback.Bar(0).HeadTopViewport) * 720 - 12 + .001f));
                     }
                     Assert.That(sim.EnemyHealth(0), Is.EqualTo(outcome == 0 ? 20 : 40));
                     Assert.That(sim.Kills, Is.EqualTo(outcome));
