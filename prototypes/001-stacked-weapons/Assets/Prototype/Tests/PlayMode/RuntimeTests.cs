@@ -5,8 +5,80 @@ using UnityEngine.TestTools;
 
 namespace Journey.Tests
 {
+    public sealed class FeedbackHudProbe : MonoBehaviour
+    {
+        public CombatFeedback Feedback;
+        void OnGUI() { Feedback?.DrawHUD(Screen.width, Screen.height); }
+    }
+
     public sealed class RuntimeTests
     {
+        [UnityTest]
+        public IEnumerator DamagePresentationRendersBothOutcomesAndRestartClearsIt()
+        {
+            var root = new GameObject("Damage presentation test");
+            var view = new ArenaPresentation(); var sim = new CombatSimulation { UseBurst = true };
+            try
+            {
+                view.Create(root.transform); sim.Reset(1, 15, false);
+                root.AddComponent<FeedbackHudProbe>().Feedback = view.Feedback;
+                Quaternion healthyAim = Quaternion.LookRotation(sim.Position(0) + Vector3.up * 1.1f - (sim.Player + Vector3.up * 1.65f));
+                view.Draw(sim, 1, healthyAim.eulerAngles.y, healthyAim.eulerAngles.x, 0);
+                yield return null;
+                Assert.That(view.Feedback.FocusVisible, Is.True);
+                Assert.That(view.Feedback.TargetHealthBarVisible, Is.False, "A healthy aimed normal enemy has no HP display.");
+                Assert.That(sim.Shots, Is.Zero);
+                for (int outcome = 0; outcome < 2; outcome++)
+                {
+                    if (outcome > 0) sim.Step(Vector3.zero, .12f);
+                    var ray = new Ray(sim.Position(0) + Vector3.up * 1.1f - Vector3.forward * 3, Vector3.forward);
+                    Assert.That(sim.TryFire(ray, out ShotResult shot), Is.True);
+                    view.ShowShot(shot.End); view.Feedback.RecordShot(sim, shot);
+                    Quaternion aim = Quaternion.LookRotation(shot.End - (sim.Player + Vector3.up * 1.65f));
+                    for (int mode = 0; mode < 2; mode++)
+                    {
+                        view.CullInstances = mode == 0;
+                        view.Draw(sim, 1, aim.eulerAngles.y, aim.eulerAngles.x, CombatSimulation.Tick);
+                        yield return null;
+                    }
+                    Assert.That(view.Feedback.ImpactCount, Is.EqualTo(1));
+                    Assert.That(view.Feedback.HitMarkerVisible, Is.True);
+                    if (outcome == 1) Assert.That(view.Feedback.KillMarkerVisible, Is.True);
+                    if (outcome == 0)
+                    {
+                        Assert.That(view.Feedback.FocusVisible, Is.True);
+                        Assert.That(view.Feedback.BarCount, Is.EqualTo(1));
+                        Assert.That(view.Feedback.Bar(0).Health, Is.EqualTo(20));
+                        Assert.That(view.Feedback.FocusHealth, Is.EqualTo(20));
+                        Assert.That(view.Feedback.TargetHealthBarVisible, Is.True);
+                        Assert.That(view.Feedback.TargetBarBounds(1280, 720).yMax,
+                            Is.LessThanOrEqualTo((1 - view.Feedback.Bar(0).HeadTopViewport) * 720 - 12 + .001f));
+                    }
+                    Assert.That(sim.EnemyHealth(0), Is.EqualTo(outcome == 0 ? 20 : 40));
+                    Assert.That(sim.Kills, Is.EqualTo(outcome));
+                }
+                view.Feedback.ObservePlayerHealth(90);
+                sim.TogglePause(); view.Draw(sim, 1, 0, 0, 1);
+                Assert.That(view.Feedback.KillMarkerVisible, Is.True);
+                Assert.That(view.Feedback.PlayerDamage, Is.EqualTo(10));
+                var muzzle = root.transform.Find("Player camera/Pulse rifle/Muzzle pulse").gameObject;
+                Assert.That(muzzle.activeSelf, Is.True, "A shot pulse remains frozen during pause.");
+                yield return null;
+                view.ResetFeedback(); sim.Reset(1, 15, false);
+                Assert.That(view.Feedback.ImpactCount, Is.Zero); Assert.That(view.Feedback.PlayerPulseRemaining, Is.Zero);
+                Assert.That(view.Feedback.FocusVisible, Is.False);
+                Assert.That(muzzle.activeSelf, Is.False);
+                view.Draw(sim, 1, 0, 0, CombatSimulation.Tick);
+                yield return null;
+                view.ShowShot(Vector3.forward * 5); sim.Reset(1, 15, true);
+                view.Draw(sim, 1, 0, 0, 0);
+                Assert.That(muzzle.activeSelf, Is.False, "Synthetic benchmark must not acquire the new muzzle effect.");
+                Assert.That(view.Feedback.FocusVisible, Is.False);
+            }
+            finally { view.Dispose(); sim.Dispose(); Object.Destroy(root); }
+            yield return null; LogAssert.NoUnexpectedReceived();
+        }
+
         [UnityTest]
         public IEnumerator ExperimentalRenderingPreservesSimulationAndDisposesBuffers()
         {

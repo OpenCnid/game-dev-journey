@@ -1,0 +1,59 @@
+{
+  "candidateId": "GDJ-16-damage-v7-2026-10-03",
+  "source": {
+    "revision": "0deb52d8dd7e2790b1651985f8a57642b37ce8d2",
+    "builtUtc": "2026-10-04T04:43:37.8997807Z",
+    "dirty": false
+  },
+  "baselineSource": "28ca1bce4d71d0af82326a93f65a528ebfd1cd5c",
+  "build": {
+    "release": true,
+    "platform": "Windows x64",
+    "editor": "6000.3.25f1",
+    "manifest": "build-manifest.json",
+    "manifestSha256": "9af266135534fcc563822d6e367b23f3cf8c126fd7fa3592c238aeaacf1f9495",
+    "fileCount": 166,
+    "totalBytes": 96914146
+  },
+  "encounter": {
+    "enemies": 35,
+    "durationSeconds": 60,
+    "seed": 137,
+    "enemyHP": 40,
+    "rifleDamage": 20,
+    "simulation": "burst",
+    "nativeState": false,
+    "rendering": "culled",
+    "combinedCharacters": false,
+    "projectileRenderer": "cube",
+    "resolution": "1920x1080 windowed",
+    "fpsCap": 144,
+    "vSync": 0
+  },
+  "checks": {
+    "editMode": {
+      "passed": 46,
+      "failed": 0
+    },
+    "playMode": {
+      "passed": 3,
+      "failed": 0
+    },
+    "humanComparison": "Accepted by P1 on 2026-10-04: good playtest and explicit commit/merge authorization; no new detailed run metrics supplied",
+    "performanceCapture": "None"
+  },
+  "feedback": {
+    "candidateBars": 64,
+    "visibleBars": 3,
+    "rangeMetres": 40,
+    "priority": "Retained wounded owners, then fill free slots",
+    "overlap": "Suppress in retained slot order; 0.25-second reveal delay",
+    "woundedPose": "Skewed/compressed body and core; original sphere unchanged",
+    "normalHealthVisibility": "Only actual health below maximum; no healthy aim decoration",
+    "bossHealthVisibility": "Future explicit enemy policy; no combat boss added",
+    "headGapMetres": 0.45,
+    "minimumHeadClearanceLogical": 12,
+    "aimDecoration": "None",
+    "healthStyle": "Consistent dark border and amber fill"
+  }
+}

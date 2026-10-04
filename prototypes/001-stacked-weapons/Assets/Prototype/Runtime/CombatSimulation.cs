@@ -5,6 +5,17 @@ using Unity.Collections;
 
 namespace Journey
 {
+    // Snapshot before respawn: presentation must not infer a hit from tracer length.
+    public readonly struct ShotResult
+    {
+        public readonly Vector3 End;
+        public readonly int EnemyIndex, SpawnVersion, Damage, HealthAfter;
+        public bool Hit => Damage > 0;
+        public bool Killed => Hit && HealthAfter == 0;
+        public ShotResult(Vector3 end, int enemyIndex, int spawnVersion, int damage, int healthAfter)
+        { End = end; EnemyIndex = enemyIndex; SpawnVersion = spawnVersion; Damage = damage; HealthAfter = healthAfter; }
+    }
+
     public enum RunState { Ready, Running, Paused, Won, Lost }
 
     // One owner, preallocated state, no per-enemy MonoBehaviour/rigidbody/Update.
@@ -18,12 +29,14 @@ namespace Journey
         public const float ArenaLimit = 29f;
         public const float Tick = 1f / 60f;
         public const float EnemyRadius = .62f;
+        public const int EnemyMaxHealth = 40;
         const float CellSize = 2f;
         const int GridWidth = 32;
         readonly Vector3[] positions = new Vector3[Capacity];
         readonly Vector3[] previous = new Vector3[Capacity];
         readonly Vector3[] velocities = new Vector3[Capacity];
         readonly int[] health = new int[Capacity];
+        readonly int[] spawnVersions = new int[Capacity];
         readonly int[] next = new int[Capacity];
         readonly int[] cells = new int[GridWidth * GridWidth];
         System.Random random;
@@ -54,6 +67,8 @@ namespace Journey
         public bool Benchmark { get; private set; }
         public float Duration { get; private set; }
         public Vector3 Position(int index) => NativeState ? NativePositions[index] : positions[index];
+        public int EnemyHealth(int index) => health[index];
+        public int EnemySpawnVersion(int index) => spawnVersions[index];
         public Vector3 RenderPosition(int index, float alpha) => NativeState ?
             Vector3.Lerp(NativePrevious[index], NativePositions[index], alpha) : Vector3.Lerp(previous[index], positions[index], alpha);
         public Vector3 RenderPlayer(float alpha) => Vector3.Lerp(PreviousPlayer, Player, alpha);
@@ -191,27 +206,41 @@ namespace Journey
 
         public bool TryFire(Ray ray, out Vector3 end, out bool killed)
         {
-            end = ray.origin + ray.direction * 65;
-            killed = false;
+            bool fired = TryFire(ray, out ShotResult shot);
+            end = shot.End; killed = shot.Killed;
+            return fired;
+        }
+
+        public bool TryFire(Ray ray, out ShotResult shot)
+        {
+            shot = new ShotResult(ray.origin + ray.direction * 65, -1, 0, 0, 0);
             if (State != RunState.Running || fireRemaining > 0) return false;
             // Simulation time drives cadence; render FPS does not change damage output.
             fireRemaining += .12f;
             Shots++;
-            float nearest = 65;
+            int target = AimTarget(ray, out float nearest);
+            Vector3 end = ray.origin + ray.direction * nearest;
+            if (target >= 0)
+            {
+                int damage = Mathf.Min(20, health[target]);
+                health[target] -= damage;
+                shot = new ShotResult(end, target, spawnVersions[target], damage, health[target]);
+                if (health[target] <= 0)
+                { Kills++; Respawn(target); }
+            }
+            return true;
+        }
+
+        public int AimTarget(Ray ray, out float nearest)
+        {
+            nearest = 65;
             int target = -1;
             for (int i = 0; i < Count; i++)
             {
                 if (RaySphere(ray, Position(i) + Vector3.up * 1.1f, EnemyRadius, out float hit) && hit < nearest)
                 { nearest = hit; target = i; }
             }
-            end = ray.origin + ray.direction * nearest;
-            if (target >= 0)
-            {
-                health[target] -= 20;
-                if (health[target] <= 0)
-                { Kills++; killed = true; Respawn(target); }
-            }
-            return true;
+            return target;
         }
 
         public static bool RaySphere(Ray ray, Vector3 center, float radius, out float distance)
@@ -244,7 +273,8 @@ namespace Journey
             }
             if (NativeState) NativePositions[index] = NativePrevious[index] = p;
             else positions[index] = previous[index] = p;
-            health[index] = 40;
+            health[index] = EnemyMaxHealth;
+            spawnVersions[index]++;
             Abilities.CancelCast(index); StateVersion++;
         }
         static int CellX(float value) => Mathf.Clamp((int)((value + 32) / CellSize), 0, GridWidth - 1);

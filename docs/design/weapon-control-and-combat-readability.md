@@ -8,6 +8,8 @@ Provide configurable auto-shoot, different weapon/item targeting behavior, throu
 
 The two owner-supplied Vampire Hunters screenshots show primary/secondary/full-auto preferences and global/primary/secondary/passive weapon-position controls. They also show merge-weapons, outline, enemy-detection, health-bar and hit-feedback options. The outline field displays X-Ray Blue. Record these as interface observations; exact values, defaults, feature semantics and layout are not selected for our game. No screenshot binaries are copied into the repository.
 
+The October 3 GDJ-16 comparison adds an owner-selected presentation direction: wounded normal-enemy HP should float clearly above the head, like an MMO status display perceived by outsiders isekai'ed into the physical world. They reject overlapping cyan body brackets/selected-HP decoration. Keep overhead health tied to actual damage, reserve full-health boss visibility for an explicit future policy, and judge crowd ownership/clutter through play. This is a presentation convention, not a new AI perception mechanic or an always-visible HUD for every actor.
+
 ## Proposed control boundaries
 
 | Question | What it controls | Owner direction and unresolved details |

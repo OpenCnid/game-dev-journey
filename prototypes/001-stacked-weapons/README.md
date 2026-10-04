@@ -19,6 +19,8 @@ Burst **1.8.30**, Collections **2.6.8**, and Mathematics **1.3.3** are pinned di
 
 WASD moves; the mouse aims; the rifle fires automatically. Escape pauses/releases the cursor; R restarts. Survive 60 seconds against 35 drones. Each drone takes two hits, then respawns at the perimeter to maintain crowd pressure. Contact damage has a shared 0.4-second grace period. This is a bounded flat arena with simple local steering and geometric hit detection.
 
+Normal-enemy HP bars appear only while wounded; aiming at a healthy enemy does not show a bar or reserve label space. Body brackets and cyan selected-HP decoration are removed. Aimed and background wounded bars share dark borders/amber fill, floating 0.45 metres above their posed heads with at least 12 logical HUD units of clearance above the highest projected head corner. Future boss types may explicitly opt into always-visible health; no combat boss exception is implemented yet. There is no central enemy-HP panel or retained defeated/recent-target display. Up to three additional wounded bars retain owner/incarnation slots across aim/distance changes, without duplicating the aimed enemy; overlap suppresses a label and requires 0.25 seconds of clear space before it returns. Up to 64 wounded/background candidates within 40 metres are considered; healthy background labels are hidden. The aimed enemy uses the existing read-only rifle-range query. A wounded body/core becomes squashed and skewed until death or restart; the existing spherical hit approximation stays unchanged. This simple visual cue is sufficient for the prototype, but future head/body critical regions must align with the visible pose. White hit markers and outer gold KILL markers can appear together, and death sparks are larger. A white muzzle pulse accompanies every shot. Player health loss produces red screen-edge pulses and a brief damage amount. Cues freeze on pause and clear on restart. This flat arena does not test bar occlusion or alter physical crowd spacing. Synthetic benchmarks omit the new combat cues and wounded pose.
+
 The pause/start menu includes 144/240/custom/uncapped frame limits and a separate VSync setting. Benchmark mode temporarily disables both the cap and VSync, then restores them.
 
 ## Prepare, test, and build
@@ -75,6 +77,7 @@ Use `-playtest` to start combat immediately or `-screenshot "C:\captures\arena.p
 | `Runtime/BurstInstances.cs` | Burst interpolation, conservative frustum culling, matrix generation and stable compaction |
 | `Runtime/StageProfile.cs` / `BurstStatus.cs` | Release stage timing and verification of native Burst execution |
 | `Runtime/ArenaPresentation.cs` | Arena geometry, instanced drones, camera, rifle, procedural shot audio |
+| `Runtime/CombatFeedback.cs` | Bounded health-bar selection, impact sparks, hit/kill markers and player damage cues; reads simulation outcomes |
 | `Runtime/PrototypeGame.cs` | Input, fixed simulation stepping, menus, HUD, benchmark orchestration |
 | `Runtime/BenchmarkCapture.cs` | Frame samples, percentile calculations, CSV/JSON export |
 | `Editor/ProjectSetup.cs` | Reproducible setup, scene creation, shader references, Windows build |

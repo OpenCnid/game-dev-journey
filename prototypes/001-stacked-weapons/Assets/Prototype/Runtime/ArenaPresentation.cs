@@ -11,6 +11,11 @@ namespace Journey
         readonly Matrix4x4[] heads = new Matrix4x4[CombatSimulation.Capacity];
         readonly Matrix4x4[] projectiles = new Matrix4x4[BossAbilities.ProjectileCapacity];
         readonly Matrix4x4[] telegraphs = new Matrix4x4[CombatSimulation.Capacity];
+        readonly Matrix4x4[] hitSparks = new Matrix4x4[CombatFeedback.ImpactCapacity * 8];
+        readonly Matrix4x4[] killSparks = new Matrix4x4[CombatFeedback.ImpactCapacity * 8];
+        readonly byte[] woundMask = new byte[CombatSimulation.Capacity];
+        Material hitMaterial, killMaterial;
+        public readonly CombatFeedback Feedback = new CombatFeedback();
         Mesh cube, ring, octahedron, character;
         Texture2D characterAtlas;
         Material characterMaterial;
@@ -22,7 +27,8 @@ namespace Journey
         Mesh ProjectileMesh => ProjectileRenderer.EndsWith("octa") ? octahedron : cube;
         Material enemyMaterial, headMaterial, projectileMaterial, telegraphMaterial;
         LineRenderer tracer;
-        Transform weapon;
+        Transform weapon, muzzlePulse;
+        Material muzzleMaterial;
         AudioSource audio;
         AudioClip shot;
         float flash, recoil;
@@ -87,13 +93,24 @@ namespace Journey
             Cube("Rifle body", Vector3.zero, new Vector3(.19f, .17f, .52f), gun, weapon, true);
             Cube("Rifle barrel", new Vector3(0, .035f, .36f), new Vector3(.075f, .075f, .28f), accent, weapon, true);
             Cube("Rifle sight", new Vector3(0, .12f, .02f), new Vector3(.04f, .045f, .09f), accent, weapon, true);
+            muzzleMaterial = Material("Muzzle pulse", Color.white, true);
+            var muzzle = new GameObject("Muzzle pulse"); muzzlePulse = muzzle.transform;
+            muzzlePulse.SetParent(weapon, false); muzzlePulse.localPosition = new Vector3(0, .035f, .55f);
+            muzzlePulse.localScale = new Vector3(.15f, .15f, .08f);
+            // Mesh assigned after the primitive mesh is acquired below; no collider or enemy cue.
+            muzzle.AddComponent<MeshRenderer>().sharedMaterial = muzzleMaterial;
+            muzzle.SetActive(false);
 
             var sample = GameObject.CreatePrimitive(PrimitiveType.Cube);
             cube = sample.GetComponent<MeshFilter>().sharedMesh;
+            muzzle.AddComponent<MeshFilter>().sharedMesh = cube;
             Object.Destroy(sample);
             enemyMaterial = Material("Drone body", new Color(.94f, .23f, .19f));
             headMaterial = Material("Drone core", new Color(1, .72f, .27f));
             enemyMaterial.enableInstancing = headMaterial.enableInstancing = true;
+            hitMaterial = Material("Damage sparks", Color.white, true);
+            killMaterial = Material("Death sparks", new Color(1, .72f, .12f), true);
+            hitMaterial.enableInstancing = killMaterial.enableInstancing = true;
             projectileMaterial = Material("Boss projectiles", new Color(1, .15f, .75f), true);
             telegraphMaterial = Material("Area warning", new Color(1, .4f, .06f), true);
             projectileMaterial.enableInstancing = telegraphMaterial.enableInstancing = true;
@@ -128,9 +145,18 @@ namespace Journey
         public void Draw(CombatSimulation sim, float alpha, float yaw, float pitch, float dt)
         {
             Camera.transform.SetPositionAndRotation(sim.RenderPlayer(alpha) + Vector3.up * 1.65f, Quaternion.Euler(pitch, yaw, 0));
-            flash -= dt; tracer.enabled = flash > 0;
+            if (sim.State != RunState.Paused) flash -= dt;
+            tracer.enabled = flash > 0; muzzlePulse.gameObject.SetActive(!sim.Benchmark && flash > 0);
             recoil = Mathf.MoveTowards(recoil, 0, dt * .55f);
             weapon.localPosition = new Vector3(.28f, -.24f, .55f - recoil);
+            Feedback.Advance(sim, dt);
+            Feedback.CollectBars(sim, Camera, alpha);
+            if (!sim.Benchmark)
+            {
+                Feedback.BuildSparks(sim, alpha, hitSparks, killSparks, out int hits, out int kills);
+                DrawInstances(hitMaterial, cube, hitSparks, hits);
+                DrawInstances(killMaterial, cube, killSparks, kills);
+            }
             if (CullInstances) { DrawCulled(sim, alpha); return; }
             long stageStart = StageProfile.Begin();
             using (PrepareMarker.Auto())
@@ -138,8 +164,9 @@ namespace Journey
                 for (int i = 0; i < sim.Count; i++)
                 {
                     Vector3 p = sim.RenderPosition(i, alpha);
-                    bodies[i] = ScaledTranslation(p + Vector3.up * .8f, new Vector3(.85f, 1.4f, .85f));
-                    heads[i] = ScaledTranslation(p + Vector3.up * 1.6f, Vector3.one * .45f);
+                    bool wounded = !sim.Benchmark && sim.EnemyHealth(i) < CombatSimulation.EnemyMaxHealth;
+                    bodies[i] = BurstInstances.CharacterMatrix(p, Vector3.up * .8f, new Vector3(.85f, 1.4f, .85f), wounded);
+                    heads[i] = BurstInstances.CharacterMatrix(p, Vector3.up * 1.6f, Vector3.one * .45f, wounded, core: true);
                 }
             }
             StageProfile.RenderPrepareMs += StageProfile.End(stageStart);
@@ -244,13 +271,19 @@ namespace Journey
         }
         void ScheduleEnemies(BurstInstances buffer, CombatSimulation sim, float alpha)
         {
+            byte[] mask = null;
+            if (!sim.Benchmark)
+            {
+                mask = woundMask;
+                for (int i = 0; i < sim.Count; i++) mask[i] = (byte)(sim.EnemyHealth(i) < CombatSimulation.EnemyMaxHealth ? 1 : 0);
+            }
             if (sim.NativeState)
                 buffer.ScheduleNative(sim.NativePositions, sim.NativePrevious, sim.Count, alpha, frustum,
                     CombinedCharacters ? Vector3.zero : Vector3.up * .8f, CombinedCharacters ? Vector3.one : new Vector3(.85f, 1.4f, .85f), Vector3.up * 1.6f, Vector3.one * .45f,
-                    Vector3.up, 1.2f, !CombinedCharacters, BatchSize);
+                    Vector3.up, 1.2f, !CombinedCharacters, BatchSize, mask);
             else buffer.Schedule(sim.Positions, sim.PreviousPositions, sim.Count, alpha, frustum,
                     CombinedCharacters ? Vector3.zero : Vector3.up * .8f, CombinedCharacters ? Vector3.one : new Vector3(.85f, 1.4f, .85f), Vector3.up * 1.6f, Vector3.one * .45f,
-                    Vector3.up, 1.2f, !CombinedCharacters, BatchSize);
+                    Vector3.up, 1.2f, !CombinedCharacters, BatchSize, mask);
         }
         void ScheduleProjectiles(BurstInstances buffer, CombatSimulation sim, float alpha)
         {
@@ -331,8 +364,20 @@ namespace Journey
             var mesh = new Mesh { name = "Area warning ring", vertices = vertices, triangles = indices };
             mesh.RecalculateNormals(); mesh.RecalculateBounds(); return mesh;
         }
-        public void ResetFeedback() { flash = recoil = 0; tracer.enabled = false; audio.Stop(); }
-        public void Dispose() { compactProjectiles?.Dispose(); compactProjectiles = null; if (octahedron != null) Object.Destroy(octahedron); if (character != null) Object.Destroy(character); if (characterMaterial != null) Object.Destroy(characterMaterial); if (characterAtlas != null) Object.Destroy(characterAtlas); instances?.Dispose(); instances = null; projectileInstances?.Dispose(); projectileInstances = null; warningInstances?.Dispose(); warningInstances = null; if (shot != null) Object.Destroy(shot); if (ring != null) Object.Destroy(ring); }
+        public void ResetFeedback() { Feedback.Reset(); flash = recoil = 0; tracer.enabled = false; muzzlePulse.gameObject.SetActive(false); audio.Stop(); }
+        public void Dispose()
+        {
+            Feedback.Reset();
+            if (hitMaterial != null) Object.Destroy(hitMaterial);
+            if (killMaterial != null) Object.Destroy(killMaterial);
+            if (muzzleMaterial != null) Object.Destroy(muzzleMaterial);
+            compactProjectiles?.Dispose(); compactProjectiles = null;
+            if (octahedron != null) Object.Destroy(octahedron); if (character != null) Object.Destroy(character);
+            if (characterMaterial != null) Object.Destroy(characterMaterial); if (characterAtlas != null) Object.Destroy(characterAtlas);
+            instances?.Dispose(); instances = null; projectileInstances?.Dispose(); projectileInstances = null;
+            warningInstances?.Dispose(); warningInstances = null;
+            if (shot != null) Object.Destroy(shot); if (ring != null) Object.Destroy(ring);
+        }
 
         static Material Material(string name, Color color, bool unlit = false)
         {
