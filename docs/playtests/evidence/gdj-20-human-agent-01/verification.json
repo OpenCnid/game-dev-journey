@@ -1,0 +1,171 @@
+{
+  "runtimeSource": {
+    "revision": "9b68fcf324494f9d4d2c9e48ff1a5f3aa40cc76b",
+    "builtUtc": "2026-10-04T07:50:57.7761832Z",
+    "dirty": false
+  },
+  "launcherBase": "d63b532de33470d7498d2e450b5843840914f5ea",
+  "launcherBranch": "implementation/gdj-20-human-agent-playtest",
+  "connection": "Two Windows release processes on one i7-10700K / RTX 3090; IPv4 UDP loopback; A native input desktop, B separate Win32 desktop and game bridge.",
+  "inputDesktopBefore": "Default",
+  "inputDesktopAfterLaunch": "Default",
+  "runs": [
+    {
+      "run": 1,
+      "checks": {
+        "sameRun": true,
+        "ticks3600": true,
+        "complete": true,
+        "playersEqual": true,
+        "enemiesEqual": true,
+        "zeroCatchupLimits": true,
+        "nativeHumanHost": true,
+        "bridgeClient": true,
+        "sourceEqual": true
+      },
+      "players": [
+        {
+          "Health": 60,
+          "Shots": 469,
+          "Hits": 76,
+          "Damage": 2040,
+          "Kills": 36,
+          "Life": 1
+        },
+        {
+          "Health": 100,
+          "Shots": 496,
+          "Hits": 225,
+          "Damage": 4500,
+          "Kills": 73,
+          "Life": 1
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "checks": {
+        "sameRun": true,
+        "ticks3600": true,
+        "complete": true,
+        "playersEqual": true,
+        "enemiesEqual": true,
+        "zeroCatchupLimits": true,
+        "nativeHumanHost": true,
+        "bridgeClient": true,
+        "sourceEqual": true
+      },
+      "players": [
+        {
+          "Health": 10,
+          "Shots": 433,
+          "Hits": 52,
+          "Damage": 1440,
+          "Kills": 21,
+          "Life": 1
+        },
+        {
+          "Health": 100,
+          "Shots": 497,
+          "Hits": 221,
+          "Damage": 4440,
+          "Kills": 76,
+          "Life": 1
+        }
+      ]
+    },
+    {
+      "run": 3,
+      "checks": {
+        "sameRun": true,
+        "ticks3600": true,
+        "complete": true,
+        "playersEqual": true,
+        "enemiesEqual": true,
+        "zeroCatchupLimits": true,
+        "nativeHumanHost": true,
+        "bridgeClient": true,
+        "sourceEqual": true
+      },
+      "players": [
+        {
+          "Health": 100,
+          "Shots": 47,
+          "Hits": 7,
+          "Damage": 200,
+          "Kills": 3,
+          "Life": 1
+        },
+        {
+          "Health": 100,
+          "Shots": 499,
+          "Hits": 283,
+          "Damage": 5660,
+          "Kills": 94,
+          "Life": 1
+        }
+      ]
+    }
+  ],
+  "humanObservation": {
+    "retry": "Okay, retry is working.",
+    "questions": "How do we control fire rate and such in multiplayer? Headshot sometimes seems below x2. What are enemy HP and rifle damage?",
+    "scope": "Only Retry confirmed by the owner; other combat feel, reverse human client role and death/return remain pending."
+  },
+  "headshotAudit": {
+    "humanConfirmedHeads": 65,
+    "full40": 49,
+    "cappedAtRemaining20": 16,
+    "anomalies": 0,
+    "examples": [
+      {
+        "run": "1",
+        "player": "0",
+        "event": "29",
+        "region": "Head",
+        "requested": "40",
+        "before": "20",
+        "actual": "20",
+        "after": "0"
+      },
+      {
+        "run": "1",
+        "player": "0",
+        "event": "30",
+        "region": "Head",
+        "requested": "40",
+        "before": "20",
+        "actual": "20",
+        "after": "0"
+      },
+      {
+        "run": "1",
+        "player": "0",
+        "event": "43",
+        "region": "Head",
+        "requested": "40",
+        "before": "20",
+        "actual": "20",
+        "after": "0"
+      }
+    ],
+    "limit": "Audits resolved authoritative headshots, not whether the intended aim region was correctly classified for every shot."
+  },
+  "performanceAcceptance": false,
+  "limitations": [
+    "B preview readback/JPEG/server overhead and uncontrolled competing desktop work.",
+    "Only loopback and one physical machine.",
+    "All recorded players remained Life=1; no human death/return or wipe evidence.",
+    "A was less active in round 3 (47 shots); this is not three equivalent human workloads.",
+    "Computer Use stopped on physical Escape; companion controller stopped and its commands expire after 0.5 seconds."
+  ],
+  "sha256": {
+    "client-summary-run-1.json": "c958fd1d5b2f459a02080f1dea6be38ba387ed2f83c2fb23bcb82be1d693c29a",
+    "client-summary-run-2.json": "46a31f931801bb5bf71ccba996d0c05dc52b5f47575181b8b9059f30abad9b11",
+    "client-summary-run-3.json": "eff60080277231784c66ff5a1ff215e9b35a493fbcf85519a124c1213f7d7502",
+    "host-events.csv": "2cb82b90ecd924d791272f3446dc575af2ed8ea808a4ca1da4c47cb91e61a3ae",
+    "host-summary-run-1.json": "9b9dca677e29f3aed017dfd59461776e354416f6f5543bd18e789e6835714bef",
+    "host-summary-run-2.json": "935a4b6e906d008be0f0b69f54d409f3c0ce3468d5132555eb23c8e82cda280b",
+    "host-summary-run-3.json": "6761b1863cd65deb2b5816a90ede443ba9ff20e966ceea4787addcfa88c2f0e0"
+  }
+}

@@ -31,23 +31,24 @@ Path(sys.argv[1]).write_text(json.dumps({'desktop':value.value,'args':sys.argv[2
 time.sleep(30)
 '''
         with tempfile.TemporaryDirectory(prefix="Stack Lab desktop ") as directory:
-            output = Path(directory) / "ready.json"
             desktop = OwnedDesktop()
             handles = []
             try:
                 arguments = ['quoted "value"', 'Unicode café', 'trailing\\']
-                desktop.launch([sys.executable, "-c", script, str(output), *arguments], Path(directory))
-                deadline = time.monotonic() + 5
-                while not output.is_file() and time.monotonic() < deadline:
-                    time.sleep(.02)
-                report = json.loads(output.read_text())
-                self.assertEqual(report["desktop"], desktop.name)
-                self.assertEqual(report["args"], arguments)
-                self.assertEqual(desktop.input_name(), desktop.initial_input)
                 open_process = desktop.kernel.OpenProcess
                 open_process.argtypes, open_process.restype = [w.DWORD, w.BOOL, w.DWORD], w.HANDLE
-                for pid in [desktop.children[0].pid, report["child"]]:
-                    handles.append(desktop.check(open_process(0x100000, False, pid)))
+                for on_input in (False, True):
+                    output = Path(directory) / f"ready-{on_input}.json"
+                    pid = desktop.launch([sys.executable, "-c", script, str(output), *arguments], Path(directory), on_input=on_input)
+                    deadline = time.monotonic() + 5
+                    while not output.is_file() and time.monotonic() < deadline:
+                        time.sleep(.02)
+                    report = json.loads(output.read_text())
+                    self.assertEqual(report["desktop"], desktop.initial_input if on_input else desktop.name)
+                    self.assertEqual(report["args"], arguments)
+                    self.assertEqual(desktop.input_name(), desktop.initial_input)
+                    for child_pid in [pid, report["child"]]:
+                        handles.append(desktop.check(open_process(0x100000, False, child_pid)))
                 desktop.close()
                 for handle in handles:
                     self.assertEqual(desktop.kernel.WaitForSingleObject(handle, 2000), 0)

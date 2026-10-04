@@ -10,12 +10,15 @@ param(
     [switch]$QuitAtEnd,
     [switch]$Uncapped,
     [switch]$Background,
+    [switch]$HumanHost,
+    [switch]$WaitForJoin,
     [string]$PythonPath
 )
 $ErrorActionPreference = 'Stop'
 $taskRoot = Split-Path -Parent $PSScriptRoot
 if (-not $PlayerFolder) { $PlayerFolder = Join-Path $taskRoot 'prototypes/001-stacked-weapons/build/StackLab' }
 $taskPlayer = Join-Path $PlayerFolder 'StackLab.exe'
+if (($HumanHost -and -not $Background) -or ($WaitForJoin -and -not $HumanHost)) { throw 'HumanHost requires Background; WaitForJoin requires HumanHost.' }
 if (-not (Test-Path -LiteralPath $taskPlayer)) { throw "No player at $taskPlayer. Build with tools/unity.ps1 first." }
 if (-not $Results) { $Results = Join-Path $taskRoot ('prototypes/001-stacked-weapons/artifacts/shared-' + (Get-Date -Format 'yyyyMMdd-HHmmss')) }
 if ($Background) {
@@ -31,6 +34,8 @@ if ($Background) {
     $taskArgs = @(('"' + $taskLauncher + '"'),'--player-folder',('"' + [IO.Path]::GetFullPath($PlayerFolder) + '"'),
         '--results',('"' + $taskResults + '"'),'--port',$Port,'--width',$Width,'--height',$Height)
     if ($Uncapped) { $taskArgs += '--uncapped' }
+    if ($HumanHost) { $taskArgs += '--human-host' }
+    if ($WaitForJoin) { $taskArgs += '--wait-for-join' }
     $taskProcess = Start-Process -FilePath $PythonPath -ArgumentList $taskArgs -WindowStyle Hidden -PassThru `
         -RedirectStandardOutput ($taskResults + '-launcher.log') -RedirectStandardError ($taskResults + '-launcher-error.log')
     $taskDeadline = (Get-Date).AddSeconds(30)

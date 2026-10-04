@@ -138,12 +138,12 @@ class OwnedDesktop:
         if self.input_name() != self.initial_input:
             raise RuntimeError("Input desktop changed; stopping the owned pair.")
 
-    def launch(self, argv, cwd):
+    def launch(self, argv, cwd, *, on_input=False):
         self.verify_input()
         info, startup = Process(), Startup()
         startup.cb = ctypes.sizeof(startup)
-        startup.desktop = self.station + "\\" + self.name
-        startup.flags, startup.show = 0x81, 1  # Visible on the non-input desktop; no feedback cursor.
+        startup.desktop = self.station + "\\" + (self.initial_input if on_input else self.name)
+        startup.flags, startup.show = 0x81, 1  # Show on the selected desktop; never switch desktops.
         command = ctypes.create_unicode_buffer(subprocess.list2cmdline([str(a) for a in argv]))
         environment = ctypes.create_unicode_buffer("\0".join(f"{k}={v}" for k, v in sorted(os.environ.items(), key=lambda p: p[0].lower())) + "\0\0")
         self.check(self.kernel.CreateProcessW(str(argv[0]), command, None, None, False,
@@ -189,13 +189,18 @@ def main():
     parser.add_argument("--height", type=int, default=1080)
     parser.add_argument("--duration", type=int, default=900)
     parser.add_argument("--uncapped", action="store_true")
+    parser.add_argument("--human-host", action="store_true", help="Native-input A on the current desktop; bridge-controlled B in the background.")
+    parser.add_argument("--wait-for-join", action="store_true", help="Hold B's launch until the viewer's Start test action.")
     args = parser.parse_args()
+    if args.wait_for_join and not args.human_host:
+        parser.error("--wait-for-join requires --human-host")
     executable = args.player_folder.resolve() / "StackLab.exe"
     if not executable.is_file() or not 1 <= args.duration <= 3600 or not 1 <= args.port <= 65535:
         parser.error("Check player path, duration (1..3600 seconds), and UDP port.")
     results = args.results.resolve()
     results.mkdir(parents=True, exist_ok=False)
     stop, lock = threading.Event(), threading.Lock()
+    join_requested, joined = threading.Event(), threading.Event()
     sequences = {"host": 0, "client": 0}
     route = "/session/" + secrets.token_urlsafe(24)
     html = Path(__file__).with_name("shared-preview.html").read_bytes()
@@ -221,6 +226,10 @@ def main():
             path = self.path.split("?", 1)[0][len(route) + 1:]
             if path == "":
                 return self.reply(200, html, "text/html; charset=utf-8")
+            if path == "session.json":
+                return self.reply(200, json.dumps({"humanRole": "host" if args.human_host else None,
+                    "roles": ["client"] if args.human_host else list(sequences),
+                    "waitingForJoin": args.wait_for_join and not joined.is_set()}).encode())
             parts = path.split("/")
             if len(parts) != 2 or parts[0] not in sequences or parts[1] not in ("state.json", "preview.jpg", "stream"):
                 return self.reply(404, b"{}")
@@ -259,8 +268,15 @@ def main():
             if role == "stop":
                 stop.set()
                 return self.reply(202, b'{"stopping":true}')
+            if role == "join" and args.wait_for_join:
+                if joined.is_set():
+                    return self.reply(409, b'{"error":"Client already joined; use Retry after the run"}')
+                join_requested.set()
+                return self.reply(202, b'{"joining":true}')
             if role not in sequences:
                 return self.reply(404, b"{}")
+            if args.human_host and role == "host":
+                return self.reply(403, b'{"error":"Human host uses native input"}')
             try:
                 length = int(self.headers.get("Content-Length", "0"))
                 if not 0 < length <= 2048:
@@ -285,20 +301,30 @@ def main():
                       "viewer": f"http://127.0.0.1:{server.server_port}{route}/", "results": str(results),
                       "startedUtc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                       "durationLimitSeconds": args.duration, "processes": [],
+                      "humanRole": "host" if args.human_host else None,
+                      "waitingForJoin": args.wait_for_join,
                       "capture": "Unity camera JPEG stream, target 30 Hz. Preview overhead and other desktop load invalidate performance acceptance."}
         thread = None
         try:
-            for role in sequences:
+            def launch_role(role):
                 output = results / role
                 output.mkdir()
                 argv = [executable, "-screen-fullscreen", "0", "-screen-width", args.width,
                         "-screen-height", args.height, "-force-d3d11", "-port", args.port,
-                        "-sharedResults", output, "-logFile", output / "player.log", "-sharedScripted", "-sharedPreview"]
+                        "-sharedResults", output, "-logFile", output / "player.log"]
+                if not (args.human_host and role == "host"):
+                    argv += ["-sharedPreview"]
+                    if not args.human_host:
+                        argv += ["-sharedScripted"]
                 argv += ["-host"] if role == "host" else ["-join", "127.0.0.1"]
                 if args.uncapped:
                     argv += ["-sharedUncapped"]
-                pid = desktop.launch(argv, executable.parent)
+                pid = desktop.launch(argv, executable.parent, on_input=args.human_host and role == "host")
                 invocation["processes"].append({"role": role, "pid": pid, "argv": [str(a) for a in argv]})
+            launch_role("host")
+            if not args.wait_for_join:
+                launch_role("client")
+                joined.set()
             invocation["inputDesktopAfterLaunch"] = desktop.input_name()
             atomic_json(results / "invocation.json", invocation)
             print(json.dumps(invocation), flush=True)
@@ -307,11 +333,21 @@ def main():
             deadline = time.monotonic() + args.duration
             while not stop.wait(.05) and time.monotonic() < deadline:
                 desktop.verify_input()
-            invocation["stopReason"] = "viewer stop" if stop.is_set() else "duration limit"
+                if join_requested.is_set() and not joined.is_set():
+                    launch_role("client")
+                    joined.set()
+                    invocation["waitingForJoin"] = False
+                    invocation["joinedUtc"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+                    atomic_json(results / "invocation.json", invocation)
+                if any(desktop.kernel.WaitForSingleObject(child.process, 0) == 0 for child in desktop.children):
+                    invocation["stopReason"] = "owned player closed"
+                    break
+            invocation.setdefault("stopReason", "viewer stop" if stop.is_set() else "duration limit")
         except BaseException as error:
             invocation["stopReason"] = str(error)
             raise
         finally:
+            stop.set()
             try:
                 invocation["inputDesktopAtStop"] = desktop.input_name()
             finally:

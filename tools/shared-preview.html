@@ -6,13 +6,21 @@
 *{box-sizing:border-box}body{margin:0;background:#11151b;color:#e8eef6;font:15px system-ui,sans-serif}main{max-width:1600px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;align-items:center;gap:20px}h1{font-size:25px;margin:0 0 6px}p{color:#aebbc9;line-height:1.5;margin:8px 0 18px}.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}article{background:#1b222c;border:1px solid #344153;border-radius:12px;overflow:hidden}h2{font-size:18px;margin:16px 18px}.camera{position:relative;aspect-ratio:16/9;background:#05080c}.camera img{width:100%;height:100%;object-fit:contain}.crosshair{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#fff;font-size:24px;pointer-events:none}.status{margin:14px 18px;color:#b7c8da;min-height:42px}.controls{display:flex;flex-wrap:wrap;gap:8px;margin:14px 18px}button{font:inherit;color:#e7eff8;background:#29384a;border:1px solid #51667f;border-radius:7px;padding:8px 12px;cursor:pointer}button:hover{background:#3b536e}button:disabled{opacity:.45;cursor:default}.receipt{color:#89d3c5;margin:12px 18px;min-height:23px;font-size:13px}footer{margin-top:18px;color:#8195ab;font-size:13px}#stop{background:#54313a;border-color:#95616f}@media(max-width:850px){.pair{grid-template-columns:1fr}main{padding:14px}header{align-items:flex-start}}
 </style>
 <main>
-<header><div><h1>Stack Lab · Background pair</h1><p>Two games on a separate Win32 desktop. Your main desktop stays active.</p></div><button id="stop">Stop both games</button></header>
+<header><div><h1>Stack Lab · Background pair</h1><p id="description">Two games on a separate Win32 desktop. Your main desktop stays active.</p></div><div><button id="join" hidden>Start test</button> <button id="stop">Stop both games</button></div></header>
 <div class="pair" id="pair"></div>
 <footer>Continuous game-camera streams target 30 frames/s, with shared state below. Camera previews use offscreen rendering; the game's window HUD is represented by live state here. This session has preview overhead and shares your CPU/GPU. Performance acceptance needs a separate controlled capture.</footer>
 </main>
-<script>
+<script type="module">
 const states={},busy={},base=location.pathname;
-for(const role of ['host','client']){
+const session=await fetch(base+'session.json').then(r=>r.json());
+if(session.humanRole){
+ document.querySelector('h1').textContent='Stack Lab · Human + agent';
+ document.querySelector('#description').textContent='You play A in the native game window (WASD + mouse). B uses the background game bridge. After starting, return to A and click Resume local input if shown.';
+ document.querySelector('.pair').style.gridTemplateColumns='1fr';
+ document.querySelector('#join').hidden=!session.waitingForJoin;
+}
+document.title=document.querySelector('h1').textContent;
+for(const role of session.roles){
  const card=document.createElement('article');
  card.innerHTML=`<h2>${role==='host'?'A · Host':'B · Client'}</h2><div class="camera"><img alt="${role} game camera"><span class="crosshair">+</span></div><div class="status">Waiting for game state…</div><div class="controls"><button data-action="scripted">Autoplay</button><button data-action="idle">Hold input</button><button data-action="body">Aim + fire body</button><button data-action="head">Aim + fire head</button><button data-action="forward">Forward</button><button data-action="left">Left</button><button data-action="back">Back</button><button data-action="right">Right</button><button data-action="retry">Retry</button></div><div class="receipt"></div>`;
  document.querySelector('#pair').append(card);
@@ -38,6 +46,7 @@ for(const role of ['host','client']){
   try{
    const response=await fetch(base+role+'/state.json');if(!response.ok)throw Error('Waiting for bridge');
    const s=await response.json();states[role]=s;
+   if(session.humanRole){const join=document.querySelector('#join');join.disabled=true;join.textContent='Test started';}
    let source='';try{source=JSON.parse(s.source).revision.slice(0,7)}catch{}
    card.querySelector('.status').textContent=`${s.state} · run ${s.run} · ${Math.max(0,60-s.elapsed).toFixed(1)}s remaining · ${s.width}×${s.height} · source ${source}\nA: ${s.players[0].Health} HP / ${s.players[0].Damage} damage · B: ${s.players[1].Health} HP / ${s.players[1].Damage} damage`;
    card.querySelector('.status').style.whiteSpace='pre-line';
@@ -55,5 +64,9 @@ async function send(role,command,card){
  finally{busy[role]=false}
 }
 document.querySelector('#stop').onclick=async()=>{await fetch(base+'stop',{method:'POST'});document.querySelector('#stop').disabled=true;document.querySelector('#stop').textContent='Stopped';};
+document.querySelector('#join').onclick=async()=>{
+ const r=await fetch(base+'join',{method:'POST'});
+ if(r.ok){document.querySelector('#join').disabled=true;document.querySelector('#join').textContent='Joining B…';}
+};
 </script>
 </html>
