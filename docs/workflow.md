@@ -72,6 +72,8 @@ The useful analogy to a web preview is a reproducible game scenario: a known are
 
 Owner feedback, October 5: reduce human reading burden. Upgrade cards show the benefit and changed effects; omit unchanged stats, previous values and unnecessary explanatory sentences. Keep detailed diagnostics in evidence reports. Human test instructions should give a short action and the few observations needed for the current experiment.
 
+Use Editor/Play Mode and affected automated checks for ordinary development iteration. Create a standalone for a playable checkpoint, native co-op/performance measurement or an executable-specific investigation; reuse that exact candidate across tests while its source is unchanged. Keep one clearly identified current human candidate and verify the selected scenario when delivering it. The October 5 v7/v3 delivery mix-up shows that naming a new build in chat alone is insufficient.
+
 ## Design for the game's future
 
 The owner asks that new features account for the future game and its interactions, not only the current prototype. Before implementing a feature, identify its relevant consumers, state ownership and known extension needs in the design or task record. Explain how it could affect future content, build strategies and balance. Progression is the current example: upgrades can affect weapons, loot generation and future upgrade draws; a weapon-only definition would exclude an already identified need.
