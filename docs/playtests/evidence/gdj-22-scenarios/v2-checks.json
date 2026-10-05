@@ -1,0 +1,30 @@
+{
+  "build": {
+    "revision": "5eb6579286394c31d295c3ee204b9cf1a5143bcb",
+    "builtUtc": "2026-10-05T03:33:47.5272036Z",
+    "dirty": false
+  },
+  "release": true,
+  "manifestFiles": 167,
+  "manifestSha256": "bb8839c18cc2b871059383a51fa4f33eb50029f020dd5971816c220fd935cb50",
+  "tests": {
+    "EditMode": {
+      "result": "Passed",
+      "total": "108",
+      "passed": "108",
+      "failed": "0",
+      "duration": "2.7787562",
+      "start-time": "2026-10-05 03:32:57Z",
+      "end-time": "2026-10-05 03:33:00Z"
+    },
+    "PlayMode": {
+      "result": "Passed",
+      "total": "11",
+      "passed": "11",
+      "failed": "0",
+      "duration": "2.8513292",
+      "start-time": "2026-10-05 03:32:16Z",
+      "end-time": "2026-10-05 03:32:18Z"
+    }
+  }
+}

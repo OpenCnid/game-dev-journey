@@ -1,12 +1,13 @@
 # GDJ-22 — scenario configuration candidate
 
-October 4, 2026 (America/Chicago). **Owner accepts the presentation for developer testing; candidate awaits coordinator review.** This report does not establish enjoyment, balance or new native performance. GDJ-20's accepted fixed loopback evidence remains separate.
+October 4, 2026 (America/Chicago). **Owner acceptance and coordinator code/integration review are complete; one review finding was fixed and the corrected candidate passes verification. Integration is pending.** This report does not establish enjoyment, balance or new native performance. GDJ-20's accepted fixed loopback evidence remains separate.
 
 ## Exact source and build
 
-- Base: merged main `e6434ec7575e2d7e3e81e3d0b799bc15299bb6e1`; foundation revision 18.
-- Runtime/release source: **`ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2`**, clean. Unity 6000.3.25f1 / Transport 2.7.4 unchanged. Release built UTC `2026-10-05T02:52:00.2602718Z`.
-- Whole player: `C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/build/StackLab-GDJ22-v1/`. All **167 files** rehash with zero mismatches against the [manifest](evidence/gdj-22-scenarios/v1-player-manifest.json), SHA-256 `191c8913837abeb077df372408cc899df7143ddc80f33560e81f81494ae9228a`. Distribute this entire folder. Accepted GDJ-20 and solo archives were untouched.
+- Base: merged main `e6434ec7575e2d7e3e81e3d0b799bc15299bb6e1`; foundation revision 18. The primary checkout remains unchanged at that base.
+- **Current v2 runtime/release source: `5eb6579286394c31d295c3ee204b9cf1a5143bcb`**, clean. Unity 6000.3.25f1 / Transport 2.7.4 unchanged. Release built UTC `2026-10-05T03:33:47.5272036Z`.
+- Current whole player: `C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/build/StackLab-GDJ22-v2/`. All **167 files** rehash against the [v2 manifest](evidence/gdj-22-scenarios/v2-player-manifest.json), canonical LF SHA-256 `bb8839c18cc2b871059383a51fa4f33eb50029f020dd5971816c220fd935cb50`. Distribute the entire folder.
+- Original v1 source `ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2` and its `build/StackLab-GDJ22-v1/` archive remain preserved. Its 167 files also rehash against the [original manifest](evidence/gdj-22-scenarios/v1-player-manifest.json), canonical LF SHA-256 `191c8913837abeb077df372408cc899df7143ddc80f33560e81f81494ae9228a`. Earlier GDJ-20 and solo controls were untouched.
 - Worktree: `C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev`; branch `codex/gdj-22-scenario-config`. [Task contract](../planning/tasks/GDJ-22.md) was committed before runtime edits.
 
 ## Implemented contract
@@ -25,7 +26,7 @@ The menu distinguishes Next solo and Host. Selecting a scenario applies on Start
 
 Supported envelope: 1–35 drones, HP 1–10000, body damage 1–1000, integer head multiplier 1–4, finite duration 1–600 seconds, finite rifle rate .5–120/s, signed 32-bit seed. The largest snapshot is **907 bytes including message type**, within the unchanged 1100-byte cap. This bound is functional, not measured network scalability. Synthetic benchmarks retain their independent 20,000-enemy capacity and historical sphere/body-only workload.
 
-## Checks and observed results
+## Original v1 checks and observed results
 
 [Exact check metadata](evidence/gdj-22-scenarios/v1-checks.json), [108 Edit Mode results](evidence/gdj-22-scenarios/v1-EditMode.xml) and [10 Play Mode results](evidence/gdj-22-scenarios/v1-PlayMode.xml) pass through serialized `tools/unity.ps1` runs, with the affected Editor closed. The release build passes. Checks cover default/developer HP/body/head parity, exact per-tick due-shot parity at .5/2/4/baseline/30/120 shots/sec, malformed/version/nonfinite/range rejection, atomic parsing, changed session/configuration, old-run rejection, maximum packet size, configured projection and the retained solo controls. Actual Play Mode game pairs cover all three named scenarios and one/both-ready Retry. Existing death/return/immunity/defeat-before-return/completion and loss tests remain passing.
 
@@ -64,7 +65,7 @@ The default solo/shared HP difference preserves earlier test fixtures; Developer
 
 After the rubric was supplied, the owner asked whether both versions are development prototypes rather than the final product. We clarified that the scenario selectors, technical labels and tuning values support testing, and that an optimized standalone release build does not mean a finished product. The owner then accepted the intended scope: **“Yes, for testing they are fine. Since they're just for developers AKA myself.”**
 
-This completes GDJ-22's owner visibility/expectation gate for the developer-facing solo/co-op scenario controls and settings. It does not accept final player-facing UI, final game balance or gameplay enjoyment, and provides no new performance evidence or merge authorization. Runtime source, build, archived player and checks remain unchanged.
+This completes GDJ-22's owner visibility/expectation gate for the developer-facing solo/co-op scenario controls and settings. It does not accept final player-facing UI, final game balance or gameplay enjoyment, and provides no new performance evidence or merge authorization. That acceptance did not change runtime source or verification. The subsequent review fix below preserves the accepted scenario labels/settings.
 
 ## Coordinator review — feedback reset finding
 
@@ -72,7 +73,20 @@ The owner requested the remaining code/integration review. Review of `dfbe2d73cd
 
 The [three reproduced omissions](evidence/gdj-22-scenarios/review-feedback-finding.json) preserve the exact missing event and limits. The [new regression before the fix](evidence/gdj-22-scenarios/review-feedback-before-PlayMode.xml) fails with zero retained events instead of two. The bounded fix filters queued feedback by the active run, preserving current-run order and discarding stale events. A Play Mode regression covers both initial Start and Retry; the standalone helper now compares all ordered run-1 nonterminal outcomes, including the first hit. Late terminal rejections remain outside that comparison because clients discard old-run feedback after Retry.
 
-A replacement clean release and standalone rechecks are being prepared. The original v1 archive/evidence above remain preserved. Review completion and the replacement source/build will be recorded here after those checks.
+**Review outcome: the P2 finding is fixed; no blocking code/integration findings remain.** The review covered all runtime/test changes against main, configuration validation and packet bounds, solo/shared damage and cadence, host offer/acknowledgement, session/run binding, Retry/lifecycle, effective presentation and retained reference controls. The PR is mergeable against the unchanged base above; it has not been merged.
+
+The corrected clean v2 release passes [108 Edit Mode tests](evidence/gdj-22-scenarios/v2-EditMode.xml), [11 Play Mode tests](evidence/gdj-22-scenarios/v2-PlayMode.xml), and the serialized release build through `tools/unity.ps1`. [Check/build metadata](evidence/gdj-22-scenarios/v2-checks.json) and the [standalone audit](evidence/gdj-22-scenarios/v2-pair-audit.json) identify the exact source and settings.
+
+| Corrected standalone run | Verified result |
+| --- | --- |
+| Shared rifle default | Both Complete at tick 3600; 960 identical nonterminal outcomes, including the first host hit. Host/client accepted shots 500/459; the client dies and returns (life 2). |
+| Developer parity | Both Complete at tick 3600; 461 identical nonterminal outcomes. Host/client accepted shots 240/221; the client dies and returns (life 2). |
+| Developer 120/s, 8 seconds | Both Complete at tick 480; 1918 identical nonterminal outcomes: 1647 damage/miss and 271 stale-enemy rejections. Host/client accepted shots 853/794. |
+| All three | Exact terminal player/enemy equality; one-ready stays in run 1; both-ready starts run 2 with the same session/configuration; stale Retry rejects; hard client loss aborts the host; zero authority catch-up-limit events. |
+
+The fast run still has four host versus three client late Terminal rejections; these do not change state and are excluded from nonterminal feedback parity. Rates describe due-shot cadence, not guaranteed accepted damage throughput: death/return and historical incarnation rejection reduce accepted shots. Hidden preview/scripted runs supply functional evidence only. Raw logs, full verification snapshots and observations remain in ignored `artifacts/gdj22-v2-{default,developer,fast}/` under the active project; the audit preserves their verification hashes and reproduction parameters.
+
+The only v1-to-v2 runtime delta is `SharedGame`'s generation-feedback reset. Solo/benchmark code, configuration values, native labels, protocol and packages are unchanged, so the original invalid-launch and reference reporting smokes remain applicable and were not repeated. Existing lifecycle and solo controls were rerun in the test suites. All owned standalone players and project Editor/test/build operations are stopped.
 
 ## Reproduction
 
@@ -84,10 +98,10 @@ From the worktree above, with its Editor closed:
 ./tools/unity.ps1 -Action Build
 ```
 
-For the exact archived candidate, the existing helper can launch default manual/scripted pairs:
+For the current corrected archived candidate, the existing helper can launch default manual/scripted pairs:
 
 ```powershell
-./tools/shared-combat.ps1 -PlayerFolder prototypes/001-stacked-weapons/build/StackLab-GDJ22-v1 -ScriptedCompanion
+./tools/shared-combat.ps1 -PlayerFolder prototypes/001-stacked-weapons/build/StackLab-GDJ22-v2 -ScriptedCompanion
 ```
 
 For the reproducible functional agreement/Retry/loss check, use a fresh output directory and free port. The script owns/stops only its pair and writes the assertions and observation snapshots:
@@ -95,7 +109,7 @@ For the reproducible functional agreement/Retry/loss check, use a fresh output d
 ```powershell
 $taskPython = "$env:USERPROFILE/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe"
 & $taskPython docs/playtests/evidence/gdj-22-scenarios/check_scenario_pair.py `
-  --player "$PWD/prototypes/001-stacked-weapons/build/StackLab-GDJ22-v1/StackLab.exe" `
+  --player "$PWD/prototypes/001-stacked-weapons/build/StackLab-GDJ22-v2/StackLab.exe" `
   --results "$PWD/prototypes/001-stacked-weapons/artifacts/NEW-gdj22-pair" `
   --scenario developer-parity --port 17823
 ```
@@ -104,4 +118,4 @@ Use `--scenario shared-rifle` for the default; add `--rate 120 --duration 8` for
 
 ## Remaining scope and handoff
 
-Draft [PR #13](https://github.com/OpenCnid/game-dev-journey/pull/13) is open and attached. The owner visibility/expectation gate is complete for developer testing; coordinator code/integration review remains. Do not merge automatically. Full lobby/readiness design, unified command processing, GDJ-6 progression, thinking space, recovery/migration, four players/dense replication and GDJ-21 runner/viewer redesign are excluded. GDJ-21 can reuse scenario construction/validation and evidence identity; future earned builds must not mutate frozen starting definitions. No editor/package upgrade, external asset or new performance claim is introduced.
+[PR #13](https://github.com/OpenCnid/game-dev-journey/pull/13) is open and attached. Owner visibility/expectation acceptance for developer testing and coordinator code/integration review are complete. The corrected v2 candidate is ready for integration; merge authorization remains separate. Do not merge automatically. Full lobby/readiness design, unified command processing, GDJ-6 progression, thinking space, recovery/migration, four players/dense replication and GDJ-21 runner/viewer redesign are excluded. GDJ-21 can reuse scenario construction/validation and evidence identity; future earned builds must not mutate frozen starting definitions. No editor/package upgrade, external asset or new performance claim is introduced.

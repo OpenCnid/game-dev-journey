@@ -1,0 +1,236 @@
+{
+  "source": "5eb6579286394c31d295c3ee204b9cf1a5143bcb",
+  "base": "e6434ec7575e2d7e3e81e3d0b799bc15299bb6e1",
+  "result": "PASS",
+  "scope": "Functional loopback checks only; hidden preview windows with scripted input, not performance or human-play evidence.",
+  "pairs": {
+    "default": {
+      "result": "PASS",
+      "scenario": {
+        "version": 1,
+        "seed": 137,
+        "enemies": 12,
+        "enemyHp": 60,
+        "bodyDamage": 20,
+        "headMultiplier": 2,
+        "headDamage": 40,
+        "run": 1,
+        "duration": 60.0,
+        "rifleInterval": 0.11999999731779099,
+        "rifleRate": 8.333333969116211,
+        "name": "Shared rifle",
+        "identity": "d29ab1d2dae9a04f6c6c554845b6a800131236465bf7ba418827a8bf9c927593",
+        "session": "5b238956063743aab05d7c552d5e330f"
+      },
+      "terminalState": "Complete",
+      "ticks": [
+        3600,
+        3600
+      ],
+      "terminalPlayersAndEnemiesEqual": true,
+      "terminalStateSha256": "879750fddeb3806abcd90c0127c365d53a07ca8ef83adff380e0f7420270e157",
+      "acceptedShots": [
+        500,
+        459
+      ],
+      "terminalLives": [
+        1,
+        2
+      ],
+      "oneReadyStaysRun1": true,
+      "bothReadyStartsRun2WithSameSessionAndConfiguration": true,
+      "staleRetryResult": "Stale run/life",
+      "afterClientLoss": "Aborted",
+      "eventAudit": {
+        "result": "PASS",
+        "identicalOutcomes": 960,
+        "firstOutcome": {
+          "run": "1",
+          "player": "0",
+          "weapon": "1",
+          "event": "1",
+          "pose_tick": "0",
+          "life": "1",
+          "decision": "Damage",
+          "enemy": "0",
+          "incarnation": "1",
+          "region": "Body",
+          "requested": "20",
+          "before": "60",
+          "actual": "20",
+          "after": "40"
+        }
+      },
+      "outcomesByRole": {
+        "host": {
+          "Damage": 560,
+          "Miss": 399,
+          "StaleLife": 1
+        },
+        "client": {
+          "Damage": 560,
+          "Miss": 399,
+          "StaleLife": 1
+        }
+      },
+      "catchupLimits": [
+        0,
+        0
+      ],
+      "rawArtifactDirectory": "prototypes/001-stacked-weapons/artifacts/gdj22-v2-default",
+      "verificationSha256": "8d3ecdf7e5cec519a5e52895224aa594aeee7800d4f5edee01876827eccc524f"
+    },
+    "developer": {
+      "result": "PASS",
+      "scenario": {
+        "version": 1,
+        "seed": 271,
+        "enemies": 12,
+        "enemyHp": 90,
+        "bodyDamage": 15,
+        "headMultiplier": 3,
+        "headDamage": 45,
+        "run": 1,
+        "duration": 60.0,
+        "rifleInterval": 0.25,
+        "rifleRate": 4.0,
+        "name": "Developer parity",
+        "identity": "04e484e0c6ad621896f8f4b40491c998248f5856bee9a4c7b9506ca880ffa5e4",
+        "session": "145259320aa04b4fafcbd510692b6d26"
+      },
+      "terminalState": "Complete",
+      "ticks": [
+        3600,
+        3600
+      ],
+      "terminalPlayersAndEnemiesEqual": true,
+      "terminalStateSha256": "32d0eea870c3cc69571366369ff63ca0899b7177e72803be864c222b4021def4",
+      "acceptedShots": [
+        240,
+        221
+      ],
+      "terminalLives": [
+        1,
+        2
+      ],
+      "oneReadyStaysRun1": true,
+      "bothReadyStartsRun2WithSameSessionAndConfiguration": true,
+      "staleRetryResult": "Stale run/life",
+      "afterClientLoss": "Aborted",
+      "eventAudit": {
+        "result": "PASS",
+        "identicalOutcomes": 461,
+        "firstOutcome": {
+          "run": "1",
+          "player": "0",
+          "weapon": "1",
+          "event": "1",
+          "pose_tick": "0",
+          "life": "1",
+          "decision": "Damage",
+          "enemy": "0",
+          "incarnation": "1",
+          "region": "Body",
+          "requested": "15",
+          "before": "90",
+          "actual": "15",
+          "after": "75"
+        }
+      },
+      "outcomesByRole": {
+        "host": {
+          "Damage": 272,
+          "Miss": 189
+        },
+        "client": {
+          "Damage": 272,
+          "Miss": 189
+        }
+      },
+      "catchupLimits": [
+        0,
+        0
+      ],
+      "rawArtifactDirectory": "prototypes/001-stacked-weapons/artifacts/gdj22-v2-developer",
+      "verificationSha256": "5d289179b3676e8dd3c7e1f5a0fe9ced6cfc12805ba8ee7defeee8baa2281fd0"
+    },
+    "fast": {
+      "result": "PASS",
+      "scenario": {
+        "version": 1,
+        "seed": 271,
+        "enemies": 12,
+        "enemyHp": 90,
+        "bodyDamage": 15,
+        "headMultiplier": 3,
+        "headDamage": 45,
+        "run": 1,
+        "duration": 8.0,
+        "rifleInterval": 0.008333333767950535,
+        "rifleRate": 119.99999237060547,
+        "name": "Developer parity (override)",
+        "identity": "f8cbc769904c4f21d532736bcbefc58a4f207d1bf3291cd2f658bf63f1acd15d",
+        "session": "658f70ae2cfa4517964ac22a3ce2e5eb"
+      },
+      "terminalState": "Complete",
+      "ticks": [
+        480,
+        480
+      ],
+      "terminalPlayersAndEnemiesEqual": true,
+      "terminalStateSha256": "a9dfecc9a60dd00eb53cc832a676c868911cc2fa62854308c5463070f3db7812",
+      "acceptedShots": [
+        853,
+        794
+      ],
+      "terminalLives": [
+        1,
+        1
+      ],
+      "oneReadyStaysRun1": true,
+      "bothReadyStartsRun2WithSameSessionAndConfiguration": true,
+      "staleRetryResult": "Stale run/life",
+      "afterClientLoss": "Aborted",
+      "eventAudit": {
+        "result": "PASS",
+        "identicalOutcomes": 1918,
+        "firstOutcome": {
+          "run": "1",
+          "player": "0",
+          "weapon": "1",
+          "event": "1",
+          "pose_tick": "0",
+          "life": "1",
+          "decision": "Damage",
+          "enemy": "0",
+          "incarnation": "1",
+          "region": "Body",
+          "requested": "15",
+          "before": "90",
+          "actual": "15",
+          "after": "75"
+        }
+      },
+      "outcomesByRole": {
+        "host": {
+          "Damage": 802,
+          "StaleEnemy": 271,
+          "Miss": 845,
+          "Terminal": 4
+        },
+        "client": {
+          "Damage": 802,
+          "StaleEnemy": 271,
+          "Miss": 845,
+          "Terminal": 3
+        }
+      },
+      "catchupLimits": [
+        0,
+        0
+      ],
+      "rawArtifactDirectory": "prototypes/001-stacked-weapons/artifacts/gdj22-v2-fast",
+      "verificationSha256": "975b46c44d572d3945a42b97a319be98270553af45cda4b780f1853ccd8b05e8"
+    }
+  }
+}
