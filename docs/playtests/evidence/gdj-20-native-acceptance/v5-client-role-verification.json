@@ -62,5 +62,18 @@
   "humanObservation": "Movement, aim, shot cues, body/critical feedback and damage visibility felt the same as normal. Death immediately darts to the other player POV; spectator identity and eventual respawn are unclear.",
   "assessment": "Combat client-role comparison positive; death/return clarity requires revision and human retest. Diagnostic timings only: host occluded, desktop work uncontrolled. Not native performance acceptance.",
   "connection": "Same-PC IPv4 loopback, no preview on either player",
-  "rawResults": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\native-client-v5-20261005T000343"
+  "rawResults": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\native-client-v5-20261005T000343",
+  "eventStateAudit": {
+    "hostEvents": 835,
+    "clientEvents": 835,
+    "hostOnlyEvents": 0,
+    "clientOnlyEvents": 0,
+    "commonSnapshotTicks": 3597,
+    "hostSampledTicks": 3599,
+    "clientSampledTicks": 3597,
+    "counterDiscrepancyTicks": [],
+    "hostSameTickCounterChanges": 0,
+    "clientSameTickCounterChanges": 0,
+    "limits": "Compares authoritative event identity/outcomes and sampled HP/shots/hits/damage/kills/enemy counters at common ticks. Terminal full player/enemy positions are compared separately; intermediate unsampled snapshots are not inferred."
+  }
 }
