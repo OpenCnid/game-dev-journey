@@ -19,6 +19,7 @@ namespace Journey
         SharedConnection connection;
         SharedEncounter authority;
         GameObject ally;
+        Material allyMaterial;
         LineRenderer allyShot;
         int local, run, life, inputSequence, shotSequence, catchupLimits;
         float yaw, pitch, inputTime, inputRemaining, shotRemaining, accumulator, pingRemaining;
@@ -64,7 +65,9 @@ namespace Journey
             if (host) { authority = new SharedEncounter(); authority.Resolved += Resolve; }
             ally = GameObject.CreatePrimitive(PrimitiveType.Capsule); ally.name = "Teammate " + (host ? "B" : "A");
             Destroy(ally.GetComponent<Collider>()); ally.transform.SetParent(transform);
-            ally.GetComponent<Renderer>().material.color = new Color(.1f, .9f, .8f); ally.SetActive(false);
+            allyMaterial = new Material(Resources.Load<Material>("Body"));
+            allyMaterial.SetColor("_BaseColor", new Color(.1f, .9f, .8f));
+            ally.GetComponent<Renderer>().sharedMaterial = allyMaterial; ally.SetActive(false);
             allyShot = new GameObject("Teammate shot").AddComponent<LineRenderer>(); allyShot.transform.SetParent(transform);
             allyShot.positionCount = 2; allyShot.startWidth = .018f; allyShot.endWidth = .004f;
             allyShot.sharedMaterial = new Material(Resources.Load<Material>("Trail")); allyShot.sharedMaterial.color = new Color(.1f, .9f, .8f);
@@ -379,7 +382,8 @@ namespace Journey
             if (connection == null) return;
             if (!saved && display.State != SharedState.Waiting) { reason = "Local player closed"; display.State = SharedState.Aborted; Save(); }
             connection.Send(SharedConnection.Message.Abort, w => w.Write("Peer player closed")); connection.Dispose();
-            frameLog?.Dispose(); hitLog?.Dispose(); if (allyShot != null) Destroy(allyShot.sharedMaterial); SetCursor(false);
+            frameLog?.Dispose(); hitLog?.Dispose(); if (allyMaterial != null) Destroy(allyMaterial);
+            if (allyShot != null) Destroy(allyShot.sharedMaterial); SetCursor(false);
         }
     }
 }

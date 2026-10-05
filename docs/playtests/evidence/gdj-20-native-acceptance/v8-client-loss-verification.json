@@ -1,0 +1,24 @@
+{
+  "visualReview": "Agent inspected the final plain-language SESSION STOPPED card. No human readability acceptance inferred.",
+  "kill": {
+    "afterKillUtc": "2026-10-05T00:37:51.155378Z",
+    "pid": 23748,
+    "run": 1,
+    "killedRole": "client",
+    "method": "Abrupt Stop-Process on exact owned PID",
+    "beforeKillUtc": "2026-10-05T00:37:51.1418626Z"
+  },
+  "source": {
+    "revision": "955d6debd7319fda5f9d4e9bede7f814a81a547a",
+    "builtUtc": "2026-10-05T00:36:36.2885189Z",
+    "dirty": false
+  },
+  "survivor": {
+    "stopToReportSeconds": -17999.3892065,
+    "state": 4,
+    "catchupLimits": 0,
+    "reason": "Transport send failed: -5",
+    "hostBindEndpoint": "127.0.0.1:7794",
+    "ticks": 1081
+  }
+}

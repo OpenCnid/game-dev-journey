@@ -1,0 +1,16 @@
+{
+  "source": {
+    "revision": "955d6debd7319fda5f9d4e9bede7f814a81a547a",
+    "builtUtc": "2026-10-05T00:36:36.2885189Z",
+    "dirty": false
+  },
+  "PlayMode": {
+    "result": "Passed",
+    "total": "9",
+    "passed": "9",
+    "failed": "0",
+    "duration": "2.299223"
+  },
+  "EditMode": "95 pass at v7; network/core unchanged; v8 changes only the interruption display text.",
+  "runner": "2 actual Win32 checks and script parser/compilation pass at v7; unchanged at v8."
+}

@@ -1,0 +1,106 @@
+{
+  "runStarts": [
+    {
+      "run": 2,
+      "utc": "2026-10-05T00:45:20.941Z"
+    }
+  ],
+  "visibility": [
+    {
+      "run": 2,
+      "phase": "before_start",
+      "role": "host",
+      "utc": "2026-10-05T00:45:20.646Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v8\\StackLab.exe",
+        "id": 5966958,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": -2,
+        "originY": 196,
+        "width": 1281,
+        "height": 751
+      },
+      "file": "v8-run2-start-host.jpg"
+    },
+    {
+      "run": 2,
+      "phase": "before_start",
+      "role": "client",
+      "utc": "2026-10-05T00:45:20.649Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v8\\StackLab.exe",
+        "id": 5443748,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 1917,
+        "originY": 196,
+        "width": 1282,
+        "height": 751
+      },
+      "file": "v8-run2-start-client.jpg"
+    },
+    {
+      "run": 2,
+      "phase": "end",
+      "role": "client",
+      "utc": "2026-10-05T00:46:40.598Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v8\\StackLab.exe",
+        "id": 5443748,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 1917,
+        "originY": 196,
+        "width": 1282,
+        "height": 751
+      },
+      "file": "v8-run2-end-client.jpg"
+    },
+    {
+      "run": 2,
+      "phase": "end",
+      "role": "host",
+      "utc": "2026-10-05T00:46:50.625Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v8\\StackLab.exe",
+        "id": 5966958,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": -2,
+        "originY": 196,
+        "width": 1281,
+        "height": 751
+      },
+      "file": "v8-run2-end-host.jpg"
+    },
+    {
+      "run": 3,
+      "phase": "before_start",
+      "role": "host",
+      "utc": "2026-10-05T00:47:00.030Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v8\\StackLab.exe",
+        "id": 5966958,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": -2,
+        "originY": 196,
+        "width": 1281,
+        "height": 751
+      },
+      "file": "v8-run3-start-host.jpg"
+    }
+  ],
+  "disposition": "One complete warm-up and one measured repeat; stopped before run 3 to correct magenta default-material teammate capsule. Not the final three-repeat acceptance set."
+}
