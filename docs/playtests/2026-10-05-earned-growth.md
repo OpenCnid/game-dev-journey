@@ -2,7 +2,7 @@
 
 GDJ-23 implements one ordinary earned level-up in the fixed solo/two-player rifle fixture. It tests perceptible power growth, distinct personal choices and readable combat. Base main is `bd2bd1438b1029426e2c0234ff640502dc0e25ea`; the isolated branch is `codex/gdj-23-earned-growth`. Unity 6000.3.25f1 and Transport 2.7.4 are unchanged. Main integration is pending.
 
-[Draft PR #14](https://github.com/OpenCnid/game-dev-journey/pull/14) is attached to the gameplay chat; GDJ-23 is In Review for the remaining owner/native/coordinator gates, not Done.
+[PR #14](https://github.com/OpenCnid/game-dev-journey/pull/14) is merged as an included dependency of owner-authorized PR 15; see the integration record below. GDJ-23's remaining human/native observations stay distinct from this integration.
 
 ## Human result: revise
 
@@ -87,3 +87,7 @@ The owner later calls the test “horrible”: cards still contain too much info
 The owner observes gravity working but cannot clearly understand its action and suggests an effect showing XP gravity clusters. Record this as remaining human readability feedback; successful mechanics do not establish readable attraction/merging. No further XP effect implementation is selected here under the owner's MVP priority.
 
 Corrected delivery opens exact clean GDJ-3 v3 (`d8c3eee6ad6b4b8109c8d63c524512efb9a918b3`) visibly at the already-selected Weapon stack menu, native input/audio and saved logs, without scripted movement, preview, automatic start or XP grants. New process PID 34308; raw invocation/log folder `prototypes/001-stacked-weapons/artifacts/gdj3-owner-v3-20261005-080944Z`. v7 remains under the owner's control. v3 contains concise cards and earned levels 2/3 for adding scatter/piercing and either a third slot or enhancement. Human stack observations remain pending; [the stack report](2026-10-05-weapon-stack.md) preserves its exact candidate and limitations.
+
+## Owner-authorized integration through PR 15, October 5
+
+The owner authorizes PR 15 into main. Its exact tested candidate includes the PR 14 earned-growth foundation; merge `92d72f620b23b22b0e9eb34e62942225232e6f84` preserves that ancestry, and GitHub marks both PRs merged. [The stack integration record](2026-10-05-weapon-stack.md#owner-authorized-integration-october-5) contains tree/source equality, reused checks and the next-session handoff. The v7 archive remains frozen. Native co-op feel/timing and complete XP-gravity readability remain unverified; integration does not waive or invent those observations.
