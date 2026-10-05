@@ -361,7 +361,7 @@ namespace Journey
                 if (GUI.Button(new Rect(w / 2 - 120, h / 2, 240, 50), "Retry (R)")) Retry();
             }
             else if (display.State == SharedState.Aborted)
-                LifeMessage(w, h, "SESSION STOPPED", reason, "Start a new session to play again");
+                LifeMessage(w, h, "SESSION STOPPED", "The shared run was interrupted", "Start a new session to play again");
             else GUI.Label(new Rect(25, 110, 1150, 80), "Waiting for the fixed host/client pair…", heading);
         }
         void LifeMessage(float w, float h, string title, string detail, string context)

@@ -1,0 +1,37 @@
+{
+  "source": {
+    "revision": "f3a7e72e8a6865efe658070a96e1efd520788f26",
+    "builtUtc": "2026-10-05T00:31:06.3597678Z",
+    "dirty": false
+  },
+  "wipeParity": {
+    "run": true,
+    "ticks": true,
+    "state": true,
+    "players": true,
+    "enemyStates": true
+  },
+  "wipeSeconds": 12.233333333333333,
+  "pendingReturns": [
+    17.233333587646484,
+    16.88333511352539
+  ],
+  "hostBindEndpoint": "127.0.0.1:7793",
+  "oneReady": "Observed A READY/B waiting on Defeat, no restart; B Retry alone then starts run2 at full HP/zero damage/kills.",
+  "hostKill": {
+    "beforeKillUtc": "2026-10-05T00:33:21.0680343Z",
+    "method": "Stop-Process on exact owned PID; abrupt process loss, no graceful abort message",
+    "run": 2,
+    "pid": 29500,
+    "killedRole": "host",
+    "afterKillUtc": "2026-10-05T00:33:21.0799198Z"
+  },
+  "survivor": {
+    "state": 4,
+    "reason": "Transport send failed: -5",
+    "ticks": 166,
+    "catchupLimits": 0,
+    "stopToReportSeconds": 0.46871
+  },
+  "visualReview": "Agent inspected opaque PARTY DEFEATED and SESSION STOPPED cards. Raw transport code in the first abort card prompted a presentation-only follow-up; diagnostics remain in the report. Not new human acceptance."
+}
