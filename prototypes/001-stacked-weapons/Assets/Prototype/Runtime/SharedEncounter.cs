@@ -90,10 +90,11 @@ namespace Journey
         public readonly SharedSnapshot Current;
         public ScenarioConfiguration Configuration { get; }
         public EarnedGrowth Growth { get; }
+        public SharedWork Work { get; private set; } = new SharedWork();
         readonly List<GrowthChoice> choices = new List<GrowthChoice>(2);
         readonly SharedSnapshot[] history = new SharedSnapshot[HistoryTicks + 1];
         readonly List<SharedShot> pending = new List<SharedShot>(QueueCapacity);
-        readonly double[] nextShot = new double[6];
+        readonly double[] nextShot = new double[WeaponArsenal.MaxOwnedIds];
         readonly AimResult[] targets = new AimResult[ScenarioConfiguration.MaxEnemies];
         readonly int[] lastEvent = new int[2], lastInput = new int[2];
         readonly float[] inputTime = new float[2];
@@ -106,13 +107,14 @@ namespace Journey
         {
             Configuration = configuration ?? ScenarioConfiguration.Named(ScenarioKind.SharedRifle);
             if (roster < 1 || roster > 2) throw new ArgumentException("Fixed roster must be one or two");
-            Growth = Configuration.Growth ? new EarnedGrowth() : null;
+            Growth = Configuration.Pickups ? new EarnedGrowth() : null;
             Current = new SharedSnapshot(Configuration) { Roster = roster, Session = session == Guid.Empty ? Guid.NewGuid() : session };
             velocities = new Vector3[Configuration.EnemyCount];
             for (int i = 0; i < history.Length; i++) history[i] = new SharedSnapshot(Configuration) { Tick = -1 };
         }
         public void Start(bool preparing = false)
         {
+            Work = new SharedWork();
             Current.Run++; Current.Tick = 0; Current.Elapsed = 0; Current.State = preparing ? SharedState.Waiting : SharedState.Running;
             Current.ChoicePhase = Current.ControlRevision = 0;
             random = new System.Random(Configuration.Seed); pending.Clear(); choices.Clear(); Growth?.Reset(Configuration.Seed); Current.Xp = 0; Current.Level = 1; Rejected = 0; AbortReason = "";
@@ -177,9 +179,12 @@ namespace Journey
         {
             if (Current.State == SharedState.Choosing) { CommitChoices(); return; }
             if (Current.State != SharedState.Running) return;
+            long started = StageProfile.Begin();
             Current.Tick++; Current.Elapsed = Current.Tick * CombatSimulation.Tick;
             ApplyChoices(false);
             StepCombat();
+            double ms = StageProfile.End(started);
+            Work.frameSimulationMs += ms; Work.simulationMs += ms; Work.frameTicks++; Work.ticks++;
         }
         public bool CommitChoices()
         {
@@ -214,6 +219,7 @@ namespace Journey
         }
         void StepCombat()
         {
+            long stage = StageProfile.Begin();
             pending.Sort((a, b) => a.Player != b.Player ? a.Player.CompareTo(b.Player) : a.Event.CompareTo(b.Event));
             for (int i = 0; i < pending.Count;)
             {
@@ -221,6 +227,10 @@ namespace Journey
                 if (Current.Tick * (double)CombatSimulation.Tick < nextShot[shot.Weapon - 1]) { i++; continue; }
                 pending.RemoveAt(i); Resolve(shot);
             }
+            double weaponMs = StageProfile.End(stage); Work.frameWeaponMs += weaponMs; Work.weaponMs += weaponMs;
+            stage = StageProfile.Begin();
+            Work.steeringChecks += (long)Configuration.EnemyCount * Configuration.EnemyCount;
+            Work.contactTests += (long)Configuration.EnemyCount * Current.Roster;
             // Read all positions before applying velocities, matching the local steering rule.
             for (int i = 0; i < Configuration.EnemyCount; i++)
             {
@@ -240,6 +250,7 @@ namespace Journey
                 e.Position.x = Mathf.Clamp(e.Position.x, -29, 29); e.Position.z = Mathf.Clamp(e.Position.z, -29, 29); Current.Enemies[i] = e;
                 for (int p = 0; p < Current.Roster; p++) if ((e.Position - Current.Players[p].Position).sqrMagnitude < 1.25f) Contact(p);
             }
+            double crowdMs = StageProfile.End(stage); Work.frameCrowdMs += crowdMs; Work.crowdMs += crowdMs;
             // Wipe wins over both completion and an expiring return.
             if (NearestLiving(Vector3.zero) < 0) Current.State = SharedState.Defeat;
             else if (Current.Elapsed >= Configuration.Duration) Current.State = SharedState.Complete;
@@ -251,13 +262,16 @@ namespace Journey
                     player.Health = 100; player.Life++; player.Position = PlayerSpawn(p); player.Yaw = player.Pitch = 0;
                     player.ReturnAt = player.ContactUntil = 0; player.ImmuneUntil = Current.Elapsed + ReturnImmunity;
                     Current.Players[p] = player;
-                    for (int slot = 0; slot < 3; slot++) nextShot[WeaponArsenal.Id(p, (WeaponSlot)slot) - 1] = Current.Elapsed;
+                    for (int instance = 0; instance < WeaponArsenal.MaxInstances; instance++) nextShot[WeaponArsenal.Id(p, instance) - 1] = Current.Elapsed;
                     lastInput[p] = 0; inputTime[p] = 0;
                 }
             }
             if (Current.State == SharedState.Running && Growth != null)
             {
+                stage = StageProfile.Begin();
                 Growth.AttractAndMerge(Current); Growth.Collect(Current);
+                Work.attractionQueries += Growth.AttractionQueries;
+                double xpMs = StageProfile.End(stage); Work.frameXpMs += xpMs; Work.xpMs += xpMs;
                 if (Current.Level - 1 > Current.ChoicePhase)
                 { Current.State = SharedState.Choosing; Current.ChoicePhase = Current.Level - 1; Current.ControlRevision++; pending.Clear(); }
             }
@@ -277,7 +291,9 @@ namespace Journey
         {
             SharedPlayer player = Current.Players[p];
             if (player.Health == 0 || Current.Elapsed < player.ContactUntil || Current.Elapsed < player.ImmuneUntil) return;
-            player.Health = Mathf.Max(0, player.Health - 10); player.ContactUntil = Current.Elapsed + .4f;
+            Work.contactApplications++;
+            if (!Configuration.Scaling) player.Health = Mathf.Max(0, player.Health - 10);
+            player.ContactUntil = Current.Elapsed + .4f;
             if (player.Health == 0) player.ReturnAt = Current.Elapsed + ReturnDelay;
             Current.Players[p] = player;
         }
@@ -297,7 +313,7 @@ namespace Journey
             AimResult aim = pose.Query(source.Ray);
             if (aim.Hit && Current.Enemies[aim.EnemyIndex].Incarnation != aim.SpawnVersion)
             { Reject(source, ShotDecision.StaleEnemy, queried: true); return; }
-            nextShot[source.Player] = Math.Max(nextShot[source.Player], (Current.Tick - 1) * (double)CombatSimulation.Tick) + player.RifleInterval;
+            nextShot[source.Weapon - 1] = Math.Max(nextShot[source.Weapon - 1], (Current.Tick - 1) * (double)CombatSimulation.Tick) + player.RifleInterval;
             player.Shots++;
             ShotResult shot = new ShotResult(source.Ray.GetPoint(aim.Distance), -1, 0, 0, 0);
             Vector3 deathPosition = default;

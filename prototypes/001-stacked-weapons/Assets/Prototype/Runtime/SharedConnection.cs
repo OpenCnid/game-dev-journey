@@ -11,18 +11,36 @@ namespace Journey
     // One fixed peer, bounded packets, one reliable ordered pipeline. No scene/object replication.
     public sealed class SharedConnection : IDisposable
     {
-        public const int Protocol = 5, MaxPacket = 1100;
+        public const int Protocol = 6, MaxPacket = 1100;
         public const int MaxBufferedMessages = 1024;
-        public enum Message : byte { Hello, Input, Shot, Snapshot, Hit, Retry, Abort, Ping, Pong, Configuration, ConfigurationAck, Growth, Choice, ContinueChoice }
+        public enum Message : byte { Hello, Input, Shot, Snapshot, Hit, Retry, Abort, Ping, Pong, Configuration, ConfigurationAck, Growth, Choice, ContinueChoice, SnapshotChunk }
         NetworkDriver driver;
         NetworkPipeline pipeline;
         NetworkConnection peer;
         readonly MemoryStream buffer = new MemoryStream(MaxPacket);
         readonly BinaryWriter writer;
-        readonly Queue<byte[]> outgoing = new Queue<byte[]>();
+        readonly Queue<Retained> outgoing = new Queue<Retained>();
+        readonly MemoryStream snapshotBuffer = new MemoryStream(SnapshotAssembly.MaxBytes);
+        readonly BinaryWriter snapshotWriter;
+        int snapshotSequence;
+        readonly struct Retained
+        {
+            public readonly byte[] Bytes;
+            public readonly double At;
+            public Retained(byte[] bytes) { Bytes = bytes; At = Time.realtimeSinceStartupAsDouble; }
+        }
         public int PendingMessages => outgoing.Count;
         public int BufferedHighWater { get; private set; }
         public int DeferredSends { get; private set; }
+        public int PendingBytes { get; private set; }
+        public int BufferedBytesHighWater { get; private set; }
+        public double PendingAgeMs => outgoing.Count == 0 ? 0 : (Time.realtimeSinceStartupAsDouble - outgoing.Peek().At) * 1000;
+        public double OldestAgeHighWaterMs { get; private set; }
+        public long SentMessages { get; private set; }
+        public long ReceivedMessages { get; private set; }
+        public long SnapshotBytes { get; private set; }
+        public long SnapshotMessages { get; private set; }
+        public double SerializationMs { get; private set; }
         double opened, received;
         bool aborted;
         public bool Host { get; }
@@ -34,7 +52,7 @@ namespace Journey
         public string BoundEndpoint => driver.GetLocalEndpoint().ToString();
         public SharedConnection(bool host, string address, ushort port, bool loopbackHost = false)
         {
-            Host = host; writer = new BinaryWriter(buffer);
+            Host = host; writer = new BinaryWriter(buffer); snapshotWriter = new BinaryWriter(snapshotBuffer);
             var settings = new NetworkSettings();
             try
             {
@@ -88,7 +106,7 @@ namespace Journey
                     if (stream.Length < 1 || stream.Length > MaxPacket) { Fail("Invalid packet length"); return; }
                     byte[] bytes = new byte[stream.Length];
                     for (int i = 0; i < bytes.Length; i++) bytes[i] = stream.ReadByte();
-                    ReceivedBytes += bytes.Length; received = Time.realtimeSinceStartupAsDouble;
+                    ReceivedBytes += bytes.Length; ReceivedMessages++; received = Time.realtimeSinceStartupAsDouble;
                     try
                     {
                         using (var reader = new BinaryReader(new MemoryStream(bytes)))
@@ -126,14 +144,40 @@ namespace Journey
             if (outgoing.Count == 0 && TrySend(buffer.GetBuffer(), (int)buffer.Length)) return true;
             if (aborted) return false;
             if (outgoing.Count >= MaxBufferedMessages) { Fail("Reliable outgoing backlog exceeded " + MaxBufferedMessages + " retained messages"); return false; }
-            outgoing.Enqueue(buffer.ToArray()); BufferedHighWater = Math.Max(BufferedHighWater, outgoing.Count); DeferredSends++; return true;
+            outgoing.Enqueue(new Retained(buffer.ToArray())); PendingBytes += (int)buffer.Length;
+            BufferedHighWater = Math.Max(BufferedHighWater, outgoing.Count);
+            BufferedBytesHighWater = Math.Max(BufferedBytesHighWater, PendingBytes); DeferredSends++; return true;
+        }
+        // Complete reliable snapshots remain the reference. Chunking only makes the larger
+        // workload measurable; it neither coalesces authoritative outcomes nor raises the MTU.
+        public bool SendSnapshot(SharedSnapshot snapshot)
+        {
+            long started = StageProfile.Begin();
+            snapshotBuffer.Position = 0; snapshotBuffer.SetLength(0);
+            WriteSnapshot(snapshotWriter, snapshot); snapshotWriter.Flush();
+            SerializationMs += StageProfile.End(started);
+            int length = (int)snapshotBuffer.Length;
+            if (length > SnapshotAssembly.MaxBytes) { Fail("Snapshot exceeded bounded assembly"); return false; }
+            SnapshotBytes += length;
+            byte[] data = snapshotBuffer.GetBuffer();
+            if (length + 1 <= MaxPacket)
+            { SnapshotMessages++; return Send(Message.Snapshot, w => w.Write(data, 0, length)); }
+            int sequence = ++snapshotSequence;
+            for (int offset = 0; offset < length; offset += SnapshotAssembly.ChunkBytes)
+            {
+                int start = offset, count = Math.Min(SnapshotAssembly.ChunkBytes, length - offset);
+                SnapshotMessages++;
+                if (!Send(Message.SnapshotChunk, w => { w.Write(sequence); w.Write(length); w.Write(start); w.Write(data, start, count); })) return false;
+            }
+            return true;
         }
         // The reliable window is finite. Backpressure retains complete records in FIFO order;
         // neither XP nor individual pellet/penetration outcomes are dropped or coalesced.
         void FlushOutgoing()
         {
+            OldestAgeHighWaterMs = Math.Max(OldestAgeHighWaterMs, PendingAgeMs);
             while (outgoing.Count > 0 && !aborted)
-            { byte[] bytes = outgoing.Peek(); if (!TrySend(bytes, bytes.Length)) return; outgoing.Dequeue(); }
+            { byte[] bytes = outgoing.Peek().Bytes; if (!TrySend(bytes, bytes.Length)) return; outgoing.Dequeue(); PendingBytes -= bytes.Length; }
         }
         bool TrySend(byte[] bytes, int count)
         {
@@ -144,13 +188,13 @@ namespace Journey
             status = driver.EndSend(stream);
             if (status == (int)TransportStatus.NetworkSendQueueFull) return false;
             if (status < 0) { Fail("Transport send failed: " + status); return false; }
-            SentBytes += count; return true;
+            SentBytes += count; SentMessages++; return true;
         }
         void Fail(string reason) { if (aborted) return; aborted = true; Connected = false; Lost?.Invoke(reason); }
         public void Dispose()
         {
             if (driver.IsCreated) { if (peer.IsCreated) driver.Disconnect(peer); driver.ScheduleUpdate().Complete(); driver.Dispose(); }
-            writer.Dispose(); buffer.Dispose();
+            writer.Dispose(); buffer.Dispose(); snapshotWriter.Dispose(); snapshotBuffer.Dispose();
             outgoing.Clear();
         }
         public static void Vector(BinaryWriter w, Vector3 v) { w.Write(v.x); w.Write(v.y); w.Write(v.z); }

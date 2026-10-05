@@ -9,16 +9,18 @@ namespace Journey
     // enhancement stay separate so later compatible additions can open their own upgrade pool.
     public static class WeaponArsenal
     {
-        public const int Rifle = 1, Scattergun = 2, Piercer = 4, All = 7;
+        public const int Rifle = 1, Scattergun = 2, Piercer = 4, All = 7, MaxInstances = 8, MaxOwnedIds = MaxInstances * 2;
         public static int Id(int player, WeaponSlot slot) => (int)slot * 2 + player + 1;
-        public static WeaponSlot Slot(int id) => (WeaponSlot)((id - 1) / 2);
-        public static bool Owns(SharedPlayer player, int owner, int id) => id >= 1 && id <= 6 &&
-            (id - 1) % 2 == owner && (player.Arsenal & (1 << (int)Slot(id))) != 0;
+        public static int Id(int player, int instance) => instance * 2 + player + 1;
+        public static int Instance(int id) => (id - 1) / 2;
+        public static WeaponSlot Slot(int id) => (WeaponSlot)(Instance(id) % 3);
+        public static bool Owns(SharedPlayer player, int owner, int id) => id >= 1 && id <= MaxOwnedIds &&
+            (id - 1) % 2 == owner && (player.Arsenal & (1 << Instance(id))) != 0;
         public static int AddedMask(UpgradeId id) => id == UpgradeId.AddScattergun ? Scattergun : id == UpgradeId.AddPiercer ? Piercer : 0;
         public static UpgradeId Missing(UpgradeId first) => first == UpgradeId.AddScattergun ? UpgradeId.AddPiercer : UpgradeId.AddScattergun;
         public static UpgradeId Enhancement(UpgradeId first) => first == UpgradeId.AddScattergun ? UpgradeId.WiderScatter : UpgradeId.DeeperPierce;
         public static string Name(WeaponSlot slot) => slot == WeaponSlot.Rifle ? "Rifle" : slot == WeaponSlot.Scattergun ? "Scattergun" : "Piercer";
-        public static string Label(int mask) => mask == All ? "Rifle + scattergun + piercer" : mask == (Rifle | Scattergun) ? "Rifle + scattergun" : mask == (Rifle | Piercer) ? "Rifle + piercer" : "Rifle";
+        public static string Label(int mask) => mask == 255 ? "8 instances: 3 rifle / 3 scatter / 2 pierce" : mask == All ? "Rifle + scattergun + piercer" : mask == (Rifle | Scattergun) ? "Rifle + scattergun" : mask == (Rifle | Piercer) ? "Rifle + piercer" : "Rifle";
         public static float Interval(SharedPlayer p, WeaponSlot slot) => slot == WeaponSlot.Rifle ? p.RifleInterval : slot == WeaponSlot.Scattergun ? .75f : .65f;
         public static float Range(WeaponSlot slot) => slot == WeaponSlot.Scattergun ? 30 : CombatSimulation.RifleRange;
         public static int Damage(SharedPlayer p, WeaponSlot slot) => slot == WeaponSlot.Rifle ? p.BodyDamage : slot == WeaponSlot.Scattergun ? 12 : 16;
@@ -81,9 +83,9 @@ namespace Journey
 
     [Serializable] public sealed class WeaponWork
     {
-        public int weapon, player, triggers, rays, targetTests, hits, damage, kills, rejected;
+        public int weapon, player, instance, triggers, rays, targetTests, hits, damage, kills, rejected;
         public string name;
-        public WeaponWork(int id) { weapon = id; player = (id - 1) % 2; name = WeaponArsenal.Name(WeaponArsenal.Slot(id)); }
+        public WeaponWork(int id) { weapon = id; player = (id - 1) % 2; instance = WeaponArsenal.Instance(id); name = WeaponArsenal.Name(WeaponArsenal.Slot(id)); }
         public void Record(SharedHit hit)
         {
             if (hit.Trigger) triggers++;
