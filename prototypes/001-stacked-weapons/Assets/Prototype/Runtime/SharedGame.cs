@@ -126,6 +126,8 @@ namespace Journey
         {
             if (connection == null) return;
             double now = Time.realtimeSinceStartupAsDouble, frame = (now - previousClock) * 1000; previousClock = now;
+            bool runningAtFrameStart = display.State == SharedState.Running;
+            int frameRun = display.Run;
             connection.Poll();
             SyncGeneration();
             preview?.Poll();
@@ -177,7 +179,9 @@ namespace Journey
             }
             if (authority != null && display.State == SharedState.Running)
             {
-                accumulator += (float)(frame * .001); int ticks = 0;
+                // Hello/Retry can start a run inside Poll. Its preceding Waiting/terminal frame is not combat time.
+                if (runningAtFrameStart && frameRun == display.Run) accumulator += (float)(frame * .001);
+                int ticks = 0;
                 while (accumulator >= CombatSimulation.Tick && ticks < 8 && authority.Current.State == SharedState.Running)
                 { authority.Step(); accumulator -= CombatSimulation.Tick; ticks++; Publish(); }
                 if (accumulator >= CombatSimulation.Tick) { catchupLimits++; Abort("Authority tick catch-up limit"); accumulator = 0; }

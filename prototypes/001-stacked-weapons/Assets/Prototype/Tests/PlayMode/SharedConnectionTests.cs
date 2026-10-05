@@ -7,6 +7,54 @@ namespace Journey.Tests
 {
     public class SharedConnectionTests
     {
+        [UnityTest] public IEnumerator StartAndRetryExcludeWaitingFramesButActiveStallsStillAbort()
+        {
+            var root = new GameObject("Shared phase clock test");
+            var view = new ArenaPresentation(); var sim = new CombatSimulation();
+            var game = root.AddComponent<SharedGame>(); game.enabled = false;
+            const System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+            var clock = typeof(SharedGame).GetField("previousClock", flags);
+            var update = typeof(SharedGame).GetMethod("Update", flags);
+            var publish = typeof(SharedGame).GetMethod("Publish", flags);
+            typeof(SharedGame).GetField("output", flags).SetValue(game,
+                System.IO.Path.Combine(Application.dataPath, "../artifacts/phase-clock-" + System.Guid.NewGuid().ToString("N")));
+            using (var client = new SharedConnection(false, "127.0.0.1", 17778))
+            try
+            {
+                LogAssert.Expect(LogType.Log, new System.Text.RegularExpressions.Regex("^SHARED_SESSION HOST "));
+                view.Create(root.transform); game.Initialize(view, sim, true, "0.0.0.0", 17778);
+                double deadline = Time.realtimeSinceStartupAsDouble + 4;
+                while (game.Snapshot.State == SharedState.Waiting && Time.realtimeSinceStartupAsDouble < deadline)
+                {
+                    client.Poll(); clock.SetValue(game, Time.realtimeSinceStartupAsDouble - 2);
+                    update.Invoke(game, null); yield return null;
+                }
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Running), "Hello must not spend a two-second Waiting frame in combat.");
+                Assert.That(game.Snapshot.Tick, Is.Zero);
+                clock.SetValue(game, Time.realtimeSinceStartupAsDouble - .02); update.Invoke(game, null);
+                Assert.That(game.Snapshot.Tick, Is.GreaterThan(0), "Subsequent active frames still advance the authority.");
+
+                var authority = (SharedEncounter)typeof(SharedGame).GetField("authority", flags).GetValue(game);
+                authority.Current.Tick = 3599; authority.Step(); authority.Retry(1, 0); publish.Invoke(game, null);
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Complete));
+                client.Send(SharedConnection.Message.Retry, writer => writer.Write(1));
+                while (game.Snapshot.Run == 1 && Time.realtimeSinceStartupAsDouble < deadline)
+                {
+                    client.Poll(); clock.SetValue(game, Time.realtimeSinceStartupAsDouble - 2);
+                    update.Invoke(game, null); yield return null;
+                }
+                Assert.That(game.Snapshot.Run, Is.EqualTo(2));
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Running), "Retry must not spend a terminal-screen frame in the next run.");
+                Assert.That(game.Snapshot.Tick, Is.Zero);
+                LogAssert.Expect(LogType.Log, "SHARED_ABORT Authority tick catch-up limit");
+                LogAssert.Expect(LogType.Log, new System.Text.RegularExpressions.Regex("^SHARED_REPORT "));
+                clock.SetValue(game, Time.realtimeSinceStartupAsDouble - .5); update.Invoke(game, null);
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Aborted), "A real active-run stall still hits the unchanged catch-up bound.");
+            }
+            finally { Object.DestroyImmediate(root); view.Dispose(); sim.Dispose(); }
+            yield return null; LogAssert.NoUnexpectedReceived();
+        }
+
         [UnityTest] public IEnumerator RealLoopbackHandshakeSnapshotAndRetryRoundTrip()
         {
             var authority = new SharedEncounter(); var clientView = new SharedSnapshot();
