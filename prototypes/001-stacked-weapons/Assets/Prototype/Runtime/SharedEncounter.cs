@@ -296,7 +296,7 @@ namespace Journey
             // Host derives region and incarnation from the displayed historical pose.
             AimResult aim = pose.Query(source.Ray);
             if (aim.Hit && Current.Enemies[aim.EnemyIndex].Incarnation != aim.SpawnVersion)
-            { Reject(source, ShotDecision.StaleEnemy); return; }
+            { Reject(source, ShotDecision.StaleEnemy, queried: true); return; }
             nextShot[source.Player] = Math.Max(nextShot[source.Player], (Current.Tick - 1) * (double)CombatSimulation.Tick) + player.RifleInterval;
             player.Shots++;
             ShotResult shot = new ShotResult(source.Ray.GetPoint(aim.Distance), -1, 0, 0, 0);
@@ -363,10 +363,10 @@ namespace Journey
             }
             Current.Players[source.Player] = player;
         }
-        void Reject(SharedShot source, ShotDecision reason)
+        void Reject(SharedShot source, ShotDecision reason, bool queried = false)
         {
             Rejected++; Resolved?.Invoke(new SharedHit(source, reason,
-                new ShotResult(source.Ray.GetPoint(CombatSimulation.RifleRange), -1, 0, 0, 0), default));
+                new ShotResult(source.Ray.GetPoint(CombatSimulation.RifleRange), -1, 0, 0, 0), default, false, 0, queried ? 1 : 0, queried ? Configuration.EnemyCount : 0));
         }
         void Respawn(int i)
         {

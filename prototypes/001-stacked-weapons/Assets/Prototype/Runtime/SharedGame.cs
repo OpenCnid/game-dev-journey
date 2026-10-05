@@ -63,6 +63,7 @@ namespace Journey
             binding = new SharedScenarioBinding(host ? configuration ?? ScenarioConfiguration.Named(ScenarioKind.SharedRifle) : null);
             view = arena; projection = sim; local = host ? 0 : 1;
             var args = Environment.GetCommandLineArgs();
+            if (Array.IndexOf(args, "-sharedMute") >= 0) AudioListener.volume = 0;
             scripted = Array.IndexOf(args, "-sharedScripted") >= 0; quitAtEnd = Array.IndexOf(args, "-sharedQuit") >= 0;
             screenshotAtLevelUp = Array.IndexOf(args, "-screenshotAtLevelUp") >= 0;
             if (Array.IndexOf(args, "-sharedUncapped") >= 0) { Application.targetFrameRate = -1; QualitySettings.vSyncCount = 0; }
@@ -498,6 +499,7 @@ namespace Journey
             public string role, source, machine, gpu, connection, reason, hostBindEndpoint;
             public ScenarioEvidence scenario;
             public bool scripted, development, previewEnabled;
+            public float audioVolume;
             public int run, ticks, enemies, catchupLimits, frameSamples, confirmedHits, width, height, frameCap, vsync;
             public double frameP50, frameP95, frameP99, frameMax, confirmP50, confirmP95, confirmMax, rttMs;
             public SharedState state;
@@ -524,6 +526,7 @@ namespace Journey
                 state = display.State, players = display.Players, enemyStates = display.Enemies, roster = display.Roster, xp = display.Xp, level = display.Level, uncollectedOrbs = orbReplica.Orbs.Count, sentBytes = connection?.SentBytes ?? 0, receivedBytes = connection?.ReceivedBytes ?? 0 };
             report.uncollectedXp = orbReplica.UncollectedXp; report.choicePhase = display.ChoicePhase; report.controlRevision = display.ControlRevision;
             report.weaponWork = weaponWork;
+            report.audioVolume = AudioListener.volume;
             report.outgoingPending = connection?.PendingMessages ?? 0; report.outgoingHighWater = connection?.BufferedHighWater ?? 0;
             report.outgoingDeferred = connection?.DeferredSends ?? 0; report.outgoingLimit = SharedConnection.MaxBufferedMessages;
             report.pickupRadius = EarnedGrowth.PickupRadius; report.attractionRadius = EarnedGrowth.AttractionRadius; report.mergeRadius = EarnedGrowth.MergeRadius;

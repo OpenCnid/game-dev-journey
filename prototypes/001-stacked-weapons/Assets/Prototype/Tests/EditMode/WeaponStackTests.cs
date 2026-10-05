@@ -136,6 +136,18 @@ namespace Journey.Tests
             var stale = Shot(1, 3); stale.Run = oldRun; game.Submit(stale); Assert.That(hits[hits.Count - 1].Decision, Is.EqualTo(ShotDecision.StaleRun));
             Assert.That(game.ContinueChoice(oldRun, 2, 0), Is.False);
         }
+        [Test] public void WorkCountsHistoricalGeometryQueriesEvenWhenRespawnRejectsThePrimaryTrigger()
+        {
+            Start("all"); game.Current.Enemies[0].Position = game.Current.Players[0].Position + Vector3.forward * 8;
+            game.Current.Enemies[0].Health = 20; game.Step();
+            SharedShot first = Shot(1, 1), late = Shot(2, 1);
+            game.Submit(first); game.Step(); game.Submit(late); for (int i = 0; i < 10; i++) game.Step();
+            Assert.That(hits.Count, Is.EqualTo(2)); Assert.That(hits[0].Shot.Killed, Is.True);
+            Assert.That(hits[1].Decision, Is.EqualTo(ShotDecision.StaleEnemy)); Assert.That(hits[1].Trigger, Is.False);
+            var work = new WeaponWork(1); foreach (SharedHit hit in hits) work.Record(hit);
+            Assert.That(work.triggers, Is.EqualTo(1)); Assert.That(work.rays, Is.EqualTo(2)); Assert.That(work.targetTests, Is.EqualTo(70));
+            Assert.That(work.damage, Is.EqualTo(20)); Assert.That(game.Current.Players[0].Shots, Is.EqualTo(1));
+        }
         [Test] public void StackSnapshotsAndMultiTargetHitsRoundTripUnderPacketLimitAndRejectForgedBuilds()
         {
             Start(); Earn(25); SelectBoth(UpgradeId.AddScattergun, UpgradeId.AddPiercer); game.Step(); SelectBoth(UpgradeId.WiderScatter, UpgradeId.AddScattergun);

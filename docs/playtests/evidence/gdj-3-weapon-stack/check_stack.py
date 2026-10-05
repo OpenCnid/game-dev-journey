@@ -17,6 +17,7 @@ p.add_argument('--results', type=Path, required=True)
 p.add_argument('--solo', action='store_true')
 p.add_argument('--reference', choices=['rifle', 'all', 'scatter', 'pierce'])
 p.add_argument('--port', default='17833')
+p.add_argument('--runs', type=int, choices=[1, 2], default=2)
 a = p.parse_args()
 a.results.mkdir(parents=True, exist_ok=False)
 roles = ['solo'] if a.solo else ['host', 'client']
@@ -105,7 +106,12 @@ def audit(run, terminal):
     for role in roles:
         summary = read(a.results / role / f'summary-run-{run}.json')
         assert summary and summary['catchupLimits'] == 0
-        assert summary['state'] == 2 and summary['ticks'] == (3600 if a.reference else 7200)
+        duration = 3600 if a.reference else 7200
+        assert summary['state'] in (2, 3) and 0 < summary['ticks'] <= duration
+        if summary['state'] == 2:
+            assert summary['ticks'] == duration
+        else:
+            assert all(player['Health'] == 0 for player in summary['players'][:len(roles)]), 'Defeat requires an actual roster wipe'
         summaries.append(summary)
         events = [json.loads(line) for line in (a.results / role / 'growth.jsonl').read_text().splitlines()]
         events = [e for e in events if e['Run'] == run]
@@ -143,10 +149,11 @@ def audit(run, terminal):
             for stat, counter in [('triggers', 'Shots'), ('hits', 'Hits'), ('damage', 'Damage'), ('kills', 'Kills')]:
                 assert sum(w[stat] for w in work) == summary['players'][player][counter], (stat, work, summary['players'][player])
         for work in summary['weaponWork']:
-            triggers = [r for r in rows if int(r['weapon']) == work['weapon'] and r['trigger'] == 'True']
+            weapon_rows = [r for r in rows if int(r['weapon']) == work['weapon']]
+            triggers = [r for r in weapon_rows if r['trigger'] == 'True']
             assert len(triggers) == work['triggers']
-            assert sum(int(r['rays']) for r in triggers) == work['rays']
-            assert sum(int(r['target_tests']) for r in triggers) == work['targetTests'] == work['rays'] * 35
+            assert sum(int(r['rays']) for r in weapon_rows) == work['rays']
+            assert sum(int(r['target_tests']) for r in weapon_rows) == work['targetTests'] == work['rays'] * 35
         piercing = {}
         for row in rows:
             if int(row['weapon']) in (5, 6) and row['decision'] == 'Damage':
@@ -162,7 +169,7 @@ def audit(run, terminal):
     comparison = dict(run=run, terminal=summaries[0], growthEvents=len(logs[0]), outcomeEvents=len(outcomes[0]),
                       levelSeconds=[e['Tick'] / 60 for e in logs[0] if e['Kind'] == 2 and e['Player'] == 0])
     comparisons.append(comparison)
-    print(f'Run {run}: full active duration, conserved XP and attributed weapon work pass', flush=True)
+    print(f'Run {run}: valid {"completion" if summaries[0]["state"] == 2 else "defeat"} at {summaries[0]["ticks"] / 60:.3f}s, conserved XP and attributed weapon work pass', flush=True)
 
 
 try:
@@ -170,13 +177,13 @@ try:
         folder = a.results / role
         folder.mkdir()
         argv = [str(a.player), '-force-d3d11', '-screen-fullscreen', '0', '-screen-width', '1280', '-screen-height', '720',
-                '-port', a.port, '-sharedScripted', '-sharedPreview', '-sharedResults', str(folder), '-logFile', str(folder / 'player.log')]
+                '-port', a.port, '-sharedScripted', '-sharedPreview', '-sharedMute', '-sharedResults', str(folder), '-logFile', str(folder / 'player.log')]
         scenario = ['-scenario', 'stack-reference', '-stackLoadout', a.reference] if a.reference else ['-scenario', 'weapon-stack']
         argv += ['-playtest'] + scenario if a.solo else (['-host', '-sharedLoopback'] + scenario if i == 0 else ['-join', '127.0.0.1', '-scenario', 'solo-precision', '-rifleRate', '2'])
         pid = desktop.launch(argv, a.player.parent)
         (folder / 'invocation.json').write_text(json.dumps(dict(args=argv, pid=pid, desktop=desktop.name, inputDesktop=desktop.initial_input), indent=2))
     wait(lambda s: all(v['state'] == 'Running' and v['run'] == 1 for v in s), 30)
-    for run in (1,) if a.reference else (1, 2):
+    for run in (1,) if a.reference else range(1, a.runs + 1):
         if not a.reference:
             choose(2, [3, 4] if run == 1 else [3, 4])
             choose(3, [4, 6] if run == 1 else [5, 3])

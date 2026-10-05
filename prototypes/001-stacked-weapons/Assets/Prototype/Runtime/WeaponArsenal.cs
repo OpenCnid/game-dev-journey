@@ -86,7 +86,8 @@ namespace Journey
         public WeaponWork(int id) { weapon = id; player = (id - 1) % 2; name = WeaponArsenal.Name(WeaponArsenal.Slot(id)); }
         public void Record(SharedHit hit)
         {
-            if (hit.Trigger) { triggers++; rays += hit.Rays; targetTests += hit.TargetTests; }
+            if (hit.Trigger) triggers++;
+            rays += hit.Rays; targetTests += hit.TargetTests;
             if (hit.Decision == ShotDecision.Damage) { hits++; damage += hit.Shot.Damage; if (hit.Shot.Killed) kills++; }
             else if (hit.Decision != ShotDecision.Miss) rejected++;
         }

@@ -290,8 +290,8 @@ namespace Journey
             if (GUILayout.Button("Solo precision for both")) SelectScenario(ScenarioKind.SoloPrecision);
             if (GUILayout.Button("Shared rifle for both")) SelectScenario(ScenarioKind.SharedRifle);
             GUILayout.EndHorizontal(); GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Earned growth for solo / Host")) SelectScenario(ScenarioKind.EarnedGrowth);
-            if (GUILayout.Button("Weapon stack for solo / Host")) SelectScenario(ScenarioKind.WeaponStack);
+            if (GUILayout.Button("Earned growth")) SelectScenario(ScenarioKind.EarnedGrowth);
+            if (GUILayout.Button("Weapon stack")) SelectScenario(ScenarioKind.WeaponStack);
             if (GUILayout.Button("Developer parity")) { SelectScenario(ScenarioKind.DeveloperParity); SetRifleRate(4); }
             if (GUILayout.Button("Named defaults"))
             {
@@ -441,7 +441,7 @@ namespace Journey
                 if (sim.State == RunState.Paused && !sim.Benchmark && GUILayout.Button("RESUME", button)) { sim.TogglePause(); SetCursor(true); }
                 if (GUILayout.Button("START / RESTART COMBAT", button)) StartCombat();
                 GUILayout.Space(8);
-                GUILayout.Label("TWO-PLAYER SHARED RIFLE TEST", heading);
+                GUILayout.Label("TWO-PLAYER CO-OP TEST", heading);
                 sharedAddress = GUILayout.TextField(sharedAddress, 48);
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button("Host (A)", button)) StartShared(true, "0.0.0.0");
