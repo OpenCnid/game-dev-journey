@@ -1,0 +1,3000 @@
+{
+  "warmupSeconds": 10.0,
+  "classification": "numerical audit; acceptance requires separate visibility/correctness gates",
+  "roles": [
+    {
+      "folder": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-24-coop-scale\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\gdj24-v1-solo-S4",
+      "report": {
+        "role": "host A",
+        "source": "{\n    \"revision\": \"4a6b5b024be285d00c2de190b2ab451313888456\",\n    \"builtUtc\": \"2026-10-05T09:08:54.2308920Z\",\n    \"dirty\": false\n}",
+        "machine": "Intel(R) Core(TM) i7-10700K CPU @ 3.80GHz",
+        "gpu": "NVIDIA GeForce RTX 3090",
+        "connection": "Direct IPv4 UDP; declare actual address/machine/visibility separately",
+        "reason": "",
+        "hostBindEndpoint": "",
+        "scenario": {
+          "version": 3,
+          "seed": 137,
+          "enemies": 250,
+          "enemyHp": 60,
+          "bodyDamage": 20,
+          "headMultiplier": 2,
+          "headDamage": 40,
+          "run": 1,
+          "startingArsenal": 7,
+          "startingSpecialization": 0,
+          "duration": 40.0,
+          "rifleInterval": 0.11999999731779099,
+          "rifleRate": 8.333333969116211,
+          "name": "Co-op scale (diagnostic) (override)",
+          "identity": "771fbdf0cfd6c53335a6136eebff5633d6c5467ce11ad951bfa736f05133cb75",
+          "session": "00d2f2a5e17b458ab303fb3bc4061071"
+        },
+        "scripted": true,
+        "development": false,
+        "previewEnabled": false,
+        "audioVolume": 0.0,
+        "run": 1,
+        "ticks": 2400,
+        "enemies": 250,
+        "catchupLimits": 0,
+        "frameSamples": 25025,
+        "confirmedHits": 436,
+        "width": 1920,
+        "height": 1080,
+        "frameCap": -1,
+        "vsync": 0,
+        "frameP50": 1.346999999999987,
+        "frameP95": 2.7794999999990466,
+        "frameP99": 3.4493999999991587,
+        "frameMax": 6.703399999999249,
+        "confirmP50": 12.774500000002575,
+        "confirmP95": 17.389600000001337,
+        "confirmMax": 18.182699999997,
+        "rttMs": 0.0,
+        "updateLastMs": 0.6585,
+        "updateMaxMs": 16.7401,
+        "abortFrameMs": 0.0,
+        "abortRemainingMs": 0.0,
+        "abortPreviousUpdateMs": 0.0,
+        "previewCaptureLastMs": 0.0,
+        "previewCaptureMaxMs": 0.0,
+        "previewCaptureCompletedAt": 0.0,
+        "previewPollMaxMs": 0.0,
+        "abortCatchupTicks": 0,
+        "state": 2,
+        "players": [
+          {
+            "Position": {
+              "x": 8.537802696228027,
+              "y": 0.0,
+              "z": -14.046425819396973
+            },
+            "Yaw": 146.52389526367188,
+            "Pitch": 22.94296646118164,
+            "ReturnAt": 0.0,
+            "ImmuneUntil": 0.0,
+            "ContactUntil": 40.116668701171875,
+            "Health": 100,
+            "Life": 1,
+            "Shots": 449,
+            "Hits": 581,
+            "Damage": 9692,
+            "Kills": 133,
+            "Weapon": 1,
+            "BodyDamage": 20,
+            "Arsenal": 7,
+            "FirstAddition": 0,
+            "Specialization": 0,
+            "RifleInterval": 0.11999999731779099,
+            "Ready": false,
+            "ChoiceReady": false,
+            "Offer": {
+              "Id": 0,
+              "Tick": 0,
+              "Weapon": 0,
+              "AppliedTick": 0,
+              "ControlRevision": 0,
+              "First": 0,
+              "Second": 0,
+              "Selected": 0
+            }
+          },
+          {
+            "Position": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "Yaw": 0.0,
+            "Pitch": 0.0,
+            "ReturnAt": 0.0,
+            "ImmuneUntil": 0.0,
+            "ContactUntil": 0.0,
+            "Health": 0,
+            "Life": 0,
+            "Shots": 0,
+            "Hits": 0,
+            "Damage": 0,
+            "Kills": 0,
+            "Weapon": 0,
+            "BodyDamage": 0,
+            "Arsenal": 0,
+            "FirstAddition": 0,
+            "Specialization": 0,
+            "RifleInterval": 0.0,
+            "Ready": false,
+            "ChoiceReady": false,
+            "Offer": {
+              "Id": 0,
+              "Tick": 0,
+              "Weapon": 0,
+              "AppliedTick": 0,
+              "ControlRevision": 0,
+              "First": 0,
+              "Second": 0,
+              "Selected": 0
+            }
+          }
+        ],
+        "enemyStates": [
+          {
+            "Position": {
+              "x": -4.656034469604492,
+              "y": 0.0,
+              "z": -13.406571388244629
+            },
+            "Health": 12,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": -4.990418434143066,
+              "y": 0.0,
+              "z": -6.633420467376709
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 2.7471871376037598,
+              "y": 0.0,
+              "z": -11.898487091064453
+            },
+            "Health": 40,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 23.826976776123047,
+              "y": 0.0,
+              "z": 19.813894271850586
+            },
+            "Health": 60,
+            "Incarnation": 5
+          },
+          {
+            "Position": {
+              "x": -7.004082202911377,
+              "y": 0.0,
+              "z": -2.450258493423462
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": 0.05942678451538086,
+              "y": 0.0,
+              "z": -10.523305892944336
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.6906877756118774,
+              "y": 0.0,
+              "z": -1.0003854036331177
+            },
+            "Health": 60,
+            "Incarnation": 5
+          },
+          {
+            "Position": {
+              "x": -4.247575759887695,
+              "y": 0.0,
+              "z": -23.25298500061035
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -4.365062713623047,
+              "y": 0.0,
+              "z": -7.340396881103516
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.170576810836792,
+              "y": 0.0,
+              "z": -8.292722702026367
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 2.546358585357666,
+              "y": 0.0,
+              "z": -8.801141738891602
+            },
+            "Health": 44,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -7.353786468505859,
+              "y": 0.0,
+              "z": -6.197702884674072
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.938370704650879,
+              "y": 0.0,
+              "z": -12.332927703857422
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.7371095418930054,
+              "y": 0.0,
+              "z": -13.322833061218262
+            },
+            "Health": 48,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.32986587285995483,
+              "y": 0.0,
+              "z": -7.946823596954346
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.8887042999267578,
+              "y": 0.0,
+              "z": -10.098230361938477
+            },
+            "Health": 36,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.32986587285995483,
+              "y": 0.0,
+              "z": -7.946823596954346
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.7427058219909668,
+              "y": 0.0,
+              "z": -14.586862564086914
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 3.7795236110687256,
+              "y": 0.0,
+              "z": -14.326004981994629
+            },
+            "Health": 60,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": 1.2611311674118042,
+              "y": 0.0,
+              "z": -13.758889198303223
+            },
+            "Health": 44,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -5.977299690246582,
+              "y": 0.0,
+              "z": -1.8910497426986694
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -6.622186660766602,
+              "y": 0.0,
+              "z": -5.633116722106934
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 1.185627818107605,
+              "y": 0.0,
+              "z": -10.714936256408691
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 2.852550506591797,
+              "y": 0.0,
+              "z": -11.264680862426758
+            },
+            "Health": 40,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 2.1108415126800537,
+              "y": 0.0,
+              "z": -7.776157855987549
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.0910542011260986,
+              "y": 0.0,
+              "z": -9.388837814331055
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 1.6327147483825684,
+              "y": 0.0,
+              "z": -8.48685359954834
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -5.398770332336426,
+              "y": 0.0,
+              "z": -4.2916436195373535
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -20.11866569519043,
+              "y": 0.0,
+              "z": 27.35694122314453
+            },
+            "Health": 60,
+            "Incarnation": 5
+          },
+          {
+            "Position": {
+              "x": -1.7187623977661133,
+              "y": 0.0,
+              "z": -6.338201522827148
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.10546104609966278,
+              "y": 0.0,
+              "z": -12.367262840270996
+            },
+            "Health": 40,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 3.324436664581299,
+              "y": 0.0,
+              "z": -13.490330696105957
+            },
+            "Health": 44,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": -1.6231420040130615,
+              "y": 0.0,
+              "z": -12.967728614807129
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 2.506542205810547,
+              "y": 0.0,
+              "z": -9.644033432006836
+            },
+            "Health": 28,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 2.311016082763672,
+              "y": 0.0,
+              "z": -6.177480697631836
+            },
+            "Health": 60,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": -2.764094114303589,
+              "y": 0.0,
+              "z": -11.630353927612305
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -4.351413249969482,
+              "y": 0.0,
+              "z": -10.71915340423584
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -6.738913536071777,
+              "y": 0.0,
+              "z": -12.572930335998535
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.6461220979690552,
+              "y": 0.0,
+              "z": -2.77956485748291
+            },
+            "Health": 4,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -7.313635349273682,
+              "y": 0.0,
+              "z": -3.519878387451172
+            },
+            "Health": 40,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -5.470930099487305,
+              "y": 0.0,
+              "z": -10.493548393249512
+            },
+            "Health": 20,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.9072747230529785,
+              "y": 0.0,
+              "z": -12.76821517944336
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 3.0877673625946045,
+              "y": 0.0,
+              "z": -6.93279504776001
+            },
+            "Health": 60,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": -6.072712421417236,
+              "y": 0.0,
+              "z": -7.602156639099121
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 3.818549394607544,
+              "y": 0.0,
+              "z": -10.85784912109375
+            },
+            "Health": 60,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": -11.45334529876709,
+              "y": 0.0,
+              "z": -10.530435562133789
+            },
+            "Health": 60,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": -5.110609531402588,
+              "y": 0.0,
+              "z": -2.6009702682495117
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -6.426568508148193,
+              "y": 0.0,
+              "z": -10.191645622253418
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 3.575314521789551,
+              "y": 0.0,
+              "z": -8.934361457824707
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -0.6053506135940552,
+              "y": 0.0,
+              "z": -3.1810531616210938
+            },
+            "Health": 20,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.0445014238357544,
+              "y": 0.0,
+              "z": -11.725302696228027
+            },
+            "Health": 20,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -3.483672618865967,
+              "y": 0.0,
+              "z": -6.745599269866943
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -3.9143104553222656,
+              "y": 0.0,
+              "z": -8.116941452026367
+            },
+            "Health": 20,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -14.066774368286133,
+              "y": 0.0,
+              "z": -22.76206398010254
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -2.7716784477233887,
+              "y": 0.0,
+              "z": -5.014277935028076
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 2.577845335006714,
+              "y": 0.0,
+              "z": -13.123616218566895
+            },
+            "Health": 44,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -3.1981377601623535,
+              "y": 0.0,
+              "z": -3.4335436820983887
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.1231491565704346,
+              "y": 0.0,
+              "z": -5.526503086090088
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -9.205448150634766,
+              "y": 0.0,
+              "z": -6.339672088623047
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -1.5259395837783813,
+              "y": 0.0,
+              "z": -11.023802757263184
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 1.5327191352844238,
+              "y": 0.0,
+              "z": 27.489517211914062
+            },
+            "Health": 60,
+            "Incarnation": 5
+          },
+          {
+            "Position": {
+              "x": 18.63153648376465,
+              "y": 0.0,
+              "z": -25.235393524169922
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": 13.109760284423828,
+              "y": 0.0,
+              "z": 17.804203033447266
+            },
+            "Health": 60,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": -8.412152290344238,
+              "y": 0.0,
+              "z": -5.621300220489502
+            },
+            "Health": 40,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": 9.920733451843262,
+              "y": 0.0,
+              "z": -16.153038024902344
+            },
+            "Health": 40,
+            "Incarnation": 6
+          },
+          {
+            "Position": {
+              "x": -6.409281253814697,
+              "y": 0.0,
+              "z": -6.682413578033447
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.805657386779785,
+              "y": 0.0,
+              "z": -6.034652233123779
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.723410129547119,
+              "y": 0.0,
+              "z": -12.182107925415039
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.2583651542663574,
+              "y": 0.0,
+              "z": -11.39660358428955
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.601775884628296,
+              "y": 0.0,
+              "z": -4.306537628173828
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.4242970943450928,
+              "y": 0.0,
+              "z": -1.767238736152649
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.30564165115356445,
+              "y": 0.0,
+              "z": -9.853556632995605
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.8012457489967346,
+              "y": 0.0,
+              "z": -4.810725212097168
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -3.4474990367889404,
+              "y": 0.0,
+              "z": -15.354876518249512
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -3.65649151802063,
+              "y": 0.0,
+              "z": -13.684033393859863
+            },
+            "Health": 44,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -2.06911301612854,
+              "y": 0.0,
+              "z": -8.28388786315918
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 1.5009706020355225,
+              "y": 0.0,
+              "z": -4.08717155456543
+            },
+            "Health": 60,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": 13.49881649017334,
+              "y": 0.0,
+              "z": -12.168611526489258
+            },
+            "Health": 60,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": -20.91524887084961,
+              "y": 0.0,
+              "z": 2.9251012802124023
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -2.714949369430542,
+              "y": 0.0,
+              "z": -13.737025260925293
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -8.892786026000977,
+              "y": 0.0,
+              "z": -7.428837299346924
+            },
+            "Health": 60,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": 7.017199993133545,
+              "y": 0.0,
+              "z": -8.936108589172363
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -7.845274925231934,
+              "y": 0.0,
+              "z": -7.85940408706665
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -14.666555404663086,
+              "y": 0.0,
+              "z": 15.362900733947754
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -20.34775161743164,
+              "y": 0.0,
+              "z": 9.552769660949707
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -3.5017433166503906,
+              "y": 0.0,
+              "z": -5.0701375007629395
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -6.089113712310791,
+              "y": 0.0,
+              "z": -3.0352745056152344
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -10.351363182067871,
+              "y": 0.0,
+              "z": -24.64867401123047
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": 5.195930480957031,
+              "y": 0.0,
+              "z": -14.011018753051758
+            },
+            "Health": 20,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": 12.397909164428711,
+              "y": 0.0,
+              "z": -21.206796646118164
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -3.57086181640625,
+              "y": 0.0,
+              "z": -7.526029109954834
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.6324059963226318,
+              "y": 0.0,
+              "z": -11.862220764160156
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -5.51887321472168,
+              "y": 0.0,
+              "z": -7.072618007659912
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.15945284068584442,
+              "y": 0.0,
+              "z": -13.98414134979248
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -6.732109069824219,
+              "y": 0.0,
+              "z": -7.988529682159424
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.32299646735191345,
+              "y": 0.0,
+              "z": 11.939984321594238
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -4.284513473510742,
+              "y": 0.0,
+              "z": -5.068151473999023
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.4447222054004669,
+              "y": 0.0,
+              "z": -7.469376087188721
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.3861827850341797,
+              "y": 0.0,
+              "z": -3.7299225330352783
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -6.003167629241943,
+              "y": 0.0,
+              "z": -8.692852020263672
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.6023037433624268,
+              "y": 0.0,
+              "z": -10.454803466796875
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 2.590963840484619,
+              "y": 0.0,
+              "z": -14.165016174316406
+            },
+            "Health": 24,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": 1.724104404449463,
+              "y": 0.0,
+              "z": -11.67846965789795
+            },
+            "Health": 20,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.5955610871315002,
+              "y": 0.0,
+              "z": -12.290243148803711
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -3.5493693351745605,
+              "y": 0.0,
+              "z": -10.639575958251953
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -5.118237495422363,
+              "y": 0.0,
+              "z": -5.093128681182861
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -3.714937925338745,
+              "y": 0.0,
+              "z": -2.4296634197235107
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.1579668521881104,
+              "y": 0.0,
+              "z": -3.566662073135376
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.1727917194366455,
+              "y": 0.0,
+              "z": -7.194785118103027
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -5.389409065246582,
+              "y": 0.0,
+              "z": -11.17351245880127
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.0006804876029491425,
+              "y": 0.0,
+              "z": -6.879616737365723
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -8.12525463104248,
+              "y": 0.0,
+              "z": -6.741652965545654
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.054875612258911,
+              "y": 0.0,
+              "z": -8.837855339050293
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 1.7754714488983154,
+              "y": 0.0,
+              "z": -15.336115837097168
+            },
+            "Health": 28,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -2.1774840354919434,
+              "y": 0.0,
+              "z": -7.619047164916992
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.1703557968139648,
+              "y": 0.0,
+              "z": -3.8672542572021484
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -4.869691848754883,
+              "y": 0.0,
+              "z": -15.014019012451172
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -5.095178127288818,
+              "y": 0.0,
+              "z": -5.840949058532715
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -6.266574382781982,
+              "y": 0.0,
+              "z": -9.399748802185059
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -5.421002388000488,
+              "y": 0.0,
+              "z": -9.739598274230957
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -6.982320308685303,
+              "y": 0.0,
+              "z": -4.5555901527404785
+            },
+            "Health": 44,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.4267148971557617,
+              "y": 0.0,
+              "z": -10.272957801818848
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.882351279258728,
+              "y": 0.0,
+              "z": -9.31235408782959
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.9747018218040466,
+              "y": 0.0,
+              "z": -12.757177352905273
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -6.457891464233398,
+              "y": 0.0,
+              "z": -10.997878074645996
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.7345996499061584,
+              "y": 0.0,
+              "z": -4.943295478820801
+            },
+            "Health": 44,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -5.696856498718262,
+              "y": 0.0,
+              "z": -15.662931442260742
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": 19.734468460083008,
+              "y": 0.0,
+              "z": 22.794601440429688
+            },
+            "Health": 60,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": -1.2594645023345947,
+              "y": 0.0,
+              "z": -14.883546829223633
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.2497146129608154,
+              "y": 0.0,
+              "z": -5.7757978439331055
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.284172534942627,
+              "y": 0.0,
+              "z": -13.230120658874512
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -7.275696754455566,
+              "y": 0.0,
+              "z": -11.645723342895508
+            },
+            "Health": 8,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -7.106586456298828,
+              "y": 0.0,
+              "z": 13.026884078979492
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -5.128750801086426,
+              "y": 0.0,
+              "z": -3.5204570293426514
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.2481725215911865,
+              "y": 0.0,
+              "z": -15.324091911315918
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -2.112572431564331,
+              "y": 0.0,
+              "z": -11.25965690612793
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.0179436206817627,
+              "y": 0.0,
+              "z": -6.2565717697143555
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 1.6866543292999268,
+              "y": 0.0,
+              "z": -14.451760292053223
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 1.089449405670166,
+              "y": 0.0,
+              "z": -2.9933130741119385
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -3.4502980709075928,
+              "y": 0.0,
+              "z": -10.078702926635742
+            },
+            "Health": 40,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.7083072662353516,
+              "y": 0.0,
+              "z": -9.216784477233887
+            },
+            "Health": 20,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 1.6320241689682007,
+              "y": 0.0,
+              "z": -9.270147323608398
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.7537002563476562,
+              "y": 0.0,
+              "z": -6.812218189239502
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -4.190168380737305,
+              "y": 0.0,
+              "z": -3.2582223415374756
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 1.207761526107788,
+              "y": 0.0,
+              "z": -5.848147392272949
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.2583651542663574,
+              "y": 0.0,
+              "z": -11.39660358428955
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -5.525107383728027,
+              "y": 0.0,
+              "z": -12.67862606048584
+            },
+            "Health": 24,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 1.8127617835998535,
+              "y": 0.0,
+              "z": -10.148334503173828
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.0484225749969482,
+              "y": 0.0,
+              "z": -6.871870994567871
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.6779519319534302,
+              "y": 0.0,
+              "z": -4.513943672180176
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -3.4563145637512207,
+              "y": 0.0,
+              "z": -5.877138137817383
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -7.281964302062988,
+              "y": 0.0,
+              "z": -9.64376163482666
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.8545325994491577,
+              "y": 0.0,
+              "z": -5.213699817657471
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.6197451949119568,
+              "y": 0.0,
+              "z": -6.953774929046631
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.11702299118042,
+              "y": 0.0,
+              "z": -10.719473838806152
+            },
+            "Health": 36,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -4.567363739013672,
+              "y": 0.0,
+              "z": -0.767092227935791
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -0.1733742207288742,
+              "y": 0.0,
+              "z": -14.982705116271973
+            },
+            "Health": 40,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 2.7200186252593994,
+              "y": 0.0,
+              "z": -10.511493682861328
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 1.9001301527023315,
+              "y": 0.0,
+              "z": -13.392894744873047
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 1.1948463916778564,
+              "y": 0.0,
+              "z": -7.465184688568115
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -4.626028537750244,
+              "y": 0.0,
+              "z": -10.134725570678711
+            },
+            "Health": 44,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -11.370272636413574,
+              "y": 0.0,
+              "z": -16.592409133911133
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -3.4204041957855225,
+              "y": 0.0,
+              "z": -8.634693145751953
+            },
+            "Health": 40,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.6854056715965271,
+              "y": 0.0,
+              "z": -14.180057525634766
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -8.384904861450195,
+              "y": 0.0,
+              "z": -9.870247840881348
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": 1.9211236238479614,
+              "y": 0.0,
+              "z": -11.045960426330566
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.9658925533294678,
+              "y": 0.0,
+              "z": -14.292276382446289
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -4.2043137550354,
+              "y": 0.0,
+              "z": -6.615870952606201
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.16749605536460876,
+              "y": 0.0,
+              "z": -8.94822883605957
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -6.056137561798096,
+              "y": 0.0,
+              "z": -11.829161643981934
+            },
+            "Health": 44,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 22.18404197692871,
+              "y": 0.0,
+              "z": 17.100507736206055
+            },
+            "Health": 60,
+            "Incarnation": 5
+          },
+          {
+            "Position": {
+              "x": -2.945481538772583,
+              "y": 0.0,
+              "z": -9.705683708190918
+            },
+            "Health": 20,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.536414623260498,
+              "y": 0.0,
+              "z": -13.341113090515137
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.9430068731307983,
+              "y": 0.0,
+              "z": -9.388371467590332
+            },
+            "Health": 28,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.3966659307479858,
+              "y": 0.0,
+              "z": -13.73713207244873
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 4.387849807739258,
+              "y": 0.0,
+              "z": -13.299826622009277
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -0.43143925070762634,
+              "y": 0.0,
+              "z": -9.773226737976074
+            },
+            "Health": 8,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.0230084657669067,
+              "y": 0.0,
+              "z": -1.9707489013671875
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": 1.918091058731079,
+              "y": 0.0,
+              "z": -5.148594856262207
+            },
+            "Health": 44,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -5.168990612030029,
+              "y": 0.0,
+              "z": -9.139464378356934
+            },
+            "Health": 44,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -7.037751197814941,
+              "y": 0.0,
+              "z": -8.715584754943848
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 1.6887630224227905,
+              "y": 0.0,
+              "z": -12.380349159240723
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -6.0187788009643555,
+              "y": 0.0,
+              "z": -5.032444953918457
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -7.5090861320495605,
+              "y": 0.0,
+              "z": -10.608147621154785
+            },
+            "Health": 28,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -19.22985076904297,
+              "y": 0.0,
+              "z": -26.60805892944336
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": 3.0724735260009766,
+              "y": 0.0,
+              "z": -7.967288017272949
+            },
+            "Health": 44,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -3.5845272541046143,
+              "y": 0.0,
+              "z": -12.992419242858887
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -5.823823928833008,
+              "y": 0.0,
+              "z": -6.059947490692139
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -8.143569946289062,
+              "y": 0.0,
+              "z": -4.316054821014404
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": 0.5622629523277283,
+              "y": 0.0,
+              "z": -10.947088241577148
+            },
+            "Health": 44,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.1278637796640396,
+              "y": 0.0,
+              "z": -13.029033660888672
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.2849467992782593,
+              "y": 0.0,
+              "z": -9.957939147949219
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -3.7519147396087646,
+              "y": 0.0,
+              "z": -12.219976425170898
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.4912511110305786,
+              "y": 0.0,
+              "z": 5.173879623413086
+            },
+            "Health": 60,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": -5.314914226531982,
+              "y": 0.0,
+              "z": -14.061734199523926
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -4.932199478149414,
+              "y": 0.0,
+              "z": -11.944083213806152
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.6201841235160828,
+              "y": 0.0,
+              "z": -12.050494194030762
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -7.995227336883545,
+              "y": 0.0,
+              "z": -8.86524486541748
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -8.96743392944336,
+              "y": 0.0,
+              "z": -8.50460147857666
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": 0.6993057727813721,
+              "y": 0.0,
+              "z": -6.482741355895996
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 1.1626858711242676,
+              "y": 0.0,
+              "z": -12.690557479858398
+            },
+            "Health": 40,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -4.253656387329102,
+              "y": 0.0,
+              "z": -5.869139194488525
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -3.810734510421753,
+              "y": 0.0,
+              "z": -11.677263259887695
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -3.5176877975463867,
+              "y": 0.0,
+              "z": -1.3702151775360107
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.990816593170166,
+              "y": 0.0,
+              "z": -14.513235092163086
+            },
+            "Health": 24,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -1.108832836151123,
+              "y": 0.0,
+              "z": -8.80657958984375
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -7.5500359535217285,
+              "y": 0.0,
+              "z": -5.228935241699219
+            },
+            "Health": 40,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.9039002656936646,
+              "y": 0.0,
+              "z": -11.562023162841797
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 1.697251319885254,
+              "y": 0.0,
+              "z": -6.849155426025391
+            },
+            "Health": 44,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 3.4939393997192383,
+              "y": 0.0,
+              "z": -9.91991901397705
+            },
+            "Health": 20,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.9020652770996094,
+              "y": 0.0,
+              "z": -7.6389899253845215
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.06666125357151031,
+              "y": 0.0,
+              "z": -2.415376663208008
+            },
+            "Health": 60,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": 0.6779342293739319,
+              "y": 0.0,
+              "z": -15.612578392028809
+            },
+            "Health": 48,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -1.42933189868927,
+              "y": 0.0,
+              "z": -7.705655097961426
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.587536334991455,
+              "y": 0.0,
+              "z": -10.776305198669434
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.7827770709991455,
+              "y": 0.0,
+              "z": -8.183019638061523
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.16749605536460876,
+              "y": 0.0,
+              "z": -8.94822883605957
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -3.6848156452178955,
+              "y": 0.0,
+              "z": -9.157143592834473
+            },
+            "Health": 40,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 3.8576126098632812,
+              "y": 0.0,
+              "z": -11.805134773254395
+            },
+            "Health": 40,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -24.59622573852539,
+              "y": 0.0,
+              "z": -21.838773727416992
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": 0.9847184419631958,
+              "y": 0.0,
+              "z": -10.035304069519043
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -4.495869159698486,
+              "y": 0.0,
+              "z": -9.05135440826416
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.19566377997398376,
+              "y": 0.0,
+              "z": -5.423110485076904
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -4.52129602432251,
+              "y": 0.0,
+              "z": -8.384965896606445
+            },
+            "Health": 40,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.21993939578533173,
+              "y": 0.0,
+              "z": -5.994560718536377
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 0.617132842540741,
+              "y": 0.0,
+              "z": -8.67225456237793
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 15.047286033630371,
+              "y": 0.0,
+              "z": 4.929211616516113
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -4.119970321655273,
+              "y": 0.0,
+              "z": -14.40704345703125
+            },
+            "Health": 44,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -23.171833038330078,
+              "y": 0.0,
+              "z": -20.309703826904297
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -2.864795207977295,
+              "y": 0.0,
+              "z": -8.374549865722656
+            },
+            "Health": 12,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -6.148251056671143,
+              "y": 0.0,
+              "z": -13.447556495666504
+            },
+            "Health": 20,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": -0.22905083000659943,
+              "y": 0.0,
+              "z": -4.354747772216797
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -3.289036512374878,
+              "y": 0.0,
+              "z": -11.189274787902832
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -6.746152400970459,
+              "y": 0.0,
+              "z": -15.159280776977539
+            },
+            "Health": 60,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -5.433435440063477,
+              "y": 0.0,
+              "z": -8.239495277404785
+            },
+            "Health": 20,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -4.409942150115967,
+              "y": 0.0,
+              "z": -4.241772174835205
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 7.139030933380127,
+              "y": 0.0,
+              "z": 4.97502326965332
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -4.474981784820557,
+              "y": 0.0,
+              "z": -12.610239028930664
+            },
+            "Health": 28,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 2.9096579551696777,
+              "y": 0.0,
+              "z": -15.085868835449219
+            },
+            "Health": 24,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -4.949100494384766,
+              "y": 0.0,
+              "z": -7.685788154602051
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 3.578446626663208,
+              "y": 0.0,
+              "z": -12.618326187133789
+            },
+            "Health": 20,
+            "Incarnation": 2
+          },
+          {
+            "Position": {
+              "x": -3.5657732486724854,
+              "y": 0.0,
+              "z": -4.196087837219238
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -7.1395182609558105,
+              "y": 0.0,
+              "z": -7.178919792175293
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -6.270216941833496,
+              "y": 0.0,
+              "z": -3.969184398651123
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -4.122339248657227,
+              "y": 0.0,
+              "z": -9.699969291687012
+            },
+            "Health": 48,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -4.5912089347839355,
+              "y": 0.0,
+              "z": -1.8185005187988281
+            },
+            "Health": 44,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -0.8153756856918335,
+              "y": 0.0,
+              "z": -15.803971290588379
+            },
+            "Health": 28,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": 2.495389699935913,
+              "y": 0.0,
+              "z": -12.463102340698242
+            },
+            "Health": 40,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -4.466360092163086,
+              "y": 0.0,
+              "z": -11.311727523803711
+            },
+            "Health": 60,
+            "Incarnation": 1
+          },
+          {
+            "Position": {
+              "x": -2.713195562362671,
+              "y": 0.0,
+              "z": -2.666858434677124
+            },
+            "Health": 60,
+            "Incarnation": 1
+          }
+        ],
+        "weaponWork": [
+          {
+            "weapon": 1,
+            "player": 0,
+            "instance": 0,
+            "triggers": 333,
+            "rays": 334,
+            "targetTests": 83500,
+            "hits": 333,
+            "damage": 6368,
+            "kills": 80,
+            "rejected": 1,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 2,
+            "player": 1,
+            "instance": 0,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 3,
+            "player": 0,
+            "instance": 1,
+            "triggers": 54,
+            "rays": 270,
+            "targetTests": 67500,
+            "hits": 144,
+            "damage": 1632,
+            "kills": 44,
+            "rejected": 124,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 4,
+            "player": 1,
+            "instance": 1,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 5,
+            "player": 0,
+            "instance": 2,
+            "triggers": 62,
+            "rays": 62,
+            "targetTests": 15500,
+            "hits": 104,
+            "damage": 1692,
+            "kills": 9,
+            "rejected": 7,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 6,
+            "player": 1,
+            "instance": 2,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 7,
+            "player": 0,
+            "instance": 3,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 8,
+            "player": 1,
+            "instance": 3,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 9,
+            "player": 0,
+            "instance": 4,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 10,
+            "player": 1,
+            "instance": 4,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 11,
+            "player": 0,
+            "instance": 5,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 12,
+            "player": 1,
+            "instance": 5,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 13,
+            "player": 0,
+            "instance": 6,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 14,
+            "player": 1,
+            "instance": 6,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 15,
+            "player": 0,
+            "instance": 7,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 16,
+            "player": 1,
+            "instance": 7,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          }
+        ],
+        "roster": 1,
+        "xp": 133,
+        "level": 1,
+        "uncollectedOrbs": 0,
+        "uncollectedXp": 0,
+        "choicePhase": 0,
+        "controlRevision": 0,
+        "pickupRadius": 2.0,
+        "attractionRadius": 1.5,
+        "mergeRadius": 0.30000001192092896,
+        "sentBytes": 0,
+        "receivedBytes": 0,
+        "outgoingPending": 0,
+        "outgoingHighWater": 0,
+        "outgoingDeferred": 0,
+        "outgoingLimit": 1024,
+        "authorityWork": {
+          "ticks": 2400,
+          "steeringChecks": 150000000,
+          "contactTests": 600000,
+          "contactApplications": 37,
+          "attractionQueries": 2255,
+          "simulationMs": 3419.974499999993,
+          "crowdMs": 3247.9539999999947,
+          "weaponMs": 146.59540000000612,
+          "xpMs": 14.275900000000025,
+          "frameSimulationMs": 1.5574,
+          "frameCrowdMs": 1.5533,
+          "frameWeaponMs": 0.0001,
+          "frameXpMs": 0.0,
+          "frameTicks": 1
+        },
+        "sentMessages": 0,
+        "receivedMessages": 0,
+        "snapshotBytes": 0,
+        "snapshotMessages": 0,
+        "allocatedThreadBytes": 0,
+        "managedHeapBytes": 34775040,
+        "workingSetBytes": 0,
+        "presentationRays": 27901,
+        "presentationProbes": 6975250,
+        "serializationMs": 0.0,
+        "outgoingAgeMs": 0.0,
+        "outgoingMaxAgeMs": 0.0,
+        "loggingMs": 1402.5404999999857,
+        "loggingMaxMs": 1.7463,
+        "outgoingBytes": 0,
+        "outgoingBytesHighWater": 0,
+        "xpDrops": 133,
+        "xpMerges": 3,
+        "xpMoveEvents": 10,
+        "xpCollections": 130,
+        "physicalXpMoves": 68
+      },
+      "frameMs": {
+        "samples": 19923,
+        "p50": 1.3674,
+        "p95": 2.806,
+        "p99": 3.4392,
+        "max": 6.7034,
+        "over6_944": 0,
+        "over13_889": 0
+      },
+      "coldFrameMs": {
+        "samples": 27235,
+        "p50": 1.3375,
+        "p95": 2.7683,
+        "p99": 3.4392,
+        "max": 14.8103
+      },
+      "confirmationMs": {
+        "samples": 327,
+        "p50": 12.83,
+        "p95": 17.376,
+        "p99": 17.872,
+        "max": 18.183
+      },
+      "rttMs": {
+        "samples": 0
+      },
+      "rttMethod": "one sample per RTT sequence",
+      "firstTick": 600,
+      "lastTick": 2399,
+      "traceWallSpan": 29.998664,
+      "terminalComplete": true,
+      "noCatchup": true,
+      "rawHashes": {
+        "frames.csv": {
+          "bytes": 13594013,
+          "sha256": "34ab4fd2ebd1cb8dade7bc0a31fe2dc08d337fa1d6958c6ad83ea5d87d3bb553"
+        },
+        "events.csv": {
+          "bytes": 54030,
+          "sha256": "f74cd2f7958203a940cb5afb15598de1d91cc873ff67d031751b252520450de2"
+        },
+        "growth.jsonl": {
+          "bytes": 103137,
+          "sha256": "7887ed4b022b34295deb63586f0eb3874adfeb4eb14684d93545b31278c5e284"
+        },
+        "player.log": {
+          "bytes": 1722,
+          "sha256": "0884d5ec89a4d05d2cab16dd10eb7cb5a1f871ad948242f10e42abfbedbd67ba"
+        },
+        "summary-run-1.json": {
+          "bytes": 66554,
+          "sha256": "2c5ef26cdb63fdae433c9e49e63e26ef28e6167d111a6543cf88bb3a39f70bc3"
+        },
+        "invocation.json": {
+          "bytes": 990,
+          "sha256": "6f97b99056a52f6eb3e7baad307b43d8949f33b033fb397556b8fabb65b626bf"
+        },
+        "visibility.json": {
+          "bytes": 248,
+          "sha256": "3298c6d65c6377557c47299e41a21b29ec7788ba0e769fd340c8228040b980e1"
+        }
+      },
+      "workWindow": {
+        "wallSeconds": 29.998664,
+        "tickSpan": 1799,
+        "cumulativeDeltas": {
+          "steering_checks": 112437500.0,
+          "contact_tests": 449750.0,
+          "attraction_queries": 213.0,
+          "presentation_rays": 20418.0,
+          "presentation_probes": 5104500.0,
+          "sent_bytes": 0.0,
+          "received_bytes": 0.0,
+          "sent_messages": 0.0,
+          "received_messages": 0.0,
+          "snapshot_bytes": 0.0,
+          "snapshot_messages": 0.0,
+          "serialization_ms": 0.0,
+          "allocated_thread_bytes": 0.0,
+          "gc0": 207.0,
+          "gc1": 207.0,
+          "gc2": 207.0,
+          "xp_drops": 101.0,
+          "xp_merges": 0.0,
+          "xp_move_events": 4.0,
+          "xp_collections": 101.0,
+          "weapon1_triggers": 250.0,
+          "weapon1_rays": 250.0,
+          "weapon1_target_tests": 62500.0,
+          "weapon1_hits": 250.0,
+          "weapon1_damage": 4556.0,
+          "weapon1_kills": 62.0,
+          "weapon2_triggers": 0.0,
+          "weapon2_rays": 0.0,
+          "weapon2_target_tests": 0.0,
+          "weapon2_hits": 0.0,
+          "weapon2_damage": 0.0,
+          "weapon2_kills": 0.0,
+          "weapon3_triggers": 40.0,
+          "weapon3_rays": 200.0,
+          "weapon3_target_tests": 50000.0,
+          "weapon3_hits": 97.0,
+          "weapon3_damage": 1040.0,
+          "weapon3_kills": 35.0,
+          "weapon4_triggers": 0.0,
+          "weapon4_rays": 0.0,
+          "weapon4_target_tests": 0.0,
+          "weapon4_hits": 0.0,
+          "weapon4_damage": 0.0,
+          "weapon4_kills": 0.0,
+          "weapon5_triggers": 46.0,
+          "weapon5_rays": 46.0,
+          "weapon5_target_tests": 11500.0,
+          "weapon5_hits": 80.0,
+          "weapon5_damage": 1272.0,
+          "weapon5_kills": 4.0,
+          "weapon6_triggers": 0.0,
+          "weapon6_rays": 0.0,
+          "weapon6_target_tests": 0.0,
+          "weapon6_hits": 0.0,
+          "weapon6_damage": 0.0,
+          "weapon6_kills": 0.0,
+          "weapon7_triggers": 0.0,
+          "weapon7_rays": 0.0,
+          "weapon7_target_tests": 0.0,
+          "weapon7_hits": 0.0,
+          "weapon7_damage": 0.0,
+          "weapon7_kills": 0.0,
+          "weapon8_triggers": 0.0,
+          "weapon8_rays": 0.0,
+          "weapon8_target_tests": 0.0,
+          "weapon8_hits": 0.0,
+          "weapon8_damage": 0.0,
+          "weapon8_kills": 0.0,
+          "weapon9_triggers": 0.0,
+          "weapon9_rays": 0.0,
+          "weapon9_target_tests": 0.0,
+          "weapon9_hits": 0.0,
+          "weapon9_damage": 0.0,
+          "weapon9_kills": 0.0,
+          "weapon10_triggers": 0.0,
+          "weapon10_rays": 0.0,
+          "weapon10_target_tests": 0.0,
+          "weapon10_hits": 0.0,
+          "weapon10_damage": 0.0,
+          "weapon10_kills": 0.0,
+          "weapon11_triggers": 0.0,
+          "weapon11_rays": 0.0,
+          "weapon11_target_tests": 0.0,
+          "weapon11_hits": 0.0,
+          "weapon11_damage": 0.0,
+          "weapon11_kills": 0.0,
+          "weapon12_triggers": 0.0,
+          "weapon12_rays": 0.0,
+          "weapon12_target_tests": 0.0,
+          "weapon12_hits": 0.0,
+          "weapon12_damage": 0.0,
+          "weapon12_kills": 0.0,
+          "weapon13_triggers": 0.0,
+          "weapon13_rays": 0.0,
+          "weapon13_target_tests": 0.0,
+          "weapon13_hits": 0.0,
+          "weapon13_damage": 0.0,
+          "weapon13_kills": 0.0,
+          "weapon14_triggers": 0.0,
+          "weapon14_rays": 0.0,
+          "weapon14_target_tests": 0.0,
+          "weapon14_hits": 0.0,
+          "weapon14_damage": 0.0,
+          "weapon14_kills": 0.0,
+          "weapon15_triggers": 0.0,
+          "weapon15_rays": 0.0,
+          "weapon15_target_tests": 0.0,
+          "weapon15_hits": 0.0,
+          "weapon15_damage": 0.0,
+          "weapon15_kills": 0.0,
+          "weapon16_triggers": 0.0,
+          "weapon16_rays": 0.0,
+          "weapon16_target_tests": 0.0,
+          "weapon16_hits": 0.0,
+          "weapon16_damage": 0.0,
+          "weapon16_kills": 0.0
+        },
+        "stageFrameMs": {
+          "sim_ms": {
+            "samples": 19923,
+            "p50": 0.0,
+            "p95": 1.2911,
+            "p99": 1.6403,
+            "max": 3.0995
+          },
+          "crowd_ms": {
+            "samples": 19923,
+            "p50": 0.0,
+            "p95": 1.2796,
+            "p99": 1.5612,
+            "max": 2.2456
+          },
+          "weapon_ms": {
+            "samples": 19923,
+            "p50": 0.0,
+            "p95": 0.0002,
+            "p99": 0.1942,
+            "max": 1.7026
+          },
+          "xp_ms": {
+            "samples": 19923,
+            "p50": 0.0,
+            "p95": 0.0013,
+            "p99": 0.0022,
+            "max": 0.1214
+          },
+          "presentation_ms": {
+            "samples": 19923,
+            "p50": 0.8257,
+            "p95": 1.0832,
+            "p99": 1.2861,
+            "max": 2.5185
+          },
+          "render_prepare_ms": {
+            "samples": 19923,
+            "p50": 0.0207,
+            "p95": 0.0286,
+            "p99": 0.0396,
+            "max": 0.2703
+          },
+          "render_submit_ms": {
+            "samples": 19923,
+            "p50": 0.0078,
+            "p95": 0.0121,
+            "p99": 0.0158,
+            "max": 0.184
+          },
+          "pickup_render_ms": {
+            "samples": 19923,
+            "p50": 0.0067,
+            "p95": 0.0089,
+            "p99": 0.011,
+            "max": 0.2002
+          },
+          "net_poll_ms": {
+            "samples": 19923,
+            "p50": 0.0,
+            "p95": 0.0001,
+            "p99": 0.0001,
+            "max": 0.0007
+          },
+          "crowd_ms_per_tick": {
+            "samples": 1800,
+            "p50": 1.2818,
+            "p95": 1.6496,
+            "p99": 1.7713,
+            "max": 2.2456
+          }
+        },
+        "gauges": {
+          "enemies": {
+            "first": 250.0,
+            "last": 250.0,
+            "min": 250.0,
+            "max": 250.0
+          },
+          "installed_instances": {
+            "first": 3.0,
+            "last": 3.0,
+            "min": 3.0,
+            "max": 3.0
+          },
+          "active_instances": {
+            "first": 3.0,
+            "last": 3.0,
+            "min": 3.0,
+            "max": 3.0
+          },
+          "submitted_instances": {
+            "first": 204.0,
+            "last": 27.0,
+            "min": 15.0,
+            "max": 522.0
+          },
+          "instance_batches": {
+            "first": 3.0,
+            "last": 4.0,
+            "min": 1.0,
+            "max": 4.0
+          },
+          "pickup_carriers": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 3.0
+          },
+          "secondary_cues": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 6.0
+          },
+          "uncollected_xp": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 3.0
+          },
+          "queue_records": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "queue_bytes": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "queue_age_ms": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "payloadRatesPerSecond": {
+          "sent_bytes": 0.0,
+          "received_bytes": 0.0,
+          "sent_messages": 0.0,
+          "received_messages": 0.0
+        },
+        "threadAllocationBytesPerSecond": null,
+        "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+        "longestQueueAgeOver100msSeconds": 0,
+        "queueAgeGate": true
+      },
+      "correctness": {
+        "errors": [],
+        "xpDeaths": 133,
+        "outcomeEvents": 715,
+        "outcomesSha256": "27f492607a6074037e4ebfdb1a384f9d0d2e296d2a60ffd7047444030bbec07a",
+        "growthSha256": "f88c96f18fe37edebda10721f38307203133e50be9912b7ee7219f3c54a40f4a",
+        "terminalQueueEmpty": true
+      }
+    }
+  ]
+}

@@ -32,18 +32,30 @@ Full reliable snapshots remain. Larger payloads use ordered chunks below the exi
 
 Release frame traces now include authority/steering/weapon/XP stage times, actual steering/contact/attraction tests, per-instance work, presentation query/probe counts, renderer instances/batches, XP activity/value/carriers, networking and main-thread allocation/GC counters. Logging/serialization cost is reported; stage parents overlap children. Presentation counters include the regular head/body focus query and emission queries, not every arithmetic operation. Absolute allocation counters are process-thread totals; use capture deltas. These measurements do not supply GPU time or physical input/display latency.
 
-First import failed because a new metadata GUID was invalid; corrected before tests ran. Failed log stays at `artifacts/gdj24-initial-import-failure.log`. Following correction, **148 Edit Mode / 18 Play Mode pass**, including existing progression/lifecycle/precision checks and new diagnostic bounds, eight owned schedules, XP conservation/contacts, malformed/atomic chunk checks and real reliable loopback delivery beyond the transport window. A small additive logging-cost field follows those checks and will compile in the release build. No optimization has yet been selected; pairwise steering is still the reference.
+First import failed because a new metadata GUID was invalid; corrected before tests ran. Failed log stays at `artifacts/gdj24-initial-import-failure.log`. Following correction, **148 Edit Mode / 18 Play Mode pass**, including existing progression/lifecycle/precision checks and new diagnostic bounds, eight owned schedules, XP conservation/contacts, malformed/atomic chunk checks and real reliable loopback delivery beyond the transport window. The additive logging-cost field compiles in the clean release. Pairwise steering is still the measured reference.
 
 ## Required measurements and remaining work
 
 | Rung | Enemies / instances each | Solo | Actual pair |
 | --- | --- | --- | --- |
-| S1 | 35 / 1 | Not measured | Not measured |
-| S2 | 35 / 3 | Not measured | Not measured |
-| S3 | 35 / 8 | Not measured | Not measured |
-| S4 | 250 / 3 | Not measured | Not measured |
-| S5 | 1000 / 3 | Not measured | Not measured |
-| S6 | 250 / 8 | Not measured | Not measured |
-| S7 | 1000 / 8 | Not measured | Not measured |
+| S1 | 35 / 1 | Complete; p99 1.445 ms | Complete; host/client p99 2.356 / 2.146 ms |
+| S2 | 35 / 3 | Complete; 1.475 ms | Complete; 1.965 / 2.007 ms |
+| S3 | 35 / 8 | Complete; 1.470 ms | Complete; 2.141 / 1.959 ms |
+| S4 | 250 / 3 | Complete; 3.439 ms | Complete; 4.572 / 3.038 ms |
+| S5 | 1000 / 3 | **Catch-up abort / tick 33** | **Catch-up abort / tick 24** |
+| S6 | 250 / 8 | Complete; 3.709 ms | Complete; 5.913 / 2.910 ms |
+| S7 | 1000 / 8 | **Catch-up abort / tick 24** | **Catch-up abort / tick 23; terminal reject counters differ** |
 
-Next: clean instrumented release and whole manifest, ordinary fixture regression, then sequential 10+30 exploratory screens to locate the first limiting cost. Preserve an equivalent-work reference before one justified improvement. Standard selected 30+60×3 acceptance, cold evidence, a separate five-minute S7 pair attempt and a verified human candidate remain required. Native acceptance needs a quiet desktop and declared complete rendering. Owner co-op/readability observations, intermittent-stall cause and GDJ-23's remaining human gates stay open. No LAN/internet, four-player, final boss/VFX or >10,000-enemy support is claimed. Conclusion remains pending.
+These are one 10+30 **contended exploratory screen** per rung, with complete intended workload on the successful cases. They do not establish acceptance or a supported peak. [Compact matrix index](evidence/gdj-24-coop-scale/matrix-v1.json) links every full audit and compressed raw frame/events/growth/source/settings/visibility record. All completed solo/pair cases conserve XP and reconcile per-instance triggers/rays/probes with per-player damage/kills. Every completed pair has matching nonterminal combat and XP event streams, terminal players/enemies/progression and weapon counters, empty application queues, no queue-age violation and no catch-up. Pair S4 also contains a window-placement UI attempt and remains exploratory. Frame tails/cold data remain in each audit; p99 alone does not erase misses.
+
+Release v1 is clean source **`4a6b5b024be285d00c2de190b2ab451313888456`**, built **2026-10-05T09:08:54.2308920Z** with Unity 6000.3.25f1 / URP 17.3.0 / Transport 2.7.4, Windows x64 Mono / D3D11 release. Whole archive `build/StackLab-GDJ24-v1` has 167 files / 97,921,579 bytes; its ZIP is 36,056,200 bytes, SHA-256 `730bd571125187047efb895b554a9d735d8de21c1c530777b6d44d300bd9ab48`. [Whole-file manifest](evidence/gdj-24-coop-scale/release-manifest-v1.json), [hardware/settings](evidence/gdj-24-coop-scale/hardware-v1.json). Windows 11 build 26200, RTX 3090 driver 32.0.15.9186, 3840×1600 / reported 143 Hz desktop at 150% scale, Balanced power plan, 8-core/16-thread i7-10700K and approximately 64 GB. Actual sustained clocks, cooling and BIOS settings are unknown.
+
+[Ordinary pair regression](evidence/gdj-24-coop-scale/ordinary-pair-v1.json) passes two runs on the owned background desktop: physically frozen independent choices, explicit Continue, XP conservation and identical event attribution, complete reset/stale rejection and client loss while Choosing. This is functional evidence, not native performance or human observation; death/return rules are additionally covered in the existing passing suite.
+
+The measured first limit is pairwise steering. In solo S5, crowd work costs **690.5542 ms across 33 ticks** (about **20.93 ms per 16.67 ms tick**), against 703.9258 ms total simulation and 33,000,000 separation candidates. The abort row retains 154.4307 ms frame interval, 29.9724 ms remaining accumulator and the preceding 153.5185 ms Update. The other upper references similarly abort before warm-up. This clear overload does not explain or fix the unrelated old v2 stalls.
+
+Pair S7's overload also leaves 440 host application records at its saved abort barrier. Nonterminal combat and XP hashes and physical state agree, but the client receives later `Terminal` rejection records after the host's first report; only rejection counters differ. This remains a failed capture with pending work and mismatching terminal counters, not evidence of a supported rung or permission to discard records.
+
+The release Mono thread-allocation API returns zero throughout despite known frame/event string allocations. Allocation rate is therefore **unavailable**; GC counts and terminal managed/process memory are retained but are not a precise allocation profile. Add low-frequency heap/process-memory samples for endurance. The one justified improvement is an optional exact spatial neighbor query over the same positions, all neighbors and stable accumulation order, with pairwise reference retained. Fixing queries, replication or presentation remains a separate decision after its next measurements.
+
+Next: implement the measured exact-grid improvement and fixed-tick state/outcome/XP parity, build and screen the unchanged candidate, then selected comparisons and five-minute S7 pair attempt. Standard 30+60×3 acceptance needs a quiet desktop and declared complete rendering; permission for the old owner player remains pending. A verified human candidate and owner co-op/readability observations, intermittent-stall cause and GDJ-23's remaining human gates stay open. No LAN/internet, four-player, final boss/VFX or >10,000-enemy support is claimed. Supported-limit conclusion remains pending.
