@@ -44,6 +44,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--viewer", required=True)
     parser.add_argument("--results", type=Path, required=True)
+    parser.add_argument("--choice", choices=["stronger", "faster"], help="Explicit diagnostic personal selection on earned level 2.")
     parser.add_argument("--seconds", type=int, default=900)
     args = parser.parse_args()
     address = urlparse(args.viewer)
@@ -65,6 +66,11 @@ def main():
                     log.write(json.dumps(entry) + "\n"); log.flush()
                     print(json.dumps({"run": state["run"], "state": state["state"], "elapsed": state["elapsed"],
                                       "A_hp": state["players"][0]["Health"], "B_hp": state["players"][1]["Health"]}), flush=True)
+                offer = state["players"][1].get("Offer", {})
+                if args.choice and state["state"] == "Running" and offer.get("Id", 0) > 0 and offer.get("Selected", 0) == 0:
+                    request(base + "client", {"action": "choice", "upgrade": 1 if args.choice == "stronger" else 2})
+                    time.sleep(.2)
+                    continue
                 if state["state"] == "Running" and state["players"][1]["Health"] > 0:
                     request(base + "client", cover_input(state)); sent += 1
                 elif state["state"] in ("Complete", "Defeat") and state["run"] not in ready_runs:

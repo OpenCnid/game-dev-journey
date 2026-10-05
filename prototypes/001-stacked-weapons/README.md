@@ -58,6 +58,24 @@ Unity Transport **2.7.4** is the one added pinned package; existing editor/depen
 
 ## Scenario configuration (GDJ-22)
 
+## First earned level-up (GDJ-23 candidate)
+
+Select **Earned growth for solo / Host**, then Start or Host; Join adopts Host's settings. CLI solo: `-playtest -scenario earned-growth`. The fixed accepted fixture has 35 respawning 60-HP drones, seed 137, 60 seconds, one 20/40-damage rifle at .12 seconds, and 100 player HP. Overrides and rate edits are disabled for this fixture. Original solo/reference modes retain their controls and rate preferences.
+
+Collect the blue ground orbs within 2 metres: kills alone grant no XP. Ten collected team XP earns level 2 and one independent personal offer for every roster member. **1/2** selects the visible card; **Tab** hides/reopens the same offer. Combat continues. Stronger hits gives 30/60 damage at .12 seconds; Faster fire gives 20/40 at .08 seconds. Both choices can appear in either order. Death retains offers/builds; a dead teammate can choose while another lives. Pair returns take five seconds with one second of contact protection. All-dead defeat precedes return/completion. Retry/R after ending starts a fully reset run when the fixed roster is ready; solo needs one click. Escape/focus loss releases input while the growth encounter continues.
+
+```powershell
+./tools/shared-combat.ps1 -Scenario earned-growth -ScriptedCompanion
+./tools/shared-combat.ps1 -Scenario earned-growth -Scripted -HostChoice stronger -ClientChoice faster -QuitAtEnd
+./tools/shared-combat.ps1 -Scenario earned-growth -Background -HumanHost -WaitForJoin
+```
+
+The background companion can explicitly select its personal card with `tools/tests/play_shared_companion.py --choice faster` (or `stronger`). Without that option it retains the offer. `-growthChoice stronger|faster` selects only when diagnostic scripted input has normally earned an offer; it grants no XP. Use swapped choices for the second comparison. Scripts are functional evidence, not enjoyment observations. `growth.jsonl` records run/tick/sequence, death/orb/collector, cumulative XP, offer and applied choice; summaries/preview state include XP/level/personal builds. Each run keeps its frozen starting scenario identity.
+
+Protocol 3 adds validated earned state and bounded reliable ordered orb/choice events. Snapshots remain under 1100 bytes; the dynamic orb ledger preserves every uncollected orb independently of packet size. The supported experiment is solo/two players for 60 seconds; dense/four-player/recovery and extra levels/content remain separate. Full rules and owner comparison: [accepted contract](../../docs/design/first-earned-level-up.md).
+
+### Starting configuration controls
+
 Solo and shared rifle play consume the same validated version-1 starting configuration. The menu shows separate **Next solo** and **Host** settings; selecting a named scenario for both makes their starting enemy HP, damage and interval match. The default controls remain intentionally different:
 
 | CLI name | Drones / HP | Body / head | Interval | Seed / duration |
@@ -65,6 +83,7 @@ Solo and shared rifle play consume the same validated version-1 starting configu
 | `solo-precision` | 35 / 40 | 20 / 40 (x2) | .12 s | 137 / 60 s |
 | `shared-rifle` | 12 / 60 | 20 / 40 (x2) | .12 s | 137 / 60 s |
 | `developer-parity` | 12 / 90 | 15 / 45 (x3) | .25 s | 271 / 60 s |
+| `earned-growth` | 35 / 60 | 20 / 40 (x2) | .12 s | 137 / 60 s |
 
 With no `-scenario`, solo selects solo precision and Host selects shared rifle. `-scenario <name>` selects the same definition for either path. Explicit overrides: `-scenarioEnemies` (1–35), `-scenarioHp` (1–10000), `-scenarioDamage` (1–1000), `-scenarioHead` (integer 1–4), `-scenarioDuration` (finite 1–600 seconds), `-seed` (signed 32-bit integer), and the retained `-rifleRate` (finite .5–120 shots/sec). CLI numbers use invariant decimal notation. Unsupported names/versions, missing/malformed values and out-of-range settings reject launch. Overrides are labelled in the native HUD/menu and saved evidence. The maximum 35-drone snapshot fits the unchanged 1100-byte packet limit; this is a functional bound, not a new network-performance envelope.
 

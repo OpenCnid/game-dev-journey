@@ -1,6 +1,9 @@
 param(
     [string]$PlayerFolder,
     [string]$Results,
+    [ValidateSet('solo-precision','shared-rifle','developer-parity','earned-growth')][string]$Scenario = 'shared-rifle',
+    [ValidateSet('none','stronger','faster')][string]$HostChoice = 'none',
+    [ValidateSet('none','stronger','faster')][string]$ClientChoice = 'none',
     [ushort]$Port = 7777,
     [int]$Width = 1920,
     [int]$Height = 1080,
@@ -33,6 +36,7 @@ if ($Background) {
     $taskLauncher = Join-Path $PSScriptRoot 'background_desktop.py'
     $taskArgs = @(('"' + $taskLauncher + '"'),'--player-folder',('"' + [IO.Path]::GetFullPath($PlayerFolder) + '"'),
         '--results',('"' + $taskResults + '"'),'--port',$Port,'--width',$Width,'--height',$Height)
+    $taskArgs += @('--scenario',$Scenario)
     if ($Uncapped) { $taskArgs += '--uncapped' }
     if ($HumanHost) { $taskArgs += '--human-host' }
     if ($WaitForJoin) { $taskArgs += '--wait-for-join' }
@@ -53,9 +57,11 @@ foreach ($taskRole in @('host','client')) {
     $taskRoleResults = Join-Path $taskResults $taskRole
     New-Item -ItemType Directory -Path $taskRoleResults -Force | Out-Null
     $taskArgs = @('-screen-fullscreen','0','-screen-width',$Width,'-screen-height',$Height,'-force-d3d11',
-        '-port',$Port,'-sharedResults',('"' + $taskRoleResults + '"'),'-logFile',('"' + (Join-Path $taskRoleResults 'player.log') + '"'))
+        '-port',$Port,'-scenario',$Scenario,'-sharedResults',('"' + $taskRoleResults + '"'),'-logFile',('"' + (Join-Path $taskRoleResults 'player.log') + '"'))
     if ($taskRole -eq 'host') { $taskArgs += @('-host','-sharedLoopback') } else { $taskArgs += @('-join','127.0.0.1') }
     if ($Scripted -or ($ScriptedCompanion -and $taskRole -ne $HumanRole)) { $taskArgs += '-sharedScripted' }
+    $taskChoice = if ($taskRole -eq 'host') { $HostChoice } else { $ClientChoice }
+    if ($taskChoice -ne 'none') { $taskArgs += @('-growthChoice',$taskChoice) }
     if ($QuitAtEnd) { $taskArgs += '-sharedQuit' }
     if ($Uncapped) { $taskArgs += '-sharedUncapped' }
     # The owner explicitly requested opening two interactive games. Keep both visible.

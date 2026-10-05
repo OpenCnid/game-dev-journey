@@ -18,6 +18,39 @@ namespace Journey.Tests
         static void Pump(SharedGame game)
         { Clock.SetValue(game, Time.realtimeSinceStartupAsDouble - .016); Update.Invoke(game, null); }
 
+        [UnityTest] public IEnumerator SoloGrowthHiddenCardsCannotSelectAndRetryRestoresBaseline()
+        {
+            var root = new GameObject("Solo earned growth controls"); var view = new ArenaPresentation(); var sim = new CombatSimulation();
+            try
+            {
+                view.Create(root.transform); var game = root.AddComponent<SharedGame>(); game.enabled = false;
+                typeof(SharedGame).GetField("output", Hidden).SetValue(game, viewOutput());
+                game.Initialize(view, sim, true, "", 0, ScenarioConfiguration.Named(ScenarioKind.EarnedGrowth), true);
+                Assert.That(game.Snapshot.Roster, Is.EqualTo(1));
+                var authority = (SharedEncounter)typeof(SharedGame).GetField("authority", Hidden).GetValue(game);
+                for (int i = 1; i <= 10; i++) authority.Growth.Death(authority.Current,
+                    new SharedHit(new SharedShot { Run = 1, Player = 0, Weapon = 1, Event = i }, ShotDecision.Damage,
+                    new ShotResult(Vector3.zero, 0, i, HitRegion.Body, 30, 30, 30, 0), Vector3.zero));
+                authority.Step(); Publish.Invoke(game, null); Pump(game);
+                Assert.That(game.Snapshot.Players[0].Offer.Pending, Is.True);
+                Assert.That(game.ChoiceControls(true, 1), Is.False, "Hiding cards disables number selection");
+                Assert.That(game.ChoiceControls(false, 2), Is.False);
+                RifleUpgrade first = game.Snapshot.Players[0].Offer.Card(1);
+                Assert.That(game.ChoiceControls(true, 1), Is.True, "Reopening keeps the original offer");
+                authority.Step(); Publish.Invoke(game, null); Pump(game);
+                Assert.That(game.Snapshot.Players[0].Offer.Selected, Is.EqualTo(first));
+                Assert.That(game.ChoiceControls(false, 2), Is.False);
+                authority.Current.Players[0].Health = 0; authority.Step(); Publish.Invoke(game, null);
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Defeat));
+                Assert.That(game.ApplyPreviewCommand(new SharedPreviewCommand { sequence = 1, run = 1, life = 1, action = "retry" }), Is.Empty);
+                Assert.That(game.Snapshot.Run, Is.EqualTo(2)); Assert.That(game.Snapshot.Xp, Is.Zero);
+                Assert.That(game.Snapshot.Players[0].BodyDamage, Is.EqualTo(20)); Assert.That(game.Snapshot.Players[0].RifleInterval, Is.EqualTo(.12f));
+                yield return null;
+            }
+            finally { UnityEngine.Object.DestroyImmediate(root); view.Dispose(); sim.Dispose(); }
+        }
+        static string viewOutput() => Path.Combine(Application.dataPath, "../artifacts/growth-solo-" + Guid.NewGuid().ToString("N"));
+
         [Test] public void StartAndRetryKeepCurrentRunFeedbackReceivedWithTheNewSnapshot()
         {
             var root = new GameObject("Batched generation feedback");
@@ -51,7 +84,7 @@ namespace Journey.Tests
 
         [UnityTest] public IEnumerator ActualGamesAgreeBeforeStartAndBothReadyRetryRetainsDefaultsAndOverride()
         {
-            foreach (var kind in new[] { ScenarioKind.SharedRifle, ScenarioKind.DeveloperParity, ScenarioKind.SoloPrecision })
+            foreach (var kind in new[] { ScenarioKind.SharedRifle, ScenarioKind.DeveloperParity, ScenarioKind.SoloPrecision, ScenarioKind.EarnedGrowth })
             {
                 var configuration = ScenarioConfiguration.Named(kind);
                 var roots = new[] { new GameObject("Scenario host"), new GameObject("Scenario client") };
@@ -81,6 +114,23 @@ namespace Journey.Tests
                     { Assert.That(p.BodyDamage, Is.EqualTo(configuration.BodyDamage)); Assert.That(p.RifleInterval, Is.EqualTo(configuration.RifleInterval)); }
 
                     var authority = (SharedEncounter)typeof(SharedGame).GetField("authority", Hidden).GetValue(games[0]);
+                    if (configuration.Growth)
+                    {
+                        // Labelled diagnostic deaths isolate actual transport and UI selection, not earning/enjoyment.
+                        for (int i = 1; i <= 10; i++) authority.Growth.Death(authority.Current,
+                            new SharedHit(new SharedShot { Run = 1, Player = 0, Weapon = 1, Event = i }, ShotDecision.Damage,
+                            new ShotResult(Vector3.zero, 0, i, HitRegion.Body, 30, 30, 30, 0), SharedEncounter.Spawn(0)));
+                        authority.Step(); Publish.Invoke(games[0], null);
+                        while (games[1].Snapshot.Level == 1 && Time.realtimeSinceStartupAsDouble < deadline)
+                        { Pump(games[0]); Pump(games[1]); yield return null; }
+                        Assert.That(games[1].Snapshot.Xp, Is.EqualTo(10)); Assert.That(games[1].Snapshot.Players[1].Offer.Pending, Is.True);
+                        Assert.That(games[0].Choose(RifleUpgrade.StrongerHits), Is.True); Assert.That(games[1].Choose(RifleUpgrade.FasterFire), Is.True);
+                        while (games[1].Snapshot.Players[1].Offer.Pending && Time.realtimeSinceStartupAsDouble < deadline)
+                        { Pump(games[0]); Pump(games[1]); yield return null; }
+                        Assert.That(games[1].Snapshot.Players[0].BodyDamage, Is.EqualTo(30));
+                        Assert.That(games[1].Snapshot.Players[1].RifleInterval, Is.EqualTo(.08f));
+                        Assert.That(games[1].Choose(RifleUpgrade.StrongerHits), Is.False);
+                    }
                     authority.Current.Tick = 3599; authority.Step(); Publish.Invoke(games[0], null);
                     while (games[1].Snapshot.State == SharedState.Running && Time.realtimeSinceStartupAsDouble < deadline)
                     { Pump(games[0]); Pump(games[1]); yield return null; }
@@ -95,6 +145,8 @@ namespace Journey.Tests
                     Assert.That(games[1].Snapshot.Configuration.Identity, Is.EqualTo(configuration.Identity));
                     Assert.That(games[1].ApplyPreviewCommand(new SharedPreviewCommand { sequence = 2, run = 1, life = 1, action = "retry" }), Is.EqualTo("Stale run/life"));
                     Assert.That(games[1].Snapshot.Players[0].Health, Is.EqualTo(100));
+                    Assert.That(games[1].Snapshot.Xp, Is.Zero); Assert.That(games[1].Snapshot.Level, Is.EqualTo(1));
+                    Assert.That(games[1].Snapshot.Players[0].Offer.Id, Is.Zero);
                 }
                 finally
                 {

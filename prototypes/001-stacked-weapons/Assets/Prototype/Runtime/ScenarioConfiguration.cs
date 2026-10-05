@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace Journey
 {
-    public enum ScenarioKind { SoloPrecision = 1, SharedRifle = 2, DeveloperParity = 3 }
+    public enum ScenarioKind { SoloPrecision = 1, SharedRifle = 2, DeveloperParity = 3, EarnedGrowth = 4 }
 
     // Starting definitions only. Earned personal build state belongs to the run authority.
     public sealed class ScenarioConfiguration
@@ -29,7 +29,8 @@ namespace Journey
                 return identity;
             }
         }
-        public string Name => Kind == ScenarioKind.SoloPrecision ? "Solo precision" : Kind == ScenarioKind.SharedRifle ? "Shared rifle" : "Developer parity";
+        public bool Growth => Kind == ScenarioKind.EarnedGrowth;
+        public string Name => Kind == ScenarioKind.SoloPrecision ? "Solo precision" : Kind == ScenarioKind.SharedRifle ? "Shared rifle" : Kind == ScenarioKind.DeveloperParity ? "Developer parity" : "Earned growth";
         public bool Overridden => (overridden ?? (overridden = !SameValues(Named(Kind)))).Value;
         public string Label => Name + (Overridden ? " (override)" : "");
         public string Settings => FormattableString.Invariant($"{EnemyCount} drones / {EnemyHealth} HP · Body {BodyDamage} / Head {HeadDamage} (x{HeadMultiplier}) · {RifleRate:0.##}/s ({RifleInterval:0.####}s)");
@@ -38,17 +39,20 @@ namespace Journey
             int bodyDamage, int headMultiplier, float duration, float rifleInterval)
         {
             if (schema != Version) throw new ArgumentException("Unsupported scenario version.");
-            if (kind < ScenarioKind.SoloPrecision || kind > ScenarioKind.DeveloperParity) throw new ArgumentException("Unknown scenario.");
+            if (kind < ScenarioKind.SoloPrecision || kind > ScenarioKind.EarnedGrowth) throw new ArgumentException("Unknown scenario.");
             if (enemyCount < 1 || enemyCount > MaxEnemies) throw new ArgumentException("Scenario supports 1–35 drones.");
             if (enemyHealth < 1 || enemyHealth > 10000 || bodyDamage < 1 || bodyDamage > 1000 || headMultiplier < 1 || headMultiplier > 4)
                 throw new ArgumentException("HP must be 1–10000, body damage 1–1000 and head multiplier 1–4.");
             if (!(duration >= 1 && duration <= 600) || !(rifleInterval >= 1f / 120 && rifleInterval <= 2))
                 throw new ArgumentException("Duration must be 1–600 seconds and rifle rate 0.5–120/s; values must be finite.");
-            Schema = schema; Kind = kind; Seed = seed; EnemyCount = enemyCount; EnemyHealth = enemyHealth;
+            Schema = schema; Kind = kind; if (kind == ScenarioKind.EarnedGrowth && (seed != 137 || enemyCount != 35 || enemyHealth != 60 || bodyDamage != 20 || headMultiplier != 2 || duration != 60 || rifleInterval != .12f))
+                throw new ArgumentException("Earned growth uses its fixed accepted settings; overrides are disabled.");
+            Seed = seed; EnemyCount = enemyCount; EnemyHealth = enemyHealth;
             BodyDamage = bodyDamage; HeadMultiplier = headMultiplier; Duration = duration; RifleInterval = rifleInterval;
         }
         public static ScenarioConfiguration Named(ScenarioKind kind)
         {
+            if (kind == ScenarioKind.EarnedGrowth) return new ScenarioConfiguration(Version, kind, 137, 35, 60, 20, 2, 60, .12f);
             if (kind == ScenarioKind.DeveloperParity) return new ScenarioConfiguration(Version, kind, 271, 12, 90, 15, 3, 60, .25f);
             return new ScenarioConfiguration(Version, kind, 137, kind == ScenarioKind.SoloPrecision ? 35 : 12,
                 kind == ScenarioKind.SoloPrecision ? 40 : 60, 20, 2, 60, .12f);
@@ -78,7 +82,7 @@ namespace Journey
             {
                 string value = Value(args, i);
                 kind = value == "solo-precision" ? ScenarioKind.SoloPrecision : value == "shared-rifle" ? ScenarioKind.SharedRifle :
-                    value == "developer-parity" ? ScenarioKind.DeveloperParity : throw new ArgumentException("Unknown -scenario.");
+                    value == "developer-parity" ? ScenarioKind.DeveloperParity : value == "earned-growth" ? ScenarioKind.EarnedGrowth : throw new ArgumentException("Unknown -scenario.");
             }
             ScenarioConfiguration result = Named(kind);
             for (int i = 0; i < args.Length; i++)
@@ -138,9 +142,30 @@ namespace Journey
         public bool CanAdopt(SharedSnapshot incoming, SharedSnapshot current)
         {
             if (!Matches(incoming)) throw new ArgumentException("Snapshot configuration/session mismatch.");
-            foreach (SharedPlayer player in incoming.Players)
-                if (player.BodyDamage != Configuration.BodyDamage || player.RifleInterval != Configuration.RifleInterval)
+            if (incoming.Roster != 2) throw new ArgumentException("Invalid shared roster");
+            for (int p = 0; p < incoming.Roster; p++)
+            {
+                SharedPlayer player = incoming.Players[p]; PersonalOffer offer = player.Offer;
+                if (player.Weapon != p + 1) throw new ArgumentException("Invalid owned weapon");
+                if (Configuration.Growth)
+                {
+                    if (incoming.Xp < 0 || incoming.Level != (incoming.Xp >= EarnedGrowth.Threshold ? 2 : 1) ||
+                        (incoming.Level == 1 && (offer.Id != 0 || offer.Selected != RifleUpgrade.None || offer.AppliedTick != 0)) ||
+                        (offer.Selected == RifleUpgrade.None && offer.AppliedTick != 0) ||
+                        (incoming.Level == 2 && (offer.Id != p + 1 || offer.Weapon != player.Weapon ||
+                        offer.Tick < 1 || offer.Tick > incoming.Tick || !GrowthUpgrade.Valid(offer.First))) ||
+                        (offer.Selected != RifleUpgrade.None && (!GrowthUpgrade.Valid(offer.Selected) || offer.AppliedTick <= offer.Tick || offer.AppliedTick > incoming.Tick)) ||
+                        player.BodyDamage != GrowthUpgrade.Damage(offer.Selected) || player.RifleInterval != GrowthUpgrade.Interval(offer.Selected))
+                        throw new ArgumentException("Invalid earned build snapshot");
+                    PersonalOffer previous = current.Players[p].Offer;
+                    if (incoming.Run == current.Run && incoming.Tick >= current.Tick && (incoming.Xp < current.Xp ||
+                        previous.Id > 0 && (offer.Id != previous.Id || offer.First != previous.First || offer.Weapon != previous.Weapon || offer.Tick != previous.Tick ||
+                        previous.Selected != RifleUpgrade.None && (offer.Selected != previous.Selected || offer.AppliedTick != previous.AppliedTick))))
+                        throw new ArgumentException("Earned state cannot regress or reroll");
+                }
+                else if (offer.Id != 0 || incoming.Xp != 0 || incoming.Level != 1 || player.BodyDamage != Configuration.BodyDamage || player.RifleInterval != Configuration.RifleInterval)
                     throw new ArgumentException("Snapshot weapon configuration mismatch.");
+            }
             if (incoming.Run < 1 || incoming.Run > current.Run + 1 || incoming.Tick < 0 ||
                 !(incoming.Elapsed >= 0 && incoming.Elapsed <= Configuration.Duration + CombatSimulation.Tick) ||
                 incoming.State < SharedState.Running || incoming.State > SharedState.Aborted)

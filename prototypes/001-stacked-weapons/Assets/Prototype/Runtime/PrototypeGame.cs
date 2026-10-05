@@ -216,11 +216,17 @@ namespace Journey
         public void StartCombat()
         {
             if (configurationInvalid) return;
+            if (soloScenario.Growth) { StartGrowthSolo(); return; }
             if (benchmark) RestoreFrameSettings();
             benchmark = false; capture.Cancel(); error = "";
             yaw = pitch = accumulator = 0;
             view.ResetFeedback(); sim.Reset(soloScenario.With(interval: sim.RifleInterval));
             soloRun = Guid.NewGuid(); SaveSoloScenario(); SetCursor(true);
+        }
+        void StartGrowthSolo()
+        {
+            if (benchmark) CancelBenchmark(); sim.Reset(0, 137, false); view.ResetFeedback();
+            gameObject.AddComponent<SharedGame>().Initialize(view, sim, true, "", 0, ScenarioConfiguration.Named(ScenarioKind.EarnedGrowth), true); enabled = false;
         }
         void StartShared(bool host, string address, ushort port = 7777)
         {
@@ -245,7 +251,7 @@ namespace Journey
         void SetRifleRate(float rate)
         {
             sim.RifleRate = rate;
-            soloScenario = soloScenario.With(interval: sim.RifleInterval); sharedScenario = sharedScenario.With(interval: sim.RifleInterval);
+            if (!soloScenario.Growth) soloScenario = soloScenario.With(interval: sim.RifleInterval); if (!sharedScenario.Growth) sharedScenario = sharedScenario.With(interval: sim.RifleInterval);
             if (!benchmark && soloRun != Guid.Empty) SaveSoloScenario();
             customRifleRate = sim.RifleRate.ToString("G8", CultureInfo.InvariantCulture); rateError = "";
         }
@@ -257,7 +263,7 @@ namespace Journey
         }
         void SelectScenario(ScenarioKind kind)
         {
-            soloScenario = sharedScenario = ScenarioConfiguration.Named(kind).With(interval: sim.RifleInterval);
+            soloScenario = sharedScenario = kind == ScenarioKind.EarnedGrowth ? ScenarioConfiguration.Named(kind) : ScenarioConfiguration.Named(kind).With(interval: sim.RifleInterval);
         }
         void ScenarioControls()
         {
@@ -268,6 +274,7 @@ namespace Journey
             if (GUILayout.Button("Solo precision for both")) SelectScenario(ScenarioKind.SoloPrecision);
             if (GUILayout.Button("Shared rifle for both")) SelectScenario(ScenarioKind.SharedRifle);
             GUILayout.EndHorizontal(); GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Earned growth for solo / Host")) SelectScenario(ScenarioKind.EarnedGrowth);
             if (GUILayout.Button("Developer parity")) { SelectScenario(ScenarioKind.DeveloperParity); SetRifleRate(4); }
             if (GUILayout.Button("Named defaults"))
             {

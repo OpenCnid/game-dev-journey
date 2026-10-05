@@ -13,6 +13,7 @@ namespace Journey
         public long sequence;
         public string action;
         public int run, life;
+        public RifleUpgrade upgrade;
         public float moveX, moveZ, yaw, pitch, duration;
         public bool fire;
         public string Validate(SharedSnapshot state, int local)
@@ -22,6 +23,7 @@ namespace Journey
             if (run != state.Run || life != state.Players[local].Life) return "Stale run/life";
             if (action == "retry") return state.State == SharedState.Complete || state.State == SharedState.Defeat ? "" : "Run still active";
             if (action == "scripted" || action == "idle") return "";
+            if (action == "choice") return state.State == SharedState.Running && state.Players[local].Offer.Pending && GrowthUpgrade.Valid(upgrade) ? "" : "No valid pending choice";
             if (action != "input") return "Unknown action";
             if (state.State != SharedState.Running || state.Players[local].Health <= 0) return "Player inactive";
             if (!Finite(moveX) || !Finite(moveZ) || !Finite(yaw) || !Finite(pitch) || !Finite(duration)
@@ -46,6 +48,7 @@ namespace Journey
             public ScenarioEvidence scenario;
             public SharedPlayer[] players;
             public SharedEnemy[] enemies;
+            public int xp, level;
         }
         SharedGame game;
         Camera camera;
@@ -91,7 +94,7 @@ namespace Journey
                 var state = new State { run = snapshot.Run, life = snapshot.Players[game.LocalPlayer].Life,
                     local = game.LocalPlayer, tick = snapshot.Tick, elapsed = snapshot.Elapsed, state = snapshot.State.ToString(),
                     scenario = new ScenarioEvidence(snapshot.Configuration, snapshot.Session, snapshot.Run),
-                    players = snapshot.Players, enemies = snapshot.Enemies, lastSequence = lastSequence, commandResult = result,
+                    xp = snapshot.Xp, level = snapshot.Level, players = snapshot.Players, enemies = snapshot.Enemies, lastSequence = lastSequence, commandResult = result,
                     frameSequence = frameSequence, capturedWallSeconds = lastCapture, captureError = captureError,
                     source = stamp, width = Screen.width, height = Screen.height, scripted = game.Scripted,
                     yaw = game.LocalYaw, pitch = game.LocalPitch };
