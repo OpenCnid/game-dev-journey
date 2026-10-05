@@ -27,6 +27,7 @@ namespace Journey
         public static bool Valid(UpgradeId value) => value == UpgradeId.StrongerHits || value == UpgradeId.FasterFire;
         public static UpgradeDefinition Definition(UpgradeId value) => value == UpgradeId.StrongerHits ? stronger : value == UpgradeId.FasterFire ? faster : throw new ArgumentException("Unknown upgrade definition");
         public static string Label(UpgradeId value) => Valid(value) ? Definition(value).Name : "Baseline";
+        public static string Summary(UpgradeId value) => value == UpgradeId.FasterFire ? "+50% fire rate" : value == UpgradeId.StrongerHits ? "+50% damage" : "";
         public static int Damage(UpgradeId value) => Valid(value) && Definition(value).Effect == UpgradeEffect.DirectDamage ? Mathf.RoundToInt(20 * Definition(value).Factor) : 20;
         public static float Interval(UpgradeId value) => Valid(value) && Definition(value).Effect == UpgradeEffect.FireCadence ? .12f / Definition(value).Factor : .12f;
     }

@@ -401,16 +401,15 @@ namespace Journey
                 for (int card = 1; card <= 2; card++)
                 {
                     UpgradeId upgrade = offer.Card(card);
-                    string text = card + " · " + GrowthUpgrade.Label(upgrade) + "\n\nBody 20 → " + GrowthUpgrade.Damage(upgrade) + " / Head 40 → " + GrowthUpgrade.Damage(upgrade) * 2 +
-                        "\nShot interval .12 → " + GrowthUpgrade.Interval(upgrade).ToString("0.00", CultureInfo.InvariantCulture) + "s";
+                    string text = card + " · " + GrowthUpgrade.Label(upgrade) + "\n\n" + GrowthUpgrade.Summary(upgrade);
                     if (GUI.Button(new Rect(panel.x + 20 + (card - 1) * 380, panel.y + 117, 360, 142), text, choiceCard)) Choose(upgrade);
                 }
-                GUI.Label(new Rect(panel.x, panel.y + 280, panel.width, 35), "Click a card or press 1 / 2. Your choice belongs to you.", lifeDetail);
+                GUI.Label(new Rect(panel.x, panel.y + 280, panel.width, 35), "Click a card or press 1 / 2.", lifeDetail);
             }
             else
             {
                 GUI.Label(new Rect(panel.x, panel.y + 124, panel.width, 45), GrowthUpgrade.Label(offer.Selected) + " selected", lifeHeading);
-                GUI.Label(new Rect(panel.x, panel.y + 174, panel.width, 35), "Body " + display.Players[local].BodyDamage + " / Head " + display.Players[local].BodyDamage * 2 + " · Shot interval " + display.Players[local].RifleInterval.ToString("0.00", CultureInfo.InvariantCulture) + "s", lifeDetail);
+                GUI.Label(new Rect(panel.x, panel.y + 174, panel.width, 35), GrowthUpgrade.Summary(offer.Selected), lifeDetail);
                 if (!display.Players[local].ChoiceReady)
                 { if (GUI.Button(new Rect(w / 2 - 160, panel.y + 223, 320, 50), "Continue (Enter)", choiceCard)) ContinueChoice(); }
                 else GUI.Label(new Rect(panel.x, panel.y + 232, panel.width, 35), "Ready — waiting for your teammate", lifeDetail);
