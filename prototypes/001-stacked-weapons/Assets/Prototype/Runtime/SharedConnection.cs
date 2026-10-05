@@ -24,7 +24,8 @@ namespace Journey
         public event Action<string> Lost;
         public long SentBytes { get; private set; }
         public long ReceivedBytes { get; private set; }
-        public SharedConnection(bool host, string address, ushort port)
+        public string BoundEndpoint => driver.GetLocalEndpoint().ToString();
+        public SharedConnection(bool host, string address, ushort port, bool loopbackHost = false)
         {
             Host = host; writer = new BinaryWriter(buffer);
             var settings = new NetworkSettings();
@@ -38,7 +39,8 @@ namespace Journey
             pipeline = driver.CreatePipeline(typeof(ReliableSequencedPipelineStage));
             if (host)
             {
-                if (driver.Bind(NetworkEndpoint.AnyIpv4.WithPort(port)) != 0 || driver.Listen() != 0)
+                NetworkEndpoint bind = loopbackHost ? NetworkEndpoint.LoopbackIpv4 : NetworkEndpoint.AnyIpv4;
+                if (driver.Bind(bind.WithPort(port)) != 0 || driver.Listen() != 0)
                 { driver.Dispose(); throw new InvalidOperationException("Cannot host on UDP port " + port); }
             }
             else

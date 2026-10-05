@@ -316,7 +316,7 @@ def main():
                     argv += ["-sharedPreview"]
                     if not args.human_host:
                         argv += ["-sharedScripted"]
-                argv += ["-host"] if role == "host" else ["-join", "127.0.0.1"]
+                argv += ["-host", "-sharedLoopback"] if role == "host" else ["-join", "127.0.0.1"]
                 if args.uncapped:
                     argv += ["-sharedUncapped"]
                 pid = desktop.launch(argv, executable.parent, on_input=args.human_host and role == "host")

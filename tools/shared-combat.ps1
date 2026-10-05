@@ -54,7 +54,7 @@ foreach ($taskRole in @('host','client')) {
     New-Item -ItemType Directory -Path $taskRoleResults -Force | Out-Null
     $taskArgs = @('-screen-fullscreen','0','-screen-width',$Width,'-screen-height',$Height,'-force-d3d11',
         '-port',$Port,'-sharedResults',('"' + $taskRoleResults + '"'),'-logFile',('"' + (Join-Path $taskRoleResults 'player.log') + '"'))
-    if ($taskRole -eq 'host') { $taskArgs += '-host' } else { $taskArgs += @('-join','127.0.0.1') }
+    if ($taskRole -eq 'host') { $taskArgs += @('-host','-sharedLoopback') } else { $taskArgs += @('-join','127.0.0.1') }
     if ($Scripted -or ($ScriptedCompanion -and $taskRole -ne $HumanRole)) { $taskArgs += '-sharedScripted' }
     if ($QuitAtEnd) { $taskArgs += '-sharedQuit' }
     if ($Uncapped) { $taskArgs += '-sharedUncapped' }

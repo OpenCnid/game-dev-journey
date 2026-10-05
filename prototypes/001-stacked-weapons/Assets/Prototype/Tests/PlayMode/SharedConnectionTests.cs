@@ -59,9 +59,10 @@ namespace Journey.Tests
         {
             var authority = new SharedEncounter(); var clientView = new SharedSnapshot();
             var confirmed = new System.Collections.Generic.List<SharedHit>(); bool shotReceived = false;
-            using (var host = new SharedConnection(true, "0.0.0.0", 17777))
+            using (var host = new SharedConnection(true, "0.0.0.0", 17777, loopbackHost: true))
             using (var client = new SharedConnection(false, "127.0.0.1", 17777))
             {
+                Assert.That(host.BoundEndpoint, Is.EqualTo("127.0.0.1:17777"));
                 string loss = ""; host.Lost += r => loss = r; client.Lost += r => loss = r;
                 host.Received += (m, r) => {
                     if (m == SharedConnection.Message.Hello)

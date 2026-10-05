@@ -59,7 +59,7 @@ namespace Journey
             frameLog.WriteLine("wall_seconds,frame_ms,run,tick,state,A_shots,B_shots,A_hits,B_hits,A_damage,B_damage,A_kills,B_kills,A_hp,B_hp,enemies,rtt_ms");
             hitLog = new StreamWriter(Path.Combine(output, "events.csv"));
             hitLog.WriteLine("wall_seconds,run,player,weapon,event,pose_tick,life,decision,enemy,incarnation,region,requested,before,actual,after,confirmed_delay_ms");
-            connection = new SharedConnection(host, address, port);
+            connection = new SharedConnection(host, address, port, Array.IndexOf(args, "-sharedLoopback") >= 0);
             connection.Received += Receive; connection.Lost += Abort;
             if (host) { authority = new SharedEncounter(); authority.Resolved += Resolve; }
             ally = GameObject.CreatePrimitive(PrimitiveType.Capsule); ally.name = "Teammate " + (host ? "B" : "A");
@@ -275,7 +275,7 @@ namespace Journey
         }
         [Serializable] sealed class Report
         {
-            public string role, source, machine, gpu, connection, reason;
+            public string role, source, machine, gpu, connection, reason, hostBindEndpoint;
             public bool scripted, development, previewEnabled;
             public int run, ticks, enemies, catchupLimits, frameSamples, confirmedHits, width, height, frameCap, vsync;
             public double frameP50, frameP95, frameP99, frameMax, confirmP50, confirmP95, confirmMax, rttMs;
@@ -290,7 +290,7 @@ namespace Journey
             TextAsset stamp = Resources.Load<TextAsset>("BuildInfo");
             var report = new Report { role = local == 0 ? "host A" : "client B", source = stamp == null ? "Editor" : stamp.text,
                 machine = SystemInfo.processorType, gpu = SystemInfo.graphicsDeviceName, connection = "Direct IPv4 UDP; declare actual address/machine/visibility separately",
-                reason = reason, scripted = scripted, development = Debug.isDebugBuild, previewEnabled = preview != null, run = run, ticks = display.Tick, enemies = 12,
+                reason = reason, hostBindEndpoint = authority != null ? connection.BoundEndpoint : "", scripted = scripted, development = Debug.isDebugBuild, previewEnabled = preview != null, run = run, ticks = display.Tick, enemies = 12,
                 catchupLimits = catchupLimits, width = Screen.width, height = Screen.height, frameCap = Application.targetFrameRate,
                 vsync = QualitySettings.vSyncCount, frameSamples = frames.Count, confirmedHits = confirms.Count, frameP50 = Percentile(frames, .5),
                 frameP95 = Percentile(frames, .95), frameP99 = Percentile(frames, .99), frameMax = Percentile(frames, 1),
@@ -355,10 +355,14 @@ namespace Journey
             }
             else if (display.State == SharedState.Complete || display.State == SharedState.Defeat)
             {
-                GUI.Label(new Rect(w / 2 - 220, h / 2 - 50, 440, 40), $"Retry readiness: A {(a.Ready ? "READY" : "waiting")} / B {(b.Ready ? "READY" : "waiting")}", small);
+                LifeMessage(w, h, display.State == SharedState.Defeat ? "PARTY DEFEATED" : "RUN COMPLETE",
+                    display.State == SharedState.Defeat ? "Both players are down" : "60-second encounter complete",
+                    $"Retry readiness: A {(a.Ready ? "READY" : "waiting")} / B {(b.Ready ? "READY" : "waiting")}");
                 if (GUI.Button(new Rect(w / 2 - 120, h / 2, 240, 50), "Retry (R)")) Retry();
             }
-            else GUI.Label(new Rect(25, 110, 1150, 80), display.State == SharedState.Waiting ? "Waiting for the fixed host/client pair…" : "Test aborted: " + reason, heading);
+            else if (display.State == SharedState.Aborted)
+                LifeMessage(w, h, "SESSION STOPPED", reason, "Start a new session to play again");
+            else GUI.Label(new Rect(25, 110, 1150, 80), "Waiting for the fixed host/client pair…", heading);
         }
         void LifeMessage(float w, float h, string title, string detail, string context)
         {
