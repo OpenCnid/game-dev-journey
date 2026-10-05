@@ -2,6 +2,8 @@
 
 GDJ-23 implements one ordinary earned level-up in the fixed solo/two-player rifle fixture. It tests perceptible power growth, distinct personal choices and readable combat. Base main is `bd2bd1438b1029426e2c0234ff640502dc0e25ea`; the isolated branch is `codex/gdj-23-earned-growth`. Unity 6000.3.25f1 and Transport 2.7.4 are unchanged. Main integration is pending.
 
+[Draft PR #14](https://github.com/OpenCnid/game-dev-journey/pull/14) is attached to the gameplay chat; GDJ-23 is In Review for the remaining owner/native/coordinator gates, not Done.
+
 ## Human result: revise
 
 The owner first clicked Host A in the solo comparison and could not leave Waiting. The v5 navigation correction adds Back to menu, closes session resources/ports, preserves existing menu settings and starts fresh solo/pair sessions. Its clean runtime is `654d5298d91f49ca2c5caf7729214feabf8bd534`; [the v5 manifest](evidence/gdj-23-earned-growth/release-manifest-v5.json) preserves all 167 player files (97,886,694 bytes).
