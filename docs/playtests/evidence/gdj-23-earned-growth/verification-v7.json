@@ -1,0 +1,261 @@
+{
+  "schema": 1,
+  "candidate": "StackLab-GDJ23-v7",
+  "runtimeSource": "f7084023ae6ff3988efe384421c8a809a1aade8b",
+  "tests": {
+    "EditModePassed": 131,
+    "PlayModePassed": 15,
+    "note": "Edit suite before diagnostic Continue correction; Play suite repeated after correction; clean release built afterward."
+  },
+  "functionalOnly": true,
+  "comparisons": [
+    {
+      "mode": "solo",
+      "result": "PASS",
+      "source": {
+        "revision": "f7084023ae6ff3988efe384421c8a809a1aade8b",
+        "builtUtc": "2026-10-05T05:58:30.5060442Z",
+        "dirty": false
+      },
+      "runs": [
+        {
+          "levelSeconds": 8.133333333333333,
+          "earningTargetMet": false,
+          "growthEvents": 575,
+          "merges": 24,
+          "feedbackEvents": 500,
+          "ticks": 3600,
+          "xp": 216,
+          "uncollectedXp": 22,
+          "uncollectedCarriers": 22,
+          "players": [
+            {
+              "Health": 60,
+              "Shots": 500,
+              "Hits": 500,
+              "Damage": 14310,
+              "Kills": 238,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 1,
+                "Tick": 488,
+                "Weapon": 1,
+                "AppliedTick": 488,
+                "ControlRevision": 2,
+                "First": 2,
+                "Selected": 1
+              }
+            },
+            {
+              "Health": 0,
+              "Shots": 0,
+              "Hits": 0,
+              "Damage": 0,
+              "Kills": 0,
+              "ChoiceReady": false,
+              "Offer": {
+                "Id": 0,
+                "Tick": 0,
+                "Weapon": 0,
+                "AppliedTick": 0,
+                "ControlRevision": 0,
+                "First": 0,
+                "Selected": 0
+              }
+            }
+          ],
+          "catchupLimits": 0
+        },
+        {
+          "levelSeconds": 8.3,
+          "earningTargetMet": false,
+          "growthEvents": 635,
+          "merges": 29,
+          "feedbackEvents": 716,
+          "ticks": 3600,
+          "xp": 217,
+          "uncollectedXp": 22,
+          "uncollectedCarriers": 19,
+          "players": [
+            {
+              "Health": 70,
+              "Shots": 716,
+              "Hits": 716,
+              "Damage": 14340,
+              "Kills": 239,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 1,
+                "Tick": 498,
+                "Weapon": 1,
+                "AppliedTick": 498,
+                "ControlRevision": 2,
+                "First": 2,
+                "Selected": 2
+              }
+            },
+            {
+              "Health": 0,
+              "Shots": 0,
+              "Hits": 0,
+              "Damage": 0,
+              "Kills": 0,
+              "ChoiceReady": false,
+              "Offer": {
+                "Id": 0,
+                "Tick": 0,
+                "Weapon": 0,
+                "AppliedTick": 0,
+                "ControlRevision": 0,
+                "First": 0,
+                "Selected": 0
+              }
+            }
+          ],
+          "catchupLimits": 0
+        }
+      ],
+      "heldWallSeconds": [
+        2,
+        2
+      ],
+      "afterClientLoss": null,
+      "desktopLifetime": {
+        "desktop": "StackLab-4a5d55737da1e0054d58fdcb",
+        "inputBefore": "Default",
+        "inputAfter": "Default",
+        "unchanged": true,
+        "children": [
+          5656
+        ],
+        "stopped": true
+      },
+      "rawArtifacts": "prototypes/001-stacked-weapons/artifacts/gdj23-v7-solo"
+    },
+    {
+      "mode": "pair",
+      "result": "PASS",
+      "source": {
+        "revision": "f7084023ae6ff3988efe384421c8a809a1aade8b",
+        "builtUtc": "2026-10-05T05:58:30.5060442Z",
+        "dirty": false
+      },
+      "runs": [
+        {
+          "levelSeconds": 7.25,
+          "earningTargetMet": false,
+          "growthEvents": 1925,
+          "merges": 191,
+          "feedbackEvents": 1220,
+          "ticks": 3600,
+          "xp": 438,
+          "uncollectedXp": 128,
+          "uncollectedCarriers": 89,
+          "players": [
+            {
+              "Health": 100,
+              "Shots": 496,
+              "Hits": 487,
+              "Damage": 12610,
+              "Kills": 271,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 1,
+                "Tick": 435,
+                "Weapon": 1,
+                "AppliedTick": 435,
+                "ControlRevision": 2,
+                "First": 2,
+                "Selected": 1
+              }
+            },
+            {
+              "Health": 100,
+              "Shots": 651,
+              "Hits": 651,
+              "Damage": 21390,
+              "Kills": 295,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 2,
+                "Tick": 435,
+                "Weapon": 2,
+                "AppliedTick": 435,
+                "ControlRevision": 3,
+                "First": 2,
+                "Selected": 2
+              }
+            }
+          ],
+          "catchupLimits": 0
+        },
+        {
+          "levelSeconds": 8.266666666666667,
+          "earningTargetMet": false,
+          "growthEvents": 2033,
+          "merges": 202,
+          "feedbackEvents": 1214,
+          "ticks": 3600,
+          "xp": 428,
+          "uncollectedXp": 162,
+          "uncollectedCarriers": 97,
+          "players": [
+            {
+              "Health": 50,
+              "Shots": 690,
+              "Hits": 652,
+              "Damage": 13080,
+              "Kills": 109,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 1,
+                "Tick": 496,
+                "Weapon": 1,
+                "AppliedTick": 496,
+                "ControlRevision": 2,
+                "First": 2,
+                "Selected": 2
+              }
+            },
+            {
+              "Health": 100,
+              "Shots": 489,
+              "Hits": 489,
+              "Damage": 22340,
+              "Kills": 481,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 2,
+                "Tick": 496,
+                "Weapon": 2,
+                "AppliedTick": 496,
+                "ControlRevision": 3,
+                "First": 2,
+                "Selected": 1
+              }
+            }
+          ],
+          "catchupLimits": 0
+        }
+      ],
+      "heldWallSeconds": [
+        3,
+        3
+      ],
+      "afterClientLoss": "Aborted",
+      "desktopLifetime": {
+        "desktop": "StackLab-cd7a188db1130fc3fceb9522",
+        "inputBefore": "Default",
+        "inputAfter": "Default",
+        "unchanged": true,
+        "children": [
+          34440,
+          4588
+        ],
+        "stopped": true
+      },
+      "rawArtifacts": "prototypes/001-stacked-weapons/artifacts/gdj23-v7-pair"
+    }
+  ],
+  "nativeGates": "Owner revised UI/audio/Stronger hits, native co-op, visible release timing and coordinator review pending. Bridge screenshot requests failed active render target size."
+}

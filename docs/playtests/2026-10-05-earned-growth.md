@@ -38,9 +38,22 @@ Earlier v3 checks preserve two ordinary 60-second solo and pair runs with contra
 
 The first revised v6 clean build, source `1dc2465fe784c098bcadfc8d4c298ead48a529f2`, is preserved with [its manifest](evidence/gdj-23-earned-growth/release-manifest-v6.json). Its standalone checker caught an unconfigured scripted-player bug: after an explicit card command, scripted movement automatically marked Continue. The physical freeze held before selection, but the checker rejected the implicit resume. Restrict automatic Continue to a companion explicitly configured with `-growthChoice`; the Play Mode regression now also exercises scripted movement without that configuration. All 15 Play Mode tests pass after the correction. The failed run/desktop lifetime remain in `artifacts/gdj23-v6-solo` (input desktop Default before/after, owned player stopped). v6 is not the delivery candidate.
 
-The corrected v7 build, complete archive, background standalone results and draft PR are being finalized. The next checkpoint will record their exact source and paths before delivery.
+**Delivery candidate v7:** clean release source `f7084023ae6ff3988efe384421c8a809a1aade8b`, built `2026-10-05T05:58:30.5060442Z`. The whole player is archived at `C:\Users\Darian\.codex\worktrees\gdj-23-earned-growth\new-game-dev\prototypes\001-stacked-weapons\build\StackLab-GDJ23-v7`; [manifest v7](evidence/gdj-23-earned-growth/release-manifest-v7.json) records 167 files / 97,896,070 bytes. v2/v5/v6/v7 archives rehash against every recorded SHA-256; prior archives are preserved.
 
-All automated standalone interaction uses the existing owned Win32 background desktop and game-owned command/state bridge. It never switches the input desktop. The camera bridge changes rendering/timing and omits the native HUD, so its checks establish functionality only. `-screenshotAtLevelUp -screenshot <absolute-path>` requests a game-owned native chooser capture for visual inspection; it does not establish native input or performance.
+The exact v7 ordinary standalone checks pass in `artifacts/gdj23-v7-solo` and `artifacts/gdj23-v7-pair`. [Compact verification](evidence/gdj-23-earned-growth/verification-v7.json) retains source, counters, desktop lifetime and raw-trace locations. All four comparisons reach tick 3600 / 60 active seconds, level 2 and zero catch-up limits. Host/client full terminal player/enemy state, ordered growth events and nonterminal combat events agree exactly.
+
+| Mode/run | Choices | Level at active seconds | Kills | Collected XP | Uncollected XP | Merge events |
+| --- | --- | --- | --- | --- | --- | --- |
+| Solo 1 | Stronger hits | 8.133 | 238 | 216 | 22 | 24 |
+| Solo 2 | Faster fire | 8.300 | 239 | 217 | 22 | 29 |
+| Pair 1 | A stronger / B faster | 7.250 | 566 | 438 | 128 | 191 |
+| Pair 2 | A faster / B stronger | 8.267 | 590 | 428 | 162 | 202 |
+
+In every run, collected plus uncollected value equals unique deaths. Merged carriers reduce count without deleting XP; pair endings retain 89/97 carriers holding 128/162 XP. The checker holds the automatic pause for at least two wall seconds, applies choices at the same frozen physical tick, rejects duplicate choice and invalid-phase readiness, holds pair combat for another second after only A Continues, then resumes after B. Both-ready Retry resets XP, offers, builds, phase/revision/readiness and rejects old-run choice/Continue. Client termination during run 3's Choosing phase aborts the host on the control clock. Both owned desktops record input `Default` before/after and all owned children stopped; the owner's native v5 PID 22212 is untouched.
+
+This still misses the 10–25-second earning target under scripted perfect aim. Keep the human 28.9-second result separate; no hidden XP/tuning claim. Current native owner observations are pending.
+
+All automated standalone interaction uses the existing owned Win32 background desktop and game-owned command/state bridge. It never switches the input desktop. The camera bridge changes rendering/timing and omits the native HUD, so its checks establish functionality only. A v6 game-owned chooser capture was inspected: both centered cards and before/after text fit at 1280×720. Current v7 screenshot requests with the bridge failed because its active 960×540 render target is smaller than the requested screen region; this is a capture limitation, not a passed native HUD check. Raw player logs retain the failures. `-screenshotAtLevelUp -screenshot <absolute-path>` can request a native chooser capture without that bridge; native input/readability/timing still need owner verification. The bridge capture repair belongs with GDJ-21, not a new gameplay/performance claim.
 
 Reproduce the functional checker with the bundled Python (or a Windows Python installation):
 

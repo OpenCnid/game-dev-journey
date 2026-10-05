@@ -55,6 +55,12 @@ Additional weapons/levels, qualifying rares/team grants, magnets, thinking space
 
 ## Durable handoff and Resume
 
+### Revised release checkpoint — October 5
+
+Runtime `f7084023ae6ff3988efe384421c8a809a1aade8b` is the clean v7 candidate on `codex/gdj-23-earned-growth`, after decision 0013's owner-requested pause/XP revision. [The report](../../playtests/2026-10-05-earned-growth.md) contains exact whole archive/manifest, human v5 revise result, 131 Edit Mode / 15 Play Mode passes, two ordinary 60-second solo and two contrasting/swapped actual-pair passes, frozen control/readiness, value/event parity, reset/stale/duplicate and paused hard-loss checks. v6 exposed an unconfigured scripted auto-Continue bug; v7 fixes it and the runtime regression passes. No forced XP or grants. All automatic players ran on owned background desktops and are stopped; input desktop remained Default and owner v5 PID 22212 remains under their control. Primary checkout is untouched.
+
+Next: owner tests v7 XP/range/audio/merging and the safe centered chooser, especially Stronger hits (still untested by a human). Native co-op/representative visible release timing and coordinator review remain required before integration/completion. v7 bridge screenshot capture fails from active-render-target size; its raw warning is preserved and native HUD validation is pending. No dense-pickup performance envelope, full Zone, recovery or authored varied enemy-drop content. The draft PR/Linear Resume supply the review link; do not automatically merge or mark Done.
+
 ### Owner growth feedback and revision — October 5
 
 Native v5 solo play completed at 60 seconds with zero catch-up limits, 64 collected XP, nine uncollected single-XP orbs and 73 kills. The offer arrived at 28.9 active seconds; Faster fire applied at 48.133 seconds. The owner did not recognize XP or the level-up, discovered the corner cards late and disliked live selection/Tab hiding, but noticed the increased fire rate. Stronger hits is untested; another attempt ended at 12.5 seconds with eight XP and no choice. Preserve this as a revise result, not both-upgrade acceptance. Exact logs: `artifacts/gdj23-owner-navigation-v5-20261005-001858/session-13ad00216ded4ed6960b10c81da7ae45`.
