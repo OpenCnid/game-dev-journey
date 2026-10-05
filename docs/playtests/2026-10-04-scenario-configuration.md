@@ -1,10 +1,10 @@
 # GDJ-22 — scenario configuration candidate
 
-October 4, 2026 (America/Chicago). **Owner acceptance and coordinator code/integration review are complete; one review finding was fixed and the corrected candidate passes verification. Integration is pending.** This report does not establish enjoyment, balance or new native performance. GDJ-20's accepted fixed loopback evidence remains separate.
+October 4, 2026 (America/Chicago). **Owner acceptance and coordinator code/integration review are complete; one review finding was fixed and the corrected candidate passes verification. The owner authorized integration; PR #13 is merged.** This report does not establish enjoyment, balance or new native performance. GDJ-20's accepted fixed loopback evidence remains separate.
 
 ## Exact source and build
 
-- Base: merged main `e6434ec7575e2d7e3e81e3d0b799bc15299bb6e1`; foundation revision 18. The primary checkout remains unchanged at that base.
+- Base: merged main `e6434ec7575e2d7e3e81e3d0b799bc15299bb6e1`; foundation revision 18. The primary main checkout now includes merge `8f33f0dc8b3c6148de00f5d9c98e89a9ba1c087f`.
 - **Current v2 runtime/release source: `5eb6579286394c31d295c3ee204b9cf1a5143bcb`**, clean. Unity 6000.3.25f1 / Transport 2.7.4 unchanged. Release built UTC `2026-10-05T03:33:47.5272036Z`.
 - Current whole player: `C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/build/StackLab-GDJ22-v2/`. All **167 files** rehash against the [v2 manifest](evidence/gdj-22-scenarios/v2-player-manifest.json), canonical LF SHA-256 `bb8839c18cc2b871059383a51fa4f33eb50029f020dd5971816c220fd935cb50`. Distribute the entire folder.
 - Original v1 source `ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2` and its `build/StackLab-GDJ22-v1/` archive remain preserved. Its 167 files also rehash against the [original manifest](evidence/gdj-22-scenarios/v1-player-manifest.json), canonical LF SHA-256 `191c8913837abeb077df372408cc899df7143ddc80f33560e81f81494ae9228a`. Earlier GDJ-20 and solo controls were untouched.
@@ -73,7 +73,7 @@ The owner requested the remaining code/integration review. Review of `dfbe2d73cd
 
 The [three reproduced omissions](evidence/gdj-22-scenarios/review-feedback-finding.json) preserve the exact missing event and limits. The [new regression before the fix](evidence/gdj-22-scenarios/review-feedback-before-PlayMode.xml) fails with zero retained events instead of two. The bounded fix filters queued feedback by the active run, preserving current-run order and discarding stale events. A Play Mode regression covers both initial Start and Retry; the standalone helper now compares all ordered run-1 nonterminal outcomes, including the first hit. Late terminal rejections remain outside that comparison because clients discard old-run feedback after Retry.
 
-**Review outcome: the P2 finding is fixed; no blocking code/integration findings remain.** The review covered all runtime/test changes against main, configuration validation and packet bounds, solo/shared damage and cadence, host offer/acknowledgement, session/run binding, Retry/lifecycle, effective presentation and retained reference controls. The PR is mergeable against the unchanged base above; it has not been merged.
+**Review outcome: the P2 finding is fixed; no blocking code/integration findings remain.** The review covered all runtime/test changes against main, configuration validation and packet bounds, solo/shared damage and cadence, host offer/acknowledgement, session/run binding, Retry/lifecycle, effective presentation and retained reference controls. The reviewed candidate was mergeable against the unchanged base above; owner-authorized integration is recorded below.
 
 The corrected clean v2 release passes [108 Edit Mode tests](evidence/gdj-22-scenarios/v2-EditMode.xml), [11 Play Mode tests](evidence/gdj-22-scenarios/v2-PlayMode.xml), and the serialized release build through `tools/unity.ps1`. [Check/build metadata](evidence/gdj-22-scenarios/v2-checks.json) and the [standalone audit](evidence/gdj-22-scenarios/v2-pair-audit.json) identify the exact source and settings.
 
@@ -116,6 +116,14 @@ $taskPython = "$env:USERPROFILE/.cache/codex-runtimes/codex-primary-runtime/depe
 
 Use `--scenario shared-rifle` for the default; add `--rate 120 --duration 8` for the short high-rate case. Native launch flags and all override bounds are in the [prototype README](../../prototypes/001-stacked-weapons/README.md#scenario-configuration-gdj-22). Solo uses `-playtest -scenario developer-parity`; host uses `-host -sharedLoopback -scenario developer-parity`; client uses `-join 127.0.0.1`. Supply distinct `-sharedResults` paths for the pair. Default direct UDP port is 7777.
 
+## Owner-authorized integration
+
+After the completed review and corrected verification, the owner asks: “So is everything looking good for GDJ-22? If so let's go ahead and merge it into main”. This authorizes integration of the reviewed candidate and supersedes earlier no-merge handoffs.
+
+[PR #13](https://github.com/OpenCnid/game-dev-journey/pull/13) merged into `main` at **`8f33f0dc8b3c6148de00f5d9c98e89a9ba1c087f`**, UTC `2026-10-05T03:42:32Z`, using a merge commit guarded by the exact reviewed head `016aebc954ffbb7a8ab44c1597ec32abb06340f7`. The primary checkout fast-forwarded successfully. The merge tree is identical to that reviewed head; runtime, tests, packages, settings and tools are unchanged from verified release source `5eb6579286394c31d295c3ee204b9cf1a5143bcb`. Therefore no Unity rerun/rebuild is needed for the merge or documentation bookkeeping. The 108/11 suites, clean v2 release and three corrected standalone pair checks remain the applicable evidence.
+
+Task/current-state/planning records now reflect integration. Both complete player archives stay preserved in the managed worktree; it is retained because those ignored build/evidence files remain useful. No new runtime, asset, package, performance or human-play change accompanies this integration. No blocking finding or unfinished work remains within GDJ-22's bounded scope.
+
 ## Remaining scope and handoff
 
-[PR #13](https://github.com/OpenCnid/game-dev-journey/pull/13) is open and attached. Owner visibility/expectation acceptance for developer testing and coordinator code/integration review are complete. The corrected v2 candidate is ready for integration; merge authorization remains separate. Do not merge automatically. Full lobby/readiness design, unified command processing, GDJ-6 progression, thinking space, recovery/migration, four players/dense replication and GDJ-21 runner/viewer redesign are excluded. GDJ-21 can reuse scenario construction/validation and evidence identity; future earned builds must not mutate frozen starting definitions. No editor/package upgrade, external asset or new performance claim is introduced.
+[PR #13](https://github.com/OpenCnid/game-dev-journey/pull/13) is merged and attached. Owner visibility/expectation acceptance for developer testing, coordinator review and authorized integration are complete. The corrected v2 source and both archives remain preserved. Full lobby/readiness design, unified command processing, GDJ-6 progression, thinking space, recovery/migration, four players/dense replication and GDJ-21 runner/viewer redesign are excluded. GDJ-21 can reuse scenario construction/validation and evidence identity; future earned builds must not mutate frozen starting definitions. No editor/package upgrade, external asset or new performance claim is introduced.
