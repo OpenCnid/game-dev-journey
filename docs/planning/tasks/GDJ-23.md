@@ -1,0 +1,50 @@
+# GDJ-23: first earned level-up implementation
+
+October 4, 2026. The owner selected this outcome and explicitly requested a dedicated gameplay chat. [GDJ-23](https://linear.app/cnid/issue/GDJ-23/implement-the-first-earned-level-up-in-solo-and-co-op) owns live status, sequential checkpoints and the exact worker Resume. GDJ-6 remains completed design; GDJ-4's older five-minute/three-weapon experiment is separate.
+
+## Outcome and source
+
+Implement the [accepted GDJ-6 revision 1 contract](../../design/first-earned-level-up.md) so a player can fight, collect earned XP, choose a personal rifle improvement, feel its effect and retry. It serves [perceptible power growth](../../foundation.md#1-perceptible-power-growth), begins a controlled comparison of [distinct builds](../../foundation.md#2-distinct-builds), and protects [readable, responsive combat](../../foundation.md#3-readable-responsive-combat). Values remain test hypotheses; the human comparison decides whether the growth is noticeable and useful.
+
+Merged source base: **`bd2bd1438b1029426e2c0234ff640502dc0e25ea`**, foundation revision 18, after GDJ-22/PR #13. This preparation adds documentation only. Its committed revision is linked from the issue; start the implementation branch from that brief revision so the planning handoff travels with the implementation PR. If main advances, reconcile and record the exact new base before edits.
+
+Read [foundation](../../foundation.md) FIRST, then [AGENTS.md](../../../AGENTS.md), [planning handoff](../README.md), [current state](../../current-state.md), the issue/Resume, [workflow](../../workflow.md) and the accepted contract. The active project is `prototypes/001-stacked-weapons/`, pinned Unity 6000.3.25f1 / Transport 2.7.4. Read only the relevant context below and affected source/tests.
+
+GDJ-20's fixed local combat/lifecycle and GDJ-22's configuration are complete. Older pending-network-investigation or pending-acceptance language in the design history is superseded by their current reports. GDJ-22's clean release source `5eb6579286394c31d295c3ee204b9cf1a5143bcb` has 108 Edit Mode / 11 Play Mode passes and corrected standalone pair checks. Those establish the starting control, not this new progression outcome.
+
+## Four implementation checkpoints
+
+1. **Controlled encounter:** fixed solo or two-player roster, one rifle each, 60 active seconds, seed 137 and 35 total approaching/respawning 60-HP drones. Rifle starts at 20 body / 40 head, .12-second interval and 65-metre range; player starts at 100 HP. Use validated scenario data. Disable rate edits in this experiment while preserving original controls and reference modes.
+2. **Collected shared XP:** each authoritative enemy-incarnation death creates one stationary 1-XP ground orb before slot reuse. A living player collects within an inclusive 2-metre ground radius, exactly once; stable player ID breaks collector ties. Kills alone give no XP. Ten collected XP grants shared level 2 once and an independent entitlement to each roster member, alive or dead. Keep cumulative XP visible at the explicit level-2 test cap.
+3. **Personal choice and visible effect:** offer each player Stronger hits (30 body / 60 head, .12 s) and Faster fire (20 / 40, .08 s), with independent offer identity/order/random state. Apply only their explicit valid selection once, at the next tick before the next due shot; preserve fractional cooldown without a retroactive burst. Use the accepted 1/2 selection and Tab hide/reopen controls with live combat, old/new values, personal confirmation and factual teammate choice labels. One player's ordinary choice never grants to or consumes another's.
+4. **Retention and reset:** preserve earned builds/offers through death, five-second return and one-second indicated immunity. Dead players can receive/select earned choices while a teammate lives. Preserve all-dead defeat before revival/completion, shared ending and both-ready Retry (one click in solo). Reset every run-owned progression, combat, readiness and pending-event state under a new run identity. Reject duplicate, stale and terminal mutations. Keep current disconnect-abort behavior.
+
+These are sequential implementation checkpoints in one task, not a replacement specification. Follow the full contract for tick ordering, targeting, attribution, UI, lifecycle and reset details. In particular, new entitlements cannot be selected until a later tick, old shot snapshots keep their original damage, and a reused enemy slot cannot receive damage/XP from its previous incarnation.
+
+## Plan the boundaries before runtime edits
+
+Add a short implementation/ownership plan here after inspecting the actual source. Identify starting definitions versus authoritative earned player state, death/orb/collection/offer/selection IDs, command ordering, shared solo/pair rules, replication and storage bounds, and full reset behavior. Keep room for known future weapon, pickup, loot and draw effects without a universal modifier engine or a weapon-only upgrade definition.
+
+Relevant seams include `ScenarioConfiguration`, `SharedScenarioBinding`, `SharedEncounter`, `SharedConnection`, `SharedGame`, `CombatSimulation`, `PrototypeGame`, feedback/projection and their tests. `SharedScenarioBinding.CanAdopt` currently requires each snapshot player's damage/interval to equal starting configuration. Adapt that boundary deliberately so legitimate host-owned earned builds can diverge while invalid client-supplied state is rejected. Do not mutate the frozen scenario to represent an upgrade.
+
+The current 35-drone snapshot fits the existing packet cap, but orb/progression traffic has not been measured or allocated. State the supported message/storage bounds and test them; silently deleting/capping uncollected orbs, limiting normal deaths or changing the accepted fixture to fit transport is not an implementation shortcut. Keep refactoring limited to rules and boundaries this outcome needs.
+
+Context beyond the contract: [progression/pool design](../../design/progression-and-upgrade-pools.md), [multiplayer boundary proposal and code map](../../design/multiplayer-boundaries.md), [GDJ-22 integration evidence](../../playtests/2026-10-04-scenario-configuration.md), [shared-combat evidence](../../playtests/2026-10-04-shared-rifle.md) and [prototype setup/commands](../../../prototypes/001-stacked-weapons/README.md). The broad architecture remains proposed; implementing all of it is not a prerequisite.
+
+## Acceptance and evidence
+
+- Meaningful rule tests: one death/orb/collection/credit, independent offers and idempotent effects, expected hit-count/cadence differences, retained dead-player choice/build, terminal ordering and complete reset/stale rejection. Check authoritative state and feedback attribution in both solo and actual host/client operation.
+- Run relevant Edit/Play Mode suites, a clean release build and affected control/reporting smokes through `tools/unity.ps1`, serialized with the project's Editor closed. Preserve accepted whole-player archives. Save the new whole player, manifest and reproduction commands.
+- Exercise the complete chain in actual standalone solo and pair runs, including contrasting/swapped choices and lifecycle cases. Use the existing one-machine/automated-companion facility for functional pair checks; no new runner is required. Include a representative visible release check for the 35-drone growth workload with source, settings and comparable counters. Hidden scripted checks establish functionality only; no dense-network or broad performance conclusion follows.
+- Present the exact candidate with a short owner rubric: earn normally, try each effect, explain what became easier, notice the change before reading stats, read threats/ally contribution and assess choosing under pressure. Target the choice around 10–25 seconds with at least 20 seconds to use it. Record failures and propose one tuning change; never secretly grant XP to make the test pass. Diagnostic forced setup is labelled separately.
+- Preserve the owner's actual observations and a proceed/revise decision. Automated companions cannot supply a second human's opinion; label any unobserved pair-experience claims. Keep the issue In Review until required human feedback and coordinator handoff review are resolved. A useful revise result is evidence, not permission to expand the pool to hide the problem.
+
+Additional weapons/levels, qualifying rares/team grants, magnets, thinking space, reconnect/migration, four players/dense networking, permanent progression, new lore/art, full architecture and GDJ-21 runner redesign remain separate. Current scope is one ordinary earned level-up in the existing graybox.
+
+## Durable handoff and Resume
+
+- **Completed at dispatch preparation:** owner-selected scope, verified base/prerequisites, separate Linear ticket and this brief. No runtime change, new build, performance result or human-play result.
+- **Coordinator:** `01a0ff82-9c47-77a2-b780-0e86575639f1`, host `local`. Exact worker ID is recorded in the issue after creation. This chat owns priorities and handoff/integration review; the gameplay chat owns this implementation and candidate checks.
+- **Next:** establish a suitable isolated managed checkout from the committed brief revision; record exact path/branch/base in the issue and add the boundary plan above before runtime edits. Keep one gameplay writer and serialize Unity operations.
+- **During work:** save checkpoints with exact source, completed steps, checks, remaining work, blockers and next action here or in the issue. Linear owns checkpoint status; this file owns the implementation rationale and durable handoff.
+- **Return:** a draft PR against main, exact clean source/build/archive/configuration, test and standalone evidence, concrete owner observations, supported limits and unresolved findings. Link the report from Linear and update current state/planning when their facts change. Attach the PR to the task. Launch authorizes implementation, testing and candidate preparation; integration follows coordinator review and owner authorization, with no automatic merge.
