@@ -43,6 +43,7 @@ namespace Journey
             public float elapsed, yaw, pitch;
             public double capturedWallSeconds;
             public bool scripted;
+            public ScenarioEvidence scenario;
             public SharedPlayer[] players;
             public SharedEnemy[] enemies;
         }
@@ -89,6 +90,7 @@ namespace Journey
                 SharedSnapshot snapshot = game.Snapshot;
                 var state = new State { run = snapshot.Run, life = snapshot.Players[game.LocalPlayer].Life,
                     local = game.LocalPlayer, tick = snapshot.Tick, elapsed = snapshot.Elapsed, state = snapshot.State.ToString(),
+                    scenario = new ScenarioEvidence(snapshot.Configuration, snapshot.Session, snapshot.Run),
                     players = snapshot.Players, enemies = snapshot.Enemies, lastSequence = lastSequence, commandResult = result,
                     frameSequence = frameSequence, capturedWallSeconds = lastCapture, captureError = captureError,
                     source = stamp, width = Screen.width, height = Screen.height, scripted = game.Scripted,

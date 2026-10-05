@@ -22,6 +22,14 @@ namespace Journey.Tests
             try
             {
                 LogAssert.Expect(LogType.Log, new System.Text.RegularExpressions.Regex("^SHARED_SESSION HOST "));
+                var binding = new SharedScenarioBinding();
+                client.Received += (message, reader) => {
+                    if (message == SharedConnection.Message.Configuration) { binding.AcceptOffer(reader); client.Send(SharedConnection.Message.ConfigurationAck, binding.Write); }
+                    else if (message == SharedConnection.Message.Snapshot) SharedConnection.ReadSnapshot(reader, new SharedSnapshot());
+                    else if (message == SharedConnection.Message.Hit) SharedConnection.ReadHit(reader);
+                    else if (message == SharedConnection.Message.Ping) { double stamp = reader.ReadDouble(); client.Send(SharedConnection.Message.Pong, w => w.Write(stamp)); }
+                    else if (message == SharedConnection.Message.Abort) reader.ReadString();
+                };
                 view.Create(root.transform); game.Initialize(view, sim, true, "0.0.0.0", 17778);
                 double deadline = Time.realtimeSinceStartupAsDouble + 4;
                 while (game.Snapshot.State == SharedState.Waiting && Time.realtimeSinceStartupAsDouble < deadline)
@@ -37,7 +45,7 @@ namespace Journey.Tests
                 var authority = (SharedEncounter)typeof(SharedGame).GetField("authority", flags).GetValue(game);
                 authority.Current.Tick = 3599; authority.Step(); authority.Retry(1, 0); publish.Invoke(game, null);
                 Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Complete));
-                client.Send(SharedConnection.Message.Retry, writer => writer.Write(1));
+                client.Send(SharedConnection.Message.Retry, writer => { writer.Write(1); binding.Write(writer); });
                 while (game.Snapshot.Run == 1 && Time.realtimeSinceStartupAsDouble < deadline)
                 {
                     client.Poll(); clock.SetValue(game, Time.realtimeSinceStartupAsDouble - 2);

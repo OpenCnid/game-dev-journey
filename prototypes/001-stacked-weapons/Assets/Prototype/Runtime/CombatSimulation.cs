@@ -51,6 +51,7 @@ namespace Journey
         double fireRemaining;
         float damageRemaining;
         float rifleRate = DefaultRifleRate, rifleInterval = DefaultRifleInterval;
+        public ScenarioConfiguration Configuration { get; private set; } = ScenarioConfiguration.Named(ScenarioKind.SoloPrecision);
         public float RifleInterval => rifleInterval;
         public float RifleRate
         {
@@ -66,6 +67,7 @@ namespace Journey
                 // Keep cooldown progress, including through a paused testing-menu edit.
                 fireRemaining *= (double)interval / rifleInterval;
                 rifleRate = value; rifleInterval = interval;
+                Configuration = Configuration.With(interval: interval);
             }
         }
         RunState beforePause;
@@ -101,8 +103,21 @@ namespace Journey
             Vector3.Lerp(NativePrevious[index], NativePositions[index], alpha) : Vector3.Lerp(previous[index], positions[index], alpha);
         public Vector3 RenderPlayer(float alpha) => Vector3.Lerp(PreviousPlayer, Player, alpha);
 
+        public void Reset(ScenarioConfiguration configuration)
+        {
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+            Configuration = configuration;
+            if (rifleInterval != configuration.RifleInterval) rifleRate = configuration.RifleRate;
+            rifleInterval = configuration.RifleInterval;
+            ResetCore(configuration.EnemyCount, configuration.Seed, false, configuration.Duration, false, false);
+        }
         public void Reset(int count, int seed, bool benchmark, float duration = 60f,
             bool bosses = false, bool synchronizedAbilities = false)
+        {
+            Configuration = ScenarioConfiguration.Named(ScenarioKind.SoloPrecision).With(interval: rifleInterval);
+            ResetCore(count, seed, benchmark, duration, bosses, synchronizedAbilities);
+        }
+        void ResetCore(int count, int seed, bool benchmark, float duration, bool bosses, bool synchronizedAbilities)
         {
             if (UseNativeState && !UseBurst) throw new InvalidOperationException("Native state requires Burst simulation.");
             NativeState = UseNativeState;
@@ -112,7 +127,7 @@ namespace Journey
                 NativePrevious = new NativeArray<Vector3>(Capacity, Allocator.Persistent);
             }
             Count = Mathf.Clamp(count, 0, Capacity);
-            HealthMaximum = EnemyMaxHealth;
+            HealthMaximum = Configuration.EnemyHealth;
             random = new System.Random(seed);
             Benchmark = benchmark;
             Duration = duration;
@@ -252,7 +267,7 @@ namespace Journey
             Vector3 end = ray.GetPoint(aim.Distance);
             if (target >= 0)
             {
-                int requested = aim.Region == HitRegion.Head ? 40 : 20;
+                int requested = Benchmark ? 20 : aim.Region == HitRegion.Head ? Configuration.HeadDamage : Configuration.BodyDamage;
                 int before = health[target], damage = Mathf.Min(requested, before);
                 health[target] -= damage;
                 StateVersion++;
@@ -299,10 +314,11 @@ namespace Journey
         // Read-only projection for the accepted renderer/feedback. SharedEncounter alone owns damage.
         internal void ProjectShared(SharedSnapshot snapshot, int player, Vector3 cameraPosition)
         {
-            NativeState = false; Benchmark = false; Count = snapshot.State == SharedState.Waiting ? 0 : snapshot.Enemies.Length; HealthMaximum = SharedEncounter.EnemyHealth;
+            NativeState = false; Benchmark = false; Count = snapshot.State == SharedState.Waiting ? 0 : snapshot.Enemies.Length; HealthMaximum = snapshot.Configuration.EnemyHealth;
+            Configuration = snapshot.Configuration; rifleInterval = Configuration.RifleInterval; rifleRate = Configuration.RifleRate;
             State = snapshot.State == SharedState.Running ? RunState.Running : snapshot.State == SharedState.Complete ? RunState.Won : RunState.Lost;
             Player = PreviousPlayer = cameraPosition; PlayerHealth = snapshot.Players[player].Health;
-            Elapsed = snapshot.Elapsed; Duration = SharedEncounter.Duration;
+            Elapsed = snapshot.Elapsed; Duration = snapshot.Configuration.Duration;
             Shots = snapshot.Players[player].Shots; Kills = snapshot.Players[0].Kills + snapshot.Players[1].Kills; StateVersion++;
             for (int i = 0; i < Count; i++)
             {
@@ -340,7 +356,7 @@ namespace Journey
             }
             if (NativeState) NativePositions[index] = NativePrevious[index] = p;
             else positions[index] = previous[index] = p;
-            health[index] = EnemyMaxHealth;
+            health[index] = HealthMaximum;
             spawnVersions[index]++;
             Abilities.CancelCast(index); StateVersion++;
         }

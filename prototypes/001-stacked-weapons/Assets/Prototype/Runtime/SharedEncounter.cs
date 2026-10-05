@@ -27,9 +27,15 @@ namespace Journey
         public float Elapsed;
         public SharedState State;
         public readonly SharedPlayer[] Players = new SharedPlayer[2];
-        public readonly SharedEnemy[] Enemies = new SharedEnemy[SharedEncounter.EnemyCount];
+        public Guid Session;
+        public ScenarioConfiguration Configuration { get; private set; }
+        public SharedEnemy[] Enemies { get; private set; }
+        public SharedSnapshot(ScenarioConfiguration configuration = null)
+        { Configuration = configuration ?? ScenarioConfiguration.Named(ScenarioKind.SharedRifle); Enemies = new SharedEnemy[Configuration.EnemyCount]; }
         public void CopyFrom(SharedSnapshot other)
         {
+            Configuration = other.Configuration; Session = other.Session;
+            if (Enemies.Length != other.Enemies.Length) Enemies = new SharedEnemy[other.Enemies.Length];
             Run = other.Run; Tick = other.Tick; Elapsed = other.Elapsed; State = other.State;
             Array.Copy(other.Players, Players, 2); Array.Copy(other.Enemies, Enemies, Enemies.Length);
         }
@@ -40,7 +46,7 @@ namespace Journey
             for (int i = 0; i < Enemies.Length; i++)
             {
                 SharedEnemy e = Enemies[i];
-                bool wounded = e.Health < SharedEncounter.EnemyHealth;
+                bool wounded = e.Health < Configuration.EnemyHealth;
                 bool body = EnemyGeometry.RayCube(ray, EnemyGeometry.Body(e.Position, wounded), out float b);
                 bool head = EnemyGeometry.RayCube(ray, EnemyGeometry.Head(e.Position, wounded), out float h);
                 if (!body && !head) continue;
@@ -71,34 +77,38 @@ namespace Journey
     // Host-only rules. Presentation receives snapshots; it cannot mutate this encounter.
     public sealed class SharedEncounter
     {
-        public const int EnemyCount = 12, EnemyHealth = 60, HistoryTicks = 30, QueueCapacity = 32;
-        public const float Duration = 60, ReturnDelay = 5, ReturnImmunity = 1;
-        public readonly SharedSnapshot Current = new SharedSnapshot();
+        public const int HistoryTicks = 30, QueueCapacity = 32;
+        public const float ReturnDelay = 5, ReturnImmunity = 1;
+        public readonly SharedSnapshot Current;
+        public ScenarioConfiguration Configuration { get; }
         readonly SharedSnapshot[] history = new SharedSnapshot[HistoryTicks + 1];
         readonly List<SharedShot> pending = new List<SharedShot>(QueueCapacity);
         readonly double[] nextShot = new double[2];
         readonly int[] lastEvent = new int[2], lastInput = new int[2];
         readonly float[] inputTime = new float[2];
-        readonly Vector3[] velocities = new Vector3[EnemyCount];
+        readonly Vector3[] velocities;
         System.Random random;
         public event Action<SharedHit> Resolved;
         public int Rejected { get; private set; }
         public string AbortReason { get; private set; } = "";
-        public SharedEncounter()
+        public SharedEncounter(ScenarioConfiguration configuration = null, Guid session = default)
         {
-            for (int i = 0; i < history.Length; i++) history[i] = new SharedSnapshot { Tick = -1 };
+            Configuration = configuration ?? ScenarioConfiguration.Named(ScenarioKind.SharedRifle);
+            Current = new SharedSnapshot(Configuration) { Session = session == Guid.Empty ? Guid.NewGuid() : session };
+            velocities = new Vector3[Configuration.EnemyCount];
+            for (int i = 0; i < history.Length; i++) history[i] = new SharedSnapshot(Configuration) { Tick = -1 };
         }
         public void Start()
         {
             Current.Run++; Current.Tick = 0; Current.Elapsed = 0; Current.State = SharedState.Running;
-            random = new System.Random(137); pending.Clear(); Rejected = 0; AbortReason = "";
+            random = new System.Random(Configuration.Seed); pending.Clear(); Rejected = 0; AbortReason = "";
             for (int p = 0; p < 2; p++)
             {
                 Current.Players[p] = new SharedPlayer { Position = Spawn(p), Health = 100, Life = 1,
-                    Weapon = p + 1, BodyDamage = 20, RifleInterval = .12f };
+                    Weapon = p + 1, BodyDamage = Configuration.BodyDamage, RifleInterval = Configuration.RifleInterval };
                 nextShot[p] = 0; lastEvent[p] = lastInput[p] = 0; inputTime[p] = 0;
             }
-            for (int i = 0; i < EnemyCount; i++) { Current.Enemies[i] = default; Respawn(i); }
+            for (int i = 0; i < Configuration.EnemyCount; i++) { Current.Enemies[i] = default; Respawn(i); }
             foreach (SharedSnapshot pose in history) { pose.Run = 0; pose.Tick = -1; }
             Remember();
         }
@@ -149,15 +159,15 @@ namespace Journey
             for (int i = 0; i < pending.Count;)
             {
                 SharedShot shot = pending[i];
-                if (Current.Elapsed + .00001 < nextShot[shot.Player]) { i++; continue; }
+                if (Current.Tick * (double)CombatSimulation.Tick < nextShot[shot.Player]) { i++; continue; }
                 pending.RemoveAt(i); Resolve(shot);
             }
             // Read all positions before applying velocities, matching the local steering rule.
-            for (int i = 0; i < EnemyCount; i++)
+            for (int i = 0; i < Configuration.EnemyCount; i++)
             {
                 Vector3 position = Current.Enemies[i].Position, separation = Vector3.zero;
                 int target = NearestLiving(position);
-                for (int j = 0; j < EnemyCount; j++)
+                for (int j = 0; j < Configuration.EnemyCount; j++)
                 {
                     Vector3 delta = position - Current.Enemies[j].Position; float distance = delta.magnitude;
                     if (j != i && distance > .01f && distance < 1.2f) separation += delta * ((1.2f - distance) / distance);
@@ -165,7 +175,7 @@ namespace Journey
                 velocities[i] = target < 0 ? Vector3.zero : Vector3.ClampMagnitude(
                     (Current.Players[target].Position - position).normalized * 3.1f + separation * 5, 5);
             }
-            for (int i = 0; i < EnemyCount; i++)
+            for (int i = 0; i < Configuration.EnemyCount; i++)
             {
                 SharedEnemy e = Current.Enemies[i]; e.Position += velocities[i] * CombatSimulation.Tick;
                 e.Position.x = Mathf.Clamp(e.Position.x, -29, 29); e.Position.z = Mathf.Clamp(e.Position.z, -29, 29); Current.Enemies[i] = e;
@@ -173,7 +183,7 @@ namespace Journey
             }
             // Wipe wins over both completion and an expiring return.
             if (Current.Players[0].Health == 0 && Current.Players[1].Health == 0) Current.State = SharedState.Defeat;
-            else if (Current.Tick >= 3600) Current.State = SharedState.Complete;
+            else if (Current.Elapsed >= Configuration.Duration) Current.State = SharedState.Complete;
             else for (int p = 0; p < 2; p++)
             {
                 SharedPlayer player = Current.Players[p];
@@ -218,14 +228,14 @@ namespace Journey
             AimResult aim = pose.Query(source.Ray);
             if (aim.Hit && Current.Enemies[aim.EnemyIndex].Incarnation != aim.SpawnVersion)
             { Reject(source, ShotDecision.StaleEnemy); return; }
-            nextShot[source.Player] = Math.Max(nextShot[source.Player] + player.RifleInterval, Current.Elapsed + player.RifleInterval - CombatSimulation.Tick);
+            nextShot[source.Player] = Math.Max(nextShot[source.Player], (Current.Tick - 1) * (double)CombatSimulation.Tick) + player.RifleInterval;
             player.Shots++;
             ShotResult shot = new ShotResult(source.Ray.GetPoint(aim.Distance), -1, 0, 0, 0);
             Vector3 deathPosition = default;
             if (aim.Hit)
             {
                 SharedEnemy enemy = Current.Enemies[aim.EnemyIndex];
-                int requested = player.BodyDamage * (aim.Region == HitRegion.Head ? 2 : 1);
+                int requested = player.BodyDamage * (aim.Region == HitRegion.Head ? Configuration.HeadMultiplier : 1);
                 int actual = Math.Min(requested, enemy.Health), after = enemy.Health - actual;
                 shot = new ShotResult(shot.End, aim.EnemyIndex, aim.SpawnVersion, aim.Region, requested, enemy.Health, actual, after);
                 enemy.Health = after; Current.Enemies[aim.EnemyIndex] = enemy;
@@ -249,7 +259,7 @@ namespace Journey
                 p = side < 2 ? new Vector3(side == 0 ? -28 : 28, 0, edge) : new Vector3(edge, 0, side == 2 ? -28 : 28);
                 if ((p - Current.Players[0].Position).sqrMagnitude > 100 && (p - Current.Players[1].Position).sqrMagnitude > 100) break;
             }
-            Current.Enemies[i] = new SharedEnemy { Position = p, Health = EnemyHealth, Incarnation = Current.Enemies[i].Incarnation + 1 };
+            Current.Enemies[i] = new SharedEnemy { Position = p, Health = Configuration.EnemyHealth, Incarnation = Current.Enemies[i].Incarnation + 1 };
         }
         void Remember() => history[Current.Tick % history.Length].CopyFrom(Current);
         public bool Retry(int run, int p)

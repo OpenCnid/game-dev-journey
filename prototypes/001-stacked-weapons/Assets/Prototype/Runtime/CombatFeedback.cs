@@ -25,7 +25,7 @@ namespace Journey
         }
         readonly Impact[] impacts = new Impact[ImpactCapacity];
         readonly HealthBar[] bars = new HealthBar[BarCapacity];
-        int nextImpact, previousHealth = 100, healthMaximum = CombatSimulation.EnemyMaxHealth;
+        int nextImpact, previousHealth = 100, healthMaximum = CombatSimulation.EnemyMaxHealth, headMultiplier = 2;
         float hitMarkerRemaining, killMarkerRemaining, criticalMarkerRemaining;
         readonly Rect[] barBounds = new Rect[VisibleBarCapacity];
         readonly int[] visibleBars = new int[VisibleBarCapacity];
@@ -107,7 +107,7 @@ namespace Journey
 
         public void CollectBars(CombatSimulation sim, Camera camera, float alpha)
         {
-            healthMaximum = sim.HealthMaximum; BarCount = 0;
+            healthMaximum = sim.HealthMaximum; headMultiplier = sim.Configuration.HeadMultiplier; BarCount = 0;
             FocusAimed = false; FocusEnemy = -1; FocusHealth = 0;
             PreviewRegion = HitRegion.None;
             if (sim.Benchmark || (sim.State != RunState.Running && sim.State != RunState.Paused))
@@ -274,7 +274,7 @@ namespace Journey
             if (CriticalMarkerVisible)
             {
                 GUI.color = new Color(1, .75f, .15f);
-                GUI.Label(new Rect(width / 2 - 60, height / 2 - 58, 120, 26), "CRIT ×2", cueStyle);
+                GUI.Label(new Rect(width / 2 - 60, height / 2 - 58, 120, 26), $"CRIT ×{headMultiplier}", cueStyle);
             }
             if (KillMarkerVisible)
             {

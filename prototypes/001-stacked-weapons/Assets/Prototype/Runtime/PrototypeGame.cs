@@ -17,6 +17,7 @@ namespace Journey
         readonly ArenaPresentation view = new ArenaPresentation();
         readonly BenchmarkCapture capture = new BenchmarkCapture();
         readonly FrameTiming[] timings = new FrameTiming[1];
+        bool configurationInvalid;
         bool benchmark, quitAfterBenchmark, screenshotSaved, screenshotAtMenu;
         bool bosses = true, synchronizedAbilities;
         int crowd = 100, seed = 137, repeat = 1, repeats = 3;
@@ -28,12 +29,15 @@ namespace Journey
         string customCap = "144";
         string customRifleRate = CombatSimulation.DefaultRifleRate.ToString("G8", CultureInfo.InvariantCulture), rateError = "";
         Vector2 menuScroll;
+        ScenarioConfiguration soloScenario = ScenarioConfiguration.Named(ScenarioKind.SoloPrecision);
+        ScenarioConfiguration sharedScenario = ScenarioConfiguration.Named(ScenarioKind.SharedRifle);
+        Guid soloRun;
         string sharedAddress = "127.0.0.1";
         string profilePath;
         float profileSeconds = 5;
         double profileStarted;
         bool profileActive, profileSaved;
-        GUIStyle title, label, small, heading, button;
+        GUIStyle title, label, small, heading, button, scenarioText;
         public RunState State => sim.State;
         public int ShotsFired => sim.Shots;
         public float RifleRate => sim.RifleRate;
@@ -46,7 +50,9 @@ namespace Journey
             outputDirectory = Path.Combine(Application.persistentDataPath, "BenchmarkResults");
             previousClock = Time.realtimeSinceStartupAsDouble;
             sim.UseBurst = true;
-            ParseArguments();
+            try { ParseArguments(); }
+            catch (Exception e) when (e is ArgumentException || e is FormatException || e is OverflowException)
+            { configurationInvalid = true; error = "Scenario rejected: " + e.Message; UnityEngine.Debug.LogError(error); }
             BurstStatus.Verify();
             if (enabled && !benchmark) SetCursor(false);
         }
@@ -54,6 +60,10 @@ namespace Journey
         void ParseArguments()
         {
             string[] args = Environment.GetCommandLineArgs();
+            soloScenario = ScenarioConfiguration.FromArguments(args, ScenarioKind.SoloPrecision);
+            sharedScenario = ScenarioConfiguration.FromArguments(args, ScenarioKind.SharedRifle);
+            sim.RifleRate = soloScenario.RifleRate;
+            customRifleRate = sim.RifleRate.ToString("G8", CultureInfo.InvariantCulture);
             bool autoBenchmark = false, autoPlay = false;
             for (int i = 0; i < args.Length; i++)
             {
@@ -105,6 +115,7 @@ namespace Journey
 
         void Update()
         {
+            if (configurationInvalid) return;
             StageProfile.Reset();
             double now = Time.realtimeSinceStartupAsDouble;
             double interval = (now - previousClock) * 1000; previousClock = now;
@@ -204,20 +215,23 @@ namespace Journey
 
         public void StartCombat()
         {
+            if (configurationInvalid) return;
             if (benchmark) RestoreFrameSettings();
             benchmark = false; capture.Cancel(); error = "";
             yaw = pitch = accumulator = 0;
-            view.ResetFeedback(); sim.Reset(35, seed, false); SetCursor(true);
+            view.ResetFeedback(); sim.Reset(soloScenario.With(interval: sim.RifleInterval));
+            soloRun = Guid.NewGuid(); SaveSoloScenario(); SetCursor(true);
         }
         void StartShared(bool host, string address, ushort port = 7777)
         {
+            if (configurationInvalid) return;
             try
             {
                 if (benchmark) CancelBenchmark();
                 sim.Reset(0, 137, false);
                 view.ResetFeedback();
                 var shared = gameObject.AddComponent<SharedGame>();
-                shared.Initialize(view, sim, host, address, port); enabled = false;
+                shared.Initialize(view, sim, host, address, port, host ? sharedScenario : null); enabled = false;
             }
             catch (Exception exception) { error = exception.Message; Debug.LogException(exception); }
         }
@@ -231,7 +245,37 @@ namespace Journey
         void SetRifleRate(float rate)
         {
             sim.RifleRate = rate;
+            soloScenario = soloScenario.With(interval: sim.RifleInterval); sharedScenario = sharedScenario.With(interval: sim.RifleInterval);
+            if (!benchmark && soloRun != Guid.Empty) SaveSoloScenario();
             customRifleRate = sim.RifleRate.ToString("G8", CultureInfo.InvariantCulture); rateError = "";
+        }
+        void SaveSoloScenario()
+        {
+            Directory.CreateDirectory(outputDirectory);
+            File.WriteAllText(Path.Combine(outputDirectory, "solo-scenario-" + soloRun.ToString("N") + ".json"),
+                JsonUtility.ToJson(new ScenarioEvidence(sim.Configuration, soloRun, 1), true));
+        }
+        void SelectScenario(ScenarioKind kind)
+        {
+            soloScenario = sharedScenario = ScenarioConfiguration.Named(kind).With(interval: sim.RifleInterval);
+        }
+        void ScenarioControls()
+        {
+            if (scenarioText == null) scenarioText = new GUIStyle(small) { wordWrap = true };
+            GUILayout.Label("Next solo: " + soloScenario.Label + " — " + soloScenario.Settings, scenarioText);
+            GUILayout.Label("Host: " + sharedScenario.Label + " — " + sharedScenario.Settings, scenarioText);
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Solo precision for both")) SelectScenario(ScenarioKind.SoloPrecision);
+            if (GUILayout.Button("Shared rifle for both")) SelectScenario(ScenarioKind.SharedRifle);
+            GUILayout.EndHorizontal(); GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Developer parity")) { SelectScenario(ScenarioKind.DeveloperParity); SetRifleRate(4); }
+            if (GUILayout.Button("Named defaults"))
+            {
+                soloScenario = ScenarioConfiguration.Named(ScenarioKind.SoloPrecision);
+                sharedScenario = ScenarioConfiguration.Named(ScenarioKind.SharedRifle); SetRifleRate(CombatSimulation.DefaultRifleRate);
+            }
+            GUILayout.EndHorizontal();
+            GUILayout.Label("Selection applies on Start/Host. Join uses host settings. Shared Retry keeps the session's locked settings.", scenarioText);
         }
         void RifleRateControls()
         {
@@ -247,10 +291,11 @@ namespace Journey
             if (GUILayout.Button("Rapid 30/s", GUILayout.Height(26))) SetRifleRate(30);
             if (GUILayout.Button("Stress 120/s", GUILayout.Height(26))) SetRifleRate(120);
             GUILayout.EndHorizontal();
-            GUILayout.Label(rateError.Length > 0 ? rateError : "Combat + benchmark · 0.5–120 shots/sec · Restart keeps the selected rate.", small);
+            GUILayout.Label(rateError.Length > 0 ? rateError : "Solo + next Host + benchmark · 0.5–120 shots/sec · Restart keeps the selected rate.", small);
         }
         void StartBenchmark(int count)
         {
+            if (configurationInvalid) return;
             if (!benchmark) { savedCap = Application.targetFrameRate; savedVSync = QualitySettings.vSyncCount; }
             benchmark = true; crowd = count; repeat = 1; error = "";
             Application.targetFrameRate = -1; QualitySettings.vSyncCount = 0;
@@ -331,6 +376,8 @@ namespace Journey
             GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one * scale);
             float width = Screen.width / scale, height = Screen.height / scale;
             GUI.Label(new Rect(30, 20, 500, 50), "STACK / LAB", title);
+            if (!benchmark && sim.State != RunState.Ready)
+                GUI.Label(new Rect(32, 96, 1200, 24), sim.Configuration.Label + " · " + sim.Configuration.Settings, small);
             GUI.Label(new Rect(32, 69, 700, 24), $"01   /   PULSE RIFLE     ·     {sim.RifleRate:0.##} SHOTS/SEC     ·     CROWD SIMULATION", small);
             GUI.Label(new Rect(width - 320, 26, 300, 30), $"{1000 / Mathf.Max(.01f, frameMs):F0} FPS   /   {frameMs:F2} ms", heading);
             GUI.Label(new Rect(width - 320, 59, 300, 25), "144 FPS TARGET  ·  6.94 ms BUDGET", small);
@@ -342,7 +389,7 @@ namespace Journey
                 GUI.color = Color.white;
                 GUI.Label(new Rect(32, height - 70, 1100, 32), $"{(benchmark ? "BENCH" : "HP " + sim.PlayerHealth)} / {sim.Count} {(sim.Abilities.Enabled ? "BOSSES" : "DRONES")} / {sim.Kills} KILLS / {sim.Abilities.Projectiles} PROJECTILES", heading);
                 GUI.Label(new Rect(32, height - 38, 700, 28), benchmark ? "SCRIPTED ORBIT + AUTOFIRE  /  ESC CANCELS" : "WASD MOVE  /  MOUSE AIM  /  AUTO FIRE  /  ESC PAUSE  /  R RESTART", small);
-                if (!benchmark) GUI.Label(new Rect(width - 200, height - 65, 180, 32), $"{Mathf.Max(0, 60 - sim.Elapsed):F1}s", heading);
+                if (!benchmark) GUI.Label(new Rect(width - 200, height - 65, 180, 32), $"{Mathf.Max(0, sim.Duration - sim.Elapsed):F1}s", heading);
             }
             if (!benchmark) view.Feedback.DrawHUD(width, height);
             if (benchmark)
@@ -361,9 +408,11 @@ namespace Journey
                 GUILayout.Space(18);
                 string status = sim.State == RunState.Won ? "ENCOUNTER COMPLETE" : sim.State == RunState.Lost ? "RIG OFFLINE" : sim.State == RunState.Paused ? "SIMULATION PAUSED" : "ONE WEAPON. HOLD THE LINE.";
                 GUILayout.Label(status, heading);
-                GUILayout.Label("Survive 60 seconds. Two body hits or one head hit destroy a fresh drone. Crosshair: green body ×1, gold head ×2, white miss. Movement keeps you alive.", label);
+                GUILayout.Label($"Survive {soloScenario.Duration:0.##} seconds. Crosshair: green body, gold head, white miss. Movement keeps you alive.", label);
                 GUILayout.Space(12);
+                GUI.enabled = !configurationInvalid;
                 RifleRateControls();
+                ScenarioControls();
                 GUILayout.Space(8);
                 if (sim.State == RunState.Paused && !sim.Benchmark && GUILayout.Button("RESUME", button)) { sim.TogglePause(); SetCursor(true); }
                 if (GUILayout.Button("START / RESTART COMBAT", button)) StartCombat();
@@ -374,7 +423,7 @@ namespace Journey
                 if (GUILayout.Button("Host (A)", button)) StartShared(true, "0.0.0.0");
                 if (GUILayout.Button("Join (B)", button)) StartShared(false, sharedAddress);
                 GUILayout.EndHorizontal();
-                GUILayout.Label("Fixed pair · 12 shared 60-HP drones · UDP 7777 · Run continues while local input is released", small);
+                GUILayout.Label("Fixed pair · Host settings shown above · UDP 7777 · Run continues while local input is released", small);
                 GUILayout.Space(12);
                 GUILayout.Label("REPEATABLE CROWD BENCHMARK", heading);
                 sim.UseBurst = GUILayout.Toggle(sim.UseBurst, " Jobs/Burst simulation");
