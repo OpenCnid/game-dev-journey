@@ -1,0 +1,54 @@
+# GDJ-24: larger arsenal, enemy crowd and co-op performance
+
+October 5, 2026. The owner explicitly requests a new focused session from the saved main handoff. [GDJ-24](https://linear.app/cnid/issue/GDJ-24/measure-larger-arsenals-and-enemy-crowds-in-two-player-co-op) owns live status, acceptance criteria and the worker's exact Resume. Keep one implementation/performance task active.
+
+## Outcome and base
+
+Determine the measured operating envelope and first limiting cost when larger simultaneous arsenals, denser active enemies and two-player co-op run together. This serves [readable, responsive combat](../../foundation.md#3-readable-responsive-combat), with [perceptible growth](../../foundation.md#1-perceptible-power-growth) and [distinct builds](../../foundation.md#2-distinct-builds) supplying actual weapon/damage/pickup work. Return a supported limit, a proceed/revise conclusion and one next bounded bottleneck; a measured failed rung is useful evidence.
+
+Verified main: **`e8acedb107905ade056241e978dace6bdaa0bb92`**, after PR 15 merge `92d72f620b23b22b0e9eb34e62942225232e6f84`, which includes PR 14. Runtime/tests/tools exactly match clean GDJ-3 v3 source **`d8c3eee6ad6b4b8109c8d63c524512efb9a918b3`**. Existing evidence records 143 Edit / 17 Play / two runner checks, six final functional captures and the owner's confirmation that scattergun/piercer produce different playstyles. No dense/native performance follows from those results.
+
+This dispatch adds documentation only. Its exact committed revision is linked in Linear. Start an isolated implementation branch from that brief revision so these docs travel with its PR; reconcile any newer main explicitly. Keep the primary checkout and accepted whole-player archives intact.
+
+Read [foundation](../../foundation.md) FIRST (revision 19), [AGENTS](../../../AGENTS.md), [planning](../README.md), [current state](../../current-state.md), [workflow](../../workflow.md), then this task/issue and the relevant context below. Continue Unity/C#/URP with pinned Unity 6000.3.25f1/packages in `prototypes/001-stacked-weapons/`. The owner has deferred Rust.
+
+## Handoff facts that change this experiment
+
+- Main already contains earned growth and rifle/scatter/pierce stacking. Preserve collection-required/conserved XP, gravity/merging, paused centered personal choices, explicit Continue, dead participation and full Retry. Revision 1's live corner cards are superseded by [decision 0013](../../decisions/0013-readable-xp-and-safe-first-level-up.md).
+- GDJ-3's bounded comparison is Done. GDJ-23 remains In Review for unobserved human co-op/readability/native timing despite merged source; do not restart it or falsely close its gates. This experiment may supply relevant native/stability/co-op evidence. Additional XP/audio/UI polish stays parked unless it blocks measurement.
+- The current managed/full-snapshot fixture is capped at 35 enemies and three slots. Schema 2/protocol 5 has a 1,025-byte snapshot against a 1,100-byte packet limit. Its 1,024-message outgoing FIFO handles transient backpressure, not demonstrated sustained density.
+- Two v2 attempts hit the eight-tick authority catch-up safeguard. v3 adds abort/accumulator/Update/preview timings, and later captures pass, but the cause is unresolved. Preserve failed artifacts; do not treat successful retries as a fix or relax the safeguard.
+- Historical local Jobs/Burst/renderer boss results are separate controls. They omit the integrated precision/stacked-weapon/XP/co-op workload. They cannot be substituted for larger-game proof.
+
+## Four sequential stages
+
+1. **Baseline and contract.** Inspect the relevant source and preserved failures. Before runtime changes, add an exact workload matrix, gate/counter definitions, source/measurement plan, expected limits and ownership/replication changes here. Reproduce native 35-drone/three-weapon solo and pair controls. Investigate the unexplained stalls first enough to distinguish an unstable baseline from a density regression.
+2. **Bounded combined workload.** Initial ladder: 1/3/8 simultaneously active weapon instances per player, 35/250/1,000 active enemies, solo then two actual local processes. Eight slots repeat/mix existing rifle/scatter/pierce archetypes with independent owned identities/cadence; this is diagnostic load, not eight new content designs. Screen one dimension at a time, then selected combined cases. Freeze or justify adjustments to the matrix before implementation; never change gates to convert failure to success. The 1,000-enemy rung is an initial integrated target, not a final cap or evidence for >10,000 ability-heavy enemies. Larger probes require evidence that they are useful.
+3. **First limiting cost.** Instrument/profile the actual failing boundary and implement the smallest justified change, retaining a comparable reference. Inspect slot/ID assumptions, pairwise steering, precision queries, render/feedback work, XP merging and packet/backlog ownership. Extend bounds safely and test them; no silent clipping, lost events or unbounded queues. Use existing Jobs/Burst/grid/renderer components only where measured evidence and semantic parity justify adaptation. Stop at a useful measured boundary if further work requires another substantial subsystem.
+4. **Native comparison and handoff.** Deliver controlled release comparisons, correctness checks, one clearly identified human candidate, per-rung pass/fail/not-measured results and the next bounded action. A failed upper rung can finish this investigation honestly; it cannot establish performance support or lower the product target.
+
+## Verification and measurement
+
+Follow [performance policy](../../performance.md), [profiling](../../profiling.md) and the [late-game workload limits](../../design/late-game-workload.md). Current desktop: i7-10700K / RTX 3090 / approximately 64 GB, 1080p at 100% scale, uncapped/VSync off and declared effects. Record actual driver/hardware/settings and both roles' visibility, plus same-machine contention. Run one desktop capture at a time and serialize Unity operations. Keep owner-controlled players under their control.
+
+Selected comparable acceptance scenarios use 30-second warm-up, at least 60-second capture and three repeats. Retain cold/first-use behavior and a separate five-minute combined endurance attempt. Screening is exploratory. Native visible release evidence requires the intended rendering; hidden/preview runs establish narrower functionality. Use profiled builds for diagnosis, with overhead disclosed, and reuse unchanged release candidates across checks.
+
+Use the policy's proposed **p99 <=6.944 ms** gate per required visible role/capture; report p50/p95/p99/max and counts over 6.944/13.889 ms. The earlier GDJ-20 local software confirmation **p95 <=100 ms** and sampled **RTT <=20 ms** remain provisional diagnostics for this same-machine comparison, distinct from physical input/display latency. Declare any additional bandwidth/memory budgets before measurements. Report packet/byte rates, queue occupancy/high-water/age, deferred sends, disconnects and instrumentation cost.
+
+Acceptance requires no lost simulation time, catch-up limit, dropped authoritative combat/XP event, duplicate credit, unbounded backlog or unexplained state disagreement. Keep stable run/player/weapon/incarnation attribution, independent choices, pause/control revisions, death/return, Retry/stale rejection and exact XP-value conservation. Match actual work and duration when comparing implementations; a seed alone is insufficient.
+
+Record live enemies; installed/active weapons; triggers, rays and target probes; accepted/rejected hits, actual damage/kills by owner; XP carriers/value/merge/collection work; visible effects/instances; simulation ticks; CPU/GPU/allocations where available; network activity. Hidden visuals or reduced combat work cannot pass as an optimization. Label any diagnostic frozen loadout/invulnerability and omitted gameplay explicitly; preserve the ordinary earned fixture separately.
+
+Use Editor/Play Mode and affected tests for iteration. Build a standalone for playable checkpoints/native measurements, then reuse the exact unchanged candidate. Deliver one clear current human build and verify its source/scenario, avoiding the previous v7/v3 mix-up. Keep human instructions short: movement/aim, weapon/threat readability, co-op agreement and hitches. An automated companion supports pair verification but supplies no second human opinion. Report LAN/internet, four players, final boss/VFX density and >10,000-enemy co-op as unverified unless measured.
+
+## Relevant context and boundaries
+
+Start with [weapon-stack report/integration](../../playtests/2026-10-05-weapon-stack.md), its [compact v3 evidence](../../playtests/evidence/gdj-3-weapon-stack/verification-v3.json), [GDJ-3 implementation record](GDJ-3.md), [growth evidence](../../playtests/2026-10-05-earned-growth.md) and [prototype instructions](../../../prototypes/001-stacked-weapons/README.md). The [accepted small local-pair capture](../../playtests/2026-10-04-shared-rifle.md#controlled-native-capture--three-repeats-pass) supplies earlier measurement context. Inspect `ScenarioConfiguration`, `SharedEncounter`, `SharedConnection`, `WeaponArsenal`, `SharedGame`, XP/precision/rendering, existing local crowd code and relevant tests before selecting changes.
+
+Damage balance, maximum range/falloff, presentation refinement, new weapon/enemy content, full Zone, recovery, four-player admission, broad architecture/runner rewrites, package upgrades and renderer-preset promotion stay separate. Known future interactions should remain possible without speculative systems. This task scopes an integrated measurement, not another isolated proof that three weapons can feel different.
+
+## Resume and required return
+
+Owner-authorized dispatch preparation only: exact main/runtime identity, board, accepted handoff and remaining gates verified; no new runtime, build or performance result. Exact worker ID and committed brief live in Linear after creation. Coordinator is `01a0ff82-9c47-77a2-b780-0e86575639f1`, host `local`.
+
+Next: establish the isolated checkout, record its path/branch/base, inspect the limiting seams and append the frozen experiment plan before runtime edits. Save completed stages, exact revision, checks, remaining work, blockers and next action at useful checkpoints. Linear owns live stage status. Return a draft PR when source changes, exact clean source/build/archive/manifest, workload/settings, tests, raw and summarized measurements, retained failures, owner observations, supported limits and one next outcome. Update current state only for verified changed facts. Attach the PR and link evidence from Linear. Integration follows review and owner authorization; no automatic merge.
