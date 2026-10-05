@@ -2496,7 +2496,7 @@
   "failureInterpretation": "Two v2 attempts hit the existing eight-tick catch-up limit. Aborting-frame duration and cause were not recorded. v3 adds diagnostics without changing gameplay/preview behavior/limit; later passes do not establish that the cause is fixed. Native stability/performance remains open.",
   "harnessCorrections": [
     "A real solo defeat is a legal ending, not a failed timer completion.",
-    "Resolve relative player/results paths before launch; save compact failures and fail immediately on unexpected Aborted state. The gdj3-v2-solo-check2 launch supplies no runtime evidence."
+    "Resolve relative player/results paths before launch; save compact failures and fail immediately on unexpected Aborted state. Seven gdj3-v2-solo-check2 files were written inside the player working directory and recovered under its misplaced-output evidence folder. It reached Choosing / level 2 / tick 489 but supplies no completed progression verification."
   ],
   "limits": "Ordinary scripted earning and explicit choices; frozen diagnostic references. Owned background desktop and v2 muted audio/preview exclude native FPS or human feel claims. 35 drones, same-machine loopback only; larger dense co-op feasibility remains open."
 }
