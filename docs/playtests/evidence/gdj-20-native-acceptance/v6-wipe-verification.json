@@ -1,0 +1,52 @@
+{
+  "source": {
+    "revision": "aee61590dffb86fc38a34ed1b9163efc914b2e17",
+    "builtUtc": "2026-10-05T00:12:12.7222755Z",
+    "dirty": false
+  },
+  "terminalParity": {
+    "run": true,
+    "ticks": true,
+    "state": true,
+    "players": true,
+    "enemyStates": true
+  },
+  "state": 3,
+  "ticks": 734,
+  "elapsedSeconds": 12.233333333333333,
+  "terminalHP": [
+    0,
+    0
+  ],
+  "terminalReturnAt": [
+    17.233333587646484,
+    16.88333511352539
+  ],
+  "terminalLives": [
+    1,
+    1
+  ],
+  "deathTransitions": {
+    "host": [
+      {
+        "tick": 713,
+        "health": [
+          10,
+          0
+        ]
+      }
+    ],
+    "client": [
+      {
+        "tick": 713,
+        "health": [
+          10,
+          0
+        ]
+      }
+    ]
+  },
+  "assessment": "Functional standalone evidence only. Computer Use stopped on physical Escape before window inspection. Human defeat/disconnect readability and visible performance acceptance remain pending. Both exact owned players stopped after identity verification.",
+  "visibility": "Unverified; no screenshot accepted",
+  "connection": "Same-PC IPv4 loopback port 7791; native pair, no preview."
+}
