@@ -6,7 +6,7 @@ October 4, 2026 (America/Chicago). **Functional candidate ready for review; owne
 
 - Base: merged main `e6434ec7575e2d7e3e81e3d0b799bc15299bb6e1`; foundation revision 18.
 - Runtime/release source: **`ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2`**, clean. Unity 6000.3.25f1 / Transport 2.7.4 unchanged. Release built UTC `2026-10-05T02:52:00.2602718Z`.
-- Whole player: `C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/build/StackLab-GDJ22-v1/`. All **167 files** rehash with zero mismatches against the [manifest](evidence/gdj-22-scenarios/v1-player-manifest.json), SHA-256 `a0b601a6ec5f553ee2b728a1ffc57d4449ebc68a4b26a5a909180abf9a4a9b99`. Distribute this entire folder. Accepted GDJ-20 and solo archives were untouched.
+- Whole player: `C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/build/StackLab-GDJ22-v1/`. All **167 files** rehash with zero mismatches against the [manifest](evidence/gdj-22-scenarios/v1-player-manifest.json), SHA-256 `191c8913837abeb077df372408cc899df7143ddc80f33560e81f81494ae9228a`. Distribute this entire folder. Accepted GDJ-20 and solo archives were untouched.
 - Worktree: `C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev`; branch `codex/gdj-22-scenario-config`. [Task contract](../planning/tasks/GDJ-22.md) was committed before runtime edits.
 
 ## Implemented contract
@@ -78,4 +78,4 @@ Use `--scenario shared-rifle` for the default; add `--rate 120 --duration 8` for
 
 ## Remaining scope and handoff
 
-Owner visibility/expectation response and coordinator review remain. Do not merge automatically. Full lobby/readiness design, unified command processing, GDJ-6 progression, thinking space, recovery/migration, four players/dense replication and GDJ-21 runner/viewer redesign are excluded. GDJ-21 can reuse scenario construction/validation and evidence identity; future earned builds must not mutate frozen starting definitions. No editor/package upgrade, external asset or new performance claim is introduced.
+Draft [PR #13](https://github.com/OpenCnid/game-dev-journey/pull/13) is open and attached. Owner visibility/expectation response and coordinator review remain. Do not merge automatically. Full lobby/readiness design, unified command processing, GDJ-6 progression, thinking space, recovery/migration, four players/dense replication and GDJ-21 runner/viewer redesign are excluded. GDJ-21 can reuse scenario construction/validation and evidence identity; future earned builds must not mutate frozen starting definitions. No editor/package upgrade, external asset or new performance claim is introduced.
