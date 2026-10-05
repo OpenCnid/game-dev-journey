@@ -1,0 +1,109 @@
+[
+  {
+    "case": "default",
+    "terminal": "Complete",
+    "tick": 3600,
+    "configuration": {
+      "version": 1,
+      "seed": 137,
+      "enemies": 12,
+      "enemyHp": 60,
+      "bodyDamage": 20,
+      "headMultiplier": 2,
+      "headDamage": 40,
+      "run": 1,
+      "duration": 60.0,
+      "rifleInterval": 0.11999999731779099,
+      "rifleRate": 8.333333969116211,
+      "name": "Shared rifle",
+      "identity": "d29ab1d2dae9a04f6c6c554845b6a800131236465bf7ba418827a8bf9c927593",
+      "session": "0a10ead1c86d4d01847507fc7dd105f4"
+    },
+    "fullTerminalStateParity": true,
+    "nonterminalEventParity": true,
+    "eventCounts": [
+      {
+        "Damage": 574,
+        "Miss": 426
+      },
+      {
+        "Damage": 574,
+        "Miss": 426
+      }
+    ],
+    "note": "One extra late Terminal rejection is host-only in override/fast; client discards old-run feedback after Retry. It changes no state."
+  },
+  {
+    "case": "override",
+    "terminal": "Complete",
+    "tick": 3600,
+    "configuration": {
+      "version": 1,
+      "seed": 271,
+      "enemies": 12,
+      "enemyHp": 90,
+      "bodyDamage": 15,
+      "headMultiplier": 3,
+      "headDamage": 45,
+      "run": 1,
+      "duration": 60.0,
+      "rifleInterval": 0.25,
+      "rifleRate": 4.0,
+      "name": "Developer parity",
+      "identity": "04e484e0c6ad621896f8f4b40491c998248f5856bee9a4c7b9506ca880ffa5e4",
+      "session": "deb385cda887445ca80479d84eed80e5"
+    },
+    "fullTerminalStateParity": true,
+    "nonterminalEventParity": true,
+    "eventCounts": [
+      {
+        "Damage": 271,
+        "Miss": 210,
+        "Terminal": 1
+      },
+      {
+        "Damage": 271,
+        "Miss": 210
+      }
+    ],
+    "note": "One extra late Terminal rejection is host-only in override/fast; client discards old-run feedback after Retry. It changes no state."
+  },
+  {
+    "case": "fast",
+    "terminal": "Complete",
+    "tick": 480,
+    "configuration": {
+      "version": 1,
+      "seed": 137,
+      "enemies": 12,
+      "enemyHp": 60,
+      "bodyDamage": 20,
+      "headMultiplier": 2,
+      "headDamage": 40,
+      "run": 1,
+      "duration": 8.0,
+      "rifleInterval": 0.008333333767950535,
+      "rifleRate": 119.99999237060547,
+      "name": "Shared rifle (override)",
+      "identity": "79f37a1ff2e455e5395e378693d9e9a8a6f951eaabd2bb35f365365f9fb57a07",
+      "session": "12cbe9b7e1cb4778af3e1589f432088e"
+    },
+    "fullTerminalStateParity": true,
+    "nonterminalEventParity": true,
+    "eventCounts": [
+      {
+        "Damage": 703,
+        "StaleEnemy": 415,
+        "Miss": 802,
+        "Terminal": 2
+      },
+      {
+        "Damage": 703,
+        "StaleEnemy": 415,
+        "Miss": 802,
+        "Terminal": 1
+      }
+    ],
+    "note": "One extra late Terminal rejection is host-only in override/fast; client discards old-run feedback after Retry. It changes no state."
+  }
+]
