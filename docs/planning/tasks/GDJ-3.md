@@ -1,0 +1,44 @@
+# GDJ-3: Earn a simultaneous weapon stack
+
+## Outcome
+
+The owner selected MVP proof over further detail refinement on October 5: give v7 a quick blocking-flow check, then test weapon stacking with cooperative progression. One rough graybox run must grow a rifle into a recognizably different arsenal and expose two build paths. This serves perceptible power growth and distinct builds; measure the changed workload and preserve readability.
+
+## Base and blocking gate
+
+Reuse the attached managed checkout `C:/Users/Darian/.codex/worktrees/gdj-23-earned-growth/new-game-dev` on new branch `codex/gdj-3-weapon-stack`, from `cc00db7` / PR 14. Main is still `bd2bd14`; no merge is authorized. PR 14 and the exact v7 archive stay frozen. New review will be stacked on that candidate so its changes are inspectable.
+
+v7 runtime `f7084023ae6ff3988efe384421c8a809a1aade8b` has 131 Edit / 15 Play passes and four ordinary 60-second solo/pair runs covering start, earned choice, physical freeze, explicit Continue, Retry/reset/stale rejection and loss. Its full archive rehashes unchanged. These existing checks satisfy the automated blocking-flow gate; the optional quick human smoke is pending, not invented. The bridge screenshot limitation remains documented and is not a gameplay blocker. Additional XP/audio/presentation polish is parked. GDJ-23 remains In Review; no new acceptance or performance result is implied.
+
+## Bounded test settings
+
+Use a new `weapon-stack` fixture: same arena, seed 137, 35 respawning 60-HP drones, 100 player HP, baseline rifle 20/40 at .12 seconds, **120 active seconds**, two earned choices at **10 and 25 cumulative collected XP**, test level cap 3. These are experimental settings, not final balance/run format. Preserve the existing one-level earned-growth fixture.
+
+At level 2, each player independently chooses **Add scattergun** or **Add piercer**. At level 3, choose the missing secondary (three simultaneous weapons) or specialize the previously added one (a distinct two-weapon build). Scattergun: five horizontal fan rays, 12 body/24 head damage, .75-second cadence, 30-metre range, ±8-degree fan. Its ordinary specialization adds two pellets. Piercer: one 65-metre ray, 16/32 damage, .65-second cadence, at most three distinct enemies in distance order; its ordinary specialization raises that to five. No wall penetration policy is selected by this empty bounded arena.
+
+All installed weapons fire together with independent cooldowns, following the current camera aim. Keep the paused chooser, all-roster Continue, shared collected XP, independent offers, dead participation, return/ending/Retry and loss-abort. No extra enemies, skills, rares, magnets, recovery, generalized modifier engine or presentation refinement.
+
+An explicit `stack-reference` scenario with a frozen starting arsenal supports one-versus-three and specialized loadout comparisons without pretending debug grants were earned. Same workload/settings, no XP/choices, clearly marked diagnostic in configuration/reporting. No diagnostic setup may enter the ordinary earned run.
+
+## Ownership and source plan before implementation
+
+`ScenarioConfiguration` owns named starting fixture/reference arsenal and a versioned identity. `SharedPlayer` owns a compact authoritative arsenal mask, first addition and specialization, independent from the primary rifle settings. Extend offer card identity rather than relying on the old two-option complement. Definitions distinguish installing a slot from enhancing an existing trait; both cards have explicit legal consumers. Preserve room for later weapon/player/loot/draw effects without implementing them.
+
+`SharedEncounter` owns six player/slot weapon IDs, per-slot cooldowns, complete historical pose/build eligibility, trigger identity, multi-ray/piercing damage, immutable per-ray/target feedback and enemy-incarnation death deduplication. Derive all rays/targets/damage on authority; client submits only owned weapon plus aim/identity. A piercing trigger hits an incarnation once; scatter rays may hit the same live incarnation but a reused slot cannot receive another ray from its previous incarnation. The killing ray creates one death/drop. Capture the complete pre-trigger pose before applying multi-ray damage.
+
+Growth grants one offer per earned level/roster member with run/level-scoped IDs and independent order streams. Reuse the physical Choosing/control revision barrier for both levels. Recompute cooldown eligibility per slot without retroactive bursts; clear queued fire at the pause, retain builds on return and reset every slot/counter/offer on Retry.
+
+`SharedGame` emits installed slots independently, projects authority outcomes and shows minimal colored slot/tracer cues. Reports record trigger/ray/target/weapon attribution so one-versus-three comparisons have equivalent work counters. Compact build state stays in bounded snapshots; reliable hit/growth records stay individually bounded. Test actual packet sizes after extensions. Never discard XP or hits to fit a packet.
+
+## Meaningful checks and stopping point
+
+- Independent weapon cadence/ownership, scatter geometry, piercing distance/unique targets, head/body damage, historical incarnation reuse and one death/drop.
+- Two personal growth stages, legal card targets/build divergence, same-tick paused commits, all-roster readiness, dead retention and complete Retry/stale/duplicate rejection.
+- Actual standalone solo and pair earning, broad/specialized paths and a controlled reference comparison; preserve original fixtures/tests and whole v7 build.
+- Clean release, exact source/manifest/report and short owner comparison. Scripts establish mechanics; the owner establishes perceived power/differences and blockers.
+
+The current shared fixture remains limited to 35 drones and its managed pair simulation/full snapshots do not scale to thousands. Existing Jobs/Burst local crowd controls remain separate. Record this as an unresolved MVP risk: a later representative dense stacked workload and scalable cooperative replication must be measured before claiming the larger game is feasible. GDJ-1's preset naming/20,000-boss endurance task no longer blocks this owner-selected gameplay experiment; its unverified claims remain unverified. Native visible performance capture requires a quiet dedicated desktop window and is not inferred from the background preview.
+
+## Resume
+
+Owner authorization is the October 5 “Okay let's do that then” reply to the quick-v7-check/weapon-stack recommendation. Worktree reused; branch/base above; no other agent/foreground input/new chat. Next implement this bounded slice and prepare a candidate. Keep GDJ-23 review separate, and record any reported v7 blocker before using it as a baseline.
