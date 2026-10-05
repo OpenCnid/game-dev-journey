@@ -212,7 +212,7 @@ namespace Journey
             }
             if (keyboard != null && keyboard.enterKey.wasPressedThisFrame) ContinueChoice();
             if (authority != null && authority.CommitChoices()) Publish();
-            if (scripted && display.State == SharedState.Choosing && display.Players[local].Offer.Selected != UpgradeId.None) ContinueChoice();
+            if (scripted && GrowthUpgrade.Valid(scriptedChoice) && display.State == SharedState.Choosing && display.Players[local].Offer.Selected != UpgradeId.None) ContinueChoice();
             float dt = Mathf.Min(.05f, (float)(frame * .001));
             bool active = display.State == SharedState.Running && player.Health > 0;
             Vector3 movement = Vector3.zero;

@@ -162,11 +162,15 @@ namespace Journey.Tests
                 Clock.SetValue(game, Time.realtimeSinceStartupAsDouble - 5); Update.Invoke(game, null);
                 Assert.That(game.Snapshot.Tick, Is.EqualTo(pausedTick), "Paused wall time is not physical simulation");
                 Assert.That(game.ContinueChoice(), Is.False, "No implicit choice or readiness");
+                typeof(SharedGame).GetField("scripted", Hidden).SetValue(game, true);
                 UpgradeId first = game.Snapshot.Players[0].Offer.Card(1);
                 Assert.That(game.ChoiceControls(true, 1), Is.True, "Tab cannot hide the paused choice");
                 authority.Step(); Publish.Invoke(game, null); Pump(game);
                 Assert.That(game.Snapshot.Players[0].Offer.Selected, Is.EqualTo(first));
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Choosing), "Scripted movement alone does not authorize Continue");
+                Assert.That(game.Snapshot.Players[0].ChoiceReady, Is.False);
                 Assert.That(game.ChoiceControls(false, 2), Is.False);
+                typeof(SharedGame).GetField("scripted", Hidden).SetValue(game, false);
                 Assert.That(game.ContinueChoice(), Is.True);
                 Clock.SetValue(game, Time.realtimeSinceStartupAsDouble - 5); Update.Invoke(game, null);
                 Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Running));

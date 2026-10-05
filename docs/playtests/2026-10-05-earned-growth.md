@@ -36,21 +36,23 @@ Earlier v3 checks preserve two ordinary 60-second solo and pair runs with contra
 
 ## Candidate and reproduction
 
-The v6 clean build, complete archive, background standalone results and draft PR are being finalized. The next checkpoint below will record their exact source and paths before delivery.
+The first revised v6 clean build, source `1dc2465fe784c098bcadfc8d4c298ead48a529f2`, is preserved with [its manifest](evidence/gdj-23-earned-growth/release-manifest-v6.json). Its standalone checker caught an unconfigured scripted-player bug: after an explicit card command, scripted movement automatically marked Continue. The physical freeze held before selection, but the checker rejected the implicit resume. Restrict automatic Continue to a companion explicitly configured with `-growthChoice`; the Play Mode regression now also exercises scripted movement without that configuration. All 15 Play Mode tests pass after the correction. The failed run/desktop lifetime remain in `artifacts/gdj23-v6-solo` (input desktop Default before/after, owned player stopped). v6 is not the delivery candidate.
+
+The corrected v7 build, complete archive, background standalone results and draft PR are being finalized. The next checkpoint will record their exact source and paths before delivery.
 
 All automated standalone interaction uses the existing owned Win32 background desktop and game-owned command/state bridge. It never switches the input desktop. The camera bridge changes rendering/timing and omits the native HUD, so its checks establish functionality only. `-screenshotAtLevelUp -screenshot <absolute-path>` requests a game-owned native chooser capture for visual inspection; it does not establish native input or performance.
 
 Reproduce the functional checker with the bundled Python (or a Windows Python installation):
 
 ```powershell
-python docs/playtests/evidence/gdj-23-earned-growth/check_growth.py --player <absolute-v6-StackLab.exe> --results <new-absolute-results-folder> --solo
-python docs/playtests/evidence/gdj-23-earned-growth/check_growth.py --player <absolute-v6-StackLab.exe> --results <another-new-results-folder> --port 17823
+python docs/playtests/evidence/gdj-23-earned-growth/check_growth.py --player <absolute-v7-StackLab.exe> --results <new-absolute-results-folder> --solo
+python docs/playtests/evidence/gdj-23-earned-growth/check_growth.py --player <absolute-v7-StackLab.exe> --results <another-new-results-folder> --port 17823
 ```
 
 It earns XP through ordinary diagnostic movement/firing, holds the choice for wall time, checks frozen state and independent selections, tests invalid/duplicate Continue, contrasting/swapped builds, event/value parity and Retry/stale rejection. Pair loss is tested during the choice freeze. It retains commands, states, growth/combat traces, summaries, invocation and desktop lifetime. No forced XP, hidden immunity or synthetic enjoyment score.
 
 ## Remaining owner comparison
 
-Launch v6, choose Earned growth for solo and Start. Watch whether XP/range/audio are immediately clear. At level-up, leave the centered chooser open for several seconds; confirm combat/time stop, read both cards, choose Stronger hits first and explicitly Continue. Assess whether fewer shots to kill is noticeable before reading stats and whether the interruption helps. Retry and compare Faster fire, then report XP pickup sound comfort, attraction/merging clarity and any missed/blocked controls. Native co-op contrast/swapped choices and second-human impressions remain unobserved.
+Launch v7, choose Earned growth for solo and Start. Watch whether XP/range/audio are immediately clear. At level-up, leave the centered chooser open for several seconds; confirm combat/time stop, read both cards, choose Stronger hits first and explicitly Continue. Assess whether fewer shots to kill is noticeable before reading stats and whether the interruption helps. Retry and compare Faster fire, then report XP pickup sound comfort, attraction/merging clarity and any missed/blocked controls. Native co-op contrast/swapped choices and second-human impressions remain unobserved.
 
 Required remaining gates are owner readability/choice/sound observations, Stronger hits comparison, native co-op flow and representative visible release timing with equivalent workload counters, then coordinator handoff review. Automated passes or a draft PR do not mark GDJ-23 Done. The owner-controlled v5 window is left alone while the revised build is prepared.
