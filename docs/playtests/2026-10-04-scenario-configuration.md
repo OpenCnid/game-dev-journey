@@ -1,6 +1,6 @@
 # GDJ-22 — scenario configuration candidate
 
-October 4, 2026 (America/Chicago). **Functional candidate ready for review; owner visibility/expectation feedback pending.** This report does not establish enjoyment, balance or new native performance. GDJ-20's accepted fixed loopback evidence remains separate.
+October 4, 2026 (America/Chicago). **Owner accepts the presentation for developer testing; candidate awaits coordinator review.** This report does not establish enjoyment, balance or new native performance. GDJ-20's accepted fixed loopback evidence remains separate.
 
 ## Exact source and build
 
@@ -46,7 +46,7 @@ Raw configuration, run-1 summaries and attributed event CSVs are retained beside
 
 Agent inspection of the actual release windows verifies [named default selections](evidence/gdj-22-scenarios/native-menu.png), [solo default](evidence/gdj-22-scenarios/native-solo-default.png), [solo developer](evidence/gdj-22-scenarios/native-solo-developer.png), and matching developer settings on [host](evidence/gdj-22-scenarios/native-shared-developer-host.png) / [client](evidence/gdj-22-scenarios/native-shared-developer-client.png). The shared HUD displays Host ownership, Retry retention and matching content identity. These are native window captures; no preview-only HUD reconstruction is used. An earlier hidden native ScreenCapture returned black and was excluded from the visibility evidence.
 
-The owner was shown the native comparison and asked whether the scenario differences and host ownership are clear and match expectations. The owner replied: “I can't answer this question without what the rubric or my expectations should entail. It's unclear.” This is feedback that the review request lacked a usable rubric, not acceptance or rejection of the implementation. The visibility gate remains open.
+The owner was shown the native comparison and asked whether the scenario differences and host ownership are clear and match expectations. The owner replied: “I can't answer this question without what the rubric or my expectations should entail. It's unclear.” This identified an unusable review request; the rubric below was then supplied. The later acceptance below supersedes that pending visibility gate.
 
 ### Concrete owner review rubric
 
@@ -59,6 +59,12 @@ The owner is reviewing whether the native menu/HUD communicates the tested behav
 | Ownership and when changes apply | The UI communicates that Join uses the host's settings; both players share them; shared Retry keeps them; changing shared tuning requires a new session. |
 
 The default solo/shared HP difference preserves earlier test fixtures; Developer parity is a deliberate comparison configuration, not proposed final balance. A useful review identifies which criterion is clear or names missing/confusing wording, illegible text or unexpected behavior. “Cannot tell from these screenshots” is also valid feedback and calls for a guided native comparison. Agent inspection and automated parity are not owner acceptance, gameplay enjoyment or a balance decision.
+
+### Owner acceptance for developer testing
+
+After the rubric was supplied, the owner asked whether both versions are development prototypes rather than the final product. We clarified that the scenario selectors, technical labels and tuning values support testing, and that an optimized standalone release build does not mean a finished product. The owner then accepted the intended scope: **“Yes, for testing they are fine. Since they're just for developers AKA myself.”**
+
+This completes GDJ-22's owner visibility/expectation gate for the developer-facing solo/co-op scenario controls and settings. It does not accept final player-facing UI, final game balance or gameplay enjoyment, and provides no new performance evidence or merge authorization. Runtime source, build, archived player and checks remain unchanged.
 
 ## Reproduction
 
@@ -90,4 +96,4 @@ Use `--scenario shared-rifle` for the default; add `--rate 120 --duration 8` for
 
 ## Remaining scope and handoff
 
-Draft [PR #13](https://github.com/OpenCnid/game-dev-journey/pull/13) is open and attached. Owner visibility/expectation response and coordinator review remain. Do not merge automatically. Full lobby/readiness design, unified command processing, GDJ-6 progression, thinking space, recovery/migration, four players/dense replication and GDJ-21 runner/viewer redesign are excluded. GDJ-21 can reuse scenario construction/validation and evidence identity; future earned builds must not mutate frozen starting definitions. No editor/package upgrade, external asset or new performance claim is introduced.
+Draft [PR #13](https://github.com/OpenCnid/game-dev-journey/pull/13) is open and attached. The owner visibility/expectation gate is complete for developer testing; coordinator code/integration review remains. Do not merge automatically. Full lobby/readiness design, unified command processing, GDJ-6 progression, thinking space, recovery/migration, four players/dense replication and GDJ-21 runner/viewer redesign are excluded. GDJ-21 can reuse scenario construction/validation and evidence identity; future earned builds must not mutate frozen starting definitions. No editor/package upgrade, external asset or new performance claim is introduced.
