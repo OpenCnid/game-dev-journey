@@ -27,7 +27,10 @@ namespace Journey
         double previousClock, lastRtt;
         string reason = "", output = "", screenshot = "";
         StreamWriter frameLog, hitLog;
-        GUIStyle heading, small;
+        GUIStyle heading, small, lifeHeading, lifeDetail;
+        const float ViewTransitionSeconds = .2f;
+        float viewTransition;
+        int previousWatched = -1;
         SharedPreview preview;
         Vector3 previewMovement;
         double previewInputUntil;
@@ -120,6 +123,7 @@ namespace Journey
             {
                 shotSequence = 0; emitted.Clear(); feedback.Clear(); saved = false;
                 frames.Clear(); confirms.Clear(); catchupLimits = 0;
+                previousWatched = -1; viewTransition = 0;
             }
         }
         void Update()
@@ -190,6 +194,9 @@ namespace Journey
             SyncGeneration();
             player = display.Players[local]; active = display.State == SharedState.Running && player.Health > 0;
             int watched = player.Health == 0 && display.Players[1 - local].Health > 0 ? 1 - local : local;
+            viewTransition = Mathf.Max(0, viewTransition - (float)(frame * .001));
+            if (previousWatched >= 0 && watched != previousWatched) viewTransition = ViewTransitionSeconds;
+            previousWatched = watched;
             Vector3 cameraPosition = watched == local ? predicted : display.Players[watched].Position;
             float cameraYaw = watched == local ? yaw : display.Players[watched].Yaw, cameraPitch = watched == local ? pitch : display.Players[watched].Pitch;
             projection.ProjectShared(display, local, cameraPosition);
@@ -303,17 +310,35 @@ namespace Journey
         void OnGUI()
         {
             if (connection == null) return;
-            if (heading == null) { heading = new GUIStyle(GUI.skin.label) { fontSize = 23, fontStyle = FontStyle.Bold }; small = new GUIStyle(GUI.skin.label) { fontSize = 15 }; }
+            if (heading == null)
+            {
+                heading = new GUIStyle(GUI.skin.label) { fontSize = 23, fontStyle = FontStyle.Bold };
+                small = new GUIStyle(GUI.skin.label) { fontSize = 15 };
+                lifeHeading = new GUIStyle(heading) { fontSize = 32, alignment = TextAnchor.UpperCenter };
+                lifeDetail = new GUIStyle(small) { fontSize = 24, alignment = TextAnchor.UpperCenter };
+            }
             float scale = Mathf.Min(Screen.width / 1280f, Screen.height / 720f);
             GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one * scale); float w = Screen.width / scale, h = Screen.height / scale;
             SharedPlayer p = display.Players[local], a = display.Players[0], b = display.Players[1];
+            if (viewTransition > 0)
+            {
+                GUI.color = new Color(0, 0, 0, viewTransition / ViewTransitionSeconds);
+                GUI.DrawTexture(new Rect(0, 0, w, h), Texture2D.whiteTexture); GUI.color = Color.white;
+            }
             GUI.Label(new Rect(25, 18, 1000, 40), $"SHARED RIFLE / {(local == 0 ? "A · HOST" : "B · CLIENT")} / {display.State}", heading);
             GUI.Label(new Rect(25, 57, 1150, 28), $"Run {display.Run}   ·   12 drones / 60 HP   ·   A: {a.Health} HP, {a.Damage} damage, {a.Kills} kills   ·   B: {b.Health} HP, {b.Damage} damage, {b.Kills} kills", small);
             GUI.Label(new Rect(w - 210, h - 60, 200, 40), $"{Mathf.Max(0, 60 - display.Elapsed):F1}s   RTT {lastRtt:F1}ms", small);
             if (display.State == SharedState.Running)
             {
-                GUI.color = view.Feedback.CrosshairColor;
-                GUI.DrawTexture(new Rect(w / 2 - 7, h / 2 - 1, 14, 2), Texture2D.whiteTexture); GUI.DrawTexture(new Rect(w / 2 - 1, h / 2 - 7, 2, 14), Texture2D.whiteTexture); GUI.color = Color.white;
+                if (p.Health > 0)
+                {
+                    GUI.color = view.Feedback.CrosshairColor;
+                    GUI.DrawTexture(new Rect(w / 2 - 7, h / 2 - 1, 14, 2), Texture2D.whiteTexture); GUI.DrawTexture(new Rect(w / 2 - 1, h / 2 - 7, 2, 14), Texture2D.whiteTexture); GUI.color = Color.white;
+                }
+                if (p.Health == 0)
+                    LifeMessage(w, h, "YOU DIED", $"Respawning in {Mathf.Max(0, p.ReturnAt - display.Elapsed):F1}s", $"Spectating teammate {(local == 0 ? "B" : "A")}");
+                else if (display.Elapsed < p.ImmuneUntil)
+                    LifeMessage(w, h, "BACK IN THE FIGHT", $"{p.Health} HP · Contact protection {p.ImmuneUntil - display.Elapsed:F1}s", "Your camera and controls are restored");
                 GUI.Label(new Rect(25, h - 68, 950, 32), p.Health == 0 ? $"Following teammate · Return in {Mathf.Max(0, p.ReturnAt - display.Elapsed):F1}s" :
                     display.Elapsed < p.ImmuneUntil ? $"RETURN IMMUNITY {p.ImmuneUntil - display.Elapsed:F1}s" : "WASD · Mouse aim · Auto rifle", heading);
                 if (!inputActive && !scripted && p.Health > 0)
@@ -334,6 +359,15 @@ namespace Journey
                 if (GUI.Button(new Rect(w / 2 - 120, h / 2, 240, 50), "Retry (R)")) Retry();
             }
             else GUI.Label(new Rect(25, 110, 1150, 80), display.State == SharedState.Waiting ? "Waiting for the fixed host/client pair…" : "Test aborted: " + reason, heading);
+        }
+        void LifeMessage(float w, float h, string title, string detail, string context)
+        {
+            Rect panel = new Rect(w / 2 - 310, h * .20f, 620, 155);
+            GUI.color = new Color(.02f, .035f, .06f, .92f);
+            GUI.DrawTexture(panel, Texture2D.whiteTexture); GUI.color = Color.white;
+            GUI.Label(new Rect(panel.x, panel.y + 12, panel.width, 44), title, lifeHeading);
+            GUI.Label(new Rect(panel.x, panel.y + 61, panel.width, 34), detail, lifeDetail);
+            GUI.Label(new Rect(panel.x, panel.y + 107, panel.width, 30), context, lifeDetail);
         }
         static void SetCursor(bool locked) { Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None; Cursor.visible = !locked; }
         void OnDestroy()
