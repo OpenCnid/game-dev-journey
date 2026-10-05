@@ -1,0 +1,109 @@
+{
+  "reviewHead": "dfbe2d73cd73245201d85fce07e1ec8439964625",
+  "runtimeSource": "ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2",
+  "finding": "Generation reset clears valid new-run feedback queued by the same transport Poll. The first host hit is missing on the client; authoritative terminal state remains identical.",
+  "priority": "P2",
+  "pairs": {
+    "default": {
+      "missingClientHit": {
+        "run": "1",
+        "player": "0",
+        "weapon": "1",
+        "event": "1",
+        "pose_tick": "0",
+        "life": "1",
+        "decision": "Damage",
+        "enemy": "0",
+        "incarnation": "1",
+        "region": "Body",
+        "requested": "20",
+        "before": "60",
+        "actual": "20",
+        "after": "40"
+      },
+      "remainingNonterminalOutcomesIdentical": true,
+      "terminalPlayersAndEnemiesEqual": true,
+      "outcomesByRole": {
+        "host": {
+          "Damage": 561,
+          "Miss": 405,
+          "StaleLife": 1
+        },
+        "client": {
+          "Miss": 405,
+          "Damage": 560,
+          "StaleLife": 1
+        }
+      },
+      "rawArtifactDirectory": "prototypes/001-stacked-weapons/artifacts/gdj22-review-default"
+    },
+    "developer": {
+      "missingClientHit": {
+        "run": "1",
+        "player": "0",
+        "weapon": "1",
+        "event": "1",
+        "pose_tick": "0",
+        "life": "1",
+        "decision": "Damage",
+        "enemy": "0",
+        "incarnation": "1",
+        "region": "Body",
+        "requested": "15",
+        "before": "90",
+        "actual": "15",
+        "after": "75"
+      },
+      "remainingNonterminalOutcomesIdentical": true,
+      "terminalPlayersAndEnemiesEqual": true,
+      "outcomesByRole": {
+        "host": {
+          "Damage": 268,
+          "Miss": 192,
+          "Terminal": 1
+        },
+        "client": {
+          "Miss": 192,
+          "Damage": 267,
+          "Terminal": 1
+        }
+      },
+      "rawArtifactDirectory": "prototypes/001-stacked-weapons/artifacts/gdj22-review-developer"
+    },
+    "fast": {
+      "missingClientHit": {
+        "run": "1",
+        "player": "0",
+        "weapon": "1",
+        "event": "1",
+        "pose_tick": "0",
+        "life": "1",
+        "decision": "Damage",
+        "enemy": "0",
+        "incarnation": "1",
+        "region": "Body",
+        "requested": "15",
+        "before": "90",
+        "actual": "15",
+        "after": "75"
+      },
+      "remainingNonterminalOutcomesIdentical": true,
+      "terminalPlayersAndEnemiesEqual": true,
+      "outcomesByRole": {
+        "host": {
+          "Damage": 828,
+          "Miss": 781,
+          "StaleEnemy": 307,
+          "Terminal": 3
+        },
+        "client": {
+          "Damage": 827,
+          "Miss": 781,
+          "StaleEnemy": 307,
+          "Terminal": 2
+        }
+      },
+      "rawArtifactDirectory": "prototypes/001-stacked-weapons/artifacts/gdj22-review-fast"
+    }
+  }
+}

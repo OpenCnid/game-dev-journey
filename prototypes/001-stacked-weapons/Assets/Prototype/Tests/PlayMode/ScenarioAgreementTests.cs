@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using NUnit.Framework;
@@ -16,6 +17,37 @@ namespace Journey.Tests
         static readonly FieldInfo Clock = typeof(SharedGame).GetField("previousClock", Hidden);
         static void Pump(SharedGame game)
         { Clock.SetValue(game, Time.realtimeSinceStartupAsDouble - .016); Update.Invoke(game, null); }
+
+        [Test] public void StartAndRetryKeepCurrentRunFeedbackReceivedWithTheNewSnapshot()
+        {
+            var root = new GameObject("Batched generation feedback");
+            var view = new ArenaPresentation();
+            try
+            {
+                view.Create(root.transform);
+                var game = root.AddComponent<SharedGame>(); game.enabled = false;
+                typeof(SharedGame).GetField("view", Hidden).SetValue(game, view);
+                var queue = (Queue<SharedHit>)typeof(SharedGame).GetField("feedback", Hidden).GetValue(game);
+                var sync = typeof(SharedGame).GetMethod("SyncGeneration", Hidden);
+                var encounter = new SharedEncounter();
+                for (int run = 1; run <= 2; run++)
+                {
+                    encounter.Start(); game.Snapshot.CopyFrom(encounter.Current);
+                    // One transport Poll can deliver the new snapshot, an old hit,
+                    // and the new run's first hits before SyncGeneration executes.
+                    foreach (var source in new[] {
+                        new SharedShot { Run = run - 1, Event = 99 },
+                        new SharedShot { Run = run, Event = 1 },
+                        new SharedShot { Run = run, Event = 2 } })
+                        queue.Enqueue(new SharedHit(source, ShotDecision.Miss, default, default));
+                    sync.Invoke(game, null);
+                    Assert.That(queue.Count, Is.EqualTo(2), "Start/Retry must retain new-run feedback and discard stale feedback.");
+                    Assert.That(queue.Dequeue().Source.Event, Is.EqualTo(1));
+                    Assert.That(queue.Dequeue().Source.Event, Is.EqualTo(2));
+                }
+            }
+            finally { UnityEngine.Object.DestroyImmediate(root); view.Dispose(); }
+        }
 
         [UnityTest] public IEnumerator ActualGamesAgreeBeforeStartAndBothReadyRetryRetainsDefaultsAndOverride()
         {

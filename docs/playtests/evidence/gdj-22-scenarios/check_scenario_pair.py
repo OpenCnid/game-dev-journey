@@ -2,6 +2,7 @@
 Hidden windows/preview/short runs are not performance or human-play evidence.
 """
 import argparse
+import csv
 import json
 import subprocess
 import time
@@ -52,6 +53,17 @@ def command(i, action, state):
     temporary.write_text(json.dumps(item), encoding='utf-8')
     temporary.replace(directory / 'command.json')
 
+def audit_run_one_events():
+    outcomes = []
+    for role in ('host', 'client'):
+        with (a.results / role / 'events.csv').open(encoding='utf-8-sig', newline='') as stream:
+            outcomes.append([
+                {key: value for key, value in row.items() if key not in ('wall_seconds', 'confirmed_delay_ms')}
+                for row in csv.DictReader(stream) if row['run'] == '1' and row['decision'] != 'Terminal'
+            ])
+    assert outcomes[0] and outcomes[0] == outcomes[1], 'Host/client nonterminal feedback differs, including startup hits.'
+    return dict(result='PASS', identicalOutcomes=len(outcomes[0]), firstOutcome=outcomes[0][0])
+
 try:
     for i, role in enumerate(('host', 'client')):
         folder = a.results / role
@@ -101,10 +113,11 @@ try:
         if host and host['state'] == 'Aborted': break
         time.sleep(.05)
     assert host['state'] == 'Aborted', host
+    event_audit = audit_run_one_events()
     result = dict(result='PASS', note='Functional only; hidden preview pair, automated input, no performance claim.',
-                  start=start, terminal=terminal, oneReady=one_ready, reset=reset, stale=stale, afterClientLoss=host)
+                  start=start, terminal=terminal, oneReady=one_ready, reset=reset, stale=stale, afterClientLoss=host, eventAudit=event_audit)
     (a.results / 'verification.json').write_text(json.dumps(result, indent=2), encoding='utf-8')
-    print('PASS: agreement, exact terminal parity, one/both-ready Retry, stale rejection, hard client-loss abort.', flush=True)
+    print('PASS: agreement, exact terminal parity, one/both-ready Retry, stale rejection, hard client-loss abort, nonterminal feedback parity.', flush=True)
 finally:
     (a.results / 'observations.json').write_text(json.dumps(history), encoding='utf-8')
     for process in processes:

@@ -143,7 +143,15 @@ namespace Journey
             previewInputUntil = 0; previewMovement = Vector3.zero; previewFire = false;
             if (newRun)
             {
-                shotSequence = 0; emitted.Clear(); feedback.Clear(); saved = false;
+                shotSequence = 0; emitted.Clear(); saved = false;
+                // Poll can deliver the new snapshot and its first hits together.
+                // Retain that run's feedback while discarding prior-run events.
+                int queued = feedback.Count;
+                while (queued-- > 0)
+                {
+                    SharedHit hit = feedback.Dequeue();
+                    if (hit.Source.Run == run) feedback.Enqueue(hit);
+                }
                 frames.Clear(); confirms.Clear(); catchupLimits = 0;
                 previousWatched = -1; viewTransition = 0;
             }

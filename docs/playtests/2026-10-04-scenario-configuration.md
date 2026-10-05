@@ -66,6 +66,14 @@ After the rubric was supplied, the owner asked whether both versions are develop
 
 This completes GDJ-22's owner visibility/expectation gate for the developer-facing solo/co-op scenario controls and settings. It does not accept final player-facing UI, final game balance or gameplay enjoyment, and provides no new performance evidence or merge authorization. Runtime source, build, archived player and checks remain unchanged.
 
+## Coordinator review — feedback reset finding
+
+The owner requested the remaining code/integration review. Review of `dfbe2d73cd73245201d85fce07e1ec8439964625` found one P2 lifecycle issue during a deeper audit of repeated default/developer/120-per-second standalone runs: the client omitted the host's first hit from feedback/events, while authoritative player/enemy state still matched. `SharedGame.SyncGeneration` cleared the entire feedback queue after `Poll` could already have received the new snapshot and that run's first hits. The same ordering can occur at Retry. This reset behavior predated the scenario extraction but affects its integration checks.
+
+The [three reproduced omissions](evidence/gdj-22-scenarios/review-feedback-finding.json) preserve the exact missing event and limits. The [new regression before the fix](evidence/gdj-22-scenarios/review-feedback-before-PlayMode.xml) fails with zero retained events instead of two. The bounded fix filters queued feedback by the active run, preserving current-run order and discarding stale events. A Play Mode regression covers both initial Start and Retry; the standalone helper now compares all ordered run-1 nonterminal outcomes, including the first hit. Late terminal rejections remain outside that comparison because clients discard old-run feedback after Retry.
+
+A replacement clean release and standalone rechecks are being prepared. The original v1 archive/evidence above remain preserved. Review completion and the replacement source/build will be recorded here after those checks.
+
 ## Reproduction
 
 From the worktree above, with its Editor closed:
