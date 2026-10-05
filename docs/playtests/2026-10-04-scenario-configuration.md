@@ -46,7 +46,19 @@ Raw configuration, run-1 summaries and attributed event CSVs are retained beside
 
 Agent inspection of the actual release windows verifies [named default selections](evidence/gdj-22-scenarios/native-menu.png), [solo default](evidence/gdj-22-scenarios/native-solo-default.png), [solo developer](evidence/gdj-22-scenarios/native-solo-developer.png), and matching developer settings on [host](evidence/gdj-22-scenarios/native-shared-developer-host.png) / [client](evidence/gdj-22-scenarios/native-shared-developer-client.png). The shared HUD displays Host ownership, Retry retention and matching content identity. These are native window captures; no preview-only HUD reconstruction is used. An earlier hidden native ScreenCapture returned black and was excluded from the visibility evidence.
 
-The owner was shown the native comparison and asked whether the scenario differences and host ownership are clear and match expectations. **No owner answer has been received at this checkpoint.** This gate remains open. Agent inspection and automated parity are not owner acceptance, gameplay enjoyment or a balance decision.
+The owner was shown the native comparison and asked whether the scenario differences and host ownership are clear and match expectations. The owner replied: “I can't answer this question without what the rubric or my expectations should entail. It's unclear.” This is feedback that the review request lacked a usable rubric, not acceptance or rejection of the implementation. The visibility gate remains open.
+
+### Concrete owner review rubric
+
+The owner is reviewing whether the native menu/HUD communicates the tested behavior. Automated checks already cover value agreement, validation, cadence and reset correctness. This review does not ask the owner to approve these fixture values as final game balance or recheck network correctness.
+
+| Readability criterion | A pass means |
+| --- | --- |
+| Selected versus active scenario | The menu makes the next solo/Host selection understandable, and the combat HUD lets the player identify the scenario actually running. |
+| Effective combat settings | HP, body/head damage and firing rate are legible and their labels understandable. Default solo is 40 HP, 20/40 damage, about 8.33/s; default shared is 60 HP with the same rifle. Developer parity is 90 HP, 15/45 damage and 4/s in both modes. |
+| Ownership and when changes apply | The UI communicates that Join uses the host's settings; both players share them; shared Retry keeps them; changing shared tuning requires a new session. |
+
+The default solo/shared HP difference preserves earlier test fixtures; Developer parity is a deliberate comparison configuration, not proposed final balance. A useful review identifies which criterion is clear or names missing/confusing wording, illegible text or unexpected behavior. “Cannot tell from these screenshots” is also valid feedback and calls for a guided native comparison. Agent inspection and automated parity are not owner acceptance, gameplay enjoyment or a balance decision.
 
 ## Reproduction
 
