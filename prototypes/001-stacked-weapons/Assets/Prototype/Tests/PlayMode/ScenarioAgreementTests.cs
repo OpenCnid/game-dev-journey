@@ -40,10 +40,14 @@ namespace Journey.Tests
                 authority.Step(); Publish.Invoke(game, null); Pump(game);
                 Assert.That(game.Snapshot.Players[0].Offer.Selected, Is.EqualTo(first));
                 Assert.That(game.ChoiceControls(false, 2), Is.False);
+                authority.Current.Tick = 3599;
+                Clock.SetValue(game, Time.realtimeSinceStartupAsDouble - .06); Update.Invoke(game, null);
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Complete), "Leftover frame time cannot overwrite completion with catch-up abort");
+                Assert.That(game.ApplyPreviewCommand(new SharedPreviewCommand { sequence = 1, run = 1, life = 1, action = "retry" }), Is.Empty);
                 authority.Current.Players[0].Health = 0; authority.Step(); Publish.Invoke(game, null);
                 Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Defeat));
-                Assert.That(game.ApplyPreviewCommand(new SharedPreviewCommand { sequence = 1, run = 1, life = 1, action = "retry" }), Is.Empty);
-                Assert.That(game.Snapshot.Run, Is.EqualTo(2)); Assert.That(game.Snapshot.Xp, Is.Zero);
+                Assert.That(game.ApplyPreviewCommand(new SharedPreviewCommand { sequence = 2, run = 2, life = 1, action = "retry" }), Is.Empty);
+                Assert.That(game.Snapshot.Run, Is.EqualTo(3)); Assert.That(game.Snapshot.Xp, Is.Zero);
                 Assert.That(game.Snapshot.Players[0].BodyDamage, Is.EqualTo(20)); Assert.That(game.Snapshot.Players[0].RifleInterval, Is.EqualTo(.12f));
                 yield return null;
             }

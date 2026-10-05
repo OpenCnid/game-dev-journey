@@ -163,7 +163,7 @@ namespace Journey
             previewInputUntil = 0; previewMovement = Vector3.zero; previewFire = false;
             if (newRun)
             {
-                shotSequence = 0; emitted.Clear(); saved = false;
+                accumulator = 0; shotSequence = 0; emitted.Clear(); saved = false;
                 // Poll can deliver the new snapshot and its first hits together.
                 // Retain that run's feedback while discarding prior-run events.
                 int queued = feedback.Count;
@@ -252,7 +252,8 @@ namespace Journey
                 int ticks = 0;
                 while (accumulator >= CombatSimulation.Tick && ticks < 8 && authority.Current.State == SharedState.Running)
                 { authority.Step(); accumulator -= CombatSimulation.Tick; ticks++; Publish(); }
-                if (accumulator >= CombatSimulation.Tick) { catchupLimits++; Abort("Authority tick catch-up limit"); accumulator = 0; }
+                if (authority.Current.State == SharedState.Running && accumulator >= CombatSimulation.Tick)
+                { catchupLimits++; Abort("Authority tick catch-up limit"); accumulator = 0; }
                 else if (authority.Current.State == SharedState.Aborted) Abort(authority.AbortReason);
             }
             SyncGeneration();
@@ -377,8 +378,8 @@ namespace Journey
         void Retry()
         {
             if (display.State != SharedState.Complete && display.State != SharedState.Defeat) return;
-            if (authority != null) { authority.Retry(run, local); Publish(); }
-            else connection.Send(SharedConnection.Message.Retry, w => { w.Write(run); binding.Write(w); });
+            if (authority != null) { authority.Retry(display.Run, local); Publish(); if (display.Run != run) accumulator = 0; }
+            else connection.Send(SharedConnection.Message.Retry, w => { w.Write(display.Run); binding.Write(w); });
             inputActive = true; SetCursor(!scripted && preview == null);
         }
         public string ApplyPreviewCommand(SharedPreviewCommand command)
