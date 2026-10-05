@@ -56,6 +56,32 @@ For a human A and supervised agent B, use `./tools/shared-combat.ps1 -Background
 
 Unity Transport **2.7.4** is the one added pinned package; existing editor/dependency versions remain unchanged. [Authority, history/reset policies, owner-agreed budgets and pending evidence](../../docs/planning/tasks/GDJ-20.md) define the bounded candidate. XP/orbs/offers/upgrades and thinking space remain absent; this stage does not complete earned progression. Original solo and synthetic benchmarks below retain their controls and workload.
 
+## Scenario configuration (GDJ-22)
+
+Solo and shared rifle play consume the same validated version-1 starting configuration. The menu shows separate **Next solo** and **Host** settings; selecting a named scenario for both makes their starting enemy HP, damage and interval match. The default controls remain intentionally different:
+
+| CLI name | Drones / HP | Body / head | Interval | Seed / duration |
+| --- | --- | --- | --- | --- |
+| `solo-precision` | 35 / 40 | 20 / 40 (x2) | .12 s | 137 / 60 s |
+| `shared-rifle` | 12 / 60 | 20 / 40 (x2) | .12 s | 137 / 60 s |
+| `developer-parity` | 12 / 90 | 15 / 45 (x3) | .25 s | 271 / 60 s |
+
+With no `-scenario`, solo selects solo precision and Host selects shared rifle. `-scenario <name>` selects the same definition for either path. Explicit overrides: `-scenarioEnemies` (1–35), `-scenarioHp` (1–10000), `-scenarioDamage` (1–1000), `-scenarioHead` (integer 1–4), `-scenarioDuration` (finite 1–600 seconds), `-seed` (signed 32-bit integer), and the retained `-rifleRate` (finite .5–120 shots/sec). CLI numbers use invariant decimal notation. Unsupported names/versions, missing/malformed values and out-of-range settings reject launch. Overrides are labelled in the native HUD/menu and saved evidence. The maximum 35-drone snapshot fits the unchanged 1100-byte packet limit; this is a functional bound, not a new network-performance envelope.
+
+Host transfers the full bounded scenario and a new session ID. Client validates and acknowledges that exact content before Start; local client tuning is ignored. Shared settings are frozen for the entire session, including both-ready Retry, which increments run identity and resets state. Changing shared settings requires a fresh pair. Protocol 2 intentionally rejects older protocol-1 players. Stale/mismatched configuration and malformed snapshots cannot replace active state. Disconnect still aborts.
+
+Solo rate edits still preserve fractional cooldown, paused timing and session/restart retention; the chosen rate also applies to the next Host session. Scenario selection applies on Start/Host. Native HUD and JSON show the scenario name, content hash and effective HP/body/head/rate/interval. Shared output includes `scenario.json`, per-run summaries with `scenario`, and preview state with the same values. Solo Start/Restart writes `solo-scenario-<run-id>.json` under `-results` or the usual BenchmarkResults directory. Synthetic benchmarks retain their historical 40-HP/body-only workload and independent crowd controls; their existing rate/interval metadata remains authoritative.
+
+Example direct launches from the repository root after the release build (use a fresh results folder for each pair):
+
+```powershell
+& ./prototypes/001-stacked-weapons/build/StackLab/StackLab.exe -playtest -scenario developer-parity -results C:/captures/gdj22-solo
+& ./prototypes/001-stacked-weapons/build/StackLab/StackLab.exe -host -sharedLoopback -scenario developer-parity -sharedResults C:/captures/gdj22-pair/host
+& ./prototypes/001-stacked-weapons/build/StackLab/StackLab.exe -join 127.0.0.1 -sharedResults C:/captures/gdj22-pair/client
+```
+
+Add `-sharedScripted` for an automated companion or `-sharedPreview` for the existing game-owned command/state bridge. Those are functional/diagnostic modes. [The task contract](../../docs/planning/tasks/GDJ-22.md) separates starting definitions from future per-player earned builds and the GDJ-21 test interface.
+
 ## Prepare, test, and build
 
 From the repository root in PowerShell:

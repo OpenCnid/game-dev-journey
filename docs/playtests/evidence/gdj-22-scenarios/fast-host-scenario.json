@@ -1,0 +1,16 @@
+{
+    "version": 1,
+    "seed": 137,
+    "enemies": 12,
+    "enemyHp": 60,
+    "bodyDamage": 20,
+    "headMultiplier": 2,
+    "headDamage": 40,
+    "run": 0,
+    "duration": 8.0,
+    "rifleInterval": 0.008333333767950535,
+    "rifleRate": 119.99999237060547,
+    "name": "Shared rifle (override)",
+    "identity": "79f37a1ff2e455e5395e378693d9e9a8a6f951eaabd2bb35f365365f9fb57a07",
+    "session": "12cbe9b7e1cb4778af3e1589f432088e"
+}

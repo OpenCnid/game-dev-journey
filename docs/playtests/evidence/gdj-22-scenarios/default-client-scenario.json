@@ -1,0 +1,16 @@
+{
+    "version": 1,
+    "seed": 137,
+    "enemies": 12,
+    "enemyHp": 60,
+    "bodyDamage": 20,
+    "headMultiplier": 2,
+    "headDamage": 40,
+    "run": 0,
+    "duration": 60.0,
+    "rifleInterval": 0.11999999731779099,
+    "rifleRate": 8.333333969116211,
+    "name": "Shared rifle",
+    "identity": "d29ab1d2dae9a04f6c6c554845b6a800131236465bf7ba418827a8bf9c927593",
+    "session": "0a10ead1c86d4d01847507fc7dd105f4"
+}

@@ -1,0 +1,2115 @@
+{
+  "result": "PASS",
+  "note": "Functional only; hidden preview pair, automated input, no performance claim.",
+  "start": [
+    {
+      "run": 1,
+      "life": 1,
+      "local": 0,
+      "tick": 0,
+      "frameSequence": 2,
+      "width": 1280,
+      "height": 720,
+      "lastSequence": 0,
+      "state": "Running",
+      "commandResult": "",
+      "captureError": "",
+      "source": "{\n    \"revision\": \"ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2\",\n    \"builtUtc\": \"2026-10-05T02:52:00.2602718Z\",\n    \"dirty\": false\n}",
+      "elapsed": 0.0,
+      "yaw": 246.54034423828125,
+      "pitch": 1.7177842855453491,
+      "capturedWallSeconds": 3.3320768054988674,
+      "scripted": true,
+      "scenario": {
+        "version": 1,
+        "seed": 137,
+        "enemies": 12,
+        "enemyHp": 60,
+        "bodyDamage": 20,
+        "headMultiplier": 2,
+        "headDamage": 40,
+        "run": 1,
+        "duration": 60.0,
+        "rifleInterval": 0.11999999731779099,
+        "rifleRate": 8.333333969116211,
+        "name": "Shared rifle",
+        "identity": "d29ab1d2dae9a04f6c6c554845b6a800131236465bf7ba418827a8bf9c927593",
+        "session": "0a10ead1c86d4d01847507fc7dd105f4"
+      },
+      "players": [
+        {
+          "Position": {
+            "x": -2.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "Yaw": 0.0,
+          "Pitch": 0.0,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 0,
+          "Hits": 0,
+          "Damage": 0,
+          "Kills": 0,
+          "Weapon": 1,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        },
+        {
+          "Position": {
+            "x": 2.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "Yaw": 0.0,
+          "Pitch": 0.0,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 0,
+          "Hits": 0,
+          "Damage": 0,
+          "Kills": 0,
+          "Weapon": 2,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        }
+      ],
+      "enemies": [
+        {
+          "Position": {
+            "x": -28.0,
+            "y": 0.0,
+            "z": -11.283365249633789
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 1.645134449005127,
+            "y": 0.0,
+            "z": 28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 28.0,
+            "y": 0.0,
+            "z": -24.66354751586914
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -28.0,
+            "y": 0.0,
+            "z": -11.771501541137695
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 23.89731216430664,
+            "y": 0.0,
+            "z": 28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 28.0,
+            "y": 0.0,
+            "z": -15.45663833618164
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 17.55343246459961,
+            "y": 0.0,
+            "z": -28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 21.18462371826172,
+            "y": 0.0,
+            "z": -28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -2.7124853134155273,
+            "y": 0.0,
+            "z": 28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 28.0,
+            "y": 0.0,
+            "z": -6.393851280212402
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 28.0,
+            "y": 0.0,
+            "z": -26.87038803100586
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -19.84703826904297,
+            "y": 0.0,
+            "z": 28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        }
+      ]
+    },
+    {
+      "run": 1,
+      "life": 1,
+      "local": 1,
+      "tick": 0,
+      "frameSequence": 2,
+      "width": 1280,
+      "height": 720,
+      "lastSequence": 0,
+      "state": "Running",
+      "commandResult": "",
+      "captureError": "",
+      "source": "{\n    \"revision\": \"ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2\",\n    \"builtUtc\": \"2026-10-05T02:52:00.2602718Z\",\n    \"dirty\": false\n}",
+      "elapsed": 0.0,
+      "yaw": 0.0,
+      "pitch": 0.0,
+      "capturedWallSeconds": 3.3246163045918378,
+      "scripted": true,
+      "scenario": {
+        "version": 1,
+        "seed": 137,
+        "enemies": 12,
+        "enemyHp": 60,
+        "bodyDamage": 20,
+        "headMultiplier": 2,
+        "headDamage": 40,
+        "run": 1,
+        "duration": 60.0,
+        "rifleInterval": 0.11999999731779099,
+        "rifleRate": 8.333333969116211,
+        "name": "Shared rifle",
+        "identity": "d29ab1d2dae9a04f6c6c554845b6a800131236465bf7ba418827a8bf9c927593",
+        "session": "0a10ead1c86d4d01847507fc7dd105f4"
+      },
+      "players": [
+        {
+          "Position": {
+            "x": -2.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "Yaw": 0.0,
+          "Pitch": 0.0,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 0,
+          "Hits": 0,
+          "Damage": 0,
+          "Kills": 0,
+          "Weapon": 1,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        },
+        {
+          "Position": {
+            "x": 2.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "Yaw": 0.0,
+          "Pitch": 0.0,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 0,
+          "Hits": 0,
+          "Damage": 0,
+          "Kills": 0,
+          "Weapon": 2,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        }
+      ],
+      "enemies": [
+        {
+          "Position": {
+            "x": -28.0,
+            "y": 0.0,
+            "z": -11.283365249633789
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 1.645134449005127,
+            "y": 0.0,
+            "z": 28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 28.0,
+            "y": 0.0,
+            "z": -24.66354751586914
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -28.0,
+            "y": 0.0,
+            "z": -11.771501541137695
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 23.89731216430664,
+            "y": 0.0,
+            "z": 28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 28.0,
+            "y": 0.0,
+            "z": -15.45663833618164
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 17.55343246459961,
+            "y": 0.0,
+            "z": -28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 21.18462371826172,
+            "y": 0.0,
+            "z": -28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -2.7124853134155273,
+            "y": 0.0,
+            "z": 28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 28.0,
+            "y": 0.0,
+            "z": -6.393851280212402
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 28.0,
+            "y": 0.0,
+            "z": -26.87038803100586
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -19.84703826904297,
+            "y": 0.0,
+            "z": 28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        }
+      ]
+    }
+  ],
+  "terminal": [
+    {
+      "run": 1,
+      "life": 1,
+      "local": 0,
+      "tick": 3600,
+      "frameSequence": 1606,
+      "width": 1280,
+      "height": 720,
+      "lastSequence": 0,
+      "state": "Complete",
+      "commandResult": "IOException",
+      "captureError": "",
+      "source": "{\n    \"revision\": \"ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2\",\n    \"builtUtc\": \"2026-10-05T02:52:00.2602718Z\",\n    \"dirty\": false\n}",
+      "elapsed": 60.000003814697266,
+      "yaw": 12.700825691223145,
+      "pitch": 1.948935627937317,
+      "capturedWallSeconds": 63.452459805498876,
+      "scripted": true,
+      "scenario": {
+        "version": 1,
+        "seed": 137,
+        "enemies": 12,
+        "enemyHp": 60,
+        "bodyDamage": 20,
+        "headMultiplier": 2,
+        "headDamage": 40,
+        "run": 1,
+        "duration": 60.0,
+        "rifleInterval": 0.11999999731779099,
+        "rifleRate": 8.333333969116211,
+        "name": "Shared rifle",
+        "identity": "d29ab1d2dae9a04f6c6c554845b6a800131236465bf7ba418827a8bf9c927593",
+        "session": "0a10ead1c86d4d01847507fc7dd105f4"
+      },
+      "players": [
+        {
+          "Position": {
+            "x": 14.267426490783691,
+            "y": 0.0,
+            "z": -16.745437622070312
+          },
+          "Yaw": 12.77665901184082,
+          "Pitch": 1.9454808235168457,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 500,
+          "Hits": 500,
+          "Damage": 10000,
+          "Kills": 194,
+          "Weapon": 1,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        },
+        {
+          "Position": {
+            "x": -14.357421875,
+            "y": 0.0,
+            "z": 16.668685913085938
+          },
+          "Yaw": 244.151123046875,
+          "Pitch": 0.24525022506713867,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 44.91667175292969,
+          "Health": 10,
+          "Life": 1,
+          "Shots": 500,
+          "Hits": 74,
+          "Damage": 2520,
+          "Kills": 10,
+          "Weapon": 2,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        }
+      ],
+      "enemies": [
+        {
+          "Position": {
+            "x": 19.747974395751953,
+            "y": 0.0,
+            "z": 7.57204008102417
+          },
+          "Health": 20,
+          "Incarnation": 19
+        },
+        {
+          "Position": {
+            "x": 7.502810478210449,
+            "y": 0.0,
+            "z": 15.615226745605469
+          },
+          "Health": 20,
+          "Incarnation": 14
+        },
+        {
+          "Position": {
+            "x": 21.347679138183594,
+            "y": 0.0,
+            "z": 18.101123809814453
+          },
+          "Health": 20,
+          "Incarnation": 22
+        },
+        {
+          "Position": {
+            "x": -24.703298568725586,
+            "y": 0.0,
+            "z": 11.701098442077637
+          },
+          "Health": 20,
+          "Incarnation": 12
+        },
+        {
+          "Position": {
+            "x": 14.599347114562988,
+            "y": 0.0,
+            "z": 13.52818489074707
+          },
+          "Health": 60,
+          "Incarnation": 22
+        },
+        {
+          "Position": {
+            "x": 5.58207893371582,
+            "y": 0.0,
+            "z": 19.12407875061035
+          },
+          "Health": 20,
+          "Incarnation": 17
+        },
+        {
+          "Position": {
+            "x": -24.085777282714844,
+            "y": 0.0,
+            "z": 25.610671997070312
+          },
+          "Health": 20,
+          "Incarnation": 16
+        },
+        {
+          "Position": {
+            "x": -27.246402740478516,
+            "y": 0.0,
+            "z": -20.93444061279297
+          },
+          "Health": 60,
+          "Incarnation": 21
+        },
+        {
+          "Position": {
+            "x": 8.073689460754395,
+            "y": 0.0,
+            "z": 26.977706909179688
+          },
+          "Health": 60,
+          "Incarnation": 13
+        },
+        {
+          "Position": {
+            "x": -14.198163032531738,
+            "y": 0.0,
+            "z": -27.49017333984375
+          },
+          "Health": 60,
+          "Incarnation": 24
+        },
+        {
+          "Position": {
+            "x": -22.456729888916016,
+            "y": 0.0,
+            "z": -23.113420486450195
+          },
+          "Health": 60,
+          "Incarnation": 23
+        },
+        {
+          "Position": {
+            "x": 15.811345100402832,
+            "y": 0.0,
+            "z": 15.91466236114502
+          },
+          "Health": 20,
+          "Incarnation": 13
+        }
+      ]
+    },
+    {
+      "run": 1,
+      "life": 1,
+      "local": 1,
+      "tick": 3600,
+      "frameSequence": 1604,
+      "width": 1280,
+      "height": 720,
+      "lastSequence": 0,
+      "state": "Complete",
+      "commandResult": "",
+      "captureError": "",
+      "source": "{\n    \"revision\": \"ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2\",\n    \"builtUtc\": \"2026-10-05T02:52:00.2602718Z\",\n    \"dirty\": false\n}",
+      "elapsed": 60.000003814697266,
+      "yaw": 244.42950439453125,
+      "pitch": 0.24975168704986572,
+      "capturedWallSeconds": 63.433120204591845,
+      "scripted": true,
+      "scenario": {
+        "version": 1,
+        "seed": 137,
+        "enemies": 12,
+        "enemyHp": 60,
+        "bodyDamage": 20,
+        "headMultiplier": 2,
+        "headDamage": 40,
+        "run": 1,
+        "duration": 60.0,
+        "rifleInterval": 0.11999999731779099,
+        "rifleRate": 8.333333969116211,
+        "name": "Shared rifle",
+        "identity": "d29ab1d2dae9a04f6c6c554845b6a800131236465bf7ba418827a8bf9c927593",
+        "session": "0a10ead1c86d4d01847507fc7dd105f4"
+      },
+      "players": [
+        {
+          "Position": {
+            "x": 14.267426490783691,
+            "y": 0.0,
+            "z": -16.745437622070312
+          },
+          "Yaw": 12.77665901184082,
+          "Pitch": 1.9454808235168457,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 500,
+          "Hits": 500,
+          "Damage": 10000,
+          "Kills": 194,
+          "Weapon": 1,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        },
+        {
+          "Position": {
+            "x": -14.357421875,
+            "y": 0.0,
+            "z": 16.668685913085938
+          },
+          "Yaw": 244.151123046875,
+          "Pitch": 0.24525022506713867,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 44.91667175292969,
+          "Health": 10,
+          "Life": 1,
+          "Shots": 500,
+          "Hits": 74,
+          "Damage": 2520,
+          "Kills": 10,
+          "Weapon": 2,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        }
+      ],
+      "enemies": [
+        {
+          "Position": {
+            "x": 19.747974395751953,
+            "y": 0.0,
+            "z": 7.57204008102417
+          },
+          "Health": 20,
+          "Incarnation": 19
+        },
+        {
+          "Position": {
+            "x": 7.502810478210449,
+            "y": 0.0,
+            "z": 15.615226745605469
+          },
+          "Health": 20,
+          "Incarnation": 14
+        },
+        {
+          "Position": {
+            "x": 21.347679138183594,
+            "y": 0.0,
+            "z": 18.101123809814453
+          },
+          "Health": 20,
+          "Incarnation": 22
+        },
+        {
+          "Position": {
+            "x": -24.703298568725586,
+            "y": 0.0,
+            "z": 11.701098442077637
+          },
+          "Health": 20,
+          "Incarnation": 12
+        },
+        {
+          "Position": {
+            "x": 14.599347114562988,
+            "y": 0.0,
+            "z": 13.52818489074707
+          },
+          "Health": 60,
+          "Incarnation": 22
+        },
+        {
+          "Position": {
+            "x": 5.58207893371582,
+            "y": 0.0,
+            "z": 19.12407875061035
+          },
+          "Health": 20,
+          "Incarnation": 17
+        },
+        {
+          "Position": {
+            "x": -24.085777282714844,
+            "y": 0.0,
+            "z": 25.610671997070312
+          },
+          "Health": 20,
+          "Incarnation": 16
+        },
+        {
+          "Position": {
+            "x": -27.246402740478516,
+            "y": 0.0,
+            "z": -20.93444061279297
+          },
+          "Health": 60,
+          "Incarnation": 21
+        },
+        {
+          "Position": {
+            "x": 8.073689460754395,
+            "y": 0.0,
+            "z": 26.977706909179688
+          },
+          "Health": 60,
+          "Incarnation": 13
+        },
+        {
+          "Position": {
+            "x": -14.198163032531738,
+            "y": 0.0,
+            "z": -27.49017333984375
+          },
+          "Health": 60,
+          "Incarnation": 24
+        },
+        {
+          "Position": {
+            "x": -22.456729888916016,
+            "y": 0.0,
+            "z": -23.113420486450195
+          },
+          "Health": 60,
+          "Incarnation": 23
+        },
+        {
+          "Position": {
+            "x": 15.811345100402832,
+            "y": 0.0,
+            "z": 15.91466236114502
+          },
+          "Health": 20,
+          "Incarnation": 13
+        }
+      ]
+    }
+  ],
+  "oneReady": [
+    {
+      "run": 1,
+      "life": 1,
+      "local": 0,
+      "tick": 3600,
+      "frameSequence": 1609,
+      "width": 1280,
+      "height": 720,
+      "lastSequence": 1,
+      "state": "Complete",
+      "commandResult": "Applied retry",
+      "captureError": "",
+      "source": "{\n    \"revision\": \"ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2\",\n    \"builtUtc\": \"2026-10-05T02:52:00.2602718Z\",\n    \"dirty\": false\n}",
+      "elapsed": 60.000003814697266,
+      "yaw": 12.700825691223145,
+      "pitch": 1.948935627937317,
+      "capturedWallSeconds": 63.56091620549887,
+      "scripted": true,
+      "scenario": {
+        "version": 1,
+        "seed": 137,
+        "enemies": 12,
+        "enemyHp": 60,
+        "bodyDamage": 20,
+        "headMultiplier": 2,
+        "headDamage": 40,
+        "run": 1,
+        "duration": 60.0,
+        "rifleInterval": 0.11999999731779099,
+        "rifleRate": 8.333333969116211,
+        "name": "Shared rifle",
+        "identity": "d29ab1d2dae9a04f6c6c554845b6a800131236465bf7ba418827a8bf9c927593",
+        "session": "0a10ead1c86d4d01847507fc7dd105f4"
+      },
+      "players": [
+        {
+          "Position": {
+            "x": 14.267426490783691,
+            "y": 0.0,
+            "z": -16.745437622070312
+          },
+          "Yaw": 12.77665901184082,
+          "Pitch": 1.9454808235168457,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 500,
+          "Hits": 500,
+          "Damage": 10000,
+          "Kills": 194,
+          "Weapon": 1,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": true
+        },
+        {
+          "Position": {
+            "x": -14.357421875,
+            "y": 0.0,
+            "z": 16.668685913085938
+          },
+          "Yaw": 244.151123046875,
+          "Pitch": 0.24525022506713867,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 44.91667175292969,
+          "Health": 10,
+          "Life": 1,
+          "Shots": 500,
+          "Hits": 74,
+          "Damage": 2520,
+          "Kills": 10,
+          "Weapon": 2,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        }
+      ],
+      "enemies": [
+        {
+          "Position": {
+            "x": 19.747974395751953,
+            "y": 0.0,
+            "z": 7.57204008102417
+          },
+          "Health": 20,
+          "Incarnation": 19
+        },
+        {
+          "Position": {
+            "x": 7.502810478210449,
+            "y": 0.0,
+            "z": 15.615226745605469
+          },
+          "Health": 20,
+          "Incarnation": 14
+        },
+        {
+          "Position": {
+            "x": 21.347679138183594,
+            "y": 0.0,
+            "z": 18.101123809814453
+          },
+          "Health": 20,
+          "Incarnation": 22
+        },
+        {
+          "Position": {
+            "x": -24.703298568725586,
+            "y": 0.0,
+            "z": 11.701098442077637
+          },
+          "Health": 20,
+          "Incarnation": 12
+        },
+        {
+          "Position": {
+            "x": 14.599347114562988,
+            "y": 0.0,
+            "z": 13.52818489074707
+          },
+          "Health": 60,
+          "Incarnation": 22
+        },
+        {
+          "Position": {
+            "x": 5.58207893371582,
+            "y": 0.0,
+            "z": 19.12407875061035
+          },
+          "Health": 20,
+          "Incarnation": 17
+        },
+        {
+          "Position": {
+            "x": -24.085777282714844,
+            "y": 0.0,
+            "z": 25.610671997070312
+          },
+          "Health": 20,
+          "Incarnation": 16
+        },
+        {
+          "Position": {
+            "x": -27.246402740478516,
+            "y": 0.0,
+            "z": -20.93444061279297
+          },
+          "Health": 60,
+          "Incarnation": 21
+        },
+        {
+          "Position": {
+            "x": 8.073689460754395,
+            "y": 0.0,
+            "z": 26.977706909179688
+          },
+          "Health": 60,
+          "Incarnation": 13
+        },
+        {
+          "Position": {
+            "x": -14.198163032531738,
+            "y": 0.0,
+            "z": -27.49017333984375
+          },
+          "Health": 60,
+          "Incarnation": 24
+        },
+        {
+          "Position": {
+            "x": -22.456729888916016,
+            "y": 0.0,
+            "z": -23.113420486450195
+          },
+          "Health": 60,
+          "Incarnation": 23
+        },
+        {
+          "Position": {
+            "x": 15.811345100402832,
+            "y": 0.0,
+            "z": 15.91466236114502
+          },
+          "Health": 20,
+          "Incarnation": 13
+        }
+      ]
+    },
+    {
+      "run": 1,
+      "life": 1,
+      "local": 1,
+      "tick": 3600,
+      "frameSequence": 1609,
+      "width": 1280,
+      "height": 720,
+      "lastSequence": 0,
+      "state": "Complete",
+      "commandResult": "",
+      "captureError": "",
+      "source": "{\n    \"revision\": \"ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2\",\n    \"builtUtc\": \"2026-10-05T02:52:00.2602718Z\",\n    \"dirty\": false\n}",
+      "elapsed": 60.000003814697266,
+      "yaw": 244.42950439453125,
+      "pitch": 0.24975168704986572,
+      "capturedWallSeconds": 63.628714204591844,
+      "scripted": true,
+      "scenario": {
+        "version": 1,
+        "seed": 137,
+        "enemies": 12,
+        "enemyHp": 60,
+        "bodyDamage": 20,
+        "headMultiplier": 2,
+        "headDamage": 40,
+        "run": 1,
+        "duration": 60.0,
+        "rifleInterval": 0.11999999731779099,
+        "rifleRate": 8.333333969116211,
+        "name": "Shared rifle",
+        "identity": "d29ab1d2dae9a04f6c6c554845b6a800131236465bf7ba418827a8bf9c927593",
+        "session": "0a10ead1c86d4d01847507fc7dd105f4"
+      },
+      "players": [
+        {
+          "Position": {
+            "x": 14.267426490783691,
+            "y": 0.0,
+            "z": -16.745437622070312
+          },
+          "Yaw": 12.77665901184082,
+          "Pitch": 1.9454808235168457,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 500,
+          "Hits": 500,
+          "Damage": 10000,
+          "Kills": 194,
+          "Weapon": 1,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": true
+        },
+        {
+          "Position": {
+            "x": -14.357421875,
+            "y": 0.0,
+            "z": 16.668685913085938
+          },
+          "Yaw": 244.151123046875,
+          "Pitch": 0.24525022506713867,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 44.91667175292969,
+          "Health": 10,
+          "Life": 1,
+          "Shots": 500,
+          "Hits": 74,
+          "Damage": 2520,
+          "Kills": 10,
+          "Weapon": 2,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        }
+      ],
+      "enemies": [
+        {
+          "Position": {
+            "x": 19.747974395751953,
+            "y": 0.0,
+            "z": 7.57204008102417
+          },
+          "Health": 20,
+          "Incarnation": 19
+        },
+        {
+          "Position": {
+            "x": 7.502810478210449,
+            "y": 0.0,
+            "z": 15.615226745605469
+          },
+          "Health": 20,
+          "Incarnation": 14
+        },
+        {
+          "Position": {
+            "x": 21.347679138183594,
+            "y": 0.0,
+            "z": 18.101123809814453
+          },
+          "Health": 20,
+          "Incarnation": 22
+        },
+        {
+          "Position": {
+            "x": -24.703298568725586,
+            "y": 0.0,
+            "z": 11.701098442077637
+          },
+          "Health": 20,
+          "Incarnation": 12
+        },
+        {
+          "Position": {
+            "x": 14.599347114562988,
+            "y": 0.0,
+            "z": 13.52818489074707
+          },
+          "Health": 60,
+          "Incarnation": 22
+        },
+        {
+          "Position": {
+            "x": 5.58207893371582,
+            "y": 0.0,
+            "z": 19.12407875061035
+          },
+          "Health": 20,
+          "Incarnation": 17
+        },
+        {
+          "Position": {
+            "x": -24.085777282714844,
+            "y": 0.0,
+            "z": 25.610671997070312
+          },
+          "Health": 20,
+          "Incarnation": 16
+        },
+        {
+          "Position": {
+            "x": -27.246402740478516,
+            "y": 0.0,
+            "z": -20.93444061279297
+          },
+          "Health": 60,
+          "Incarnation": 21
+        },
+        {
+          "Position": {
+            "x": 8.073689460754395,
+            "y": 0.0,
+            "z": 26.977706909179688
+          },
+          "Health": 60,
+          "Incarnation": 13
+        },
+        {
+          "Position": {
+            "x": -14.198163032531738,
+            "y": 0.0,
+            "z": -27.49017333984375
+          },
+          "Health": 60,
+          "Incarnation": 24
+        },
+        {
+          "Position": {
+            "x": -22.456729888916016,
+            "y": 0.0,
+            "z": -23.113420486450195
+          },
+          "Health": 60,
+          "Incarnation": 23
+        },
+        {
+          "Position": {
+            "x": 15.811345100402832,
+            "y": 0.0,
+            "z": 15.91466236114502
+          },
+          "Health": 20,
+          "Incarnation": 13
+        }
+      ]
+    }
+  ],
+  "reset": [
+    {
+      "run": 2,
+      "life": 1,
+      "local": 0,
+      "tick": 0,
+      "frameSequence": 1614,
+      "width": 1280,
+      "height": 720,
+      "lastSequence": 1,
+      "state": "Running",
+      "commandResult": "Applied retry",
+      "captureError": "",
+      "source": "{\n    \"revision\": \"ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2\",\n    \"builtUtc\": \"2026-10-05T02:52:00.2602718Z\",\n    \"dirty\": false\n}",
+      "elapsed": 0.0,
+      "yaw": 0.0,
+      "pitch": 0.0,
+      "capturedWallSeconds": 63.76388660549887,
+      "scripted": true,
+      "scenario": {
+        "version": 1,
+        "seed": 137,
+        "enemies": 12,
+        "enemyHp": 60,
+        "bodyDamage": 20,
+        "headMultiplier": 2,
+        "headDamage": 40,
+        "run": 2,
+        "duration": 60.0,
+        "rifleInterval": 0.11999999731779099,
+        "rifleRate": 8.333333969116211,
+        "name": "Shared rifle",
+        "identity": "d29ab1d2dae9a04f6c6c554845b6a800131236465bf7ba418827a8bf9c927593",
+        "session": "0a10ead1c86d4d01847507fc7dd105f4"
+      },
+      "players": [
+        {
+          "Position": {
+            "x": -2.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "Yaw": 0.0,
+          "Pitch": 0.0,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 0,
+          "Hits": 0,
+          "Damage": 0,
+          "Kills": 0,
+          "Weapon": 1,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        },
+        {
+          "Position": {
+            "x": 2.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "Yaw": 0.0,
+          "Pitch": 0.0,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 0,
+          "Hits": 0,
+          "Damage": 0,
+          "Kills": 0,
+          "Weapon": 2,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        }
+      ],
+      "enemies": [
+        {
+          "Position": {
+            "x": -28.0,
+            "y": 0.0,
+            "z": -11.283365249633789
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 1.645134449005127,
+            "y": 0.0,
+            "z": 28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 28.0,
+            "y": 0.0,
+            "z": -24.66354751586914
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -28.0,
+            "y": 0.0,
+            "z": -11.771501541137695
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 23.89731216430664,
+            "y": 0.0,
+            "z": 28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 28.0,
+            "y": 0.0,
+            "z": -15.45663833618164
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 17.55343246459961,
+            "y": 0.0,
+            "z": -28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 21.18462371826172,
+            "y": 0.0,
+            "z": -28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -2.7124853134155273,
+            "y": 0.0,
+            "z": 28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 28.0,
+            "y": 0.0,
+            "z": -6.393851280212402
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 28.0,
+            "y": 0.0,
+            "z": -26.87038803100586
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -19.84703826904297,
+            "y": 0.0,
+            "z": 28.0
+          },
+          "Health": 60,
+          "Incarnation": 1
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "life": 1,
+      "local": 1,
+      "tick": 4,
+      "frameSequence": 1614,
+      "width": 1280,
+      "height": 720,
+      "lastSequence": 1,
+      "state": "Running",
+      "commandResult": "Applied retry",
+      "captureError": "",
+      "source": "{\n    \"revision\": \"ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2\",\n    \"builtUtc\": \"2026-10-05T02:52:00.2602718Z\",\n    \"dirty\": false\n}",
+      "elapsed": 0.06666667014360428,
+      "yaw": 218.76844787597656,
+      "pitch": 0.08015118539333344,
+      "capturedWallSeconds": 63.83936570459184,
+      "scripted": true,
+      "scenario": {
+        "version": 1,
+        "seed": 137,
+        "enemies": 12,
+        "enemyHp": 60,
+        "bodyDamage": 20,
+        "headMultiplier": 2,
+        "headDamage": 40,
+        "run": 2,
+        "duration": 60.0,
+        "rifleInterval": 0.11999999731779099,
+        "rifleRate": 8.333333969116211,
+        "name": "Shared rifle",
+        "identity": "d29ab1d2dae9a04f6c6c554845b6a800131236465bf7ba418827a8bf9c927593",
+        "session": "0a10ead1c86d4d01847507fc7dd105f4"
+      },
+      "players": [
+        {
+          "Position": {
+            "x": -1.4521692991256714,
+            "y": 0.0,
+            "z": 0.0027123428881168365
+          },
+          "Yaw": 214.57614135742188,
+          "Pitch": 1.4339386224746704,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 1,
+          "Hits": 1,
+          "Damage": 20,
+          "Kills": 0,
+          "Weapon": 1,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        },
+        {
+          "Position": {
+            "x": 1.8305938243865967,
+            "y": 0.0,
+            "z": -0.0010203849524259567
+          },
+          "Yaw": 219.14991760253906,
+          "Pitch": 0.07946636527776718,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 1,
+          "Hits": 1,
+          "Damage": 40,
+          "Kills": 1,
+          "Weapon": 2,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        }
+      ],
+      "enemies": [
+        {
+          "Position": {
+            "x": -20.815256118774414,
+            "y": 0.0,
+            "z": -27.872514724731445
+          },
+          "Health": 60,
+          "Incarnation": 2
+        },
+        {
+          "Position": {
+            "x": 1.6471211910247803,
+            "y": 0.0,
+            "z": 27.79334259033203
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 27.849824905395508,
+            "y": 0.0,
+            "z": -24.521564483642578
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -27.81136703491211,
+            "y": 0.0,
+            "z": -11.746390342712402
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 23.769691467285156,
+            "y": 0.0,
+            "z": 27.837446212768555
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 27.822202682495117,
+            "y": 0.0,
+            "z": -15.351288795471191
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 17.452651977539062,
+            "y": 0.0,
+            "z": -27.819570541381836
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 21.06745719909668,
+            "y": 0.0,
+            "z": -27.829755783081055
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -2.7042653560638428,
+            "y": 0.0,
+            "z": 27.793498992919922
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 27.799274444580078,
+            "y": 0.0,
+            "z": -6.344655513763428
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 27.856046676635742,
+            "y": 0.0,
+            "z": -26.722105026245117
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -19.73419189453125,
+            "y": 0.0,
+            "z": 27.826862335205078
+          },
+          "Health": 60,
+          "Incarnation": 1
+        }
+      ]
+    }
+  ],
+  "stale": [
+    {
+      "run": 2,
+      "life": 1,
+      "local": 0,
+      "tick": 11,
+      "frameSequence": 1620,
+      "width": 1280,
+      "height": 720,
+      "lastSequence": 1,
+      "state": "Running",
+      "commandResult": "Applied retry",
+      "captureError": "",
+      "source": "{\n    \"revision\": \"ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2\",\n    \"builtUtc\": \"2026-10-05T02:52:00.2602718Z\",\n    \"dirty\": false\n}",
+      "elapsed": 0.18333333730697632,
+      "yaw": 155.22589111328125,
+      "pitch": 1.5824426412582397,
+      "capturedWallSeconds": 63.976264905498866,
+      "scripted": true,
+      "scenario": {
+        "version": 1,
+        "seed": 137,
+        "enemies": 12,
+        "enemyHp": 60,
+        "bodyDamage": 20,
+        "headMultiplier": 2,
+        "headDamage": 40,
+        "run": 2,
+        "duration": 60.0,
+        "rifleInterval": 0.11999999731779099,
+        "rifleRate": 8.333333969116211,
+        "name": "Shared rifle",
+        "identity": "d29ab1d2dae9a04f6c6c554845b6a800131236465bf7ba418827a8bf9c927593",
+        "session": "0a10ead1c86d4d01847507fc7dd105f4"
+      },
+      "players": [
+        {
+          "Position": {
+            "x": -0.5155599117279053,
+            "y": 0.0,
+            "z": 0.031861066818237305
+          },
+          "Yaw": 215.83712768554688,
+          "Pitch": 1.4256885051727295,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 2,
+          "Hits": 2,
+          "Damage": 40,
+          "Kills": 0,
+          "Weapon": 1,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        },
+        {
+          "Position": {
+            "x": 0.8938872218132019,
+            "y": 0.0,
+            "z": -0.02538086473941803
+          },
+          "Yaw": 218.02621459960938,
+          "Pitch": 0.08164863288402557,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 2,
+          "Hits": 2,
+          "Damage": 80,
+          "Kills": 2,
+          "Weapon": 2,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        }
+      ],
+      "enemies": [
+        {
+          "Position": {
+            "x": 12.382476806640625,
+            "y": 0.0,
+            "z": -27.904460906982422
+          },
+          "Health": 60,
+          "Incarnation": 3
+        },
+        {
+          "Position": {
+            "x": 1.6424732208251953,
+            "y": 0.0,
+            "z": 27.431724548339844
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 27.58404541015625,
+            "y": 0.0,
+            "z": -24.276294708251953
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -27.47991943359375,
+            "y": 0.0,
+            "z": -11.601669311523438
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 23.54254150390625,
+            "y": 0.0,
+            "z": 27.556013107299805
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 27.509103775024414,
+            "y": 0.0,
+            "z": -15.170269012451172
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 17.270923614501953,
+            "y": 0.0,
+            "z": -27.50688934326172
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 20.85790252685547,
+            "y": 0.0,
+            "z": -27.534997940063477
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -2.680349826812744,
+            "y": 0.0,
+            "z": 27.432640075683594
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 27.447505950927734,
+            "y": 0.0,
+            "z": -6.260626316070557
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 27.601011276245117,
+            "y": 0.0,
+            "z": -26.465679168701172
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -19.531124114990234,
+            "y": 0.0,
+            "z": 27.527599334716797
+          },
+          "Health": 60,
+          "Incarnation": 1
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "life": 1,
+      "local": 1,
+      "tick": 11,
+      "frameSequence": 1617,
+      "width": 1280,
+      "height": 720,
+      "lastSequence": 2,
+      "state": "Running",
+      "commandResult": "Stale run/life",
+      "captureError": "",
+      "source": "{\n    \"revision\": \"ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2\",\n    \"builtUtc\": \"2026-10-05T02:52:00.2602718Z\",\n    \"dirty\": false\n}",
+      "elapsed": 0.18333333730697632,
+      "yaw": 157.23143005371094,
+      "pitch": 0.09478503465652466,
+      "capturedWallSeconds": 63.949944204591844,
+      "scripted": true,
+      "scenario": {
+        "version": 1,
+        "seed": 137,
+        "enemies": 12,
+        "enemyHp": 60,
+        "bodyDamage": 20,
+        "headMultiplier": 2,
+        "headDamage": 40,
+        "run": 2,
+        "duration": 60.0,
+        "rifleInterval": 0.11999999731779099,
+        "rifleRate": 8.333333969116211,
+        "name": "Shared rifle",
+        "identity": "d29ab1d2dae9a04f6c6c554845b6a800131236465bf7ba418827a8bf9c927593",
+        "session": "0a10ead1c86d4d01847507fc7dd105f4"
+      },
+      "players": [
+        {
+          "Position": {
+            "x": -0.5155599117279053,
+            "y": 0.0,
+            "z": 0.031861066818237305
+          },
+          "Yaw": 215.83712768554688,
+          "Pitch": 1.4256885051727295,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 2,
+          "Hits": 2,
+          "Damage": 40,
+          "Kills": 0,
+          "Weapon": 1,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        },
+        {
+          "Position": {
+            "x": 0.8938872218132019,
+            "y": 0.0,
+            "z": -0.02538086473941803
+          },
+          "Yaw": 218.02621459960938,
+          "Pitch": 0.08164863288402557,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 0.0,
+          "Health": 100,
+          "Life": 1,
+          "Shots": 2,
+          "Hits": 2,
+          "Damage": 80,
+          "Kills": 2,
+          "Weapon": 2,
+          "BodyDamage": 20,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false
+        }
+      ],
+      "enemies": [
+        {
+          "Position": {
+            "x": 12.382476806640625,
+            "y": 0.0,
+            "z": -27.904460906982422
+          },
+          "Health": 60,
+          "Incarnation": 3
+        },
+        {
+          "Position": {
+            "x": 1.6424732208251953,
+            "y": 0.0,
+            "z": 27.431724548339844
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 27.58404541015625,
+            "y": 0.0,
+            "z": -24.276294708251953
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -27.47991943359375,
+            "y": 0.0,
+            "z": -11.601669311523438
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 23.54254150390625,
+            "y": 0.0,
+            "z": 27.556013107299805
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 27.509103775024414,
+            "y": 0.0,
+            "z": -15.170269012451172
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 17.270923614501953,
+            "y": 0.0,
+            "z": -27.50688934326172
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 20.85790252685547,
+            "y": 0.0,
+            "z": -27.534997940063477
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -2.680349826812744,
+            "y": 0.0,
+            "z": 27.432640075683594
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 27.447505950927734,
+            "y": 0.0,
+            "z": -6.260626316070557
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": 27.601011276245117,
+            "y": 0.0,
+            "z": -26.465679168701172
+          },
+          "Health": 60,
+          "Incarnation": 1
+        },
+        {
+          "Position": {
+            "x": -19.531124114990234,
+            "y": 0.0,
+            "z": 27.527599334716797
+          },
+          "Health": 60,
+          "Incarnation": 1
+        }
+      ]
+    }
+  ],
+  "afterClientLoss": {
+    "run": 2,
+    "life": 1,
+    "local": 0,
+    "tick": 43,
+    "frameSequence": 1635,
+    "width": 1280,
+    "height": 720,
+    "lastSequence": 1,
+    "state": "Aborted",
+    "commandResult": "Applied retry",
+    "captureError": "",
+    "source": "{\n    \"revision\": \"ba71678da53dbe9e1d1354b4a8dcb43a61f0b3f2\",\n    \"builtUtc\": \"2026-10-05T02:52:00.2602718Z\",\n    \"dirty\": false\n}",
+    "elapsed": 0.7166666984558105,
+    "yaw": 105.78787231445312,
+    "pitch": 1.9804699420928955,
+    "capturedWallSeconds": 64.52873560549887,
+    "scripted": true,
+    "scenario": {
+      "version": 1,
+      "seed": 137,
+      "enemies": 12,
+      "enemyHp": 60,
+      "bodyDamage": 20,
+      "headMultiplier": 2,
+      "headDamage": 40,
+      "run": 2,
+      "duration": 60.0,
+      "rifleInterval": 0.11999999731779099,
+      "rifleRate": 8.333333969116211,
+      "name": "Shared rifle",
+      "identity": "d29ab1d2dae9a04f6c6c554845b6a800131236465bf7ba418827a8bf9c927593",
+      "session": "0a10ead1c86d4d01847507fc7dd105f4"
+    },
+    "players": [
+      {
+        "Position": {
+          "x": 3.8425590991973877,
+          "y": 0.0,
+          "z": 0.6210681200027466
+        },
+        "Yaw": 105.78787231445312,
+        "Pitch": 1.9804699420928955,
+        "ReturnAt": 0.0,
+        "ImmuneUntil": 0.0,
+        "ContactUntil": 0.0,
+        "Health": 100,
+        "Life": 1,
+        "Shots": 6,
+        "Hits": 6,
+        "Damage": 120,
+        "Kills": 1,
+        "Weapon": 1,
+        "BodyDamage": 20,
+        "RifleInterval": 0.11999999731779099,
+        "Ready": false
+      },
+      {
+        "Position": {
+          "x": 0.202971413731575,
+          "y": 0.0,
+          "z": -0.06345570832490921
+        },
+        "Yaw": 156.6325225830078,
+        "Pitch": 0.09475149214267731,
+        "ReturnAt": 0.0,
+        "ImmuneUntil": 0.0,
+        "ContactUntil": 0.0,
+        "Health": 100,
+        "Life": 1,
+        "Shots": 2,
+        "Hits": 2,
+        "Damage": 80,
+        "Kills": 2,
+        "Weapon": 2,
+        "BodyDamage": 20,
+        "RifleInterval": 0.11999999731779099,
+        "Ready": false
+      }
+    ],
+    "enemies": [
+      {
+        "Position": {
+          "x": 27.30128288269043,
+          "y": 0.0,
+          "z": -6.0852556228637695
+        },
+        "Health": 60,
+        "Incarnation": 4
+      },
+      {
+        "Position": {
+          "x": 1.6504359245300293,
+          "y": 0.0,
+          "z": 25.78019142150879
+        },
+        "Health": 60,
+        "Incarnation": 1
+      },
+      {
+        "Position": {
+          "x": 26.388134002685547,
+          "y": 0.0,
+          "z": -23.135475158691406
+        },
+        "Health": 60,
+        "Incarnation": 1
+      },
+      {
+        "Position": {
+          "x": -25.95453453063965,
+          "y": 0.0,
+          "z": -10.963930130004883
+        },
+        "Health": 60,
+        "Incarnation": 1
+      },
+      {
+        "Position": {
+          "x": 22.514577865600586,
+          "y": 0.0,
+          "z": 26.26162338256836
+        },
+        "Health": 60,
+        "Incarnation": 1
+      },
+      {
+        "Position": {
+          "x": 26.093183517456055,
+          "y": 0.0,
+          "z": -14.31766414642334
+        },
+        "Health": 60,
+        "Incarnation": 1
+      },
+      {
+        "Position": {
+          "x": 16.468393325805664,
+          "y": 0.0,
+          "z": -26.06254005432129
+        },
+        "Health": 60,
+        "Incarnation": 1
+      },
+      {
+        "Position": {
+          "x": 19.924819946289062,
+          "y": 0.0,
+          "z": -26.17113494873047
+        },
+        "Health": 60,
+        "Incarnation": 1
+      },
+      {
+        "Position": {
+          "x": -2.4136557579040527,
+          "y": 0.0,
+          "z": 25.802749633789062
+        },
+        "Health": 60,
+        "Incarnation": 1
+      },
+      {
+        "Position": {
+          "x": 25.84585952758789,
+          "y": 0.0,
+          "z": -5.851548194885254
+        },
+        "Health": 40,
+        "Incarnation": 1
+      },
+      {
+        "Position": {
+          "x": 26.454423904418945,
+          "y": 0.0,
+          "z": -25.27528190612793
+        },
+        "Health": 60,
+        "Incarnation": 1
+      },
+      {
+        "Position": {
+          "x": -18.569656372070312,
+          "y": 0.0,
+          "z": 26.18260383605957
+        },
+        "Health": 60,
+        "Incarnation": 1
+      }
+    ]
+  }
+}

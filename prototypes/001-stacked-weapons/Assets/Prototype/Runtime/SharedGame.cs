@@ -18,6 +18,7 @@ namespace Journey
         CombatSimulation projection;
         SharedConnection connection;
         SharedEncounter authority;
+        SharedScenarioBinding binding;
         GameObject ally;
         Material allyMaterial;
         LineRenderer allyShot;
@@ -41,8 +42,9 @@ namespace Journey
         public bool Scripted => scripted;
         public float LocalYaw => yaw;
         public float LocalPitch => pitch;
-        public void Initialize(ArenaPresentation arena, CombatSimulation sim, bool host, string address, ushort port)
+        public void Initialize(ArenaPresentation arena, CombatSimulation sim, bool host, string address, ushort port, ScenarioConfiguration configuration = null)
         {
+            binding = new SharedScenarioBinding(host ? configuration ?? ScenarioConfiguration.Named(ScenarioKind.SharedRifle) : null);
             view = arena; projection = sim; local = host ? 0 : 1;
             var args = Environment.GetCommandLineArgs();
             scripted = Array.IndexOf(args, "-sharedScripted") >= 0; quitAtEnd = Array.IndexOf(args, "-sharedQuit") >= 0;
@@ -62,7 +64,7 @@ namespace Journey
             hitLog.WriteLine("wall_seconds,run,player,weapon,event,pose_tick,life,decision,enemy,incarnation,region,requested,before,actual,after,confirmed_delay_ms");
             connection = new SharedConnection(host, address, port, Array.IndexOf(args, "-sharedLoopback") >= 0);
             connection.Received += Receive; connection.Lost += Abort;
-            if (host) { authority = new SharedEncounter(); authority.Resolved += Resolve; }
+            if (host) { authority = new SharedEncounter(binding.Configuration, binding.Session); display.CopyFrom(authority.Current); authority.Resolved += Resolve; }
             ally = GameObject.CreatePrimitive(PrimitiveType.Capsule); ally.name = "Teammate " + (host ? "B" : "A");
             Destroy(ally.GetComponent<Collider>()); ally.transform.SetParent(transform);
             allyMaterial = new Material(Resources.Load<Material>("Body"));
@@ -78,7 +80,19 @@ namespace Journey
         void Receive(SharedConnection.Message message, BinaryReader r)
         {
             if (message == SharedConnection.Message.Hello && authority != null && display.State == SharedState.Waiting)
-            { authority.Start(); accumulator = 0; previousClock = Time.realtimeSinceStartupAsDouble; Publish(); }
+            { connection.Send(SharedConnection.Message.Configuration, binding.Write); }
+            else if (message == SharedConnection.Message.Configuration && authority == null)
+            {
+                binding.AcceptOffer(r);
+                display.CopyFrom(new SharedSnapshot(binding.Configuration) { Session = binding.Session });
+                SaveConfiguration();
+                connection.Send(SharedConnection.Message.ConfigurationAck, binding.Write);
+            }
+            else if (message == SharedConnection.Message.ConfigurationAck && authority != null)
+            {
+                binding.AcceptAcknowledgement(r); SaveConfiguration();
+                authority.Start(); accumulator = 0; previousClock = Time.realtimeSinceStartupAsDouble; Publish();
+            }
             else if (message == SharedConnection.Message.Input && authority != null)
             {
                 int commandRun = r.ReadInt32(), commandLife = r.ReadInt32(), sequence = r.ReadInt32();
@@ -90,10 +104,15 @@ namespace Journey
             else if (message == SharedConnection.Message.Snapshot && authority == null)
             {
                 SharedConnection.ReadSnapshot(r, incoming);
-                if (incoming.Run > display.Run || incoming.Run == display.Run && incoming.Tick >= display.Tick) display.CopyFrom(incoming);
+                if (binding.CanAdopt(incoming, display)) display.CopyFrom(incoming);
             }
             else if (message == SharedConnection.Message.Hit && authority == null) feedback.Enqueue(SharedConnection.ReadHit(r));
-            else if (message == SharedConnection.Message.Retry && authority != null) { authority.Retry(r.ReadInt32(), 1); Publish(); }
+            else if (message == SharedConnection.Message.Retry && authority != null)
+            {
+                int retryRun = r.ReadInt32(); Guid session = new Guid(r.ReadBytes(16)); var config = ScenarioConfiguration.Read(r); SharedScenarioBinding.RequireEnd(r);
+                if (!binding.Agreed || session != binding.Session || !binding.Configuration.SameValues(config)) throw new ArgumentException("Retry configuration/session mismatch.");
+                authority.Retry(retryRun, 1); Publish();
+            }
             else if (message == SharedConnection.Message.Abort) Abort(r.ReadString());
             else if (message == SharedConnection.Message.Ping) { double stamp = r.ReadDouble(); connection.Send(SharedConnection.Message.Pong, w => w.Write(stamp)); }
             else if (message == SharedConnection.Message.Pong) lastRtt = (Time.realtimeSinceStartupAsDouble - r.ReadDouble()) * 1000;
@@ -124,7 +143,15 @@ namespace Journey
             previewInputUntil = 0; previewMovement = Vector3.zero; previewFire = false;
             if (newRun)
             {
-                shotSequence = 0; emitted.Clear(); feedback.Clear(); saved = false;
+                shotSequence = 0; emitted.Clear(); saved = false;
+                // Poll can deliver the new snapshot and its first hits together.
+                // Retain that run's feedback while discarding prior-run events.
+                int queued = feedback.Count;
+                while (queued-- > 0)
+                {
+                    SharedHit hit = feedback.Dequeue();
+                    if (hit.Source.Run == run) feedback.Enqueue(hit);
+                }
                 frames.Clear(); confirms.Clear(); catchupLimits = 0;
                 previousWatched = -1; viewTransition = 0;
             }
@@ -226,9 +253,9 @@ namespace Journey
             if (active && (scripted || (preview == null ? inputActive : previewActive && previewFire)))
             {
                 shotRemaining -= dt;
-                if (shotRemaining <= 0)
+                while (shotRemaining <= 0)
                 {
-                    shotRemaining = Mathf.Max(0, shotRemaining + player.RifleInterval);
+                    shotRemaining += player.RifleInterval;
                     Ray ray = new Ray(view.Camera.transform.position, view.Camera.transform.forward);
                     AimResult preview = display.Query(ray);
                     view.ShowShot(ray.GetPoint(preview.Distance)); // Immediate cue only, no hit grant.
@@ -247,7 +274,7 @@ namespace Journey
             {
                 if (display.Elapsed >= 3) frames.Add(frame);
                 SharedPlayer a = display.Players[0], b = display.Players[1];
-                frameLog.WriteLine(FormattableString.Invariant($"{now:F6},{frame:F4},{run},{display.Tick},{display.State},{a.Shots},{b.Shots},{a.Hits},{b.Hits},{a.Damage},{b.Damage},{a.Kills},{b.Kills},{a.Health},{b.Health},12,{lastRtt:F3}"));
+                frameLog.WriteLine(FormattableString.Invariant($"{now:F6},{frame:F4},{run},{display.Tick},{display.State},{a.Shots},{b.Shots},{a.Hits},{b.Hits},{a.Damage},{b.Damage},{a.Kills},{b.Kills},{a.Health},{b.Health},{display.Enemies.Length},{lastRtt:F3}"));
                 if (screenshot.Length > 0 && display.Elapsed >= 5) { Directory.CreateDirectory(Path.GetDirectoryName(screenshot)); ScreenCapture.CaptureScreenshot(screenshot); screenshot = ""; }
             }
             else if (display.State != SharedState.Waiting && !saved)
@@ -257,7 +284,7 @@ namespace Journey
         {
             if (display.State != SharedState.Complete && display.State != SharedState.Defeat) return;
             if (authority != null) { authority.Retry(run, local); Publish(); }
-            else connection.Send(SharedConnection.Message.Retry, w => w.Write(run));
+            else connection.Send(SharedConnection.Message.Retry, w => { w.Write(run); binding.Write(w); });
             inputActive = true; SetCursor(!scripted && preview == null);
         }
         public string ApplyPreviewCommand(SharedPreviewCommand command)
@@ -279,6 +306,7 @@ namespace Journey
         [Serializable] sealed class Report
         {
             public string role, source, machine, gpu, connection, reason, hostBindEndpoint;
+            public ScenarioEvidence scenario;
             public bool scripted, development, previewEnabled;
             public int run, ticks, enemies, catchupLimits, frameSamples, confirmedHits, width, height, frameCap, vsync;
             public double frameP50, frameP95, frameP99, frameMax, confirmP50, confirmP95, confirmMax, rttMs;
@@ -293,7 +321,8 @@ namespace Journey
             TextAsset stamp = Resources.Load<TextAsset>("BuildInfo");
             var report = new Report { role = local == 0 ? "host A" : "client B", source = stamp == null ? "Editor" : stamp.text,
                 machine = SystemInfo.processorType, gpu = SystemInfo.graphicsDeviceName, connection = "Direct IPv4 UDP; declare actual address/machine/visibility separately",
-                reason = reason, hostBindEndpoint = authority != null ? connection.BoundEndpoint : "", scripted = scripted, development = Debug.isDebugBuild, previewEnabled = preview != null, run = run, ticks = display.Tick, enemies = 12,
+                reason = reason, hostBindEndpoint = authority != null ? connection.BoundEndpoint : "", scripted = scripted, development = Debug.isDebugBuild, previewEnabled = preview != null, run = run, ticks = display.Tick, enemies = display.Enemies.Length,
+                scenario = new ScenarioEvidence(display.Configuration, display.Session, display.Run),
                 catchupLimits = catchupLimits, width = Screen.width, height = Screen.height, frameCap = Application.targetFrameRate,
                 vsync = QualitySettings.vSyncCount, frameSamples = frames.Count, confirmedHits = confirms.Count, frameP50 = Percentile(frames, .5),
                 frameP95 = Percentile(frames, .95), frameP99 = Percentile(frames, .99), frameMax = Percentile(frames, 1),
@@ -301,6 +330,10 @@ namespace Journey
                 state = display.State, players = display.Players, enemyStates = display.Enemies, sentBytes = connection.SentBytes, receivedBytes = connection.ReceivedBytes };
             File.WriteAllText(Path.Combine(output, "summary-run-" + run + ".json"), JsonUtility.ToJson(report, true));
             Debug.Log("SHARED_REPORT " + output);
+        }
+        void SaveConfiguration()
+        {
+            File.WriteAllText(Path.Combine(output, "scenario.json"), JsonUtility.ToJson(new ScenarioEvidence(binding.Configuration, binding.Session, 0), true));
         }
         public static double Percentile(List<double> values, double percentile)
         {
@@ -329,8 +362,13 @@ namespace Journey
                 GUI.DrawTexture(new Rect(0, 0, w, h), Texture2D.whiteTexture); GUI.color = Color.white;
             }
             GUI.Label(new Rect(25, 18, 1000, 40), $"SHARED RIFLE / {(local == 0 ? "A · HOST" : "B · CLIENT")} / {display.State}", heading);
-            GUI.Label(new Rect(25, 57, 1150, 28), $"Run {display.Run}   ·   12 drones / 60 HP   ·   A: {a.Health} HP, {a.Damage} damage, {a.Kills} kills   ·   B: {b.Health} HP, {b.Damage} damage, {b.Kills} kills", small);
-            GUI.Label(new Rect(w - 210, h - 60, 200, 40), $"{Mathf.Max(0, 60 - display.Elapsed):F1}s   RTT {lastRtt:F1}ms", small);
+            GUI.Label(new Rect(25, 57, 1150, 28), $"Run {display.Run}   ·   A: {a.Health} HP, {a.Damage} damage, {a.Kills} kills   ·   B: {b.Health} HP, {b.Damage} damage, {b.Kills} kills", small);
+            if (binding.Configuration != null)
+            {
+                GUI.Label(new Rect(25, 85, 1200, 25), binding.Configuration.Label + " · " + binding.Configuration.Settings, small);
+                GUI.Label(new Rect(25, 110, 1200, 25), "Host settings locked for this session · Retry keeps them · " + binding.Configuration.Identity.Substring(0, 12), small);
+            }
+            GUI.Label(new Rect(w - 210, h - 60, 200, 40), $"{Mathf.Max(0, display.Configuration.Duration - display.Elapsed):F1}s   RTT {lastRtt:F1}ms", small);
             if (display.State == SharedState.Running)
             {
                 if (p.Health > 0)
@@ -359,13 +397,13 @@ namespace Journey
             else if (display.State == SharedState.Complete || display.State == SharedState.Defeat)
             {
                 LifeMessage(w, h, display.State == SharedState.Defeat ? "PARTY DEFEATED" : "RUN COMPLETE",
-                    display.State == SharedState.Defeat ? "Both players are down" : "60-second encounter complete",
+                    display.State == SharedState.Defeat ? "Both players are down" : $"{display.Configuration.Duration:0.##}-second encounter complete",
                     $"Retry readiness: A {(a.Ready ? "READY" : "waiting")} / B {(b.Ready ? "READY" : "waiting")}");
                 if (GUI.Button(new Rect(w / 2 - 120, h / 2, 240, 50), "Retry (R)")) Retry();
             }
             else if (display.State == SharedState.Aborted)
                 LifeMessage(w, h, "SESSION STOPPED", "The shared run was interrupted", "Start a new session to play again");
-            else GUI.Label(new Rect(25, 110, 1150, 80), "Waiting for the fixed host/client pair…", heading);
+            else GUI.Label(new Rect(25, 145, 1150, 80), "Waiting for the fixed host/client pair…", heading);
         }
         void LifeMessage(float w, float h, string title, string detail, string context)
         {

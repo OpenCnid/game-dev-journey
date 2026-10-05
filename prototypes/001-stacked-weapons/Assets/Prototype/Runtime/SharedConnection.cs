@@ -9,8 +9,8 @@ namespace Journey
     // One fixed peer, bounded packets, one reliable ordered pipeline. No scene/object replication.
     public sealed class SharedConnection : IDisposable
     {
-        public const int Protocol = 1, MaxPacket = 1100;
-        public enum Message : byte { Hello, Input, Shot, Snapshot, Hit, Retry, Abort, Ping, Pong }
+        public const int Protocol = 2, MaxPacket = 1100;
+        public enum Message : byte { Hello, Input, Shot, Snapshot, Hit, Retry, Abort, Ping, Pong, Configuration, ConfigurationAck }
         NetworkDriver driver;
         NetworkPipeline pipeline;
         NetworkConnection peer;
@@ -88,11 +88,18 @@ namespace Journey
                             if (Host && message == Message.Hello)
                             {
                                 if (reader.ReadInt32() != Protocol) { Fail("Protocol mismatch"); return; }
+                                SharedScenarioBinding.RequireEnd(reader);
+                                if (Connected) { Fail("Duplicate hello"); return; }
                                 Connected = true;
                                 // Notify host only after version handshake.
                                 Received?.Invoke(message, reader);
                             }
-                            else Received?.Invoke(message, reader);
+                            else
+                            {
+                                if (!Enum.IsDefined(typeof(Message), message) || !Connected) { Fail("Unexpected packet before handshake"); return; }
+                                Received?.Invoke(message, reader);
+                            }
+                            SharedScenarioBinding.RequireEnd(reader);
                         }
                     }
                     catch (Exception e) when (e is EndOfStreamException || e is IOException || e is ArgumentException)
@@ -132,6 +139,7 @@ namespace Journey
             Weapon = r.ReadInt32(), Event = r.ReadInt32(), PoseTick = r.ReadInt32(), Ray = new Ray(Vector(r), Vector(r)) };
         public static void WriteSnapshot(BinaryWriter w, SharedSnapshot s)
         {
+            w.Write(s.Session.ToByteArray()); s.Configuration.Write(w);
             w.Write(s.Run); w.Write(s.Tick); w.Write(s.Elapsed); w.Write((int)s.State);
             foreach (SharedPlayer p in s.Players)
             {
@@ -144,12 +152,18 @@ namespace Journey
         }
         public static void ReadSnapshot(BinaryReader r, SharedSnapshot s)
         {
+            Guid session = new Guid(r.ReadBytes(16)); var configuration = ScenarioConfiguration.Read(r);
+            var parsed = new SharedSnapshot(configuration) { Session = session };
+            ReadSnapshotBody(r, parsed); SharedScenarioBinding.RequireEnd(r); s.CopyFrom(parsed);
+        }
+        static void ReadSnapshotBody(BinaryReader r, SharedSnapshot s)
+        {
             s.Run = r.ReadInt32(); s.Tick = r.ReadInt32(); s.Elapsed = r.ReadSingle(); s.State = (SharedState)r.ReadInt32();
             for (int i = 0; i < 2; i++) s.Players[i] = new SharedPlayer { Position = Vector(r), Yaw = r.ReadSingle(), Pitch = r.ReadSingle(),
                 Health = r.ReadInt32(), Life = r.ReadInt32(), ReturnAt = r.ReadSingle(), ImmuneUntil = r.ReadSingle(), ContactUntil = r.ReadSingle(),
                 Ready = r.ReadBoolean(), Weapon = r.ReadInt32(), BodyDamage = r.ReadInt32(), RifleInterval = r.ReadSingle(),
                 Shots = r.ReadInt32(), Hits = r.ReadInt32(), Damage = r.ReadInt32(), Kills = r.ReadInt32() };
-            for (int i = 0; i < SharedEncounter.EnemyCount; i++) s.Enemies[i] = new SharedEnemy { Position = Vector(r), Health = r.ReadInt32(), Incarnation = r.ReadInt32() };
+            for (int i = 0; i < s.Enemies.Length; i++) s.Enemies[i] = new SharedEnemy { Position = Vector(r), Health = r.ReadInt32(), Incarnation = r.ReadInt32() };
         }
         public static void WriteHit(BinaryWriter w, SharedHit hit)
         {

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="10" result="Passed" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-05 02:51:48Z" end-time="2026-10-05 02:51:51Z" duration="2.8314166">
+  <test-suite type="TestSuite" id="1023" name="Stack Lab" fullname="Stack Lab" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-05 02:51:48Z" end-time="2026-10-05 02:51:51Z" duration="2.831417" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1017" name="Journey.PlayTests.dll" fullname="C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Library/ScriptAssemblies/Journey.PlayTests.dll" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-05 02:51:48Z" end-time="2026-10-05 02:51:51Z" duration="2.823113" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="33080" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1018" name="Journey" fullname="Journey" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-05 02:51:48Z" end-time="2026-10-05 02:51:51Z" duration="2.822692" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1019" name="Tests" fullname="Journey.Tests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-05 02:51:48Z" end-time="2026-10-05 02:51:51Z" duration="2.822409" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="PrecisionFeedbackTests" fullname="Journey.Tests.PrecisionFeedbackTests" classname="Journey.Tests.PrecisionFeedbackTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-10-05 02:51:48Z" end-time="2026-10-05 02:51:48Z" duration="0.106739" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1002" name="PreviewTracksDisplayedPoseMissCooldownPauseAndResetWithIndependentCriticalCue" fullname="Journey.Tests.PrecisionFeedbackTests.PreviewTracksDisplayedPoseMissCooldownPauseAndResetWithIndependentCriticalCue" methodname="PreviewTracksDisplayedPoseMissCooldownPauseAndResetWithIndependentCriticalCue" classname="Journey.Tests.PrecisionFeedbackTests" runstate="Runnable" seed="618082418" result="Passed" start-time="2026-10-05 02:51:48Z" end-time="2026-10-05 02:51:48Z" duration="0.096842" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[PRECISION_FEEDBACK_REPRO bodyPreview=true missWhite=true woundedHeadCritical=true actualDamage=20 pauseFreeze=true resetClear=true
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1003" name="RifleRateControlTests" fullname="Journey.Tests.RifleRateControlTests" classname="Journey.Tests.RifleRateControlTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-10-05 02:51:48Z" end-time="2026-10-05 02:51:49Z" duration="0.643646" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1004" name="MenuRateValidationAndCombatRestartUseTheChosenRate" fullname="Journey.Tests.RifleRateControlTests.MenuRateValidationAndCombatRestartUseTheChosenRate" methodname="MenuRateValidationAndCombatRestartUseTheChosenRate" classname="Journey.Tests.RifleRateControlTests" runstate="Runnable" seed="1640308600" result="Passed" start-time="2026-10-05 02:51:48Z" end-time="2026-10-05 02:51:49Z" duration="0.642831" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1005" name="RuntimeTests" fullname="Journey.Tests.RuntimeTests" classname="Journey.Tests.RuntimeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-05 02:51:49Z" end-time="2026-10-05 02:51:50Z" duration="1.059456" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1008" name="ArenaStartsFiresAndRestartsWithoutRuntimeErrors" fullname="Journey.Tests.RuntimeTests.ArenaStartsFiresAndRestartsWithoutRuntimeErrors" methodname="ArenaStartsFiresAndRestartsWithoutRuntimeErrors" classname="Journey.Tests.RuntimeTests" runstate="Runnable" seed="1915957089" result="Passed" start-time="2026-10-05 02:51:49Z" end-time="2026-10-05 02:51:49Z" duration="0.635341" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1006" name="DamagePresentationRendersBothOutcomesAndRestartClearsIt" fullname="Journey.Tests.RuntimeTests.DamagePresentationRendersBothOutcomesAndRestartClearsIt" methodname="DamagePresentationRendersBothOutcomesAndRestartClearsIt" classname="Journey.Tests.RuntimeTests" runstate="Runnable" seed="1346634454" result="Passed" start-time="2026-10-05 02:51:49Z" end-time="2026-10-05 02:51:49Z" duration="0.069173" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1007" name="ExperimentalRenderingPreservesSimulationAndDisposesBuffers" fullname="Journey.Tests.RuntimeTests.ExperimentalRenderingPreservesSimulationAndDisposesBuffers" methodname="ExperimentalRenderingPreservesSimulationAndDisposesBuffers" classname="Journey.Tests.RuntimeTests" runstate="Runnable" seed="18846178" result="Passed" start-time="2026-10-05 02:51:49Z" end-time="2026-10-05 02:51:50Z" duration="0.347783" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1009" name="ScenarioAgreementTests" fullname="Journey.Tests.ScenarioAgreementTests" classname="Journey.Tests.ScenarioAgreementTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-10-05 02:51:50Z" end-time="2026-10-05 02:51:50Z" duration="0.580620" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1010" name="ActualGamesAgreeBeforeStartAndBothReadyRetryRetainsDefaultsAndOverride" fullname="Journey.Tests.ScenarioAgreementTests.ActualGamesAgreeBeforeStartAndBothReadyRetryRetainsDefaultsAndOverride" methodname="ActualGamesAgreeBeforeStartAndBothReadyRetryRetainsDefaultsAndOverride" classname="Journey.Tests.ScenarioAgreementTests" runstate="Runnable" seed="1605003000" result="Passed" start-time="2026-10-05 02:51:50Z" end-time="2026-10-05 02:51:50Z" duration="0.573444" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[SHARED_SESSION HOST 127.0.0.1:17779 C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-976adf3d61a94bcda72460c04256fb68
+SHARED_SESSION CLIENT 127.0.0.1:17779 C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-1ccca2d7cd264a26a3db9a5096021261
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+SHARED_REPORT C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-976adf3d61a94bcda72460c04256fb68
+SHARED_REPORT C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-1ccca2d7cd264a26a3db9a5096021261
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+SHARED_REPORT C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-976adf3d61a94bcda72460c04256fb68
+SHARED_REPORT C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-1ccca2d7cd264a26a3db9a5096021261
+SHARED_SESSION HOST 127.0.0.1:17779 C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-029e7f3b50474c85b08711e6505a4dbc
+SHARED_SESSION CLIENT 127.0.0.1:17779 C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-102b7161e4724962b915a6824e7e4ff2
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+SHARED_REPORT C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-029e7f3b50474c85b08711e6505a4dbc
+SHARED_REPORT C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-102b7161e4724962b915a6824e7e4ff2
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+SHARED_REPORT C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-029e7f3b50474c85b08711e6505a4dbc
+SHARED_REPORT C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-102b7161e4724962b915a6824e7e4ff2
+SHARED_SESSION HOST 127.0.0.1:17779 C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-d296651b5d6148e98c4459ad33a3f59a
+SHARED_SESSION CLIENT 127.0.0.1:17779 C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-b9e2ca025b334ffe83ddb276905650f7
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+SHARED_REPORT C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-d296651b5d6148e98c4459ad33a3f59a
+SHARED_REPORT C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-b9e2ca025b334ffe83ddb276905650f7
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+There are 2 audio listeners in the scene. Please ensure there is always exactly one audio listener in the scene.
+SHARED_REPORT C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-d296651b5d6148e98c4459ad33a3f59a
+SHARED_REPORT C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/scenario-pair-b9e2ca025b334ffe83ddb276905650f7
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1011" name="SharedConnectionTests" fullname="Journey.Tests.SharedConnectionTests" classname="Journey.Tests.SharedConnectionTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-05 02:51:50Z" end-time="2026-10-05 02:51:50Z" duration="0.228674" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1013" name="RealLoopbackHandshakeSnapshotAndRetryRoundTrip" fullname="Journey.Tests.SharedConnectionTests.RealLoopbackHandshakeSnapshotAndRetryRoundTrip" methodname="RealLoopbackHandshakeSnapshotAndRetryRoundTrip" classname="Journey.Tests.SharedConnectionTests" runstate="Runnable" seed="837562280" result="Passed" start-time="2026-10-05 02:51:50Z" end-time="2026-10-05 02:51:50Z" duration="0.119592" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1012" name="StartAndRetryExcludeWaitingFramesButActiveStallsStillAbort" fullname="Journey.Tests.SharedConnectionTests.StartAndRetryExcludeWaitingFramesButActiveStallsStillAbort" methodname="StartAndRetryExcludeWaitingFramesButActiveStallsStillAbort" classname="Journey.Tests.SharedConnectionTests" runstate="Runnable" seed="48389811" result="Passed" start-time="2026-10-05 02:51:50Z" end-time="2026-10-05 02:51:50Z" duration="0.102513" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[SHARED_SESSION HOST 0.0.0.0:17778 C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/phase-clock-6bba5c3d9f04493daeccacf96713d6a7
+SHARED_ABORT Authority tick catch-up limit
+SHARED_REPORT C:/Users/Darian/.codex/worktrees/gdj-22-scenario-config/new-game-dev/prototypes/001-stacked-weapons/Assets\../artifacts/phase-clock-6bba5c3d9f04493daeccacf96713d6a7
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1014" name="ShotPresentationTests" fullname="Journey.Tests.ShotPresentationTests" classname="Journey.Tests.ShotPresentationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-05 02:51:50Z" end-time="2026-10-05 02:51:51Z" duration="0.201893" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1015" name="FastTurnUsesCurrentMuzzleAndDoesNotLeaveAnOldLine" fullname="Journey.Tests.ShotPresentationTests.FastTurnUsesCurrentMuzzleAndDoesNotLeaveAnOldLine" methodname="FastTurnUsesCurrentMuzzleAndDoesNotLeaveAnOldLine" classname="Journey.Tests.ShotPresentationTests" runstate="Runnable" seed="947539584" result="Passed" start-time="2026-10-05 02:51:51Z" end-time="2026-10-05 02:51:51Z" duration="0.039191" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[SHOT_ALIGNMENT_REPRO muzzleErrorMetres=0.000000 endpointViewport=(0.500000, 0.500000, 65.000000) birthVisible=True retainedAfterTurn=False lineRenderers=1
+]]></output>
+            </test-case>
+            <test-case id="1016" name="FreshShotsSurviveLongFrameButLinesClearOnPauseAndRestart" fullname="Journey.Tests.ShotPresentationTests.FreshShotsSurviveLongFrameButLinesClearOnPauseAndRestart" methodname="FreshShotsSurviveLongFrameButLinesClearOnPauseAndRestart" classname="Journey.Tests.ShotPresentationTests" runstate="Runnable" seed="979531049" result="Passed" start-time="2026-10-05 02:51:51Z" end-time="2026-10-05 02:51:51Z" duration="0.155687" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: C:/Users/Darian/AppData/LocalLow/Game Dev Journey/Stack Lab\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

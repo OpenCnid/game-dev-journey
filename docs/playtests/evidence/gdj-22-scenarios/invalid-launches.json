@@ -1,0 +1,42 @@
+[
+  {
+    "arguments": [
+      "-scenario",
+      "unknown"
+    ],
+    "result": "Rejected before session creation",
+    "reason": "Scenario rejected: Unknown -scenario."
+  },
+  {
+    "arguments": [
+      "-scenarioHp",
+      "0"
+    ],
+    "result": "Rejected before session creation",
+    "reason": "Scenario rejected: HP must be 1\u201310000, body damage 1\u20131000 and head multiplier 1\u20134."
+  },
+  {
+    "arguments": [
+      "-rifleRate",
+      "NaN"
+    ],
+    "result": "Rejected before session creation",
+    "reason": "Scenario rejected: Rifle rate must be 0.5\u2013120/s."
+  },
+  {
+    "arguments": [
+      "-scenarioDamage",
+      "oops"
+    ],
+    "result": "Rejected before session creation",
+    "reason": "Scenario rejected: Input string was not in a correct format."
+  },
+  {
+    "arguments": [
+      "-scenarioEnemies",
+      "36"
+    ],
+    "result": "Rejected before session creation",
+    "reason": "Scenario rejected: Scenario supports 1\u201335 drones."
+  }
+]

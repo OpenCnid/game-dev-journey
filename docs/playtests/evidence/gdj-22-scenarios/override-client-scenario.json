@@ -1,0 +1,16 @@
+{
+    "version": 1,
+    "seed": 271,
+    "enemies": 12,
+    "enemyHp": 90,
+    "bodyDamage": 15,
+    "headMultiplier": 3,
+    "headDamage": 45,
+    "run": 0,
+    "duration": 60.0,
+    "rifleInterval": 0.25,
+    "rifleRate": 4.0,
+    "name": "Developer parity",
+    "identity": "04e484e0c6ad621896f8f4b40491c998248f5856bee9a4c7b9506ca880ffa5e4",
+    "session": "deb385cda887445ca80479d84eed80e5"
+}
