@@ -217,7 +217,7 @@ namespace Journey
         public void StartCombat()
         {
             if (configurationInvalid) return;
-            if (soloScenario.Growth) { StartGrowthSolo(); return; }
+            if (soloScenario.SharedSolo) { StartGrowthSolo(); return; }
             if (benchmark) RestoreFrameSettings();
             benchmark = false; capture.Cancel(); error = "";
             yaw = pitch = accumulator = 0;
@@ -228,7 +228,7 @@ namespace Journey
         {
             if (benchmark) CancelBenchmark(); sim.Reset(0, 137, false); view.ResetFeedback();
             menuRifleRate = sim.RifleRate;
-            gameObject.AddComponent<SharedGame>().Initialize(view, sim, true, "", 0, ScenarioConfiguration.Named(ScenarioKind.EarnedGrowth), true); enabled = false;
+            gameObject.AddComponent<SharedGame>().Initialize(view, sim, true, "", 0, soloScenario, true); enabled = false;
         }
         void StartShared(bool host, string address, ushort port = 7777)
         {
@@ -266,7 +266,7 @@ namespace Journey
         void SetRifleRate(float rate)
         {
             sim.RifleRate = rate;
-            if (!soloScenario.Growth) soloScenario = soloScenario.With(interval: sim.RifleInterval); if (!sharedScenario.Growth) sharedScenario = sharedScenario.With(interval: sim.RifleInterval);
+            if (!soloScenario.SharedSolo) soloScenario = soloScenario.With(interval: sim.RifleInterval); if (!sharedScenario.SharedSolo) sharedScenario = sharedScenario.With(interval: sim.RifleInterval);
             if (!benchmark && soloRun != Guid.Empty) SaveSoloScenario();
             customRifleRate = sim.RifleRate.ToString("G8", CultureInfo.InvariantCulture); rateError = "";
         }
@@ -278,7 +278,8 @@ namespace Journey
         }
         void SelectScenario(ScenarioKind kind)
         {
-            soloScenario = sharedScenario = kind == ScenarioKind.EarnedGrowth ? ScenarioConfiguration.Named(kind) : ScenarioConfiguration.Named(kind).With(interval: sim.RifleInterval);
+            var selected = ScenarioConfiguration.Named(kind);
+            soloScenario = sharedScenario = selected.SharedSolo ? selected : selected.With(interval: sim.RifleInterval);
         }
         void ScenarioControls()
         {
@@ -290,6 +291,7 @@ namespace Journey
             if (GUILayout.Button("Shared rifle for both")) SelectScenario(ScenarioKind.SharedRifle);
             GUILayout.EndHorizontal(); GUILayout.BeginHorizontal();
             if (GUILayout.Button("Earned growth for solo / Host")) SelectScenario(ScenarioKind.EarnedGrowth);
+            if (GUILayout.Button("Weapon stack for solo / Host")) SelectScenario(ScenarioKind.WeaponStack);
             if (GUILayout.Button("Developer parity")) { SelectScenario(ScenarioKind.DeveloperParity); SetRifleRate(4); }
             if (GUILayout.Button("Named defaults"))
             {

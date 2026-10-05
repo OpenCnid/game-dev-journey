@@ -188,6 +188,60 @@ namespace Journey.Tests
             }
             finally { UnityEngine.Object.DestroyImmediate(root); view.Dispose(); sim.Dispose(); }
         }
+        [UnityTest] public IEnumerator ActualStackPairReplicatesTwoIndependentChoicesAndReadinessResetsWithoutReroll()
+        {
+            var roots = new[] { new GameObject("Stack host"), new GameObject("Stack client") };
+            var views = new[] { new ArenaPresentation(), new ArenaPresentation() };
+            var sims = new[] { new CombatSimulation(), new CombatSimulation() };
+            var games = new SharedGame[2];
+            try
+            {
+                for (int p = 0; p < 2; p++)
+                {
+                    views[p].Create(roots[p].transform); games[p] = roots[p].AddComponent<SharedGame>(); games[p].enabled = false;
+                    typeof(SharedGame).GetField("output", Hidden).SetValue(games[p], viewOutput());
+                    games[p].Initialize(views[p], sims[p], p == 0, "127.0.0.1", 17781, p == 0 ? ScenarioConfiguration.Named(ScenarioKind.WeaponStack) : null);
+                    typeof(SharedGame).GetField("inputActive", Hidden).SetValue(games[p], false);
+                }
+                double deadline = Time.realtimeSinceStartupAsDouble + 10;
+                while (games[1].Snapshot.Run == 0 && Time.realtimeSinceStartupAsDouble < deadline) { Pump(games[0]); Pump(games[1]); yield return null; }
+                Assert.That(games[1].Snapshot.Configuration.Kind, Is.EqualTo(ScenarioKind.WeaponStack));
+                var authority = (SharedEncounter)typeof(SharedGame).GetField("authority", Hidden).GetValue(games[0]);
+                for (int stage = 1; stage <= 2; stage++)
+                {
+                    // Diagnostic deaths isolate the real transport/UI barrier. Standalone checks earn through firing.
+                    for (int i = stage == 1 ? 1 : 11; i <= (stage == 1 ? 10 : 25); i++)
+                        authority.Growth.Death(authority.Current, new SharedHit(new SharedShot { Run = 1, Player = 0, Weapon = 1, Event = i },
+                            ShotDecision.Damage, new ShotResult(SharedEncounter.Spawn(0), 0, i, 1, 0), SharedEncounter.Spawn(0)));
+                    authority.Step(); Publish.Invoke(games[0], null);
+                    while (games[1].Snapshot.Level < stage + 1 && Time.realtimeSinceStartupAsDouble < deadline) { Pump(games[0]); Pump(games[1]); yield return null; }
+                    Assert.That(games[1].Snapshot.State, Is.EqualTo(SharedState.Choosing));
+                    Assert.That(games[1].Snapshot.ChoicePhase, Is.EqualTo(stage));
+                    Assert.That(games[1].Snapshot.Players[0].ChoiceReady, Is.False);
+                    int tick = games[0].Snapshot.Tick;
+                    Assert.That(games[0].Choose(stage == 1 ? UpgradeId.AddScattergun : UpgradeId.WiderScatter), Is.True);
+                    Assert.That(games[1].Choose(stage == 1 ? UpgradeId.AddPiercer : UpgradeId.AddScattergun), Is.True);
+                    while (games[1].Snapshot.Players[1].Offer.Pending && Time.realtimeSinceStartupAsDouble < deadline) { Pump(games[0]); Pump(games[1]); yield return null; }
+                    Assert.That(games[1].Snapshot.Tick, Is.EqualTo(tick));
+                    Assert.That(games[1].Choose(UpgradeId.StrongerHits), Is.False);
+                    Assert.That(games[0].ContinueChoice(), Is.True);
+                    while (!games[1].Snapshot.Players[0].ChoiceReady && Time.realtimeSinceStartupAsDouble < deadline) { Pump(games[0]); Pump(games[1]); yield return null; }
+                    Assert.That(games[1].Snapshot.State, Is.EqualTo(SharedState.Choosing)); Assert.That(games[1].ContinueChoice(), Is.True);
+                    while (games[1].Snapshot.State == SharedState.Choosing && Time.realtimeSinceStartupAsDouble < deadline) { Pump(games[0]); Pump(games[1]); yield return null; }
+                    Assert.That(games[1].Snapshot.State, Is.EqualTo(SharedState.Running));
+                }
+                Assert.That(games[1].Snapshot.Players[0].Arsenal, Is.EqualTo(3)); Assert.That(games[1].Snapshot.Players[0].Specialization, Is.EqualTo(UpgradeId.WiderScatter));
+                Assert.That(games[1].Snapshot.Players[1].Arsenal, Is.EqualTo(7));
+                authority.Current.State = SharedState.Defeat; Publish.Invoke(games[0], null);
+                while (games[1].Snapshot.State != SharedState.Defeat && Time.realtimeSinceStartupAsDouble < deadline) { Pump(games[0]); Pump(games[1]); yield return null; }
+                for (int p = 0; p < 2; p++) Assert.That(games[p].ApplyPreviewCommand(new SharedPreviewCommand { sequence = 1, run = 1, life = 1, action = "retry" }), Is.Empty);
+                while (games[1].Snapshot.Run != 2 && Time.realtimeSinceStartupAsDouble < deadline) { Pump(games[0]); Pump(games[1]); yield return null; }
+                Assert.That(games[1].Snapshot.Run, Is.EqualTo(2)); Assert.That(games[1].Snapshot.Level, Is.EqualTo(1));
+                foreach (SharedPlayer player in games[1].Snapshot.Players) { Assert.That(player.Arsenal, Is.EqualTo(1)); Assert.That(player.Specialization, Is.EqualTo(UpgradeId.None)); Assert.That(player.FirstAddition, Is.EqualTo(UpgradeId.None)); }
+                yield return null;
+            }
+            finally { for (int p = 0; p < 2; p++) { UnityEngine.Object.DestroyImmediate(roots[p]); views[p].Dispose(); sims[p].Dispose(); } }
+        }
         static string viewOutput() => Path.Combine(Application.dataPath, "../artifacts/growth-solo-" + Guid.NewGuid().ToString("N"));
 
         [Test] public void StartAndRetryKeepCurrentRunFeedbackReceivedWithTheNewSnapshot()

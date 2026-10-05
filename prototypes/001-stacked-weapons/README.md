@@ -76,11 +76,26 @@ Ten collected team XP earns level 2 and an independent personal offer for every 
 
 The background companion can explicitly select its personal card and Continue with `tools/tests/play_shared_companion.py --choice faster` (or `stronger`). Without that option it retains the offer and waits. `-growthChoice stronger|faster` selects and Continues only when diagnostic scripted input has normally earned an offer; it grants no XP. Use swapped choices for the second comparison. Scripts are functional evidence, not enjoyment observations. `growth.jsonl` records run/tick/sequence, death/orb/collector, conserved carrier values, movement/merges, cumulative XP, offer and applied choice. Summaries/state include choice phase, control revision and personal readiness/builds. Each run keeps its frozen starting identity. Add `-screenshotAtLevelUp -screenshot <absolute-path>` for a game-owned chooser capture; the camera preview itself omits the native HUD.
 
-Protocol 4 adds physical-pause/control state and conserved carrier movement/merge events. The 35-drone snapshot is 985 bytes and each growth event is 101 bytes, including message type, within the 1100-byte bound. The dynamic ledger retains every uncollected value independently of packet size; movement events are sampled at 10 Hz and merges are reliable ordered. Network cost still grows with moving carriers; this does not validate dense/four-player/recovery or extra content. [Owner revision](../../docs/decisions/0013-readable-xp-and-safe-first-level-up.md) and [evidence/comparison](../../docs/playtests/2026-10-05-earned-growth.md) govern the candidate.
+Protocol 5 extends the earlier growth protocol with compact arsenal/explicit card state and per-trigger/ray work attribution. The current 35-drone snapshot is 1025 bytes, each growth event 105 bytes and each hit outcome 118 bytes, including message type, within the 1100-byte bound. The dynamic XP ledger retains every uncollected value independently of packet size. A bounded 1024-record outgoing FIFO retains temporary reliable-window overflow without dropping or coalescing hits/XP; exceeding that backlog explicitly aborts. Movement events sample at 10 Hz. Network cost still grows with moving carriers; this does not validate dense/four-player/recovery. The frozen [v7 growth evidence](../../docs/playtests/2026-10-05-earned-growth.md) applies to its original protocol 4 archive.
+
+### Earned weapon-stack MVP experiment (GDJ-3)
+
+Select **Weapon stack** then Start, or launch with `-playtest -scenario weapon-stack`. Same graybox/seed 137/35 respawning 60-HP drones, but 120 active seconds. Start with the rifle. At 10 collected team XP choose **Add scattergun** (five horizontal fan rays, 12/24 damage, .75 seconds, 30 metres, ±8°) or **Add piercer** (16/32 damage, .65 seconds, 65 metres, three distinct enemies). At 25 collected XP choose the other secondary, making three weapons, or specialize the installed one: **+2 pellets** or **+2 pierced enemies**. All installed slots fire together on independent cooldowns at the current camera aim. Orange trails show spread; purple trails show piercing. These are test settings, not final balance.
+
+Both stages use the centered physical pause, personal cards and explicit all-roster Continue, including dead members. Excess collected XP is banked; each stage is offered separately. Return retains the arsenal; Retry clears it. Cards show only their benefit, without previous or unchanged values. The earlier one-level Earned growth fixture remains available.
+
+```powershell
+./tools/shared-combat.ps1 -Scenario weapon-stack -ScriptedCompanion -ClientStackPath pierce
+./tools/shared-combat.ps1 -Scenario weapon-stack -Background -HumanHost -WaitForJoin
+```
+
+For the background companion, `tools/tests/play_shared_companion.py --stack-path broad|scatter|pierce` explicitly selects both earned cards and Continues; no configured policy means it waits. Native diagnostic scripted players use `-sharedScripted -stackPath broad|scatter|pierce`. Ordinary runs receive no debug XP/loadout grants.
+
+For controlled comparisons only: `-playtest -scenario stack-reference -stackLoadout rifle|all|scatter|pierce`. This frozen diagnostic fixture lasts 60 seconds, supplies no XP/offers, and starts with the named rifle-only, all-three, specialized scatter or specialized pierce build. Its starting loadout is in the configuration identity. Summaries and frame traces include each weapon's triggers, rays, target tests, hits, damage and kills; multiple pellets/penetrations retain one source trigger and pre-trigger enemy incarnations. See the [bounded task and remaining feasibility gates](../../docs/planning/tasks/GDJ-3.md). The 35-drone managed steering/full-snapshot path does not establish the intended thousands-of-enemies cooperative envelope.
 
 ### Starting configuration controls
 
-Solo and shared rifle play consume the same validated version-1 starting configuration. The menu shows separate **Next solo** and **Host** settings; selecting a named scenario for both makes their starting enemy HP, damage and interval match. The default controls remain intentionally different:
+Solo and shared rifle play consume the same validated version-2 starting configuration. The menu shows separate **Next solo** and **Host** settings; selecting a named scenario for both makes their starting enemy HP, damage and interval match. The default controls remain intentionally different:
 
 | CLI name | Drones / HP | Body / head | Interval | Seed / duration |
 | --- | --- | --- | --- | --- |
@@ -88,10 +103,12 @@ Solo and shared rifle play consume the same validated version-1 starting configu
 | `shared-rifle` | 12 / 60 | 20 / 40 (x2) | .12 s | 137 / 60 s |
 | `developer-parity` | 12 / 90 | 15 / 45 (x3) | .25 s | 271 / 60 s |
 | `earned-growth` | 35 / 60 | 20 / 40 (x2) | .12 s | 137 / 60 s |
+| `weapon-stack` | 35 / 60 | 20 / 40 rifle (x2) | .12 s rifle | 137 / 120 s |
+| `stack-reference` | 35 / 60 | 20 / 40 rifle (x2) | .12 s rifle | 137 / 60 s |
 
 With no `-scenario`, solo selects solo precision and Host selects shared rifle. `-scenario <name>` selects the same definition for either path. Explicit overrides: `-scenarioEnemies` (1–35), `-scenarioHp` (1–10000), `-scenarioDamage` (1–1000), `-scenarioHead` (integer 1–4), `-scenarioDuration` (finite 1–600 seconds), `-seed` (signed 32-bit integer), and the retained `-rifleRate` (finite .5–120 shots/sec). CLI numbers use invariant decimal notation. Unsupported names/versions, missing/malformed values and out-of-range settings reject launch. Overrides are labelled in the native HUD/menu and saved evidence. The maximum 35-drone snapshot fits the unchanged 1100-byte packet limit; this is a functional bound, not a new network-performance envelope.
 
-Host transfers the full bounded scenario and a new session ID. Client validates and acknowledges that exact content before Start; local client tuning is ignored. Shared settings are frozen for the entire session, including both-ready Retry, which increments run identity and resets state. Changing shared settings requires a fresh pair. Protocol 4 intentionally rejects older players. Stale/mismatched configuration and malformed snapshots cannot replace active state. Disconnect still aborts, including while choices pause combat.
+Host transfers the full bounded scenario and a new session ID. Client validates and acknowledges that exact content before Start; local client tuning is ignored. Shared settings are frozen for the entire session, including both-ready Retry, which increments run identity and resets state. Changing shared settings requires a fresh pair. Protocol 5 intentionally rejects older players. Stale/mismatched configuration and malformed snapshots cannot replace active state. Disconnect still aborts, including while choices pause combat.
 
 Solo rate edits still preserve fractional cooldown, paused timing and session/restart retention; the chosen rate also applies to the next Host session. Scenario selection applies on Start/Host. Native HUD and JSON show the scenario name, content hash and effective HP/body/head/rate/interval. Shared output includes `scenario.json`, per-run summaries with `scenario`, and preview state with the same values. Solo Start/Restart writes `solo-scenario-<run-id>.json` under `-results` or the usual BenchmarkResults directory. Synthetic benchmarks retain their historical 40-HP/body-only workload and independent crowd controls; their existing rate/interval metadata remains authoritative.
 

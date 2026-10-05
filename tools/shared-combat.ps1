@@ -1,9 +1,11 @@
 param(
     [string]$PlayerFolder,
     [string]$Results,
-    [ValidateSet('solo-precision','shared-rifle','developer-parity','earned-growth')][string]$Scenario = 'shared-rifle',
+    [ValidateSet('solo-precision','shared-rifle','developer-parity','earned-growth','weapon-stack')][string]$Scenario = 'shared-rifle',
     [ValidateSet('none','stronger','faster')][string]$HostChoice = 'none',
     [ValidateSet('none','stronger','faster')][string]$ClientChoice = 'none',
+    [ValidateSet('none','broad','scatter','pierce')][string]$HostStackPath = 'none',
+    [ValidateSet('none','broad','scatter','pierce')][string]$ClientStackPath = 'none',
     [ushort]$Port = 7777,
     [int]$Width = 1920,
     [int]$Height = 1080,
@@ -25,6 +27,7 @@ if (($HumanHost -and -not $Background) -or ($WaitForJoin -and -not $HumanHost)) 
 if (-not (Test-Path -LiteralPath $taskPlayer)) { throw "No player at $taskPlayer. Build with tools/unity.ps1 first." }
 if (-not $Results) { $Results = Join-Path $taskRoot ('prototypes/001-stacked-weapons/artifacts/shared-' + (Get-Date -Format 'yyyyMMdd-HHmmss')) }
 if ($Background) {
+    if ($HostStackPath -ne 'none' -or $ClientStackPath -ne 'none') { throw 'Use the background companion --stack-path policy or explicit viewer choices.' }
     if ($ScriptedCompanion -or $QuitAtEnd) { throw 'Background preview starts both scripted players and exposes per-player controls in its viewer.' }
     if (-not $PythonPath) {
         $PythonPath = Join-Path $env:USERPROFILE '.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
@@ -62,6 +65,8 @@ foreach ($taskRole in @('host','client')) {
     if ($Scripted -or ($ScriptedCompanion -and $taskRole -ne $HumanRole)) { $taskArgs += '-sharedScripted' }
     $taskChoice = if ($taskRole -eq 'host') { $HostChoice } else { $ClientChoice }
     if ($taskChoice -ne 'none') { $taskArgs += @('-growthChoice',$taskChoice) }
+    $taskStackPath = if ($taskRole -eq 'host') { $HostStackPath } else { $ClientStackPath }
+    if ($taskStackPath -ne 'none') { $taskArgs += @('-stackPath',$taskStackPath) }
     if ($QuitAtEnd) { $taskArgs += '-sharedQuit' }
     if ($Uncapped) { $taskArgs += '-sharedUncapped' }
     # The owner explicitly requested opening two interactive games. Keep both visible.

@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Journey
 {
-    public enum UpgradeId { None, StrongerHits, FasterFire }
+    public enum UpgradeId { None, StrongerHits, FasterFire, AddScattergun, AddPiercer, WiderScatter, DeeperPierce }
     public enum UpgradeTarget { OwnedWeapon, Player, LootPool, DrawPool }
-    public enum UpgradeEffect { DirectDamage, FireCadence }
+    public enum UpgradeEffect { DirectDamage, FireCadence, InstallWeapon, PelletCount, PierceCount }
     public readonly struct UpgradeDefinition
     {
         public readonly UpgradeId Id;
@@ -18,25 +18,30 @@ namespace Journey
         public UpgradeDefinition(UpgradeId id, string name, UpgradeTarget target, UpgradeEffect effect, float factor)
         { Id = id; Name = name; Target = target; Effect = effect; Factor = factor; }
     }
-    // Content identity/eligibility is separate from the effect consumer. Only these two ordinary definitions exist.
+    // Content identity/eligibility is separate from the effect consumer.
     // Later player/pickup, loot and draw definitions route to their own consumers; they are not rifle stat edits.
     public static class GrowthUpgrade
     {
         static readonly UpgradeDefinition stronger = new UpgradeDefinition(UpgradeId.StrongerHits, "Stronger hits", UpgradeTarget.OwnedWeapon, UpgradeEffect.DirectDamage, 1.5f);
         static readonly UpgradeDefinition faster = new UpgradeDefinition(UpgradeId.FasterFire, "Faster fire", UpgradeTarget.OwnedWeapon, UpgradeEffect.FireCadence, 1.5f);
-        public static bool Valid(UpgradeId value) => value == UpgradeId.StrongerHits || value == UpgradeId.FasterFire;
-        public static UpgradeDefinition Definition(UpgradeId value) => value == UpgradeId.StrongerHits ? stronger : value == UpgradeId.FasterFire ? faster : throw new ArgumentException("Unknown upgrade definition");
+        static readonly UpgradeDefinition scatter = new UpgradeDefinition(UpgradeId.AddScattergun, "Add scattergun", UpgradeTarget.OwnedWeapon, UpgradeEffect.InstallWeapon, 1);
+        static readonly UpgradeDefinition pierce = new UpgradeDefinition(UpgradeId.AddPiercer, "Add piercer", UpgradeTarget.OwnedWeapon, UpgradeEffect.InstallWeapon, 1);
+        static readonly UpgradeDefinition wider = new UpgradeDefinition(UpgradeId.WiderScatter, "More pellets", UpgradeTarget.OwnedWeapon, UpgradeEffect.PelletCount, 2);
+        static readonly UpgradeDefinition deeper = new UpgradeDefinition(UpgradeId.DeeperPierce, "Deeper piercing", UpgradeTarget.OwnedWeapon, UpgradeEffect.PierceCount, 2);
+        public static bool Valid(UpgradeId value) => value >= UpgradeId.StrongerHits && value <= UpgradeId.DeeperPierce;
+        public static UpgradeDefinition Definition(UpgradeId value) => value == UpgradeId.StrongerHits ? stronger : value == UpgradeId.FasterFire ? faster : value == UpgradeId.AddScattergun ? scatter : value == UpgradeId.AddPiercer ? pierce : value == UpgradeId.WiderScatter ? wider : value == UpgradeId.DeeperPierce ? deeper : throw new ArgumentException("Unknown upgrade definition");
         public static string Label(UpgradeId value) => Valid(value) ? Definition(value).Name : "Baseline";
-        public static string Summary(UpgradeId value) => value == UpgradeId.FasterFire ? "+50% fire rate" : value == UpgradeId.StrongerHits ? "+50% damage" : "";
+        public static string Summary(UpgradeId value) => value == UpgradeId.FasterFire ? "+50% fire rate" : value == UpgradeId.StrongerHits ? "+50% damage" : value == UpgradeId.AddScattergun ? "5-pellet spread" : value == UpgradeId.AddPiercer ? "Pierces 3 enemies" : value == UpgradeId.WiderScatter ? "+2 pellets" : value == UpgradeId.DeeperPierce ? "+2 pierced enemies" : "";
         public static int Damage(UpgradeId value) => Valid(value) && Definition(value).Effect == UpgradeEffect.DirectDamage ? Mathf.RoundToInt(20 * Definition(value).Factor) : 20;
         public static float Interval(UpgradeId value) => Valid(value) && Definition(value).Effect == UpgradeEffect.FireCadence ? .12f / Definition(value).Factor : .12f;
     }
     [Serializable] public struct PersonalOffer
     {
         public int Id, Tick, Weapon, AppliedTick, ControlRevision;
-        public UpgradeId First, Selected;
+        public UpgradeId First, Second, Selected;
         public UpgradeId Card(int index) => index == 1 ? First : index == 2 ?
-            (First == UpgradeId.StrongerHits ? UpgradeId.FasterFire : UpgradeId.StrongerHits) : UpgradeId.None;
+            (Second != UpgradeId.None ? Second : First == UpgradeId.StrongerHits ? UpgradeId.FasterFire : UpgradeId.StrongerHits) : UpgradeId.None;
+        public bool Contains(UpgradeId upgrade) => GrowthUpgrade.Valid(upgrade) && (upgrade == Card(1) || upgrade == Card(2));
         public bool Pending => Id > 0 && Selected == UpgradeId.None;
     }
     public struct GrowthChoice { public int Run, Player, Offer, Weapon; public UpgradeId Upgrade; }
@@ -66,9 +71,9 @@ namespace Journey
             Orb = new XpOrb { Id = r.ReadInt32(), Enemy = r.ReadInt32(), Incarnation = r.ReadInt32(), SourcePlayer = r.ReadInt32(),
                 SourceWeapon = r.ReadInt32(), Shot = r.ReadInt32(), Value = r.ReadInt32(), Position = SharedConnection.Vector(r) }, Offer = ReadOffer(r) };
         public static void WriteOffer(BinaryWriter w, PersonalOffer o)
-        { w.Write(o.Id); w.Write(o.Tick); w.Write(o.Weapon); w.Write(o.AppliedTick); w.Write(o.ControlRevision); w.Write((int)o.First); w.Write((int)o.Selected); }
+        { w.Write(o.Id); w.Write(o.Tick); w.Write(o.Weapon); w.Write(o.AppliedTick); w.Write(o.ControlRevision); w.Write((int)o.First); w.Write((int)o.Second); w.Write((int)o.Selected); }
         public static PersonalOffer ReadOffer(BinaryReader r) => new PersonalOffer { Id = r.ReadInt32(), Tick = r.ReadInt32(), Weapon = r.ReadInt32(),
-            AppliedTick = r.ReadInt32(), ControlRevision = r.ReadInt32(), First = (UpgradeId)r.ReadInt32(), Selected = (UpgradeId)r.ReadInt32() };
+            AppliedTick = r.ReadInt32(), ControlRevision = r.ReadInt32(), First = (UpgradeId)r.ReadInt32(), Second = (UpgradeId)r.ReadInt32(), Selected = (UpgradeId)r.ReadInt32() };
     }
 
     // Run-owned ledger, team threshold and personal draws. Collection is separate from effect application.
@@ -85,17 +90,19 @@ namespace Journey
         readonly HashSet<long> deaths = new HashSet<long>();
         readonly List<int> collected = new List<int>();
         readonly System.Random[] draws = new System.Random[2];
-        int orbId, sequence;
+        int orbId, sequence, level = 1;
         public int AttractionQueries { get; private set; }
         public int EarnedXp { get; private set; }
         public int UncollectedXp => EarnedXp - Xp;
         public int Xp { get; private set; }
-        public int Level => Xp >= Threshold ? 2 : 1;
+        public int Level => level;
+        public static int ThresholdFor(int level) => level == 2 ? 10 : level == 3 ? 25 : throw new ArgumentException("Unknown earned level");
         public event Action<GrowthEvent> Changed;
         public void Reset(int seed)
         {
             Orbs.Clear(); deaths.Clear(); collected.Clear(); orbId = sequence = Xp = 0;
             EarnedXp = AttractionQueries = 0; ordered.Clear(); links.Clear();
+            level = 1;
             for (int p = 0; p < 2; p++) draws[p] = new System.Random(unchecked(seed * 397 ^ (p + 1) * 7919));
         }
         void Emit(SharedSnapshot s, GrowthEventKind kind, int player, XpOrb orb = default, PersonalOffer offer = default, int consumedOrb = 0)
@@ -167,11 +174,22 @@ namespace Journey
                     (s.Players[p].Position - orb.Position).sqrMagnitude <= PickupRadius * PickupRadius)
                 { collected.Add(orb.Id); Xp += orb.Value; Emit(s, GrowthEventKind.Collected, p, orb); break; }
             foreach (int id in collected) Orbs.Remove(id);
-            s.Xp = Xp; s.Level = Level;
-            if (Level == 2) for (int p = 0; p < s.Roster; p++) if (s.Players[p].Offer.Id == 0)
+            s.Xp = Xp;
+            // Bank excess collected value, but grant only one decision stage at a time.
+            // The physical pause prevents a later entitlement overwriting an unspent offer.
+            int next = s.Level + 1;
+            if (next > s.Configuration.LevelCap || Xp < ThresholdFor(next)) return;
+            for (int p = 0; p < s.Roster; p++) if (s.Players[p].Offer.Pending) return;
+            s.Level = level = next;
+            for (int p = 0; p < s.Roster; p++)
             {
-                var offer = new PersonalOffer { Id = p + 1, Tick = s.Tick, Weapon = s.Players[p].Weapon,
-                    First = draws[p].Next(2) == 0 ? UpgradeId.StrongerHits : UpgradeId.FasterFire };
+                UpgradeId a = UpgradeId.StrongerHits, b = UpgradeId.FasterFire;
+                if (s.Configuration.Kind == ScenarioKind.WeaponStack)
+                { a = next == 2 ? UpgradeId.AddScattergun : WeaponArsenal.Missing(s.Players[p].FirstAddition); b = next == 2 ? UpgradeId.AddPiercer : WeaponArsenal.Enhancement(s.Players[p].FirstAddition); }
+                bool reversed = draws[p].Next(2) != 0;
+                var offer = new PersonalOffer { Id = (next - 2) * 2 + p + 1, Tick = s.Tick, Weapon = s.Players[p].Weapon,
+                    First = reversed ? b : a, Second = reversed ? a : b };
+                s.Players[p].ChoiceReady = false;
                 s.Players[p].Offer = offer; Emit(s, GrowthEventKind.Entitlement, p, offer: offer);
             }
         }

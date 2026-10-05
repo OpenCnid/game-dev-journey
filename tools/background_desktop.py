@@ -188,7 +188,7 @@ def main():
     parser.add_argument("--width", type=int, default=1920)
     parser.add_argument("--height", type=int, default=1080)
     parser.add_argument("--duration", type=int, default=900)
-    parser.add_argument("--scenario", choices=["shared-rifle", "solo-precision", "developer-parity", "earned-growth"], default="shared-rifle")
+    parser.add_argument("--scenario", choices=["shared-rifle", "solo-precision", "developer-parity", "earned-growth", "weapon-stack"], default="shared-rifle")
     parser.add_argument("--uncapped", action="store_true")
     parser.add_argument("--human-host", action="store_true", help="Native-input A on the current desktop; bridge-controlled B in the background.")
     parser.add_argument("--wait-for-join", action="store_true", help="Hold B's launch until the viewer's Start test action.")

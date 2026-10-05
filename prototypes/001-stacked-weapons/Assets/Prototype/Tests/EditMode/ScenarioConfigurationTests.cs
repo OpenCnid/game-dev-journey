@@ -77,7 +77,7 @@ namespace Journey.Tests
             Assert.Throws<ArgumentException>(() => config.With(hp: 0)); Assert.Throws<ArgumentException>(() => config.With(hp: 10001));
             Assert.Throws<ArgumentException>(() => config.With(damage: 0)); Assert.Throws<ArgumentException>(() => config.With(damage: 1001));
             Assert.Throws<ArgumentException>(() => config.With(head: 0)); Assert.Throws<ArgumentException>(() => config.With(head: 5));
-            Assert.Throws<ArgumentException>(() => new ScenarioConfiguration(2, ScenarioKind.SharedRifle, 137, 12, 60, 20, 2, 60, .12f));
+            Assert.Throws<ArgumentException>(() => new ScenarioConfiguration(ScenarioConfiguration.Version + 1, ScenarioKind.SharedRifle, 137, 12, 60, 20, 2, 60, .12f));
             Assert.Throws<ArgumentException>(() => ScenarioConfiguration.Named((ScenarioKind)99));
             Assert.Throws<ArgumentException>(() => ScenarioConfiguration.FromArguments(new[] { "-scenario", "unknown" }, ScenarioKind.SharedRifle));
             Assert.Throws<FormatException>(() => ScenarioConfiguration.FromArguments(new[] { "-scenarioHp", "bad" }, ScenarioKind.SharedRifle));

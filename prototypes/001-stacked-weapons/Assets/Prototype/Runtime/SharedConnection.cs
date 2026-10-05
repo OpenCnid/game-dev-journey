@@ -1,21 +1,28 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Unity.Networking.Transport;
 using Unity.Networking.Transport.Utilities;
 using UnityEngine;
+using TransportStatus = Unity.Networking.Transport.Error.StatusCode;
 
 namespace Journey
 {
     // One fixed peer, bounded packets, one reliable ordered pipeline. No scene/object replication.
     public sealed class SharedConnection : IDisposable
     {
-        public const int Protocol = 4, MaxPacket = 1100;
+        public const int Protocol = 5, MaxPacket = 1100;
+        public const int MaxBufferedMessages = 1024;
         public enum Message : byte { Hello, Input, Shot, Snapshot, Hit, Retry, Abort, Ping, Pong, Configuration, ConfigurationAck, Growth, Choice, ContinueChoice }
         NetworkDriver driver;
         NetworkPipeline pipeline;
         NetworkConnection peer;
         readonly MemoryStream buffer = new MemoryStream(MaxPacket);
         readonly BinaryWriter writer;
+        readonly Queue<byte[]> outgoing = new Queue<byte[]>();
+        public int PendingMessages => outgoing.Count;
+        public int BufferedHighWater { get; private set; }
+        public int DeferredSends { get; private set; }
         double opened, received;
         bool aborted;
         public bool Host { get; }
@@ -55,6 +62,8 @@ namespace Journey
         {
             if (!driver.IsCreated || aborted) return;
             driver.ScheduleUpdate().Complete();
+            FlushOutgoing();
+            if (aborted) return;
             if (Host)
             {
                 NetworkConnection incoming;
@@ -114,19 +123,35 @@ namespace Journey
             if (!driver.IsCreated || !peer.IsCreated || aborted) return false;
             buffer.Position = 0; buffer.SetLength(0); writer.Write((byte)message); body(writer); writer.Flush();
             if (buffer.Length > MaxPacket) { Fail("Packet exceeded bounded payload"); return false; }
+            if (outgoing.Count == 0 && TrySend(buffer.GetBuffer(), (int)buffer.Length)) return true;
+            if (aborted) return false;
+            if (outgoing.Count >= MaxBufferedMessages) { Fail("Reliable outgoing backlog exceeded " + MaxBufferedMessages + " retained messages"); return false; }
+            outgoing.Enqueue(buffer.ToArray()); BufferedHighWater = Math.Max(BufferedHighWater, outgoing.Count); DeferredSends++; return true;
+        }
+        // The reliable window is finite. Backpressure retains complete records in FIFO order;
+        // neither XP nor individual pellet/penetration outcomes are dropped or coalesced.
+        void FlushOutgoing()
+        {
+            while (outgoing.Count > 0 && !aborted)
+            { byte[] bytes = outgoing.Peek(); if (!TrySend(bytes, bytes.Length)) return; outgoing.Dequeue(); }
+        }
+        bool TrySend(byte[] bytes, int count)
+        {
             int status = driver.BeginSend(pipeline, peer, out var stream);
+            if (status == (int)TransportStatus.NetworkSendQueueFull) return false;
             if (status != 0) { Fail("Transport send failed: " + status); return false; }
-            byte[] bytes = buffer.GetBuffer();
-            for (int i = 0; i < buffer.Length; i++) stream.WriteByte(bytes[i]);
+            for (int i = 0; i < count; i++) stream.WriteByte(bytes[i]);
             status = driver.EndSend(stream);
+            if (status == (int)TransportStatus.NetworkSendQueueFull) return false;
             if (status < 0) { Fail("Transport send failed: " + status); return false; }
-            SentBytes += buffer.Length; return true;
+            SentBytes += count; return true;
         }
         void Fail(string reason) { if (aborted) return; aborted = true; Connected = false; Lost?.Invoke(reason); }
         public void Dispose()
         {
             if (driver.IsCreated) { if (peer.IsCreated) driver.Disconnect(peer); driver.ScheduleUpdate().Complete(); driver.Dispose(); }
             writer.Dispose(); buffer.Dispose();
+            outgoing.Clear();
         }
         public static void Vector(BinaryWriter w, Vector3 v) { w.Write(v.x); w.Write(v.y); w.Write(v.z); }
         public static Vector3 Vector(BinaryReader r) => new Vector3(r.ReadSingle(), r.ReadSingle(), r.ReadSingle());
@@ -149,6 +174,7 @@ namespace Journey
                 w.Write(p.ReturnAt); w.Write(p.ImmuneUntil); w.Write(p.ContactUntil); w.Write(p.Ready);
                 w.Write(p.ChoiceReady);
                 w.Write(p.Weapon); w.Write(p.BodyDamage); w.Write(p.RifleInterval);
+                w.Write(p.Arsenal); w.Write((int)p.FirstAddition); w.Write((int)p.Specialization);
                 GrowthEvent.WriteOffer(w, p.Offer);
                 w.Write(p.Shots); w.Write(p.Hits); w.Write(p.Damage); w.Write(p.Kills);
             }
@@ -168,6 +194,7 @@ namespace Journey
             for (int i = 0; i < 2; i++) s.Players[i] = new SharedPlayer { Position = Vector(r), Yaw = r.ReadSingle(), Pitch = r.ReadSingle(),
                 Health = r.ReadInt32(), Life = r.ReadInt32(), ReturnAt = r.ReadSingle(), ImmuneUntil = r.ReadSingle(), ContactUntil = r.ReadSingle(),
                 Ready = r.ReadBoolean(), ChoiceReady = r.ReadBoolean(), Weapon = r.ReadInt32(), BodyDamage = r.ReadInt32(), RifleInterval = r.ReadSingle(),
+                Arsenal = r.ReadInt32(), FirstAddition = (UpgradeId)r.ReadInt32(), Specialization = (UpgradeId)r.ReadInt32(),
                 Offer = GrowthEvent.ReadOffer(r), Shots = r.ReadInt32(), Hits = r.ReadInt32(), Damage = r.ReadInt32(), Kills = r.ReadInt32() };
             for (int i = 0; i < s.Enemies.Length; i++) s.Enemies[i] = new SharedEnemy { Position = Vector(r), Health = r.ReadInt32(), Incarnation = r.ReadInt32() };
         }
@@ -176,12 +203,13 @@ namespace Journey
             WriteShot(w, hit.Source); w.Write((int)hit.Decision); ShotResult s = hit.Shot;
             Vector(w, s.End); w.Write(s.EnemyIndex); w.Write(s.SpawnVersion); w.Write((int)s.Region);
             w.Write(s.RequestedDamage); w.Write(s.HealthBefore); w.Write(s.Damage); w.Write(s.HealthAfter); Vector(w, hit.DeathPosition);
+            w.Write(hit.Trigger); w.Write(hit.RayIndex); w.Write(hit.Rays); w.Write(hit.TargetTests);
         }
         public static SharedHit ReadHit(BinaryReader r)
         {
             SharedShot source = ReadShot(r); var decision = (ShotDecision)r.ReadInt32();
             var shot = new ShotResult(Vector(r), r.ReadInt32(), r.ReadInt32(), (HitRegion)r.ReadInt32(), r.ReadInt32(), r.ReadInt32(), r.ReadInt32(), r.ReadInt32());
-            return new SharedHit(source, decision, shot, Vector(r));
+            return new SharedHit(source, decision, shot, Vector(r), r.ReadBoolean(), r.ReadInt32(), r.ReadInt32(), r.ReadInt32());
         }
     }
 }

@@ -41,4 +41,4 @@ The current shared fixture remains limited to 35 drones and its managed pair sim
 
 ## Resume
 
-Owner authorization is the October 5 “Okay let's do that then” reply to the quick-v7-check/weapon-stack recommendation. Worktree reused; branch/base above; no other agent/foreground input/new chat. Next implement this bounded slice and prepare a candidate. Keep GDJ-23 review separate, and record any reported v7 blocker before using it as a baseline.
+Owner authorization is the October 5 “Okay let's do that then” reply to the quick-v7-check/weapon-stack recommendation. Worktree reused; branch/base above; no other agent/foreground input/new chat. v7's quick human check is now clear. The bounded stack is implemented; [the report](../../playtests/2026-10-05-weapon-stack.md) records source behavior and the discovered reliable-window burst fix. Checks and exact clean candidate/standalone evidence are being prepared; this checkpoint does not yet claim a playable delivery or human stack comparison. Keep GDJ-23 review separate and the frozen v7 archive intact.

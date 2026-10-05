@@ -23,7 +23,7 @@ namespace Journey
             if (run != state.Run || life != state.Players[local].Life) return "Stale run/life";
             if (action == "retry") return state.State == SharedState.Complete || state.State == SharedState.Defeat ? "" : "Run still active";
             if (action == "scripted" || action == "idle") return "";
-            if (action == "choice") return (state.State == SharedState.Running || state.State == SharedState.Choosing) && state.Players[local].Offer.Pending && GrowthUpgrade.Valid(upgrade) ? "" : "No valid pending choice";
+            if (action == "choice") return (state.State == SharedState.Running || state.State == SharedState.Choosing) && state.Players[local].Offer.Pending && state.Players[local].Offer.Contains(upgrade) ? "" : "No valid pending choice";
             if (action == "continue") return state.State == SharedState.Choosing && phase == state.ChoicePhase && state.Players[local].Offer.Selected != UpgradeId.None && !state.Players[local].ChoiceReady ? "" : "No valid choice readiness";
             if (action != "input") return "Unknown action";
             if (state.State != SharedState.Running || state.Players[local].Health <= 0) return "Player inactive";
