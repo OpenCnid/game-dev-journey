@@ -29,6 +29,9 @@ namespace Journey.Tests
                 Assert.That(game.Snapshot.Roster, Is.EqualTo(1));
                 Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Waiting));
                 Clock.SetValue(game, Time.realtimeSinceStartupAsDouble - .5); Update.Invoke(game, null);
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Waiting));
+                Assert.That(sim.Count, Is.EqualTo(35), "Prepared enemies render before the encounter clock starts");
+                Clock.SetValue(game, Time.realtimeSinceStartupAsDouble - .5); Update.Invoke(game, null);
                 Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Running));
                 Assert.That(game.Snapshot.Tick, Is.Zero, "Initialization is not active combat time");
                 var authority = (SharedEncounter)typeof(SharedGame).GetField("authority", Hidden).GetValue(game);

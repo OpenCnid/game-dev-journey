@@ -105,9 +105,9 @@ namespace Journey
             velocities = new Vector3[Configuration.EnemyCount];
             for (int i = 0; i < history.Length; i++) history[i] = new SharedSnapshot(Configuration) { Tick = -1 };
         }
-        public void Start()
+        public void Start(bool preparing = false)
         {
-            Current.Run++; Current.Tick = 0; Current.Elapsed = 0; Current.State = SharedState.Running;
+            Current.Run++; Current.Tick = 0; Current.Elapsed = 0; Current.State = preparing ? SharedState.Waiting : SharedState.Running;
             random = new System.Random(Configuration.Seed); pending.Clear(); choices.Clear(); Growth?.Reset(Configuration.Seed); Current.Xp = 0; Current.Level = 1; Rejected = 0; AbortReason = "";
             for (int p = 0; p < Current.Roster; p++)
             {
@@ -118,6 +118,11 @@ namespace Journey
             for (int i = 0; i < Configuration.EnemyCount; i++) { Current.Enemies[i] = default; Respawn(i); }
             foreach (SharedSnapshot pose in history) { pose.Run = 0; pose.Tick = -1; }
             Remember();
+        }
+        public bool Begin()
+        {
+            if (Current.Run < 1 || Current.State != SharedState.Waiting) return false;
+            Current.State = SharedState.Running; Remember(); return true;
         }
         Vector3 PlayerSpawn(int p) => Current.Roster == 1 ? Vector3.zero : Spawn(p);
         public static Vector3 Spawn(int p) => new Vector3(p == 0 ? -2 : 2, 0, 0);

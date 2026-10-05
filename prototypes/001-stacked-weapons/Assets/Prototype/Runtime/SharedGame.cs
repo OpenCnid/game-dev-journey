@@ -25,7 +25,7 @@ namespace Journey
         int local, run, life, inputSequence, shotSequence, catchupLimits;
         float yaw, pitch, inputTime, inputRemaining, shotRemaining, accumulator, pingRemaining;
         Vector3 predicted;
-        bool inputActive = true, scripted, quitAtEnd, saved, solo, cardsVisible = true;
+        bool inputActive = true, scripted, quitAtEnd, saved, solo, soloPrepared, cardsVisible = true;
         readonly OrbReplica orbReplica = new OrbReplica();
         readonly Dictionary<int, GameObject> orbViews = new Dictionary<int, GameObject>();
         Material orbMaterial;
@@ -87,6 +87,7 @@ namespace Journey
             allyShot.positionCount = 2; allyShot.startWidth = .018f; allyShot.endWidth = .004f;
             allyShot.sharedMaterial = new Material(Resources.Load<Material>("Trail")); allyShot.sharedMaterial.color = new Color(.1f, .9f, .8f);
             allyShot.enabled = false;
+            if (solo) { authority.Start(preparing: true); Publish(); SaveConfiguration(); }
             previousClock = Time.realtimeSinceStartupAsDouble;
             SetCursor(!scripted && preview == null); Debug.Log("SHARED_SESSION " + (host ? "HOST" : "CLIENT") + " " + address + ":" + port + " " + output);
         }
@@ -182,10 +183,10 @@ namespace Journey
             bool runningAtFrameStart = display.State == SharedState.Running;
             int frameRun = display.Run;
             connection?.Poll();
-            if (solo && display.State == SharedState.Waiting)
+            if (solo && display.State == SharedState.Waiting && soloPrepared)
             {
-                authority.Start(); accumulator = 0; Publish(); SaveConfiguration();
-                // Initialization and first-frame setup precede active encounter time, as with pair agreement.
+                authority.Begin(); accumulator = 0; Publish();
+                // One complete prepared render precedes active time; first-use GPU setup is not combat.
                 frame = 0; previousClock = now;
             }
             SyncGeneration();
@@ -309,6 +310,7 @@ namespace Journey
                 }
             }
             view.Draw(projection, 1);
+            if (solo && display.State == SharedState.Waiting) soloPrepared = true;
             DrawOrbs();
             int other = 1 - local; ally.SetActive(!solo && display.State == SharedState.Running && display.Players[other].Health > 0 && watched == local);
             ally.transform.position = display.Players[other].Position + Vector3.up;
@@ -507,7 +509,7 @@ namespace Journey
             }
             else if (display.State == SharedState.Aborted)
                 LifeMessage(w, h, "SESSION STOPPED", "The shared run was interrupted", "Start a new session to play again");
-            else GUI.Label(new Rect(25, 145, 1150, 80), "Waiting for the fixed host/client pair…", heading);
+            else GUI.Label(new Rect(25, 225, 1150, 80), solo ? "Preparing the arena…" : "Waiting for the fixed host/client pair…", heading);
         }
         void LifeMessage(float w, float h, string title, string detail, string context)
         {

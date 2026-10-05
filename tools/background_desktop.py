@@ -283,7 +283,7 @@ def main():
                 if not 0 < length <= 2048:
                     raise ValueError("Invalid size")
                 command = json.loads(self.rfile.read(length))
-                if command.get("action") not in ("input", "scripted", "idle", "retry", "quit"):
+                if command.get("action") not in ("input", "scripted", "idle", "choice", "retry", "quit"):
                     raise ValueError("Unknown action")
                 with lock:
                     state = json.loads(read_shared(results / role / "state.json"))
