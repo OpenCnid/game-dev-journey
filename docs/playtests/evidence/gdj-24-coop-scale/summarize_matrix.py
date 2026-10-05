@@ -24,7 +24,12 @@ for file in sorted(a.audits.glob('*/audit.json')):
             queueMaxAgeMs=report.get('outgoingMaxAgeMs'), correctness=role['correctness'],
             stageFrameMs=window['stageFrameMs'] if window else None,
             payloadRates=window['payloadRatesPerSecond'] if window else None,
-            queueAgeGate=window['queueAgeGate'] if window else None))
+            queueAgeGate=window['queueAgeGate'] if window else None,
+            emissionTimerClippedFrames=window.get('emissionTimerClippedFrames') if window else None,
+            emissionTimerClippedMs=window.get('emissionTimerClippedMs') if window else None,
+            allocationNote=window.get('allocationNote') if window else None,
+            workingSetNote=window.get('workingSetNote') if window else None,
+            externalProcessMemory=role.get('externalProcessMemory')))
     captures.append(dict(capture=file.parent.name, audit=str(file), roles=roles,
                          terminalParity=audit.get('terminalParity'), replicaEventParity=audit.get('replicaEventParity')))
 result = dict(classification='exploratory; no acceptance inferred from numerical results', captures=captures)

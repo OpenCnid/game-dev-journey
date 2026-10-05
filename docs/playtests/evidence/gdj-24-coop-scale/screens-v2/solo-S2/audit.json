@@ -1,0 +1,2094 @@
+{
+  "warmupSeconds": 10.0,
+  "classification": "numerical audit; acceptance requires separate visibility/correctness gates",
+  "roles": [
+    {
+      "folder": "prototypes\\001-stacked-weapons\\artifacts\\gdj24-v2-solo-S2",
+      "report": {
+        "role": "host A",
+        "source": "{\n    \"revision\": \"32497266d711d031ae129903b5616a37fa1ea060\",\n    \"builtUtc\": \"2026-10-05T09:49:18.0072903Z\",\n    \"dirty\": false\n}",
+        "machine": "Intel(R) Core(TM) i7-10700K CPU @ 3.80GHz",
+        "gpu": "NVIDIA GeForce RTX 3090",
+        "connection": "Direct IPv4 UDP; declare actual address/machine/visibility separately",
+        "reason": "",
+        "hostBindEndpoint": "",
+        "steering": "exact grid",
+        "scenario": {
+          "version": 3,
+          "seed": 137,
+          "enemies": 35,
+          "enemyHp": 60,
+          "bodyDamage": 20,
+          "headMultiplier": 2,
+          "headDamage": 40,
+          "run": 1,
+          "startingArsenal": 7,
+          "startingSpecialization": 0,
+          "duration": 40.0,
+          "rifleInterval": 0.11999999731779099,
+          "rifleRate": 8.333333969116211,
+          "name": "Co-op scale (diagnostic) (override)",
+          "identity": "04a61786e9df738943d2a79f9e48847ebb15bfa04dcf45fd14bc93749257d7db",
+          "session": "025691a1b77143078bb6920d87fb04bc"
+        },
+        "scripted": true,
+        "development": false,
+        "previewEnabled": false,
+        "audioVolume": 0.0,
+        "run": 1,
+        "ticks": 2400,
+        "enemies": 35,
+        "catchupLimits": 0,
+        "frameSamples": 53234,
+        "confirmedHits": 412,
+        "width": 1920,
+        "height": 1080,
+        "frameCap": -1,
+        "vsync": 0,
+        "frameP50": 0.6054999999989263,
+        "frameP95": 1.2471999999945638,
+        "frameP99": 1.4527000000015278,
+        "frameMax": 4.174700000000087,
+        "confirmP50": 13.079199999999958,
+        "confirmP95": 17.054600000001585,
+        "confirmMax": 17.66269999999892,
+        "rttMs": 0.0,
+        "updateLastMs": 0.1657,
+        "updateMaxMs": 20.1311,
+        "abortFrameMs": 0.0,
+        "abortRemainingMs": 0.0,
+        "abortPreviousUpdateMs": 0.0,
+        "previewCaptureLastMs": 0.0,
+        "previewCaptureMaxMs": 0.0,
+        "previewCaptureCompletedAt": 0.0,
+        "previewPollMaxMs": 0.0,
+        "abortCatchupTicks": 0,
+        "state": 2,
+        "players": [
+          {
+            "Position": {
+              "x": -5.406487464904785,
+              "y": 0.0,
+              "z": 7.329321384429932
+            },
+            "Yaw": 55.93083572387695,
+            "Pitch": 18.832040786743164,
+            "ReturnAt": 0.0,
+            "ImmuneUntil": 0.0,
+            "ContactUntil": 25.75,
+            "Health": 100,
+            "Life": 1,
+            "Shots": 448,
+            "Hits": 542,
+            "Damage": 8496,
+            "Kills": 140,
+            "Weapon": 1,
+            "BodyDamage": 20,
+            "Arsenal": 7,
+            "FirstAddition": 0,
+            "Specialization": 0,
+            "RifleInterval": 0.11999999731779099,
+            "Ready": false,
+            "ChoiceReady": false,
+            "Offer": {
+              "Id": 0,
+              "Tick": 0,
+              "Weapon": 0,
+              "AppliedTick": 0,
+              "ControlRevision": 0,
+              "First": 0,
+              "Second": 0,
+              "Selected": 0
+            }
+          },
+          {
+            "Position": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "Yaw": 0.0,
+            "Pitch": 0.0,
+            "ReturnAt": 0.0,
+            "ImmuneUntil": 0.0,
+            "ContactUntil": 0.0,
+            "Health": 0,
+            "Life": 0,
+            "Shots": 0,
+            "Hits": 0,
+            "Damage": 0,
+            "Kills": 0,
+            "Weapon": 0,
+            "BodyDamage": 0,
+            "Arsenal": 0,
+            "FirstAddition": 0,
+            "Specialization": 0,
+            "RifleInterval": 0.0,
+            "Ready": false,
+            "ChoiceReady": false,
+            "Offer": {
+              "Id": 0,
+              "Tick": 0,
+              "Weapon": 0,
+              "AppliedTick": 0,
+              "ControlRevision": 0,
+              "First": 0,
+              "Second": 0,
+              "Selected": 0
+            }
+          }
+        ],
+        "enemyStates": [
+          {
+            "Position": {
+              "x": -11.132987022399902,
+              "y": 0.0,
+              "z": 7.840330123901367
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": -15.19819164276123,
+              "y": 0.0,
+              "z": -15.93803596496582
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": 27.15259552001953,
+              "y": 0.0,
+              "z": -20.17360496520996
+            },
+            "Health": 60,
+            "Incarnation": 6
+          },
+          {
+            "Position": {
+              "x": 3.920074462890625,
+              "y": 0.0,
+              "z": 5.361878871917725
+            },
+            "Health": 60,
+            "Incarnation": 6
+          },
+          {
+            "Position": {
+              "x": 17.280553817749023,
+              "y": 0.0,
+              "z": -23.69969940185547
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -15.606106758117676,
+              "y": 0.0,
+              "z": -1.4985562562942505
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -0.7199708223342896,
+              "y": 0.0,
+              "z": -1.3421634435653687
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": 1.7102662324905396,
+              "y": 0.0,
+              "z": 26.1287841796875
+            },
+            "Health": 60,
+            "Incarnation": 6
+          },
+          {
+            "Position": {
+              "x": -3.0978448390960693,
+              "y": 0.0,
+              "z": -24.531692504882812
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": 13.613153457641602,
+              "y": 0.0,
+              "z": -13.425604820251465
+            },
+            "Health": 60,
+            "Incarnation": 5
+          },
+          {
+            "Position": {
+              "x": 12.636941909790039,
+              "y": 0.0,
+              "z": -4.043420791625977
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": 7.195937156677246,
+              "y": 0.0,
+              "z": 9.025524139404297
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -18.841632843017578,
+              "y": 0.0,
+              "z": -2.5386667251586914
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 20.716670989990234,
+              "y": 0.0,
+              "z": -7.9133453369140625
+            },
+            "Health": 60,
+            "Incarnation": 7
+          },
+          {
+            "Position": {
+              "x": -16.477079391479492,
+              "y": 0.0,
+              "z": -23.600744247436523
+            },
+            "Health": 60,
+            "Incarnation": 5
+          },
+          {
+            "Position": {
+              "x": 19.506771087646484,
+              "y": 0.0,
+              "z": -17.05463981628418
+            },
+            "Health": 60,
+            "Incarnation": 6
+          },
+          {
+            "Position": {
+              "x": -24.4077205657959,
+              "y": 0.0,
+              "z": -14.475688934326172
+            },
+            "Health": 60,
+            "Incarnation": 5
+          },
+          {
+            "Position": {
+              "x": -16.91573715209961,
+              "y": 0.0,
+              "z": -1.7889320850372314
+            },
+            "Health": 60,
+            "Incarnation": 5
+          },
+          {
+            "Position": {
+              "x": -15.838204383850098,
+              "y": 0.0,
+              "z": -10.848469734191895
+            },
+            "Health": 60,
+            "Incarnation": 5
+          },
+          {
+            "Position": {
+              "x": -3.6624324321746826,
+              "y": 0.0,
+              "z": -11.311735153198242
+            },
+            "Health": 60,
+            "Incarnation": 5
+          },
+          {
+            "Position": {
+              "x": 0.34265846014022827,
+              "y": 0.0,
+              "z": 6.026443004608154
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -2.803773880004883,
+              "y": 0.0,
+              "z": 9.082305908203125
+            },
+            "Health": 20,
+            "Incarnation": 3
+          },
+          {
+            "Position": {
+              "x": -21.35839080810547,
+              "y": 0.0,
+              "z": 7.225680351257324
+            },
+            "Health": 60,
+            "Incarnation": 5
+          },
+          {
+            "Position": {
+              "x": 7.467793941497803,
+              "y": 0.0,
+              "z": 4.096571922302246
+            },
+            "Health": 60,
+            "Incarnation": 5
+          },
+          {
+            "Position": {
+              "x": -11.745317459106445,
+              "y": 0.0,
+              "z": -14.604104042053223
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": 5.017308712005615,
+              "y": 0.0,
+              "z": 8.556397438049316
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -20.092987060546875,
+              "y": 0.0,
+              "z": -9.592667579650879
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -23.24534797668457,
+              "y": 0.0,
+              "z": -25.264209747314453
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -2.3218157291412354,
+              "y": 0.0,
+              "z": 20.630441665649414
+            },
+            "Health": 60,
+            "Incarnation": 6
+          },
+          {
+            "Position": {
+              "x": -2.4821670055389404,
+              "y": 0.0,
+              "z": -8.054590225219727
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": -2.4652175903320312,
+              "y": 0.0,
+              "z": 3.1377437114715576
+            },
+            "Health": 4,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": 4.9710469245910645,
+              "y": 0.0,
+              "z": 2.2260146141052246
+            },
+            "Health": 60,
+            "Incarnation": 7
+          },
+          {
+            "Position": {
+              "x": -22.915971755981445,
+              "y": 0.0,
+              "z": -16.5730037689209
+            },
+            "Health": 60,
+            "Incarnation": 5
+          },
+          {
+            "Position": {
+              "x": 10.24850082397461,
+              "y": 0.0,
+              "z": -16.69171714782715
+            },
+            "Health": 60,
+            "Incarnation": 4
+          },
+          {
+            "Position": {
+              "x": 6.431440830230713,
+              "y": 0.0,
+              "z": -8.693056106567383
+            },
+            "Health": 60,
+            "Incarnation": 5
+          }
+        ],
+        "weaponWork": [
+          {
+            "weapon": 1,
+            "player": 0,
+            "instance": 0,
+            "triggers": 332,
+            "rays": 334,
+            "targetTests": 11690,
+            "hits": 332,
+            "damage": 5960,
+            "kills": 100,
+            "rejected": 2,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 2,
+            "player": 1,
+            "instance": 0,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 3,
+            "player": 0,
+            "instance": 1,
+            "triggers": 54,
+            "rays": 270,
+            "targetTests": 9450,
+            "hits": 142,
+            "damage": 1568,
+            "kills": 28,
+            "rejected": 48,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 4,
+            "player": 1,
+            "instance": 1,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 5,
+            "player": 0,
+            "instance": 2,
+            "triggers": 62,
+            "rays": 62,
+            "targetTests": 2170,
+            "hits": 68,
+            "damage": 968,
+            "kills": 12,
+            "rejected": 3,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 6,
+            "player": 1,
+            "instance": 2,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 7,
+            "player": 0,
+            "instance": 3,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 8,
+            "player": 1,
+            "instance": 3,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 9,
+            "player": 0,
+            "instance": 4,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 10,
+            "player": 1,
+            "instance": 4,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 11,
+            "player": 0,
+            "instance": 5,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 12,
+            "player": 1,
+            "instance": 5,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 13,
+            "player": 0,
+            "instance": 6,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 14,
+            "player": 1,
+            "instance": 6,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 15,
+            "player": 0,
+            "instance": 7,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 16,
+            "player": 1,
+            "instance": 7,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          }
+        ],
+        "roster": 1,
+        "xp": 138,
+        "level": 1,
+        "uncollectedOrbs": 2,
+        "uncollectedXp": 2,
+        "choicePhase": 0,
+        "controlRevision": 0,
+        "pickupRadius": 2.0,
+        "attractionRadius": 1.5,
+        "mergeRadius": 0.30000001192092896,
+        "sentBytes": 0,
+        "receivedBytes": 0,
+        "outgoingPending": 0,
+        "outgoingHighWater": 0,
+        "outgoingDeferred": 0,
+        "outgoingLimit": 1024,
+        "authorityWork": {
+          "ticks": 2400,
+          "steeringChecks": 147832,
+          "contactTests": 84000,
+          "contactApplications": 9,
+          "attractionQueries": 12559,
+          "simulationMs": 103.95940000000006,
+          "crowdMs": 38.91769999999994,
+          "weaponMs": 31.063899999999318,
+          "xpMs": 25.413000000000018,
+          "frameSimulationMs": 0.016,
+          "frameCrowdMs": 0.0135,
+          "frameWeaponMs": 0.0001,
+          "frameXpMs": 0.0,
+          "frameTicks": 1
+        },
+        "sentMessages": 0,
+        "receivedMessages": 0,
+        "snapshotBytes": 0,
+        "snapshotMessages": 0,
+        "allocatedThreadBytes": 0,
+        "managedHeapBytes": 33906688,
+        "workingSetBytes": 0,
+        "presentationRays": 58134,
+        "presentationProbes": 2034690,
+        "serializationMs": 0.0,
+        "outgoingAgeMs": 0.0,
+        "outgoingMaxAgeMs": 0.0,
+        "loggingMs": 2853.199800000117,
+        "loggingMaxMs": 1.7754,
+        "memorySamples": 41,
+        "memorySamplingMs": 5.417400000000001,
+        "outgoingBytes": 0,
+        "outgoingBytesHighWater": 0,
+        "xpDrops": 140,
+        "xpMerges": 12,
+        "xpMoveEvents": 41,
+        "xpCollections": 126,
+        "physicalXpMoves": 260
+      },
+      "frameMs": {
+        "samples": 43138,
+        "p50": 0.6054,
+        "p95": 1.2431,
+        "p99": 1.4518,
+        "max": 4.1747,
+        "over6_944": 0,
+        "over13_889": 0
+      },
+      "coldFrameMs": {
+        "samples": 57468,
+        "p50": 0.6066,
+        "p95": 1.2465,
+        "p99": 1.4512,
+        "max": 13.6265
+      },
+      "confirmationMs": {
+        "samples": 313,
+        "p50": 13.128,
+        "p95": 17.144,
+        "p99": 17.492,
+        "max": 17.663
+      },
+      "rttMs": {
+        "samples": 0
+      },
+      "rttMethod": "one sample per RTT sequence",
+      "firstTick": 600,
+      "lastTick": 2399,
+      "traceWallSpan": 29.998815999999998,
+      "terminalComplete": true,
+      "noCatchup": true,
+      "rawHashes": {
+        "frames.csv": {
+          "bytes": 29620370,
+          "sha256": "107d7630e040070ae10e0e1687d16059bd35d598f6f1b86ac5fec477fe0be713"
+        },
+        "events.csv": {
+          "bytes": 49789,
+          "sha256": "4b3b3946b920f753eb632ec8fc8bd1576042787aeac1d64929adc6211689458e"
+        },
+        "growth.jsonl": {
+          "bytes": 119136,
+          "sha256": "b6a07656acfe6d08e6acee37cec6d9df89e446181b591174a0cb43d5ab47a18d"
+        },
+        "player.log": {
+          "bytes": 1722,
+          "sha256": "a4cbb7d026c42d0b56d1361306134318e162b41613998941cbf1a8fe34370803"
+        },
+        "summary-run-1.json": {
+          "bytes": 18340,
+          "sha256": "1ae24c0da7c84912ec4063b50245aa3560df6c0e9b1d6d322ee812c1a1f5ff0d"
+        },
+        "invocation.json": {
+          "bytes": 1026,
+          "sha256": "e496e161ef76f0c4e3b7eccf4df6f7596e0b0fee94335845b49e0c1026dbbd0e"
+        },
+        "visibility.json": {
+          "bytes": 248,
+          "sha256": "3f05795ffb8d6fb026d30bc37b03166d14c132d68933d75dbb155087b3a5ad26"
+        }
+      },
+      "workWindow": {
+        "wallSeconds": 29.998815999999998,
+        "tickSpan": 1799,
+        "cumulativeDeltas": {
+          "steering_checks": 96179.0,
+          "contact_tests": 62965.0,
+          "attraction_queries": 7221.0,
+          "presentation_rays": 43633.0,
+          "presentation_probes": 1527155.0,
+          "sent_bytes": 0.0,
+          "received_bytes": 0.0,
+          "sent_messages": 0.0,
+          "received_messages": 0.0,
+          "snapshot_bytes": 0.0,
+          "snapshot_messages": 0.0,
+          "serialization_ms": 0.0,
+          "allocated_thread_bytes": 0.0,
+          "gc0": 453.0,
+          "gc1": 453.0,
+          "gc2": 453.0,
+          "xp_drops": 107.0,
+          "xp_merges": 3.0,
+          "xp_move_events": 15.0,
+          "xp_collections": 107.0,
+          "weapon1_triggers": 249.0,
+          "weapon1_rays": 250.0,
+          "weapon1_target_tests": 8750.0,
+          "weapon1_hits": 249.0,
+          "weapon1_damage": 4464.0,
+          "weapon1_kills": 76.0,
+          "weapon2_triggers": 0.0,
+          "weapon2_rays": 0.0,
+          "weapon2_target_tests": 0.0,
+          "weapon2_hits": 0.0,
+          "weapon2_damage": 0.0,
+          "weapon2_kills": 0.0,
+          "weapon3_triggers": 40.0,
+          "weapon3_rays": 200.0,
+          "weapon3_target_tests": 7000.0,
+          "weapon3_hits": 120.0,
+          "weapon3_damage": 1352.0,
+          "weapon3_kills": 22.0,
+          "weapon4_triggers": 0.0,
+          "weapon4_rays": 0.0,
+          "weapon4_target_tests": 0.0,
+          "weapon4_hits": 0.0,
+          "weapon4_damage": 0.0,
+          "weapon4_kills": 0.0,
+          "weapon5_triggers": 46.0,
+          "weapon5_rays": 46.0,
+          "weapon5_target_tests": 1610.0,
+          "weapon5_hits": 47.0,
+          "weapon5_damage": 660.0,
+          "weapon5_kills": 9.0,
+          "weapon6_triggers": 0.0,
+          "weapon6_rays": 0.0,
+          "weapon6_target_tests": 0.0,
+          "weapon6_hits": 0.0,
+          "weapon6_damage": 0.0,
+          "weapon6_kills": 0.0,
+          "weapon7_triggers": 0.0,
+          "weapon7_rays": 0.0,
+          "weapon7_target_tests": 0.0,
+          "weapon7_hits": 0.0,
+          "weapon7_damage": 0.0,
+          "weapon7_kills": 0.0,
+          "weapon8_triggers": 0.0,
+          "weapon8_rays": 0.0,
+          "weapon8_target_tests": 0.0,
+          "weapon8_hits": 0.0,
+          "weapon8_damage": 0.0,
+          "weapon8_kills": 0.0,
+          "weapon9_triggers": 0.0,
+          "weapon9_rays": 0.0,
+          "weapon9_target_tests": 0.0,
+          "weapon9_hits": 0.0,
+          "weapon9_damage": 0.0,
+          "weapon9_kills": 0.0,
+          "weapon10_triggers": 0.0,
+          "weapon10_rays": 0.0,
+          "weapon10_target_tests": 0.0,
+          "weapon10_hits": 0.0,
+          "weapon10_damage": 0.0,
+          "weapon10_kills": 0.0,
+          "weapon11_triggers": 0.0,
+          "weapon11_rays": 0.0,
+          "weapon11_target_tests": 0.0,
+          "weapon11_hits": 0.0,
+          "weapon11_damage": 0.0,
+          "weapon11_kills": 0.0,
+          "weapon12_triggers": 0.0,
+          "weapon12_rays": 0.0,
+          "weapon12_target_tests": 0.0,
+          "weapon12_hits": 0.0,
+          "weapon12_damage": 0.0,
+          "weapon12_kills": 0.0,
+          "weapon13_triggers": 0.0,
+          "weapon13_rays": 0.0,
+          "weapon13_target_tests": 0.0,
+          "weapon13_hits": 0.0,
+          "weapon13_damage": 0.0,
+          "weapon13_kills": 0.0,
+          "weapon14_triggers": 0.0,
+          "weapon14_rays": 0.0,
+          "weapon14_target_tests": 0.0,
+          "weapon14_hits": 0.0,
+          "weapon14_damage": 0.0,
+          "weapon14_kills": 0.0,
+          "weapon15_triggers": 0.0,
+          "weapon15_rays": 0.0,
+          "weapon15_target_tests": 0.0,
+          "weapon15_hits": 0.0,
+          "weapon15_damage": 0.0,
+          "weapon15_kills": 0.0,
+          "weapon16_triggers": 0.0,
+          "weapon16_rays": 0.0,
+          "weapon16_target_tests": 0.0,
+          "weapon16_hits": 0.0,
+          "weapon16_damage": 0.0,
+          "weapon16_kills": 0.0
+        },
+        "stageFrameMs": {
+          "sim_ms": {
+            "samples": 43138,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.036,
+            "max": 0.446
+          },
+          "crowd_ms": {
+            "samples": 43138,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0147,
+            "max": 0.2903
+          },
+          "weapon_ms": {
+            "samples": 43138,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0003,
+            "max": 0.3698
+          },
+          "xp_ms": {
+            "samples": 43138,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0077,
+            "max": 0.1113
+          },
+          "presentation_ms": {
+            "samples": 43138,
+            "p50": 0.1238,
+            "p95": 0.1569,
+            "p99": 0.253,
+            "max": 1.6989
+          },
+          "render_prepare_ms": {
+            "samples": 43138,
+            "p50": 0.013,
+            "p95": 0.0171,
+            "p99": 0.0221,
+            "max": 1.2983
+          },
+          "render_submit_ms": {
+            "samples": 43138,
+            "p50": 0.0049,
+            "p95": 0.0071,
+            "p99": 0.0094,
+            "max": 0.2005
+          },
+          "pickup_render_ms": {
+            "samples": 43138,
+            "p50": 0.0069,
+            "p95": 0.009,
+            "p99": 0.0111,
+            "max": 0.5421
+          },
+          "net_poll_ms": {
+            "samples": 43138,
+            "p50": 0.0001,
+            "p95": 0.0001,
+            "p99": 0.0002,
+            "max": 0.0673
+          },
+          "crowd_ms_per_tick": {
+            "samples": 1800,
+            "p50": 0.0136,
+            "p95": 0.0182,
+            "p99": 0.0239,
+            "max": 0.2903
+          }
+        },
+        "gauges": {
+          "enemies": {
+            "first": 35.0,
+            "last": 35.0,
+            "min": 35.0,
+            "max": 35.0
+          },
+          "installed_instances": {
+            "first": 3.0,
+            "last": 3.0,
+            "min": 3.0,
+            "max": 3.0
+          },
+          "active_instances": {
+            "first": 3.0,
+            "last": 3.0,
+            "min": 3.0,
+            "max": 3.0
+          },
+          "submitted_instances": {
+            "first": 68.0,
+            "last": 36.0,
+            "min": 18.0,
+            "max": 99.0
+          },
+          "instance_batches": {
+            "first": 3.0,
+            "last": 4.0,
+            "min": 1.0,
+            "max": 4.0
+          },
+          "pickup_carriers": {
+            "first": 5.0,
+            "last": 2.0,
+            "min": 1.0,
+            "max": 7.0
+          },
+          "secondary_cues": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 6.0
+          },
+          "uncollected_xp": {
+            "first": 7.0,
+            "last": 2.0,
+            "min": 1.0,
+            "max": 9.0
+          },
+          "queue_records": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "queue_bytes": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "queue_age_ms": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "payloadRatesPerSecond": {
+          "sent_bytes": 0.0,
+          "received_bytes": 0.0,
+          "sent_messages": 0.0,
+          "received_messages": 0.0
+        },
+        "threadAllocationBytesPerSecond": null,
+        "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+        "memorySamples": [
+          {
+            "wall_seconds": "13.129790",
+            "tick": "600",
+            "memory_samples": "11",
+            "managed_heap_bytes": "33017856",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.000000"
+          },
+          {
+            "wall_seconds": "13.677348",
+            "tick": "632",
+            "memory_samples": "12",
+            "managed_heap_bytes": "32894976",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.094000"
+          },
+          {
+            "wall_seconds": "14.677600",
+            "tick": "692",
+            "memory_samples": "13",
+            "managed_heap_bytes": "33865728",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.069600"
+          },
+          {
+            "wall_seconds": "15.678086",
+            "tick": "752",
+            "memory_samples": "14",
+            "managed_heap_bytes": "33804288",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.091300"
+          },
+          {
+            "wall_seconds": "16.678288",
+            "tick": "812",
+            "memory_samples": "15",
+            "managed_heap_bytes": "33124352",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.138000"
+          },
+          {
+            "wall_seconds": "17.678397",
+            "tick": "872",
+            "memory_samples": "16",
+            "managed_heap_bytes": "33411072",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.186800"
+          },
+          {
+            "wall_seconds": "18.678526",
+            "tick": "932",
+            "memory_samples": "17",
+            "managed_heap_bytes": "33632256",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.101100"
+          },
+          {
+            "wall_seconds": "19.678736",
+            "tick": "992",
+            "memory_samples": "18",
+            "managed_heap_bytes": "33615872",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.095700"
+          },
+          {
+            "wall_seconds": "20.678803",
+            "tick": "1052",
+            "memory_samples": "19",
+            "managed_heap_bytes": "34222080",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.092100"
+          },
+          {
+            "wall_seconds": "21.679282",
+            "tick": "1112",
+            "memory_samples": "20",
+            "managed_heap_bytes": "34336768",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.092200"
+          },
+          {
+            "wall_seconds": "22.679375",
+            "tick": "1172",
+            "memory_samples": "21",
+            "managed_heap_bytes": "33710080",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.107700"
+          },
+          {
+            "wall_seconds": "23.679460",
+            "tick": "1232",
+            "memory_samples": "22",
+            "managed_heap_bytes": "33677312",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.103400"
+          },
+          {
+            "wall_seconds": "24.679769",
+            "tick": "1293",
+            "memory_samples": "23",
+            "managed_heap_bytes": "33402880",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.117000"
+          },
+          {
+            "wall_seconds": "25.680329",
+            "tick": "1353",
+            "memory_samples": "24",
+            "managed_heap_bytes": "33837056",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.095800"
+          },
+          {
+            "wall_seconds": "26.680814",
+            "tick": "1413",
+            "memory_samples": "25",
+            "managed_heap_bytes": "33533952",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.098200"
+          },
+          {
+            "wall_seconds": "27.680886",
+            "tick": "1473",
+            "memory_samples": "26",
+            "managed_heap_bytes": "33865728",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.094600"
+          },
+          {
+            "wall_seconds": "28.681345",
+            "tick": "1533",
+            "memory_samples": "27",
+            "managed_heap_bytes": "34041856",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.101900"
+          },
+          {
+            "wall_seconds": "29.681695",
+            "tick": "1593",
+            "memory_samples": "28",
+            "managed_heap_bytes": "33435648",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.097600"
+          },
+          {
+            "wall_seconds": "30.682408",
+            "tick": "1653",
+            "memory_samples": "29",
+            "managed_heap_bytes": "33927168",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.100900"
+          },
+          {
+            "wall_seconds": "31.682491",
+            "tick": "1713",
+            "memory_samples": "30",
+            "managed_heap_bytes": "34238464",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.083400"
+          },
+          {
+            "wall_seconds": "32.682689",
+            "tick": "1773",
+            "memory_samples": "31",
+            "managed_heap_bytes": "33873920",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.101200"
+          },
+          {
+            "wall_seconds": "33.682882",
+            "tick": "1833",
+            "memory_samples": "32",
+            "managed_heap_bytes": "34119680",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.114700"
+          },
+          {
+            "wall_seconds": "34.683543",
+            "tick": "1893",
+            "memory_samples": "33",
+            "managed_heap_bytes": "33869824",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.143400"
+          },
+          {
+            "wall_seconds": "35.683866",
+            "tick": "1953",
+            "memory_samples": "34",
+            "managed_heap_bytes": "34127872",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.123000"
+          },
+          {
+            "wall_seconds": "36.683894",
+            "tick": "2013",
+            "memory_samples": "35",
+            "managed_heap_bytes": "34369536",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.094100"
+          },
+          {
+            "wall_seconds": "37.683999",
+            "tick": "2073",
+            "memory_samples": "36",
+            "managed_heap_bytes": "34525184",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.091800"
+          },
+          {
+            "wall_seconds": "38.684925",
+            "tick": "2133",
+            "memory_samples": "37",
+            "managed_heap_bytes": "34410496",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.092900"
+          },
+          {
+            "wall_seconds": "39.685074",
+            "tick": "2193",
+            "memory_samples": "38",
+            "managed_heap_bytes": "34570240",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.086900"
+          },
+          {
+            "wall_seconds": "40.685118",
+            "tick": "2253",
+            "memory_samples": "39",
+            "managed_heap_bytes": "34504704",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.093400"
+          },
+          {
+            "wall_seconds": "41.685504",
+            "tick": "2313",
+            "memory_samples": "40",
+            "managed_heap_bytes": "34488320",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.088300"
+          },
+          {
+            "wall_seconds": "42.685847",
+            "tick": "2373",
+            "memory_samples": "41",
+            "managed_heap_bytes": "34279424",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.097100"
+          }
+        ],
+        "workingSetNote": "Mono process API returned zero; unavailable. External PowerShell observations, where present, are separate.",
+        "emissionTimerClippedFrames": 0,
+        "emissionTimerClippedMs": 0,
+        "emissionTimerNote": "SharedGame caps input/emission dt at 50 ms; clipped capture frames cannot establish no lost work.",
+        "longestQueueAgeOver100msSeconds": 0,
+        "queueAgeGate": true
+      },
+      "coldWorkWindow": {
+        "wallSeconds": 39.99906,
+        "tickSpan": 2399,
+        "cumulativeDeltas": {
+          "steering_checks": 147781.0,
+          "contact_tests": 83965.0,
+          "attraction_queries": 12559.0,
+          "presentation_rays": 58126.0,
+          "presentation_probes": 2034410.0,
+          "sent_bytes": 0.0,
+          "received_bytes": 0.0,
+          "sent_messages": 0.0,
+          "received_messages": 0.0,
+          "snapshot_bytes": 0.0,
+          "snapshot_messages": 0.0,
+          "serialization_ms": 0.0,
+          "allocated_thread_bytes": 0.0,
+          "gc0": 608.0,
+          "gc1": 608.0,
+          "gc2": 608.0,
+          "xp_drops": 140.0,
+          "xp_merges": 12.0,
+          "xp_move_events": 41.0,
+          "xp_collections": 126.0,
+          "weapon1_triggers": 332.0,
+          "weapon1_rays": 334.0,
+          "weapon1_target_tests": 11690.0,
+          "weapon1_hits": 332.0,
+          "weapon1_damage": 5960.0,
+          "weapon1_kills": 100.0,
+          "weapon2_triggers": 0.0,
+          "weapon2_rays": 0.0,
+          "weapon2_target_tests": 0.0,
+          "weapon2_hits": 0.0,
+          "weapon2_damage": 0.0,
+          "weapon2_kills": 0.0,
+          "weapon3_triggers": 54.0,
+          "weapon3_rays": 270.0,
+          "weapon3_target_tests": 9450.0,
+          "weapon3_hits": 142.0,
+          "weapon3_damage": 1568.0,
+          "weapon3_kills": 28.0,
+          "weapon4_triggers": 0.0,
+          "weapon4_rays": 0.0,
+          "weapon4_target_tests": 0.0,
+          "weapon4_hits": 0.0,
+          "weapon4_damage": 0.0,
+          "weapon4_kills": 0.0,
+          "weapon5_triggers": 62.0,
+          "weapon5_rays": 62.0,
+          "weapon5_target_tests": 2170.0,
+          "weapon5_hits": 68.0,
+          "weapon5_damage": 968.0,
+          "weapon5_kills": 12.0,
+          "weapon6_triggers": 0.0,
+          "weapon6_rays": 0.0,
+          "weapon6_target_tests": 0.0,
+          "weapon6_hits": 0.0,
+          "weapon6_damage": 0.0,
+          "weapon6_kills": 0.0,
+          "weapon7_triggers": 0.0,
+          "weapon7_rays": 0.0,
+          "weapon7_target_tests": 0.0,
+          "weapon7_hits": 0.0,
+          "weapon7_damage": 0.0,
+          "weapon7_kills": 0.0,
+          "weapon8_triggers": 0.0,
+          "weapon8_rays": 0.0,
+          "weapon8_target_tests": 0.0,
+          "weapon8_hits": 0.0,
+          "weapon8_damage": 0.0,
+          "weapon8_kills": 0.0,
+          "weapon9_triggers": 0.0,
+          "weapon9_rays": 0.0,
+          "weapon9_target_tests": 0.0,
+          "weapon9_hits": 0.0,
+          "weapon9_damage": 0.0,
+          "weapon9_kills": 0.0,
+          "weapon10_triggers": 0.0,
+          "weapon10_rays": 0.0,
+          "weapon10_target_tests": 0.0,
+          "weapon10_hits": 0.0,
+          "weapon10_damage": 0.0,
+          "weapon10_kills": 0.0,
+          "weapon11_triggers": 0.0,
+          "weapon11_rays": 0.0,
+          "weapon11_target_tests": 0.0,
+          "weapon11_hits": 0.0,
+          "weapon11_damage": 0.0,
+          "weapon11_kills": 0.0,
+          "weapon12_triggers": 0.0,
+          "weapon12_rays": 0.0,
+          "weapon12_target_tests": 0.0,
+          "weapon12_hits": 0.0,
+          "weapon12_damage": 0.0,
+          "weapon12_kills": 0.0,
+          "weapon13_triggers": 0.0,
+          "weapon13_rays": 0.0,
+          "weapon13_target_tests": 0.0,
+          "weapon13_hits": 0.0,
+          "weapon13_damage": 0.0,
+          "weapon13_kills": 0.0,
+          "weapon14_triggers": 0.0,
+          "weapon14_rays": 0.0,
+          "weapon14_target_tests": 0.0,
+          "weapon14_hits": 0.0,
+          "weapon14_damage": 0.0,
+          "weapon14_kills": 0.0,
+          "weapon15_triggers": 0.0,
+          "weapon15_rays": 0.0,
+          "weapon15_target_tests": 0.0,
+          "weapon15_hits": 0.0,
+          "weapon15_damage": 0.0,
+          "weapon15_kills": 0.0,
+          "weapon16_triggers": 0.0,
+          "weapon16_rays": 0.0,
+          "weapon16_target_tests": 0.0,
+          "weapon16_hits": 0.0,
+          "weapon16_damage": 0.0,
+          "weapon16_kills": 0.0
+        },
+        "stageFrameMs": {
+          "sim_ms": {
+            "samples": 57468,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0412,
+            "max": 8.1924
+          },
+          "crowd_ms": {
+            "samples": 57468,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0165,
+            "max": 1.0604
+          },
+          "weapon_ms": {
+            "samples": 57468,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0003,
+            "max": 3.2724
+          },
+          "xp_ms": {
+            "samples": 57468,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0081,
+            "max": 2.1804
+          },
+          "presentation_ms": {
+            "samples": 57468,
+            "p50": 0.124,
+            "p95": 0.1583,
+            "p99": 0.2517,
+            "max": 5.3272
+          },
+          "render_prepare_ms": {
+            "samples": 57468,
+            "p50": 0.013,
+            "p95": 0.0172,
+            "p99": 0.0221,
+            "max": 1.2983
+          },
+          "render_submit_ms": {
+            "samples": 57468,
+            "p50": 0.0049,
+            "p95": 0.0072,
+            "p99": 0.0094,
+            "max": 0.2106
+          },
+          "pickup_render_ms": {
+            "samples": 57468,
+            "p50": 0.0071,
+            "p95": 0.0092,
+            "p99": 0.0114,
+            "max": 0.5421
+          },
+          "net_poll_ms": {
+            "samples": 57468,
+            "p50": 0.0001,
+            "p95": 0.0001,
+            "p99": 0.0002,
+            "max": 0.1148
+          },
+          "crowd_ms_per_tick": {
+            "samples": 2399,
+            "p50": 0.0142,
+            "p95": 0.0199,
+            "p99": 0.0259,
+            "max": 1.0604
+          }
+        },
+        "gauges": {
+          "enemies": {
+            "first": 35.0,
+            "last": 35.0,
+            "min": 35.0,
+            "max": 35.0
+          },
+          "installed_instances": {
+            "first": 3.0,
+            "last": 3.0,
+            "min": 3.0,
+            "max": 3.0
+          },
+          "active_instances": {
+            "first": 3.0,
+            "last": 3.0,
+            "min": 3.0,
+            "max": 3.0
+          },
+          "submitted_instances": {
+            "first": 10.0,
+            "last": 36.0,
+            "min": 10.0,
+            "max": 103.0
+          },
+          "instance_batches": {
+            "first": 2.0,
+            "last": 4.0,
+            "min": 1.0,
+            "max": 4.0
+          },
+          "pickup_carriers": {
+            "first": 0.0,
+            "last": 2.0,
+            "min": 0.0,
+            "max": 12.0
+          },
+          "secondary_cues": {
+            "first": 6.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 6.0
+          },
+          "uncollected_xp": {
+            "first": 0.0,
+            "last": 2.0,
+            "min": 0.0,
+            "max": 18.0
+          },
+          "queue_records": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "queue_bytes": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "queue_age_ms": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "payloadRatesPerSecond": {
+          "sent_bytes": 0.0,
+          "received_bytes": 0.0,
+          "sent_messages": 0.0,
+          "received_messages": 0.0
+        },
+        "threadAllocationBytesPerSecond": null,
+        "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+        "memorySamples": [
+          {
+            "wall_seconds": "3.129546",
+            "tick": "0",
+            "memory_samples": "1",
+            "managed_heap_bytes": "30507008",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.000000"
+          },
+          {
+            "wall_seconds": "3.674800",
+            "tick": "32",
+            "memory_samples": "2",
+            "managed_heap_bytes": "33722368",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.097800"
+          },
+          {
+            "wall_seconds": "4.675075",
+            "tick": "92",
+            "memory_samples": "3",
+            "managed_heap_bytes": "33337344",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.098300"
+          },
+          {
+            "wall_seconds": "5.675527",
+            "tick": "152",
+            "memory_samples": "4",
+            "managed_heap_bytes": "33640448",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.113400"
+          },
+          {
+            "wall_seconds": "6.675568",
+            "tick": "212",
+            "memory_samples": "5",
+            "managed_heap_bytes": "33013760",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.109800"
+          },
+          {
+            "wall_seconds": "7.675648",
+            "tick": "272",
+            "memory_samples": "6",
+            "managed_heap_bytes": "33185792",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.119600"
+          },
+          {
+            "wall_seconds": "8.675654",
+            "tick": "332",
+            "memory_samples": "7",
+            "managed_heap_bytes": "32690176",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.103800"
+          },
+          {
+            "wall_seconds": "9.675695",
+            "tick": "392",
+            "memory_samples": "8",
+            "managed_heap_bytes": "33419264",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.106400"
+          },
+          {
+            "wall_seconds": "10.676038",
+            "tick": "452",
+            "memory_samples": "9",
+            "managed_heap_bytes": "33296384",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.258000"
+          },
+          {
+            "wall_seconds": "11.677179",
+            "tick": "512",
+            "memory_samples": "10",
+            "managed_heap_bytes": "33873920",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.127500"
+          },
+          {
+            "wall_seconds": "12.677187",
+            "tick": "572",
+            "memory_samples": "11",
+            "managed_heap_bytes": "33017856",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.093100"
+          },
+          {
+            "wall_seconds": "13.677348",
+            "tick": "632",
+            "memory_samples": "12",
+            "managed_heap_bytes": "32894976",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.094000"
+          },
+          {
+            "wall_seconds": "14.677600",
+            "tick": "692",
+            "memory_samples": "13",
+            "managed_heap_bytes": "33865728",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.069600"
+          },
+          {
+            "wall_seconds": "15.678086",
+            "tick": "752",
+            "memory_samples": "14",
+            "managed_heap_bytes": "33804288",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.091300"
+          },
+          {
+            "wall_seconds": "16.678288",
+            "tick": "812",
+            "memory_samples": "15",
+            "managed_heap_bytes": "33124352",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.138000"
+          },
+          {
+            "wall_seconds": "17.678397",
+            "tick": "872",
+            "memory_samples": "16",
+            "managed_heap_bytes": "33411072",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.186800"
+          },
+          {
+            "wall_seconds": "18.678526",
+            "tick": "932",
+            "memory_samples": "17",
+            "managed_heap_bytes": "33632256",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.101100"
+          },
+          {
+            "wall_seconds": "19.678736",
+            "tick": "992",
+            "memory_samples": "18",
+            "managed_heap_bytes": "33615872",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.095700"
+          },
+          {
+            "wall_seconds": "20.678803",
+            "tick": "1052",
+            "memory_samples": "19",
+            "managed_heap_bytes": "34222080",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.092100"
+          },
+          {
+            "wall_seconds": "21.679282",
+            "tick": "1112",
+            "memory_samples": "20",
+            "managed_heap_bytes": "34336768",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.092200"
+          },
+          {
+            "wall_seconds": "22.679375",
+            "tick": "1172",
+            "memory_samples": "21",
+            "managed_heap_bytes": "33710080",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.107700"
+          },
+          {
+            "wall_seconds": "23.679460",
+            "tick": "1232",
+            "memory_samples": "22",
+            "managed_heap_bytes": "33677312",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.103400"
+          },
+          {
+            "wall_seconds": "24.679769",
+            "tick": "1293",
+            "memory_samples": "23",
+            "managed_heap_bytes": "33402880",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.117000"
+          },
+          {
+            "wall_seconds": "25.680329",
+            "tick": "1353",
+            "memory_samples": "24",
+            "managed_heap_bytes": "33837056",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.095800"
+          },
+          {
+            "wall_seconds": "26.680814",
+            "tick": "1413",
+            "memory_samples": "25",
+            "managed_heap_bytes": "33533952",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.098200"
+          },
+          {
+            "wall_seconds": "27.680886",
+            "tick": "1473",
+            "memory_samples": "26",
+            "managed_heap_bytes": "33865728",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.094600"
+          },
+          {
+            "wall_seconds": "28.681345",
+            "tick": "1533",
+            "memory_samples": "27",
+            "managed_heap_bytes": "34041856",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.101900"
+          },
+          {
+            "wall_seconds": "29.681695",
+            "tick": "1593",
+            "memory_samples": "28",
+            "managed_heap_bytes": "33435648",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.097600"
+          },
+          {
+            "wall_seconds": "30.682408",
+            "tick": "1653",
+            "memory_samples": "29",
+            "managed_heap_bytes": "33927168",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.100900"
+          },
+          {
+            "wall_seconds": "31.682491",
+            "tick": "1713",
+            "memory_samples": "30",
+            "managed_heap_bytes": "34238464",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.083400"
+          },
+          {
+            "wall_seconds": "32.682689",
+            "tick": "1773",
+            "memory_samples": "31",
+            "managed_heap_bytes": "33873920",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.101200"
+          },
+          {
+            "wall_seconds": "33.682882",
+            "tick": "1833",
+            "memory_samples": "32",
+            "managed_heap_bytes": "34119680",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.114700"
+          },
+          {
+            "wall_seconds": "34.683543",
+            "tick": "1893",
+            "memory_samples": "33",
+            "managed_heap_bytes": "33869824",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.143400"
+          },
+          {
+            "wall_seconds": "35.683866",
+            "tick": "1953",
+            "memory_samples": "34",
+            "managed_heap_bytes": "34127872",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.123000"
+          },
+          {
+            "wall_seconds": "36.683894",
+            "tick": "2013",
+            "memory_samples": "35",
+            "managed_heap_bytes": "34369536",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.094100"
+          },
+          {
+            "wall_seconds": "37.683999",
+            "tick": "2073",
+            "memory_samples": "36",
+            "managed_heap_bytes": "34525184",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.091800"
+          },
+          {
+            "wall_seconds": "38.684925",
+            "tick": "2133",
+            "memory_samples": "37",
+            "managed_heap_bytes": "34410496",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.092900"
+          },
+          {
+            "wall_seconds": "39.685074",
+            "tick": "2193",
+            "memory_samples": "38",
+            "managed_heap_bytes": "34570240",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.086900"
+          },
+          {
+            "wall_seconds": "40.685118",
+            "tick": "2253",
+            "memory_samples": "39",
+            "managed_heap_bytes": "34504704",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.093400"
+          },
+          {
+            "wall_seconds": "41.685504",
+            "tick": "2313",
+            "memory_samples": "40",
+            "managed_heap_bytes": "34488320",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.088300"
+          },
+          {
+            "wall_seconds": "42.685847",
+            "tick": "2373",
+            "memory_samples": "41",
+            "managed_heap_bytes": "34279424",
+            "working_set_bytes": "0",
+            "memory_sample_ms": "0.097100"
+          }
+        ],
+        "workingSetNote": "Mono process API returned zero; unavailable. External PowerShell observations, where present, are separate.",
+        "emissionTimerClippedFrames": 0,
+        "emissionTimerClippedMs": 0,
+        "emissionTimerNote": "SharedGame caps input/emission dt at 50 ms; clipped capture frames cannot establish no lost work.",
+        "longestQueueAgeOver100msSeconds": 0,
+        "queueAgeGate": true
+      },
+      "externalProcessMemory": null,
+      "terminalRow": {
+        "wall_seconds": "43.129697",
+        "frame_ms": "1.0912",
+        "run": "1",
+        "tick": "2400",
+        "state": "Complete",
+        "A_shots": "448",
+        "B_shots": "0",
+        "A_hits": "542",
+        "B_hits": "0",
+        "A_damage": "8496",
+        "B_damage": "0",
+        "A_kills": "140",
+        "B_kills": "0",
+        "A_hp": "100",
+        "B_hp": "0",
+        "enemies": "35",
+        "rtt_ms": "0.000",
+        "xp": "138",
+        "level": "1",
+        "uncollected_orbs": "2",
+        "weapon1_triggers": "332",
+        "weapon1_rays": "334",
+        "weapon1_target_tests": "11690",
+        "weapon1_hits": "332",
+        "weapon1_damage": "5960",
+        "weapon1_kills": "100",
+        "weapon2_triggers": "0",
+        "weapon2_rays": "0",
+        "weapon2_target_tests": "0",
+        "weapon2_hits": "0",
+        "weapon2_damage": "0",
+        "weapon2_kills": "0",
+        "weapon3_triggers": "54",
+        "weapon3_rays": "270",
+        "weapon3_target_tests": "9450",
+        "weapon3_hits": "142",
+        "weapon3_damage": "1568",
+        "weapon3_kills": "28",
+        "weapon4_triggers": "0",
+        "weapon4_rays": "0",
+        "weapon4_target_tests": "0",
+        "weapon4_hits": "0",
+        "weapon4_damage": "0",
+        "weapon4_kills": "0",
+        "weapon5_triggers": "62",
+        "weapon5_rays": "62",
+        "weapon5_target_tests": "2170",
+        "weapon5_hits": "68",
+        "weapon5_damage": "968",
+        "weapon5_kills": "12",
+        "weapon6_triggers": "0",
+        "weapon6_rays": "0",
+        "weapon6_target_tests": "0",
+        "weapon6_hits": "0",
+        "weapon6_damage": "0",
+        "weapon6_kills": "0",
+        "weapon7_triggers": "0",
+        "weapon7_rays": "0",
+        "weapon7_target_tests": "0",
+        "weapon7_hits": "0",
+        "weapon7_damage": "0",
+        "weapon7_kills": "0",
+        "weapon8_triggers": "0",
+        "weapon8_rays": "0",
+        "weapon8_target_tests": "0",
+        "weapon8_hits": "0",
+        "weapon8_damage": "0",
+        "weapon8_kills": "0",
+        "weapon9_triggers": "0",
+        "weapon9_rays": "0",
+        "weapon9_target_tests": "0",
+        "weapon9_hits": "0",
+        "weapon9_damage": "0",
+        "weapon9_kills": "0",
+        "weapon10_triggers": "0",
+        "weapon10_rays": "0",
+        "weapon10_target_tests": "0",
+        "weapon10_hits": "0",
+        "weapon10_damage": "0",
+        "weapon10_kills": "0",
+        "weapon11_triggers": "0",
+        "weapon11_rays": "0",
+        "weapon11_target_tests": "0",
+        "weapon11_hits": "0",
+        "weapon11_damage": "0",
+        "weapon11_kills": "0",
+        "weapon12_triggers": "0",
+        "weapon12_rays": "0",
+        "weapon12_target_tests": "0",
+        "weapon12_hits": "0",
+        "weapon12_damage": "0",
+        "weapon12_kills": "0",
+        "weapon13_triggers": "0",
+        "weapon13_rays": "0",
+        "weapon13_target_tests": "0",
+        "weapon13_hits": "0",
+        "weapon13_damage": "0",
+        "weapon13_kills": "0",
+        "weapon14_triggers": "0",
+        "weapon14_rays": "0",
+        "weapon14_target_tests": "0",
+        "weapon14_hits": "0",
+        "weapon14_damage": "0",
+        "weapon14_kills": "0",
+        "weapon15_triggers": "0",
+        "weapon15_rays": "0",
+        "weapon15_target_tests": "0",
+        "weapon15_hits": "0",
+        "weapon15_damage": "0",
+        "weapon15_kills": "0",
+        "weapon16_triggers": "0",
+        "weapon16_rays": "0",
+        "weapon16_target_tests": "0",
+        "weapon16_hits": "0",
+        "weapon16_damage": "0",
+        "weapon16_kills": "0",
+        "rtt_sequence": "0",
+        "sim_ticks": "1",
+        "sim_ms": "0.016000",
+        "crowd_ms": "0.013500",
+        "weapon_ms": "0.000100",
+        "xp_ms": "0.000000",
+        "steering_checks": "147832",
+        "contact_tests": "84000",
+        "attraction_queries": "12559",
+        "presentation_rays": "58134",
+        "presentation_probes": "2034690",
+        "presentation_ms": "0.038400",
+        "render_prepare_ms": "0.015300",
+        "render_submit_ms": "0.005900",
+        "pickup_render_ms": "0.004100",
+        "submitted_instances": "36",
+        "instance_batches": "4",
+        "pickup_carriers": "2",
+        "secondary_cues": "0",
+        "net_poll_ms": "0.000000",
+        "sent_bytes": "0",
+        "received_bytes": "0",
+        "sent_messages": "0",
+        "received_messages": "0",
+        "snapshot_bytes": "0",
+        "snapshot_messages": "0",
+        "serialization_ms": "0.000000",
+        "queue_records": "0",
+        "queue_bytes": "0",
+        "queue_age_ms": "0.000000",
+        "queue_high_water": "0",
+        "queue_deferred": "0",
+        "allocated_thread_bytes": "0",
+        "gc0": "637",
+        "gc1": "637",
+        "gc2": "637",
+        "installed_instances": "3",
+        "active_instances": "3",
+        "xp_drops": "140",
+        "xp_merges": "12",
+        "xp_move_events": "41",
+        "xp_collections": "126",
+        "uncollected_xp": "2",
+        "memory_samples": "41",
+        "managed_heap_bytes": "34279424",
+        "working_set_bytes": "0",
+        "memory_sample_ms": "0.000000"
+      },
+      "correctness": {
+        "errors": [],
+        "xpDeaths": 140,
+        "outcomeEvents": 676,
+        "outcomesSha256": "1d350d59d0875a1db320fea6377ba82abe7422a78cbef9c7d10a3d46656354ce",
+        "growthSha256": "baf3ea13380d12e9d0ad00b10e7e6078e2112185feaec9bb32077ddceba55b2a",
+        "terminalQueueEmpty": true
+      }
+    }
+  ]
+}

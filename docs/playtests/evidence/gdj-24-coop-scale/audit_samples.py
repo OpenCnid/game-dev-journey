@@ -18,6 +18,30 @@ def distribution(values):
     return {'samples': len(values), **{key: values[math.ceil(p * len(values)) - 1]
         for key, p in [('p50', .5), ('p95', .95), ('p99', .99), ('max', 1)]}}
 
+def external_process_memory(folder):
+    file = folder / 'process-memory.csv'
+    if not file.exists():
+        return None
+    with file.open(encoding='utf-8-sig', newline='') as f:
+        rows = list(csv.DictReader(f))
+    def window(samples):
+        if not samples:
+            return None
+        return {'samples': len(samples),
+                'firstElapsedSeconds': float(samples[0]['elapsed_seconds']),
+                'lastElapsedSeconds': float(samples[-1]['elapsed_seconds']),
+                'cpuSecondsDelta': float(samples[-1]['cpu_seconds']) - float(samples[0]['cpu_seconds']),
+                **{key: {'first': int(samples[0][key]), 'last': int(samples[-1][key]),
+                         'min': min(int(r[key]) for r in samples),
+                         'max': max(int(r[key]) for r in samples),
+                         'netChange': int(samples[-1][key]) - int(samples[0][key])}
+                   for key in ('working_set_bytes', 'private_bytes')}}
+    return {'method': 'External PowerShell Get-Process, approximately every 10 seconds; process counters include logging and all runtime work. Not an allocation rate or leak diagnosis.',
+            'allSamplesIncludingStartup': window(rows),
+            'afterThirtySeconds': window([r for r in rows if float(r['elapsed_seconds']) >= 30]),
+            'getProcessMs': distribution([float(r['get_process_ms']) for r in rows]),
+            'getProcessMsTotal': sum(float(r['get_process_ms']) for r in rows)}
+
 def work_window(rows):
     if not rows or 'sim_ms' not in rows[0]:
         return None
@@ -61,6 +85,11 @@ def work_window(rows):
                 if float(last['allocated_thread_bytes']) == 0 else 'Main thread only; capture delta',
             'memorySamples': [{k: r[k] for k in ('wall_seconds', 'tick', 'memory_samples',
                 'managed_heap_bytes', 'working_set_bytes', 'memory_sample_ms')} for r in memory],
+            'workingSetNote': 'Mono process API returned zero; unavailable. External PowerShell observations, where present, are separate.'
+                if memory and float(last['working_set_bytes']) == 0 else 'Process working set, where supported',
+            'emissionTimerClippedFrames': sum(float(r['frame_ms']) > 50 for r in rows),
+            'emissionTimerClippedMs': sum(max(0, float(r['frame_ms']) - 50) for r in rows),
+            'emissionTimerNote': 'SharedGame caps input/emission dt at 50 ms; clipped capture frames cannot establish no lost work.',
             'longestQueueAgeOver100msSeconds': longest, 'queueAgeGate': longest < 1}
 
 def correctness(folder, report, events):
@@ -129,7 +158,7 @@ def audit_role(folder, warmup, out):
         if key not in seen and float(row['rtt_ms']) > 0:
             seen.add(key); rtts.append(float(row['rtt_ms']))
     raw_hashes = {}
-    for name in ('frames.csv', 'events.csv', 'growth.jsonl', 'player.log', 'summary-run-1.json', 'invocation.json', 'visibility.json'):
+    for name in ('frames.csv', 'events.csv', 'growth.jsonl', 'player.log', 'summary-run-1.json', 'invocation.json', 'visibility.json', 'external-memory.json', 'process-memory.csv'):
         file = folder / name
         if not file.exists():
             continue
@@ -147,6 +176,7 @@ def audit_role(folder, warmup, out):
             'terminalComplete': report['state'] == 2,
             'noCatchup': report['catchupLimits'] == 0, 'rawHashes': raw_hashes,
             'workWindow': work_window(rows), 'coldWorkWindow': work_window(running),
+            'externalProcessMemory': external_process_memory(folder),
             'terminalRow': all_rows[-1] if all_rows else None, 'correctness': correctness(folder, report, events)}
 
 parser = argparse.ArgumentParser()

@@ -1,0 +1,2185 @@
+{
+  "classification": "exploratory; no acceptance inferred from numerical results",
+  "captures": [
+    {
+      "capture": "pair-S2",
+      "audit": "docs\\playtests\\evidence\\gdj-24-coop-scale\\screens-v2\\pair-S2\\audit.json",
+      "roles": [
+        {
+          "role": "host A",
+          "source": {
+            "revision": "32497266d711d031ae129903b5616a37fa1ea060",
+            "builtUtc": "2026-10-05T09:49:18.0072903Z",
+            "dirty": false
+          },
+          "scenario": {
+            "version": 3,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 7,
+            "startingSpecialization": 0,
+            "duration": 40.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Co-op scale (diagnostic) (override)",
+            "identity": "04a61786e9df738943d2a79f9e48847ebb15bfa04dcf45fd14bc93749257d7db",
+            "session": "dc9132f3f38b4296917316ba58432d9d"
+          },
+          "state": 2,
+          "ticks": 2400,
+          "reason": "",
+          "frameMs": {
+            "samples": 31965,
+            "p50": 0.8181,
+            "p95": 1.683,
+            "p99": 2.1447,
+            "max": 3.5895,
+            "over6_944": 0,
+            "over13_889": 0
+          },
+          "coldFrameMs": {
+            "samples": 42104,
+            "p50": 0.824,
+            "p95": 1.689,
+            "p99": 2.2344,
+            "max": 20.7527
+          },
+          "confirmationMs": {
+            "samples": 293,
+            "p50": 9.659,
+            "p95": 17.224,
+            "p99": 17.768,
+            "max": 18.239
+          },
+          "rttMs": {
+            "samples": 60,
+            "p50": 3.071,
+            "p95": 4.911,
+            "p99": 5.84,
+            "max": 5.84
+          },
+          "catchupLimits": 0,
+          "authorityWork": {
+            "ticks": 2400,
+            "steeringChecks": 143796,
+            "contactTests": 168000,
+            "contactApplications": 0,
+            "attractionQueries": 314143,
+            "simulationMs": 303.81810000000036,
+            "crowdMs": 52.486400000000195,
+            "weaponMs": 105.09510000000294,
+            "xpMs": 133.84110000000007,
+            "frameSimulationMs": 0.0201,
+            "frameCrowdMs": 0.018,
+            "frameWeaponMs": 0.0002,
+            "frameXpMs": 0.0,
+            "frameTicks": 1
+          },
+          "loggingMs": 3042.25420000002,
+          "managedHeapBytes": 34885632,
+          "workingSetBytes": 0,
+          "terminalQueueRecords": 0,
+          "queueHighWater": 0,
+          "queueMaxAgeMs": 0.0,
+          "correctness": {
+            "errors": [],
+            "xpDeaths": 365,
+            "outcomeEvents": 1364,
+            "outcomesSha256": "5962938eff4a35f28c3e286f5486231327ad0997dd5b7fe93f56ad305cd34a1b",
+            "growthSha256": "3e0c12c911ba838af501f8feb6f4ff3beccb9c5295d62427dad11894c4e5d5e6",
+            "terminalQueueEmpty": true
+          },
+          "stageFrameMs": {
+            "sim_ms": {
+              "samples": 31965,
+              "p50": 0.0,
+              "p95": 0.0467,
+              "p99": 0.1736,
+              "max": 1.0944
+            },
+            "crowd_ms": {
+              "samples": 31965,
+              "p50": 0.0,
+              "p95": 0.0146,
+              "p99": 0.021,
+              "max": 0.4733
+            },
+            "weapon_ms": {
+              "samples": 31965,
+              "p50": 0.0,
+              "p95": 0.0001,
+              "p99": 0.0783,
+              "max": 0.889
+            },
+            "xp_ms": {
+              "samples": 31965,
+              "p50": 0.0,
+              "p95": 0.0242,
+              "p99": 0.0776,
+              "max": 0.7246
+            },
+            "presentation_ms": {
+              "samples": 31965,
+              "p50": 0.1207,
+              "p95": 0.3495,
+              "p99": 0.6216,
+              "max": 1.2197
+            },
+            "render_prepare_ms": {
+              "samples": 31965,
+              "p50": 0.0131,
+              "p95": 0.0206,
+              "p99": 0.1374,
+              "max": 0.7981
+            },
+            "render_submit_ms": {
+              "samples": 31965,
+              "p50": 0.0058,
+              "p95": 0.0097,
+              "p99": 0.0174,
+              "max": 0.8492
+            },
+            "pickup_render_ms": {
+              "samples": 31965,
+              "p50": 0.018,
+              "p95": 0.0304,
+              "p99": 0.196,
+              "max": 0.9091
+            },
+            "net_poll_ms": {
+              "samples": 31965,
+              "p50": 0.0403,
+              "p95": 0.1243,
+              "p99": 0.3805,
+              "max": 1.0371
+            },
+            "crowd_ms_per_tick": {
+              "samples": 1800,
+              "p50": 0.0169,
+              "p95": 0.0243,
+              "p99": 0.169,
+              "max": 0.4733
+            }
+          },
+          "payloadRates": {
+            "sent_bytes": 68563.31464239421,
+            "received_bytes": 2804.5742277312274,
+            "sent_messages": 127.03669557120946,
+            "received_messages": 75.16865613043225
+          },
+          "queueAgeGate": true,
+          "emissionTimerClippedFrames": 0,
+          "emissionTimerClippedMs": 0,
+          "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+          "workingSetNote": "Mono process API returned zero; unavailable. External PowerShell observations, where present, are separate.",
+          "externalProcessMemory": null
+        },
+        {
+          "role": "client B",
+          "source": {
+            "revision": "32497266d711d031ae129903b5616a37fa1ea060",
+            "builtUtc": "2026-10-05T09:49:18.0072903Z",
+            "dirty": false
+          },
+          "scenario": {
+            "version": 3,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 7,
+            "startingSpecialization": 0,
+            "duration": 40.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Co-op scale (diagnostic) (override)",
+            "identity": "04a61786e9df738943d2a79f9e48847ebb15bfa04dcf45fd14bc93749257d7db",
+            "session": "dc9132f3f38b4296917316ba58432d9d"
+          },
+          "state": 2,
+          "ticks": 2400,
+          "reason": "",
+          "frameMs": {
+            "samples": 30996,
+            "p50": 0.8649,
+            "p95": 1.6326,
+            "p99": 2.0179,
+            "max": 3.5869,
+            "over6_944": 0,
+            "over13_889": 0
+          },
+          "coldFrameMs": {
+            "samples": 41133,
+            "p50": 0.8616,
+            "p95": 1.6475,
+            "p99": 2.0789,
+            "max": 20.646
+          },
+          "confirmationMs": {
+            "samples": 290,
+            "p50": 13.031,
+            "p95": 19.746,
+            "p99": 20.997,
+            "max": 21.497
+          },
+          "rttMs": {
+            "samples": 61,
+            "p50": 3.514,
+            "p95": 4.597,
+            "p99": 6.096,
+            "max": 6.096
+          },
+          "catchupLimits": 0,
+          "authorityWork": {
+            "ticks": 0,
+            "steeringChecks": 0,
+            "contactTests": 0,
+            "contactApplications": 0,
+            "attractionQueries": 0,
+            "simulationMs": 0.0,
+            "crowdMs": 0.0,
+            "weaponMs": 0.0,
+            "xpMs": 0.0,
+            "frameSimulationMs": 0.0,
+            "frameCrowdMs": 0.0,
+            "frameWeaponMs": 0.0,
+            "frameXpMs": 0.0,
+            "frameTicks": 0
+          },
+          "loggingMs": 2932.7652000000553,
+          "managedHeapBytes": 35373056,
+          "workingSetBytes": 0,
+          "terminalQueueRecords": 0,
+          "queueHighWater": 0,
+          "queueMaxAgeMs": 0.0,
+          "correctness": {
+            "errors": [],
+            "xpDeaths": 365,
+            "outcomeEvents": 1364,
+            "outcomesSha256": "5962938eff4a35f28c3e286f5486231327ad0997dd5b7fe93f56ad305cd34a1b",
+            "growthSha256": "3e0c12c911ba838af501f8feb6f4ff3beccb9c5295d62427dad11894c4e5d5e6",
+            "terminalQueueEmpty": true
+          },
+          "stageFrameMs": {
+            "sim_ms": {
+              "samples": 30996,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "crowd_ms": {
+              "samples": 30996,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "weapon_ms": {
+              "samples": 30996,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "xp_ms": {
+              "samples": 30996,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "presentation_ms": {
+              "samples": 30996,
+              "p50": 0.1263,
+              "p95": 0.3534,
+              "p99": 0.6126,
+              "max": 1.299
+            },
+            "render_prepare_ms": {
+              "samples": 30996,
+              "p50": 0.0136,
+              "p95": 0.0231,
+              "p99": 0.119,
+              "max": 1.1656
+            },
+            "render_submit_ms": {
+              "samples": 30996,
+              "p50": 0.0061,
+              "p95": 0.0102,
+              "p99": 0.0282,
+              "max": 0.5803
+            },
+            "pickup_render_ms": {
+              "samples": 30996,
+              "p50": 0.0185,
+              "p95": 0.0327,
+              "p99": 0.1716,
+              "max": 0.8091
+            },
+            "net_poll_ms": {
+              "samples": 30996,
+              "p50": 0.0407,
+              "p95": 0.1312,
+              "p99": 0.3515,
+              "max": 1.1192
+            },
+            "crowd_ms_per_tick": {
+              "samples": 0
+            }
+          },
+          "payloadRates": {
+            "sent_bytes": 2803.398232441446,
+            "received_bytes": 68462.98041384366,
+            "sent_messages": 75.16268291681429,
+            "received_messages": 126.8807363372009
+          },
+          "queueAgeGate": true,
+          "emissionTimerClippedFrames": 0,
+          "emissionTimerClippedMs": 0,
+          "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+          "workingSetNote": "Mono process API returned zero; unavailable. External PowerShell observations, where present, are separate.",
+          "externalProcessMemory": null
+        }
+      ],
+      "terminalParity": {
+        "run": true,
+        "ticks": true,
+        "state": true,
+        "players": true,
+        "enemyStates": true,
+        "xp": true,
+        "uncollectedXp": true,
+        "level": true,
+        "choicePhase": true,
+        "controlRevision": true,
+        "weaponWork": true
+      },
+      "replicaEventParity": {
+        "outcomesSha256": true,
+        "growthSha256": true
+      }
+    },
+    {
+      "capture": "pair-S5",
+      "audit": "docs\\playtests\\evidence\\gdj-24-coop-scale\\screens-v2\\pair-S5\\audit.json",
+      "roles": [
+        {
+          "role": "host A",
+          "source": {
+            "revision": "32497266d711d031ae129903b5616a37fa1ea060",
+            "builtUtc": "2026-10-05T09:49:18.0072903Z",
+            "dirty": false
+          },
+          "scenario": {
+            "version": 3,
+            "seed": 137,
+            "enemies": 1000,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 7,
+            "startingSpecialization": 0,
+            "duration": 40.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Co-op scale (diagnostic) (override)",
+            "identity": "6cbd7e886d8444588600005d24c220e291c6acad07ca92bbb030264717502c2a",
+            "session": "6ef191915145439786e3f56d04f83769"
+          },
+          "state": 2,
+          "ticks": 2400,
+          "reason": "",
+          "frameMs": {
+            "samples": 5191,
+            "p50": 4.7778,
+            "p95": 10.983,
+            "p99": 13.9878,
+            "max": 20.4111,
+            "over6_944": 1697,
+            "over13_889": 54
+          },
+          "coldFrameMs": {
+            "samples": 7425,
+            "p50": 4.3309,
+            "p95": 10.5758,
+            "p99": 13.398,
+            "max": 29.2164
+          },
+          "confirmationMs": {
+            "samples": 326,
+            "p50": 9.754,
+            "p95": 20.871,
+            "p99": 22.822,
+            "max": 25.364
+          },
+          "rttMs": {
+            "samples": 61,
+            "p50": 17.93,
+            "p95": 47.242,
+            "p99": 48.851,
+            "max": 48.851
+          },
+          "catchupLimits": 0,
+          "authorityWork": {
+            "ticks": 2400,
+            "steeringChecks": 104683530,
+            "contactTests": 4800000,
+            "contactApplications": 120,
+            "attractionQueries": 2496,
+            "simulationMs": 9899.523000000008,
+            "crowdMs": 8679.78360000002,
+            "weaponMs": 1166.3947999999732,
+            "xpMs": 33.54749999999984,
+            "frameSimulationMs": 3.4576,
+            "frameCrowdMs": 2.6626,
+            "frameWeaponMs": 0.7904,
+            "frameXpMs": 0.0,
+            "frameTicks": 1
+          },
+          "loggingMs": 586.4230000000009,
+          "managedHeapBytes": 34054144,
+          "workingSetBytes": 0,
+          "terminalQueueRecords": 8,
+          "queueHighWater": 63,
+          "queueMaxAgeMs": 41.831099999999566,
+          "correctness": {
+            "errors": [],
+            "xpDeaths": 343,
+            "outcomeEvents": 1496,
+            "outcomesSha256": "24e80442fb457f9e849421447b6e5ff5dae5595015db98484f60791abb4313a2",
+            "growthSha256": "336af564044edf0eab330c44490d30230f64a7aafb92d64efd8da304d4413602",
+            "terminalQueueEmpty": false
+          },
+          "stageFrameMs": {
+            "sim_ms": {
+              "samples": 5191,
+              "p50": 0.0,
+              "p95": 5.3231,
+              "p99": 7.9976,
+              "max": 12.5229
+            },
+            "crowd_ms": {
+              "samples": 5191,
+              "p50": 0.0,
+              "p95": 4.7154,
+              "p99": 5.5721,
+              "max": 9.2902
+            },
+            "weapon_ms": {
+              "samples": 5191,
+              "p50": 0.0,
+              "p95": 0.9918,
+              "p99": 4.2609,
+              "max": 6.9887
+            },
+            "xp_ms": {
+              "samples": 5191,
+              "p50": 0.0,
+              "p95": 0.038,
+              "p99": 0.0768,
+              "max": 0.621
+            },
+            "presentation_ms": {
+              "samples": 5191,
+              "p50": 3.0265,
+              "p95": 4.2594,
+              "p99": 5.2803,
+              "max": 9.7114
+            },
+            "render_prepare_ms": {
+              "samples": 5191,
+              "p50": 0.0561,
+              "p95": 0.0865,
+              "p99": 0.1766,
+              "max": 0.5408
+            },
+            "render_submit_ms": {
+              "samples": 5191,
+              "p50": 0.0168,
+              "p95": 0.0323,
+              "p99": 0.0765,
+              "max": 0.3603
+            },
+            "pickup_render_ms": {
+              "samples": 5191,
+              "p50": 0.0102,
+              "p95": 0.0143,
+              "p99": 0.0266,
+              "max": 0.1501
+            },
+            "net_poll_ms": {
+              "samples": 5191,
+              "p50": 0.1471,
+              "p95": 0.6159,
+              "p99": 0.8974,
+              "max": 1.6678
+            },
+            "crowd_ms_per_tick": {
+              "samples": 1799,
+              "p50": 3.7305,
+              "p95": 5.2904,
+              "p99": 6.1746,
+              "max": 8.2001
+            }
+          },
+          "payloadRates": {
+            "sent_bytes": 1240370.232205228,
+            "received_bytes": 2804.8449959345003,
+            "sent_messages": 1199.4141946126042,
+            "received_messages": 75.17591330400306
+          },
+          "queueAgeGate": true,
+          "emissionTimerClippedFrames": 0,
+          "emissionTimerClippedMs": 0,
+          "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+          "workingSetNote": "Mono process API returned zero; unavailable. External PowerShell observations, where present, are separate.",
+          "externalProcessMemory": null
+        },
+        {
+          "role": "client B",
+          "source": {
+            "revision": "32497266d711d031ae129903b5616a37fa1ea060",
+            "builtUtc": "2026-10-05T09:49:18.0072903Z",
+            "dirty": false
+          },
+          "scenario": {
+            "version": 3,
+            "seed": 137,
+            "enemies": 1000,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 7,
+            "startingSpecialization": 0,
+            "duration": 40.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Co-op scale (diagnostic) (override)",
+            "identity": "6cbd7e886d8444588600005d24c220e291c6acad07ca92bbb030264717502c2a",
+            "session": "6ef191915145439786e3f56d04f83769"
+          },
+          "state": 2,
+          "ticks": 2400,
+          "reason": "",
+          "frameMs": {
+            "samples": 7118,
+            "p50": 4.1462,
+            "p95": 5.9261,
+            "p99": 6.8009,
+            "max": 20.6129,
+            "over6_944": 59,
+            "over13_889": 2
+          },
+          "coldFrameMs": {
+            "samples": 9791,
+            "p50": 4.0364,
+            "p95": 5.835,
+            "p99": 6.7677,
+            "max": 31.0361
+          },
+          "confirmationMs": {
+            "samples": 312,
+            "p50": 28.766,
+            "p95": 39.79,
+            "p99": 48.632,
+            "max": 58.732
+          },
+          "rttMs": {
+            "samples": 60,
+            "p50": 16.775,
+            "p95": 25.656,
+            "p99": 32.045,
+            "max": 32.045
+          },
+          "catchupLimits": 0,
+          "authorityWork": {
+            "ticks": 0,
+            "steeringChecks": 0,
+            "contactTests": 0,
+            "contactApplications": 0,
+            "attractionQueries": 0,
+            "simulationMs": 0.0,
+            "crowdMs": 0.0,
+            "weaponMs": 0.0,
+            "xpMs": 0.0,
+            "frameSimulationMs": 0.0,
+            "frameCrowdMs": 0.0,
+            "frameWeaponMs": 0.0,
+            "frameXpMs": 0.0,
+            "frameTicks": 0
+          },
+          "loggingMs": 758.4414000000005,
+          "managedHeapBytes": 34631680,
+          "workingSetBytes": 0,
+          "terminalQueueRecords": 0,
+          "queueHighWater": 0,
+          "queueMaxAgeMs": 0.0,
+          "correctness": {
+            "errors": [],
+            "xpDeaths": 343,
+            "outcomeEvents": 1496,
+            "outcomesSha256": "24e80442fb457f9e849421447b6e5ff5dae5595015db98484f60791abb4313a2",
+            "growthSha256": "336af564044edf0eab330c44490d30230f64a7aafb92d64efd8da304d4413602",
+            "terminalQueueEmpty": true
+          },
+          "stageFrameMs": {
+            "sim_ms": {
+              "samples": 7118,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "crowd_ms": {
+              "samples": 7118,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "weapon_ms": {
+              "samples": 7118,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "xp_ms": {
+              "samples": 7118,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "presentation_ms": {
+              "samples": 7118,
+              "p50": 3.1124,
+              "p95": 4.2993,
+              "p99": 5.0003,
+              "max": 11.0378
+            },
+            "render_prepare_ms": {
+              "samples": 7118,
+              "p50": 0.0602,
+              "p95": 0.0906,
+              "p99": 0.1654,
+              "max": 0.4918
+            },
+            "render_submit_ms": {
+              "samples": 7118,
+              "p50": 0.0203,
+              "p95": 0.0359,
+              "p99": 0.0702,
+              "max": 0.6485
+            },
+            "pickup_render_ms": {
+              "samples": 7118,
+              "p50": 0.0099,
+              "p95": 0.0147,
+              "p99": 0.0265,
+              "max": 0.2544
+            },
+            "net_poll_ms": {
+              "samples": 7118,
+              "p50": 0.1189,
+              "p95": 0.794,
+              "p99": 1.1207,
+              "max": 2.1869
+            },
+            "crowd_ms_per_tick": {
+              "samples": 0
+            }
+          },
+          "payloadRates": {
+            "sent_bytes": 2803.817905782862,
+            "received_bytes": 1240025.9051981515,
+            "sent_messages": 75.12280728429151,
+            "received_messages": 1199.0640358412813
+          },
+          "queueAgeGate": true,
+          "emissionTimerClippedFrames": 0,
+          "emissionTimerClippedMs": 0,
+          "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+          "workingSetNote": "Mono process API returned zero; unavailable. External PowerShell observations, where present, are separate.",
+          "externalProcessMemory": null
+        }
+      ],
+      "terminalParity": {
+        "run": true,
+        "ticks": true,
+        "state": true,
+        "players": true,
+        "enemyStates": true,
+        "xp": true,
+        "uncollectedXp": true,
+        "level": true,
+        "choicePhase": true,
+        "controlRevision": true,
+        "weaponWork": true
+      },
+      "replicaEventParity": {
+        "outcomesSha256": true,
+        "growthSha256": true
+      }
+    },
+    {
+      "capture": "pair-S6",
+      "audit": "docs\\playtests\\evidence\\gdj-24-coop-scale\\screens-v2\\pair-S6\\audit.json",
+      "roles": [
+        {
+          "role": "host A",
+          "source": {
+            "revision": "32497266d711d031ae129903b5616a37fa1ea060",
+            "builtUtc": "2026-10-05T09:49:18.0072903Z",
+            "dirty": false
+          },
+          "scenario": {
+            "version": 3,
+            "seed": 137,
+            "enemies": 250,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 255,
+            "startingSpecialization": 0,
+            "duration": 40.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Co-op scale (diagnostic) (override)",
+            "identity": "136b785004bd9eadb67ca7ce08de79022385e3f27acbd73a3f5db89e835f26a7",
+            "session": "44cccb046924493f8aecb9e4c7336d2b"
+          },
+          "state": 2,
+          "ticks": 2400,
+          "reason": "",
+          "frameMs": {
+            "samples": 18209,
+            "p50": 1.4603,
+            "p95": 2.7596,
+            "p99": 4.2525,
+            "max": 20.5065,
+            "over6_944": 34,
+            "over13_889": 3
+          },
+          "coldFrameMs": {
+            "samples": 24291,
+            "p50": 1.4653,
+            "p95": 2.7274,
+            "p99": 4.1842,
+            "max": 27.375
+          },
+          "confirmationMs": {
+            "samples": 813,
+            "p50": 9.506,
+            "p95": 17.399,
+            "p99": 18.217,
+            "max": 21.605
+          },
+          "rttMs": {
+            "samples": 60,
+            "p50": 5.758,
+            "p95": 9.588,
+            "p99": 11.484,
+            "max": 11.484
+          },
+          "catchupLimits": 0,
+          "authorityWork": {
+            "ticks": 2400,
+            "steeringChecks": 6096458,
+            "contactTests": 1200000,
+            "contactApplications": 45,
+            "attractionQueries": 111338,
+            "simulationMs": 1779.2007,
+            "crowdMs": 713.1021000000007,
+            "weaponMs": 957.0415999999835,
+            "xpMs": 95.76950000000004,
+            "frameSimulationMs": 0.9205,
+            "frameCrowdMs": 0.216,
+            "frameWeaponMs": 0.7017,
+            "frameXpMs": 0.0,
+            "frameTicks": 1
+          },
+          "loggingMs": 1723.7332000000017,
+          "managedHeapBytes": 34955264,
+          "workingSetBytes": 0,
+          "terminalQueueRecords": 0,
+          "queueHighWater": 32,
+          "queueMaxAgeMs": 12.18330000000023,
+          "correctness": {
+            "errors": [],
+            "xpDeaths": 865,
+            "outcomeEvents": 4104,
+            "outcomesSha256": "5a56e3ace11b5d500586fc728643fa6c42c05040de124c2aafae6899225e51a0",
+            "growthSha256": "7a5284a5909d640ab188d9c0bccef1e47fcde820420e2e149180f59922d3cdb0",
+            "terminalQueueEmpty": true
+          },
+          "stageFrameMs": {
+            "sim_ms": {
+              "samples": 18209,
+              "p50": 0.0,
+              "p95": 0.4199,
+              "p99": 1.3828,
+              "max": 6.4535
+            },
+            "crowd_ms": {
+              "samples": 18209,
+              "p50": 0.0,
+              "p95": 0.2549,
+              "p99": 0.5209,
+              "max": 1.646
+            },
+            "weapon_ms": {
+              "samples": 18209,
+              "p50": 0.0,
+              "p95": 0.0003,
+              "p99": 0.9908,
+              "max": 6.0747
+            },
+            "xp_ms": {
+              "samples": 18209,
+              "p50": 0.0,
+              "p95": 0.0192,
+              "p99": 0.0888,
+              "max": 1.1434
+            },
+            "presentation_ms": {
+              "samples": 18209,
+              "p50": 0.6128,
+              "p95": 1.1923,
+              "p99": 1.5436,
+              "max": 5.7117
+            },
+            "render_prepare_ms": {
+              "samples": 18209,
+              "p50": 0.0226,
+              "p95": 0.0336,
+              "p99": 0.1188,
+              "max": 0.6247
+            },
+            "render_submit_ms": {
+              "samples": 18209,
+              "p50": 0.0085,
+              "p95": 0.0147,
+              "p99": 0.0282,
+              "max": 0.5917
+            },
+            "pickup_render_ms": {
+              "samples": 18209,
+              "p50": 0.0115,
+              "p95": 0.0189,
+              "p99": 0.0464,
+              "max": 0.5206
+            },
+            "net_poll_ms": {
+              "samples": 18209,
+              "p50": 0.0482,
+              "p95": 0.1976,
+              "p99": 0.5243,
+              "max": 1.2658
+            },
+            "crowd_ms_per_tick": {
+              "samples": 1799,
+              "p50": 0.2554,
+              "p95": 0.6331,
+              "p99": 0.9337,
+              "max": 1.646
+            }
+          },
+          "payloadRates": {
+            "sent_bytes": 342109.25897078816,
+            "received_bytes": 3826.8571165891694,
+            "sent_messages": 471.1567812358129,
+            "received_messages": 96.00477783777707
+          },
+          "queueAgeGate": true,
+          "emissionTimerClippedFrames": 0,
+          "emissionTimerClippedMs": 0,
+          "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+          "workingSetNote": "Mono process API returned zero; unavailable. External PowerShell observations, where present, are separate.",
+          "externalProcessMemory": null
+        },
+        {
+          "role": "client B",
+          "source": {
+            "revision": "32497266d711d031ae129903b5616a37fa1ea060",
+            "builtUtc": "2026-10-05T09:49:18.0072903Z",
+            "dirty": false
+          },
+          "scenario": {
+            "version": 3,
+            "seed": 137,
+            "enemies": 250,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 255,
+            "startingSpecialization": 0,
+            "duration": 40.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Co-op scale (diagnostic) (override)",
+            "identity": "136b785004bd9eadb67ca7ce08de79022385e3f27acbd73a3f5db89e835f26a7",
+            "session": "44cccb046924493f8aecb9e4c7336d2b"
+          },
+          "state": 2,
+          "ticks": 2400,
+          "reason": "",
+          "frameMs": {
+            "samples": 19589,
+            "p50": 1.4183,
+            "p95": 2.3658,
+            "p99": 2.9712,
+            "max": 20.6166,
+            "over6_944": 5,
+            "over13_889": 4
+          },
+          "coldFrameMs": {
+            "samples": 26055,
+            "p50": 1.4165,
+            "p95": 2.3806,
+            "p99": 2.9915,
+            "max": 21.3566
+          },
+          "confirmationMs": {
+            "samples": 566,
+            "p50": 14.802,
+            "p95": 22.681,
+            "p99": 28.158,
+            "max": 46.465
+          },
+          "rttMs": {
+            "samples": 60,
+            "p50": 5.116,
+            "p95": 7.89,
+            "p99": 9.638,
+            "max": 9.638
+          },
+          "catchupLimits": 0,
+          "authorityWork": {
+            "ticks": 0,
+            "steeringChecks": 0,
+            "contactTests": 0,
+            "contactApplications": 0,
+            "attractionQueries": 0,
+            "simulationMs": 0.0,
+            "crowdMs": 0.0,
+            "weaponMs": 0.0,
+            "xpMs": 0.0,
+            "frameSimulationMs": 0.0,
+            "frameCrowdMs": 0.0,
+            "frameWeaponMs": 0.0,
+            "frameXpMs": 0.0,
+            "frameTicks": 0
+          },
+          "loggingMs": 1765.4269999999892,
+          "managedHeapBytes": 34365440,
+          "workingSetBytes": 0,
+          "terminalQueueRecords": 0,
+          "queueHighWater": 0,
+          "queueMaxAgeMs": 0.0,
+          "correctness": {
+            "errors": [],
+            "xpDeaths": 865,
+            "outcomeEvents": 4104,
+            "outcomesSha256": "5a56e3ace11b5d500586fc728643fa6c42c05040de124c2aafae6899225e51a0",
+            "growthSha256": "7a5284a5909d640ab188d9c0bccef1e47fcde820420e2e149180f59922d3cdb0",
+            "terminalQueueEmpty": true
+          },
+          "stageFrameMs": {
+            "sim_ms": {
+              "samples": 19589,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "crowd_ms": {
+              "samples": 19589,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "weapon_ms": {
+              "samples": 19589,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "xp_ms": {
+              "samples": 19589,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "presentation_ms": {
+              "samples": 19589,
+              "p50": 0.606,
+              "p95": 1.152,
+              "p99": 1.4805,
+              "max": 5.1524
+            },
+            "render_prepare_ms": {
+              "samples": 19589,
+              "p50": 0.0219,
+              "p95": 0.0335,
+              "p99": 0.0924,
+              "max": 0.6044
+            },
+            "render_submit_ms": {
+              "samples": 19589,
+              "p50": 0.008,
+              "p95": 0.0139,
+              "p99": 0.0256,
+              "max": 0.3493
+            },
+            "pickup_render_ms": {
+              "samples": 19589,
+              "p50": 0.0112,
+              "p95": 0.019,
+              "p99": 0.0386,
+              "max": 0.4394
+            },
+            "net_poll_ms": {
+              "samples": 19589,
+              "p50": 0.0467,
+              "p95": 0.2714,
+              "p99": 0.5462,
+              "max": 1.497
+            },
+            "crowd_ms_per_tick": {
+              "samples": 0
+            }
+          },
+          "payloadRates": {
+            "sent_bytes": 3826.46361425018,
+            "received_bytes": 341867.655798851,
+            "sent_messages": 96.02070981068356,
+            "received_messages": 470.90475838776393
+          },
+          "queueAgeGate": true,
+          "emissionTimerClippedFrames": 0,
+          "emissionTimerClippedMs": 0,
+          "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+          "workingSetNote": "Mono process API returned zero; unavailable. External PowerShell observations, where present, are separate.",
+          "externalProcessMemory": null
+        }
+      ],
+      "terminalParity": {
+        "run": true,
+        "ticks": true,
+        "state": true,
+        "players": true,
+        "enemyStates": true,
+        "xp": true,
+        "uncollectedXp": true,
+        "level": true,
+        "choicePhase": true,
+        "controlRevision": true,
+        "weaponWork": true
+      },
+      "replicaEventParity": {
+        "outcomesSha256": true,
+        "growthSha256": true
+      }
+    },
+    {
+      "capture": "pair-S7",
+      "audit": "docs\\playtests\\evidence\\gdj-24-coop-scale\\screens-v2\\pair-S7\\audit.json",
+      "roles": [
+        {
+          "role": "host A",
+          "source": {
+            "revision": "32497266d711d031ae129903b5616a37fa1ea060",
+            "builtUtc": "2026-10-05T09:49:18.0072903Z",
+            "dirty": false
+          },
+          "scenario": {
+            "version": 3,
+            "seed": 137,
+            "enemies": 1000,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 255,
+            "startingSpecialization": 0,
+            "duration": 40.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Co-op scale (diagnostic) (override)",
+            "identity": "d6bdda6833f5f6206ff5bbd1a5c3d71c52e830a32c5f25bfb7e44ca8cb7f7338",
+            "session": "4ee8bbd4d52a459c87bd4f4a2ba8250a"
+          },
+          "state": 2,
+          "ticks": 2400,
+          "reason": "",
+          "frameMs": {
+            "samples": 4520,
+            "p50": 4.7959,
+            "p95": 13.7331,
+            "p99": 22.9228,
+            "max": 30.0053,
+            "over6_944": 1729,
+            "over13_889": 216
+          },
+          "coldFrameMs": {
+            "samples": 6653,
+            "p50": 4.3358,
+            "p95": 13.0053,
+            "p99": 21.8261,
+            "max": 44.0613
+          },
+          "confirmationMs": {
+            "samples": 735,
+            "p50": 9.948,
+            "p95": 23.009,
+            "p99": 27.704,
+            "max": 28.537
+          },
+          "rttMs": {
+            "samples": 61,
+            "p50": 19.585,
+            "p95": 64.697,
+            "p99": 86.314,
+            "max": 86.314
+          },
+          "catchupLimits": 0,
+          "authorityWork": {
+            "ticks": 2400,
+            "steeringChecks": 118805360,
+            "contactTests": 4800000,
+            "contactApplications": 137,
+            "attractionQueries": 29043,
+            "simulationMs": 13002.9354,
+            "crowdMs": 9770.649599999977,
+            "weaponMs": 3145.0938999999944,
+            "xpMs": 69.96940000000009,
+            "frameSimulationMs": 5.1717,
+            "frameCrowdMs": 5.1663,
+            "frameWeaponMs": 0.0001,
+            "frameXpMs": 0.0,
+            "frameTicks": 1
+          },
+          "loggingMs": 535.8236000000012,
+          "managedHeapBytes": 34476032,
+          "workingSetBytes": 0,
+          "terminalQueueRecords": 98,
+          "queueHighWater": 141,
+          "queueMaxAgeMs": 87.16429999999775,
+          "correctness": {
+            "errors": [],
+            "xpDeaths": 834,
+            "outcomeEvents": 4243,
+            "outcomesSha256": "ae19136b235233da15e61dec149d87e43a7e88c44760dfdd1bf98027b7a783b6",
+            "growthSha256": "d4e5ecc05fb0107399848d02e5c7e5c38e20321540a272d127fe2a0b8588716b",
+            "terminalQueueEmpty": false
+          },
+          "stageFrameMs": {
+            "sim_ms": {
+              "samples": 4520,
+              "p50": 0.0,
+              "p95": 7.9062,
+              "p99": 16.8616,
+              "max": 22.0586
+            },
+            "crowd_ms": {
+              "samples": 4520,
+              "p50": 0.0,
+              "p95": 5.9734,
+              "p99": 6.7803,
+              "max": 13.7815
+            },
+            "weapon_ms": {
+              "samples": 4520,
+              "p50": 0.0,
+              "p95": 2.7682,
+              "p99": 12.0689,
+              "max": 16.9261
+            },
+            "xp_ms": {
+              "samples": 4520,
+              "p50": 0.0,
+              "p95": 0.0598,
+              "p99": 0.1053,
+              "max": 0.7933
+            },
+            "presentation_ms": {
+              "samples": 4520,
+              "p50": 2.6575,
+              "p95": 4.6226,
+              "p99": 6.8656,
+              "max": 19.8849
+            },
+            "render_prepare_ms": {
+              "samples": 4520,
+              "p50": 0.0547,
+              "p95": 0.0845,
+              "p99": 0.1656,
+              "max": 0.408
+            },
+            "render_submit_ms": {
+              "samples": 4520,
+              "p50": 0.016,
+              "p95": 0.0305,
+              "p99": 0.0733,
+              "max": 0.3424
+            },
+            "pickup_render_ms": {
+              "samples": 4520,
+              "p50": 0.0114,
+              "p95": 0.0163,
+              "p99": 0.031,
+              "max": 0.2135
+            },
+            "net_poll_ms": {
+              "samples": 4520,
+              "p50": 0.2158,
+              "p95": 0.7396,
+              "p99": 1.0066,
+              "max": 1.6706
+            },
+            "crowd_ms_per_tick": {
+              "samples": 1781,
+              "p50": 4.431,
+              "p95": 6.4531,
+              "p99": 6.8981,
+              "max": 8.5225
+            }
+          },
+          "payloadRates": {
+            "sent_bytes": 1247836.8790283615,
+            "received_bytes": 3827.033257045339,
+            "sent_messages": 1289.155764643638,
+            "received_messages": 96.03500434240888
+          },
+          "queueAgeGate": true,
+          "emissionTimerClippedFrames": 0,
+          "emissionTimerClippedMs": 0,
+          "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+          "workingSetNote": "Mono process API returned zero; unavailable. External PowerShell observations, where present, are separate.",
+          "externalProcessMemory": null
+        },
+        {
+          "role": "client B",
+          "source": {
+            "revision": "32497266d711d031ae129903b5616a37fa1ea060",
+            "builtUtc": "2026-10-05T09:49:18.0072903Z",
+            "dirty": false
+          },
+          "scenario": {
+            "version": 3,
+            "seed": 137,
+            "enemies": 1000,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 255,
+            "startingSpecialization": 0,
+            "duration": 40.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Co-op scale (diagnostic) (override)",
+            "identity": "d6bdda6833f5f6206ff5bbd1a5c3d71c52e830a32c5f25bfb7e44ca8cb7f7338",
+            "session": "4ee8bbd4d52a459c87bd4f4a2ba8250a"
+          },
+          "state": 2,
+          "ticks": 2400,
+          "reason": "",
+          "frameMs": {
+            "samples": 8085,
+            "p50": 3.5714,
+            "p95": 5.5418,
+            "p99": 7.6955,
+            "max": 22.2147,
+            "over6_944": 115,
+            "over13_889": 34
+          },
+          "coldFrameMs": {
+            "samples": 10931,
+            "p50": 3.4974,
+            "p95": 5.5122,
+            "p99": 7.524,
+            "max": 38.2496
+          },
+          "confirmationMs": {
+            "samples": 534,
+            "p50": 31.625,
+            "p95": 71.214,
+            "p99": 88.268,
+            "max": 101.22
+          },
+          "rttMs": {
+            "samples": 60,
+            "p50": 19.295,
+            "p95": 66.932,
+            "p99": 85.938,
+            "max": 85.938
+          },
+          "catchupLimits": 0,
+          "authorityWork": {
+            "ticks": 0,
+            "steeringChecks": 0,
+            "contactTests": 0,
+            "contactApplications": 0,
+            "attractionQueries": 0,
+            "simulationMs": 0.0,
+            "crowdMs": 0.0,
+            "weaponMs": 0.0,
+            "xpMs": 0.0,
+            "frameSimulationMs": 0.0,
+            "frameCrowdMs": 0.0,
+            "frameWeaponMs": 0.0,
+            "frameXpMs": 0.0,
+            "frameTicks": 0
+          },
+          "loggingMs": 826.8129999999985,
+          "managedHeapBytes": 34369536,
+          "workingSetBytes": 0,
+          "terminalQueueRecords": 0,
+          "queueHighWater": 0,
+          "queueMaxAgeMs": 0.0,
+          "correctness": {
+            "errors": [],
+            "xpDeaths": 834,
+            "outcomeEvents": 4243,
+            "outcomesSha256": "ae19136b235233da15e61dec149d87e43a7e88c44760dfdd1bf98027b7a783b6",
+            "growthSha256": "d4e5ecc05fb0107399848d02e5c7e5c38e20321540a272d127fe2a0b8588716b",
+            "terminalQueueEmpty": true
+          },
+          "stageFrameMs": {
+            "sim_ms": {
+              "samples": 8085,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "crowd_ms": {
+              "samples": 8085,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "weapon_ms": {
+              "samples": 8085,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "xp_ms": {
+              "samples": 8085,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0,
+              "max": 0.0
+            },
+            "presentation_ms": {
+              "samples": 8085,
+              "p50": 2.5026,
+              "p95": 3.996,
+              "p99": 6.1227,
+              "max": 21.0243
+            },
+            "render_prepare_ms": {
+              "samples": 8085,
+              "p50": 0.0543,
+              "p95": 0.083,
+              "p99": 0.1562,
+              "max": 0.651
+            },
+            "render_submit_ms": {
+              "samples": 8085,
+              "p50": 0.016,
+              "p95": 0.0301,
+              "p99": 0.0528,
+              "max": 0.3834
+            },
+            "pickup_render_ms": {
+              "samples": 8085,
+              "p50": 0.0105,
+              "p95": 0.0154,
+              "p99": 0.0253,
+              "max": 0.2917
+            },
+            "net_poll_ms": {
+              "samples": 8085,
+              "p50": 0.1024,
+              "p95": 0.833,
+              "p99": 1.218,
+              "max": 2.0029
+            },
+            "crowd_ms_per_tick": {
+              "samples": 0
+            }
+          },
+          "payloadRates": {
+            "sent_bytes": 3826.0013250362426,
+            "received_bytes": 1249552.4361646841,
+            "sent_messages": 95.98330850265138,
+            "received_messages": 1290.6755515215903
+          },
+          "queueAgeGate": true,
+          "emissionTimerClippedFrames": 0,
+          "emissionTimerClippedMs": 0,
+          "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+          "workingSetNote": "Mono process API returned zero; unavailable. External PowerShell observations, where present, are separate.",
+          "externalProcessMemory": null
+        }
+      ],
+      "terminalParity": {
+        "run": true,
+        "ticks": true,
+        "state": true,
+        "players": true,
+        "enemyStates": true,
+        "xp": true,
+        "uncollectedXp": true,
+        "level": true,
+        "choicePhase": true,
+        "controlRevision": true,
+        "weaponWork": false
+      },
+      "replicaEventParity": {
+        "outcomesSha256": true,
+        "growthSha256": true
+      }
+    },
+    {
+      "capture": "solo-S2",
+      "audit": "docs\\playtests\\evidence\\gdj-24-coop-scale\\screens-v2\\solo-S2\\audit.json",
+      "roles": [
+        {
+          "role": "host A",
+          "source": {
+            "revision": "32497266d711d031ae129903b5616a37fa1ea060",
+            "builtUtc": "2026-10-05T09:49:18.0072903Z",
+            "dirty": false
+          },
+          "scenario": {
+            "version": 3,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 7,
+            "startingSpecialization": 0,
+            "duration": 40.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Co-op scale (diagnostic) (override)",
+            "identity": "04a61786e9df738943d2a79f9e48847ebb15bfa04dcf45fd14bc93749257d7db",
+            "session": "025691a1b77143078bb6920d87fb04bc"
+          },
+          "state": 2,
+          "ticks": 2400,
+          "reason": "",
+          "frameMs": {
+            "samples": 43138,
+            "p50": 0.6054,
+            "p95": 1.2431,
+            "p99": 1.4518,
+            "max": 4.1747,
+            "over6_944": 0,
+            "over13_889": 0
+          },
+          "coldFrameMs": {
+            "samples": 57468,
+            "p50": 0.6066,
+            "p95": 1.2465,
+            "p99": 1.4512,
+            "max": 13.6265
+          },
+          "confirmationMs": {
+            "samples": 313,
+            "p50": 13.128,
+            "p95": 17.144,
+            "p99": 17.492,
+            "max": 17.663
+          },
+          "rttMs": {
+            "samples": 0
+          },
+          "catchupLimits": 0,
+          "authorityWork": {
+            "ticks": 2400,
+            "steeringChecks": 147832,
+            "contactTests": 84000,
+            "contactApplications": 9,
+            "attractionQueries": 12559,
+            "simulationMs": 103.95940000000006,
+            "crowdMs": 38.91769999999994,
+            "weaponMs": 31.063899999999318,
+            "xpMs": 25.413000000000018,
+            "frameSimulationMs": 0.016,
+            "frameCrowdMs": 0.0135,
+            "frameWeaponMs": 0.0001,
+            "frameXpMs": 0.0,
+            "frameTicks": 1
+          },
+          "loggingMs": 2853.199800000117,
+          "managedHeapBytes": 33906688,
+          "workingSetBytes": 0,
+          "terminalQueueRecords": 0,
+          "queueHighWater": 0,
+          "queueMaxAgeMs": 0.0,
+          "correctness": {
+            "errors": [],
+            "xpDeaths": 140,
+            "outcomeEvents": 676,
+            "outcomesSha256": "1d350d59d0875a1db320fea6377ba82abe7422a78cbef9c7d10a3d46656354ce",
+            "growthSha256": "baf3ea13380d12e9d0ad00b10e7e6078e2112185feaec9bb32077ddceba55b2a",
+            "terminalQueueEmpty": true
+          },
+          "stageFrameMs": {
+            "sim_ms": {
+              "samples": 43138,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.036,
+              "max": 0.446
+            },
+            "crowd_ms": {
+              "samples": 43138,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0147,
+              "max": 0.2903
+            },
+            "weapon_ms": {
+              "samples": 43138,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0003,
+              "max": 0.3698
+            },
+            "xp_ms": {
+              "samples": 43138,
+              "p50": 0.0,
+              "p95": 0.0,
+              "p99": 0.0077,
+              "max": 0.1113
+            },
+            "presentation_ms": {
+              "samples": 43138,
+              "p50": 0.1238,
+              "p95": 0.1569,
+              "p99": 0.253,
+              "max": 1.6989
+            },
+            "render_prepare_ms": {
+              "samples": 43138,
+              "p50": 0.013,
+              "p95": 0.0171,
+              "p99": 0.0221,
+              "max": 1.2983
+            },
+            "render_submit_ms": {
+              "samples": 43138,
+              "p50": 0.0049,
+              "p95": 0.0071,
+              "p99": 0.0094,
+              "max": 0.2005
+            },
+            "pickup_render_ms": {
+              "samples": 43138,
+              "p50": 0.0069,
+              "p95": 0.009,
+              "p99": 0.0111,
+              "max": 0.5421
+            },
+            "net_poll_ms": {
+              "samples": 43138,
+              "p50": 0.0001,
+              "p95": 0.0001,
+              "p99": 0.0002,
+              "max": 0.0673
+            },
+            "crowd_ms_per_tick": {
+              "samples": 1800,
+              "p50": 0.0136,
+              "p95": 0.0182,
+              "p99": 0.0239,
+              "max": 0.2903
+            }
+          },
+          "payloadRates": {
+            "sent_bytes": 0.0,
+            "received_bytes": 0.0,
+            "sent_messages": 0.0,
+            "received_messages": 0.0
+          },
+          "queueAgeGate": true,
+          "emissionTimerClippedFrames": 0,
+          "emissionTimerClippedMs": 0,
+          "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+          "workingSetNote": "Mono process API returned zero; unavailable. External PowerShell observations, where present, are separate.",
+          "externalProcessMemory": null
+        }
+      ],
+      "terminalParity": null,
+      "replicaEventParity": null
+    },
+    {
+      "capture": "solo-S5",
+      "audit": "docs\\playtests\\evidence\\gdj-24-coop-scale\\screens-v2\\solo-S5\\audit.json",
+      "roles": [
+        {
+          "role": "host A",
+          "source": {
+            "revision": "32497266d711d031ae129903b5616a37fa1ea060",
+            "builtUtc": "2026-10-05T09:49:18.0072903Z",
+            "dirty": false
+          },
+          "scenario": {
+            "version": 3,
+            "seed": 137,
+            "enemies": 1000,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 7,
+            "startingSpecialization": 0,
+            "duration": 40.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Co-op scale (diagnostic) (override)",
+            "identity": "6cbd7e886d8444588600005d24c220e291c6acad07ca92bbb030264717502c2a",
+            "session": "2641ac6036d944558c3a94550a044c40"
+          },
+          "state": 2,
+          "ticks": 2400,
+          "reason": "",
+          "frameMs": {
+            "samples": 5338,
+            "p50": 4.1311,
+            "p95": 11.0692,
+            "p99": 13.3188,
+            "max": 16.8834,
+            "over6_944": 1784,
+            "over13_889": 37
+          },
+          "coldFrameMs": {
+            "samples": 8227,
+            "p50": 3.8845,
+            "p95": 10.7204,
+            "p99": 12.3487,
+            "max": 21.7861
+          },
+          "confirmationMs": {
+            "samples": 325,
+            "p50": 8.928,
+            "p95": 18.684,
+            "p99": 19.679,
+            "max": 20.35
+          },
+          "rttMs": {
+            "samples": 0
+          },
+          "catchupLimits": 0,
+          "authorityWork": {
+            "ticks": 2400,
+            "steeringChecks": 156534540,
+            "contactTests": 2400000,
+            "contactApplications": 46,
+            "attractionQueries": 974,
+            "simulationMs": 12328.715599999981,
+            "crowdMs": 11780.385600000001,
+            "weaponMs": 517.5595999999989,
+            "xpMs": 14.667199999999996,
+            "frameSimulationMs": 5.7808,
+            "frameCrowdMs": 5.776,
+            "frameWeaponMs": 0.0001,
+            "frameXpMs": 0.0,
+            "frameTicks": 1
+          },
+          "loggingMs": 553.9314999999968,
+          "managedHeapBytes": 33878016,
+          "workingSetBytes": 0,
+          "terminalQueueRecords": 0,
+          "queueHighWater": 0,
+          "queueMaxAgeMs": 0.0,
+          "correctness": {
+            "errors": [],
+            "xpDeaths": 127,
+            "outcomeEvents": 744,
+            "outcomesSha256": "56c3bdee9822083fc8fc387be8e45f1f17ee3c29c3aa0ee08a38359ab339cd8d",
+            "growthSha256": "e4ff98052a9d576d37bfe5205aa8f86c0dd141462a224af2bd6fe6fc90caa142",
+            "terminalQueueEmpty": true
+          },
+          "stageFrameMs": {
+            "sim_ms": {
+              "samples": 5338,
+              "p50": 0.0,
+              "p95": 6.5283,
+              "p99": 7.486,
+              "max": 12.0527
+            },
+            "crowd_ms": {
+              "samples": 5338,
+              "p50": 0.0,
+              "p95": 6.2672,
+              "p99": 6.7406,
+              "max": 8.5997
+            },
+            "weapon_ms": {
+              "samples": 5338,
+              "p50": 0.0,
+              "p95": 0.6866,
+              "p99": 1.1292,
+              "max": 5.8183
+            },
+            "xp_ms": {
+              "samples": 5338,
+              "p50": 0.0,
+              "p95": 0.0022,
+              "p99": 0.0336,
+              "max": 0.1474
+            },
+            "presentation_ms": {
+              "samples": 5338,
+              "p50": 3.1943,
+              "p95": 3.9764,
+              "p99": 4.7244,
+              "max": 8.4895
+            },
+            "render_prepare_ms": {
+              "samples": 5338,
+              "p50": 0.0581,
+              "p95": 0.0799,
+              "p99": 0.1298,
+              "max": 0.3229
+            },
+            "render_submit_ms": {
+              "samples": 5338,
+              "p50": 0.0206,
+              "p95": 0.0324,
+              "p99": 0.0475,
+              "max": 0.2163
+            },
+            "pickup_render_ms": {
+              "samples": 5338,
+              "p50": 0.0093,
+              "p95": 0.0126,
+              "p99": 0.0168,
+              "max": 0.1826
+            },
+            "net_poll_ms": {
+              "samples": 5338,
+              "p50": 0.0001,
+              "p95": 0.0001,
+              "p99": 0.0002,
+              "max": 0.0007
+            },
+            "crowd_ms_per_tick": {
+              "samples": 1800,
+              "p50": 5.6585,
+              "p95": 6.6189,
+              "p99": 6.9988,
+              "max": 8.5997
+            }
+          },
+          "payloadRates": {
+            "sent_bytes": 0.0,
+            "received_bytes": 0.0,
+            "sent_messages": 0.0,
+            "received_messages": 0.0
+          },
+          "queueAgeGate": true,
+          "emissionTimerClippedFrames": 0,
+          "emissionTimerClippedMs": 0,
+          "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+          "workingSetNote": "Mono process API returned zero; unavailable. External PowerShell observations, where present, are separate.",
+          "externalProcessMemory": null
+        }
+      ],
+      "terminalParity": null,
+      "replicaEventParity": null
+    },
+    {
+      "capture": "solo-S6",
+      "audit": "docs\\playtests\\evidence\\gdj-24-coop-scale\\screens-v2\\solo-S6\\audit.json",
+      "roles": [
+        {
+          "role": "host A",
+          "source": {
+            "revision": "32497266d711d031ae129903b5616a37fa1ea060",
+            "builtUtc": "2026-10-05T09:49:18.0072903Z",
+            "dirty": false
+          },
+          "scenario": {
+            "version": 3,
+            "seed": 137,
+            "enemies": 250,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 255,
+            "startingSpecialization": 0,
+            "duration": 40.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Co-op scale (diagnostic) (override)",
+            "identity": "136b785004bd9eadb67ca7ce08de79022385e3f27acbd73a3f5db89e835f26a7",
+            "session": "3dde4ed4a533498fbfa19c25306940b7"
+          },
+          "state": 2,
+          "ticks": 2400,
+          "reason": "",
+          "frameMs": {
+            "samples": 21469,
+            "p50": 1.3484,
+            "p95": 1.9943,
+            "p99": 2.7185,
+            "max": 7.2592,
+            "over6_944": 1,
+            "over13_889": 0
+          },
+          "coldFrameMs": {
+            "samples": 28969,
+            "p50": 1.3272,
+            "p95": 1.9825,
+            "p99": 2.7006,
+            "max": 20.2861
+          },
+          "confirmationMs": {
+            "samples": 788,
+            "p50": 10.434,
+            "p95": 17.156,
+            "p99": 17.684,
+            "max": 17.834
+          },
+          "rttMs": {
+            "samples": 0
+          },
+          "catchupLimits": 0,
+          "authorityWork": {
+            "ticks": 2400,
+            "steeringChecks": 10883438,
+            "contactTests": 600000,
+            "contactApplications": 18,
+            "attractionQueries": 21080,
+            "simulationMs": 1327.2265000000014,
+            "crowdMs": 894.3870999999998,
+            "weaponMs": 392.5895000000018,
+            "xpMs": 31.199500000000075,
+            "frameSimulationMs": 0.5837,
+            "frameCrowdMs": 0.5808,
+            "frameWeaponMs": 0.0001,
+            "frameXpMs": 0.0,
+            "frameTicks": 1
+          },
+          "loggingMs": 1560.6844999999655,
+          "managedHeapBytes": 34717696,
+          "workingSetBytes": 0,
+          "terminalQueueRecords": 0,
+          "queueHighWater": 0,
+          "queueMaxAgeMs": 0.0,
+          "correctness": {
+            "errors": [],
+            "xpDeaths": 384,
+            "outcomeEvents": 2050,
+            "outcomesSha256": "6033516f3540acd7a53c2038d38e8d190de0da20eb631cb384e0a776f30af15a",
+            "growthSha256": "bcae3e1288a27ade2997fa5fb5c808eddf1c77ac021b051fefc89a38cdec8015",
+            "terminalQueueEmpty": true
+          },
+          "stageFrameMs": {
+            "sim_ms": {
+              "samples": 21469,
+              "p50": 0.0,
+              "p95": 0.4428,
+              "p99": 0.9804,
+              "max": 4.6422
+            },
+            "crowd_ms": {
+              "samples": 21469,
+              "p50": 0.0,
+              "p95": 0.4208,
+              "p99": 0.52,
+              "max": 1.3918
+            },
+            "weapon_ms": {
+              "samples": 21469,
+              "p50": 0.0,
+              "p95": 0.0002,
+              "p99": 0.5754,
+              "max": 4.1428
+            },
+            "xp_ms": {
+              "samples": 21469,
+              "p50": 0.0,
+              "p95": 0.0072,
+              "p99": 0.0243,
+              "max": 0.1965
+            },
+            "presentation_ms": {
+              "samples": 21469,
+              "p50": 0.7964,
+              "p95": 1.0339,
+              "p99": 1.3689,
+              "max": 4.8102
+            },
+            "render_prepare_ms": {
+              "samples": 21469,
+              "p50": 0.0209,
+              "p95": 0.0284,
+              "p99": 0.0581,
+              "max": 0.3268
+            },
+            "render_submit_ms": {
+              "samples": 21469,
+              "p50": 0.0069,
+              "p95": 0.0108,
+              "p99": 0.0143,
+              "max": 0.2709
+            },
+            "pickup_render_ms": {
+              "samples": 21469,
+              "p50": 0.0079,
+              "p95": 0.0103,
+              "p99": 0.0139,
+              "max": 0.3856
+            },
+            "net_poll_ms": {
+              "samples": 21469,
+              "p50": 0.0001,
+              "p95": 0.0001,
+              "p99": 0.0001,
+              "max": 0.0009
+            },
+            "crowd_ms_per_tick": {
+              "samples": 1800,
+              "p50": 0.4298,
+              "p95": 0.5917,
+              "p99": 0.9071,
+              "max": 1.3918
+            }
+          },
+          "payloadRates": {
+            "sent_bytes": 0.0,
+            "received_bytes": 0.0,
+            "sent_messages": 0.0,
+            "received_messages": 0.0
+          },
+          "queueAgeGate": true,
+          "emissionTimerClippedFrames": 0,
+          "emissionTimerClippedMs": 0,
+          "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+          "workingSetNote": "Mono process API returned zero; unavailable. External PowerShell observations, where present, are separate.",
+          "externalProcessMemory": null
+        }
+      ],
+      "terminalParity": null,
+      "replicaEventParity": null
+    },
+    {
+      "capture": "solo-S7",
+      "audit": "docs\\playtests\\evidence\\gdj-24-coop-scale\\screens-v2\\solo-S7\\audit.json",
+      "roles": [
+        {
+          "role": "host A",
+          "source": {
+            "revision": "32497266d711d031ae129903b5616a37fa1ea060",
+            "builtUtc": "2026-10-05T09:49:18.0072903Z",
+            "dirty": false
+          },
+          "scenario": {
+            "version": 3,
+            "seed": 137,
+            "enemies": 1000,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 255,
+            "startingSpecialization": 0,
+            "duration": 40.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Co-op scale (diagnostic) (override)",
+            "identity": "d6bdda6833f5f6206ff5bbd1a5c3d71c52e830a32c5f25bfb7e44ca8cb7f7338",
+            "session": "3fb91f76bfba426b9a36453951cc3574"
+          },
+          "state": 2,
+          "ticks": 2400,
+          "reason": "",
+          "frameMs": {
+            "samples": 4958,
+            "p50": 4.2055,
+            "p95": 12.0422,
+            "p99": 20.6899,
+            "max": 29.8888,
+            "over6_944": 1776,
+            "over13_889": 105
+          },
+          "coldFrameMs": {
+            "samples": 7676,
+            "p50": 3.9371,
+            "p95": 11.277,
+            "p99": 19.353,
+            "max": 36.4555
+          },
+          "confirmationMs": {
+            "samples": 783,
+            "p50": 9.286,
+            "p95": 21.634,
+            "p99": 25.893,
+            "max": 32.936
+          },
+          "rttMs": {
+            "samples": 0
+          },
+          "catchupLimits": 0,
+          "authorityWork": {
+            "ticks": 2400,
+            "steeringChecks": 147214582,
+            "contactTests": 2400000,
+            "contactApplications": 38,
+            "attractionQueries": 4910,
+            "simulationMs": 12761.700600000004,
+            "crowdMs": 11219.065900000009,
+            "weaponMs": 1498.0833999999516,
+            "xpMs": 27.0063999999997,
+            "frameSimulationMs": 6.2683,
+            "frameCrowdMs": 6.2627,
+            "frameWeaponMs": 0.0001,
+            "frameXpMs": 0.0,
+            "frameTicks": 1
+          },
+          "loggingMs": 520.0254000000006,
+          "managedHeapBytes": 33681408,
+          "workingSetBytes": 0,
+          "terminalQueueRecords": 0,
+          "queueHighWater": 0,
+          "queueMaxAgeMs": 0.0,
+          "correctness": {
+            "errors": [],
+            "xpDeaths": 395,
+            "outcomeEvents": 2112,
+            "outcomesSha256": "d6e7dedcaff9839fc2bffd5639b4b0a780cef0740e65f3c6c35058010d204b90",
+            "growthSha256": "e263e386d77aff05d1dfb1ce72a3a66739a5e3b64d42c5eb7f603169252e8038",
+            "terminalQueueEmpty": true
+          },
+          "stageFrameMs": {
+            "sim_ms": {
+              "samples": 4958,
+              "p50": 0.0,
+              "p95": 7.2286,
+              "p99": 9.5782,
+              "max": 24.2323
+            },
+            "crowd_ms": {
+              "samples": 4958,
+              "p50": 0.0,
+              "p95": 6.1141,
+              "p99": 6.5792,
+              "max": 13.9647
+            },
+            "weapon_ms": {
+              "samples": 4958,
+              "p50": 0.0,
+              "p95": 1.9752,
+              "p99": 2.9832,
+              "max": 17.7404
+            },
+            "xp_ms": {
+              "samples": 4958,
+              "p50": 0.0,
+              "p95": 0.0283,
+              "p99": 0.0455,
+              "max": 0.1554
+            },
+            "presentation_ms": {
+              "samples": 4958,
+              "p50": 3.2033,
+              "p95": 4.6807,
+              "p99": 6.5561,
+              "max": 19.1578
+            },
+            "render_prepare_ms": {
+              "samples": 4958,
+              "p50": 0.0593,
+              "p95": 0.081,
+              "p99": 0.118,
+              "max": 0.2245
+            },
+            "render_submit_ms": {
+              "samples": 4958,
+              "p50": 0.0204,
+              "p95": 0.0317,
+              "p99": 0.0437,
+              "max": 0.1677
+            },
+            "pickup_render_ms": {
+              "samples": 4958,
+              "p50": 0.0097,
+              "p95": 0.0127,
+              "p99": 0.0165,
+              "max": 0.1691
+            },
+            "net_poll_ms": {
+              "samples": 4958,
+              "p50": 0.0001,
+              "p95": 0.0001,
+              "p99": 0.0002,
+              "max": 0.0394
+            },
+            "crowd_ms_per_tick": {
+              "samples": 1794,
+              "p50": 5.4484,
+              "p95": 6.4473,
+              "p99": 6.8344,
+              "max": 7.7192
+            }
+          },
+          "payloadRates": {
+            "sent_bytes": 0.0,
+            "received_bytes": 0.0,
+            "sent_messages": 0.0,
+            "received_messages": 0.0
+          },
+          "queueAgeGate": true,
+          "emissionTimerClippedFrames": 0,
+          "emissionTimerClippedMs": 0,
+          "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+          "workingSetNote": "Mono process API returned zero; unavailable. External PowerShell observations, where present, are separate.",
+          "externalProcessMemory": null
+        }
+      ],
+      "terminalParity": null,
+      "replicaEventParity": null
+    }
+  ]
+}

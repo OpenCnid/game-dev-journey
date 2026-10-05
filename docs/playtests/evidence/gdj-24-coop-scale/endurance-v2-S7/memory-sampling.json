@@ -1,0 +1,7 @@
+{
+  "elapsedSeconds": 302.9012272,
+  "sampleCount": 60,
+  "getProcessMsTotal": 33.8919,
+  "intervalSeconds": 10,
+  "classification": "external read-only process counters; startup included; sampling overhead and desktop contention retained"
+}
