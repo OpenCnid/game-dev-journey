@@ -41,6 +41,8 @@ def work_window(rows):
               for k in ('enemies', 'installed_instances', 'active_instances', 'submitted_instances',
                         'instance_batches', 'pickup_carriers', 'secondary_cues', 'uncollected_xp',
                         'queue_records', 'queue_bytes', 'queue_age_ms') if k in first}
+    memory = [r for i, r in enumerate(rows) if 'memory_samples' in r and
+              (i == 0 or r['memory_samples'] != rows[i - 1]['memory_samples'])]
     longest, start = 0, None
     for r in rows:
         wall = float(r['wall_seconds'])
@@ -57,6 +59,8 @@ def work_window(rows):
                 if seconds > 0 and float(last['allocated_thread_bytes']) > 0 else None,
             'allocationNote': 'Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation'
                 if float(last['allocated_thread_bytes']) == 0 else 'Main thread only; capture delta',
+            'memorySamples': [{k: r[k] for k in ('wall_seconds', 'tick', 'memory_samples',
+                'managed_heap_bytes', 'working_set_bytes', 'memory_sample_ms')} for r in memory],
             'longestQueueAgeOver100msSeconds': longest, 'queueAgeGate': longest < 1}
 
 def correctness(folder, report, events):

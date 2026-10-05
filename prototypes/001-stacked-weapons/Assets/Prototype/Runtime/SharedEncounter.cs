@@ -99,17 +99,20 @@ namespace Journey
         readonly int[] lastEvent = new int[2], lastInput = new int[2];
         readonly float[] inputTime = new float[2];
         readonly Vector3[] velocities;
+        readonly ExactSteeringGrid steeringGrid;
+        public bool ExactSteering => steeringGrid != null;
         System.Random random;
         public event Action<SharedHit> Resolved;
         public int Rejected { get; private set; }
         public string AbortReason { get; private set; } = "";
-        public SharedEncounter(ScenarioConfiguration configuration = null, Guid session = default, int roster = 2)
+        public SharedEncounter(ScenarioConfiguration configuration = null, Guid session = default, int roster = 2, bool exactSteering = false)
         {
             Configuration = configuration ?? ScenarioConfiguration.Named(ScenarioKind.SharedRifle);
             if (roster < 1 || roster > 2) throw new ArgumentException("Fixed roster must be one or two");
             Growth = Configuration.Pickups ? new EarnedGrowth() : null;
             Current = new SharedSnapshot(Configuration) { Roster = roster, Session = session == Guid.Empty ? Guid.NewGuid() : session };
             velocities = new Vector3[Configuration.EnemyCount];
+            if (exactSteering) steeringGrid = new ExactSteeringGrid(Configuration.EnemyCount);
             for (int i = 0; i < history.Length; i++) history[i] = new SharedSnapshot(Configuration) { Tick = -1 };
         }
         public void Start(bool preparing = false)
@@ -229,15 +232,18 @@ namespace Journey
             }
             double weaponMs = StageProfile.End(stage); Work.frameWeaponMs += weaponMs; Work.weaponMs += weaponMs;
             stage = StageProfile.Begin();
-            Work.steeringChecks += (long)Configuration.EnemyCount * Configuration.EnemyCount;
             Work.contactTests += (long)Configuration.EnemyCount * Current.Roster;
             // Read all positions before applying velocities, matching the local steering rule.
+            steeringGrid?.Build(Current.Enemies);
             for (int i = 0; i < Configuration.EnemyCount; i++)
             {
                 Vector3 position = Current.Enemies[i].Position, separation = Vector3.zero;
                 int target = NearestLiving(position);
-                for (int j = 0; j < Configuration.EnemyCount; j++)
+                int candidates = steeringGrid?.Gather(position) ?? Configuration.EnemyCount;
+                Work.steeringChecks += candidates;
+                for (int candidate = 0; candidate < candidates; candidate++)
                 {
+                    int j = steeringGrid == null ? candidate : steeringGrid.Candidates[candidate];
                     Vector3 delta = position - Current.Enemies[j].Position; float distance = delta.magnitude;
                     if (j != i && distance > .01f && distance < 1.2f) separation += delta * ((1.2f - distance) / distance);
                 }

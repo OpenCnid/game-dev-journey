@@ -3,7 +3,7 @@
   "classification": "numerical audit; acceptance requires separate visibility/correctness gates",
   "roles": [
     {
-      "folder": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-24-coop-scale\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\gdj24-v1-pair-S5\\host",
+      "folder": "prototypes\\001-stacked-weapons\\artifacts\\gdj24-v1-pair-S5\\host",
       "report": {
         "role": "host A",
         "source": "{\n    \"revision\": \"4a6b5b024be285d00c2de190b2ab451313888456\",\n    \"builtUtc\": \"2026-10-05T09:08:54.2308920Z\",\n    \"dirty\": false\n}",
@@ -9727,6 +9727,7 @@
         },
         "threadAllocationBytesPerSecond": null,
         "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+        "memorySamples": [],
         "longestQueueAgeOver100msSeconds": 0.11457500000000032,
         "queueAgeGate": true
       },
@@ -9901,7 +9902,7 @@
       }
     },
     {
-      "folder": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-24-coop-scale\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\gdj24-v1-pair-S5\\client",
+      "folder": "prototypes\\001-stacked-weapons\\artifacts\\gdj24-v1-pair-S5\\client",
       "report": {
         "role": "client B",
         "source": "{\n    \"revision\": \"4a6b5b024be285d00c2de190b2ab451313888456\",\n    \"builtUtc\": \"2026-10-05T09:08:54.2308920Z\",\n    \"dirty\": false\n}",
@@ -19621,6 +19622,7 @@
         },
         "threadAllocationBytesPerSecond": null,
         "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+        "memorySamples": [],
         "longestQueueAgeOver100msSeconds": 0,
         "queueAgeGate": true
       },

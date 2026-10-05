@@ -76,7 +76,7 @@ Ten collected team XP earns level 2 and an independent personal offer for every 
 
 The background companion can explicitly select its personal card and Continue with `tools/tests/play_shared_companion.py --choice faster` (or `stronger`). Without that option it retains the offer and waits. `-growthChoice stronger|faster` selects and Continues only when diagnostic scripted input has normally earned an offer; it grants no XP. Use swapped choices for the second comparison. Scripts are functional evidence, not enjoyment observations. `growth.jsonl` records run/tick/sequence, death/orb/collector, conserved carrier values, movement/merges, cumulative XP, offer and applied choice. Summaries/state include choice phase, control revision and personal readiness/builds. Each run keeps its frozen starting identity. Add `-screenshotAtLevelUp -screenshot <absolute-path>` for a game-owned chooser capture; the camera preview itself omits the native HUD.
 
-Protocol 5 extends the earlier growth protocol with compact arsenal/explicit card state and per-trigger/ray work attribution. The current 35-drone snapshot is 1025 bytes, each growth event 105 bytes and each hit outcome 118 bytes, including message type, within the 1100-byte bound. The dynamic XP ledger retains every uncollected value independently of packet size. A bounded 1024-record outgoing FIFO retains temporary reliable-window overflow without dropping or coalescing hits/XP; exceeding that backlog explicitly aborts. Movement events sample at 10 Hz. Network cost still grows with moving carriers; this does not validate dense/four-player/recovery. The frozen [v7 growth evidence](../../docs/playtests/2026-10-05-earned-growth.md) applies to its original protocol 4 archive.
+Protocol 6 retains compact arsenal/explicit card state and per-trigger/ray work attribution, and adds bounded full-snapshot chunks for scale diagnostics. The current 35-drone snapshot is 1025 bytes, each growth event 105 bytes and each hit outcome 118 bytes, including message type, within the 1100-byte bound. The dynamic XP ledger retains every uncollected value independently of packet size. A bounded 1024-record outgoing FIFO retains temporary reliable-window overflow without dropping or coalescing hits/XP; exceeding that backlog explicitly aborts. Movement events sample at 10 Hz. Network cost still grows with moving carriers; this does not validate dense/four-player/recovery. The frozen [v7 growth evidence](../../docs/playtests/2026-10-05-earned-growth.md) applies to its original protocol 4 archive.
 
 ### Earned weapon-stack MVP experiment (GDJ-3)
 
@@ -93,9 +93,23 @@ For the background companion, `tools/tests/play_shared_companion.py --stack-path
 
 For controlled comparisons only: `-playtest -scenario stack-reference -stackLoadout rifle|all|scatter|pierce`. This frozen diagnostic fixture lasts 60 seconds, supplies no XP/offers, and starts with the named rifle-only, all-three, specialized scatter or specialized pierce build. Its starting loadout is in the configuration identity. Summaries and frame traces include each weapon's granted triggers, ray queries, per-enemy target probes, hits, damage and kills; rejected historical primary queries also count their actual work. Multiple pellets/penetrations retain one source trigger and pre-trigger enemy incarnations. `-sharedMute` sets only this player's audio volume to zero for background functional checks and records that volume; ordinary launches keep audio. See the [bounded task and remaining feasibility gates](../../docs/planning/tasks/GDJ-3.md). The 35-drone managed steering/full-snapshot path does not establish the intended thousands-of-enemies cooperative envelope.
 
+### Cooperative scale diagnostic (GDJ-24)
+
+CLI-only `co-op-scale` maintains 1–1000 respawning 60-HP drones, seed 137, frozen 1/3/8 independent weapon instances per player and labelled invulnerability. It retains contact checks, real combat/respawn and conserved collected XP with gravity/merging, feedback and pickup rendering. Offers are omitted for continuous load. Eight instances repeat rifle/scatter/pierce (3 rifles, 3 scatters, 2 piercers); this is diagnostic repetition, not final content or a supported cap. Ordinary earned scenarios remain available.
+
+```powershell
+# Solo; use the complete archived player folder named in the report.
+./prototypes/001-stacked-weapons/build/StackLab/StackLab.exe -playtest -scenario co-op-scale -scenarioEnemies 250 -scaleWeapons 8 -scenarioDuration 90 -sharedSteering grid
+# Actual native pair, in separate invocations. Host locks the starting scenario.
+./prototypes/001-stacked-weapons/build/StackLab/StackLab.exe -host -sharedLoopback -scenario co-op-scale -scenarioEnemies 250 -scaleWeapons 8 -scenarioDuration 90 -sharedSteering grid
+./prototypes/001-stacked-weapons/build/StackLab/StackLab.exe -join 127.0.0.1
+```
+
+`-sharedSteering grid|pairwise` selects the host's exact spatial broad phase or retained pairwise reference; default is pairwise. Both use every neighbor within the same 1.2-metre radius and the same stable ID addition order. The grid is rebuilt after shot-driven respawns and before any movement; future position/radius changes must retain those semantics. It does not accelerate precision/history queries, XP or replication. Add `-sharedScripted -sharedUncapped -sharedMute -force-d3d11 -screen-fullscreen 0 -screen-width 1920 -screen-height 1080 -sharedResults <new-absolute-folder> -logFile <absolute-file>` to each measured role. Use distinct results folders and a unique port per pair; keep both processes alive until both terminal reports exist. `-sharedQuit` is unsuitable for the pair reporting barrier. Preview/background modes establish functionality only. [Frozen matrix, release identities, raw traces and remaining gates](../../docs/playtests/2026-10-05-coop-scale.md).
+
 ### Starting configuration controls
 
-Solo and shared rifle play consume the same validated version-2 starting configuration. The menu shows separate **Next solo** and **Host** settings; selecting a named scenario for both makes their starting enemy HP, damage and interval match. The default controls remain intentionally different:
+Solo and shared rifle play consume the same validated version-3 starting configuration. The menu shows separate **Next solo** and **Host** settings; selecting a named scenario for both makes their starting enemy HP, damage and interval match. The default controls remain intentionally different:
 
 | CLI name | Drones / HP | Body / head | Interval | Seed / duration |
 | --- | --- | --- | --- | --- |

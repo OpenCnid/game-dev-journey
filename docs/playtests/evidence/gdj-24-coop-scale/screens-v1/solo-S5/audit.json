@@ -9727,6 +9727,7 @@
         },
         "threadAllocationBytesPerSecond": null,
         "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+        "memorySamples": [],
         "longestQueueAgeOver100msSeconds": 0,
         "queueAgeGate": true
       },

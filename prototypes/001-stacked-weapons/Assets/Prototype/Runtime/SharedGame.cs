@@ -49,6 +49,10 @@ namespace Journey
         long presentationProbes, presentationRays;
         double pollMs, presentationMs, pickupRenderMs;
         double loggingMs, loggingMaxMs;
+        bool exactSteering;
+        double memoryAt, memorySampleMs, memorySamplingMs;
+        long sampledHeapBytes, sampledWorkingSetBytes;
+        int memorySamples;
         string reason = "", output = "", screenshot = "";
         StreamWriter frameLog, hitLog;
         GUIStyle heading, small, lifeHeading, lifeDetail, choiceCard;
@@ -77,6 +81,7 @@ namespace Journey
             for (int i = 0; i < args.Length - 1; i++)
             {
                 if (args[i] == "-sharedResults") output = Path.GetFullPath(args[i + 1]);
+                if (args[i] == "-sharedSteering") exactSteering = args[i + 1] == "grid" ? true : args[i + 1] == "pairwise" ? false : throw new ArgumentException("Steering must be grid or pairwise");
                 if (args[i] == "-growthChoice") scriptedChoice = args[i + 1] == "stronger" ? UpgradeId.StrongerHits : args[i + 1] == "faster" ? UpgradeId.FasterFire : throw new ArgumentException("Unknown growth choice");
                 if (args[i] == "-stackPath") scriptedStackPath = args[i + 1] == "broad" || args[i + 1] == "scatter" || args[i + 1] == "pierce" ? args[i + 1] : throw new ArgumentException("Unknown stack path");
                 if (args[i] == "-screenshot") screenshot = Path.GetFullPath(args[i + 1]);
@@ -90,6 +95,7 @@ namespace Journey
             frameLog.Write("wall_seconds,frame_ms,run,tick,state,A_shots,B_shots,A_hits,B_hits,A_damage,B_damage,A_kills,B_kills,A_hp,B_hp,enemies,rtt_ms,xp,level,uncollected_orbs");
             for (int id = 1; id <= WeaponArsenal.MaxOwnedIds; id++) frameLog.Write($",weapon{id}_triggers,weapon{id}_rays,weapon{id}_target_tests,weapon{id}_hits,weapon{id}_damage,weapon{id}_kills");
             frameLog.Write(",rtt_sequence,sim_ticks,sim_ms,crowd_ms,weapon_ms,xp_ms,steering_checks,contact_tests,attraction_queries,presentation_rays,presentation_probes,presentation_ms,render_prepare_ms,render_submit_ms,pickup_render_ms,submitted_instances,instance_batches,pickup_carriers,secondary_cues,net_poll_ms,sent_bytes,received_bytes,sent_messages,received_messages,snapshot_bytes,snapshot_messages,serialization_ms,queue_records,queue_bytes,queue_age_ms,queue_high_water,queue_deferred,allocated_thread_bytes,gc0,gc1,gc2,installed_instances,active_instances,xp_drops,xp_merges,xp_move_events,xp_collections,uncollected_xp");
+            frameLog.Write(",memory_samples,managed_heap_bytes,working_set_bytes,memory_sample_ms");
             frameLog.WriteLine();
             hitLog = new StreamWriter(Path.Combine(output, "events.csv"));
             hitLog.WriteLine("wall_seconds,run,player,weapon,event,pose_tick,life,decision,enemy,incarnation,region,requested,before,actual,after,confirmed_delay_ms,trigger,ray_index,rays,target_tests");
@@ -100,7 +106,7 @@ namespace Journey
                 connection = new SharedConnection(host, address, port, Array.IndexOf(args, "-sharedLoopback") >= 0);
                 connection.Received += Receive; connection.Lost += Abort;
             }
-            if (host) { authority = new SharedEncounter(binding.Configuration, binding.Session, solo ? 1 : 2); display.CopyFrom(authority.Current); authority.Resolved += Resolve; if (authority.Growth != null) authority.Growth.Changed += GrowthChanged; }
+            if (host) { authority = new SharedEncounter(binding.Configuration, binding.Session, solo ? 1 : 2, exactSteering); display.CopyFrom(authority.Current); authority.Resolved += Resolve; if (authority.Growth != null) authority.Growth.Changed += GrowthChanged; }
             ally = GameObject.CreatePrimitive(PrimitiveType.Capsule); ally.name = "Teammate " + (host ? "B" : "A");
             Destroy(ally.GetComponent<Collider>()); ally.transform.SetParent(transform);
             allyMaterial = new Material(Resources.Load<Material>("Body"));
@@ -222,6 +228,15 @@ namespace Journey
             long updateStarted = System.Diagnostics.Stopwatch.GetTimestamp();
             StageProfile.Reset(); authority?.Work.BeginFrame();
             double now = Time.realtimeSinceStartupAsDouble, frame = (now - previousClock) * 1000; previousClock = now;
+            memorySampleMs = 0;
+            if (now >= memoryAt)
+            {
+                long memoryStarted = StageProfile.Begin();
+                sampledHeapBytes = GC.GetTotalMemory(false);
+                using (var process = System.Diagnostics.Process.GetCurrentProcess()) sampledWorkingSetBytes = process.WorkingSet64;
+                memorySamples++; memoryAt = now + 1;
+                memorySampleMs = StageProfile.End(memoryStarted); memorySamplingMs += memorySampleMs;
+            }
             bool runningAtFrameStart = display.State == SharedState.Running;
             int frameRun = display.Run;
             long pollStarted = StageProfile.Begin(); connection?.Poll(); pollMs = StageProfile.End(pollStarted);
@@ -412,6 +427,7 @@ namespace Journey
             for (int p = 0; p < display.Roster; p++) for (int instance = 0; instance < WeaponArsenal.MaxInstances; instance++)
                 if ((display.Players[p].Arsenal & (1 << instance)) != 0) { installed++; if (display.Players[p].Health > 0) active++; }
             frameLog.Write(FormattableString.Invariant($",{rttSequence},{work?.frameTicks ?? 0},{work?.frameSimulationMs ?? 0:F6},{work?.frameCrowdMs ?? 0:F6},{work?.frameWeaponMs ?? 0:F6},{work?.frameXpMs ?? 0:F6},{work?.steeringChecks ?? 0},{work?.contactTests ?? 0},{work?.attractionQueries ?? 0},{presentationRays},{presentationProbes},{presentationMs:F6},{StageProfile.RenderPrepareMs:F6},{StageProfile.RenderSubmitMs:F6},{pickupRenderMs:F6},{StageProfile.SubmittedInstances},{StageProfile.InstanceBatches},{pickups.SubmittedCarriers},{secondaryCue},{pollMs:F6},{connection?.SentBytes ?? 0},{connection?.ReceivedBytes ?? 0},{connection?.SentMessages ?? 0},{connection?.ReceivedMessages ?? 0},{connection?.SnapshotBytes ?? 0},{connection?.SnapshotMessages ?? 0},{connection?.SerializationMs ?? 0:F6},{connection?.PendingMessages ?? 0},{connection?.PendingBytes ?? 0},{connection?.PendingAgeMs ?? 0:F6},{connection?.BufferedHighWater ?? 0},{connection?.DeferredSends ?? 0},{GC.GetAllocatedBytesForCurrentThread()},{GC.CollectionCount(0)},{GC.CollectionCount(1)},{GC.CollectionCount(2)},{installed},{active},{orbReplica.Drops},{orbReplica.MergeEvents},{orbReplica.MoveEvents},{orbReplica.Collections},{orbReplica.UncollectedXp}"));
+            frameLog.Write(FormattableString.Invariant($",{memorySamples},{sampledHeapBytes},{sampledWorkingSetBytes},{memorySampleMs:F6}"));
         }
         void GrowthChanged(GrowthEvent e)
         {
@@ -543,7 +559,7 @@ namespace Journey
         }
         [Serializable] sealed class Report
         {
-            public string role, source, machine, gpu, connection, reason, hostBindEndpoint;
+            public string role, source, machine, gpu, connection, reason, hostBindEndpoint, steering;
             public ScenarioEvidence scenario;
             public bool scripted, development, previewEnabled;
             public float audioVolume;
@@ -565,6 +581,8 @@ namespace Journey
             public long presentationRays, presentationProbes;
             public double serializationMs, outgoingAgeMs, outgoingMaxAgeMs;
             public double loggingMs, loggingMaxMs;
+            public int memorySamples;
+            public double memorySamplingMs;
             public int outgoingBytes, outgoingBytesHighWater, xpDrops, xpMerges, xpMoveEvents, xpCollections, physicalXpMoves;
         }
         void Save()
@@ -588,6 +606,8 @@ namespace Journey
             report.snapshotBytes = connection?.SnapshotBytes ?? 0; report.snapshotMessages = connection?.SnapshotMessages ?? 0;
             report.serializationMs = connection?.SerializationMs ?? 0;
             report.loggingMs = loggingMs; report.loggingMaxMs = loggingMaxMs;
+            report.steering = authority == null ? "client; host owns steering" : authority.ExactSteering ? "exact grid" : "pairwise";
+            report.memorySamples = memorySamples; report.memorySamplingMs = memorySamplingMs;
             report.outgoingBytes = connection?.PendingBytes ?? 0; report.outgoingBytesHighWater = connection?.BufferedBytesHighWater ?? 0;
             report.outgoingAgeMs = connection?.PendingAgeMs ?? 0; report.outgoingMaxAgeMs = connection?.OldestAgeHighWaterMs ?? 0;
             report.xpDrops = orbReplica.Drops; report.xpMerges = orbReplica.MergeEvents; report.xpMoveEvents = orbReplica.MoveEvents;
