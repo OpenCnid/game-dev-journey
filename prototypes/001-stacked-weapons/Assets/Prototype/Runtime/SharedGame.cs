@@ -42,6 +42,8 @@ namespace Journey
         UpgradeId scriptedChoice;
         string scriptedStackPath = "";
         double previousClock, lastRtt;
+        double updateLastMs, updateMaxMs, abortFrameMs, abortRemainingMs, abortPreviousUpdateMs;
+        int abortCatchupTicks;
         string reason = "", output = "", screenshot = "";
         StreamWriter frameLog, hitLog;
         GUIStyle heading, small, lifeHeading, lifeDetail, choiceCard;
@@ -197,6 +199,7 @@ namespace Journey
                     if (hit.Source.Run == run) feedback.Enqueue(hit);
                 }
                 frames.Clear(); confirms.Clear(); catchupLimits = 0;
+                abortFrameMs = abortRemainingMs = abortPreviousUpdateMs = 0; abortCatchupTicks = 0;
                 for (int i = 0; i < weaponWork.Length; i++) weaponWork[i] = new WeaponWork(i + 1);
                 previousWatched = -1; viewTransition = 0; cardsVisible = true; confirmationUntil = 0; emissionInterval = player.RifleInterval;
             }
@@ -204,6 +207,7 @@ namespace Journey
         void Update()
         {
             if (binding == null) return;
+            long updateStarted = System.Diagnostics.Stopwatch.GetTimestamp();
             double now = Time.realtimeSinceStartupAsDouble, frame = (now - previousClock) * 1000; previousClock = now;
             bool runningAtFrameStart = display.State == SharedState.Running;
             int frameRun = display.Run;
@@ -291,7 +295,11 @@ namespace Journey
                 while (accumulator >= CombatSimulation.Tick && ticks < 8 && authority.Current.State == SharedState.Running)
                 { authority.Step(); accumulator -= CombatSimulation.Tick; ticks++; Publish(); }
                 if (authority.Current.State == SharedState.Running && accumulator >= CombatSimulation.Tick)
-                { catchupLimits++; Abort("Authority tick catch-up limit"); accumulator = 0; }
+                {
+                    abortFrameMs = frame; abortRemainingMs = accumulator * 1000; abortCatchupTicks = ticks;
+                    abortPreviousUpdateMs = updateLastMs;
+                    catchupLimits++; Abort("Authority tick catch-up limit"); accumulator = 0;
+                }
                 else if (authority.Current.State == SharedState.Aborted) Abort(authority.AbortReason);
             }
             SyncGeneration();
@@ -371,6 +379,8 @@ namespace Journey
             { Save(); SetCursor(false); if (quitAtEnd) Application.Quit(display.State == SharedState.Aborted ? 2 : 0); }
             if (screenshot.Length > 0 && (screenshotAtLevelUp ? display.State == SharedState.Choosing : display.State == SharedState.Running && display.Elapsed >= 5))
             { Directory.CreateDirectory(Path.GetDirectoryName(screenshot)); ScreenCapture.CaptureScreenshot(screenshot); screenshot = ""; }
+            updateLastMs = (System.Diagnostics.Stopwatch.GetTimestamp() - updateStarted) * 1000.0 / System.Diagnostics.Stopwatch.Frequency;
+            updateMaxMs = Math.Max(updateMaxMs, updateLastMs);
         }
         void GrowthChanged(GrowthEvent e)
         {
@@ -502,6 +512,9 @@ namespace Journey
             public float audioVolume;
             public int run, ticks, enemies, catchupLimits, frameSamples, confirmedHits, width, height, frameCap, vsync;
             public double frameP50, frameP95, frameP99, frameMax, confirmP50, confirmP95, confirmMax, rttMs;
+            public double updateLastMs, updateMaxMs, abortFrameMs, abortRemainingMs, abortPreviousUpdateMs;
+            public double previewCaptureLastMs, previewCaptureMaxMs, previewCaptureCompletedAt, previewPollMaxMs;
+            public int abortCatchupTicks;
             public SharedState state;
             public SharedPlayer[] players;
             public SharedEnemy[] enemyStates;
@@ -526,6 +539,11 @@ namespace Journey
                 state = display.State, players = display.Players, enemyStates = display.Enemies, roster = display.Roster, xp = display.Xp, level = display.Level, uncollectedOrbs = orbReplica.Orbs.Count, sentBytes = connection?.SentBytes ?? 0, receivedBytes = connection?.ReceivedBytes ?? 0 };
             report.uncollectedXp = orbReplica.UncollectedXp; report.choicePhase = display.ChoicePhase; report.controlRevision = display.ControlRevision;
             report.weaponWork = weaponWork;
+            report.updateLastMs = updateLastMs; report.updateMaxMs = updateMaxMs;
+            report.abortFrameMs = abortFrameMs; report.abortRemainingMs = abortRemainingMs;
+            report.abortPreviousUpdateMs = abortPreviousUpdateMs; report.abortCatchupTicks = abortCatchupTicks;
+            report.previewCaptureLastMs = preview?.CaptureLastMs ?? 0; report.previewCaptureMaxMs = preview?.CaptureMaxMs ?? 0;
+            report.previewCaptureCompletedAt = preview?.CaptureCompletedAt ?? 0; report.previewPollMaxMs = preview?.PollMaxMs ?? 0;
             report.audioVolume = AudioListener.volume;
             report.outgoingPending = connection?.PendingMessages ?? 0; report.outgoingHighWater = connection?.BufferedHighWater ?? 0;
             report.outgoingDeferred = connection?.DeferredSends ?? 0; report.outgoingLimit = SharedConnection.MaxBufferedMessages;

@@ -59,6 +59,10 @@ namespace Journey
         int frameSequence;
         double lastPoll, lastCapture, lastRequested;
         bool pending, closing;
+        public double CaptureLastMs { get; private set; }
+        public double CaptureMaxMs { get; private set; }
+        public double CaptureCompletedAt { get; private set; }
+        public double PollMaxMs { get; private set; }
         string result = "", captureError = "";
         public void Initialize(SharedGame owner, Camera target, string directory)
         {
@@ -75,6 +79,7 @@ namespace Journey
             double now = Time.realtimeSinceStartupAsDouble;
             if (now - lastPoll < .1) return;
             lastPoll = now;
+            long started = System.Diagnostics.Stopwatch.GetTimestamp();
             string commandPath = Path.Combine(output, "command.json");
             try
             {
@@ -104,6 +109,7 @@ namespace Journey
             }
             catch (Exception error) when (error is IOException || error is ArgumentException)
             { result = error.GetType().Name; }
+            finally { PollMaxMs = Math.Max(PollMaxMs, MillisecondsSince(started)); }
         }
         IEnumerator Capture()
         {
@@ -118,6 +124,7 @@ namespace Journey
                     pending = false;
                     if (closing) return;
                     if (request.hasError) { captureError = "GPU readback failed"; return; }
+                    long started = System.Diagnostics.Stopwatch.GetTimestamp();
                     try
                     {
                         byte[] jpeg = ImageConversion.EncodeArrayToJPG(request.GetData<byte>().ToArray(),
@@ -126,6 +133,12 @@ namespace Journey
                         lastCapture = Time.realtimeSinceStartupAsDouble; frameSequence++; captureError = "";
                     }
                     catch (IOException error) { captureError = error.GetType().Name; }
+                    finally
+                    {
+                        CaptureLastMs = MillisecondsSince(started);
+                        CaptureMaxMs = Math.Max(CaptureMaxMs, CaptureLastMs);
+                        CaptureCompletedAt = Time.realtimeSinceStartupAsDouble;
+                    }
                 });
             }
         }
@@ -144,6 +157,7 @@ namespace Journey
             if (full != null) { full.Release(); Destroy(full); }
             if (thumbnail != null) { thumbnail.Release(); Destroy(thumbnail); }
         }
+        static double MillisecondsSince(long started) => (System.Diagnostics.Stopwatch.GetTimestamp() - started) * 1000.0 / System.Diagnostics.Stopwatch.Frequency;
         void OnDestroy() => Close();
     }
 }
