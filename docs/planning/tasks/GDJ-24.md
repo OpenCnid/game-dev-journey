@@ -49,6 +49,56 @@ Damage balance, maximum range/falloff, presentation refinement, new weapon/enemy
 
 ## Resume and required return
 
+## Frozen experiment contract — October 5, before runtime edits
+
+Checkout: `C:/Users/Darian/.codex/worktrees/gdj-24-coop-scale/new-game-dev`; implementation branch `codex/gdj-24-coop-scale`; exact parent `9663ffc03ff504647e7d180a39e54c098c761a9e`, with main ancestor `e8acedb107905ade056241e978dace6bdaa0bb92`. Primary main and existing build archives remain intact. No applicable nested AGENTS file. Main has not advanced at startup. The owner-controlled old v7 process (PID 31288 at inspection) is still running; permission to close it for a quiet capture is pending. Do not call a contended run acceptance evidence.
+
+### Baseline and screening order
+
+First rehash/reuse the complete GDJ-3 v3 archive against its manifest. Preserve the v2 failures and inspect their saved logs/summaries alongside v3 abort diagnostics. Run native, preview-disabled `stack-reference / all` controls in solo and actual host/client, 35 enemies / three weapons / seed 137 / ordinary health. The unchanged reference is fixed at 60 active seconds with no XP; these cold controls are baseline reproduction and stall screening, **not** the standard 30+60 acceptance protocol. Separately retain an ordinary `weapon-stack` solo/pair progression check, including choices, XP, death/return/reset and loss. Do not infer that the prior intermittent abort is fixed if it fails to recur.
+
+The new diagnostic workload holds a frozen starting loadout and uses labelled invulnerability to maintain the intended active population/duration. It keeps contact tests, actual rays/head/body/incarnation queries, respawn deaths, conserved collected XP, gravity/merging, pickup rendering/audio, weapon feedback and authority/network work. It omits earned offers and physical choice pauses so the measured window has continuous load; those stay covered in the ordinary fixture. No boss abilities, additional archetypes or final VFX are added.
+
+| Order, in each of solo then pair | Active enemies | Owned instances per player | Purpose |
+| --- | ---: | ---: | --- |
+| S1 | 35 | 1 | Small rifle control |
+| S2 | 35 | 3 | Small combined control |
+| S3 | 35 | 8 | Isolate arsenal expansion |
+| S4 | 250 | 3 | First crowd rung |
+| S5 | 1,000 | 3 | Isolate upper crowd rung |
+| S6 | 250 | 8 | Combined intermediate rung |
+| S7 | 1,000 | 8 | Initial integrated upper rung |
+
+No full Cartesian sweep. Slots 0–7 repeat **rifle, scatter, pierce, rifle, scatter, pierce, rifle, scatter** (three rifles, three five-pellet scatters, two three-target piercers). The first three keep the current tuning; each instance has independent owner/identity/cadence. This is diagnostic content repetition, not new weapons or a selected final cap. All rungs keep 60-HP drones, seed 137, current ranges/damage/cadences, arena, complete visuals and 60 Hz authority.
+
+Screen each rung once with 10 seconds warm-up + 30 seconds capture, labelled exploratory. Attempt failed upper rungs long enough to record the boundary; aborts stay failures and are not averaged with successful retries. For native acceptance, select S2 and the highest completed combined rung in each mode for three fresh 30+60 captures. If S7 completes but fails timing, retain its three-repeat comparison where practical to characterize tails; do not substitute S6 as a pass for S7. Rotate reference/candidate order for the selected comparison. Retain first-use/cold data. Attempt a separate 300-active-second S7 pair endurance; a safety abort is a valid recorded failed attempt. No higher rung is planned without a new recorded justification.
+
+### Gates and evidence windows
+
+Use visible release, 1920×1080 per measured role, URP 100% scale, shadows off/current effects, uncapped/VSync off, force D3D11. Confirm actual visibility and dimensions; disclose both roles' rendering and shared-machine contention. Stop only agent-owned competing operations without approval. Record hardware, driver/OS, display, power settings where available; unknown clocks/BIOS/cooling remain unknown. No preview/JPEG bridge during native acceptance. Editor/tests/builds and desktop captures remain serialized.
+
+For each required role/repeat: p99 <=6.944 ms; report p50/p95/p99/max and counts >6.944/>13.889 ms, all frame/tick/capture durations. No lost physical time, eight-tick catch-up event, dropped outcome/XP, duplicate credit, unexplained divergence, disconnect or growing queue passes. Frame tails and cold misses remain visible even when p99 passes. Keep local software damage-confirmation p95 <=100 ms and sampled RTT <=20 ms provisional, with sample counts/distributions; they do not measure physical latency.
+
+Use a finite reliable application queue: existing 1,024 records remain the cap. Record pending bytes/records, high-water, oldest age and deferred sends. Treat queue age >100 ms sustained for one second or pending work at a terminal barrier as a failed local diagnostic, not permission to drop authoritative records. Keep the 1,100-byte transport payload bound. Report payload message/byte rates explicitly; transport headers/retransmissions are separate/unavailable unless measured. No additional bandwidth or memory product ceiling is invented for loopback; record allocation/process-memory observations and growth through endurance.
+
+Save raw frame/events/growth traces, invocation/visibility notes, source/build/manifest, terminal state and preserved aborts. Capture-window deltas include enemies, installed/living-active instances, granted/rejected triggers, ray/probe work, accepted damage/kills per owner/instance, contact/steering checks, XP drops/value/carriers/moves/merges/collections, submitted visible instances/batches/effects, simulated ticks and network bytes/messages/queue age. Include stage elapsed time for authority/steering/queries/XP, network poll/serialization and render prepare/submit where available. Parent/child timings overlap. Report instrumentation costs and missing GPU timings; do not claim a seed gives equal work. Compare optimization paths by fixed-tick outcome/counter parity as well as native duration/counters.
+
+### Ownership, extension seams and stopping boundary
+
+Before selecting an optimization, measure the baseline/first failing stage. Current source has an O(N²) separation loop, six-ID arrays, linear precision scans, a fresh parsed snapshot allocation per incoming tick, 60 full reliable snapshots/second and individual reliable XP/feedback events. At 35 enemies a full snapshot consumes 1,025 bytes. Merely increasing count would overflow the packet; merely increasing a buffer would conceal the boundary.
+
+Bounded extension: add a distinct versioned diagnostic configuration, with explicit slot count/loadout and XP-without-offers/invulnerability flags included in session identity. Keep ordinary configuration validation and progression behavior. Instance identity remains independent of archetype: preserve IDs 1–6 for current slots, extend the fixed roster's interleaved owner/instance IDs for diagnostic repeats, and retain run/life/event/incarnation/history checks and per-instance schedules. Future progression/content can add instances without confusing their effect type with ownership; do not build a general inventory/modifier engine here.
+
+If needed to run the crowd rungs, transmit bounded chunks of one complete authority snapshot; stage and validate the entire generation/tick/control snapshot before adopting it. Keep reliable combat/XP order, fixed payload and explicit finite reassembly bounds. Preserve a full-snapshot reference and measure chunk/message/serialization/backlog cost; chunking permits measurement, not a scalable-replication claim. A saturated reliable stream may be the honest upper result and next bounded follow-up. No speculative delta/prediction/recovery rewrite.
+
+For steering, retain the pairwise reference. Consider an exact local spatial query only after measurements justify it; enumerate all neighbors within the existing radius, preserve stable accumulation/order and no visibility/gameplay suppression. Do not substitute the historical 36-neighbor approximation as equal work. Query, XP, render or network changes require their own evidence if they are the first limit. Stop at one justified improvement plus a measured next boundary when additional work becomes a separate substantial system.
+
+Human candidate: one clearly named whole release build, verified source/scenario, ordinary Weapon stack available alongside diagnostics. Short instructions: move/aim through the crowd, watch orange scatter/purple piercing contribution, compare both views/shared outcomes, report hitches. Owner observations stay pending until supplied; automated companions cannot establish fun or a second opinion. GDJ-23 human gates remain open.
+
+### Checkpoint
+
+Source inspection and this contract only; no runtime edit, new build/test or new performance result yet. Next: baseline archive/failure audit and quiet native controls, then bounded diagnostic implementation and targeted parity/protocol/lifecycle checks. Save deviations here before dependent implementation/measurement.
+
 Owner-authorized dispatch preparation only: exact main/runtime identity, board, accepted handoff and remaining gates verified; no new runtime, build or performance result. Exact worker ID and committed brief live in Linear after creation. Coordinator is `01a0ff82-9c47-77a2-b780-0e86575639f1`, host `local`.
 
 Next: establish the isolated checkout, record its path/branch/base, inspect the limiting seams and append the frozen experiment plan before runtime edits. Save completed stages, exact revision, checks, remaining work, blockers and next action at useful checkpoints. Linear owns live stage status. Return a draft PR when source changes, exact clean source/build/archive/manifest, workload/settings, tests, raw and summarized measurements, retained failures, owner observations, supported limits and one next outcome. Update current state only for verified changed facts. Attach the PR and link evidence from Linear. Integration follows review and owner authorization; no automatic merge.
