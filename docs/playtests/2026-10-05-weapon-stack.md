@@ -53,6 +53,8 @@ Use the whole `prototypes/001-stacked-weapons/build/StackLab-GDJ3-v3` folder in 
 
 Short owner comparison: play one run adding both weapons; Retry and enhance the first addition instead. Report whether each addition is noticeable, whether the two builds feel different, and any blocker/hitch. Scripts cannot answer that. Further presentation refinement stays parked unless it blocks the comparison.
 
+Delivery correction: the owner's subsequent negative test screenshot is still the original GDJ-23 v7 (confirmed sole running player PID 31288 before launch), with its level-2 cap/rifle-only choices and old verbose cards. [The follow-up record](2026-10-05-earned-growth.md#owner-follow-up-and-delivery-correction-october-5) preserves that observation and unclear XP-gravity feedback. The exact v3 archive rehashes before native launch at its selected Weapon stack menu, PID 34308, results `artifacts/gdj3-owner-v3-20261005-080944Z`. v7 is left under owner control. No native weapon-stack acceptance is inferred from the old-window test. The owner also correctly challenges re-proving a known genre pattern: this 35-drone slice is integration groundwork, and combined larger-arsenal/density/co-op measurement is still needed for the larger game's feasibility.
+
 Functional reproduction from the managed checkout (bundled Python or another configured Python):
 
 ```powershell
