@@ -2,6 +2,8 @@
 
 [GDJ-24](https://linear.app/cnid/issue/GDJ-24/measure-larger-arsenals-and-enemy-crowds-in-two-player-co-op) investigates the integrated operating envelope, not the known isolated value of three weapon archetypes. [The frozen pre-implementation contract](../planning/tasks/GDJ-24.md#frozen-experiment-contract--october-5-before-runtime-edits) owns the matrix, gates, counters and ownership seams. This report is an ongoing evidence record; no dense performance or human acceptance is established yet.
 
+[Draft PR #16](https://github.com/OpenCnid/game-dev-journey/pull/16) contains the bounded workload, one exact steering improvement and this measured handoff. Review is separate from the remaining native/human gates; it has not been merged.
+
 ## Baseline reproduction and preserved failures
 
 Managed checkout `C:/Users/Darian/.codex/worktrees/gdj-24-coop-scale/new-game-dev`, branch `codex/gdj-24-coop-scale`, from brief `9663ffc03ff504647e7d180a39e54c098c761a9e` / main ancestor `e8acedb107905ade056241e978dace6bdaa0bb92`. Contract committed before runtime edits at `2c8bbdd`. The entire v3 control at clean runtime source `d8c3eee6ad6b4b8109c8d63c524512efb9a918b3` rehashes: 167 files / 97,909,030 bytes; [read-only audit and earlier failure hashes](evidence/gdj-24-coop-scale/control-audit.json).
