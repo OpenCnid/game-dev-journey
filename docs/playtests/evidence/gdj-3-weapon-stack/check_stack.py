@@ -19,6 +19,9 @@ p.add_argument('--reference', choices=['rifle', 'all', 'scatter', 'pierce'])
 p.add_argument('--port', default='17833')
 p.add_argument('--runs', type=int, choices=[1, 2], default=2)
 a = p.parse_args()
+a.player, a.results = a.player.resolve(), a.results.resolve()
+if not a.player.is_file():
+    p.error('Player executable does not exist')
 a.results.mkdir(parents=True, exist_ok=False)
 roles = ['solo'] if a.solo else ['host', 'client']
 desktop = OwnedDesktop()
@@ -46,12 +49,16 @@ def wait(predicate, seconds=15):
             key = lambda v: (v['run'], v['tick'], v['controlRevision'], v['state'])
             if not history or key(values[0]) != key(history[-1][0]):
                 history.append(values)
+            if any(v['state'] == 'Aborted' for v in values):
+                raise RuntimeError('Unexpected abort: ' + str([(roles[i], v['run'], v['tick'], v.get('exitReason'))
+                                                               for i, v in enumerate(values)]))
             if predicate(values):
                 return values
         if any(desktop.kernel.WaitForSingleObject(c.process, 0) == 0 for c in desktop.children):
             raise RuntimeError('An owned player exited')
         time.sleep(.05)
-    raise TimeoutError(str(states()))
+    raise TimeoutError(str([None if v is None else {k: v.get(k) for k in ('run', 'tick', 'state', 'level', 'exitReason')}
+                            for v in states()]))
 
 
 def command(i, action, state, **fields):
@@ -218,6 +225,11 @@ try:
                   comparisons=comparisons, pauses=pauses, afterClientLoss=loss)
     (a.results / 'verification.json').write_text(json.dumps(report, indent=2))
     print('PASS: weapon-stack ordinary progression/reference checks', flush=True)
+except Exception as error:
+    (a.results / 'failure.json').write_text(json.dumps(dict(result='FAIL', error=str(error),
+        states=[None if value is None else {k: value.get(k) for k in ('run', 'tick', 'state', 'level', 'exitReason', 'source')}
+                for value in states()]), indent=2))
+    raise
 finally:
     (a.results / 'observations.json').write_text(json.dumps(history))
     after = desktop.input_name()

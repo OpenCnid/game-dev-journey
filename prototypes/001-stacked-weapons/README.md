@@ -267,4 +267,4 @@ Use [playtest notes](../../docs/playtests/README.md). If weapons feel interchang
 
 **Result:** implementation and automated verification are recorded in the development journal; player enjoyment and target-hardware performance still require playtesting.
 
-**Disposition:** first combat and benchmark slice implemented; next evaluate feel and crowded performance before adding simultaneous weapons.
+**Disposition:** first combat, earned growth and the bounded GDJ-3 simultaneous arsenal are implemented on their recorded branches. Compare the earned broad and specialized builds next; human feel and representative dense cooperative performance remain open. The five-minute/content proposal above is later scope, not the current two-minute experiment.
