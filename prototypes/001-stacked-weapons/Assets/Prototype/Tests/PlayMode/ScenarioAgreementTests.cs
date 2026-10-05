@@ -27,6 +27,10 @@ namespace Journey.Tests
                 typeof(SharedGame).GetField("output", Hidden).SetValue(game, viewOutput());
                 game.Initialize(view, sim, true, "", 0, ScenarioConfiguration.Named(ScenarioKind.EarnedGrowth), true);
                 Assert.That(game.Snapshot.Roster, Is.EqualTo(1));
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Waiting));
+                Clock.SetValue(game, Time.realtimeSinceStartupAsDouble - .5); Update.Invoke(game, null);
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Running));
+                Assert.That(game.Snapshot.Tick, Is.Zero, "Initialization is not active combat time");
                 var authority = (SharedEncounter)typeof(SharedGame).GetField("authority", Hidden).GetValue(game);
                 for (int i = 1; i <= 10; i++) authority.Growth.Death(authority.Current,
                     new SharedHit(new SharedShot { Run = 1, Player = 0, Weapon = 1, Event = i }, ShotDecision.Damage,
@@ -35,7 +39,7 @@ namespace Journey.Tests
                 Assert.That(game.Snapshot.Players[0].Offer.Pending, Is.True);
                 Assert.That(game.ChoiceControls(true, 1), Is.False, "Hiding cards disables number selection");
                 Assert.That(game.ChoiceControls(false, 2), Is.False);
-                RifleUpgrade first = game.Snapshot.Players[0].Offer.Card(1);
+                UpgradeId first = game.Snapshot.Players[0].Offer.Card(1);
                 Assert.That(game.ChoiceControls(true, 1), Is.True, "Reopening keeps the original offer");
                 authority.Step(); Publish.Invoke(game, null); Pump(game);
                 Assert.That(game.Snapshot.Players[0].Offer.Selected, Is.EqualTo(first));
@@ -128,12 +132,12 @@ namespace Journey.Tests
                         while (games[1].Snapshot.Level == 1 && Time.realtimeSinceStartupAsDouble < deadline)
                         { Pump(games[0]); Pump(games[1]); yield return null; }
                         Assert.That(games[1].Snapshot.Xp, Is.EqualTo(10)); Assert.That(games[1].Snapshot.Players[1].Offer.Pending, Is.True);
-                        Assert.That(games[0].Choose(RifleUpgrade.StrongerHits), Is.True); Assert.That(games[1].Choose(RifleUpgrade.FasterFire), Is.True);
+                        Assert.That(games[0].Choose(UpgradeId.StrongerHits), Is.True); Assert.That(games[1].Choose(UpgradeId.FasterFire), Is.True);
                         while (games[1].Snapshot.Players[1].Offer.Pending && Time.realtimeSinceStartupAsDouble < deadline)
                         { Pump(games[0]); Pump(games[1]); yield return null; }
                         Assert.That(games[1].Snapshot.Players[0].BodyDamage, Is.EqualTo(30));
                         Assert.That(games[1].Snapshot.Players[1].RifleInterval, Is.EqualTo(.08f));
-                        Assert.That(games[1].Choose(RifleUpgrade.StrongerHits), Is.False);
+                        Assert.That(games[1].Choose(UpgradeId.StrongerHits), Is.False);
                     }
                     authority.Current.Tick = 3599; authority.Step(); Publish.Invoke(games[0], null);
                     while (games[1].Snapshot.State == SharedState.Running && Time.realtimeSinceStartupAsDouble < deadline)

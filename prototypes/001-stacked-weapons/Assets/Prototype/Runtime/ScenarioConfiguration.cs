@@ -150,17 +150,17 @@ namespace Journey
                 if (Configuration.Growth)
                 {
                     if (incoming.Xp < 0 || incoming.Level != (incoming.Xp >= EarnedGrowth.Threshold ? 2 : 1) ||
-                        (incoming.Level == 1 && (offer.Id != 0 || offer.Selected != RifleUpgrade.None || offer.AppliedTick != 0)) ||
-                        (offer.Selected == RifleUpgrade.None && offer.AppliedTick != 0) ||
+                        (incoming.Level == 1 && (offer.Id != 0 || offer.Selected != UpgradeId.None || offer.AppliedTick != 0)) ||
+                        (offer.Selected == UpgradeId.None && offer.AppliedTick != 0) ||
                         (incoming.Level == 2 && (offer.Id != p + 1 || offer.Weapon != player.Weapon ||
                         offer.Tick < 1 || offer.Tick > incoming.Tick || !GrowthUpgrade.Valid(offer.First))) ||
-                        (offer.Selected != RifleUpgrade.None && (!GrowthUpgrade.Valid(offer.Selected) || offer.AppliedTick <= offer.Tick || offer.AppliedTick > incoming.Tick)) ||
+                        (offer.Selected != UpgradeId.None && (!GrowthUpgrade.Valid(offer.Selected) || offer.AppliedTick <= offer.Tick || offer.AppliedTick > incoming.Tick)) ||
                         player.BodyDamage != GrowthUpgrade.Damage(offer.Selected) || player.RifleInterval != GrowthUpgrade.Interval(offer.Selected))
                         throw new ArgumentException("Invalid earned build snapshot");
                     PersonalOffer previous = current.Players[p].Offer;
                     if (incoming.Run == current.Run && incoming.Tick >= current.Tick && (incoming.Xp < current.Xp ||
                         previous.Id > 0 && (offer.Id != previous.Id || offer.First != previous.First || offer.Weapon != previous.Weapon || offer.Tick != previous.Tick ||
-                        previous.Selected != RifleUpgrade.None && (offer.Selected != previous.Selected || offer.AppliedTick != previous.AppliedTick))))
+                        previous.Selected != UpgradeId.None && (offer.Selected != previous.Selected || offer.AppliedTick != previous.AppliedTick))))
                         throw new ArgumentException("Earned state cannot regress or reroll");
                 }
                 else if (offer.Id != 0 || incoming.Xp != 0 || incoming.Level != 1 || player.BodyDamage != Configuration.BodyDamage || player.RifleInterval != Configuration.RifleInterval)

@@ -31,7 +31,7 @@ namespace Journey
         Material orbMaterial;
         StreamWriter growthLog;
         float emissionInterval = .12f, confirmationUntil;
-        RifleUpgrade scriptedChoice;
+        UpgradeId scriptedChoice;
         double previousClock, lastRtt;
         string reason = "", output = "", screenshot = "";
         StreamWriter frameLog, hitLog;
@@ -59,7 +59,7 @@ namespace Journey
             for (int i = 0; i < args.Length - 1; i++)
             {
                 if (args[i] == "-sharedResults") output = Path.GetFullPath(args[i + 1]);
-                if (args[i] == "-growthChoice") scriptedChoice = args[i + 1] == "stronger" ? RifleUpgrade.StrongerHits : args[i + 1] == "faster" ? RifleUpgrade.FasterFire : throw new ArgumentException("Unknown growth choice");
+                if (args[i] == "-growthChoice") scriptedChoice = args[i + 1] == "stronger" ? UpgradeId.StrongerHits : args[i + 1] == "faster" ? UpgradeId.FasterFire : throw new ArgumentException("Unknown growth choice");
                 if (args[i] == "-screenshot") screenshot = Path.GetFullPath(args[i + 1]);
             }
             if (output.Length == 0) output = Path.Combine(Application.persistentDataPath, "SharedCombat", DateTime.UtcNow.ToString("yyyyMMdd-HHmmss"), host ? "host" : "client");
@@ -87,7 +87,6 @@ namespace Journey
             allyShot.positionCount = 2; allyShot.startWidth = .018f; allyShot.endWidth = .004f;
             allyShot.sharedMaterial = new Material(Resources.Load<Material>("Trail")); allyShot.sharedMaterial.color = new Color(.1f, .9f, .8f);
             allyShot.enabled = false;
-            if (solo) { authority.Start(); Publish(); SaveConfiguration(); }
             previousClock = Time.realtimeSinceStartupAsDouble;
             SetCursor(!scripted && preview == null); Debug.Log("SHARED_SESSION " + (host ? "HOST" : "CLIENT") + " " + address + ":" + port + " " + output);
         }
@@ -123,7 +122,7 @@ namespace Journey
             else if (message == SharedConnection.Message.Growth && authority == null) GrowthChanged(GrowthEvent.Read(r));
             else if (message == SharedConnection.Message.Choice && authority != null)
             {
-                authority.Select(new GrowthChoice { Run = r.ReadInt32(), Player = 1, Offer = r.ReadInt32(), Weapon = r.ReadInt32(), Upgrade = (RifleUpgrade)r.ReadInt32() });
+                authority.Select(new GrowthChoice { Run = r.ReadInt32(), Player = 1, Offer = r.ReadInt32(), Weapon = r.ReadInt32(), Upgrade = (UpgradeId)r.ReadInt32() });
             }
             else if (message == SharedConnection.Message.Hit && authority == null) feedback.Enqueue(SharedConnection.ReadHit(r));
             else if (message == SharedConnection.Message.Retry && authority != null)
@@ -183,6 +182,12 @@ namespace Journey
             bool runningAtFrameStart = display.State == SharedState.Running;
             int frameRun = display.Run;
             connection?.Poll();
+            if (solo && display.State == SharedState.Waiting)
+            {
+                authority.Start(); accumulator = 0; Publish(); SaveConfiguration();
+                // Initialization and first-frame setup precede active encounter time, as with pair agreement.
+                frame = 0; previousClock = now;
+            }
             SyncGeneration();
             preview?.Poll();
             SharedPlayer player = display.Players[local];
@@ -333,7 +338,7 @@ namespace Journey
             if (tab) cardsVisible = !cardsVisible;
             return cardsVisible && card > 0 && card <= 2 && Choose(offer.Card(card));
         }
-        public bool Choose(RifleUpgrade upgrade)
+        public bool Choose(UpgradeId upgrade)
         {
             PersonalOffer offer = display.Players[local].Offer;
             if (!offer.Pending || display.State != SharedState.Running || !GrowthUpgrade.Valid(upgrade)) return false;
@@ -367,7 +372,7 @@ namespace Journey
                 if (cardsVisible)
                     for (int card = 1; card <= 2; card++)
                     {
-                        RifleUpgrade upgrade = offer.Card(card); Rect rect = new Rect(w - 355, h - 327 + (card - 1) * 120, 330, 110);
+                        UpgradeId upgrade = offer.Card(card); Rect rect = new Rect(w - 355, h - 327 + (card - 1) * 120, 330, 110);
                         GUI.Box(rect, ""); GUI.Label(new Rect(rect.x + 12, rect.y + 6, 310, 28), $"{card} · {GrowthUpgrade.Label(upgrade)}", heading);
                         GUI.Label(new Rect(rect.x + 12, rect.y + 40, 310, 65), $"Your starting rifle\nBody 20 → {GrowthUpgrade.Damage(upgrade)} / Head 40 → {GrowthUpgrade.Damage(upgrade) * 2}\nInterval .12 → {GrowthUpgrade.Interval(upgrade):0.00}s", small);
                     }
@@ -459,14 +464,15 @@ namespace Journey
                 GUI.DrawTexture(new Rect(0, 0, w, h), Texture2D.whiteTexture); GUI.color = Color.white;
             }
             GUI.Label(new Rect(25, 18, 1000, 40), $"{(display.Configuration.Growth ? "EARNED GROWTH" : "SHARED RIFLE")} / {(solo ? "SOLO" : local == 0 ? "A · HOST" : "B · CLIENT")} / {display.State}", heading);
-            GUI.Label(new Rect(25, 57, 1150, 28), $"Run {display.Run}   ·   A: {a.Health} HP, {a.Damage} damage, {a.Kills} kills   ·   B: {b.Health} HP, {b.Damage} damage, {b.Kills} kills", small);
+            GUI.Label(new Rect(25, 57, 1150, 28), solo ? $"Run {display.Run} · {a.Health} HP · {a.Damage} damage · {a.Kills} kills" :
+                $"Run {display.Run}   ·   A: {a.Health} HP, {a.Damage} damage, {a.Kills} kills   ·   B: {b.Health} HP, {b.Damage} damage, {b.Kills} kills", small);
             if (binding.Configuration != null)
             {
-                GUI.Label(new Rect(25, 85, 1200, 25), binding.Configuration.Label + " · " + binding.Configuration.Settings, small);
-                GUI.Label(new Rect(25, 110, 1200, 25), "Host settings locked for this session · Retry keeps them · " + binding.Configuration.Identity.Substring(0, 12), small);
+                GUI.Label(new Rect(25, 85, 1200, 25), (display.Configuration.Growth ? "START · " : "") + binding.Configuration.Label + " · " + binding.Configuration.Settings, small);
+                GUI.Label(new Rect(25, 110, 1200, 25), (display.Configuration.Growth ? "Starting fixture locked · Retry resets earned builds · " : "Host settings locked for this session · Retry keeps them · ") + binding.Configuration.Identity.Substring(0, 12), small);
             }
             GrowthHud(w, h);
-            GUI.Label(new Rect(w - 210, h - 60, 200, 40), $"{Mathf.Max(0, display.Configuration.Duration - display.Elapsed):F1}s   RTT {lastRtt:F1}ms", small);
+            GUI.Label(new Rect(w - 210, h - 60, 200, 40), $"{Mathf.Max(0, display.Configuration.Duration - display.Elapsed):F1}s" + (solo ? "" : $"   RTT {lastRtt:F1}ms"), small);
             if (display.State == SharedState.Running)
             {
                 if (p.Health > 0)
@@ -494,7 +500,7 @@ namespace Journey
             }
             else if (display.State == SharedState.Complete || display.State == SharedState.Defeat)
             {
-                LifeMessage(w, h, display.State == SharedState.Defeat ? "PARTY DEFEATED" : "RUN COMPLETE",
+                LifeMessage(w, h, display.State == SharedState.Defeat ? (solo ? "DEFEATED" : "PARTY DEFEATED") : "RUN COMPLETE",
                     display.State == SharedState.Defeat ? (solo ? "You are down" : "Both players are down") : $"{display.Configuration.Duration:0.##}-second encounter complete",
                     solo ? "Retry starts a fresh run" : $"Retry readiness: A {(a.Ready ? "READY" : "waiting")} / B {(b.Ready ? "READY" : "waiting")}");
                 if (GUI.Button(new Rect(w / 2 - 120, h / 2, 240, 50), "Retry (R)")) Retry();

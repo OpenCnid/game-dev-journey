@@ -13,7 +13,7 @@ namespace Journey
         public long sequence;
         public string action;
         public int run, life;
-        public RifleUpgrade upgrade;
+        public UpgradeId upgrade;
         public float moveX, moveZ, yaw, pitch, duration;
         public bool fire;
         public string Validate(SharedSnapshot state, int local)

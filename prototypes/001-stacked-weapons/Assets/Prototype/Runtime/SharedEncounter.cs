@@ -168,10 +168,12 @@ namespace Journey
             {
                 SharedPlayer player = Current.Players[choice.Player];
                 if (!ValidChoice(choice) || player.Offer.Tick >= Current.Tick) continue;
-                float interval = GrowthUpgrade.Interval(choice.Upgrade);
+                UpgradeDefinition definition = GrowthUpgrade.Definition(choice.Upgrade);
+                float interval = definition.Effect == UpgradeEffect.FireCadence ? GrowthUpgrade.Interval(choice.Upgrade) : player.RifleInterval;
                 double progressRemaining = Math.Max(0, nextShot[choice.Player] - (Current.Tick - 1) * (double)CombatSimulation.Tick) / player.RifleInterval;
                 nextShot[choice.Player] = (Current.Tick - 1) * (double)CombatSimulation.Tick + progressRemaining * interval;
-                player.BodyDamage = GrowthUpgrade.Damage(choice.Upgrade); player.RifleInterval = interval;
+                if (definition.Effect == UpgradeEffect.DirectDamage) player.BodyDamage = GrowthUpgrade.Damage(choice.Upgrade);
+                player.RifleInterval = interval;
                 player.Offer.Selected = choice.Upgrade; player.Offer.AppliedTick = Current.Tick;
                 Current.Players[choice.Player] = player; Growth.Applied(Current, choice.Player);
             }
@@ -296,7 +298,8 @@ namespace Journey
             if (Current.Players[0].Ready && (Current.Roster == 1 || Current.Players[1].Ready)) Start(); return true;
         }
         bool ValidChoice(GrowthChoice c) => Growth != null && c.Run == Current.Run && Current.State == SharedState.Running &&
-            c.Player >= 0 && c.Player < Current.Roster && GrowthUpgrade.Valid(c.Upgrade) && Current.Players[c.Player].Offer.Pending &&
+            c.Player >= 0 && c.Player < Current.Roster && GrowthUpgrade.Valid(c.Upgrade) &&
+            GrowthUpgrade.Definition(c.Upgrade).Target == UpgradeTarget.OwnedWeapon && Current.Players[c.Player].Offer.Pending &&
             c.Offer == Current.Players[c.Player].Offer.Id && c.Weapon == Current.Players[c.Player].Weapon && c.Weapon == Current.Players[c.Player].Offer.Weapon;
         public bool Select(GrowthChoice choice)
         {

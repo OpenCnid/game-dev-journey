@@ -23,7 +23,7 @@ namespace Journey.Tests
             for (int i = 1; i <= 10; i++) game.Growth.Death(game.Current, Death(i, SharedEncounter.Spawn(0)));
             game.Step();
         }
-        GrowthChoice Choice(int p, RifleUpgrade upgrade) => new GrowthChoice { Run = game.Current.Run, Player = p,
+        GrowthChoice Choice(int p, UpgradeId upgrade) => new GrowthChoice { Run = game.Current.Run, Player = p,
             Offer = game.Current.Players[p].Offer.Id, Weapon = p + 1, Upgrade = upgrade };
         SharedShot Shot(int p, int id, bool head = false)
         {
@@ -67,31 +67,31 @@ namespace Journey.Tests
         [Test] public void IndependentExplicitChoicesApplyNextTickOnceAndKeepOtherOffer()
         {
             Earn(); PersonalOffer b = game.Current.Players[1].Offer;
-            Assert.That(game.Select(Choice(0, RifleUpgrade.StrongerHits)), Is.True);
-            Assert.That(game.Select(Choice(0, RifleUpgrade.FasterFire)), Is.False);
+            Assert.That(game.Select(Choice(0, UpgradeId.StrongerHits)), Is.True);
+            Assert.That(game.Select(Choice(0, UpgradeId.FasterFire)), Is.False);
             Assert.That(game.Current.Players[0].BodyDamage, Is.EqualTo(20)); game.Step();
             Assert.That(game.Current.Players[0].BodyDamage, Is.EqualTo(30)); Assert.That(game.Current.Players[0].RifleInterval, Is.EqualTo(.12f));
             Assert.That(game.Current.Players[1].Offer, Is.EqualTo(b));
-            Assert.That(game.Select(Choice(0, RifleUpgrade.StrongerHits)), Is.False);
-            Assert.That(game.Select(Choice(1, RifleUpgrade.FasterFire)), Is.True); game.Step();
+            Assert.That(game.Select(Choice(0, UpgradeId.StrongerHits)), Is.False);
+            Assert.That(game.Select(Choice(1, UpgradeId.FasterFire)), Is.True); game.Step();
             Assert.That(game.Current.Players[1].BodyDamage, Is.EqualTo(20)); Assert.That(game.Current.Players[1].RifleInterval, Is.EqualTo(.08f));
             Assert.That(events.FindAll(e => e.Kind == GrowthEventKind.Applied).Count, Is.EqualTo(2));
         }
         [Test] public void SelectionRevalidatesWeaponWithoutSpendingEntitlement()
         {
-            Earn(); Assert.That(game.Select(Choice(0, RifleUpgrade.StrongerHits)), Is.True);
+            Earn(); Assert.That(game.Select(Choice(0, UpgradeId.StrongerHits)), Is.True);
             game.Current.Players[0].Weapon = 99; game.Step(); Assert.That(game.Current.Players[0].Offer.Pending, Is.True);
             Assert.That(game.Current.Players[0].BodyDamage, Is.EqualTo(20));
         }
-        [TestCase(false, RifleUpgrade.None, 3)]
-        [TestCase(true, RifleUpgrade.None, 2)]
-        [TestCase(false, RifleUpgrade.StrongerHits, 2)]
-        [TestCase(true, RifleUpgrade.StrongerHits, 1)]
-        [TestCase(false, RifleUpgrade.FasterFire, 3)]
-        [TestCase(true, RifleUpgrade.FasterFire, 2)]
-        public void DamageThresholdsUseEarnedBuild(bool head, RifleUpgrade upgrade, int required)
+        [TestCase(false, UpgradeId.None, 3)]
+        [TestCase(true, UpgradeId.None, 2)]
+        [TestCase(false, UpgradeId.StrongerHits, 2)]
+        [TestCase(true, UpgradeId.StrongerHits, 1)]
+        [TestCase(false, UpgradeId.FasterFire, 3)]
+        [TestCase(true, UpgradeId.FasterFire, 2)]
+        public void DamageThresholdsUseEarnedBuild(bool head, UpgradeId upgrade, int required)
         {
-            Earn(); if (upgrade != RifleUpgrade.None) { game.Select(Choice(0, upgrade)); game.Step(); }
+            Earn(); if (upgrade != UpgradeId.None) { game.Select(Choice(0, upgrade)); game.Step(); }
             game.Current.Enemies[0].Position = new Vector3(0, 0, 8); game.Step();
             var hits = new List<SharedHit>(); game.Resolved += hits.Add;
             for (int i = 1; i <= required; i++)
@@ -105,26 +105,26 @@ namespace Journey.Tests
         {
             Earn(); game.Current.Enemies[0].Position = new Vector3(0, 0, 8); game.Step();
             game.Submit(Shot(0, 1)); game.Step(); game.Submit(Shot(0, 2)); game.Step();
-            game.Select(Choice(0, RifleUpgrade.FasterFire)); game.Step(); Assert.That(game.Current.Players[0].Shots, Is.EqualTo(1));
+            game.Select(Choice(0, UpgradeId.FasterFire)); game.Step(); Assert.That(game.Current.Players[0].Shots, Is.EqualTo(1));
             game.Step(); game.Step(); Assert.That(game.Current.Players[0].Shots, Is.EqualTo(1));
             game.Step(); Assert.That(game.Current.Players[0].Shots, Is.EqualTo(2));
         }
         [Test] public void DeadSelectionRetainsBuildOnReturnAndTerminalTickSuppressesCollection()
         {
             Earn(); game.Current.Players[0].Health = 0; game.Current.Players[0].ReturnAt = game.Current.Elapsed + .1f;
-            Assert.That(game.Select(Choice(0, RifleUpgrade.StrongerHits)), Is.True);
+            Assert.That(game.Select(Choice(0, UpgradeId.StrongerHits)), Is.True);
             for (int i = 0; i < 7; i++) game.Step();
             Assert.That(game.Current.Players[0].Health, Is.EqualTo(100)); Assert.That(game.Current.Players[0].BodyDamage, Is.EqualTo(30));
             game.Growth.Death(game.Current, Death(11, SharedEncounter.Spawn(1))); game.Current.Players[0].Health = 0;
             game.Current.Players[0].ReturnAt = 60; game.Current.Players[1].Health = 10; game.Current.Tick = 3599;
             game.Current.Enemies[0].Position = SharedEncounter.Spawn(1); game.Step();
             Assert.That(game.Current.State, Is.EqualTo(SharedState.Defeat)); Assert.That(game.Current.Xp, Is.EqualTo(10));
-            Assert.That(game.Select(Choice(1, RifleUpgrade.FasterFire)), Is.False);
+            Assert.That(game.Select(Choice(1, UpgradeId.FasterFire)), Is.False);
         }
         [Test] public void RetryResetsAllGrowthAndDrawsAndRejectsOldChoice()
         {
             Earn(); PersonalOffer a = game.Current.Players[0].Offer, b = game.Current.Players[1].Offer;
-            GrowthChoice stale = Choice(1, RifleUpgrade.FasterFire); game.Select(Choice(0, RifleUpgrade.StrongerHits)); game.Step();
+            GrowthChoice stale = Choice(1, UpgradeId.FasterFire); game.Select(Choice(0, UpgradeId.StrongerHits)); game.Step();
             game.Growth.Death(game.Current, Death(11, Vector3.zero)); game.Current.Tick = 3599; game.Step();
             int run = game.Current.Run; game.Retry(run, 0); game.Retry(run, 1);
             Assert.That(game.Current.Run, Is.EqualTo(run + 1)); Assert.That(game.Current.Xp, Is.Zero); Assert.That(game.Current.Level, Is.EqualTo(1));
@@ -152,7 +152,7 @@ namespace Journey.Tests
         }
         [Test] public void FrozenStartingConfigAcceptsLegalEarnedSnapshotRejectsForgedStats()
         {
-            Earn(); game.Select(Choice(0, RifleUpgrade.StrongerHits)); game.Step(); var binding = new SharedScenarioBinding(game.Configuration);
+            Earn(); game.Select(Choice(0, UpgradeId.StrongerHits)); game.Step(); var binding = new SharedScenarioBinding(game.Configuration);
             using (var stream = new MemoryStream()) { var w = new BinaryWriter(stream); binding.Write(w); stream.Position = 0; binding.AcceptAcknowledgement(new BinaryReader(stream)); }
             game.Current.Session = binding.Session; var clone = new SharedSnapshot();
             using (var stream = new MemoryStream()) { var w = new BinaryWriter(stream); SharedConnection.WriteSnapshot(w, game.Current);

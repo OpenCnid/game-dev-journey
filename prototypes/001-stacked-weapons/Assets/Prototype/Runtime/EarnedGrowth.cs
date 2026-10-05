@@ -5,24 +5,40 @@ using UnityEngine;
 
 namespace Journey
 {
-    public enum RifleUpgrade { None, StrongerHits, FasterFire }
-    // Concrete authored effects. Future pickup/player, loot and draw effects get their own consumers.
+    public enum UpgradeId { None, StrongerHits, FasterFire }
+    public enum UpgradeTarget { OwnedWeapon, Player, LootPool, DrawPool }
+    public enum UpgradeEffect { DirectDamage, FireCadence }
+    public readonly struct UpgradeDefinition
+    {
+        public readonly UpgradeId Id;
+        public readonly string Name;
+        public readonly UpgradeTarget Target;
+        public readonly UpgradeEffect Effect;
+        public readonly float Factor;
+        public UpgradeDefinition(UpgradeId id, string name, UpgradeTarget target, UpgradeEffect effect, float factor)
+        { Id = id; Name = name; Target = target; Effect = effect; Factor = factor; }
+    }
+    // Content identity/eligibility is separate from the effect consumer. Only these two ordinary definitions exist.
+    // Later player/pickup, loot and draw definitions route to their own consumers; they are not rifle stat edits.
     public static class GrowthUpgrade
     {
-        public static bool Valid(RifleUpgrade value) => value == RifleUpgrade.StrongerHits || value == RifleUpgrade.FasterFire;
-        public static string Label(RifleUpgrade value) => value == RifleUpgrade.StrongerHits ? "Stronger hits" : value == RifleUpgrade.FasterFire ? "Faster fire" : "Baseline";
-        public static int Damage(RifleUpgrade value) => value == RifleUpgrade.StrongerHits ? 30 : 20;
-        public static float Interval(RifleUpgrade value) => value == RifleUpgrade.FasterFire ? .08f : .12f;
+        static readonly UpgradeDefinition stronger = new UpgradeDefinition(UpgradeId.StrongerHits, "Stronger hits", UpgradeTarget.OwnedWeapon, UpgradeEffect.DirectDamage, 1.5f);
+        static readonly UpgradeDefinition faster = new UpgradeDefinition(UpgradeId.FasterFire, "Faster fire", UpgradeTarget.OwnedWeapon, UpgradeEffect.FireCadence, 1.5f);
+        public static bool Valid(UpgradeId value) => value == UpgradeId.StrongerHits || value == UpgradeId.FasterFire;
+        public static UpgradeDefinition Definition(UpgradeId value) => value == UpgradeId.StrongerHits ? stronger : value == UpgradeId.FasterFire ? faster : throw new ArgumentException("Unknown upgrade definition");
+        public static string Label(UpgradeId value) => Valid(value) ? Definition(value).Name : "Baseline";
+        public static int Damage(UpgradeId value) => Valid(value) && Definition(value).Effect == UpgradeEffect.DirectDamage ? Mathf.RoundToInt(20 * Definition(value).Factor) : 20;
+        public static float Interval(UpgradeId value) => Valid(value) && Definition(value).Effect == UpgradeEffect.FireCadence ? .12f / Definition(value).Factor : .12f;
     }
     [Serializable] public struct PersonalOffer
     {
         public int Id, Tick, Weapon, AppliedTick;
-        public RifleUpgrade First, Selected;
-        public RifleUpgrade Card(int index) => index == 1 ? First : index == 2 ?
-            (First == RifleUpgrade.StrongerHits ? RifleUpgrade.FasterFire : RifleUpgrade.StrongerHits) : RifleUpgrade.None;
-        public bool Pending => Id > 0 && Selected == RifleUpgrade.None;
+        public UpgradeId First, Selected;
+        public UpgradeId Card(int index) => index == 1 ? First : index == 2 ?
+            (First == UpgradeId.StrongerHits ? UpgradeId.FasterFire : UpgradeId.StrongerHits) : UpgradeId.None;
+        public bool Pending => Id > 0 && Selected == UpgradeId.None;
     }
-    public struct GrowthChoice { public int Run, Player, Offer, Weapon; public RifleUpgrade Upgrade; }
+    public struct GrowthChoice { public int Run, Player, Offer, Weapon; public UpgradeId Upgrade; }
     [Serializable] public struct XpOrb
     {
         public int Id, Enemy, Incarnation, SourcePlayer, SourceWeapon, Shot;
@@ -48,7 +64,7 @@ namespace Journey
         public static void WriteOffer(BinaryWriter w, PersonalOffer o)
         { w.Write(o.Id); w.Write(o.Tick); w.Write(o.Weapon); w.Write(o.AppliedTick); w.Write((int)o.First); w.Write((int)o.Selected); }
         public static PersonalOffer ReadOffer(BinaryReader r) => new PersonalOffer { Id = r.ReadInt32(), Tick = r.ReadInt32(), Weapon = r.ReadInt32(),
-            AppliedTick = r.ReadInt32(), First = (RifleUpgrade)r.ReadInt32(), Selected = (RifleUpgrade)r.ReadInt32() };
+            AppliedTick = r.ReadInt32(), First = (UpgradeId)r.ReadInt32(), Selected = (UpgradeId)r.ReadInt32() };
     }
 
     // Run-owned ledger, team threshold and personal draws. Collection is separate from effect application.
@@ -94,7 +110,7 @@ namespace Journey
             if (Level == 2) for (int p = 0; p < s.Roster; p++) if (s.Players[p].Offer.Id == 0)
             {
                 var offer = new PersonalOffer { Id = p + 1, Tick = s.Tick, Weapon = s.Players[p].Weapon,
-                    First = draws[p].Next(2) == 0 ? RifleUpgrade.StrongerHits : RifleUpgrade.FasterFire };
+                    First = draws[p].Next(2) == 0 ? UpgradeId.StrongerHits : UpgradeId.FasterFire };
                 s.Players[p].Offer = offer; Emit(s, GrowthEventKind.Entitlement, p, offer: offer);
             }
         }
