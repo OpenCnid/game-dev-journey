@@ -67,8 +67,12 @@ def main():
                     print(json.dumps({"run": state["run"], "state": state["state"], "elapsed": state["elapsed"],
                                       "A_hp": state["players"][0]["Health"], "B_hp": state["players"][1]["Health"]}), flush=True)
                 offer = state["players"][1].get("Offer", {})
-                if args.choice and state["state"] == "Running" and offer.get("Id", 0) > 0 and offer.get("Selected", 0) == 0:
+                if args.choice and state["state"] in ("Running", "Choosing") and offer.get("Id", 0) > 0 and offer.get("Selected", 0) == 0:
                     request(base + "client", {"action": "choice", "upgrade": 1 if args.choice == "stronger" else 2})
+                    time.sleep(.2)
+                    continue
+                if state["state"] == "Choosing" and offer.get("Selected", 0) != 0 and not state["players"][1].get("ChoiceReady", False):
+                    request(base + "client", {"action": "continue", "phase": state["choicePhase"]})
                     time.sleep(.2)
                     continue
                 if state["state"] == "Running" and state["players"][1]["Health"] > 0:

@@ -18,10 +18,68 @@ namespace Journey.Tests
         }
         SharedHit Death(int incarnation, Vector3 position) => new SharedHit(new SharedShot { Run = game.Current.Run, Player = 1, Weapon = 2, Event = incarnation },
             ShotDecision.Damage, new ShotResult(position, 0, incarnation, HitRegion.Head, 40, 20, 20, 0), position);
-        void Earn()
+        void Earn(bool keepChoosing = false)
         {
             for (int i = 1; i <= 10; i++) game.Growth.Death(game.Current, Death(i, SharedEncounter.Spawn(0)));
             game.Step();
+            // Existing effect/lifecycle cases isolate combat rules with a diagnostic live offer.
+            // Dedicated phase tests below retain the automatic freeze and readiness barrier.
+            if (!keepChoosing) game.Current.State = SharedState.Running;
+        }
+        [Test] public void ChoosingFreezesPhysicsAndDeadReturnUntilEveryMemberExplicitlyContinues()
+        {
+            game.Current.Players[0].Health = 0; game.Current.Players[0].ReturnAt = .15f;
+            game.Current.Players[1].Position = SharedEncounter.Spawn(0); Earn(true);
+            Assert.That(game.Current.State, Is.EqualTo(SharedState.Choosing));
+            int tick = game.Current.Tick; float elapsed = game.Current.Elapsed; Vector3 enemy = game.Current.Enemies[0].Position;
+            for (int i = 0; i < 600; i++) game.Step();
+            Assert.That(game.Current.Tick, Is.EqualTo(tick)); Assert.That(game.Current.Elapsed, Is.EqualTo(elapsed));
+            Assert.That(game.Current.Players[0].Health, Is.Zero); Assert.That(game.Current.Enemies[0].Position, Is.EqualTo(enemy));
+            Assert.That(game.ContinueChoice(1, 1, 0), Is.False);
+            Assert.That(game.Select(Choice(0, UpgradeId.StrongerHits)), Is.True); game.CommitChoices();
+            Assert.That(game.Current.Players[0].BodyDamage, Is.EqualTo(30)); Assert.That(game.Current.Tick, Is.EqualTo(tick));
+            Assert.That(game.Current.Players[1].Offer.Pending, Is.True);
+            Assert.That(game.ContinueChoice(0, 1, 0), Is.False); Assert.That(game.ContinueChoice(1, 2, 0), Is.False);
+            Assert.That(game.ContinueChoice(1, 1, 0), Is.True); Assert.That(game.ContinueChoice(1, 1, 0), Is.False);
+            Assert.That(game.Current.State, Is.EqualTo(SharedState.Choosing));
+            Assert.That(game.Select(Choice(1, UpgradeId.FasterFire)), Is.True); game.CommitChoices();
+            Assert.That(game.ContinueChoice(1, 1, 1), Is.True); Assert.That(game.Current.State, Is.EqualTo(SharedState.Running));
+            Assert.That(game.Current.Elapsed, Is.EqualTo(elapsed)); game.Step(); Assert.That(game.Current.Tick, Is.EqualTo(tick + 1));
+            for (int i = 0; i < 9; i++) game.Step();
+            Assert.That(game.Current.Players[0].Health, Is.EqualTo(100)); Assert.That(game.Current.Players[0].BodyDamage, Is.EqualTo(30));
+        }
+        [Test] public void GravityAndMergingPreserveValueProvenanceAndInclusiveCollection()
+        {
+            var replica = new OrbReplica(); replica.Reset(game.Current.Run); game.Growth.Changed += e => replica.Apply(e);
+            game.Growth.Death(game.Current, Death(1, new Vector3(15, 0, 0))); game.Growth.Death(game.Current, Death(2, new Vector3(16, 0, 0)));
+            Vector3 original = game.Growth.Orbs[2].Position;
+            for (int i = 0; i < 40; i++) game.Step();
+            Assert.That(events.Exists(e => e.Kind == GrowthEventKind.Moved && e.Orb.Position != original), Is.True);
+            Assert.That(game.Growth.Orbs.Count, Is.EqualTo(1)); Assert.That(game.Growth.Orbs[1].Value, Is.EqualTo(2));
+            Assert.That(game.Current.Xp, Is.Zero); Assert.That(replica.UncollectedXp, Is.EqualTo(2)); Assert.That(replica.Orbs[1].Value, Is.EqualTo(2));
+            Assert.That(game.Growth.Death(game.Current, Death(2, Vector3.zero)), Is.False, "Merging cannot enable a second award for the same death");
+            game.Current.Players[0].Position = game.Current.Players[1].Position = new Vector3(17, 0, 0); game.Growth.Collect(game.Current);
+            Assert.That(game.Current.Xp, Is.EqualTo(2)); Assert.That(replica.UncollectedXp, Is.Zero);
+            GrowthEvent collected = events.Find(e => e.Kind == GrowthEventKind.Collected);
+            Assert.That(collected.Player, Is.Zero); Assert.That(collected.Orb.Value, Is.EqualTo(2));
+        }
+        [Test] public void DenseSameCellMergeConservesTwentyThousandDiagnosticXpWithoutQuadraticScan()
+        {
+            for (int i = 1; i <= 20000; i++) game.Growth.Death(game.Current, Death(i, Vector3.forward * 20));
+            game.Growth.AttractAndMerge(game.Current);
+            Assert.That(game.Growth.Orbs.Count, Is.EqualTo(1)); Assert.That(game.Growth.Orbs[1].Value, Is.EqualTo(20000));
+            Assert.That(game.Growth.UncollectedXp, Is.EqualTo(20000)); Assert.That(game.Current.Xp, Is.Zero);
+            Assert.That(game.Growth.AttractionQueries, Is.LessThanOrEqualTo(40000));
+        }
+        [Test] public void ReplicaRejectsNonConservingAndRepeatedMerge()
+        {
+            game.Growth.Death(game.Current, Death(1, Vector3.forward * 20)); game.Growth.Death(game.Current, Death(2, Vector3.forward * 20));
+            var replica = new OrbReplica(); replica.Reset(game.Current.Run); replica.Apply(events[0]); replica.Apply(events[1]);
+            game.Growth.AttractAndMerge(game.Current); GrowthEvent merge = events[2]; GrowthEvent forged = merge; forged.Orb.Value++;
+            Assert.Throws<ArgumentException>(() => replica.Apply(forged)); Assert.That(replica.UncollectedXp, Is.EqualTo(2));
+            using (var stream = new MemoryStream())
+            { merge.Write(new BinaryWriter(stream)); Assert.That(stream.Length + 5, Is.LessThan(SharedConnection.MaxPacket)); stream.Position = 0; merge = GrowthEvent.Read(new BinaryReader(stream)); }
+            Assert.That(replica.Apply(merge), Is.True); Assert.That(replica.Apply(merge), Is.False); Assert.That(replica.UncollectedXp, Is.EqualTo(2));
         }
         GrowthChoice Choice(int p, UpgradeId upgrade) => new GrowthChoice { Run = game.Current.Run, Player = p,
             Offer = game.Current.Players[p].Offer.Id, Weapon = p + 1, Upgrade = upgrade };
@@ -159,6 +217,23 @@ namespace Journey.Tests
                 Assert.That(stream.Length + 1, Is.LessThanOrEqualTo(SharedConnection.MaxPacket)); stream.Position = 0; SharedConnection.ReadSnapshot(new BinaryReader(stream), clone); }
             Assert.That(binding.CanAdopt(clone, new SharedSnapshot(game.Configuration)), Is.True); Assert.That(clone.Configuration.BodyDamage, Is.EqualTo(20));
             clone.Players[0].BodyDamage = 31; Assert.Throws<ArgumentException>(() => binding.CanAdopt(clone, game.Current));
+        }
+        [Test] public void SameTickChoicesAndReadinessReplicateWithoutPhysicalAdvanceAndResetTheirRevision()
+        {
+            var binding = new SharedScenarioBinding(game.Configuration);
+            using (var stream = new MemoryStream()) { binding.Write(new BinaryWriter(stream)); stream.Position = 0; binding.AcceptAcknowledgement(new BinaryReader(stream)); }
+            game.Current.Session = binding.Session; Earn(true);
+            var prior = new SharedSnapshot(); prior.CopyFrom(game.Current); int tick = prior.Tick;
+            game.Select(Choice(0, UpgradeId.StrongerHits)); game.CommitChoices();
+            Assert.That(binding.CanAdopt(game.Current, prior), Is.True); Assert.That(game.Current.Tick, Is.EqualTo(tick));
+            prior.CopyFrom(game.Current); game.ContinueChoice(game.Current.Run, game.Current.ChoicePhase, 0);
+            Assert.That(binding.CanAdopt(game.Current, prior), Is.True); Assert.That(game.Current.Tick, Is.EqualTo(tick));
+            Assert.Throws<ArgumentException>(() => binding.CanAdopt(prior, game.Current), "Readiness cannot regress at the same physical tick");
+            game.Select(Choice(1, UpgradeId.FasterFire)); game.CommitChoices(); game.ContinueChoice(game.Current.Run, 1, 1);
+            Assert.That(game.Current.State, Is.EqualTo(SharedState.Running)); game.Current.Tick = 3599; game.Step();
+            game.Retry(game.Current.Run, 0); game.Retry(game.Current.Run, 1);
+            Assert.That(game.Current.ChoicePhase, Is.Zero); Assert.That(game.Current.ControlRevision, Is.Zero);
+            foreach (var player in game.Current.Players) Assert.That(player.ChoiceReady, Is.False);
         }
         [Test] public void GrowthSettingsCannotBeOverriddenOrRateEdited()
         {

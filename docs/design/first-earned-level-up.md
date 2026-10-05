@@ -1,5 +1,7 @@
 # GDJ-6: first earned level-up contract
 
+**October 5 owner revision:** [decision 0013](../decisions/0013-readable-xp-and-safe-first-level-up.md) supersedes the live corner-card and stationary one-value carrier simplifications below for the next GDJ-23 candidate: automatic physical freeze with centered choices/all-roster Continue, explicit two-metre pickup feedback/audio, flat batched XP visuals and value-conserving gravity/merging. Historical revision 1 remains preserved below. Full banked/invoked Zone and new authored drop values remain later work.
+
 **Revision 1, October 4, 2026 — owner accepted as the test contract.** [GDJ-6](https://linear.app/cnid/issue/GDJ-6/design-the-first-engine-kingdoms-cooperative-encounter) owns live status. This is one ordinary growth experiment for solo and two players, serving [foundation pillar 1](../foundation.md#1-perceptible-power-growth), with responsive combat and understandable teammate contributions. No gameplay, networking or enjoyment is established by this document.
 
 The owner accepts the exact revision 1 content at **`abde9100e03165f3437f739d40e265c05f52219c`**, in [PR #9](https://github.com/OpenCnid/game-dev-journey/pull/9): **“Let's accept revision 1 as the test contract, it looks good.”** No individual rule change or more detailed rationale was supplied. The design rationale below remains the session's explanation, not invented owner reasoning. This acceptance update changes documentation/status only; the test mechanics and values are unchanged.

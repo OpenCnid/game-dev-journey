@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Journey
 {
-    public enum SharedState { Waiting, Running, Complete, Defeat, Aborted }
+    public enum SharedState { Waiting, Running, Complete, Defeat, Aborted, Choosing }
     public enum ShotDecision { Damage, Miss, StaleRun, StaleLife, Duplicate, Invalid, StalePose, StaleEnemy, Terminal }
 
     [Serializable] public struct SharedPlayer
@@ -14,7 +14,7 @@ namespace Journey
         public int Health, Life, Shots, Hits, Damage, Kills;
         public int Weapon, BodyDamage;
         public float RifleInterval;
-        public bool Ready;
+        public bool Ready, ChoiceReady;
         public PersonalOffer Offer;
     }
     [Serializable] public struct SharedEnemy
@@ -25,7 +25,7 @@ namespace Journey
     public sealed class SharedSnapshot
     {
         public int Run, Tick;
-        public int Roster = 2, Xp, Level = 1;
+        public int Roster = 2, Xp, Level = 1, ChoicePhase, ControlRevision;
         public float Elapsed;
         public SharedState State;
         public readonly SharedPlayer[] Players = new SharedPlayer[2];
@@ -39,6 +39,7 @@ namespace Journey
             Configuration = other.Configuration; Session = other.Session;
             if (Enemies.Length != other.Enemies.Length) Enemies = new SharedEnemy[other.Enemies.Length];
             Roster = other.Roster; Xp = other.Xp; Level = other.Level;
+            ChoicePhase = other.ChoicePhase; ControlRevision = other.ControlRevision;
             Run = other.Run; Tick = other.Tick; Elapsed = other.Elapsed; State = other.State;
             Array.Copy(other.Players, Players, 2); Array.Copy(other.Enemies, Enemies, Enemies.Length);
         }
@@ -108,6 +109,7 @@ namespace Journey
         public void Start(bool preparing = false)
         {
             Current.Run++; Current.Tick = 0; Current.Elapsed = 0; Current.State = preparing ? SharedState.Waiting : SharedState.Running;
+            Current.ChoicePhase = Current.ControlRevision = 0;
             random = new System.Random(Configuration.Seed); pending.Clear(); choices.Clear(); Growth?.Reset(Configuration.Seed); Current.Xp = 0; Current.Level = 1; Rejected = 0; AbortReason = "";
             for (int p = 0; p < Current.Roster; p++)
             {
@@ -166,23 +168,39 @@ namespace Journey
         }
         public void Step()
         {
+            if (Current.State == SharedState.Choosing) { CommitChoices(); return; }
             if (Current.State != SharedState.Running) return;
             Current.Tick++; Current.Elapsed = Current.Tick * CombatSimulation.Tick;
+            ApplyChoices(false);
+            StepCombat();
+        }
+        public bool CommitChoices()
+        {
+            if (Current.State != SharedState.Choosing || choices.Count == 0) return false;
+            ApplyChoices(true); return true;
+        }
+        void ApplyChoices(bool frozen)
+        {
             choices.Sort((a,b) => a.Player.CompareTo(b.Player));
             foreach (GrowthChoice choice in choices)
             {
                 SharedPlayer player = Current.Players[choice.Player];
-                if (!ValidChoice(choice) || player.Offer.Tick >= Current.Tick) continue;
+                if (!ValidChoice(choice) || !frozen && player.Offer.Tick >= Current.Tick) continue;
                 UpgradeDefinition definition = GrowthUpgrade.Definition(choice.Upgrade);
                 float interval = definition.Effect == UpgradeEffect.FireCadence ? GrowthUpgrade.Interval(choice.Upgrade) : player.RifleInterval;
-                double progressRemaining = Math.Max(0, nextShot[choice.Player] - (Current.Tick - 1) * (double)CombatSimulation.Tick) / player.RifleInterval;
-                nextShot[choice.Player] = (Current.Tick - 1) * (double)CombatSimulation.Tick + progressRemaining * interval;
+                double now = (frozen ? Current.Tick : Current.Tick - 1) * (double)CombatSimulation.Tick;
+                double progressRemaining = Math.Max(0, nextShot[choice.Player] - now) / player.RifleInterval;
+                nextShot[choice.Player] = now + progressRemaining * interval;
                 if (definition.Effect == UpgradeEffect.DirectDamage) player.BodyDamage = GrowthUpgrade.Damage(choice.Upgrade);
                 player.RifleInterval = interval;
                 player.Offer.Selected = choice.Upgrade; player.Offer.AppliedTick = Current.Tick;
+                player.Offer.ControlRevision = ++Current.ControlRevision;
                 Current.Players[choice.Player] = player; Growth.Applied(Current, choice.Player);
             }
             choices.Clear();
+        }
+        void StepCombat()
+        {
             pending.Sort((a, b) => a.Player != b.Player ? a.Player.CompareTo(b.Player) : a.Event.CompareTo(b.Event));
             for (int i = 0; i < pending.Count;)
             {
@@ -223,7 +241,12 @@ namespace Journey
                     lastInput[p] = 0; inputTime[p] = 0;
                 }
             }
-            if (Current.State == SharedState.Running) Growth?.Collect(Current);
+            if (Current.State == SharedState.Running && Growth != null)
+            {
+                Growth.AttractAndMerge(Current); Growth.Collect(Current);
+                if (Current.Level == 2 && Current.ChoicePhase == 0)
+                { Current.State = SharedState.Choosing; Current.ChoicePhase = 1; Current.ControlRevision++; pending.Clear(); }
+            }
             Remember();
         }
         public int NearestLiving(Vector3 position)
@@ -302,7 +325,7 @@ namespace Journey
             SharedPlayer player = Current.Players[p]; player.Ready = true; Current.Players[p] = player;
             if (Current.Players[0].Ready && (Current.Roster == 1 || Current.Players[1].Ready)) Start(); return true;
         }
-        bool ValidChoice(GrowthChoice c) => Growth != null && c.Run == Current.Run && Current.State == SharedState.Running &&
+        bool ValidChoice(GrowthChoice c) => Growth != null && c.Run == Current.Run && (Current.State == SharedState.Running || Current.State == SharedState.Choosing) &&
             c.Player >= 0 && c.Player < Current.Roster && GrowthUpgrade.Valid(c.Upgrade) &&
             GrowthUpgrade.Definition(c.Upgrade).Target == UpgradeTarget.OwnedWeapon && Current.Players[c.Player].Offer.Pending &&
             c.Offer == Current.Players[c.Player].Offer.Id && c.Weapon == Current.Players[c.Player].Weapon && c.Weapon == Current.Players[c.Player].Offer.Weapon;
@@ -310,6 +333,14 @@ namespace Journey
         {
             if (!ValidChoice(choice) || choices.Exists(c => c.Player == choice.Player)) return false;
             choices.Add(choice); return true;
+        }
+        public bool ContinueChoice(int run, int phase, int p)
+        {
+            if (run != Current.Run || phase != Current.ChoicePhase || p < 0 || p >= Current.Roster ||
+                Current.State != SharedState.Choosing || Current.Players[p].Offer.Selected == UpgradeId.None || Current.Players[p].ChoiceReady) return false;
+            Current.Players[p].ChoiceReady = true; Current.ControlRevision++;
+            for (int i = 0; i < Current.Roster; i++) if (!Current.Players[i].ChoiceReady) return true;
+            Current.State = SharedState.Running; pending.Clear(); Remember(); return true;
         }
         public void Abort(string reason) { Current.State = SharedState.Aborted; AbortReason = reason; pending.Clear(); choices.Clear(); }
         static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);

@@ -151,16 +151,17 @@ namespace Journey
                 {
                     if (incoming.Xp < 0 || incoming.Level != (incoming.Xp >= EarnedGrowth.Threshold ? 2 : 1) ||
                         (incoming.Level == 1 && (offer.Id != 0 || offer.Selected != UpgradeId.None || offer.AppliedTick != 0)) ||
-                        (offer.Selected == UpgradeId.None && offer.AppliedTick != 0) ||
+                        (offer.Selected == UpgradeId.None && (offer.AppliedTick != 0 || offer.ControlRevision != 0)) ||
                         (incoming.Level == 2 && (offer.Id != p + 1 || offer.Weapon != player.Weapon ||
                         offer.Tick < 1 || offer.Tick > incoming.Tick || !GrowthUpgrade.Valid(offer.First))) ||
-                        (offer.Selected != UpgradeId.None && (!GrowthUpgrade.Valid(offer.Selected) || offer.AppliedTick <= offer.Tick || offer.AppliedTick > incoming.Tick)) ||
+                        (offer.Selected != UpgradeId.None && (!GrowthUpgrade.Valid(offer.Selected) || offer.AppliedTick < offer.Tick || offer.AppliedTick > incoming.Tick || offer.ControlRevision < 1 || offer.ControlRevision > incoming.ControlRevision)) ||
+                        (player.ChoiceReady && offer.Selected == UpgradeId.None) ||
                         player.BodyDamage != GrowthUpgrade.Damage(offer.Selected) || player.RifleInterval != GrowthUpgrade.Interval(offer.Selected))
                         throw new ArgumentException("Invalid earned build snapshot");
                     PersonalOffer previous = current.Players[p].Offer;
                     if (incoming.Run == current.Run && incoming.Tick >= current.Tick && (incoming.Xp < current.Xp ||
                         previous.Id > 0 && (offer.Id != previous.Id || offer.First != previous.First || offer.Weapon != previous.Weapon || offer.Tick != previous.Tick ||
-                        previous.Selected != UpgradeId.None && (offer.Selected != previous.Selected || offer.AppliedTick != previous.AppliedTick))))
+                        previous.Selected != UpgradeId.None && (offer.Selected != previous.Selected || offer.AppliedTick != previous.AppliedTick || offer.ControlRevision != previous.ControlRevision)) || current.Players[p].ChoiceReady && !player.ChoiceReady))
                         throw new ArgumentException("Earned state cannot regress or reroll");
                 }
                 else if (offer.Id != 0 || incoming.Xp != 0 || incoming.Level != 1 || player.BodyDamage != Configuration.BodyDamage || player.RifleInterval != Configuration.RifleInterval)
@@ -168,9 +169,10 @@ namespace Journey
             }
             if (incoming.Run < 1 || incoming.Run > current.Run + 1 || incoming.Tick < 0 ||
                 !(incoming.Elapsed >= 0 && incoming.Elapsed <= Configuration.Duration + CombatSimulation.Tick) ||
-                incoming.State < SharedState.Running || incoming.State > SharedState.Aborted)
+                incoming.State < SharedState.Running || incoming.State > SharedState.Choosing || incoming.ControlRevision < 0 ||
+                incoming.State == SharedState.Choosing && (!Configuration.Growth || incoming.Level != 2 || incoming.ChoicePhase != 1))
                 throw new ArgumentException("Invalid snapshot generation/state.");
-            return current.State != SharedState.Aborted && (incoming.Run == current.Run + 1 || incoming.Run == current.Run && incoming.Tick >= current.Tick);
+            return current.State != SharedState.Aborted && (incoming.Run == current.Run + 1 || incoming.Run == current.Run && incoming.Tick >= current.Tick && incoming.ControlRevision >= current.ControlRevision);
         }
         public static void RequireEnd(BinaryReader r)
         { if (r.BaseStream.Position != r.BaseStream.Length) throw new ArgumentException("Unexpected trailing packet data."); }

@@ -18,6 +18,32 @@ namespace Journey.Tests
         static void Pump(SharedGame game)
         { Clock.SetValue(game, Time.realtimeSinceStartupAsDouble - .016); Update.Invoke(game, null); }
 
+        [UnityTest] public IEnumerator FlatPickupBatchesKeepObjectOwnershipFixedAcrossOneThousandCarriers()
+        {
+            var root = new GameObject("Batched pickup ownership"); var view = new ArenaPresentation(); var sim = new CombatSimulation();
+            try
+            {
+                view.Create(root.transform); var game = root.AddComponent<SharedGame>(); game.enabled = false;
+                typeof(SharedGame).GetField("output", Hidden).SetValue(game, viewOutput());
+                game.Initialize(view, sim, true, "", 0, ScenarioConfiguration.Named(ScenarioKind.EarnedGrowth), true); Pump(game); Pump(game);
+                int ownedObjects = root.GetComponentsInChildren<Transform>(true).Length;
+                var authority = (SharedEncounter)typeof(SharedGame).GetField("authority", Hidden).GetValue(game);
+                for (int i = 1; i <= 1004; i++) authority.Growth.Death(authority.Current,
+                    new SharedHit(new SharedShot { Run = 1, Player = 0, Weapon = 1, Event = i }, ShotDecision.Damage,
+                    new ShotResult(Vector3.zero, 0, i, HitRegion.Body, 30, 30, 30, 0), Vector3.forward * 20));
+                var replica = (OrbReplica)typeof(SharedGame).GetField("orbReplica", Hidden).GetValue(game);
+                var pickups = (XpPresentation)typeof(SharedGame).GetField("pickups", Hidden).GetValue(game);
+                pickups.Draw(replica, view.Camera, Vector3.zero, true);
+                Assert.That(pickups.SubmittedCarriers, Is.EqualTo(1004));
+                Assert.That(root.GetComponentsInChildren<Transform>(true).Length, Is.EqualTo(ownedObjects), "Carrier count must not create objects/components/colliders");
+                var radius = root.transform.Find("XP pickup radius").GetComponent<LineRenderer>();
+                Vector3 edge = radius.GetPosition(0); edge.y = 0;
+                Assert.That(edge.magnitude, Is.EqualTo(EarnedGrowth.PickupRadius).Within(.0001f));
+                yield return null;
+            }
+            finally { UnityEngine.Object.DestroyImmediate(root); view.Dispose(); sim.Dispose(); }
+        }
+
         [UnityTest] public IEnumerator WaitingHostCanReturnRehostAndStartFreshSoloWithoutLosingMenuSettingsOrLogs()
         {
             var root = new GameObject("Menu session navigation"); var menu = root.AddComponent<PrototypeGame>();
@@ -109,7 +135,7 @@ namespace Journey.Tests
             { for (int i = 0; i < 2; i++) { UnityEngine.Object.DestroyImmediate(roots[i]); views[i].Dispose(); sims[i].Dispose(); } }
         }
 
-        [UnityTest] public IEnumerator SoloGrowthHiddenCardsCannotSelectAndRetryRestoresBaseline()
+        [UnityTest] public IEnumerator SoloGrowthChoicePausesCannotHideAndContinueRestoresCombatWithoutPausedCatchup()
         {
             var root = new GameObject("Solo earned growth controls"); var view = new ArenaPresentation(); var sim = new CombatSimulation();
             try
@@ -131,13 +157,20 @@ namespace Journey.Tests
                     new ShotResult(Vector3.zero, 0, i, HitRegion.Body, 30, 30, 30, 0), Vector3.zero));
                 authority.Step(); Publish.Invoke(game, null); Pump(game);
                 Assert.That(game.Snapshot.Players[0].Offer.Pending, Is.True);
-                Assert.That(game.ChoiceControls(true, 1), Is.False, "Hiding cards disables number selection");
-                Assert.That(game.ChoiceControls(false, 2), Is.False);
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Choosing));
+                int pausedTick = game.Snapshot.Tick;
+                Clock.SetValue(game, Time.realtimeSinceStartupAsDouble - 5); Update.Invoke(game, null);
+                Assert.That(game.Snapshot.Tick, Is.EqualTo(pausedTick), "Paused wall time is not physical simulation");
+                Assert.That(game.ContinueChoice(), Is.False, "No implicit choice or readiness");
                 UpgradeId first = game.Snapshot.Players[0].Offer.Card(1);
-                Assert.That(game.ChoiceControls(true, 1), Is.True, "Reopening keeps the original offer");
+                Assert.That(game.ChoiceControls(true, 1), Is.True, "Tab cannot hide the paused choice");
                 authority.Step(); Publish.Invoke(game, null); Pump(game);
                 Assert.That(game.Snapshot.Players[0].Offer.Selected, Is.EqualTo(first));
                 Assert.That(game.ChoiceControls(false, 2), Is.False);
+                Assert.That(game.ContinueChoice(), Is.True);
+                Clock.SetValue(game, Time.realtimeSinceStartupAsDouble - 5); Update.Invoke(game, null);
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Running));
+                Assert.That(game.Snapshot.Tick, Is.EqualTo(pausedTick), "Resume does not replay thinking time");
                 authority.Current.Tick = 3599;
                 Clock.SetValue(game, Time.realtimeSinceStartupAsDouble - .06); Update.Invoke(game, null);
                 Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Complete), "Leftover frame time cannot overwrite completion with catch-up abort");
@@ -232,6 +265,16 @@ namespace Journey.Tests
                         Assert.That(games[1].Snapshot.Players[0].BodyDamage, Is.EqualTo(30));
                         Assert.That(games[1].Snapshot.Players[1].RifleInterval, Is.EqualTo(.08f));
                         Assert.That(games[1].Choose(UpgradeId.StrongerHits), Is.False);
+                        Assert.That(games[1].Snapshot.State, Is.EqualTo(SharedState.Choosing));
+                        int pausedTick = games[1].Snapshot.Tick;
+                        Assert.That(games[0].ContinueChoice(), Is.True);
+                        Assert.That(games[0].Snapshot.State, Is.EqualTo(SharedState.Choosing), "One ready member cannot resume the pair");
+                        Pump(games[0]); Pump(games[1]);
+                        Assert.That(games[1].ContinueChoice(), Is.True);
+                        while (games[1].Snapshot.State == SharedState.Choosing && Time.realtimeSinceStartupAsDouble < deadline)
+                        { Pump(games[0]); Pump(games[1]); yield return null; }
+                        Assert.That(games[1].Snapshot.State, Is.EqualTo(SharedState.Running));
+                        Assert.That(games[1].Snapshot.Tick, Is.LessThanOrEqualTo(pausedTick + 2));
                     }
                     authority.Current.Tick = 3599; authority.Step(); Publish.Invoke(games[0], null);
                     while (games[1].Snapshot.State == SharedState.Running && Time.realtimeSinceStartupAsDouble < deadline)
