@@ -55,6 +55,12 @@ Additional weapons/levels, qualifying rares/team grants, magnets, thinking space
 
 ## Durable handoff and Resume
 
+### Owner test correction — October 5
+
+The owner clicked Host (A) during the v4 solo comparison and reported being stuck at Waiting with no route back. Add Back to menu to waiting/ending/stopped shared screens and to the released-input screen during a run. Leaving closes this local session, notifies the fixed peer of interruption, releases its UDP port and session-owned visuals/preview/log writers, and restores the existing menu with its selected scenario and rate preference. A new solo/Host/Join action creates fresh session state; Retry still belongs to the current run. Preserve previous session evidence when re-entering from the same launched player. Verify waiting-host cancel/rehost, active peer interruption, retained menu settings and fresh solo progression. This is a testing/navigation correction within GDJ-23, not connection recovery or a new lobby system.
+
+Implemented with one idempotent session-close path and immediate preview-camera detachment before restoring the existing menu. Two Play Mode regressions verify waiting cancel/rehost with actual UDP port reuse, active peer interruption, retained settings/evidence and fresh solo XP/offers/builds. Serialized `tools/unity.ps1` checks pass: **126 Edit Mode / 14 Play Mode**. The corrected clean release is archived as `StackLab-GDJ23-v5`; native owner button/upgrade comparison remains required. The v4 stuck-window screenshot and launch/logs remain in `artifacts/gdj23-owner-solo-20261005-001126`; no completed human upgrade comparison was reported.
+
 - **Completed at dispatch preparation:** owner-selected scope, verified base/prerequisites, separate Linear ticket and this brief. No runtime change, new build, performance result or human-play result.
 - **Coordinator:** `01a0ff82-9c47-77a2-b780-0e86575639f1`, host `local`. Exact worker ID is recorded in the issue after creation. This chat owns priorities and handoff/integration review; the gameplay chat owns this implementation and candidate checks.
 - **Next:** establish a suitable isolated managed checkout from the committed brief revision; record exact path/branch/base in the issue and add the boundary plan above before runtime edits. Keep one gameplay writer and serialize Unity operations.

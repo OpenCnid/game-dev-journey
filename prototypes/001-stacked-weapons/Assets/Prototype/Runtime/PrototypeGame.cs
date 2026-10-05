@@ -33,6 +33,7 @@ namespace Journey
         ScenarioConfiguration sharedScenario = ScenarioConfiguration.Named(ScenarioKind.SharedRifle);
         Guid soloRun;
         string sharedAddress = "127.0.0.1";
+        float menuRifleRate = CombatSimulation.DefaultRifleRate;
         string profilePath;
         float profileSeconds = 5;
         double profileStarted;
@@ -226,20 +227,34 @@ namespace Journey
         void StartGrowthSolo()
         {
             if (benchmark) CancelBenchmark(); sim.Reset(0, 137, false); view.ResetFeedback();
+            menuRifleRate = sim.RifleRate;
             gameObject.AddComponent<SharedGame>().Initialize(view, sim, true, "", 0, ScenarioConfiguration.Named(ScenarioKind.EarnedGrowth), true); enabled = false;
         }
         void StartShared(bool host, string address, ushort port = 7777)
         {
             if (configurationInvalid) return;
+            SharedGame shared = null;
             try
             {
                 if (benchmark) CancelBenchmark();
                 sim.Reset(0, 137, false);
                 view.ResetFeedback();
-                var shared = gameObject.AddComponent<SharedGame>();
+                menuRifleRate = sim.RifleRate;
+                shared = gameObject.AddComponent<SharedGame>();
                 shared.Initialize(view, sim, host, address, port, host ? sharedScenario : null); enabled = false;
             }
-            catch (Exception exception) { error = exception.Message; Debug.LogException(exception); }
+            catch (Exception exception)
+            {
+                if (shared != null) { shared.CloseSession("Session failed to start"); Destroy(shared); }
+                ReturnFromShared(); error = exception.Message; Debug.LogException(exception);
+            }
+        }
+        internal void ReturnFromShared()
+        {
+            sim.ResetForMenu(); sim.RifleRate = menuRifleRate;
+            view.ResetFeedback(); yaw = pitch = accumulator = 0;
+            previousClock = Time.realtimeSinceStartupAsDouble;
+            enabled = true; SetCursor(false);
         }
         public bool TrySetRifleRate(string value)
         {

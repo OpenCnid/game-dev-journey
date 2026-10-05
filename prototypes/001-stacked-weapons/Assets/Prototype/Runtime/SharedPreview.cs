@@ -132,13 +132,16 @@ namespace Journey
             string temporary = path + ".tmp"; File.WriteAllBytes(temporary, bytes);
             if (File.Exists(path)) File.Replace(temporary, path, null); else File.Move(temporary, path);
         }
-        void OnDestroy()
+        internal void Close()
         {
+            if (closing) return;
             closing = true;
+            StopAllCoroutines(); enabled = false;
             if (pending) AsyncGPUReadback.WaitAllRequests();
             if (camera != null) camera.targetTexture = null;
             if (full != null) { full.Release(); Destroy(full); }
             if (thumbnail != null) { thumbnail.Release(); Destroy(thumbnail); }
         }
+        void OnDestroy() => Close();
     }
 }

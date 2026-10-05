@@ -63,6 +63,7 @@ namespace Journey
                 if (args[i] == "-screenshot") screenshot = Path.GetFullPath(args[i + 1]);
             }
             if (output.Length == 0) output = Path.Combine(Application.persistentDataPath, "SharedCombat", DateTime.UtcNow.ToString("yyyyMMdd-HHmmss"), host ? "host" : "client");
+            if (File.Exists(Path.Combine(output, "frames.csv"))) output = Path.Combine(output, "session-" + Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(output);
             if (Array.IndexOf(args, "-sharedPreview") >= 0)
             { preview = gameObject.AddComponent<SharedPreview>(); preview.Initialize(this, view.Camera, output); }
@@ -466,6 +467,8 @@ namespace Journey
                 GUI.DrawTexture(new Rect(0, 0, w, h), Texture2D.whiteTexture); GUI.color = Color.white;
             }
             GUI.Label(new Rect(25, 18, 1000, 40), $"{(display.Configuration.Growth ? "EARNED GROWTH" : "SHARED RIFLE")} / {(solo ? "SOLO" : local == 0 ? "A · HOST" : "B · CLIENT")} / {display.State}", heading);
+            if (display.State != SharedState.Running || !inputActive)
+                if (GUI.Button(new Rect(w - 205, 18, 180, 38), "Back to menu")) { BackToMenu(); return; }
             GUI.Label(new Rect(25, 57, 1150, 28), solo ? $"Run {display.Run} · {a.Health} HP · {a.Damage} damage · {a.Kills} kills" :
                 $"Run {display.Run}   ·   A: {a.Health} HP, {a.Damage} damage, {a.Kills} kills   ·   B: {b.Health} HP, {b.Damage} damage, {b.Kills} kills", small);
             if (binding.Configuration != null)
@@ -521,14 +524,33 @@ namespace Journey
             GUI.Label(new Rect(panel.x, panel.y + 107, panel.width, 30), context, lifeDetail);
         }
         static void SetCursor(bool locked) { Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None; Cursor.visible = !locked; }
-        void OnDestroy()
+        public void BackToMenu()
         {
             if (binding == null) return;
-            if (!saved && display.State != SharedState.Waiting) { reason = "Local player closed"; display.State = SharedState.Aborted; Save(); }
-            foreach (var orb in orbViews.Values) if (orb != null) Destroy(orb);
-            connection?.Send(SharedConnection.Message.Abort, w => w.Write("Peer player closed")); connection?.Dispose();
-            frameLog?.Dispose(); hitLog?.Dispose(); growthLog?.Dispose(); if (orbMaterial != null) Destroy(orbMaterial); if (allyMaterial != null) Destroy(allyMaterial);
-            if (allyShot != null) Destroy(allyShot.sharedMaterial); SetCursor(false);
+            CloseSession("Returned to menu");
+            GetComponent<PrototypeGame>()?.ReturnFromShared();
+            Destroy(this);
         }
+        internal void CloseSession(string closeReason)
+        {
+            if (binding == null) return;
+            if (!saved && display.State != SharedState.Waiting && frameLog != null)
+            { reason = closeReason; authority?.Abort(closeReason); display.State = SharedState.Aborted; Save(); }
+            if (connection != null)
+            {
+                connection.Send(SharedConnection.Message.Abort, w => w.Write(closeReason));
+                connection.Received -= Receive; connection.Lost -= Abort;
+                connection.Dispose(); connection = null;
+            }
+            if (preview != null) { preview.Close(); Destroy(preview); }
+            foreach (var orb in orbViews.Values) if (orb != null) Destroy(orb);
+            orbViews.Clear();
+            frameLog?.Dispose(); hitLog?.Dispose(); growthLog?.Dispose(); if (orbMaterial != null) Destroy(orbMaterial); if (allyMaterial != null) Destroy(allyMaterial);
+            if (ally != null) Destroy(ally);
+            if (allyShot != null) { Destroy(allyShot.sharedMaterial); Destroy(allyShot.gameObject); }
+            if (authority != null) { authority.Resolved -= Resolve; if (authority.Growth != null) authority.Growth.Changed -= GrowthChanged; }
+            authority = null; binding = null; enabled = false; SetCursor(false);
+        }
+        void OnDestroy() => CloseSession("Peer player closed");
     }
 }

@@ -142,6 +142,12 @@ namespace Journey
             State = RunState.Running;
         }
 
+        internal void ResetForMenu()
+        {
+            Reset(0, Configuration.Seed, false);
+            State = RunState.Ready;
+        }
+
         public void TogglePause()
         {
             if (State == RunState.Paused) State = beforePause;

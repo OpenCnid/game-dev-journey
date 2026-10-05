@@ -33,6 +33,8 @@ The pause/start menu includes 144/240/custom/uncapped frame limits and a separat
 
 The main menu also offers **Host (A)** and **Join (B)**. Direct IPv4 UDP port 7777, fixed two-player roster, 12 shared 60-HP drones, one baseline 20/40-damage rifle each, 60 seconds. Host owns damage, incarnations, personal health/contact grace and endings. No friendly obstruction/damage. One death follows the living teammate's view and returns after five active seconds with one second of visible contact immunity. All-dead defeat precedes return/completion. After defeat/completion both players click Retry (or R); R does nothing during shared combat. Escape/focus loss releases local input while the encounter continues. Click **Resume local input** to resume. Connection loss aborts; restart both processes to form a fresh pair.
 
+**Back to menu** is available while waiting, at an ending or stopped session, and after Escape releases input during combat. It closes the local session and interrupts a connected peer, releases the hosting port, and restores the existing menu/settings. Start/Host/Join creates a fresh session; Retry resets the current paired run. Re-entering from the same player preserves earlier logs in separate session directories beneath the requested results folder.
+
 Use two separate games on this desktop without a second person/machine:
 
 ```powershell
