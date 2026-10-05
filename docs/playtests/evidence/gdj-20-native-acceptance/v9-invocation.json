@@ -1,0 +1,60 @@
+{
+  "width": 1920,
+  "scripted": true,
+  "processes": [
+    {
+      "role": "host",
+      "pid": 15816,
+      "arguments": [
+        "-screen-fullscreen",
+        "0",
+        "-screen-width",
+        1920,
+        "-screen-height",
+        1080,
+        "-force-d3d11",
+        "-port",
+        7796,
+        "-sharedResults",
+        "\"C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\native-v9-visible-performance\\host\"",
+        "-logFile",
+        "\"C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\native-v9-visible-performance\\host\\player.log\"",
+        "-host",
+        "-sharedLoopback",
+        "-sharedScripted",
+        "-sharedUncapped"
+      ]
+    },
+    {
+      "role": "client",
+      "pid": 21132,
+      "arguments": [
+        "-screen-fullscreen",
+        "0",
+        "-screen-width",
+        1920,
+        "-screen-height",
+        1080,
+        "-force-d3d11",
+        "-port",
+        7796,
+        "-sharedResults",
+        "\"C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\native-v9-visible-performance\\client\"",
+        "-logFile",
+        "\"C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\native-v9-visible-performance\\client\\player.log\"",
+        "-join",
+        "127.0.0.1",
+        "-sharedScripted",
+        "-sharedUncapped"
+      ]
+    }
+  ],
+  "connection": "two processes on one desktop, IPv4 loopback UDP",
+  "humanRole": "host",
+  "uncapped": true,
+  "started": "2026-10-04T19:49:56.7960952-05:00",
+  "scriptedCompanion": false,
+  "player": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v9\\StackLab.exe",
+  "visibility": "Verify both unobstructed windows before treating capture as performance evidence.",
+  "height": 1080
+}

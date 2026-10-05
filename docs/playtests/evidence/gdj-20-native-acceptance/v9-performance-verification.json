@@ -1,0 +1,471 @@
+{
+  "sourceRevision": "2e328764cd435cf11a4356adf79bdfa7650a6f05",
+  "rawTraceHashes": {
+    "host/frames.csv": {
+      "bytes": 25908385,
+      "sha256": "1e9abe14163c4d0a6d2d31fd6f73dfb9e309b6579dbdf19c7cfe083a6ae1ab49"
+    },
+    "host/events.csv": {
+      "bytes": 234303,
+      "sha256": "6b9ba12f33203bc0af561bade6650c11786e8f7906a113694b7da895e21f48c3"
+    },
+    "client/frames.csv": {
+      "bytes": 30038587,
+      "sha256": "316ed9fe138c0085393ec98a04fb8da96f36157f1b61c374e45e9641d8a412c8"
+    },
+    "client/events.csv": {
+      "bytes": 234511,
+      "sha256": "718c5c7d12d8c853ef5a9156eb83a2261eacb9bfee277b882547a366409f4af4"
+    }
+  },
+  "runs": [
+    {
+      "run": 2,
+      "terminalParity": {
+        "run": true,
+        "ticks": true,
+        "state": true,
+        "players": true,
+        "enemyStates": true
+      },
+      "commonSampledTicks": 3600,
+      "counterDiscrepancies": 0,
+      "eventOutcomesAgree": true,
+      "roles": {
+        "host": {
+          "frameMs": {
+            "samples": 83217,
+            "p50": 0.6472,
+            "p95": 1.2078,
+            "p99": 1.4238,
+            "max": 8.1442,
+            "over6_944": 2,
+            "over13_889": 0
+          },
+          "confirmedHitMs": {
+            "samples": 500,
+            "p50": 9.53,
+            "p95": 16.915,
+            "p99": 17.286,
+            "max": 17.634
+          },
+          "rttMs": {
+            "samples": 83217,
+            "p50": 2.229,
+            "p95": 3.258,
+            "p99": 3.609,
+            "max": 5.155
+          },
+          "traceSpanSeconds": 59.999247999999994,
+          "firstTick": 0,
+          "lastTick": 3599,
+          "events": 960,
+          "damageEvents": 565,
+          "deaths": [
+            {
+              "player": 1,
+              "deathTick": 2271,
+              "returnTick": 2571
+            }
+          ],
+          "tickZeroResetCountersAgree": true,
+          "uniqueEnemyDeaths": 201,
+          "eventCountersMatchTerminal": true,
+          "decisionCounts": {
+            "Damage": 565,
+            "Miss": 394,
+            "Terminal": 1
+          },
+          "terminalPlayers": [
+            {
+              "Health": 100,
+              "Life": 1,
+              "Shots": 500,
+              "Hits": 500,
+              "Damage": 10000,
+              "Kills": 187
+            },
+            {
+              "Health": 80,
+              "Life": 2,
+              "Shots": 459,
+              "Hits": 65,
+              "Damage": 2280,
+              "Kills": 14
+            }
+          ],
+          "reportedFrameWindowStartsAtSimulationSecond": 3,
+          "frameGatePass": true,
+          "confirmedHitGatePass": true,
+          "rttWithin20MsThroughoutSamples": true
+        },
+        "client": {
+          "frameMs": {
+            "samples": 95472,
+            "p50": 0.5623,
+            "p95": 1.0478,
+            "p99": 1.2913,
+            "max": 6.7516,
+            "over6_944": 0,
+            "over13_889": 0
+          },
+          "confirmedHitMs": {
+            "samples": 65,
+            "p50": 12.759,
+            "p95": 17.352,
+            "p99": 21.33,
+            "max": 21.33
+          },
+          "rttMs": {
+            "samples": 95472,
+            "p50": 2.332,
+            "p95": 3.11,
+            "p99": 3.456,
+            "max": 3.73
+          },
+          "traceSpanSeconds": 60.057249999999996,
+          "firstTick": 0,
+          "lastTick": 3599,
+          "events": 960,
+          "damageEvents": 565,
+          "deaths": [
+            {
+              "player": 1,
+              "deathTick": 2271,
+              "returnTick": 2571
+            }
+          ],
+          "tickZeroResetCountersAgree": true,
+          "uniqueEnemyDeaths": 201,
+          "eventCountersMatchTerminal": true,
+          "decisionCounts": {
+            "Damage": 565,
+            "Miss": 394,
+            "Terminal": 1
+          },
+          "terminalPlayers": [
+            {
+              "Health": 100,
+              "Life": 1,
+              "Shots": 500,
+              "Hits": 500,
+              "Damage": 10000,
+              "Kills": 187
+            },
+            {
+              "Health": 80,
+              "Life": 2,
+              "Shots": 459,
+              "Hits": 65,
+              "Damage": 2280,
+              "Kills": 14
+            }
+          ],
+          "reportedFrameWindowStartsAtSimulationSecond": 3,
+          "frameGatePass": true,
+          "confirmedHitGatePass": true,
+          "rttWithin20MsThroughoutSamples": true
+        }
+      }
+    },
+    {
+      "run": 3,
+      "terminalParity": {
+        "run": true,
+        "ticks": true,
+        "state": true,
+        "players": true,
+        "enemyStates": true
+      },
+      "commonSampledTicks": 3600,
+      "counterDiscrepancies": 0,
+      "eventOutcomesAgree": true,
+      "roles": {
+        "host": {
+          "frameMs": {
+            "samples": 83019,
+            "p50": 0.6492,
+            "p95": 1.2085,
+            "p99": 1.419,
+            "max": 11.201,
+            "over6_944": 2,
+            "over13_889": 0
+          },
+          "confirmedHitMs": {
+            "samples": 500,
+            "p50": 10.465,
+            "p95": 20.491,
+            "p99": 20.979,
+            "max": 21.808
+          },
+          "rttMs": {
+            "samples": 83019,
+            "p50": 2.235,
+            "p95": 3.363,
+            "p99": 3.805,
+            "max": 5.939
+          },
+          "traceSpanSeconds": 59.99984500000002,
+          "firstTick": 0,
+          "lastTick": 3599,
+          "events": 960,
+          "damageEvents": 565,
+          "deaths": [
+            {
+              "player": 1,
+              "deathTick": 2271,
+              "returnTick": 2571
+            }
+          ],
+          "tickZeroResetCountersAgree": true,
+          "uniqueEnemyDeaths": 201,
+          "eventCountersMatchTerminal": true,
+          "decisionCounts": {
+            "Damage": 565,
+            "Miss": 394,
+            "Terminal": 1
+          },
+          "terminalPlayers": [
+            {
+              "Health": 100,
+              "Life": 1,
+              "Shots": 500,
+              "Hits": 500,
+              "Damage": 10000,
+              "Kills": 187
+            },
+            {
+              "Health": 80,
+              "Life": 2,
+              "Shots": 459,
+              "Hits": 65,
+              "Damage": 2280,
+              "Kills": 14
+            }
+          ],
+          "reportedFrameWindowStartsAtSimulationSecond": 3,
+          "frameGatePass": true,
+          "confirmedHitGatePass": true,
+          "rttWithin20MsThroughoutSamples": true
+        },
+        "client": {
+          "frameMs": {
+            "samples": 95653,
+            "p50": 0.5645,
+            "p95": 1.0361,
+            "p99": 1.2721,
+            "max": 4.6405,
+            "over6_944": 0,
+            "over13_889": 0
+          },
+          "confirmedHitMs": {
+            "samples": 65,
+            "p50": 12.726,
+            "p95": 17.14,
+            "p99": 17.999,
+            "max": 17.999
+          },
+          "rttMs": {
+            "samples": 95653,
+            "p50": 2.143,
+            "p95": 3.24,
+            "p99": 3.621,
+            "max": 12.886
+          },
+          "traceSpanSeconds": 60.05616999999998,
+          "firstTick": 0,
+          "lastTick": 3599,
+          "events": 960,
+          "damageEvents": 565,
+          "deaths": [
+            {
+              "player": 1,
+              "deathTick": 2271,
+              "returnTick": 2571
+            }
+          ],
+          "tickZeroResetCountersAgree": true,
+          "uniqueEnemyDeaths": 201,
+          "eventCountersMatchTerminal": true,
+          "decisionCounts": {
+            "Damage": 565,
+            "Miss": 394,
+            "Terminal": 1
+          },
+          "terminalPlayers": [
+            {
+              "Health": 100,
+              "Life": 1,
+              "Shots": 500,
+              "Hits": 500,
+              "Damage": 10000,
+              "Kills": 187
+            },
+            {
+              "Health": 80,
+              "Life": 2,
+              "Shots": 459,
+              "Hits": 65,
+              "Damage": 2280,
+              "Kills": 14
+            }
+          ],
+          "reportedFrameWindowStartsAtSimulationSecond": 3,
+          "frameGatePass": true,
+          "confirmedHitGatePass": true,
+          "rttWithin20MsThroughoutSamples": true
+        }
+      }
+    },
+    {
+      "run": 4,
+      "terminalParity": {
+        "run": true,
+        "ticks": true,
+        "state": true,
+        "players": true,
+        "enemyStates": true
+      },
+      "commonSampledTicks": 3600,
+      "counterDiscrepancies": 0,
+      "eventOutcomesAgree": true,
+      "roles": {
+        "host": {
+          "frameMs": {
+            "samples": 83333,
+            "p50": 0.645,
+            "p95": 1.2096,
+            "p99": 1.4271,
+            "max": 7.1115,
+            "over6_944": 1,
+            "over13_889": 0
+          },
+          "confirmedHitMs": {
+            "samples": 501,
+            "p50": 11.555,
+            "p95": 18.563,
+            "p99": 18.9,
+            "max": 19.227
+          },
+          "rttMs": {
+            "samples": 83333,
+            "p50": 2.195,
+            "p95": 2.95,
+            "p99": 3.625,
+            "max": 3.807
+          },
+          "traceSpanSeconds": 59.99917199999999,
+          "firstTick": 0,
+          "lastTick": 3599,
+          "events": 960,
+          "damageEvents": 563,
+          "deaths": [
+            {
+              "player": 1,
+              "deathTick": 2546,
+              "returnTick": 2846
+            }
+          ],
+          "tickZeroResetCountersAgree": true,
+          "uniqueEnemyDeaths": 200,
+          "eventCountersMatchTerminal": true,
+          "decisionCounts": {
+            "Damage": 563,
+            "Miss": 397
+          },
+          "terminalPlayers": [
+            {
+              "Health": 100,
+              "Life": 1,
+              "Shots": 501,
+              "Hits": 501,
+              "Damage": 10020,
+              "Kills": 189
+            },
+            {
+              "Health": 70,
+              "Life": 2,
+              "Shots": 459,
+              "Hits": 62,
+              "Damage": 2160,
+              "Kills": 11
+            }
+          ],
+          "reportedFrameWindowStartsAtSimulationSecond": 3,
+          "frameGatePass": true,
+          "confirmedHitGatePass": true,
+          "rttWithin20MsThroughoutSamples": true
+        },
+        "client": {
+          "frameMs": {
+            "samples": 96029,
+            "p50": 0.5596,
+            "p95": 1.0397,
+            "p99": 1.2874,
+            "max": 7.1069,
+            "over6_944": 1,
+            "over13_889": 0
+          },
+          "confirmedHitMs": {
+            "samples": 62,
+            "p50": 9.975,
+            "p95": 16.84,
+            "p99": 16.974,
+            "max": 16.974
+          },
+          "rttMs": {
+            "samples": 96029,
+            "p50": 2.208,
+            "p95": 3.06,
+            "p99": 3.596,
+            "max": 3.878
+          },
+          "traceSpanSeconds": 60.05553899999995,
+          "firstTick": 0,
+          "lastTick": 3599,
+          "events": 960,
+          "damageEvents": 563,
+          "deaths": [
+            {
+              "player": 1,
+              "deathTick": 2546,
+              "returnTick": 2846
+            }
+          ],
+          "tickZeroResetCountersAgree": true,
+          "uniqueEnemyDeaths": 200,
+          "eventCountersMatchTerminal": true,
+          "decisionCounts": {
+            "Damage": 563,
+            "Miss": 397
+          },
+          "terminalPlayers": [
+            {
+              "Health": 100,
+              "Life": 1,
+              "Shots": 501,
+              "Hits": 501,
+              "Damage": 10020,
+              "Kills": 189
+            },
+            {
+              "Health": 70,
+              "Life": 2,
+              "Shots": 459,
+              "Hits": 62,
+              "Damage": 2160,
+              "Kills": 11
+            }
+          ],
+          "reportedFrameWindowStartsAtSimulationSecond": 3,
+          "frameGatePass": true,
+          "confirmedHitGatePass": true,
+          "rttWithin20MsThroughoutSamples": true
+        }
+      }
+    }
+  ],
+  "frameWindow": "All Running rows, including first three seconds; terminal state confirms 3600 ticks/60 seconds.",
+  "percentileMethod": "Nearest rank: ceil(p*n)-1 in sorted samples.",
+  "evidenceLimits": "Common ticks verify sampled counters/HP, terminal snapshots verify full state. Visibility separately observed; no OS present/CPU-work/GPU timing, physical photon latency or LAN/internet conclusion."
+}

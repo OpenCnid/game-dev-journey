@@ -1,0 +1,285 @@
+{
+  "runStarts": [
+    {
+      "run": 2,
+      "utc": "2026-10-05T00:51:31.107Z"
+    },
+    {
+      "run": 3,
+      "utc": "2026-10-05T00:53:49.442Z"
+    },
+    {
+      "run": 4,
+      "utc": "2026-10-05T00:55:24.627Z"
+    }
+  ],
+  "visibility": [
+    {
+      "run": 1,
+      "phase": "teammate-corrected",
+      "role": "host",
+      "utc": "2026-10-05T00:50:53.072Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v9\\StackLab.exe",
+        "id": 4787788,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 0,
+        "originY": 196,
+        "width": 1283,
+        "height": 751
+      },
+      "file": "v9-run1-teammate-corrected-host.jpg"
+    },
+    {
+      "run": 2,
+      "phase": "start",
+      "role": "host",
+      "utc": "2026-10-05T00:51:24.920Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v9\\StackLab.exe",
+        "id": 4787788,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 0,
+        "originY": 196,
+        "width": 1283,
+        "height": 751
+      },
+      "file": "v9-run2-start-host.jpg"
+    },
+    {
+      "run": 2,
+      "phase": "start",
+      "role": "client",
+      "utc": "2026-10-05T00:51:30.757Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v9\\StackLab.exe",
+        "id": 4918406,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 1918,
+        "originY": 196,
+        "width": 1281,
+        "height": 751
+      },
+      "file": "v9-run2-start-client.jpg"
+    },
+    {
+      "run": 2,
+      "phase": "end",
+      "role": "client",
+      "utc": "2026-10-05T00:53:15.751Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v9\\StackLab.exe",
+        "id": 4918406,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 1918,
+        "originY": 196,
+        "width": 1281,
+        "height": 751
+      },
+      "file": "v9-run2-end-client.jpg"
+    },
+    {
+      "run": 2,
+      "phase": "end",
+      "role": "host",
+      "utc": "2026-10-05T00:53:28.062Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v9\\StackLab.exe",
+        "id": 4787788,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 0,
+        "originY": 196,
+        "width": 1283,
+        "height": 751
+      },
+      "file": "v9-run2-end-host.jpg"
+    },
+    {
+      "run": 3,
+      "phase": "start",
+      "role": "host",
+      "utc": "2026-10-05T00:53:44.344Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v9\\StackLab.exe",
+        "id": 4787788,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 0,
+        "originY": 196,
+        "width": 1283,
+        "height": 751
+      },
+      "file": "v9-run3-start-host.jpg"
+    },
+    {
+      "run": 3,
+      "phase": "start",
+      "role": "client",
+      "utc": "2026-10-05T00:53:49.119Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v9\\StackLab.exe",
+        "id": 4918406,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 1918,
+        "originY": 196,
+        "width": 1281,
+        "height": 751
+      },
+      "file": "v9-run3-start-client.jpg"
+    },
+    {
+      "run": 3,
+      "phase": "teammate-corrected",
+      "role": "client",
+      "utc": "2026-10-05T00:54:07.053Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v9\\StackLab.exe",
+        "id": 4918406,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 1918,
+        "originY": 196,
+        "width": 1281,
+        "height": 751
+      },
+      "file": "v9-run3-teammate-corrected-client.jpg"
+    },
+    {
+      "run": 3,
+      "phase": "end",
+      "role": "client",
+      "utc": "2026-10-05T00:55:08.076Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v9\\StackLab.exe",
+        "id": 4918406,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 1918,
+        "originY": 196,
+        "width": 1281,
+        "height": 751
+      },
+      "file": "v9-run3-end-client.jpg"
+    },
+    {
+      "run": 3,
+      "phase": "end",
+      "role": "host",
+      "utc": "2026-10-05T00:55:12.212Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v9\\StackLab.exe",
+        "id": 4787788,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 0,
+        "originY": 196,
+        "width": 1283,
+        "height": 751
+      },
+      "file": "v9-run3-end-host.jpg"
+    },
+    {
+      "run": 4,
+      "phase": "start",
+      "role": "host",
+      "utc": "2026-10-05T00:55:17.424Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v9\\StackLab.exe",
+        "id": 4787788,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 0,
+        "originY": 196,
+        "width": 1283,
+        "height": 751
+      },
+      "file": "v9-run4-start-host.jpg"
+    },
+    {
+      "run": 4,
+      "phase": "start",
+      "role": "client",
+      "utc": "2026-10-05T00:55:24.262Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v9\\StackLab.exe",
+        "id": 4918406,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 1918,
+        "originY": 196,
+        "width": 1281,
+        "height": 751
+      },
+      "file": "v9-run4-start-client.jpg"
+    },
+    {
+      "run": 4,
+      "phase": "end",
+      "role": "client",
+      "utc": "2026-10-05T00:56:49.070Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v9\\StackLab.exe",
+        "id": 4918406,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 1918,
+        "originY": 196,
+        "width": 1281,
+        "height": 751
+      },
+      "file": "v9-run4-end-client.jpg"
+    },
+    {
+      "run": 4,
+      "phase": "end",
+      "role": "host",
+      "utc": "2026-10-05T00:56:59.764Z",
+      "window": {
+        "app": "process:C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v9\\StackLab.exe",
+        "id": 4787788,
+        "title": "Stack Lab"
+      },
+      "screenshot": {
+        "id": "screenshot-0",
+        "originX": 0,
+        "originY": 196,
+        "width": 1283,
+        "height": 751
+      },
+      "file": "v9-run4-end-host.jpg"
+    }
+  ],
+  "observation": "Two native windows side by side on the 3840x1600 display. Game/HUD areas visible; thin window borders touch at the split/display edges. Start/end inspection, no continuous desktop recording. No OS input during measured rounds after start. Warm-up run1 excludes positioning. Preview disabled."
+}
