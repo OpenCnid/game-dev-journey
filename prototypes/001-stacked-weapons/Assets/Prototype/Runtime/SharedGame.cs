@@ -23,13 +23,30 @@ namespace Journey
         Material allyMaterial;
         LineRenderer allyShot;
         int local, run, life, inputSequence, shotSequence, catchupLimits;
-        float yaw, pitch, inputTime, inputRemaining, shotRemaining, accumulator, pingRemaining;
+        float yaw, pitch, inputTime, inputRemaining, accumulator, pingRemaining;
+        readonly float[] shotRemaining = new float[3];
+        readonly WeaponWork[] weaponWork = new WeaponWork[6];
+        readonly AimResult[] cueTargets = new AimResult[ScenarioConfiguration.MaxEnemies];
+        readonly LineRenderer[] secondaryLines = new LineRenderer[8];
+        Material scatterTrail, pierceTrail;
+        int secondaryCue;
         Vector3 predicted;
-        bool inputActive = true, scripted, quitAtEnd, saved;
+        bool inputActive = true, scripted, quitAtEnd, saved, solo, soloPrepared, cardsVisible = true;
+        readonly OrbReplica orbReplica = new OrbReplica();
+        XpPresentation pickups;
+        SharedState previousState;
+        bool pickupCue, levelCue, screenshotAtLevelUp;
+        double pickupCueAt, pickupFlashUntil;
+        StreamWriter growthLog;
+        float emissionInterval = .12f, confirmationUntil;
+        UpgradeId scriptedChoice;
+        string scriptedStackPath = "";
         double previousClock, lastRtt;
+        double updateLastMs, updateMaxMs, abortFrameMs, abortRemainingMs, abortPreviousUpdateMs;
+        int abortCatchupTicks;
         string reason = "", output = "", screenshot = "";
         StreamWriter frameLog, hitLog;
-        GUIStyle heading, small, lifeHeading, lifeDetail;
+        GUIStyle heading, small, lifeHeading, lifeDetail, choiceCard;
         const float ViewTransitionSeconds = .2f;
         float viewTransition;
         int previousWatched = -1;
@@ -42,29 +59,42 @@ namespace Journey
         public bool Scripted => scripted;
         public float LocalYaw => yaw;
         public float LocalPitch => pitch;
-        public void Initialize(ArenaPresentation arena, CombatSimulation sim, bool host, string address, ushort port, ScenarioConfiguration configuration = null)
+        public void Initialize(ArenaPresentation arena, CombatSimulation sim, bool host, string address, ushort port, ScenarioConfiguration configuration = null, bool soloGrowth = false)
         {
+            solo = soloGrowth;
             binding = new SharedScenarioBinding(host ? configuration ?? ScenarioConfiguration.Named(ScenarioKind.SharedRifle) : null);
             view = arena; projection = sim; local = host ? 0 : 1;
             var args = Environment.GetCommandLineArgs();
+            if (Array.IndexOf(args, "-sharedMute") >= 0) AudioListener.volume = 0;
             scripted = Array.IndexOf(args, "-sharedScripted") >= 0; quitAtEnd = Array.IndexOf(args, "-sharedQuit") >= 0;
+            screenshotAtLevelUp = Array.IndexOf(args, "-screenshotAtLevelUp") >= 0;
             if (Array.IndexOf(args, "-sharedUncapped") >= 0) { Application.targetFrameRate = -1; QualitySettings.vSyncCount = 0; }
             for (int i = 0; i < args.Length - 1; i++)
             {
                 if (args[i] == "-sharedResults") output = Path.GetFullPath(args[i + 1]);
+                if (args[i] == "-growthChoice") scriptedChoice = args[i + 1] == "stronger" ? UpgradeId.StrongerHits : args[i + 1] == "faster" ? UpgradeId.FasterFire : throw new ArgumentException("Unknown growth choice");
+                if (args[i] == "-stackPath") scriptedStackPath = args[i + 1] == "broad" || args[i + 1] == "scatter" || args[i + 1] == "pierce" ? args[i + 1] : throw new ArgumentException("Unknown stack path");
                 if (args[i] == "-screenshot") screenshot = Path.GetFullPath(args[i + 1]);
             }
             if (output.Length == 0) output = Path.Combine(Application.persistentDataPath, "SharedCombat", DateTime.UtcNow.ToString("yyyyMMdd-HHmmss"), host ? "host" : "client");
+            if (File.Exists(Path.Combine(output, "frames.csv"))) output = Path.Combine(output, "session-" + Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(output);
             if (Array.IndexOf(args, "-sharedPreview") >= 0)
             { preview = gameObject.AddComponent<SharedPreview>(); preview.Initialize(this, view.Camera, output); }
             frameLog = new StreamWriter(Path.Combine(output, "frames.csv"));
-            frameLog.WriteLine("wall_seconds,frame_ms,run,tick,state,A_shots,B_shots,A_hits,B_hits,A_damage,B_damage,A_kills,B_kills,A_hp,B_hp,enemies,rtt_ms");
+            frameLog.Write("wall_seconds,frame_ms,run,tick,state,A_shots,B_shots,A_hits,B_hits,A_damage,B_damage,A_kills,B_kills,A_hp,B_hp,enemies,rtt_ms,xp,level,uncollected_orbs");
+            for (int id = 1; id <= 6; id++) frameLog.Write($",weapon{id}_triggers,weapon{id}_rays,weapon{id}_target_tests,weapon{id}_hits,weapon{id}_damage,weapon{id}_kills");
+            frameLog.WriteLine();
             hitLog = new StreamWriter(Path.Combine(output, "events.csv"));
-            hitLog.WriteLine("wall_seconds,run,player,weapon,event,pose_tick,life,decision,enemy,incarnation,region,requested,before,actual,after,confirmed_delay_ms");
-            connection = new SharedConnection(host, address, port, Array.IndexOf(args, "-sharedLoopback") >= 0);
-            connection.Received += Receive; connection.Lost += Abort;
-            if (host) { authority = new SharedEncounter(binding.Configuration, binding.Session); display.CopyFrom(authority.Current); authority.Resolved += Resolve; }
+            hitLog.WriteLine("wall_seconds,run,player,weapon,event,pose_tick,life,decision,enemy,incarnation,region,requested,before,actual,after,confirmed_delay_ms,trigger,ray_index,rays,target_tests");
+            growthLog = new StreamWriter(Path.Combine(output, "growth.jsonl"));
+            pickups = new XpPresentation(transform);
+            if (!solo)
+            {
+                connection = new SharedConnection(host, address, port, Array.IndexOf(args, "-sharedLoopback") >= 0);
+                connection.Received += Receive; connection.Lost += Abort;
+            }
+            if (host) { authority = new SharedEncounter(binding.Configuration, binding.Session, solo ? 1 : 2); display.CopyFrom(authority.Current); authority.Resolved += Resolve; if (authority.Growth != null) authority.Growth.Changed += GrowthChanged; }
             ally = GameObject.CreatePrimitive(PrimitiveType.Capsule); ally.name = "Teammate " + (host ? "B" : "A");
             Destroy(ally.GetComponent<Collider>()); ally.transform.SetParent(transform);
             allyMaterial = new Material(Resources.Load<Material>("Body"));
@@ -74,6 +104,14 @@ namespace Journey
             allyShot.positionCount = 2; allyShot.startWidth = .018f; allyShot.endWidth = .004f;
             allyShot.sharedMaterial = new Material(Resources.Load<Material>("Trail")); allyShot.sharedMaterial.color = new Color(.1f, .9f, .8f);
             allyShot.enabled = false;
+            scatterTrail = new Material(Resources.Load<Material>("Trail")); scatterTrail.color = new Color(1, .55f, .1f);
+            pierceTrail = new Material(Resources.Load<Material>("Trail")); pierceTrail.color = new Color(.8f, .35f, 1);
+            for (int i = 0; i < secondaryLines.Length; i++)
+            {
+                var line = new GameObject("Secondary shot " + i).AddComponent<LineRenderer>(); line.transform.SetParent(transform);
+                line.positionCount = 2; line.startWidth = .025f; line.endWidth = .008f; line.enabled = false; secondaryLines[i] = line;
+            }
+            if (solo) { authority.Start(preparing: true); Publish(); SaveConfiguration(); }
             previousClock = Time.realtimeSinceStartupAsDouble;
             SetCursor(!scripted && preview == null); Debug.Log("SHARED_SESSION " + (host ? "HOST" : "CLIENT") + " " + address + ":" + port + " " + output);
         }
@@ -104,8 +142,15 @@ namespace Journey
             else if (message == SharedConnection.Message.Snapshot && authority == null)
             {
                 SharedConnection.ReadSnapshot(r, incoming);
-                if (binding.CanAdopt(incoming, display)) display.CopyFrom(incoming);
+                if (binding.CanAdopt(incoming, display)) { if (incoming.Run != display.Run) orbReplica.Reset(incoming.Run); display.CopyFrom(incoming); }
             }
+            else if (message == SharedConnection.Message.Growth && authority == null) GrowthChanged(GrowthEvent.Read(r));
+            else if (message == SharedConnection.Message.Choice && authority != null)
+            {
+                authority.Select(new GrowthChoice { Run = r.ReadInt32(), Player = 1, Offer = r.ReadInt32(), Weapon = r.ReadInt32(), Upgrade = (UpgradeId)r.ReadInt32() });
+            }
+            else if (message == SharedConnection.Message.ContinueChoice && authority != null)
+            { authority.ContinueChoice(r.ReadInt32(), r.ReadInt32(), 1); Publish(); }
             else if (message == SharedConnection.Message.Hit && authority == null) feedback.Enqueue(SharedConnection.ReadHit(r));
             else if (message == SharedConnection.Message.Retry && authority != null)
             {
@@ -119,12 +164,13 @@ namespace Journey
         }
         void Resolve(SharedHit hit)
         {
-            feedback.Enqueue(hit); connection.Send(SharedConnection.Message.Hit, w => SharedConnection.WriteHit(w, hit));
+            feedback.Enqueue(hit); connection?.Send(SharedConnection.Message.Hit, w => SharedConnection.WriteHit(w, hit));
         }
         void Publish()
         {
+            if (display.Run != authority.Current.Run) orbReplica.Reset(authority.Current.Run);
             display.CopyFrom(authority.Current);
-            connection.Send(SharedConnection.Message.Snapshot, w => SharedConnection.WriteSnapshot(w, display));
+            connection?.Send(SharedConnection.Message.Snapshot, w => SharedConnection.WriteSnapshot(w, display));
         }
         void Abort(string value)
         {
@@ -139,11 +185,11 @@ namespace Journey
             if (display.Run == run && player.Life == life) return;
             bool newRun = display.Run != run; run = display.Run; life = player.Life;
             predicted = player.Position; yaw = player.Yaw; pitch = player.Pitch;
-            inputTime = inputRemaining = shotRemaining = 0; inputSequence = 0; view.ResetFeedback();
+            inputTime = inputRemaining = 0; Array.Clear(shotRemaining, 0, shotRemaining.Length); inputSequence = 0; view.ResetFeedback();
             previewInputUntil = 0; previewMovement = Vector3.zero; previewFire = false;
             if (newRun)
             {
-                shotSequence = 0; emitted.Clear(); saved = false;
+                accumulator = 0; shotSequence = 0; emitted.Clear(); saved = false;
                 // Poll can deliver the new snapshot and its first hits together.
                 // Retain that run's feedback while discarding prior-run events.
                 int queued = feedback.Count;
@@ -153,22 +199,43 @@ namespace Journey
                     if (hit.Source.Run == run) feedback.Enqueue(hit);
                 }
                 frames.Clear(); confirms.Clear(); catchupLimits = 0;
-                previousWatched = -1; viewTransition = 0;
+                abortFrameMs = abortRemainingMs = abortPreviousUpdateMs = 0; abortCatchupTicks = 0;
+                for (int i = 0; i < weaponWork.Length; i++) weaponWork[i] = new WeaponWork(i + 1);
+                previousWatched = -1; viewTransition = 0; cardsVisible = true; confirmationUntil = 0; emissionInterval = player.RifleInterval;
             }
         }
         void Update()
         {
-            if (connection == null) return;
+            if (binding == null) return;
+            long updateStarted = System.Diagnostics.Stopwatch.GetTimestamp();
             double now = Time.realtimeSinceStartupAsDouble, frame = (now - previousClock) * 1000; previousClock = now;
             bool runningAtFrameStart = display.State == SharedState.Running;
             int frameRun = display.Run;
-            connection.Poll();
+            connection?.Poll();
+            if (previousState == SharedState.Choosing && display.State == SharedState.Running)
+            { frame = accumulator = 0; inputActive = true; predicted = display.Players[local].Position; previewInputUntil = 0; confirmationUntil = (float)now + 2; SetCursor(!scripted && preview == null); }
+            if (solo && display.State == SharedState.Waiting && soloPrepared)
+            {
+                authority.Begin(); accumulator = 0; Publish();
+                // One complete prepared render precedes active time; first-use GPU setup is not combat.
+                frame = 0; previousClock = now;
+            }
             SyncGeneration();
             preview?.Poll();
+            if (authority != null && authority.CommitChoices()) Publish();
             SharedPlayer player = display.Players[local];
             Keyboard keyboard = preview == null ? Keyboard.current : null;
             if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame) { inputActive = !inputActive; SetCursor(inputActive && display.State == SharedState.Running); }
             if (keyboard != null && keyboard.rKey.wasPressedThisFrame) Retry();
+            PersonalOffer currentOffer = player.Offer;
+            if (currentOffer.Pending && (display.State == SharedState.Running || display.State == SharedState.Choosing))
+            {
+                if (keyboard != null) ChoiceControls(keyboard.tabKey.wasPressedThisFrame, keyboard.digit1Key.wasPressedThisFrame ? 1 : keyboard.digit2Key.wasPressedThisFrame ? 2 : 0);
+                if (scripted && GrowthUpgrade.Valid(ScriptedUpgrade())) Choose(ScriptedUpgrade());
+            }
+            if (keyboard != null && keyboard.enterKey.wasPressedThisFrame) ContinueChoice();
+            if (authority != null && authority.CommitChoices()) Publish();
+            if (scripted && GrowthUpgrade.Valid(ScriptedUpgrade()) && display.State == SharedState.Choosing && display.Players[local].Offer.Selected != UpgradeId.None) ContinueChoice();
             float dt = Mathf.Min(.05f, (float)(frame * .001));
             bool active = display.State == SharedState.Running && player.Health > 0;
             Vector3 movement = Vector3.zero;
@@ -179,12 +246,20 @@ namespace Journey
                 {
                     float t = display.Elapsed;
                     Vector3 goal = new Vector3(Mathf.Cos(t * .30f + local * Mathf.PI) * 22, 0, Mathf.Sin(t * .30f + local * Mathf.PI) * 22);
+                    if (display.Configuration.Growth && orbReplica.Orbs.Count > 0)
+                    {
+                        float nearest = float.PositiveInfinity;
+                        foreach (XpOrb orb in orbReplica.Orbs.Values)
+                        { float distance = (orb.Position - predicted).sqrMagnitude; if (distance < nearest) { nearest = distance; goal = orb.Position; } }
+                    }
                     movement = (goal - predicted).normalized;
                     // Shared slot for the opening, then clear nearby threats. No invulnerability/fixture damage changes.
                     int target = 0;
                     if (t > 2) for (int i = 1; i < display.Enemies.Length; i++)
                         if ((display.Enemies[i].Position - predicted).sqrMagnitude < (display.Enemies[target].Position - predicted).sqrMagnitude) target = i;
-                    Vector3 to = display.Enemies[target].Position + Vector3.up * (local == 0 ? .8f : 1.6f) - (predicted + Vector3.up * 1.65f);
+                    SharedEnemy enemy = display.Enemies[target];
+                    Vector3 targetCentre = (local == 0 ? EnemyGeometry.Body(enemy.Position, enemy.Health < display.Configuration.EnemyHealth) : EnemyGeometry.Head(enemy.Position, enemy.Health < display.Configuration.EnemyHealth)).MultiplyPoint3x4(Vector3.zero);
+                    Vector3 to = targetCentre - (predicted + Vector3.up * 1.65f);
                     Quaternion aim = Quaternion.LookRotation(to); yaw = aim.eulerAngles.y; pitch = aim.eulerAngles.x; if (pitch > 180) pitch -= 360;
                 }
                 else if (preview != null) movement = previewMovement;
@@ -213,16 +288,25 @@ namespace Journey
             }
             if (authority != null && display.State == SharedState.Running)
             {
+                if (previousState == SharedState.Choosing) { frame = accumulator = 0; }
                 // Hello/Retry can start a run inside Poll. Its preceding Waiting/terminal frame is not combat time.
                 if (runningAtFrameStart && frameRun == display.Run) accumulator += (float)(frame * .001);
                 int ticks = 0;
                 while (accumulator >= CombatSimulation.Tick && ticks < 8 && authority.Current.State == SharedState.Running)
                 { authority.Step(); accumulator -= CombatSimulation.Tick; ticks++; Publish(); }
-                if (accumulator >= CombatSimulation.Tick) { catchupLimits++; Abort("Authority tick catch-up limit"); accumulator = 0; }
+                if (authority.Current.State == SharedState.Running && accumulator >= CombatSimulation.Tick)
+                {
+                    abortFrameMs = frame; abortRemainingMs = accumulator * 1000; abortCatchupTicks = ticks;
+                    abortPreviousUpdateMs = updateLastMs;
+                    catchupLimits++; Abort("Authority tick catch-up limit"); accumulator = 0;
+                }
                 else if (authority.Current.State == SharedState.Aborted) Abort(authority.AbortReason);
             }
             SyncGeneration();
-            player = display.Players[local]; active = display.State == SharedState.Running && player.Health > 0;
+            player = display.Players[local];
+            if (player.RifleInterval != emissionInterval)
+            { shotRemaining[0] = Mathf.Max(0, shotRemaining[0]) / emissionInterval * player.RifleInterval; emissionInterval = player.RifleInterval; }
+            active = display.State == SharedState.Running && player.Health > 0;
             int watched = player.Health == 0 && display.Players[1 - local].Health > 0 ? 1 - local : local;
             viewTransition = Mathf.Max(0, viewTransition - (float)(frame * .001));
             if (previousWatched >= 0 && watched != previousWatched) viewTransition = ViewTransitionSeconds;
@@ -232,10 +316,12 @@ namespace Journey
             projection.ProjectShared(display, local, cameraPosition);
             view.BeginFrame(projection, 1, cameraYaw, cameraPitch, dt); view.Feedback.ObservePlayerHealth(player.Health);
             allyShot.enabled = false;
+            secondaryCue = 0; foreach (LineRenderer line in secondaryLines) line.enabled = false;
             while (feedback.Count > 0)
             {
                 SharedHit hit = feedback.Dequeue();
                 if (hit.Source.Run != run) continue;
+                if (hit.Source.Weapon >= 1 && hit.Source.Weapon <= 6) weaponWork[hit.Source.Weapon - 1].Record(hit);
                 double delay = -1;
                 if (hit.Source.Player == local && emitted.TryGetValue(hit.Source.Event, out double emission))
                 {
@@ -243,48 +329,161 @@ namespace Journey
                     if (hit.Decision == ShotDecision.Damage) confirms.Add(delay);
                 }
                 ShotResult s = hit.Shot;
-                hitLog.WriteLine(FormattableString.Invariant($"{now:F6},{run},{hit.Source.Player},{hit.Source.Weapon},{hit.Source.Event},{hit.Source.PoseTick},{hit.Source.Life},{hit.Decision},{s.EnemyIndex},{s.SpawnVersion},{s.Region},{s.RequestedDamage},{s.HealthBefore},{s.Damage},{s.HealthAfter},{delay:F3}"));
+                hitLog.WriteLine(FormattableString.Invariant($"{now:F6},{run},{hit.Source.Player},{hit.Source.Weapon},{hit.Source.Event},{hit.Source.PoseTick},{hit.Source.Life},{hit.Decision},{s.EnemyIndex},{s.SpawnVersion},{s.Region},{s.RequestedDamage},{s.HealthBefore},{s.Damage},{s.HealthAfter},{delay:F3},{hit.Trigger},{hit.RayIndex},{hit.Rays},{hit.TargetTests}"));
                 if (s.Hit)
                 {
                     if (hit.Source.Player == local && hit.Source.Life == life) view.Feedback.RecordShot(projection, s);
-                    else { allyShot.SetPosition(0, hit.Source.Ray.origin); allyShot.SetPosition(1, s.End); allyShot.enabled = true; }
+                    else { allyShot.SetPosition(0, hit.Source.Ray.origin); allyShot.SetPosition(1, s.End); allyShot.sharedMaterial.color = WeaponArsenal.Slot(hit.Source.Weapon) == WeaponSlot.Scattergun ? scatterTrail.color : WeaponArsenal.Slot(hit.Source.Weapon) == WeaponSlot.Piercer ? pierceTrail.color : new Color(.1f, .9f, .8f); allyShot.enabled = true; }
                 }
             }
             if (active && (scripted || (preview == null ? inputActive : previewActive && previewFire)))
             {
-                shotRemaining -= dt;
-                while (shotRemaining <= 0)
+                for (int s = 0; s < 3; s++)
                 {
-                    shotRemaining += player.RifleInterval;
-                    Ray ray = new Ray(view.Camera.transform.position, view.Camera.transform.forward);
-                    AimResult preview = display.Query(ray);
-                    view.ShowShot(ray.GetPoint(preview.Distance)); // Immediate cue only, no hit grant.
-                    var shot = new SharedShot { Run = run, Player = local, Life = life, Weapon = player.Weapon, Event = ++shotSequence, PoseTick = display.Tick, Ray = ray };
-                    emitted[shot.Event] = now;
-                    if (authority != null) authority.Submit(shot);
-                    else connection.Send(SharedConnection.Message.Shot, w => SharedConnection.WriteShot(w, shot));
+                    WeaponSlot slot = (WeaponSlot)s; int weapon = WeaponArsenal.Id(local, slot);
+                    if (!WeaponArsenal.Owns(player, local, weapon)) { shotRemaining[s] = 0; continue; }
+                    shotRemaining[s] -= dt;
+                    while (shotRemaining[s] <= 0)
+                    {
+                        shotRemaining[s] += WeaponArsenal.Interval(player, slot);
+                        Ray ray = new Ray(view.Camera.transform.position, view.Camera.transform.forward);
+                        if (slot == WeaponSlot.Rifle) view.ShowShot(ray.GetPoint(display.Query(ray).Distance));
+                        else SecondaryCue(player, slot, ray);
+                        var shot = new SharedShot { Run = run, Player = local, Life = life, Weapon = weapon, Event = ++shotSequence, PoseTick = display.Tick, Ray = ray };
+                        emitted[shot.Event] = now;
+                        if (authority != null) authority.Submit(shot);
+                        else connection.Send(SharedConnection.Message.Shot, w => SharedConnection.WriteShot(w, shot));
+                    }
                 }
             }
             view.Draw(projection, 1);
-            int other = 1 - local; ally.SetActive(display.State == SharedState.Running && display.Players[other].Health > 0 && watched == local);
+            if (solo && display.State == SharedState.Waiting) soloPrepared = true;
+            if (display.State == SharedState.Choosing) { predicted = display.Players[local].Position; inputActive = false; SetCursor(false); }
+            pickups.Draw(orbReplica, view.Camera, display.Players[local].Position, display.Configuration.Growth && player.Health > 0 && (display.State == SharedState.Running || display.State == SharedState.Choosing));
+            if (levelCue || pickupCue && now >= pickupCueAt)
+            { view.PlayGrowthCue(levelCue); pickupCueAt = now + .075; levelCue = pickupCue = false; }
+            previousState = display.State;
+            int other = 1 - local; ally.SetActive(!solo && (display.State == SharedState.Running || display.State == SharedState.Choosing) && display.Players[other].Health > 0 && watched == local);
             ally.transform.position = display.Players[other].Position + Vector3.up;
             pingRemaining -= dt;
-            if (connection.Connected && pingRemaining <= 0) { pingRemaining = .5f; connection.Send(SharedConnection.Message.Ping, w => w.Write(now)); }
+            if (connection != null && connection.Connected && pingRemaining <= 0) { pingRemaining = .5f; connection.Send(SharedConnection.Message.Ping, w => w.Write(now)); }
             if (display.State == SharedState.Running)
             {
-                if (display.Elapsed >= 3) frames.Add(frame);
+                if (display.Elapsed >= 3 && frame > 0) frames.Add(frame);
                 SharedPlayer a = display.Players[0], b = display.Players[1];
-                frameLog.WriteLine(FormattableString.Invariant($"{now:F6},{frame:F4},{run},{display.Tick},{display.State},{a.Shots},{b.Shots},{a.Hits},{b.Hits},{a.Damage},{b.Damage},{a.Kills},{b.Kills},{a.Health},{b.Health},{display.Enemies.Length},{lastRtt:F3}"));
-                if (screenshot.Length > 0 && display.Elapsed >= 5) { Directory.CreateDirectory(Path.GetDirectoryName(screenshot)); ScreenCapture.CaptureScreenshot(screenshot); screenshot = ""; }
+                frameLog.Write(FormattableString.Invariant($"{now:F6},{frame:F4},{run},{display.Tick},{display.State},{a.Shots},{b.Shots},{a.Hits},{b.Hits},{a.Damage},{b.Damage},{a.Kills},{b.Kills},{a.Health},{b.Health},{display.Enemies.Length},{lastRtt:F3},{display.Xp},{display.Level},{orbReplica.Orbs.Count}"));
+                foreach (WeaponWork work in weaponWork) frameLog.Write($",{work.triggers},{work.rays},{work.targetTests},{work.hits},{work.damage},{work.kills}");
+                frameLog.WriteLine();
             }
-            else if (display.State != SharedState.Waiting && !saved)
+            else if (display.State != SharedState.Waiting && display.State != SharedState.Choosing && !saved)
             { Save(); SetCursor(false); if (quitAtEnd) Application.Quit(display.State == SharedState.Aborted ? 2 : 0); }
+            if (screenshot.Length > 0 && (screenshotAtLevelUp ? display.State == SharedState.Choosing : display.State == SharedState.Running && display.Elapsed >= 5))
+            { Directory.CreateDirectory(Path.GetDirectoryName(screenshot)); ScreenCapture.CaptureScreenshot(screenshot); screenshot = ""; }
+            updateLastMs = (System.Diagnostics.Stopwatch.GetTimestamp() - updateStarted) * 1000.0 / System.Diagnostics.Stopwatch.Frequency;
+            updateMaxMs = Math.Max(updateMaxMs, updateLastMs);
         }
+        void GrowthChanged(GrowthEvent e)
+        {
+            if (!orbReplica.Apply(e)) return;
+            growthLog.WriteLine(JsonUtility.ToJson(e));
+            if (e.Kind == GrowthEventKind.Applied && e.Player == local) confirmationUntil = Time.unscaledTime + 3;
+            if (e.Kind == GrowthEventKind.Collected && e.Player == local) { pickupCue = true; pickupFlashUntil = Time.realtimeSinceStartupAsDouble + .35; }
+            if (e.Kind == GrowthEventKind.Entitlement && e.Player == local) levelCue = true;
+            if (authority != null) connection?.Send(SharedConnection.Message.Growth, e.Write);
+        }
+        UpgradeId ScriptedUpgrade()
+        {
+            if (display.Configuration.Kind != ScenarioKind.WeaponStack) return scriptedChoice;
+            if (scriptedStackPath.Length == 0) return UpgradeId.None;
+            if (display.Level == 2) return scriptedStackPath == "pierce" ? UpgradeId.AddPiercer : UpgradeId.AddScattergun;
+            if (display.Level == 3) return scriptedStackPath == "broad" ? WeaponArsenal.Missing(display.Players[local].FirstAddition) : WeaponArsenal.Enhancement(display.Players[local].FirstAddition);
+            return UpgradeId.None;
+        }
+        void SecondaryCue(SharedPlayer player, WeaponSlot slot, Ray aim)
+        {
+            int rays = WeaponArsenal.Rays(player, slot); float range = WeaponArsenal.Range(slot);
+            for (int r = 0; r < rays && secondaryCue < secondaryLines.Length; r++)
+            {
+                Ray ray = slot == WeaponSlot.Scattergun ? WeaponArsenal.Fan(aim, r, rays) : aim;
+                int count = WeaponArsenal.Query(display, ray, range, cueTargets);
+                float distance = count == 0 ? range : cueTargets[slot == WeaponSlot.Piercer ? Math.Min(count, WeaponArsenal.PierceLimit(player)) - 1 : 0].Distance;
+                LineRenderer line = secondaryLines[secondaryCue++]; line.sharedMaterial = slot == WeaponSlot.Scattergun ? scatterTrail : pierceTrail;
+                line.SetPosition(0, aim.origin + view.Camera.transform.right * .25f - Vector3.up * .18f);
+                line.SetPosition(1, ray.GetPoint(distance)); line.enabled = true;
+            }
+        }
+        public bool ChoiceControls(bool tab, int card)
+        {
+            PersonalOffer offer = display.Players[local].Offer;
+            if ((display.State != SharedState.Running && display.State != SharedState.Choosing) || !offer.Pending) return false;
+            if (display.State == SharedState.Choosing) cardsVisible = true;
+            else if (tab) cardsVisible = !cardsVisible;
+            return cardsVisible && card > 0 && card <= 2 && Choose(offer.Card(card));
+        }
+        public bool Choose(UpgradeId upgrade)
+        {
+            PersonalOffer offer = display.Players[local].Offer;
+            if (!offer.Pending || (display.State != SharedState.Running && display.State != SharedState.Choosing) || !offer.Contains(upgrade)) return false;
+            var choice = new GrowthChoice { Run = display.Run, Player = local, Offer = offer.Id, Weapon = offer.Weapon, Upgrade = upgrade };
+            if (authority != null) return authority.Select(choice);
+            return connection.Send(SharedConnection.Message.Choice, w => { w.Write(choice.Run); w.Write(choice.Offer); w.Write(choice.Weapon); w.Write((int)choice.Upgrade); });
+        }
+        public bool ContinueChoice()
+        {
+            if (display.State != SharedState.Choosing || display.Players[local].Offer.Selected == UpgradeId.None || display.Players[local].ChoiceReady) return false;
+            if (authority != null) { bool accepted = authority.ContinueChoice(display.Run, display.ChoicePhase, local); Publish(); return accepted; }
+            return connection.Send(SharedConnection.Message.ContinueChoice, w => { w.Write(display.Run); w.Write(display.ChoicePhase); });
+        }
+        void GrowthHud(float w, float h)
+        {
+            if (!display.Configuration.Growth) return;
+            SharedPlayer player = display.Players[local]; PersonalOffer offer = player.Offer;
+            int goal = display.Level < display.Configuration.LevelCap ? EarnedGrowth.ThresholdFor(display.Level + 1) : EarnedGrowth.ThresholdFor(display.Configuration.LevelCap);
+            int previous = display.Level == 1 ? 0 : EarnedGrowth.ThresholdFor(display.Level);
+            GUI.Label(new Rect(25, 139, 1100, 26), $"XP · TEAM LEVEL {display.Level} · {(display.Level < display.Configuration.LevelCap ? display.Xp + " / " + goal + " to level up" : display.Xp + " collected · test level cap")}", heading);
+            GUI.color = new Color(.08f, .18f, .28f); GUI.DrawTexture(new Rect(25, 173, 320, 12), Texture2D.whiteTexture);
+            GUI.color = Time.realtimeSinceStartupAsDouble < pickupFlashUntil ? Color.white : new Color(.15f, .65f, 1);
+            GUI.DrawTexture(new Rect(25, 173, 320 * (goal == previous ? 1 : Mathf.Clamp01((display.Xp - previous) / (float)(goal - previous))), 12), Texture2D.whiteTexture); GUI.color = Color.white;
+            GUI.Label(new Rect(25, 193, 1100, 26), $"Collect XP inside the blue {EarnedGrowth.PickupRadius:0}m ring · {orbReplica.Orbs.Count} pickups hold {orbReplica.UncollectedXp} XP", small);
+            GUI.Label(new Rect(25, 219, 1100, 26), display.Configuration.Stacking ? "ARSENAL · " + WeaponArsenal.Label(player.Arsenal) + (player.Specialization == UpgradeId.None ? "" : " · " + GrowthUpgrade.Label(player.Specialization)) + " · orange spread / purple piercing" : $"YOUR RIFLE · Body {player.BodyDamage} / Head {player.BodyDamage * 2} · {player.RifleInterval:0.00}s · {GrowthUpgrade.Label(offer.Selected)}", small);
+            if (!solo) GUI.Label(new Rect(25, 245, 1100, 26), $"A: {GrowthUpgrade.Label(display.Players[0].Offer.Selected)} · B: {GrowthUpgrade.Label(display.Players[1].Offer.Selected)}", small);
+            GUI.Label(new Rect(25, h - 105, 900, 25), "XP pickups: blue 1 · larger teal 2–4 · largest gold 5+ · nearby drops pull together and merge", small);
+            if (Time.unscaledTime < confirmationUntil) GUI.Label(new Rect(w - 360, 145, 340, 35), GrowthUpgrade.Label(offer.Selected) + " applied", heading);
+        }
+        void ChoiceDialog(float w, float h)
+        {
+            GUI.color = new Color(.015f, .025f, .045f, .88f); GUI.DrawTexture(new Rect(0, 0, w, h), Texture2D.whiteTexture); GUI.color = Color.white;
+            Rect panel = new Rect(w / 2 - 390, h / 2 - 180, 780, 360); GUI.Box(panel, "");
+            GUI.Label(new Rect(panel.x, panel.y + 15, panel.width, 45), "LEVEL UP — CHOOSE YOUR UPGRADE", lifeHeading);
+            GUI.Label(new Rect(panel.x, panel.y + 64, panel.width, 35), "Combat is paused. Take your time.", lifeDetail);
+            PersonalOffer offer = display.Players[local].Offer;
+            if (offer.Pending)
+            {
+                for (int card = 1; card <= 2; card++)
+                {
+                    UpgradeId upgrade = offer.Card(card);
+                    string text = card + " · " + GrowthUpgrade.Label(upgrade) + "\n\n" + GrowthUpgrade.Summary(upgrade);
+                    if (GUI.Button(new Rect(panel.x + 20 + (card - 1) * 380, panel.y + 117, 360, 142), text, choiceCard)) Choose(upgrade);
+                }
+                GUI.Label(new Rect(panel.x, panel.y + 280, panel.width, 35), "Click a card or press 1 / 2.", lifeDetail);
+            }
+            else
+            {
+                GUI.Label(new Rect(panel.x, panel.y + 124, panel.width, 45), GrowthUpgrade.Label(offer.Selected) + " selected", lifeHeading);
+                GUI.Label(new Rect(panel.x, panel.y + 174, panel.width, 35), GrowthUpgrade.Summary(offer.Selected), lifeDetail);
+                if (!display.Players[local].ChoiceReady)
+                { if (GUI.Button(new Rect(w / 2 - 160, panel.y + 223, 320, 50), "Continue (Enter)", choiceCard)) ContinueChoice(); }
+                else GUI.Label(new Rect(panel.x, panel.y + 232, panel.width, 35), "Ready — waiting for your teammate", lifeDetail);
+                if (!solo) GUI.Label(new Rect(panel.x, panel.y + 291, panel.width, 35), "A: " + ChoiceStatus(0) + "   ·   B: " + ChoiceStatus(1), lifeDetail);
+            }
+            if (GUI.Button(new Rect(w - 205, 18, 180, 38), "Back to menu")) BackToMenu();
+        }
+        string ChoiceStatus(int p) => display.Players[p].ChoiceReady ? "ready" : display.Players[p].Offer.Pending ? "choosing" : "chosen";
         void Retry()
         {
             if (display.State != SharedState.Complete && display.State != SharedState.Defeat) return;
-            if (authority != null) { authority.Retry(run, local); Publish(); }
-            else connection.Send(SharedConnection.Message.Retry, w => { w.Write(run); binding.Write(w); });
+            if (authority != null) { authority.Retry(display.Run, local); Publish(); if (display.Run != run) accumulator = 0; }
+            else connection.Send(SharedConnection.Message.Retry, w => { w.Write(display.Run); binding.Write(w); });
             inputActive = true; SetCursor(!scripted && preview == null);
         }
         public string ApplyPreviewCommand(SharedPreviewCommand command)
@@ -292,6 +491,8 @@ namespace Journey
             string error = command.Validate(display, local);
             if (error.Length > 0) return error;
             if (command.action == "quit") { Application.Quit(); return ""; }
+            if (command.action == "choice") { return Choose(command.upgrade) ? "" : "Choice rejected"; }
+            if (command.action == "continue") return ContinueChoice() ? "" : "Continue rejected";
             if (command.action == "retry") { Retry(); return ""; }
             scripted = command.action == "scripted";
             previewInputUntil = 0; previewMovement = Vector3.zero; previewFire = false;
@@ -308,26 +509,45 @@ namespace Journey
             public string role, source, machine, gpu, connection, reason, hostBindEndpoint;
             public ScenarioEvidence scenario;
             public bool scripted, development, previewEnabled;
+            public float audioVolume;
             public int run, ticks, enemies, catchupLimits, frameSamples, confirmedHits, width, height, frameCap, vsync;
             public double frameP50, frameP95, frameP99, frameMax, confirmP50, confirmP95, confirmMax, rttMs;
+            public double updateLastMs, updateMaxMs, abortFrameMs, abortRemainingMs, abortPreviousUpdateMs;
+            public double previewCaptureLastMs, previewCaptureMaxMs, previewCaptureCompletedAt, previewPollMaxMs;
+            public int abortCatchupTicks;
             public SharedState state;
             public SharedPlayer[] players;
             public SharedEnemy[] enemyStates;
+            public WeaponWork[] weaponWork;
+            public int roster, xp, level, uncollectedOrbs, uncollectedXp, choicePhase, controlRevision;
+            public float pickupRadius, attractionRadius, mergeRadius;
             public long sentBytes, receivedBytes;
+            public int outgoingPending, outgoingHighWater, outgoingDeferred, outgoingLimit;
         }
         void Save()
         {
-            saved = true; frameLog.Flush(); hitLog.Flush();
+            saved = true; frameLog.Flush(); hitLog.Flush(); growthLog.Flush();
             TextAsset stamp = Resources.Load<TextAsset>("BuildInfo");
             var report = new Report { role = local == 0 ? "host A" : "client B", source = stamp == null ? "Editor" : stamp.text,
                 machine = SystemInfo.processorType, gpu = SystemInfo.graphicsDeviceName, connection = "Direct IPv4 UDP; declare actual address/machine/visibility separately",
-                reason = reason, hostBindEndpoint = authority != null ? connection.BoundEndpoint : "", scripted = scripted, development = Debug.isDebugBuild, previewEnabled = preview != null, run = run, ticks = display.Tick, enemies = display.Enemies.Length,
+                reason = reason, hostBindEndpoint = authority != null && connection != null ? connection.BoundEndpoint : "", scripted = scripted, development = Debug.isDebugBuild, previewEnabled = preview != null, run = run, ticks = display.Tick, enemies = display.Enemies.Length,
                 scenario = new ScenarioEvidence(display.Configuration, display.Session, display.Run),
                 catchupLimits = catchupLimits, width = Screen.width, height = Screen.height, frameCap = Application.targetFrameRate,
                 vsync = QualitySettings.vSyncCount, frameSamples = frames.Count, confirmedHits = confirms.Count, frameP50 = Percentile(frames, .5),
                 frameP95 = Percentile(frames, .95), frameP99 = Percentile(frames, .99), frameMax = Percentile(frames, 1),
                 confirmP50 = Percentile(confirms, .5), confirmP95 = Percentile(confirms, .95), confirmMax = Percentile(confirms, 1), rttMs = lastRtt,
-                state = display.State, players = display.Players, enemyStates = display.Enemies, sentBytes = connection.SentBytes, receivedBytes = connection.ReceivedBytes };
+                state = display.State, players = display.Players, enemyStates = display.Enemies, roster = display.Roster, xp = display.Xp, level = display.Level, uncollectedOrbs = orbReplica.Orbs.Count, sentBytes = connection?.SentBytes ?? 0, receivedBytes = connection?.ReceivedBytes ?? 0 };
+            report.uncollectedXp = orbReplica.UncollectedXp; report.choicePhase = display.ChoicePhase; report.controlRevision = display.ControlRevision;
+            report.weaponWork = weaponWork;
+            report.updateLastMs = updateLastMs; report.updateMaxMs = updateMaxMs;
+            report.abortFrameMs = abortFrameMs; report.abortRemainingMs = abortRemainingMs;
+            report.abortPreviousUpdateMs = abortPreviousUpdateMs; report.abortCatchupTicks = abortCatchupTicks;
+            report.previewCaptureLastMs = preview?.CaptureLastMs ?? 0; report.previewCaptureMaxMs = preview?.CaptureMaxMs ?? 0;
+            report.previewCaptureCompletedAt = preview?.CaptureCompletedAt ?? 0; report.previewPollMaxMs = preview?.PollMaxMs ?? 0;
+            report.audioVolume = AudioListener.volume;
+            report.outgoingPending = connection?.PendingMessages ?? 0; report.outgoingHighWater = connection?.BufferedHighWater ?? 0;
+            report.outgoingDeferred = connection?.DeferredSends ?? 0; report.outgoingLimit = SharedConnection.MaxBufferedMessages;
+            report.pickupRadius = EarnedGrowth.PickupRadius; report.attractionRadius = EarnedGrowth.AttractionRadius; report.mergeRadius = EarnedGrowth.MergeRadius;
             File.WriteAllText(Path.Combine(output, "summary-run-" + run + ".json"), JsonUtility.ToJson(report, true));
             Debug.Log("SHARED_REPORT " + output);
         }
@@ -345,13 +565,14 @@ namespace Journey
         { if (preview == null && !scripted && !focused) { inputActive = false; SetCursor(false); } }
         void OnGUI()
         {
-            if (connection == null) return;
+            if (binding == null) return;
             if (heading == null)
             {
                 heading = new GUIStyle(GUI.skin.label) { fontSize = 23, fontStyle = FontStyle.Bold };
                 small = new GUIStyle(GUI.skin.label) { fontSize = 15 };
                 lifeHeading = new GUIStyle(heading) { fontSize = 32, alignment = TextAnchor.UpperCenter };
                 lifeDetail = new GUIStyle(small) { fontSize = 24, alignment = TextAnchor.UpperCenter };
+                choiceCard = new GUIStyle(GUI.skin.button) { fontSize = 20, wordWrap = true, alignment = TextAnchor.MiddleCenter };
             }
             float scale = Mathf.Min(Screen.width / 1280f, Screen.height / 720f);
             GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one * scale); float w = Screen.width / scale, h = Screen.height / scale;
@@ -361,14 +582,18 @@ namespace Journey
                 GUI.color = new Color(0, 0, 0, viewTransition / ViewTransitionSeconds);
                 GUI.DrawTexture(new Rect(0, 0, w, h), Texture2D.whiteTexture); GUI.color = Color.white;
             }
-            GUI.Label(new Rect(25, 18, 1000, 40), $"SHARED RIFLE / {(local == 0 ? "A · HOST" : "B · CLIENT")} / {display.State}", heading);
-            GUI.Label(new Rect(25, 57, 1150, 28), $"Run {display.Run}   ·   A: {a.Health} HP, {a.Damage} damage, {a.Kills} kills   ·   B: {b.Health} HP, {b.Damage} damage, {b.Kills} kills", small);
+            GUI.Label(new Rect(25, 18, 1000, 40), $"{(display.Configuration.Stacking ? display.Configuration.Name.ToUpperInvariant() : display.Configuration.Growth ? "EARNED GROWTH" : "SHARED RIFLE")} / {(solo ? "SOLO" : local == 0 ? "A · HOST" : "B · CLIENT")} / {display.State}", heading);
+            if (display.State != SharedState.Choosing && (display.State != SharedState.Running || !inputActive))
+                if (GUI.Button(new Rect(w - 205, 18, 180, 38), "Back to menu")) { BackToMenu(); return; }
+            GUI.Label(new Rect(25, 57, 1150, 28), solo ? $"Run {display.Run} · {a.Health} HP · {a.Damage} damage · {a.Kills} kills" :
+                $"Run {display.Run}   ·   A: {a.Health} HP, {a.Damage} damage, {a.Kills} kills   ·   B: {b.Health} HP, {b.Damage} damage, {b.Kills} kills", small);
             if (binding.Configuration != null)
             {
-                GUI.Label(new Rect(25, 85, 1200, 25), binding.Configuration.Label + " · " + binding.Configuration.Settings, small);
-                GUI.Label(new Rect(25, 110, 1200, 25), "Host settings locked for this session · Retry keeps them · " + binding.Configuration.Identity.Substring(0, 12), small);
+                GUI.Label(new Rect(25, 85, 1200, 25), (display.Configuration.Growth ? "START · " : "") + binding.Configuration.Label + " · " + binding.Configuration.Settings, small);
+                GUI.Label(new Rect(25, 110, 1200, 25), (display.Configuration.Growth ? "Starting fixture locked · Retry resets earned builds · " : "Host settings locked for this session · Retry keeps them · ") + binding.Configuration.Identity.Substring(0, 12), small);
             }
-            GUI.Label(new Rect(w - 210, h - 60, 200, 40), $"{Mathf.Max(0, display.Configuration.Duration - display.Elapsed):F1}s   RTT {lastRtt:F1}ms", small);
+            GrowthHud(w, h);
+            GUI.Label(new Rect(w - 210, h - 60, 200, 40), $"{Mathf.Max(0, display.Configuration.Duration - display.Elapsed):F1}s" + (solo ? "" : $"   RTT {lastRtt:F1}ms"), small);
             if (display.State == SharedState.Running)
             {
                 if (p.Health > 0)
@@ -381,7 +606,7 @@ namespace Journey
                 else if (display.Elapsed < p.ImmuneUntil)
                     LifeMessage(w, h, "BACK IN THE FIGHT", $"{p.Health} HP · Contact protection {p.ImmuneUntil - display.Elapsed:F1}s", "Your camera and controls are restored");
                 GUI.Label(new Rect(25, h - 68, 950, 32), p.Health == 0 ? $"Following teammate · Return in {Mathf.Max(0, p.ReturnAt - display.Elapsed):F1}s" :
-                    display.Elapsed < p.ImmuneUntil ? $"RETURN IMMUNITY {p.ImmuneUntil - display.Elapsed:F1}s" : "WASD · Mouse aim · Auto rifle", heading);
+                    display.Elapsed < p.ImmuneUntil ? $"RETURN IMMUNITY {p.ImmuneUntil - display.Elapsed:F1}s" : "WASD · Mouse aim · Auto arsenal", heading);
                 if (!inputActive && !scripted && p.Health > 0)
                 {
                     if (GUI.Button(new Rect(w / 2 - 120, h / 2 + 85, 240, 40), "Resume local input")) { inputActive = true; SetCursor(true); }
@@ -394,16 +619,17 @@ namespace Journey
                     if (vp.z > 0) GUI.Label(new Rect(vp.x * w - 20, (1 - vp.y) * h, 60, 25), local == 0 ? "B" : "A", small);
                 }
             }
+            else if (display.State == SharedState.Choosing) ChoiceDialog(w, h);
             else if (display.State == SharedState.Complete || display.State == SharedState.Defeat)
             {
-                LifeMessage(w, h, display.State == SharedState.Defeat ? "PARTY DEFEATED" : "RUN COMPLETE",
-                    display.State == SharedState.Defeat ? "Both players are down" : $"{display.Configuration.Duration:0.##}-second encounter complete",
-                    $"Retry readiness: A {(a.Ready ? "READY" : "waiting")} / B {(b.Ready ? "READY" : "waiting")}");
+                LifeMessage(w, h, display.State == SharedState.Defeat ? (solo ? "DEFEATED" : "PARTY DEFEATED") : "RUN COMPLETE",
+                    display.State == SharedState.Defeat ? (solo ? "You are down" : "Both players are down") : $"{display.Configuration.Duration:0.##}-second encounter complete",
+                    solo ? "Retry starts a fresh run" : $"Retry readiness: A {(a.Ready ? "READY" : "waiting")} / B {(b.Ready ? "READY" : "waiting")}");
                 if (GUI.Button(new Rect(w / 2 - 120, h / 2, 240, 50), "Retry (R)")) Retry();
             }
             else if (display.State == SharedState.Aborted)
                 LifeMessage(w, h, "SESSION STOPPED", "The shared run was interrupted", "Start a new session to play again");
-            else GUI.Label(new Rect(25, 145, 1150, 80), "Waiting for the fixed host/client pair…", heading);
+            else GUI.Label(new Rect(25, 280, 1150, 80), solo ? "Preparing the arena…" : "Waiting for the fixed host/client pair…", heading);
         }
         void LifeMessage(float w, float h, string title, string detail, string context)
         {
@@ -415,13 +641,34 @@ namespace Journey
             GUI.Label(new Rect(panel.x, panel.y + 107, panel.width, 30), context, lifeDetail);
         }
         static void SetCursor(bool locked) { Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None; Cursor.visible = !locked; }
-        void OnDestroy()
+        public void BackToMenu()
         {
-            if (connection == null) return;
-            if (!saved && display.State != SharedState.Waiting) { reason = "Local player closed"; display.State = SharedState.Aborted; Save(); }
-            connection.Send(SharedConnection.Message.Abort, w => w.Write("Peer player closed")); connection.Dispose();
-            frameLog?.Dispose(); hitLog?.Dispose(); if (allyMaterial != null) Destroy(allyMaterial);
-            if (allyShot != null) Destroy(allyShot.sharedMaterial); SetCursor(false);
+            if (binding == null) return;
+            CloseSession("Returned to menu");
+            GetComponent<PrototypeGame>()?.ReturnFromShared();
+            Destroy(this);
         }
+        internal void CloseSession(string closeReason)
+        {
+            if (binding == null) return;
+            if (!saved && display.State != SharedState.Waiting && frameLog != null)
+            { reason = closeReason; authority?.Abort(closeReason); display.State = SharedState.Aborted; Save(); }
+            if (connection != null)
+            {
+                connection.Send(SharedConnection.Message.Abort, w => w.Write(closeReason));
+                connection.Received -= Receive; connection.Lost -= Abort;
+                connection.Dispose(); connection = null;
+            }
+            if (preview != null) { preview.Close(); Destroy(preview); }
+            pickups?.Dispose();
+            frameLog?.Dispose(); hitLog?.Dispose(); growthLog?.Dispose(); if (allyMaterial != null) Destroy(allyMaterial);
+            if (ally != null) Destroy(ally);
+            if (allyShot != null) { Destroy(allyShot.sharedMaterial); Destroy(allyShot.gameObject); }
+            foreach (LineRenderer line in secondaryLines) if (line != null) Destroy(line.gameObject);
+            if (scatterTrail != null) Destroy(scatterTrail); if (pierceTrail != null) Destroy(pierceTrail);
+            if (authority != null) { authority.Resolved -= Resolve; if (authority.Growth != null) authority.Growth.Changed -= GrowthChanged; }
+            authority = null; binding = null; enabled = false; SetCursor(false);
+        }
+        void OnDestroy() => CloseSession("Peer player closed");
     }
 }

@@ -7,6 +7,29 @@ namespace Journey.Tests
 {
     public class SharedConnectionTests
     {
+        [UnityTest] public IEnumerator ReliableBurstRetainsEveryEventInOrderPastTransportWindow()
+        {
+            using (var host = new SharedConnection(true, "127.0.0.1", 17782, true))
+            using (var client = new SharedConnection(false, "127.0.0.1", 17782))
+            {
+                int received = 0; string loss = "";
+                host.Lost += r => loss = r; client.Lost += r => loss = r;
+                client.Received += (message, reader) => {
+                    if (message != SharedConnection.Message.Growth) return;
+                    GrowthEvent record = GrowthEvent.Read(reader); Assert.That(record.Sequence, Is.EqualTo(++received));
+                };
+                double deadline = Time.realtimeSinceStartupAsDouble + 8;
+                while (!host.Connected && Time.realtimeSinceStartupAsDouble < deadline) { host.Poll(); client.Poll(); yield return null; }
+                Assert.That(host.Connected, Is.True);
+                for (int i = 1; i <= 200; i++)
+                { int sequence = i; Assert.That(host.Send(SharedConnection.Message.Growth, w => new GrowthEvent { Run = 1, Sequence = sequence }.Write(w)), Is.True); }
+                Assert.That(host.PendingMessages, Is.GreaterThan(0)); Assert.That(host.DeferredSends, Is.GreaterThan(0));
+                while (received < 200 && Time.realtimeSinceStartupAsDouble < deadline) { host.Poll(); client.Poll(); yield return null; }
+                Assert.That(loss, Is.Empty); Assert.That(received, Is.EqualTo(200)); Assert.That(host.PendingMessages, Is.Zero);
+                Assert.That(host.SentBytes, Is.EqualTo(200 * 105));
+            }
+            yield return null;
+        }
         [UnityTest] public IEnumerator StartAndRetryExcludeWaitingFramesButActiveStallsStillAbort()
         {
             var root = new GameObject("Shared phase clock test");

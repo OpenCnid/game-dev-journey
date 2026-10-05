@@ -1,0 +1,33 @@
+{
+  "runtimeSource": "f7084023ae6ff3988efe384421c8a809a1aade8b",
+  "dirty": false,
+  "input": "native human; no scripted input or preview",
+  "rawEvidence": "prototypes/001-stacked-weapons/artifacts/gdj23-owner-v7-20261005-012902",
+  "ownerObservation": "Everything else seemed fine.",
+  "requestedCorrection": "Show only the benefit, omit previous/unchanged values and unnecessary ownership text.",
+  "quickBlockingCheck": "clear for the owner-selected GDJ-3 experiment",
+  "run1": {
+    "ending": "Defeat",
+    "tick": 1348,
+    "levelAtTick": 1010,
+    "xpAtLevel": 11,
+    "upgrade": "Stronger hits",
+    "appliedTick": 1010,
+    "explicitContinue": true,
+    "kills": 30,
+    "collectedXp": 19,
+    "bodyDamage": 30,
+    "rifleInterval": 0.12,
+    "catchupLimits": 0
+  },
+  "run2": {
+    "ending": "Returned to menu",
+    "tick": 122,
+    "level": 1,
+    "collectedXp": 0,
+    "bodyDamage": 20,
+    "rifleInterval": 0.12,
+    "catchupLimits": 0
+  },
+  "limits": "Selection and flow are logged; detailed damage feel, native human co-op, sound comfort and representative performance are not inferred."
+}

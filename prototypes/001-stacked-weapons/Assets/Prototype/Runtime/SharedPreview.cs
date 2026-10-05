@@ -12,7 +12,8 @@ namespace Journey
     {
         public long sequence;
         public string action;
-        public int run, life;
+        public int run, life, phase;
+        public UpgradeId upgrade;
         public float moveX, moveZ, yaw, pitch, duration;
         public bool fire;
         public string Validate(SharedSnapshot state, int local)
@@ -22,6 +23,8 @@ namespace Journey
             if (run != state.Run || life != state.Players[local].Life) return "Stale run/life";
             if (action == "retry") return state.State == SharedState.Complete || state.State == SharedState.Defeat ? "" : "Run still active";
             if (action == "scripted" || action == "idle") return "";
+            if (action == "choice") return (state.State == SharedState.Running || state.State == SharedState.Choosing) && state.Players[local].Offer.Pending && state.Players[local].Offer.Contains(upgrade) ? "" : "No valid pending choice";
+            if (action == "continue") return state.State == SharedState.Choosing && phase == state.ChoicePhase && state.Players[local].Offer.Selected != UpgradeId.None && !state.Players[local].ChoiceReady ? "" : "No valid choice readiness";
             if (action != "input") return "Unknown action";
             if (state.State != SharedState.Running || state.Players[local].Health <= 0) return "Player inactive";
             if (!Finite(moveX) || !Finite(moveZ) || !Finite(yaw) || !Finite(pitch) || !Finite(duration)
@@ -46,6 +49,7 @@ namespace Journey
             public ScenarioEvidence scenario;
             public SharedPlayer[] players;
             public SharedEnemy[] enemies;
+            public int xp, level, choicePhase, controlRevision;
         }
         SharedGame game;
         Camera camera;
@@ -55,6 +59,10 @@ namespace Journey
         int frameSequence;
         double lastPoll, lastCapture, lastRequested;
         bool pending, closing;
+        public double CaptureLastMs { get; private set; }
+        public double CaptureMaxMs { get; private set; }
+        public double CaptureCompletedAt { get; private set; }
+        public double PollMaxMs { get; private set; }
         string result = "", captureError = "";
         public void Initialize(SharedGame owner, Camera target, string directory)
         {
@@ -71,6 +79,7 @@ namespace Journey
             double now = Time.realtimeSinceStartupAsDouble;
             if (now - lastPoll < .1) return;
             lastPoll = now;
+            long started = System.Diagnostics.Stopwatch.GetTimestamp();
             string commandPath = Path.Combine(output, "command.json");
             try
             {
@@ -91,7 +100,8 @@ namespace Journey
                 var state = new State { run = snapshot.Run, life = snapshot.Players[game.LocalPlayer].Life,
                     local = game.LocalPlayer, tick = snapshot.Tick, elapsed = snapshot.Elapsed, state = snapshot.State.ToString(),
                     scenario = new ScenarioEvidence(snapshot.Configuration, snapshot.Session, snapshot.Run),
-                    players = snapshot.Players, enemies = snapshot.Enemies, lastSequence = lastSequence, commandResult = result,
+                    xp = snapshot.Xp, level = snapshot.Level, players = snapshot.Players, enemies = snapshot.Enemies, lastSequence = lastSequence, commandResult = result,
+                    choicePhase = snapshot.ChoicePhase, controlRevision = snapshot.ControlRevision,
                     frameSequence = frameSequence, capturedWallSeconds = lastCapture, captureError = captureError,
                     source = stamp, width = Screen.width, height = Screen.height, scripted = game.Scripted,
                     yaw = game.LocalYaw, pitch = game.LocalPitch };
@@ -99,6 +109,7 @@ namespace Journey
             }
             catch (Exception error) when (error is IOException || error is ArgumentException)
             { result = error.GetType().Name; }
+            finally { PollMaxMs = Math.Max(PollMaxMs, MillisecondsSince(started)); }
         }
         IEnumerator Capture()
         {
@@ -113,6 +124,7 @@ namespace Journey
                     pending = false;
                     if (closing) return;
                     if (request.hasError) { captureError = "GPU readback failed"; return; }
+                    long started = System.Diagnostics.Stopwatch.GetTimestamp();
                     try
                     {
                         byte[] jpeg = ImageConversion.EncodeArrayToJPG(request.GetData<byte>().ToArray(),
@@ -121,6 +133,12 @@ namespace Journey
                         lastCapture = Time.realtimeSinceStartupAsDouble; frameSequence++; captureError = "";
                     }
                     catch (IOException error) { captureError = error.GetType().Name; }
+                    finally
+                    {
+                        CaptureLastMs = MillisecondsSince(started);
+                        CaptureMaxMs = Math.Max(CaptureMaxMs, CaptureLastMs);
+                        CaptureCompletedAt = Time.realtimeSinceStartupAsDouble;
+                    }
                 });
             }
         }
@@ -129,13 +147,17 @@ namespace Journey
             string temporary = path + ".tmp"; File.WriteAllBytes(temporary, bytes);
             if (File.Exists(path)) File.Replace(temporary, path, null); else File.Move(temporary, path);
         }
-        void OnDestroy()
+        internal void Close()
         {
+            if (closing) return;
             closing = true;
+            StopAllCoroutines(); enabled = false;
             if (pending) AsyncGPUReadback.WaitAllRequests();
             if (camera != null) camera.targetTexture = null;
             if (full != null) { full.Release(); Destroy(full); }
             if (thumbnail != null) { thumbnail.Release(); Destroy(thumbnail); }
         }
+        static double MillisecondsSince(long started) => (System.Diagnostics.Stopwatch.GetTimestamp() - started) * 1000.0 / System.Diagnostics.Stopwatch.Frequency;
+        void OnDestroy() => Close();
     }
 }

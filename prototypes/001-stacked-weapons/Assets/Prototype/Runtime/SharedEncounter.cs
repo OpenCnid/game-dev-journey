@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Journey
 {
-    public enum SharedState { Waiting, Running, Complete, Defeat, Aborted }
+    public enum SharedState { Waiting, Running, Complete, Defeat, Aborted, Choosing }
     public enum ShotDecision { Damage, Miss, StaleRun, StaleLife, Duplicate, Invalid, StalePose, StaleEnemy, Terminal }
 
     [Serializable] public struct SharedPlayer
@@ -13,8 +13,11 @@ namespace Journey
         public float Yaw, Pitch, ReturnAt, ImmuneUntil, ContactUntil;
         public int Health, Life, Shots, Hits, Damage, Kills;
         public int Weapon, BodyDamage;
+        public int Arsenal;
+        public UpgradeId FirstAddition, Specialization;
         public float RifleInterval;
-        public bool Ready;
+        public bool Ready, ChoiceReady;
+        public PersonalOffer Offer;
     }
     [Serializable] public struct SharedEnemy
     {
@@ -24,6 +27,7 @@ namespace Journey
     public sealed class SharedSnapshot
     {
         public int Run, Tick;
+        public int Roster = 2, Xp, Level = 1, ChoicePhase, ControlRevision;
         public float Elapsed;
         public SharedState State;
         public readonly SharedPlayer[] Players = new SharedPlayer[2];
@@ -36,6 +40,8 @@ namespace Journey
         {
             Configuration = other.Configuration; Session = other.Session;
             if (Enemies.Length != other.Enemies.Length) Enemies = new SharedEnemy[other.Enemies.Length];
+            Roster = other.Roster; Xp = other.Xp; Level = other.Level;
+            ChoicePhase = other.ChoicePhase; ControlRevision = other.ControlRevision;
             Run = other.Run; Tick = other.Tick; Elapsed = other.Elapsed; State = other.State;
             Array.Copy(other.Players, Players, 2); Array.Copy(other.Enemies, Enemies, Enemies.Length);
         }
@@ -70,8 +76,10 @@ namespace Journey
         public readonly ShotDecision Decision;
         public readonly ShotResult Shot;
         public readonly Vector3 DeathPosition;
-        public SharedHit(SharedShot source, ShotDecision decision, ShotResult shot, Vector3 deathPosition)
-        { Source = source; Decision = decision; Shot = shot; DeathPosition = deathPosition; }
+        public readonly int RayIndex, Rays, TargetTests;
+        public readonly bool Trigger;
+        public SharedHit(SharedShot source, ShotDecision decision, ShotResult shot, Vector3 deathPosition, bool trigger = false, int rayIndex = 0, int rays = 0, int targetTests = 0)
+        { Source = source; Decision = decision; Shot = shot; DeathPosition = deathPosition; Trigger = trigger; RayIndex = rayIndex; Rays = rays; TargetTests = targetTests; }
     }
 
     // Host-only rules. Presentation receives snapshots; it cannot mutate this encounter.
@@ -81,9 +89,12 @@ namespace Journey
         public const float ReturnDelay = 5, ReturnImmunity = 1;
         public readonly SharedSnapshot Current;
         public ScenarioConfiguration Configuration { get; }
+        public EarnedGrowth Growth { get; }
+        readonly List<GrowthChoice> choices = new List<GrowthChoice>(2);
         readonly SharedSnapshot[] history = new SharedSnapshot[HistoryTicks + 1];
         readonly List<SharedShot> pending = new List<SharedShot>(QueueCapacity);
-        readonly double[] nextShot = new double[2];
+        readonly double[] nextShot = new double[6];
+        readonly AimResult[] targets = new AimResult[ScenarioConfiguration.MaxEnemies];
         readonly int[] lastEvent = new int[2], lastInput = new int[2];
         readonly float[] inputTime = new float[2];
         readonly Vector3[] velocities;
@@ -91,27 +102,38 @@ namespace Journey
         public event Action<SharedHit> Resolved;
         public int Rejected { get; private set; }
         public string AbortReason { get; private set; } = "";
-        public SharedEncounter(ScenarioConfiguration configuration = null, Guid session = default)
+        public SharedEncounter(ScenarioConfiguration configuration = null, Guid session = default, int roster = 2)
         {
             Configuration = configuration ?? ScenarioConfiguration.Named(ScenarioKind.SharedRifle);
-            Current = new SharedSnapshot(Configuration) { Session = session == Guid.Empty ? Guid.NewGuid() : session };
+            if (roster < 1 || roster > 2) throw new ArgumentException("Fixed roster must be one or two");
+            Growth = Configuration.Growth ? new EarnedGrowth() : null;
+            Current = new SharedSnapshot(Configuration) { Roster = roster, Session = session == Guid.Empty ? Guid.NewGuid() : session };
             velocities = new Vector3[Configuration.EnemyCount];
             for (int i = 0; i < history.Length; i++) history[i] = new SharedSnapshot(Configuration) { Tick = -1 };
         }
-        public void Start()
+        public void Start(bool preparing = false)
         {
-            Current.Run++; Current.Tick = 0; Current.Elapsed = 0; Current.State = SharedState.Running;
-            random = new System.Random(Configuration.Seed); pending.Clear(); Rejected = 0; AbortReason = "";
-            for (int p = 0; p < 2; p++)
+            Current.Run++; Current.Tick = 0; Current.Elapsed = 0; Current.State = preparing ? SharedState.Waiting : SharedState.Running;
+            Current.ChoicePhase = Current.ControlRevision = 0;
+            random = new System.Random(Configuration.Seed); pending.Clear(); choices.Clear(); Growth?.Reset(Configuration.Seed); Current.Xp = 0; Current.Level = 1; Rejected = 0; AbortReason = "";
+            Array.Clear(nextShot, 0, nextShot.Length);
+            for (int p = 0; p < Current.Roster; p++)
             {
-                Current.Players[p] = new SharedPlayer { Position = Spawn(p), Health = 100, Life = 1,
-                    Weapon = p + 1, BodyDamage = Configuration.BodyDamage, RifleInterval = Configuration.RifleInterval };
+                Current.Players[p] = new SharedPlayer { Position = PlayerSpawn(p), Health = 100, Life = 1,
+                    Weapon = p + 1, BodyDamage = Configuration.BodyDamage, RifleInterval = Configuration.RifleInterval,
+                    Arsenal = Configuration.StartingArsenal, Specialization = Configuration.StartingSpecialization };
                 nextShot[p] = 0; lastEvent[p] = lastInput[p] = 0; inputTime[p] = 0;
             }
             for (int i = 0; i < Configuration.EnemyCount; i++) { Current.Enemies[i] = default; Respawn(i); }
             foreach (SharedSnapshot pose in history) { pose.Run = 0; pose.Tick = -1; }
             Remember();
         }
+        public bool Begin()
+        {
+            if (Current.Run < 1 || Current.State != SharedState.Waiting) return false;
+            Current.State = SharedState.Running; Remember(); return true;
+        }
+        Vector3 PlayerSpawn(int p) => Current.Roster == 1 ? Vector3.zero : Spawn(p);
         public static Vector3 Spawn(int p) => new Vector3(p == 0 ? -2 : 2, 0, 0);
         public static Vector3 Move(Vector3 position, Vector3 movement, float dt)
         {
@@ -123,7 +145,7 @@ namespace Journey
         // Life/run and increasing input time prevent old movement from undoing a return/reset.
         public bool Input(int run, int p, int life, int sequence, float time, Vector3 position, float yaw, float pitch)
         {
-            if (run != Current.Run || p < 0 || p > 1 || Current.State != SharedState.Running) return false;
+            if (run != Current.Run || p < 0 || p >= Current.Roster || Current.State != SharedState.Running) return false;
             SharedPlayer player = Current.Players[p];
             if (player.Health == 0 || life != player.Life || sequence <= lastInput[p] || !Finite(time) ||
                 !Finite(yaw) || !Finite(pitch) || time < inputTime[p] || !EnemyGeometry.ValidRay(new Ray(position, Vector3.forward))) return false;
@@ -138,13 +160,13 @@ namespace Journey
             ShotDecision? rejection = null;
             if (shot.Run != Current.Run) rejection = ShotDecision.StaleRun;
             else if (Current.State != SharedState.Running) rejection = ShotDecision.Terminal;
-            else if (shot.Player < 0 || shot.Player > 1) rejection = ShotDecision.Invalid;
+            else if (shot.Player < 0 || shot.Player >= Current.Roster) rejection = ShotDecision.Invalid;
             else if (shot.Life != Current.Players[shot.Player].Life || Current.Players[shot.Player].Health == 0) rejection = ShotDecision.StaleLife;
             else if (shot.Event <= lastEvent[shot.Player]) rejection = ShotDecision.Duplicate;
             else
             {
                 lastEvent[shot.Player] = shot.Event;
-                if (shot.Weapon != Current.Players[shot.Player].Weapon || !EnemyGeometry.ValidRay(shot.Ray) ||
+                if (!WeaponArsenal.Owns(Current.Players[shot.Player], shot.Player, shot.Weapon) || !EnemyGeometry.ValidRay(shot.Ray) ||
                     Mathf.Abs(shot.Ray.direction.sqrMagnitude - 1) > .001f) rejection = ShotDecision.Invalid;
                 else if (pending.Count == QueueCapacity) { Abort("Shot queue capacity exceeded"); rejection = ShotDecision.Terminal; }
             }
@@ -153,13 +175,50 @@ namespace Journey
         }
         public void Step()
         {
+            if (Current.State == SharedState.Choosing) { CommitChoices(); return; }
             if (Current.State != SharedState.Running) return;
             Current.Tick++; Current.Elapsed = Current.Tick * CombatSimulation.Tick;
+            ApplyChoices(false);
+            StepCombat();
+        }
+        public bool CommitChoices()
+        {
+            if (Current.State != SharedState.Choosing || choices.Count == 0) return false;
+            ApplyChoices(true); return true;
+        }
+        void ApplyChoices(bool frozen)
+        {
+            choices.Sort((a,b) => a.Player.CompareTo(b.Player));
+            foreach (GrowthChoice choice in choices)
+            {
+                SharedPlayer player = Current.Players[choice.Player];
+                if (!ValidChoice(choice) || !frozen && player.Offer.Tick >= Current.Tick) continue;
+                UpgradeDefinition definition = GrowthUpgrade.Definition(choice.Upgrade);
+                if (Configuration.Kind == ScenarioKind.WeaponStack)
+                {
+                    WeaponArsenal.Apply(ref player, choice.Upgrade);
+                    int added = WeaponArsenal.AddedMask(choice.Upgrade);
+                    if (added != 0) nextShot[WeaponArsenal.Id(choice.Player, added == WeaponArsenal.Scattergun ? WeaponSlot.Scattergun : WeaponSlot.Piercer) - 1] = Current.Elapsed;
+                }
+                float interval = definition.Effect == UpgradeEffect.FireCadence ? GrowthUpgrade.Interval(choice.Upgrade) : player.RifleInterval;
+                double now = (frozen ? Current.Tick : Current.Tick - 1) * (double)CombatSimulation.Tick;
+                double progressRemaining = Math.Max(0, nextShot[choice.Player] - now) / player.RifleInterval;
+                nextShot[choice.Player] = now + progressRemaining * interval;
+                if (definition.Effect == UpgradeEffect.DirectDamage) player.BodyDamage = GrowthUpgrade.Damage(choice.Upgrade);
+                player.RifleInterval = interval;
+                player.Offer.Selected = choice.Upgrade; player.Offer.AppliedTick = Current.Tick;
+                player.Offer.ControlRevision = ++Current.ControlRevision;
+                Current.Players[choice.Player] = player; Growth.Applied(Current, choice.Player);
+            }
+            choices.Clear();
+        }
+        void StepCombat()
+        {
             pending.Sort((a, b) => a.Player != b.Player ? a.Player.CompareTo(b.Player) : a.Event.CompareTo(b.Event));
             for (int i = 0; i < pending.Count;)
             {
                 SharedShot shot = pending[i];
-                if (Current.Tick * (double)CombatSimulation.Tick < nextShot[shot.Player]) { i++; continue; }
+                if (Current.Tick * (double)CombatSimulation.Tick < nextShot[shot.Weapon - 1]) { i++; continue; }
                 pending.RemoveAt(i); Resolve(shot);
             }
             // Read all positions before applying velocities, matching the local steering rule.
@@ -179,28 +238,35 @@ namespace Journey
             {
                 SharedEnemy e = Current.Enemies[i]; e.Position += velocities[i] * CombatSimulation.Tick;
                 e.Position.x = Mathf.Clamp(e.Position.x, -29, 29); e.Position.z = Mathf.Clamp(e.Position.z, -29, 29); Current.Enemies[i] = e;
-                for (int p = 0; p < 2; p++) if ((e.Position - Current.Players[p].Position).sqrMagnitude < 1.25f) Contact(p);
+                for (int p = 0; p < Current.Roster; p++) if ((e.Position - Current.Players[p].Position).sqrMagnitude < 1.25f) Contact(p);
             }
             // Wipe wins over both completion and an expiring return.
-            if (Current.Players[0].Health == 0 && Current.Players[1].Health == 0) Current.State = SharedState.Defeat;
+            if (NearestLiving(Vector3.zero) < 0) Current.State = SharedState.Defeat;
             else if (Current.Elapsed >= Configuration.Duration) Current.State = SharedState.Complete;
-            else for (int p = 0; p < 2; p++)
+            else for (int p = 0; p < Current.Roster; p++)
             {
                 SharedPlayer player = Current.Players[p];
                 if (player.Health == 0 && Current.Elapsed + .00001f >= player.ReturnAt)
                 {
-                    player.Health = 100; player.Life++; player.Position = Spawn(p); player.Yaw = player.Pitch = 0;
+                    player.Health = 100; player.Life++; player.Position = PlayerSpawn(p); player.Yaw = player.Pitch = 0;
                     player.ReturnAt = player.ContactUntil = 0; player.ImmuneUntil = Current.Elapsed + ReturnImmunity;
-                    Current.Players[p] = player; nextShot[p] = Current.Elapsed;
+                    Current.Players[p] = player;
+                    for (int slot = 0; slot < 3; slot++) nextShot[WeaponArsenal.Id(p, (WeaponSlot)slot) - 1] = Current.Elapsed;
                     lastInput[p] = 0; inputTime[p] = 0;
                 }
+            }
+            if (Current.State == SharedState.Running && Growth != null)
+            {
+                Growth.AttractAndMerge(Current); Growth.Collect(Current);
+                if (Current.Level - 1 > Current.ChoicePhase)
+                { Current.State = SharedState.Choosing; Current.ChoicePhase = Current.Level - 1; Current.ControlRevision++; pending.Clear(); }
             }
             Remember();
         }
         public int NearestLiving(Vector3 position)
         {
             int result = -1; float distance = float.PositiveInfinity;
-            for (int p = 0; p < 2; p++) if (Current.Players[p].Health > 0)
+            for (int p = 0; p < Current.Roster; p++) if (Current.Players[p].Health > 0)
             {
                 float d = (position - Current.Players[p].Position).sqrMagnitude;
                 if (d < distance) { result = p; distance = d; }
@@ -224,10 +290,13 @@ namespace Journey
             { Reject(source, ShotDecision.StalePose); return; }
             if ((source.Ray.origin - (pose.Players[source.Player].Position + Vector3.up * 1.65f)).magnitude > 2.1f)
             { Reject(source, ShotDecision.Invalid); return; }
+            if (!WeaponArsenal.Owns(pose.Players[source.Player], source.Player, source.Weapon))
+            { Reject(source, ShotDecision.Invalid); return; }
+            if (WeaponArsenal.Slot(source.Weapon) != WeaponSlot.Rifle) { ResolveSecondary(source, pose); return; }
             // Host derives region and incarnation from the displayed historical pose.
             AimResult aim = pose.Query(source.Ray);
             if (aim.Hit && Current.Enemies[aim.EnemyIndex].Incarnation != aim.SpawnVersion)
-            { Reject(source, ShotDecision.StaleEnemy); return; }
+            { Reject(source, ShotDecision.StaleEnemy, queried: true); return; }
             nextShot[source.Player] = Math.Max(nextShot[source.Player], (Current.Tick - 1) * (double)CombatSimulation.Tick) + player.RifleInterval;
             player.Shots++;
             ShotResult shot = new ShotResult(source.Ray.GetPoint(aim.Distance), -1, 0, 0, 0);
@@ -240,15 +309,64 @@ namespace Journey
                 shot = new ShotResult(shot.End, aim.EnemyIndex, aim.SpawnVersion, aim.Region, requested, enemy.Health, actual, after);
                 enemy.Health = after; Current.Enemies[aim.EnemyIndex] = enemy;
                 player.Hits++; player.Damage += actual;
-                if (after == 0) { player.Kills++; deathPosition = enemy.Position; Respawn(aim.EnemyIndex); }
+                if (after == 0)
+                {
+                    player.Kills++; deathPosition = enemy.Position;
+                    Growth?.Death(Current, new SharedHit(source, ShotDecision.Damage, shot, deathPosition));
+                    Respawn(aim.EnemyIndex);
+                }
             }
             Current.Players[source.Player] = player;
-            Resolved?.Invoke(new SharedHit(source, aim.Hit ? ShotDecision.Damage : ShotDecision.Miss, shot, deathPosition));
+            Resolved?.Invoke(new SharedHit(source, aim.Hit ? ShotDecision.Damage : ShotDecision.Miss, shot, deathPosition, true, 0, 1, pose.Enemies.Length));
         }
-        void Reject(SharedShot source, ShotDecision reason)
+        void ResolveSecondary(SharedShot source, SharedSnapshot pose)
+        {
+            SharedPlayer player = Current.Players[source.Player], firedBuild = pose.Players[source.Player];
+            WeaponSlot slot = WeaponArsenal.Slot(source.Weapon);
+            int rays = WeaponArsenal.Rays(firedBuild, slot); float range = WeaponArsenal.Range(slot);
+            nextShot[source.Weapon - 1] = Math.Max(nextShot[source.Weapon - 1], (Current.Tick - 1) * (double)CombatSimulation.Tick) + WeaponArsenal.Interval(firedBuild, slot);
+            player.Shots++;
+            bool first = true;
+            for (int r = 0; r < rays; r++)
+            {
+                Ray ray = slot == WeaponSlot.Scattergun ? WeaponArsenal.Fan(source.Ray, r, rays) : source.Ray;
+                int count = WeaponArsenal.Query(pose, ray, range, targets);
+                int limit = Math.Min(count, slot == WeaponSlot.Piercer ? WeaponArsenal.PierceLimit(firedBuild) : 1);
+                if (limit == 0)
+                {
+                    Resolved?.Invoke(new SharedHit(source, ShotDecision.Miss, new ShotResult(ray.GetPoint(range), -1, 0, 0, 0), default,
+                        first, r, first ? rays : 0, first ? rays * pose.Enemies.Length : 0));
+                    first = false;
+                }
+                for (int t = 0; t < limit; t++)
+                {
+                    AimResult aim = targets[t]; SharedEnemy enemy = Current.Enemies[aim.EnemyIndex];
+                    if (enemy.Incarnation != aim.SpawnVersion)
+                    {
+                        // Every pellet/penetration keeps the pre-trigger incarnation. Never shoot
+                        // a fresh respawn from a previous ray in this same trigger.
+                        Rejected++;
+                        Resolved?.Invoke(new SharedHit(source, ShotDecision.StaleEnemy,
+                            new ShotResult(ray.GetPoint(aim.Distance), -1, 0, 0, 0), default, first, r, first ? rays : 0, first ? rays * pose.Enemies.Length : 0));
+                        first = false; continue;
+                    }
+                    int requested = WeaponArsenal.Damage(firedBuild, slot) * (aim.Region == HitRegion.Head ? Configuration.HeadMultiplier : 1);
+                    int actual = Math.Min(requested, enemy.Health), after = enemy.Health - actual;
+                    var result = new ShotResult(ray.GetPoint(aim.Distance), aim.EnemyIndex, aim.SpawnVersion, aim.Region, requested, enemy.Health, actual, after);
+                    enemy.Health = after; Current.Enemies[aim.EnemyIndex] = enemy;
+                    player.Hits++; player.Damage += actual; Vector3 death = default;
+                    if (after == 0)
+                    { player.Kills++; death = enemy.Position; Growth?.Death(Current, new SharedHit(source, ShotDecision.Damage, result, death)); Respawn(aim.EnemyIndex); }
+                    Resolved?.Invoke(new SharedHit(source, ShotDecision.Damage, result, death, first, r, first ? rays : 0, first ? rays * pose.Enemies.Length : 0));
+                    first = false;
+                }
+            }
+            Current.Players[source.Player] = player;
+        }
+        void Reject(SharedShot source, ShotDecision reason, bool queried = false)
         {
             Rejected++; Resolved?.Invoke(new SharedHit(source, reason,
-                new ShotResult(source.Ray.GetPoint(CombatSimulation.RifleRange), -1, 0, 0, 0), default));
+                new ShotResult(source.Ray.GetPoint(CombatSimulation.RifleRange), -1, 0, 0, 0), default, false, 0, queried ? 1 : 0, queried ? Configuration.EnemyCount : 0));
         }
         void Respawn(int i)
         {
@@ -264,11 +382,29 @@ namespace Journey
         void Remember() => history[Current.Tick % history.Length].CopyFrom(Current);
         public bool Retry(int run, int p)
         {
-            if (run != Current.Run || p < 0 || p > 1 || (Current.State != SharedState.Defeat && Current.State != SharedState.Complete)) return false;
+            if (run != Current.Run || p < 0 || p >= Current.Roster || (Current.State != SharedState.Defeat && Current.State != SharedState.Complete)) return false;
             SharedPlayer player = Current.Players[p]; player.Ready = true; Current.Players[p] = player;
-            if (Current.Players[0].Ready && Current.Players[1].Ready) Start(); return true;
+            if (Current.Players[0].Ready && (Current.Roster == 1 || Current.Players[1].Ready)) Start(); return true;
         }
-        public void Abort(string reason) { Current.State = SharedState.Aborted; AbortReason = reason; pending.Clear(); }
+        bool ValidChoice(GrowthChoice c) => Growth != null && c.Run == Current.Run && (Current.State == SharedState.Running || Current.State == SharedState.Choosing) &&
+            c.Player >= 0 && c.Player < Current.Roster && GrowthUpgrade.Valid(c.Upgrade) &&
+            GrowthUpgrade.Definition(c.Upgrade).Target == UpgradeTarget.OwnedWeapon && Current.Players[c.Player].Offer.Pending &&
+            Current.Players[c.Player].Offer.Contains(c.Upgrade) &&
+            c.Offer == Current.Players[c.Player].Offer.Id && c.Weapon == Current.Players[c.Player].Weapon && c.Weapon == Current.Players[c.Player].Offer.Weapon;
+        public bool Select(GrowthChoice choice)
+        {
+            if (!ValidChoice(choice) || choices.Exists(c => c.Player == choice.Player)) return false;
+            choices.Add(choice); return true;
+        }
+        public bool ContinueChoice(int run, int phase, int p)
+        {
+            if (run != Current.Run || phase != Current.ChoicePhase || p < 0 || p >= Current.Roster ||
+                Current.State != SharedState.Choosing || Current.Players[p].Offer.Selected == UpgradeId.None || Current.Players[p].ChoiceReady) return false;
+            Current.Players[p].ChoiceReady = true; Current.ControlRevision++;
+            for (int i = 0; i < Current.Roster; i++) if (!Current.Players[i].ChoiceReady) return true;
+            Current.State = SharedState.Running; pending.Clear(); Remember(); return true;
+        }
+        public void Abort(string reason) { Current.State = SharedState.Aborted; AbortReason = reason; pending.Clear(); choices.Clear(); }
         static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);
     }
 }

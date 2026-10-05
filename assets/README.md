@@ -11,6 +11,6 @@ Add a row for each external or generated asset we keep. Group an asset pack into
 | Asset or pack | Source / creator | License or usage terms | Changes / generation notes | Runtime path |
 | --- | --- | --- | --- | --- |
 
-The first prototype uses runtime-generated primitive geometry, flat materials, and a synthesized pulse sound implemented in `ArenaPresentation.cs`. No external art or audio is imported. The validation screenshot in `docs/playtests/evidence/` is captured from our own prototype. Editable external asset sources will be registered here when introduced.
+The first prototype uses original runtime-generated primitive geometry, flat materials and synthesized shot/pickup/level-up sounds implemented in `ArenaPresentation.cs`. October 5's XP discs/range ring are generated in `XpPresentation.cs`; the weapon-stack experiment's orange/purple trails reuse original procedural materials in `SharedGame.cs`. No external art or audio is imported. These are repository-original procedural assets created with Codex assistance. Validation screenshots in `docs/playtests/evidence/` are captured from our own prototype. Editable external asset sources will be registered here when introduced.
 
 For generated assets, record the tool/model if known, generation date, a useful prompt summary, and the applicable usage terms. For original work, identify the creator. Check large-file storage needs before adding large audio or art source files.

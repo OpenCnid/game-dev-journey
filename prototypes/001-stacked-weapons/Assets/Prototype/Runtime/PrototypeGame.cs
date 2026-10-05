@@ -33,6 +33,7 @@ namespace Journey
         ScenarioConfiguration sharedScenario = ScenarioConfiguration.Named(ScenarioKind.SharedRifle);
         Guid soloRun;
         string sharedAddress = "127.0.0.1";
+        float menuRifleRate = CombatSimulation.DefaultRifleRate;
         string profilePath;
         float profileSeconds = 5;
         double profileStarted;
@@ -216,24 +217,44 @@ namespace Journey
         public void StartCombat()
         {
             if (configurationInvalid) return;
+            if (soloScenario.SharedSolo) { StartGrowthSolo(); return; }
             if (benchmark) RestoreFrameSettings();
             benchmark = false; capture.Cancel(); error = "";
             yaw = pitch = accumulator = 0;
             view.ResetFeedback(); sim.Reset(soloScenario.With(interval: sim.RifleInterval));
             soloRun = Guid.NewGuid(); SaveSoloScenario(); SetCursor(true);
         }
+        void StartGrowthSolo()
+        {
+            if (benchmark) CancelBenchmark(); sim.Reset(0, 137, false); view.ResetFeedback();
+            menuRifleRate = sim.RifleRate;
+            gameObject.AddComponent<SharedGame>().Initialize(view, sim, true, "", 0, soloScenario, true); enabled = false;
+        }
         void StartShared(bool host, string address, ushort port = 7777)
         {
             if (configurationInvalid) return;
+            SharedGame shared = null;
             try
             {
                 if (benchmark) CancelBenchmark();
                 sim.Reset(0, 137, false);
                 view.ResetFeedback();
-                var shared = gameObject.AddComponent<SharedGame>();
+                menuRifleRate = sim.RifleRate;
+                shared = gameObject.AddComponent<SharedGame>();
                 shared.Initialize(view, sim, host, address, port, host ? sharedScenario : null); enabled = false;
             }
-            catch (Exception exception) { error = exception.Message; Debug.LogException(exception); }
+            catch (Exception exception)
+            {
+                if (shared != null) { shared.CloseSession("Session failed to start"); Destroy(shared); }
+                ReturnFromShared(); error = exception.Message; Debug.LogException(exception);
+            }
+        }
+        internal void ReturnFromShared()
+        {
+            sim.ResetForMenu(); sim.RifleRate = menuRifleRate;
+            view.ResetFeedback(); yaw = pitch = accumulator = 0;
+            previousClock = Time.realtimeSinceStartupAsDouble;
+            enabled = true; SetCursor(false);
         }
         public bool TrySetRifleRate(string value)
         {
@@ -245,7 +266,7 @@ namespace Journey
         void SetRifleRate(float rate)
         {
             sim.RifleRate = rate;
-            soloScenario = soloScenario.With(interval: sim.RifleInterval); sharedScenario = sharedScenario.With(interval: sim.RifleInterval);
+            if (!soloScenario.SharedSolo) soloScenario = soloScenario.With(interval: sim.RifleInterval); if (!sharedScenario.SharedSolo) sharedScenario = sharedScenario.With(interval: sim.RifleInterval);
             if (!benchmark && soloRun != Guid.Empty) SaveSoloScenario();
             customRifleRate = sim.RifleRate.ToString("G8", CultureInfo.InvariantCulture); rateError = "";
         }
@@ -257,7 +278,8 @@ namespace Journey
         }
         void SelectScenario(ScenarioKind kind)
         {
-            soloScenario = sharedScenario = ScenarioConfiguration.Named(kind).With(interval: sim.RifleInterval);
+            var selected = ScenarioConfiguration.Named(kind);
+            soloScenario = sharedScenario = selected.SharedSolo ? selected : selected.With(interval: sim.RifleInterval);
         }
         void ScenarioControls()
         {
@@ -268,6 +290,8 @@ namespace Journey
             if (GUILayout.Button("Solo precision for both")) SelectScenario(ScenarioKind.SoloPrecision);
             if (GUILayout.Button("Shared rifle for both")) SelectScenario(ScenarioKind.SharedRifle);
             GUILayout.EndHorizontal(); GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Earned growth")) SelectScenario(ScenarioKind.EarnedGrowth);
+            if (GUILayout.Button("Weapon stack")) SelectScenario(ScenarioKind.WeaponStack);
             if (GUILayout.Button("Developer parity")) { SelectScenario(ScenarioKind.DeveloperParity); SetRifleRate(4); }
             if (GUILayout.Button("Named defaults"))
             {
@@ -417,7 +441,7 @@ namespace Journey
                 if (sim.State == RunState.Paused && !sim.Benchmark && GUILayout.Button("RESUME", button)) { sim.TogglePause(); SetCursor(true); }
                 if (GUILayout.Button("START / RESTART COMBAT", button)) StartCombat();
                 GUILayout.Space(8);
-                GUILayout.Label("TWO-PLAYER SHARED RIFLE TEST", heading);
+                GUILayout.Label("TWO-PLAYER CO-OP TEST", heading);
                 sharedAddress = GUILayout.TextField(sharedAddress, 48);
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button("Host (A)", button)) StartShared(true, "0.0.0.0");

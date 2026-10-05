@@ -44,6 +44,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--viewer", required=True)
     parser.add_argument("--results", type=Path, required=True)
+    parser.add_argument("--choice", choices=["stronger", "faster"], help="Explicit diagnostic personal selection on earned level 2.")
+    parser.add_argument("--stack-path", choices=["broad", "scatter", "pierce"], help="Explicit two-stage weapon-stack choices and Continue.")
     parser.add_argument("--seconds", type=int, default=900)
     args = parser.parse_args()
     address = urlparse(args.viewer)
@@ -65,6 +67,21 @@ def main():
                     log.write(json.dumps(entry) + "\n"); log.flush()
                     print(json.dumps({"run": state["run"], "state": state["state"], "elapsed": state["elapsed"],
                                       "A_hp": state["players"][0]["Health"], "B_hp": state["players"][1]["Health"]}), flush=True)
+                offer = state["players"][1].get("Offer", {})
+                upgrade = 0
+                if args.stack_path and state["scenario"]["name"] == "Weapon stack":
+                    first = state["players"][1].get("FirstAddition", 0)
+                    upgrade = (4 if args.stack_path == "pierce" else 3) if state["level"] == 2 else ((4 if first == 3 else 3) if args.stack_path == "broad" else (5 if first == 3 else 6))
+                elif args.choice and state["scenario"]["name"] == "Earned growth":
+                    upgrade = 1 if args.choice == "stronger" else 2
+                if upgrade and state["state"] in ("Running", "Choosing") and offer.get("Id", 0) > 0 and offer.get("Selected", 0) == 0:
+                    request(base + "client", {"action": "choice", "upgrade": upgrade})
+                    time.sleep(.2)
+                    continue
+                if upgrade and state["state"] == "Choosing" and offer.get("Selected", 0) != 0 and not state["players"][1].get("ChoiceReady", False):
+                    request(base + "client", {"action": "continue", "phase": state["choicePhase"]})
+                    time.sleep(.2)
+                    continue
                 if state["state"] == "Running" and state["players"][1]["Health"] > 0:
                     request(base + "client", cover_input(state)); sent += 1
                 elif state["state"] in ("Complete", "Defeat") and state["run"] not in ready_runs:

@@ -142,6 +142,12 @@ namespace Journey
             State = RunState.Running;
         }
 
+        internal void ResetForMenu()
+        {
+            Reset(0, Configuration.Seed, false);
+            State = RunState.Ready;
+        }
+
         public void TogglePause()
         {
             if (State == RunState.Paused) State = beforePause;
@@ -314,9 +320,10 @@ namespace Journey
         // Read-only projection for the accepted renderer/feedback. SharedEncounter alone owns damage.
         internal void ProjectShared(SharedSnapshot snapshot, int player, Vector3 cameraPosition)
         {
-            NativeState = false; Benchmark = false; Count = snapshot.State == SharedState.Waiting ? 0 : snapshot.Enemies.Length; HealthMaximum = snapshot.Configuration.EnemyHealth;
+            bool preparing = snapshot.Roster == 1 && snapshot.Run > 0 && snapshot.State == SharedState.Waiting;
+            NativeState = false; Benchmark = false; Count = snapshot.State == SharedState.Waiting && !preparing ? 0 : snapshot.Enemies.Length; HealthMaximum = snapshot.Configuration.EnemyHealth;
             Configuration = snapshot.Configuration; rifleInterval = Configuration.RifleInterval; rifleRate = Configuration.RifleRate;
-            State = snapshot.State == SharedState.Running ? RunState.Running : snapshot.State == SharedState.Complete ? RunState.Won : RunState.Lost;
+            State = snapshot.State == SharedState.Running ? RunState.Running : snapshot.State == SharedState.Choosing ? RunState.Paused : snapshot.State == SharedState.Complete ? RunState.Won : RunState.Lost;
             Player = PreviousPlayer = cameraPosition; PlayerHealth = snapshot.Players[player].Health;
             Elapsed = snapshot.Elapsed; Duration = snapshot.Configuration.Duration;
             Shots = snapshot.Players[player].Shots; Kills = snapshot.Players[0].Kills + snapshot.Players[1].Kills; StateVersion++;

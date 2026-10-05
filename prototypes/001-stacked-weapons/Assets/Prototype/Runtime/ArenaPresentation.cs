@@ -30,7 +30,7 @@ namespace Journey
         Transform weapon, muzzlePulse;
         Material muzzleMaterial;
         AudioSource audio;
-        AudioClip shot;
+        AudioClip shot, xpPickup, levelUp;
         float flash, recoil;
         readonly Plane[] frustum = new Plane[6];
         readonly WarningCollector warnings = new WarningCollector();
@@ -134,7 +134,21 @@ namespace Journey
                 samples[i] = Mathf.Sin(2 * Mathf.PI * (700 * t - 1800 * t * t)) * Mathf.Exp(-t * 90);
             }
             shot.SetData(samples, 0);
+            xpPickup = Chime("XP pickup", .09f, 880, 1320);
+            levelUp = Chime("Level up", .42f, 660, 1320);
         }
+        static AudioClip Chime(string name, float duration, float low, float high)
+        {
+            var samples = new float[Mathf.CeilToInt(duration * 44100)];
+            for (int i = 0; i < samples.Length; i++)
+            {
+                float t = i / 44100f, progress = t / duration;
+                float frequency = progress < .5f ? low : high;
+                samples[i] = Mathf.Sin(2 * Mathf.PI * frequency * t) * Mathf.Sin(Mathf.PI * progress) * .7f;
+            }
+            var clip = AudioClip.Create(name, samples.Length, 1, 44100, false); clip.SetData(samples, 0); return clip;
+        }
+        public void PlayGrowthCue(bool leveled) => audio.PlayOneShot(leveled ? levelUp : xpPickup, leveled ? 2.4f : 1.8f);
 
         // Combat calls this after BeginFrame, with the resolved camera-ray endpoint.
         // Benchmark calls it before BeginFrame to retain its original presentation workload.
@@ -396,6 +410,7 @@ namespace Journey
             instances?.Dispose(); instances = null; projectileInstances?.Dispose(); projectileInstances = null;
             warningInstances?.Dispose(); warningInstances = null;
             if (shot != null) Object.Destroy(shot); if (ring != null) Object.Destroy(ring);
+            if (xpPickup != null) Object.Destroy(xpPickup); if (levelUp != null) Object.Destroy(levelUp);
         }
 
         static Material Material(string name, Color color, bool unlit = false)

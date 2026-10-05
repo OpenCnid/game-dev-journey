@@ -1,0 +1,2502 @@
+{
+  "schema": 1,
+  "candidate": "StackLab-GDJ3-v3",
+  "runtimeSource": "d8c3eee6ad6b4b8109c8d63c524512efb9a918b3",
+  "builtUtc": "2026-10-05T07:31:06.1059078Z",
+  "tests": {
+    "EditMode": {
+      "passed": 143,
+      "sha256": "6c7ba27bacc673f3be18e1e81c1bed5d0a9018e105284c027ea1062017e801b8"
+    },
+    "PlayMode": {
+      "passed": 17,
+      "sha256": "ec0282a71c5e9d35f4ee1675b02627f4a71f65561e49001d70fb6567cc605d4a"
+    }
+  },
+  "runnerTestsPassed": 2,
+  "functionalOnly": true,
+  "packetBytes": {
+    "snapshot": 1025,
+    "growth": 105,
+    "hit": 118,
+    "limit": 1100,
+    "outgoingRecordLimit": 1024
+  },
+  "checks": [
+    {
+      "rawEvidence": "prototypes/001-stacked-weapons/artifacts/gdj3-v1-solo-check2",
+      "result": "PASS",
+      "version": 1,
+      "desktop": {
+        "desktop": "StackLab-6d5397a3357b818c35394f23",
+        "inputBefore": "Default",
+        "inputAfter": "Default",
+        "unchanged": true,
+        "children": [
+          28792
+        ],
+        "stopped": true
+      },
+      "comparisons": [
+        {
+          "run": 1,
+          "state": 3,
+          "ticks": 3149,
+          "activeSeconds": 52.483333333333334,
+          "xp": 169,
+          "level": 3,
+          "uncollectedXp": 2,
+          "levelSeconds": [
+            8.083333333333334,
+            10.583333333333334
+          ],
+          "players": [
+            {
+              "Position": {
+                "x": 9.157179832458496,
+                "y": 0.0,
+                "z": 5.138019561767578
+              },
+              "Yaw": 82.08960723876953,
+              "Pitch": 43.27317810058594,
+              "ReturnAt": 57.48333740234375,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 52.883338928222656,
+              "Health": 0,
+              "Life": 1,
+              "Shots": 561,
+              "Hits": 628,
+              "Damage": 10376,
+              "Kills": 171,
+              "Weapon": 1,
+              "BodyDamage": 20,
+              "Arsenal": 7,
+              "FirstAddition": 3,
+              "Specialization": 0,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 3,
+                "Tick": 635,
+                "Weapon": 1,
+                "AppliedTick": 635,
+                "ControlRevision": 5,
+                "First": 4,
+                "Second": 5,
+                "Selected": 4
+              }
+            }
+          ],
+          "weaponWork": [
+            {
+              "weapon": 1,
+              "player": 0,
+              "triggers": 436,
+              "rays": 436,
+              "targetTests": 15260,
+              "hits": 425,
+              "damage": 7940,
+              "kills": 122,
+              "rejected": 2,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 2,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 3,
+              "player": 0,
+              "triggers": 60,
+              "rays": 300,
+              "targetTests": 10500,
+              "hits": 139,
+              "damage": 1532,
+              "kills": 38,
+              "rejected": 95,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 4,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 5,
+              "player": 0,
+              "triggers": 65,
+              "rays": 65,
+              "targetTests": 2275,
+              "hits": 64,
+              "damage": 904,
+              "kills": 11,
+              "rejected": 4,
+              "name": "Piercer"
+            },
+            {
+              "weapon": 6,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Piercer"
+            }
+          ],
+          "growthEvents": 398,
+          "outcomeEvents": 808,
+          "catchupLimits": 0,
+          "outgoingHighWater": 0,
+          "outgoingDeferred": 0,
+          "scenario": {
+            "version": 2,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 1,
+            "startingSpecialization": 0,
+            "duration": 120.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Weapon stack",
+            "identity": "8d3d75b340456374adcf28a37d849efca2000449016b7910bd1be8d8436ef7df",
+            "session": "e05af3f938cd4a47af65fc4aa17dfe5b"
+          },
+          "diagnostics": {
+            "abortFrameMs": null,
+            "abortRemainingMs": null,
+            "abortCatchupTicks": null,
+            "abortPreviousUpdateMs": null,
+            "updateMaxMs": null,
+            "previewCaptureLastMs": null,
+            "previewCaptureMaxMs": null,
+            "previewCaptureCompletedAt": null,
+            "previewPollMaxMs": null
+          }
+        },
+        {
+          "run": 2,
+          "state": 3,
+          "ticks": 2385,
+          "activeSeconds": 39.75,
+          "xp": 129,
+          "level": 3,
+          "uncollectedXp": 2,
+          "levelSeconds": [
+            8.283333333333333,
+            10.533333333333333
+          ],
+          "players": [
+            {
+              "Position": {
+                "x": -11.0369234085083,
+                "y": 0.0,
+                "z": 1.5061615705490112
+              },
+              "Yaw": 256.95367431640625,
+              "Pitch": 44.53346252441406,
+              "ReturnAt": 44.750003814697266,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 40.15000534057617,
+              "Health": 0,
+              "Life": 1,
+              "Shots": 368,
+              "Hits": 473,
+              "Damage": 8032,
+              "Kills": 131,
+              "Weapon": 1,
+              "BodyDamage": 20,
+              "Arsenal": 3,
+              "FirstAddition": 3,
+              "Specialization": 5,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 3,
+                "Tick": 632,
+                "Weapon": 1,
+                "AppliedTick": 632,
+                "ControlRevision": 5,
+                "First": 4,
+                "Second": 5,
+                "Selected": 5
+              }
+            }
+          ],
+          "weaponWork": [
+            {
+              "weapon": 1,
+              "player": 0,
+              "triggers": 326,
+              "rays": 326,
+              "targetTests": 11410,
+              "hits": 322,
+              "damage": 6368,
+              "kills": 98,
+              "rejected": 5,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 2,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 3,
+              "player": 0,
+              "triggers": 42,
+              "rays": 286,
+              "targetTests": 10010,
+              "hits": 151,
+              "damage": 1664,
+              "kills": 33,
+              "rejected": 91,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 4,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 5,
+              "player": 0,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Piercer"
+            },
+            {
+              "weapon": 6,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Piercer"
+            }
+          ],
+          "growthEvents": 317,
+          "outcomeEvents": 617,
+          "catchupLimits": 0,
+          "outgoingHighWater": 0,
+          "outgoingDeferred": 0,
+          "scenario": {
+            "version": 2,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 2,
+            "startingArsenal": 1,
+            "startingSpecialization": 0,
+            "duration": 120.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Weapon stack",
+            "identity": "8d3d75b340456374adcf28a37d849efca2000449016b7910bd1be8d8436ef7df",
+            "session": "e05af3f938cd4a47af65fc4aa17dfe5b"
+          },
+          "diagnostics": {
+            "abortFrameMs": null,
+            "abortRemainingMs": null,
+            "abortCatchupTicks": null,
+            "abortPreviousUpdateMs": null,
+            "updateMaxMs": null,
+            "previewCaptureLastMs": null,
+            "previewCaptureMaxMs": null,
+            "previewCaptureCompletedAt": null,
+            "previewPollMaxMs": null
+          }
+        }
+      ],
+      "pausesVerified": 4,
+      "afterClientLoss": null
+    },
+    {
+      "rawEvidence": "prototypes/001-stacked-weapons/artifacts/gdj3-v1-pair",
+      "result": "PASS",
+      "version": 1,
+      "desktop": {
+        "desktop": "StackLab-e5c5260411b7cd6f765258ae",
+        "inputBefore": "Default",
+        "inputAfter": "Default",
+        "unchanged": true,
+        "children": [
+          31984,
+          15980
+        ],
+        "stopped": true
+      },
+      "comparisons": [
+        {
+          "run": 1,
+          "state": 2,
+          "ticks": 7200,
+          "activeSeconds": 120.0,
+          "xp": 822,
+          "level": 3,
+          "uncollectedXp": 143,
+          "levelSeconds": [
+            8.15,
+            11.583333333333334
+          ],
+          "players": [
+            {
+              "Position": {
+                "x": -12.270293235778809,
+                "y": 0.0,
+                "z": -27.050682067871094
+              },
+              "Yaw": 84.622314453125,
+              "Pitch": 2.6715891361236572,
+              "ReturnAt": 0.0,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 106.33334350585938,
+              "Health": 60,
+              "Life": 1,
+              "Shots": 1316,
+              "Hits": 1342,
+              "Damage": 23512,
+              "Kills": 194,
+              "Weapon": 1,
+              "BodyDamage": 20,
+              "Arsenal": 7,
+              "FirstAddition": 3,
+              "Specialization": 0,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 3,
+                "Tick": 695,
+                "Weapon": 1,
+                "AppliedTick": 695,
+                "ControlRevision": 8,
+                "First": 4,
+                "Second": 5,
+                "Selected": 4
+              }
+            },
+            {
+              "Position": {
+                "x": -6.575529098510742,
+                "y": 0.0,
+                "z": -10.766448020935059
+              },
+              "Yaw": 11.061001777648926,
+              "Pitch": 1.1759836673736572,
+              "ReturnAt": 0.0,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 0.0,
+              "Health": 100,
+              "Life": 1,
+              "Shots": 1116,
+              "Hits": 1121,
+              "Damage": 34468,
+              "Kills": 771,
+              "Weapon": 2,
+              "BodyDamage": 20,
+              "Arsenal": 5,
+              "FirstAddition": 4,
+              "Specialization": 6,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 4,
+                "Tick": 695,
+                "Weapon": 2,
+                "AppliedTick": 695,
+                "ControlRevision": 7,
+                "First": 6,
+                "Second": 3,
+                "Selected": 6
+              }
+            }
+          ],
+          "weaponWork": [
+            {
+              "weapon": 1,
+              "player": 0,
+              "triggers": 999,
+              "rays": 999,
+              "targetTests": 34965,
+              "hits": 996,
+              "damage": 18824,
+              "kills": 166,
+              "rejected": 0,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 2,
+              "player": 1,
+              "triggers": 943,
+              "rays": 943,
+              "targetTests": 33005,
+              "hits": 942,
+              "damage": 29796,
+              "kills": 728,
+              "rejected": 57,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 3,
+              "player": 0,
+              "triggers": 150,
+              "rays": 750,
+              "targetTests": 26250,
+              "hits": 170,
+              "damage": 1960,
+              "kills": 16,
+              "rejected": 26,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 4,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 5,
+              "player": 0,
+              "triggers": 167,
+              "rays": 167,
+              "targetTests": 5845,
+              "hits": 176,
+              "damage": 2728,
+              "kills": 12,
+              "rejected": 2,
+              "name": "Piercer"
+            },
+            {
+              "weapon": 6,
+              "player": 1,
+              "triggers": 173,
+              "rays": 173,
+              "targetTests": 6055,
+              "hits": 179,
+              "damage": 4672,
+              "kills": 43,
+              "rejected": 40,
+              "name": "Piercer"
+            }
+          ],
+          "growthEvents": 3380,
+          "outcomeEvents": 3163,
+          "catchupLimits": 0,
+          "outgoingHighWater": 0,
+          "outgoingDeferred": 0,
+          "scenario": {
+            "version": 2,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 1,
+            "startingSpecialization": 0,
+            "duration": 120.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Weapon stack",
+            "identity": "8d3d75b340456374adcf28a37d849efca2000449016b7910bd1be8d8436ef7df",
+            "session": "8c06ac81a14846ceaf95427422c9c961"
+          },
+          "diagnostics": {
+            "abortFrameMs": null,
+            "abortRemainingMs": null,
+            "abortCatchupTicks": null,
+            "abortPreviousUpdateMs": null,
+            "updateMaxMs": null,
+            "previewCaptureLastMs": null,
+            "previewCaptureMaxMs": null,
+            "previewCaptureCompletedAt": null,
+            "previewPollMaxMs": null
+          }
+        },
+        {
+          "run": 2,
+          "state": 2,
+          "ticks": 7200,
+          "activeSeconds": 120.0,
+          "xp": 850,
+          "level": 3,
+          "uncollectedXp": 141,
+          "levelSeconds": [
+            8.233333333333333,
+            11.6
+          ],
+          "players": [
+            {
+              "Position": {
+                "x": -0.6419329643249512,
+                "y": 0.0,
+                "z": -5.603179454803467
+              },
+              "Yaw": 128.0607147216797,
+              "Pitch": 3.9394073486328125,
+              "ReturnAt": 0.0,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 103.08334350585938,
+              "Health": 50,
+              "Life": 1,
+              "Shots": 1134,
+              "Hits": 1203,
+              "Damage": 21276,
+              "Kills": 228,
+              "Weapon": 1,
+              "BodyDamage": 20,
+              "Arsenal": 3,
+              "FirstAddition": 3,
+              "Specialization": 5,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 3,
+                "Tick": 696,
+                "Weapon": 1,
+                "AppliedTick": 696,
+                "ControlRevision": 7,
+                "First": 4,
+                "Second": 5,
+                "Selected": 5
+              }
+            },
+            {
+              "Position": {
+                "x": -0.6254248023033142,
+                "y": 0.0,
+                "z": -5.585782527923584
+              },
+              "Yaw": 127.58353424072266,
+              "Pitch": 1.492085337638855,
+              "ReturnAt": 0.0,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 0.0,
+              "Health": 100,
+              "Life": 1,
+              "Shots": 1274,
+              "Hits": 1232,
+              "Damage": 38264,
+              "Kills": 763,
+              "Weapon": 2,
+              "BodyDamage": 20,
+              "Arsenal": 7,
+              "FirstAddition": 4,
+              "Specialization": 0,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 4,
+                "Tick": 696,
+                "Weapon": 2,
+                "AppliedTick": 696,
+                "ControlRevision": 8,
+                "First": 6,
+                "Second": 3,
+                "Selected": 3
+              }
+            }
+          ],
+          "weaponWork": [
+            {
+              "weapon": 1,
+              "player": 0,
+              "triggers": 984,
+              "rays": 984,
+              "targetTests": 34440,
+              "hits": 962,
+              "damage": 18464,
+              "kills": 205,
+              "rejected": 17,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 2,
+              "player": 1,
+              "triggers": 957,
+              "rays": 957,
+              "targetTests": 33495,
+              "hits": 957,
+              "damage": 31444,
+              "kills": 706,
+              "rejected": 43,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 3,
+              "player": 0,
+              "triggers": 150,
+              "rays": 1040,
+              "targetTests": 36400,
+              "hits": 241,
+              "damage": 2812,
+              "kills": 23,
+              "rejected": 46,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 4,
+              "player": 1,
+              "triggers": 145,
+              "rays": 725,
+              "targetTests": 25375,
+              "hits": 123,
+              "damage": 2592,
+              "kills": 28,
+              "rejected": 24,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 5,
+              "player": 0,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Piercer"
+            },
+            {
+              "weapon": 6,
+              "player": 1,
+              "triggers": 172,
+              "rays": 172,
+              "targetTests": 6020,
+              "hits": 152,
+              "damage": 4228,
+              "kills": 29,
+              "rejected": 48,
+              "name": "Piercer"
+            }
+          ],
+          "growthEvents": 3435,
+          "outcomeEvents": 3966,
+          "catchupLimits": 0,
+          "outgoingHighWater": 0,
+          "outgoingDeferred": 0,
+          "scenario": {
+            "version": 2,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 2,
+            "startingArsenal": 1,
+            "startingSpecialization": 0,
+            "duration": 120.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Weapon stack",
+            "identity": "8d3d75b340456374adcf28a37d849efca2000449016b7910bd1be8d8436ef7df",
+            "session": "8c06ac81a14846ceaf95427422c9c961"
+          },
+          "diagnostics": {
+            "abortFrameMs": null,
+            "abortRemainingMs": null,
+            "abortCatchupTicks": null,
+            "abortPreviousUpdateMs": null,
+            "updateMaxMs": null,
+            "previewCaptureLastMs": null,
+            "previewCaptureMaxMs": null,
+            "previewCaptureCompletedAt": null,
+            "previewPollMaxMs": null
+          }
+        }
+      ],
+      "pausesVerified": 4,
+      "afterClientLoss": {
+        "state": "Aborted",
+        "tick": 493,
+        "level": 2,
+        "choicePhase": 1
+      }
+    },
+    {
+      "rawEvidence": "prototypes/001-stacked-weapons/artifacts/gdj3-v2-solo-check3",
+      "result": "PASS",
+      "version": 2,
+      "desktop": {
+        "desktop": "StackLab-23ab612dc2f5d3f73412a85c",
+        "inputBefore": "Default",
+        "inputAfter": "Default",
+        "unchanged": true,
+        "children": [
+          24320
+        ],
+        "stopped": true
+      },
+      "comparisons": [
+        {
+          "run": 1,
+          "state": 3,
+          "ticks": 3616,
+          "activeSeconds": 60.266666666666666,
+          "xp": 196,
+          "level": 3,
+          "uncollectedXp": 1,
+          "levelSeconds": [
+            8.05,
+            10.833333333333334
+          ],
+          "players": [
+            {
+              "Position": {
+                "x": -2.1112165451049805,
+                "y": 0.0,
+                "z": 1.826116919517517
+              },
+              "Yaw": 88.09370422363281,
+              "Pitch": 45.360050201416016,
+              "ReturnAt": 65.26667022705078,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 60.66667175292969,
+              "Health": 0,
+              "Life": 1,
+              "Shots": 644,
+              "Hits": 741,
+              "Damage": 11916,
+              "Kills": 197,
+              "Weapon": 1,
+              "BodyDamage": 20,
+              "Arsenal": 7,
+              "FirstAddition": 3,
+              "Specialization": 0,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 3,
+                "Tick": 650,
+                "Weapon": 1,
+                "AppliedTick": 650,
+                "ControlRevision": 5,
+                "First": 4,
+                "Second": 5,
+                "Selected": 4
+              }
+            }
+          ],
+          "weaponWork": [
+            {
+              "weapon": 1,
+              "player": 0,
+              "triggers": 497,
+              "rays": 502,
+              "targetTests": 17570,
+              "hits": 491,
+              "damage": 8800,
+              "kills": 151,
+              "rejected": 5,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 2,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 3,
+              "player": 0,
+              "triggers": 70,
+              "rays": 350,
+              "targetTests": 12250,
+              "hits": 174,
+              "damage": 1920,
+              "kills": 42,
+              "rejected": 97,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 4,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 5,
+              "player": 0,
+              "triggers": 77,
+              "rays": 77,
+              "targetTests": 2695,
+              "hits": 76,
+              "damage": 1196,
+              "kills": 4,
+              "rejected": 3,
+              "name": "Piercer"
+            },
+            {
+              "weapon": 6,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Piercer"
+            }
+          ],
+          "growthEvents": 443,
+          "outcomeEvents": 934,
+          "catchupLimits": 0,
+          "outgoingHighWater": 0,
+          "outgoingDeferred": 0,
+          "scenario": {
+            "version": 2,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 1,
+            "startingSpecialization": 0,
+            "duration": 120.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Weapon stack",
+            "identity": "8d3d75b340456374adcf28a37d849efca2000449016b7910bd1be8d8436ef7df",
+            "session": "c1665d31453546e3a190f2971e726da5"
+          },
+          "diagnostics": {
+            "abortFrameMs": null,
+            "abortRemainingMs": null,
+            "abortCatchupTicks": null,
+            "abortPreviousUpdateMs": null,
+            "updateMaxMs": null,
+            "previewCaptureLastMs": null,
+            "previewCaptureMaxMs": null,
+            "previewCaptureCompletedAt": null,
+            "previewPollMaxMs": null
+          }
+        }
+      ],
+      "pausesVerified": 2,
+      "afterClientLoss": null
+    },
+    {
+      "rawEvidence": "prototypes/001-stacked-weapons/artifacts/gdj3-v2-pair",
+      "result": "PASS",
+      "version": 2,
+      "desktop": {
+        "desktop": "StackLab-bd399720224956bc0e03e412",
+        "inputBefore": "Default",
+        "inputAfter": "Default",
+        "unchanged": true,
+        "children": [
+          33352,
+          31856
+        ],
+        "stopped": true
+      },
+      "comparisons": [
+        {
+          "run": 1,
+          "state": 2,
+          "ticks": 7200,
+          "activeSeconds": 120.0,
+          "xp": 872,
+          "level": 3,
+          "uncollectedXp": 100,
+          "levelSeconds": [
+            8.25,
+            11.566666666666666
+          ],
+          "players": [
+            {
+              "Position": {
+                "x": -15.785719871520996,
+                "y": 0.0,
+                "z": -7.098755359649658
+              },
+              "Yaw": 262.4214782714844,
+              "Pitch": 3.979011297225952,
+              "ReturnAt": 0.0,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 0.0,
+              "Health": 100,
+              "Life": 1,
+              "Shots": 1312,
+              "Hits": 1353,
+              "Damage": 23188,
+              "Kills": 248,
+              "Weapon": 1,
+              "BodyDamage": 20,
+              "Arsenal": 7,
+              "FirstAddition": 3,
+              "Specialization": 0,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 3,
+                "Tick": 694,
+                "Weapon": 1,
+                "AppliedTick": 694,
+                "ControlRevision": 8,
+                "First": 4,
+                "Second": 5,
+                "Selected": 4
+              }
+            },
+            {
+              "Position": {
+                "x": -25.500247955322266,
+                "y": 0.0,
+                "z": 16.268417358398438
+              },
+              "Yaw": 185.12608337402344,
+              "Pitch": 0.11385945230722427,
+              "ReturnAt": 0.0,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 107.66667175292969,
+              "Health": 90,
+              "Life": 1,
+              "Shots": 1101,
+              "Hits": 1103,
+              "Damage": 35240,
+              "Kills": 724,
+              "Weapon": 2,
+              "BodyDamage": 20,
+              "Arsenal": 5,
+              "FirstAddition": 4,
+              "Specialization": 6,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 4,
+                "Tick": 694,
+                "Weapon": 2,
+                "AppliedTick": 694,
+                "ControlRevision": 7,
+                "First": 6,
+                "Second": 3,
+                "Selected": 6
+              }
+            }
+          ],
+          "weaponWork": [
+            {
+              "weapon": 1,
+              "player": 0,
+              "triggers": 996,
+              "rays": 1000,
+              "targetTests": 35000,
+              "hits": 992,
+              "damage": 18504,
+              "kills": 198,
+              "rejected": 4,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 2,
+              "player": 1,
+              "triggers": 929,
+              "rays": 1000,
+              "targetTests": 35000,
+              "hits": 929,
+              "damage": 30864,
+              "kills": 674,
+              "rejected": 71,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 3,
+              "player": 0,
+              "triggers": 149,
+              "rays": 745,
+              "targetTests": 26075,
+              "hits": 189,
+              "damage": 2188,
+              "kills": 18,
+              "rejected": 16,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 4,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 5,
+              "player": 0,
+              "triggers": 167,
+              "rays": 167,
+              "targetTests": 5845,
+              "hits": 172,
+              "damage": 2496,
+              "kills": 32,
+              "rejected": 4,
+              "name": "Piercer"
+            },
+            {
+              "weapon": 6,
+              "player": 1,
+              "triggers": 172,
+              "rays": 172,
+              "targetTests": 6020,
+              "hits": 174,
+              "damage": 4376,
+              "kills": 50,
+              "rejected": 44,
+              "name": "Piercer"
+            }
+          ],
+          "growthEvents": 3350,
+          "outcomeEvents": 3160,
+          "catchupLimits": 0,
+          "outgoingHighWater": 0,
+          "outgoingDeferred": 0,
+          "scenario": {
+            "version": 2,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 1,
+            "startingSpecialization": 0,
+            "duration": 120.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Weapon stack",
+            "identity": "8d3d75b340456374adcf28a37d849efca2000449016b7910bd1be8d8436ef7df",
+            "session": "3f47a57fa0a14135b2d2b08a69156f58"
+          },
+          "diagnostics": {
+            "abortFrameMs": null,
+            "abortRemainingMs": null,
+            "abortCatchupTicks": null,
+            "abortPreviousUpdateMs": null,
+            "updateMaxMs": null,
+            "previewCaptureLastMs": null,
+            "previewCaptureMaxMs": null,
+            "previewCaptureCompletedAt": null,
+            "previewPollMaxMs": null
+          }
+        }
+      ],
+      "pausesVerified": 2,
+      "afterClientLoss": {
+        "state": "Aborted",
+        "tick": 487,
+        "level": 2,
+        "choicePhase": 1
+      }
+    },
+    {
+      "rawEvidence": "prototypes/001-stacked-weapons/artifacts/gdj3-v2-reference-rifle",
+      "result": "PASS",
+      "version": 2,
+      "desktop": {
+        "desktop": "StackLab-38ed1d5029606dde8829caca",
+        "inputBefore": "Default",
+        "inputAfter": "Default",
+        "unchanged": true,
+        "children": [
+          33928
+        ],
+        "stopped": true
+      },
+      "comparisons": [
+        {
+          "run": 1,
+          "state": 2,
+          "ticks": 3600,
+          "activeSeconds": 60.0,
+          "xp": 0,
+          "level": 1,
+          "uncollectedXp": 0,
+          "levelSeconds": [],
+          "players": [
+            {
+              "Position": {
+                "x": 14.330262184143066,
+                "y": 0.0,
+                "z": -16.692781448364258
+              },
+              "Yaw": 274.3650817871094,
+              "Pitch": 5.702291488647461,
+              "ReturnAt": 0.0,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 43.85000228881836,
+              "Health": 60,
+              "Life": 1,
+              "Shots": 500,
+              "Hits": 500,
+              "Damage": 10000,
+              "Kills": 162,
+              "Weapon": 1,
+              "BodyDamage": 20,
+              "Arsenal": 1,
+              "FirstAddition": 0,
+              "Specialization": 0,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": false,
+              "Offer": {
+                "Id": 0,
+                "Tick": 0,
+                "Weapon": 0,
+                "AppliedTick": 0,
+                "ControlRevision": 0,
+                "First": 0,
+                "Second": 0,
+                "Selected": 0
+              }
+            }
+          ],
+          "weaponWork": [
+            {
+              "weapon": 1,
+              "player": 0,
+              "triggers": 500,
+              "rays": 500,
+              "targetTests": 17500,
+              "hits": 500,
+              "damage": 10000,
+              "kills": 162,
+              "rejected": 0,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 2,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 3,
+              "player": 0,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 4,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 5,
+              "player": 0,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Piercer"
+            },
+            {
+              "weapon": 6,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Piercer"
+            }
+          ],
+          "growthEvents": 0,
+          "outcomeEvents": 500,
+          "catchupLimits": 0,
+          "outgoingHighWater": 0,
+          "outgoingDeferred": 0,
+          "scenario": {
+            "version": 2,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 1,
+            "startingSpecialization": 0,
+            "duration": 60.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Stack reference (diagnostic)",
+            "identity": "00019c73d01317d10119a788bc2f224953dca82170456ce0d371c9a579f3b08c",
+            "session": "427e9a8c224145e8a4416342e502616c"
+          },
+          "diagnostics": {
+            "abortFrameMs": null,
+            "abortRemainingMs": null,
+            "abortCatchupTicks": null,
+            "abortPreviousUpdateMs": null,
+            "updateMaxMs": null,
+            "previewCaptureLastMs": null,
+            "previewCaptureMaxMs": null,
+            "previewCaptureCompletedAt": null,
+            "previewPollMaxMs": null
+          }
+        }
+      ],
+      "pausesVerified": 0,
+      "afterClientLoss": null
+    },
+    {
+      "rawEvidence": "prototypes/001-stacked-weapons/artifacts/gdj3-v3-solo",
+      "result": "PASS",
+      "version": 3,
+      "desktop": {
+        "desktop": "StackLab-fd4d67338a871a8ff9426499",
+        "inputBefore": "Default",
+        "inputAfter": "Default",
+        "unchanged": true,
+        "children": [
+          23308
+        ],
+        "stopped": true
+      },
+      "comparisons": [
+        {
+          "run": 1,
+          "state": 3,
+          "ticks": 2067,
+          "activeSeconds": 34.45,
+          "xp": 109,
+          "level": 3,
+          "uncollectedXp": 1,
+          "levelSeconds": [
+            8.083333333333334,
+            10.783333333333333
+          ],
+          "players": [
+            {
+              "Position": {
+                "x": -7.144733428955078,
+                "y": 0.0,
+                "z": 5.689494609832764
+              },
+              "Yaw": 57.61809539794922,
+              "Pitch": 40.745216369628906,
+              "ReturnAt": 39.45000076293945,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 34.85000228881836,
+              "Health": 0,
+              "Life": 1,
+              "Shots": 358,
+              "Hits": 401,
+              "Damage": 6680,
+              "Kills": 110,
+              "Weapon": 1,
+              "BodyDamage": 20,
+              "Arsenal": 7,
+              "FirstAddition": 3,
+              "Specialization": 0,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 3,
+                "Tick": 647,
+                "Weapon": 1,
+                "AppliedTick": 647,
+                "ControlRevision": 5,
+                "First": 4,
+                "Second": 5,
+                "Selected": 4
+              }
+            }
+          ],
+          "weaponWork": [
+            {
+              "weapon": 1,
+              "player": 0,
+              "triggers": 285,
+              "rays": 288,
+              "targetTests": 10080,
+              "hits": 282,
+              "damage": 5228,
+              "kills": 85,
+              "rejected": 3,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 2,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 3,
+              "player": 0,
+              "triggers": 36,
+              "rays": 180,
+              "targetTests": 6300,
+              "hits": 82,
+              "damage": 888,
+              "kills": 22,
+              "rejected": 76,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 4,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 5,
+              "player": 0,
+              "triggers": 37,
+              "rays": 37,
+              "targetTests": 1295,
+              "hits": 37,
+              "damage": 564,
+              "kills": 3,
+              "rejected": 2,
+              "name": "Piercer"
+            },
+            {
+              "weapon": 6,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Piercer"
+            }
+          ],
+          "growthEvents": 259,
+          "outcomeEvents": 510,
+          "catchupLimits": 0,
+          "outgoingHighWater": 0,
+          "outgoingDeferred": 0,
+          "scenario": {
+            "version": 2,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 1,
+            "startingSpecialization": 0,
+            "duration": 120.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Weapon stack",
+            "identity": "8d3d75b340456374adcf28a37d849efca2000449016b7910bd1be8d8436ef7df",
+            "session": "2973c7c3130341f0bc189339b130815f"
+          },
+          "diagnostics": {
+            "abortFrameMs": 0.0,
+            "abortRemainingMs": 0.0,
+            "abortCatchupTicks": 0,
+            "abortPreviousUpdateMs": 0.0,
+            "updateMaxMs": 20.0166,
+            "previewCaptureLastMs": 12.5638,
+            "previewCaptureMaxMs": 15.5392,
+            "previewCaptureCompletedAt": 43.03013600141723,
+            "previewPollMaxMs": 13.4897
+          }
+        }
+      ],
+      "pausesVerified": 2,
+      "afterClientLoss": null
+    },
+    {
+      "rawEvidence": "prototypes/001-stacked-weapons/artifacts/gdj3-v3-pair",
+      "result": "PASS",
+      "version": 3,
+      "desktop": {
+        "desktop": "StackLab-b597b84ac5c83ff66a2ff195",
+        "inputBefore": "Default",
+        "inputAfter": "Default",
+        "unchanged": true,
+        "children": [
+          9004,
+          25108
+        ],
+        "stopped": true
+      },
+      "comparisons": [
+        {
+          "run": 1,
+          "state": 2,
+          "ticks": 7200,
+          "activeSeconds": 120.0,
+          "xp": 856,
+          "level": 3,
+          "uncollectedXp": 99,
+          "levelSeconds": [
+            8.216666666666667,
+            11.55
+          ],
+          "players": [
+            {
+              "Position": {
+                "x": 8.549793243408203,
+                "y": 0.0,
+                "z": -25.006549835205078
+              },
+              "Yaw": 57.816829681396484,
+              "Pitch": 2.7898402214050293,
+              "ReturnAt": 0.0,
+              "ImmuneUntil": 98.4666748046875,
+              "ContactUntil": 111.00000762939453,
+              "Health": 70,
+              "Life": 2,
+              "Shots": 1257,
+              "Hits": 1364,
+              "Damage": 22860,
+              "Kills": 278,
+              "Weapon": 1,
+              "BodyDamage": 20,
+              "Arsenal": 7,
+              "FirstAddition": 3,
+              "Specialization": 0,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 3,
+                "Tick": 693,
+                "Weapon": 1,
+                "AppliedTick": 693,
+                "ControlRevision": 7,
+                "First": 4,
+                "Second": 5,
+                "Selected": 4
+              }
+            },
+            {
+              "Position": {
+                "x": -4.120700836181641,
+                "y": 0.0,
+                "z": -27.227771759033203
+              },
+              "Yaw": 303.0529479980469,
+              "Pitch": 0.890715479850769,
+              "ReturnAt": 0.0,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 0.0,
+              "Health": 100,
+              "Life": 1,
+              "Shots": 1110,
+              "Hits": 1098,
+              "Damage": 34504,
+              "Kills": 677,
+              "Weapon": 2,
+              "BodyDamage": 20,
+              "Arsenal": 5,
+              "FirstAddition": 4,
+              "Specialization": 6,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": true,
+              "Offer": {
+                "Id": 4,
+                "Tick": 693,
+                "Weapon": 2,
+                "AppliedTick": 693,
+                "ControlRevision": 8,
+                "First": 6,
+                "Second": 3,
+                "Selected": 6
+              }
+            }
+          ],
+          "weaponWork": [
+            {
+              "weapon": 1,
+              "player": 0,
+              "triggers": 953,
+              "rays": 959,
+              "targetTests": 33565,
+              "hits": 939,
+              "damage": 17428,
+              "kills": 202,
+              "rejected": 6,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 2,
+              "player": 1,
+              "triggers": 938,
+              "rays": 1000,
+              "targetTests": 35000,
+              "hits": 938,
+              "damage": 30492,
+              "kills": 613,
+              "rejected": 62,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 3,
+              "player": 0,
+              "triggers": 144,
+              "rays": 720,
+              "targetTests": 25200,
+              "hits": 258,
+              "damage": 2904,
+              "kills": 55,
+              "rejected": 72,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 4,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 5,
+              "player": 0,
+              "triggers": 160,
+              "rays": 160,
+              "targetTests": 5600,
+              "hits": 167,
+              "damage": 2528,
+              "kills": 21,
+              "rejected": 7,
+              "name": "Piercer"
+            },
+            {
+              "weapon": 6,
+              "player": 1,
+              "triggers": 172,
+              "rays": 172,
+              "targetTests": 6020,
+              "hits": 160,
+              "damage": 4012,
+              "kills": 64,
+              "rejected": 38,
+              "name": "Piercer"
+            }
+          ],
+          "growthEvents": 2927,
+          "outcomeEvents": 3064,
+          "catchupLimits": 0,
+          "outgoingHighWater": 0,
+          "outgoingDeferred": 0,
+          "scenario": {
+            "version": 2,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 1,
+            "startingSpecialization": 0,
+            "duration": 120.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Weapon stack",
+            "identity": "8d3d75b340456374adcf28a37d849efca2000449016b7910bd1be8d8436ef7df",
+            "session": "393e29f9d4054f669801b53f4d744480"
+          },
+          "diagnostics": {
+            "abortFrameMs": 0.0,
+            "abortRemainingMs": 0.0,
+            "abortCatchupTicks": 0,
+            "abortPreviousUpdateMs": 0.0,
+            "updateMaxMs": 34.6992,
+            "previewCaptureLastMs": 12.6659,
+            "previewCaptureMaxMs": 22.727,
+            "previewCaptureCompletedAt": 131.17775930493198,
+            "previewPollMaxMs": 15.3518
+          }
+        }
+      ],
+      "pausesVerified": 2,
+      "afterClientLoss": {
+        "state": "Aborted",
+        "tick": 487,
+        "level": 2,
+        "choicePhase": 1
+      }
+    },
+    {
+      "rawEvidence": "prototypes/001-stacked-weapons/artifacts/gdj3-v3-reference-rifle",
+      "result": "PASS",
+      "version": 3,
+      "desktop": {
+        "desktop": "StackLab-409101ad1a870a11b329a3c8",
+        "inputBefore": "Default",
+        "inputAfter": "Default",
+        "unchanged": true,
+        "children": [
+          27040
+        ],
+        "stopped": true
+      },
+      "comparisons": [
+        {
+          "run": 1,
+          "state": 2,
+          "ticks": 3600,
+          "activeSeconds": 60.0,
+          "xp": 0,
+          "level": 1,
+          "uncollectedXp": 0,
+          "levelSeconds": [],
+          "players": [
+            {
+              "Position": {
+                "x": 14.4671630859375,
+                "y": 0.0,
+                "z": -16.577253341674805
+              },
+              "Yaw": 281.008544921875,
+              "Pitch": 6.176787376403809,
+              "ReturnAt": 0.0,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 59.08333969116211,
+              "Health": 50,
+              "Life": 1,
+              "Shots": 500,
+              "Hits": 500,
+              "Damage": 10020,
+              "Kills": 164,
+              "Weapon": 1,
+              "BodyDamage": 20,
+              "Arsenal": 1,
+              "FirstAddition": 0,
+              "Specialization": 0,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": false,
+              "Offer": {
+                "Id": 0,
+                "Tick": 0,
+                "Weapon": 0,
+                "AppliedTick": 0,
+                "ControlRevision": 0,
+                "First": 0,
+                "Second": 0,
+                "Selected": 0
+              }
+            }
+          ],
+          "weaponWork": [
+            {
+              "weapon": 1,
+              "player": 0,
+              "triggers": 500,
+              "rays": 500,
+              "targetTests": 17500,
+              "hits": 500,
+              "damage": 10020,
+              "kills": 164,
+              "rejected": 0,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 2,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 3,
+              "player": 0,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 4,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 5,
+              "player": 0,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Piercer"
+            },
+            {
+              "weapon": 6,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Piercer"
+            }
+          ],
+          "growthEvents": 0,
+          "outcomeEvents": 500,
+          "catchupLimits": 0,
+          "outgoingHighWater": 0,
+          "outgoingDeferred": 0,
+          "scenario": {
+            "version": 2,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 1,
+            "startingSpecialization": 0,
+            "duration": 60.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Stack reference (diagnostic)",
+            "identity": "00019c73d01317d10119a788bc2f224953dca82170456ce0d371c9a579f3b08c",
+            "session": "24fd6e27a2ec486d8caf382f18ebff47"
+          },
+          "diagnostics": {
+            "abortFrameMs": 0.0,
+            "abortRemainingMs": 0.0,
+            "abortCatchupTicks": 0,
+            "abortPreviousUpdateMs": 0.0,
+            "updateMaxMs": 20.0795,
+            "previewCaptureLastMs": 13.3904,
+            "previewCaptureMaxMs": 19.8123,
+            "previewCaptureCompletedAt": 63.092768801587304,
+            "previewPollMaxMs": 15.9289
+          }
+        }
+      ],
+      "pausesVerified": 0,
+      "afterClientLoss": null
+    },
+    {
+      "rawEvidence": "prototypes/001-stacked-weapons/artifacts/gdj3-v3-reference-all",
+      "result": "PASS",
+      "version": 3,
+      "desktop": {
+        "desktop": "StackLab-29512a3159b880665f47b6aa",
+        "inputBefore": "Default",
+        "inputAfter": "Default",
+        "unchanged": true,
+        "children": [
+          8716
+        ],
+        "stopped": true
+      },
+      "comparisons": [
+        {
+          "run": 1,
+          "state": 2,
+          "ticks": 3600,
+          "activeSeconds": 60.0,
+          "xp": 0,
+          "level": 1,
+          "uncollectedXp": 0,
+          "levelSeconds": [],
+          "players": [
+            {
+              "Position": {
+                "x": 14.405952453613281,
+                "y": 0.0,
+                "z": -16.627655029296875
+              },
+              "Yaw": 107.33964538574219,
+              "Pitch": 13.324435234069824,
+              "ReturnAt": 0.0,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 4.783333778381348,
+              "Health": 90,
+              "Life": 1,
+              "Shots": 672,
+              "Hits": 718,
+              "Damage": 11592,
+              "Kills": 188,
+              "Weapon": 1,
+              "BodyDamage": 20,
+              "Arsenal": 7,
+              "FirstAddition": 0,
+              "Specialization": 0,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": false,
+              "Offer": {
+                "Id": 0,
+                "Tick": 0,
+                "Weapon": 0,
+                "AppliedTick": 0,
+                "ControlRevision": 0,
+                "First": 0,
+                "Second": 0,
+                "Selected": 0
+              }
+            }
+          ],
+          "weaponWork": [
+            {
+              "weapon": 1,
+              "player": 0,
+              "triggers": 499,
+              "rays": 500,
+              "targetTests": 17500,
+              "hits": 498,
+              "damage": 8728,
+              "kills": 156,
+              "rejected": 1,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 2,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 3,
+              "player": 0,
+              "triggers": 80,
+              "rays": 400,
+              "targetTests": 14000,
+              "hits": 122,
+              "damage": 1368,
+              "kills": 19,
+              "rejected": 18,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 4,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 5,
+              "player": 0,
+              "triggers": 93,
+              "rays": 93,
+              "targetTests": 3255,
+              "hits": 98,
+              "damage": 1496,
+              "kills": 13,
+              "rejected": 4,
+              "name": "Piercer"
+            },
+            {
+              "weapon": 6,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Piercer"
+            }
+          ],
+          "growthEvents": 0,
+          "outcomeEvents": 1009,
+          "catchupLimits": 0,
+          "outgoingHighWater": 0,
+          "outgoingDeferred": 0,
+          "scenario": {
+            "version": 2,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 7,
+            "startingSpecialization": 0,
+            "duration": 60.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Stack reference (diagnostic) (override)",
+            "identity": "9c9f87388cc0cccdc54af9944da18f19f6fae4308f23bd387f4bc0f524f502c2",
+            "session": "4db101f9950e47a49be346fe97c9dce0"
+          },
+          "diagnostics": {
+            "abortFrameMs": 0.0,
+            "abortRemainingMs": 0.0,
+            "abortCatchupTicks": 0,
+            "abortPreviousUpdateMs": 0.0,
+            "updateMaxMs": 21.157,
+            "previewCaptureLastMs": 13.2208,
+            "previewCaptureMaxMs": 19.4304,
+            "previewCaptureCompletedAt": 63.110776200623576,
+            "previewPollMaxMs": 12.7305
+          }
+        }
+      ],
+      "pausesVerified": 0,
+      "afterClientLoss": null
+    },
+    {
+      "rawEvidence": "prototypes/001-stacked-weapons/artifacts/gdj3-v3-reference-scatter",
+      "result": "PASS",
+      "version": 3,
+      "desktop": {
+        "desktop": "StackLab-1f505289e555a9f9ab1be891",
+        "inputBefore": "Default",
+        "inputAfter": "Default",
+        "unchanged": true,
+        "children": [
+          21328
+        ],
+        "stopped": true
+      },
+      "comparisons": [
+        {
+          "run": 1,
+          "state": 2,
+          "ticks": 3600,
+          "activeSeconds": 60.0,
+          "xp": 0,
+          "level": 1,
+          "uncollectedXp": 0,
+          "levelSeconds": [],
+          "players": [
+            {
+              "Position": {
+                "x": 14.47968578338623,
+                "y": 0.0,
+                "z": -16.563405990600586
+              },
+              "Yaw": 339.6882629394531,
+              "Pitch": 18.99744987487793,
+              "ReturnAt": 0.0,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 4.783333778381348,
+              "Health": 90,
+              "Life": 1,
+              "Shots": 579,
+              "Hits": 679,
+              "Damage": 11332,
+              "Kills": 184,
+              "Weapon": 1,
+              "BodyDamage": 20,
+              "Arsenal": 3,
+              "FirstAddition": 0,
+              "Specialization": 5,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": false,
+              "Offer": {
+                "Id": 0,
+                "Tick": 0,
+                "Weapon": 0,
+                "AppliedTick": 0,
+                "ControlRevision": 0,
+                "First": 0,
+                "Second": 0,
+                "Selected": 0
+              }
+            }
+          ],
+          "weaponWork": [
+            {
+              "weapon": 1,
+              "player": 0,
+              "triggers": 499,
+              "rays": 500,
+              "targetTests": 17500,
+              "hits": 498,
+              "damage": 9256,
+              "kills": 161,
+              "rejected": 1,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 2,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 3,
+              "player": 0,
+              "triggers": 80,
+              "rays": 560,
+              "targetTests": 19600,
+              "hits": 181,
+              "damage": 2076,
+              "kills": 23,
+              "rejected": 35,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 4,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 5,
+              "player": 0,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Piercer"
+            },
+            {
+              "weapon": 6,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Piercer"
+            }
+          ],
+          "growthEvents": 0,
+          "outcomeEvents": 1060,
+          "catchupLimits": 0,
+          "outgoingHighWater": 0,
+          "outgoingDeferred": 0,
+          "scenario": {
+            "version": 2,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 3,
+            "startingSpecialization": 5,
+            "duration": 60.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Stack reference (diagnostic) (override)",
+            "identity": "8d85fdcc61e8fd817ba03e07a52f93ef890f63e976bb11ae28d2d61f175bf6d3",
+            "session": "d8ccc1b0f32a40cabea57b921bf5d09b"
+          },
+          "diagnostics": {
+            "abortFrameMs": 0.0,
+            "abortRemainingMs": 0.0,
+            "abortCatchupTicks": 0,
+            "abortPreviousUpdateMs": 0.0,
+            "updateMaxMs": 21.0066,
+            "previewCaptureLastMs": 14.344,
+            "previewCaptureMaxMs": 21.6779,
+            "previewCaptureCompletedAt": 63.113601100056684,
+            "previewPollMaxMs": 10.8801
+          }
+        }
+      ],
+      "pausesVerified": 0,
+      "afterClientLoss": null
+    },
+    {
+      "rawEvidence": "prototypes/001-stacked-weapons/artifacts/gdj3-v3-reference-pierce",
+      "result": "PASS",
+      "version": 3,
+      "desktop": {
+        "desktop": "StackLab-a8e903dd4cf8378b3eef2e47",
+        "inputBefore": "Default",
+        "inputAfter": "Default",
+        "unchanged": true,
+        "children": [
+          34272
+        ],
+        "stopped": true
+      },
+      "comparisons": [
+        {
+          "run": 1,
+          "state": 2,
+          "ticks": 3600,
+          "activeSeconds": 60.0,
+          "xp": 0,
+          "level": 1,
+          "uncollectedXp": 0,
+          "levelSeconds": [],
+          "players": [
+            {
+              "Position": {
+                "x": 14.573505401611328,
+                "y": 0.0,
+                "z": -16.487751007080078
+              },
+              "Yaw": 279.05438232421875,
+              "Pitch": 4.175350666046143,
+              "ReturnAt": 0.0,
+              "ImmuneUntil": 0.0,
+              "ContactUntil": 43.716670989990234,
+              "Health": 70,
+              "Life": 1,
+              "Shots": 593,
+              "Hits": 602,
+              "Damage": 10228,
+              "Kills": 166,
+              "Weapon": 1,
+              "BodyDamage": 20,
+              "Arsenal": 5,
+              "FirstAddition": 0,
+              "Specialization": 6,
+              "RifleInterval": 0.11999999731779099,
+              "Ready": false,
+              "ChoiceReady": false,
+              "Offer": {
+                "Id": 0,
+                "Tick": 0,
+                "Weapon": 0,
+                "AppliedTick": 0,
+                "ControlRevision": 0,
+                "First": 0,
+                "Second": 0,
+                "Selected": 0
+              }
+            }
+          ],
+          "weaponWork": [
+            {
+              "weapon": 1,
+              "player": 0,
+              "triggers": 500,
+              "rays": 500,
+              "targetTests": 17500,
+              "hits": 497,
+              "damage": 8608,
+              "kills": 161,
+              "rejected": 0,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 2,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Rifle"
+            },
+            {
+              "weapon": 3,
+              "player": 0,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 4,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Scattergun"
+            },
+            {
+              "weapon": 5,
+              "player": 0,
+              "triggers": 93,
+              "rays": 93,
+              "targetTests": 3255,
+              "hits": 105,
+              "damage": 1620,
+              "kills": 5,
+              "rejected": 0,
+              "name": "Piercer"
+            },
+            {
+              "weapon": 6,
+              "player": 1,
+              "triggers": 0,
+              "rays": 0,
+              "targetTests": 0,
+              "hits": 0,
+              "damage": 0,
+              "kills": 0,
+              "rejected": 0,
+              "name": "Piercer"
+            }
+          ],
+          "growthEvents": 0,
+          "outcomeEvents": 609,
+          "catchupLimits": 0,
+          "outgoingHighWater": 0,
+          "outgoingDeferred": 0,
+          "scenario": {
+            "version": 2,
+            "seed": 137,
+            "enemies": 35,
+            "enemyHp": 60,
+            "bodyDamage": 20,
+            "headMultiplier": 2,
+            "headDamage": 40,
+            "run": 1,
+            "startingArsenal": 5,
+            "startingSpecialization": 6,
+            "duration": 60.0,
+            "rifleInterval": 0.11999999731779099,
+            "rifleRate": 8.333333969116211,
+            "name": "Stack reference (diagnostic) (override)",
+            "identity": "dbf3e917a2ffcd2794ecb1f7528be13baedf773216e140e246e8acaf869deebd",
+            "session": "aa063094a60c4c448ebd5f3ff2c469a1"
+          },
+          "diagnostics": {
+            "abortFrameMs": 0.0,
+            "abortRemainingMs": 0.0,
+            "abortCatchupTicks": 0,
+            "abortPreviousUpdateMs": 0.0,
+            "updateMaxMs": 20.2688,
+            "previewCaptureLastMs": 15.7561,
+            "previewCaptureMaxMs": 19.9146,
+            "previewCaptureCompletedAt": 63.11767260068027,
+            "previewPollMaxMs": 13.5422
+          }
+        }
+      ],
+      "pausesVerified": 0,
+      "afterClientLoss": null
+    }
+  ],
+  "preservedFailures": [
+    {
+      "rawEvidence": "prototypes/001-stacked-weapons/artifacts/gdj3-v2-solo",
+      "state": 4,
+      "ticks": 152,
+      "reason": "Authority tick catch-up limit",
+      "catchupLimits": 1,
+      "source": {
+        "revision": "bf7f2c2ad7de0013e67657dfaf64581c3d8d5f22",
+        "builtUtc": "2026-10-05T07:14:24.3839462Z",
+        "dirty": false
+      },
+      "desktop": {
+        "desktop": "StackLab-98dd6c61eb15ab19e6437281",
+        "inputBefore": "Default",
+        "inputAfter": "Default",
+        "unchanged": true,
+        "children": [
+          21432
+        ],
+        "stopped": true
+      }
+    },
+    {
+      "rawEvidence": "prototypes/001-stacked-weapons/artifacts/gdj3-v2-reference-all",
+      "state": 4,
+      "ticks": 3266,
+      "reason": "Authority tick catch-up limit",
+      "catchupLimits": 1,
+      "source": {
+        "revision": "bf7f2c2ad7de0013e67657dfaf64581c3d8d5f22",
+        "builtUtc": "2026-10-05T07:14:24.3839462Z",
+        "dirty": false
+      },
+      "desktop": {
+        "desktop": "StackLab-86934422f6cb1159cd5487e0",
+        "inputBefore": "Default",
+        "inputAfter": "Default",
+        "unchanged": true,
+        "children": [
+          23600
+        ],
+        "stopped": true
+      }
+    }
+  ],
+  "failureInterpretation": "Two v2 attempts hit the existing eight-tick catch-up limit. Aborting-frame duration and cause were not recorded. v3 adds diagnostics without changing gameplay/preview behavior/limit; later passes do not establish that the cause is fixed. Native stability/performance remains open.",
+  "harnessCorrections": [
+    "A real solo defeat is a legal ending, not a failed timer completion.",
+    "Resolve relative player/results paths before launch; save compact failures and fail immediately on unexpected Aborted state. Seven gdj3-v2-solo-check2 files were written inside the player working directory and recovered under its misplaced-output evidence folder. It reached Choosing / level 2 / tick 489 but supplies no completed progression verification."
+  ],
+  "limits": "Ordinary scripted earning and explicit choices; frozen diagnostic references. Owned background desktop and v2 muted audio/preview exclude native FPS or human feel claims. 35 drones, same-machine loopback only; larger dense co-op feasibility remains open."
+}

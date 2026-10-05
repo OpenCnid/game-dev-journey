@@ -1,6 +1,11 @@
 param(
     [string]$PlayerFolder,
     [string]$Results,
+    [ValidateSet('solo-precision','shared-rifle','developer-parity','earned-growth','weapon-stack')][string]$Scenario = 'shared-rifle',
+    [ValidateSet('none','stronger','faster')][string]$HostChoice = 'none',
+    [ValidateSet('none','stronger','faster')][string]$ClientChoice = 'none',
+    [ValidateSet('none','broad','scatter','pierce')][string]$HostStackPath = 'none',
+    [ValidateSet('none','broad','scatter','pierce')][string]$ClientStackPath = 'none',
     [ushort]$Port = 7777,
     [int]$Width = 1920,
     [int]$Height = 1080,
@@ -22,6 +27,7 @@ if (($HumanHost -and -not $Background) -or ($WaitForJoin -and -not $HumanHost)) 
 if (-not (Test-Path -LiteralPath $taskPlayer)) { throw "No player at $taskPlayer. Build with tools/unity.ps1 first." }
 if (-not $Results) { $Results = Join-Path $taskRoot ('prototypes/001-stacked-weapons/artifacts/shared-' + (Get-Date -Format 'yyyyMMdd-HHmmss')) }
 if ($Background) {
+    if ($HostStackPath -ne 'none' -or $ClientStackPath -ne 'none') { throw 'Use the background companion --stack-path policy or explicit viewer choices.' }
     if ($ScriptedCompanion -or $QuitAtEnd) { throw 'Background preview starts both scripted players and exposes per-player controls in its viewer.' }
     if (-not $PythonPath) {
         $PythonPath = Join-Path $env:USERPROFILE '.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
@@ -33,6 +39,7 @@ if ($Background) {
     $taskLauncher = Join-Path $PSScriptRoot 'background_desktop.py'
     $taskArgs = @(('"' + $taskLauncher + '"'),'--player-folder',('"' + [IO.Path]::GetFullPath($PlayerFolder) + '"'),
         '--results',('"' + $taskResults + '"'),'--port',$Port,'--width',$Width,'--height',$Height)
+    $taskArgs += @('--scenario',$Scenario)
     if ($Uncapped) { $taskArgs += '--uncapped' }
     if ($HumanHost) { $taskArgs += '--human-host' }
     if ($WaitForJoin) { $taskArgs += '--wait-for-join' }
@@ -53,9 +60,13 @@ foreach ($taskRole in @('host','client')) {
     $taskRoleResults = Join-Path $taskResults $taskRole
     New-Item -ItemType Directory -Path $taskRoleResults -Force | Out-Null
     $taskArgs = @('-screen-fullscreen','0','-screen-width',$Width,'-screen-height',$Height,'-force-d3d11',
-        '-port',$Port,'-sharedResults',('"' + $taskRoleResults + '"'),'-logFile',('"' + (Join-Path $taskRoleResults 'player.log') + '"'))
+        '-port',$Port,'-scenario',$Scenario,'-sharedResults',('"' + $taskRoleResults + '"'),'-logFile',('"' + (Join-Path $taskRoleResults 'player.log') + '"'))
     if ($taskRole -eq 'host') { $taskArgs += @('-host','-sharedLoopback') } else { $taskArgs += @('-join','127.0.0.1') }
     if ($Scripted -or ($ScriptedCompanion -and $taskRole -ne $HumanRole)) { $taskArgs += '-sharedScripted' }
+    $taskChoice = if ($taskRole -eq 'host') { $HostChoice } else { $ClientChoice }
+    if ($taskChoice -ne 'none') { $taskArgs += @('-growthChoice',$taskChoice) }
+    $taskStackPath = if ($taskRole -eq 'host') { $HostStackPath } else { $ClientStackPath }
+    if ($taskStackPath -ne 'none') { $taskArgs += @('-stackPath',$taskStackPath) }
     if ($QuitAtEnd) { $taskArgs += '-sharedQuit' }
     if ($Uncapped) { $taskArgs += '-sharedUncapped' }
     # The owner explicitly requested opening two interactive games. Keep both visible.
