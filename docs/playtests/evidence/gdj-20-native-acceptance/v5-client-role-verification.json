@@ -1,0 +1,79 @@
+{
+  "source": {
+    "fileCount": 167,
+    "source": {
+      "revision": "5fa96e95fff36d8280e9809718a8ca8424e70de4",
+      "builtUtc": "2026-10-05T00:01:44.3411646Z",
+      "dirty": false
+    },
+    "manifestSha256": "7975585a11c18be9e3b3568ac24632a23c96bded1edaeec5fa15cf6e76ed498a",
+    "release": true,
+    "archive": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ20-v5",
+    "editor": "6000.3.25f1"
+  },
+  "archiveHashMismatches": [],
+  "terminalParity": {
+    "run": true,
+    "ticks": true,
+    "state": true,
+    "players": true,
+    "enemyStates": true
+  },
+  "audit": {
+    "host": {
+      "events": 835,
+      "damageEvents": 526,
+      "arithmeticDiscrepancies": 0,
+      "BDeathReturnTransitions": [
+        {
+          "tick": 2091,
+          "hp": 0,
+          "elapsedSeconds": 34.85
+        },
+        {
+          "tick": 2391,
+          "hp": 100,
+          "elapsedSeconds": 39.85
+        }
+      ],
+      "rawFramesSha256": "acf9a3552b9b51a6860eef78392598e81787ea879b91a9f7bed129e0dc3aee36",
+      "rawEventsSha256": "5f8249e1f4d434e1b28a9c0e1ef3eeabf52a5690670481818a475d46bb3d03cc"
+    },
+    "client": {
+      "events": 835,
+      "damageEvents": 526,
+      "arithmeticDiscrepancies": 0,
+      "BDeathReturnTransitions": [
+        {
+          "tick": 2091,
+          "hp": 0,
+          "elapsedSeconds": 34.85
+        },
+        {
+          "tick": 2391,
+          "hp": 100,
+          "elapsedSeconds": 39.85
+        }
+      ],
+      "rawFramesSha256": "409828ff372fee9de24f85e4214a50a2da5f4147d27c92e8806a47b0eed93fda",
+      "rawEventsSha256": "6313768b304b0def9e4184bc8e4b1dffd7b5bbb1fe45cfab7f730aa781f983b3"
+    }
+  },
+  "humanObservation": "Movement, aim, shot cues, body/critical feedback and damage visibility felt the same as normal. Death immediately darts to the other player POV; spectator identity and eventual respawn are unclear.",
+  "assessment": "Combat client-role comparison positive; death/return clarity requires revision and human retest. Diagnostic timings only: host occluded, desktop work uncontrolled. Not native performance acceptance.",
+  "connection": "Same-PC IPv4 loopback, no preview on either player",
+  "rawResults": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\native-client-v5-20261005T000343",
+  "eventStateAudit": {
+    "hostEvents": 835,
+    "clientEvents": 835,
+    "hostOnlyEvents": 0,
+    "clientOnlyEvents": 0,
+    "commonSnapshotTicks": 3597,
+    "hostSampledTicks": 3599,
+    "clientSampledTicks": 3597,
+    "counterDiscrepancyTicks": [],
+    "hostSameTickCounterChanges": 0,
+    "clientSameTickCounterChanges": 0,
+    "limits": "Compares authoritative event identity/outcomes and sampled HP/shots/hits/damage/kills/enemy counters at common ticks. Terminal full player/enemy positions are compared separately; intermediate unsampled snapshots are not inferred."
+  }
+}

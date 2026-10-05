@@ -1,0 +1,18 @@
+{
+  "runtimeSource": {
+    "revision": "aee61590dffb86fc38a34ed1b9163efc914b2e17",
+    "builtUtc": "2026-10-05T00:12:12.7222755Z",
+    "dirty": false
+  },
+  "playerFiles": 167,
+  "archiveHashMismatches": [],
+  "playMode": {
+    "result": "Passed",
+    "total": "9",
+    "passed": "9",
+    "failed": "0",
+    "duration": "2.2584345"
+  },
+  "testXmlSha256": "4b7c46461a1a80c10d19f269c3b9d99ce5ac45517e24d9c2b82472f2428cf4ec",
+  "checks": "Presentation revision was tested before commit; its runtime is the code committed as aee6159 and built clean. No authority/tuning change."
+}

@@ -1,0 +1,9 @@
+{
+  "result": "Failed(Child)",
+  "message": "  Hello must not spend a two-second Waiting frame in combat.\n  Expected: Running\n  But was:  Aborted\n",
+  "passed": "8",
+  "failed": "1",
+  "total": "9",
+  "source": "v4 clock logic at db7bfd8",
+  "regression": "Journey.Tests.SharedConnectionTests.StartAndRetryExcludeWaitingFramesButActiveStallsStillAbort"
+}

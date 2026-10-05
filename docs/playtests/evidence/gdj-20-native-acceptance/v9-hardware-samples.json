@@ -1,0 +1,35 @@
+{
+  "samples": [
+    {
+      "phase": "run2-start",
+      "utc": "2026-10-05 00:51:33 UTC",
+      "sample": "NVIDIA GeForce RTX 3090, 591.86, 1905 MHz, 9751 MHz, 62, 188.23 W, 45 %\r\n"
+    },
+    {
+      "phase": "run2-end",
+      "utc": "2026-10-05 00:53:02 UTC",
+      "sample": "\r\nrole          : host A\r\nrun           : 2\r\nticks         : 3600\r\nstate         : 2\r\nframeP95      : 1.20219999996607\r\nframeP99      : 1.41010000000108\r\nconfirmP95    : 16.9154999999819\r\ncatchupLimits : 0\r\n\r\nrole          : client B\r\nrun           : 2\r\nticks         : 3600\r\nstate         : 2\r\nframeP95      : 1.03770000001191\r\nframeP99      : 1.26869999999712\r\nconfirmP95    : 17.3520000000025\r\ncatchupLimits : 0\r\n\r\n1905 MHz, 9751 MHz, 65, 200.55 W, 58 %\r\n"
+    },
+    {
+      "phase": "run3-start",
+      "utc": "2026-10-05 00:54:11 UTC",
+      "sample": "1905 MHz, 9751 MHz, 64, 191.02 W, 51 %\r\n\r\nCurrentClockSpeed MaxClockSpeed\r\n----------------- -------------\r\n             3792          3792\r\n\r\n"
+    },
+    {
+      "phase": "run3-end",
+      "utc": "2026-10-05 00:55:02 UTC",
+      "sample": "\r\nrole          : host A\r\nrun           : 3\r\nticks         : 3600\r\nstate         : 2\r\nframeP95      : 1.2042999999835\r\nframeP99      : 1.41170000000557\r\nconfirmP95    : 20.4910000000496\r\ncatchupLimits : 0\r\n\r\nrole          : client B\r\nrun           : 3\r\nticks         : 3600\r\nstate         : 2\r\nframeP95      : 1.03539999997793\r\nframeP99      : 1.26919999999586\r\nconfirmP95    : 17.1396000000072\r\ncatchupLimits : 0\r\n\r\n1905 MHz, 9751 MHz, 64, 199.89 W, 65 %\r\n"
+    },
+    {
+      "phase": "run4-start",
+      "utc": "2026-10-05 00:55:27 UTC",
+      "sample": "1905 MHz, 9751 MHz, 64, 190.74 W, 45 %\r\n"
+    },
+    {
+      "phase": "run4-end",
+      "utc": "2026-10-05 00:56:31 UTC",
+      "sample": "\r\nrole          : host A\r\nrun           : 4\r\nticks         : 3600\r\nstate         : 2\r\nframeP95      : 1.20379999998477\r\nframeP99      : 1.41329999996742\r\nconfirmP95    : 18.563400000005\r\ncatchupLimits : 0\r\n\r\nrole          : client B\r\nrun           : 4\r\nticks         : 3600\r\nstate         : 2\r\nframeP95      : 1.03540000003477\r\nframeP99      : 1.27789999999095\r\nconfirmP95    : 16.840000000002\r\ncatchupLimits : 0\r\n\r\n1905 MHz, 9751 MHz, 64, 199.66 W, 63 %\r\n"
+    }
+  ],
+  "limits": "CLI snapshots near capture boundaries, not continuous clocks/CPU-work/GPU timing. WMI CPU reported 3792 MHz; actual per-core operating clocks unavailable."
+}

@@ -1,0 +1,23 @@
+{
+  "EditMode": {
+    "result": "Passed",
+    "total": "95",
+    "passed": "95",
+    "failed": "0",
+    "duration": "2.5682916",
+    "xmlSha256": "09273f7c89fb9b5b5c89398a0541f44443f6d729b041d72bf87d77ca7ebb7529"
+  },
+  "PlayMode": {
+    "result": "Passed",
+    "total": "9",
+    "passed": "9",
+    "failed": "0",
+    "duration": "2.2834784",
+    "xmlSha256": "83c5c238447a1de075adca375d23fd1ff22c895834f0d4b153241325a917ed42"
+  },
+  "runtimeFilesSha256": {
+    "prototypes/001-stacked-weapons/Assets/Prototype/Runtime/SharedConnection.cs": "6a16df88604f15598e0fa1eb596ddacd2e55695c9c159138d621d9d4cb3c7364",
+    "prototypes/001-stacked-weapons/Assets/Prototype/Runtime/SharedGame.cs": "984bb44834f900d112b2e5e143d1ff196de74f9e095788d792c40840b255b6bb"
+  },
+  "runner": "2 actual Win32 integration checks passed; PowerShell parser and Python compilation pass."
+}

@@ -1,0 +1,22 @@
+{
+  "playMode": {
+    "passed": "9",
+    "failed": "0",
+    "result": "Passed",
+    "total": "9"
+  },
+  "transport": "2.7.4",
+  "preservedV4": {
+    "files": 167,
+    "hashMismatches": 0
+  },
+  "nativeAcceptance": "pending; startup abort is negative evidence",
+  "editMode": {
+    "passed": "95",
+    "failed": "0",
+    "result": "Passed",
+    "total": "95"
+  },
+  "editor": "6000.3.25f1",
+  "regression": "real loopback Hello and Retry each exclude a 2-second pre-run frame; normal active frame advances; 0.5-second active stall still aborts"
+}

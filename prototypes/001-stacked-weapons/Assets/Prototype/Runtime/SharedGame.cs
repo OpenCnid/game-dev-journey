@@ -19,6 +19,7 @@ namespace Journey
         SharedConnection connection;
         SharedEncounter authority;
         GameObject ally;
+        Material allyMaterial;
         LineRenderer allyShot;
         int local, run, life, inputSequence, shotSequence, catchupLimits;
         float yaw, pitch, inputTime, inputRemaining, shotRemaining, accumulator, pingRemaining;
@@ -27,7 +28,10 @@ namespace Journey
         double previousClock, lastRtt;
         string reason = "", output = "", screenshot = "";
         StreamWriter frameLog, hitLog;
-        GUIStyle heading, small;
+        GUIStyle heading, small, lifeHeading, lifeDetail;
+        const float ViewTransitionSeconds = .2f;
+        float viewTransition;
+        int previousWatched = -1;
         SharedPreview preview;
         Vector3 previewMovement;
         double previewInputUntil;
@@ -56,12 +60,14 @@ namespace Journey
             frameLog.WriteLine("wall_seconds,frame_ms,run,tick,state,A_shots,B_shots,A_hits,B_hits,A_damage,B_damage,A_kills,B_kills,A_hp,B_hp,enemies,rtt_ms");
             hitLog = new StreamWriter(Path.Combine(output, "events.csv"));
             hitLog.WriteLine("wall_seconds,run,player,weapon,event,pose_tick,life,decision,enemy,incarnation,region,requested,before,actual,after,confirmed_delay_ms");
-            connection = new SharedConnection(host, address, port);
+            connection = new SharedConnection(host, address, port, Array.IndexOf(args, "-sharedLoopback") >= 0);
             connection.Received += Receive; connection.Lost += Abort;
             if (host) { authority = new SharedEncounter(); authority.Resolved += Resolve; }
             ally = GameObject.CreatePrimitive(PrimitiveType.Capsule); ally.name = "Teammate " + (host ? "B" : "A");
             Destroy(ally.GetComponent<Collider>()); ally.transform.SetParent(transform);
-            ally.GetComponent<Renderer>().material.color = new Color(.1f, .9f, .8f); ally.SetActive(false);
+            allyMaterial = new Material(Resources.Load<Material>("Body"));
+            allyMaterial.SetColor("_BaseColor", new Color(.1f, .9f, .8f));
+            ally.GetComponent<Renderer>().sharedMaterial = allyMaterial; ally.SetActive(false);
             allyShot = new GameObject("Teammate shot").AddComponent<LineRenderer>(); allyShot.transform.SetParent(transform);
             allyShot.positionCount = 2; allyShot.startWidth = .018f; allyShot.endWidth = .004f;
             allyShot.sharedMaterial = new Material(Resources.Load<Material>("Trail")); allyShot.sharedMaterial.color = new Color(.1f, .9f, .8f);
@@ -120,12 +126,15 @@ namespace Journey
             {
                 shotSequence = 0; emitted.Clear(); feedback.Clear(); saved = false;
                 frames.Clear(); confirms.Clear(); catchupLimits = 0;
+                previousWatched = -1; viewTransition = 0;
             }
         }
         void Update()
         {
             if (connection == null) return;
             double now = Time.realtimeSinceStartupAsDouble, frame = (now - previousClock) * 1000; previousClock = now;
+            bool runningAtFrameStart = display.State == SharedState.Running;
+            int frameRun = display.Run;
             connection.Poll();
             SyncGeneration();
             preview?.Poll();
@@ -177,7 +186,9 @@ namespace Journey
             }
             if (authority != null && display.State == SharedState.Running)
             {
-                accumulator += (float)(frame * .001); int ticks = 0;
+                // Hello/Retry can start a run inside Poll. Its preceding Waiting/terminal frame is not combat time.
+                if (runningAtFrameStart && frameRun == display.Run) accumulator += (float)(frame * .001);
+                int ticks = 0;
                 while (accumulator >= CombatSimulation.Tick && ticks < 8 && authority.Current.State == SharedState.Running)
                 { authority.Step(); accumulator -= CombatSimulation.Tick; ticks++; Publish(); }
                 if (accumulator >= CombatSimulation.Tick) { catchupLimits++; Abort("Authority tick catch-up limit"); accumulator = 0; }
@@ -186,6 +197,9 @@ namespace Journey
             SyncGeneration();
             player = display.Players[local]; active = display.State == SharedState.Running && player.Health > 0;
             int watched = player.Health == 0 && display.Players[1 - local].Health > 0 ? 1 - local : local;
+            viewTransition = Mathf.Max(0, viewTransition - (float)(frame * .001));
+            if (previousWatched >= 0 && watched != previousWatched) viewTransition = ViewTransitionSeconds;
+            previousWatched = watched;
             Vector3 cameraPosition = watched == local ? predicted : display.Players[watched].Position;
             float cameraYaw = watched == local ? yaw : display.Players[watched].Yaw, cameraPitch = watched == local ? pitch : display.Players[watched].Pitch;
             projection.ProjectShared(display, local, cameraPosition);
@@ -264,7 +278,7 @@ namespace Journey
         }
         [Serializable] sealed class Report
         {
-            public string role, source, machine, gpu, connection, reason;
+            public string role, source, machine, gpu, connection, reason, hostBindEndpoint;
             public bool scripted, development, previewEnabled;
             public int run, ticks, enemies, catchupLimits, frameSamples, confirmedHits, width, height, frameCap, vsync;
             public double frameP50, frameP95, frameP99, frameMax, confirmP50, confirmP95, confirmMax, rttMs;
@@ -279,7 +293,7 @@ namespace Journey
             TextAsset stamp = Resources.Load<TextAsset>("BuildInfo");
             var report = new Report { role = local == 0 ? "host A" : "client B", source = stamp == null ? "Editor" : stamp.text,
                 machine = SystemInfo.processorType, gpu = SystemInfo.graphicsDeviceName, connection = "Direct IPv4 UDP; declare actual address/machine/visibility separately",
-                reason = reason, scripted = scripted, development = Debug.isDebugBuild, previewEnabled = preview != null, run = run, ticks = display.Tick, enemies = 12,
+                reason = reason, hostBindEndpoint = authority != null ? connection.BoundEndpoint : "", scripted = scripted, development = Debug.isDebugBuild, previewEnabled = preview != null, run = run, ticks = display.Tick, enemies = 12,
                 catchupLimits = catchupLimits, width = Screen.width, height = Screen.height, frameCap = Application.targetFrameRate,
                 vsync = QualitySettings.vSyncCount, frameSamples = frames.Count, confirmedHits = confirms.Count, frameP50 = Percentile(frames, .5),
                 frameP95 = Percentile(frames, .95), frameP99 = Percentile(frames, .99), frameMax = Percentile(frames, 1),
@@ -299,17 +313,35 @@ namespace Journey
         void OnGUI()
         {
             if (connection == null) return;
-            if (heading == null) { heading = new GUIStyle(GUI.skin.label) { fontSize = 23, fontStyle = FontStyle.Bold }; small = new GUIStyle(GUI.skin.label) { fontSize = 15 }; }
+            if (heading == null)
+            {
+                heading = new GUIStyle(GUI.skin.label) { fontSize = 23, fontStyle = FontStyle.Bold };
+                small = new GUIStyle(GUI.skin.label) { fontSize = 15 };
+                lifeHeading = new GUIStyle(heading) { fontSize = 32, alignment = TextAnchor.UpperCenter };
+                lifeDetail = new GUIStyle(small) { fontSize = 24, alignment = TextAnchor.UpperCenter };
+            }
             float scale = Mathf.Min(Screen.width / 1280f, Screen.height / 720f);
             GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.one * scale); float w = Screen.width / scale, h = Screen.height / scale;
             SharedPlayer p = display.Players[local], a = display.Players[0], b = display.Players[1];
+            if (viewTransition > 0)
+            {
+                GUI.color = new Color(0, 0, 0, viewTransition / ViewTransitionSeconds);
+                GUI.DrawTexture(new Rect(0, 0, w, h), Texture2D.whiteTexture); GUI.color = Color.white;
+            }
             GUI.Label(new Rect(25, 18, 1000, 40), $"SHARED RIFLE / {(local == 0 ? "A · HOST" : "B · CLIENT")} / {display.State}", heading);
             GUI.Label(new Rect(25, 57, 1150, 28), $"Run {display.Run}   ·   12 drones / 60 HP   ·   A: {a.Health} HP, {a.Damage} damage, {a.Kills} kills   ·   B: {b.Health} HP, {b.Damage} damage, {b.Kills} kills", small);
             GUI.Label(new Rect(w - 210, h - 60, 200, 40), $"{Mathf.Max(0, 60 - display.Elapsed):F1}s   RTT {lastRtt:F1}ms", small);
             if (display.State == SharedState.Running)
             {
-                GUI.color = view.Feedback.CrosshairColor;
-                GUI.DrawTexture(new Rect(w / 2 - 7, h / 2 - 1, 14, 2), Texture2D.whiteTexture); GUI.DrawTexture(new Rect(w / 2 - 1, h / 2 - 7, 2, 14), Texture2D.whiteTexture); GUI.color = Color.white;
+                if (p.Health > 0)
+                {
+                    GUI.color = view.Feedback.CrosshairColor;
+                    GUI.DrawTexture(new Rect(w / 2 - 7, h / 2 - 1, 14, 2), Texture2D.whiteTexture); GUI.DrawTexture(new Rect(w / 2 - 1, h / 2 - 7, 2, 14), Texture2D.whiteTexture); GUI.color = Color.white;
+                }
+                if (p.Health == 0)
+                    LifeMessage(w, h, "YOU DIED", $"Respawning in {Mathf.Max(0, p.ReturnAt - display.Elapsed):F1}s", $"Spectating teammate {(local == 0 ? "B" : "A")}");
+                else if (display.Elapsed < p.ImmuneUntil)
+                    LifeMessage(w, h, "BACK IN THE FIGHT", $"{p.Health} HP · Contact protection {p.ImmuneUntil - display.Elapsed:F1}s", "Your camera and controls are restored");
                 GUI.Label(new Rect(25, h - 68, 950, 32), p.Health == 0 ? $"Following teammate · Return in {Mathf.Max(0, p.ReturnAt - display.Elapsed):F1}s" :
                     display.Elapsed < p.ImmuneUntil ? $"RETURN IMMUNITY {p.ImmuneUntil - display.Elapsed:F1}s" : "WASD · Mouse aim · Auto rifle", heading);
                 if (!inputActive && !scripted && p.Health > 0)
@@ -326,10 +358,23 @@ namespace Journey
             }
             else if (display.State == SharedState.Complete || display.State == SharedState.Defeat)
             {
-                GUI.Label(new Rect(w / 2 - 220, h / 2 - 50, 440, 40), $"Retry readiness: A {(a.Ready ? "READY" : "waiting")} / B {(b.Ready ? "READY" : "waiting")}", small);
+                LifeMessage(w, h, display.State == SharedState.Defeat ? "PARTY DEFEATED" : "RUN COMPLETE",
+                    display.State == SharedState.Defeat ? "Both players are down" : "60-second encounter complete",
+                    $"Retry readiness: A {(a.Ready ? "READY" : "waiting")} / B {(b.Ready ? "READY" : "waiting")}");
                 if (GUI.Button(new Rect(w / 2 - 120, h / 2, 240, 50), "Retry (R)")) Retry();
             }
-            else GUI.Label(new Rect(25, 110, 1150, 80), display.State == SharedState.Waiting ? "Waiting for the fixed host/client pair…" : "Test aborted: " + reason, heading);
+            else if (display.State == SharedState.Aborted)
+                LifeMessage(w, h, "SESSION STOPPED", "The shared run was interrupted", "Start a new session to play again");
+            else GUI.Label(new Rect(25, 110, 1150, 80), "Waiting for the fixed host/client pair…", heading);
+        }
+        void LifeMessage(float w, float h, string title, string detail, string context)
+        {
+            Rect panel = new Rect(w / 2 - 310, h * .20f, 620, 155);
+            GUI.color = new Color(.02f, .035f, .06f, .92f);
+            GUI.DrawTexture(panel, Texture2D.whiteTexture); GUI.color = Color.white;
+            GUI.Label(new Rect(panel.x, panel.y + 12, panel.width, 44), title, lifeHeading);
+            GUI.Label(new Rect(panel.x, panel.y + 61, panel.width, 34), detail, lifeDetail);
+            GUI.Label(new Rect(panel.x, panel.y + 107, panel.width, 30), context, lifeDetail);
         }
         static void SetCursor(bool locked) { Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None; Cursor.visible = !locked; }
         void OnDestroy()
@@ -337,7 +382,8 @@ namespace Journey
             if (connection == null) return;
             if (!saved && display.State != SharedState.Waiting) { reason = "Local player closed"; display.State = SharedState.Aborted; Save(); }
             connection.Send(SharedConnection.Message.Abort, w => w.Write("Peer player closed")); connection.Dispose();
-            frameLog?.Dispose(); hitLog?.Dispose(); if (allyShot != null) Destroy(allyShot.sharedMaterial); SetCursor(false);
+            frameLog?.Dispose(); hitLog?.Dispose(); if (allyMaterial != null) Destroy(allyMaterial);
+            if (allyShot != null) Destroy(allyShot.sharedMaterial); SetCursor(false);
         }
     }
 }

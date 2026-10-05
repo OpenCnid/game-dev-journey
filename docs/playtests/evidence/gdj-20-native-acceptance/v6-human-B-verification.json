@@ -1,0 +1,88 @@
+{
+  "source": {
+    "revision": "aee61590dffb86fc38a34ed1b9163efc914b2e17",
+    "builtUtc": "2026-10-05T00:12:12.7222755Z",
+    "dirty": false
+  },
+  "run": 2,
+  "terminalParity": {
+    "run": true,
+    "ticks": true,
+    "state": true,
+    "players": true,
+    "enemyStates": true
+  },
+  "sharedSampledTicks": 3600,
+  "counterDiscrepancyTicks": [],
+  "eventOutcomeDifferenceCount": 0,
+  "audit": {
+    "host": {
+      "BDeathReturnTransitions": [
+        {
+          "tick": 1087,
+          "elapsedSeconds": 18.116666666666667,
+          "hp": 0
+        },
+        {
+          "tick": 1387,
+          "elapsedSeconds": 23.116666666666667,
+          "hp": 100
+        },
+        {
+          "tick": 2212,
+          "elapsedSeconds": 36.86666666666667,
+          "hp": 0
+        },
+        {
+          "tick": 2512,
+          "elapsedSeconds": 41.86666666666667,
+          "hp": 100
+        },
+        {
+          "tick": 3490,
+          "elapsedSeconds": 58.166666666666664,
+          "hp": 0
+        }
+      ],
+      "events": 903,
+      "arithmeticDiscrepancies": 0,
+      "rawFramesSha256": "b6e62f1369e977fa24e54207dd51dd36e54a3476e61c1b17444b1e2877829f8b"
+    },
+    "client": {
+      "BDeathReturnTransitions": [
+        {
+          "tick": 1087,
+          "elapsedSeconds": 18.116666666666667,
+          "hp": 0
+        },
+        {
+          "tick": 1387,
+          "elapsedSeconds": 23.116666666666667,
+          "hp": 100
+        },
+        {
+          "tick": 2212,
+          "elapsedSeconds": 36.86666666666667,
+          "hp": 0
+        },
+        {
+          "tick": 2512,
+          "elapsedSeconds": 41.86666666666667,
+          "hp": 100
+        },
+        {
+          "tick": 3490,
+          "elapsedSeconds": 58.166666666666664,
+          "hp": 0
+        }
+      ],
+      "events": 903,
+      "arithmeticDiscrepancies": 0,
+      "rawFramesSha256": "aff34911b856c69958ee3eef013f162de49ee5465f73148aee91dfea71ac988b"
+    }
+  },
+  "humanObservation": "Owner: Clear now (teammate identity, five-second respawn countdown, return/protection cue; camera abruptness included in question).",
+  "conditions": "Human B native, scripted A native, preview disabled, 1080p uncapped, same-PC loopback. Host window occluded; excluded from controlled performance acceptance.",
+  "rawFrozenFrames": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-20-shared-rifle\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\native-v6-human-evidence",
+  "assessment": "Human death/return presentation accepted for this fixed fixture. Two actual returns are exactly 300 ticks after death. Final death at 58.1667 seconds remains terminal at completion, without a late revive. Controlled performance and shared defeat/disconnect observations still separate."
+}

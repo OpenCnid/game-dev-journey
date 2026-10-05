@@ -1,0 +1,13 @@
+{
+  "EditMode": "95 pass at v7; unchanged core/transport; final revision only owns a URP teammate material.",
+  "runner": "2 actual Win32 tests/parser/compilation pass at v7; unchanged.",
+  "PlayMode": {
+    "xmlSha256": "d4f10f5c9e8585bd82ab68c3adba9d8a3c5daab16627dcb89d63070a7652973d",
+    "total": "9",
+    "passed": "9",
+    "failed": "0",
+    "duration": "2.2861851",
+    "result": "Passed"
+  },
+  "SharedGameSha256": "31aa17157f70802274749531e13e96d222e1aeb1fbbc8fd0a499a2863bcb2335"
+}
