@@ -1,5 +1,7 @@
 # Game brief
 
+**Reading status, October 6:** this document retains historical experiments alongside accepted direction. [GDD consolidation](https://linear.app/cnid/issue/GDJ-26/consolidate-the-living-gdd-and-ai-assisted-design-workflow) is the next design priority. Use the [foundation](../foundation.md) for product commitments and [current state](../current-state.md) for capabilities; old fixture settings and feasibility gates below are not automatically current requirements.
+
 **MVP/alpha priority clarification, October 3:** keep the first-person cooperative run bounded. The permanent matrix/preparation/power proposals and optional third-person/dual-camera support are parked beyond MVP/alpha as extremely low-priority ideas in [GDJ-9](https://linear.app/cnid/issue/GDJ-9/idea-permanent-progression-matrix)/[GDJ-10](https://linear.app/cnid/issue/GDJ-10/idea-optional-first-and-third-person-views). Persistent discoveries remain a future direction; a full meta system is not an initial-run requirement.
 
 The [project foundation](../foundation.md) defines the game we are building, its player experience and core systems. This brief turns that definition into a testable design; its proposed mechanics, counts and timings can change within that foundation. Current implementation facts are summarized in [current state](../current-state.md).
@@ -22,7 +24,7 @@ The [project foundation](../foundation.md) defines the game we are building, its
 
 **Confirmed performance requirement:** at least 144 FPS within the supported hardware/settings and encounter envelope, with higher caps and uncapped rendering available. Benchmark current development on the owner's i7-10700K / RTX 3090 desktop with approximately 64 GB RAM, retaining the existing 1080p configuration for comparisons. GTX 1080 Ti and older-CPU testing comes later, once the game is more polished. The [performance plan](../performance.md) defines the measurements; final visual settings and peak load are not finalized and the full gameplay target is not yet verified.
 
-**Status:** the local one-weapon combat slice and crowd benchmark are implemented. Networking, cooperative combat and world presentation are not implemented. The earlier local three-weapon/upgrade proposal below needs cooperative re-scoping before implementation; its counts and mechanics are experiments, not accepted multiplayer rules.
+**Implementation status:** the earlier statement that networking/cooperative combat were absent is superseded. Main contains solo/two-player shared combat, collected XP, personal choices and simultaneous rifle/scattergun/piercer weapons; the GDJ-24/GDJ-25 candidates extend that stack on unmerged branches. See [current state](../current-state.md) and the dated reports for exact revisions and evidence limits. World presentation remains open. The earlier local proposal below is historical design context, not the current implementation contract.
 
 ## Experience to test
 

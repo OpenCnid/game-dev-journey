@@ -14,6 +14,8 @@ The GDJ-24/GDJ-25 candidate stack adds scale experiments and mixed chaser/sentin
 
 ## Proposed MVP build sequence
 
+**October 6 sequencing update:** the owner requests a living GDD first. [GDJ-26](https://linear.app/cnid/issue/GDJ-26/consolidate-the-living-gdd-and-ai-assisted-design-workflow) will connect the intended player experience and accepted systems before another feature is selected. The construction milestones below remain background proposals; they do not replace that design work or authorize implementation.
+
 This sequence is a planning recommendation following the owner's request for organization. No new implementation task, final run duration or content count is selected here. Scope each milestone into small connected tasks through Linear.
 
 | Milestone | Capability to complete | Why it comes here |
