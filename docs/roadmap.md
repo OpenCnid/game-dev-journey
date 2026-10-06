@@ -25,11 +25,11 @@ This sequence is a planning recommendation following the owner's request for org
 
 Solo/cooperative behavior, readable feedback and run reset are part of each affected task. Do not build a separate solo game and postpone attaching co-op. Preserve the accepted 1-4 player direction while continuing two-player implementation/checks first; expanded player counts need their own bounded work.
 
-The next-task recommendation is a **small progression slice using the existing weapons**, with offer eligibility, upgrade ranks and repeat-level rules written down before implementation. Keep its first catalog modest and account for known future player/loot/draw effects without building an all-purpose rules engine. A five-minute timer or a simultaneous difficulty overhaul is not a prerequisite for that slice.
+The owner subsequently accepts a **creative-direction-first working agreement**: select the next weapon behavior, ability, enemy, combination or player moment they want to create, then identify the small supporting progression/encounter changes needed to make it playable. AI handles the implementation sequence and technical work. The earlier standalone progression-slice recommendation is not a selected task. Keep supporting systems bounded, preserve known future interactions and use these milestones as background guidance.
 
 ## How tasks advance the roadmap
 
-For each task, identify the missing player capability, the existing systems it uses and a concrete stopping point. Implement it in the playable stack, run the affected functional checks and play the combined behavior where useful. Fix breakage that blocks play and continue toward the same milestone. A new reference experiment is useful for a genuinely unresolved decision, not a default prerequisite for each addition.
+Start each task with a creative outcome: what new thing the player will be able to do, encounter or combine. Identify the existing systems it uses, the supporting capability to add and a concrete playable stopping point. Implement it in the connected stack and handle affected functional checks as routine engineering work. The owner directs the experience and plays the result; AI maintains the supporting plan and records. Fix breakage that blocks play. A new reference experiment is useful for a genuinely unresolved decision, not a default prerequisite for each addition.
 
 Earlier learning milestones, completed experiments and their evidence remain in Git history, [playtest reports](playtests/README.md) and current state. The old unchecked experiment list no longer determines the queue. Long-term performance goals remain in the foundation and [performance policy](performance.md), subject to the current MVP verification instruction.
 

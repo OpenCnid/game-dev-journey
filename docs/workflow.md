@@ -2,6 +2,8 @@
 
 We are one developer working with AI. Keep one implementation task active, shorten the path from an edit to useful feedback, and finish small playable improvements. Change this system when it creates friction.
 
+**Working agreement, October 6:** the owner leads creative direction: the desired player experience, weapons, abilities, enemies, combinations, world and presentation. AI turns that direction into bounded playable changes and handles implementation planning, integration, routine checks and bookkeeping. Frame tasks around creative outcomes the owner can play with. Present consequential creative choices and real tradeoffs clearly; keep routine technical work in the background. The roadmap supports that process. Rough MVP implementations remain acceptable.
+
 ## Give each tool one job
 
 | Tool | Owns |
