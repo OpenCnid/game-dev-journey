@@ -46,13 +46,13 @@ Each mode received three fresh-process runs with 30 seconds of warm-up and 60 se
 
 | Mode | Average FPS range | p99 ms range | Maximum ms range | Projectile ms/tick range |
 | --- | ---: | ---: | ---: | ---: |
-| Control | 185.65–214.79 | 12.779–14.144 | 17.149–22.431 | 0.455–0.518 |
-| Native state | 204.46–209.82 | 11.681–12.416 | 16.328–27.318 | 0.180–0.184 |
-| Combined | 198.85–211.97 | 12.215–13.371 | 16.887–21.823 | 0.182–0.196 |
+| Control | 185.65â€“214.79 | 12.779â€“14.144 | 17.149â€“22.431 | 0.455â€“0.518 |
+| Native state | 204.46â€“209.82 | 11.681â€“12.416 | 16.328â€“27.318 | 0.180â€“0.184 |
+| Combined | 198.85â€“211.97 | 12.215â€“13.371 | 16.887â€“21.823 | 0.182â€“0.196 |
 
 Native ownership consistently reduced projectile simulation cost and had lower p99 in these three full captures. Average FPS ranges overlap, and native mode still had an unexplained 27.318 ms outlier. Do not describe it as a guaranteed throughput improvement or a hard frame-rate minimum.
 
-The combined mode did not consistently outperform native ownership alone. Its mean preparation cost was 0.878–0.952 ms/frame versus the control's 0.996–1.210, but mean submission cost was 0.876–0.963 ms/frame versus 0.670–0.912. Stage placement and overlapping work matter; lower preparation time alone does not establish an end-to-end improvement. Independent scheduling and deduplication modes received only the short screening capture, so their individual effects are not claimed as repeat-validated full-run results.
+The combined mode did not consistently outperform native ownership alone. Its mean preparation cost was 0.878â€“0.952 ms/frame versus the control's 0.996â€“1.210, but mean submission cost was 0.876â€“0.963 ms/frame versus 0.670â€“0.912. Stage placement and overlapping work matter; lower preparation time alone does not establish an end-to-end improvement. Independent scheduling and deduplication modes received only the short screening capture, so their individual effects are not claimed as repeat-validated full-run results.
 
 **No fully visible configuration met the 6.944 ms p99 target.** Keep all experiment modes opt-in. Native ownership is the most useful CPU result to carry forward, while dense projectile rendering needs the next focused investigation. Baseline variability is visible in the ranges; no significance claim or precise overall percentage speedup is warranted from these desktop runs.
 
@@ -60,7 +60,7 @@ The combined mode did not consistently outperform native ownership alone. Its me
 
 In the aligned short control capture, intervals associated with more than 5,000 active warnings (and no more than 40,000 projectiles) averaged 5.31 ms; warning deduplication reduced that phase average to 3.49 ms. Its global p99 did not improve because the projectile-heavy phase remained expensive. That is a useful local effect, not evidence that deduplication alone solves the spikes.
 
-Intervals associated with more than 40,000 projectiles averaged 7.09 ms in the short control and 3.65 ms with projectile visuals hidden. In full native-state runs that phase still averaged 7.78–7.93 ms. These categories associate each frame interval with the preceding CSV row's workload counts. They are approximate phase comparisons, not an exactly aligned GPU trace or proof of a sole GPU cause. See [phase calculations](evidence/frame-spikes/phase-analysis.json).
+Intervals associated with more than 40,000 projectiles averaged 7.09 ms in the short control and 3.65 ms with projectile visuals hidden. In full native-state runs that phase still averaged 7.78â€“7.93 ms. These categories associate each frame interval with the preceding CSV row's workload counts. They are approximate phase comparisons, not an exactly aligned GPU trace or proof of a sole GPU cause. See [phase calculations](evidence/frame-spikes/phase-analysis.json).
 
 ### Visual check
 

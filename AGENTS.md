@@ -2,7 +2,7 @@
 
 ## Start each fresh session
 
-1. Read `docs/foundation.md` first (what the game is, its player experience and core systems), then `docs/planning/README.md` (current planning intent and context branches) and `docs/current-state.md` (verified capability and constraints).
+1. Read `docs/foundation.md` first (what the game is, its player experience and core systems), then `docs/README.md` (document map), `docs/planning/README.md` (current planning intent) and `docs/current-state.md` (verified capability and constraints). Use `docs/design/README.md` for the GDD chapters and open design gaps.
 2. Check the actual checkout/commit and the selected Linear issue or planning question. Read only the relevant branch's design, evidence, source and tests. Use `docs/workflow.md` for working/verification rules; do not load every historical session or report.
 3. Resume from the issue's Resume section or linked task plan when present. Connect the task to a foundation pillar or an uncertainty it resolves. If a summary disagrees with newer code/evidence or current user instructions, reconcile it before acting.
 
@@ -16,6 +16,7 @@ Planning/integration and task chats are replaceable sessions. At useful checkpoi
 - Implement one bounded outcome. Keep changes small enough to inspect, run and understand; avoid speculative systems and unrelated refactors.
 - Design features for the game's known long-term interactions as well as the immediate slice. Record relevant extension points and downstream effects before implementation; for example, progression upgrades may affect weapons, loot and future upgrade draws. Keep the implementation bounded without hardcoding a known future capability out of the design. See `docs/workflow.md#design-for-the-games-future`.
 - Linear owns live priority/status/dependencies. GitHub owns code, accepted decisions and evidence. Do not mirror the task board in repo checklists.
+- Follow `docs/documentation.md` for document placement, authority and traceability. Register every new/moved Markdown document in `docs/registry.json` with its purpose and upstream IDs; keep each design/task/evidence chain connected. Regenerate `docs/catalog.md` with `python tools/docs.py --write-index` and run `python tools/docs.py` before handoff. The checker verifies structure, not design acceptance or fun.
 - Use `tools/unity.ps1` for relevant tests/builds. Serialize Editor/build/test operations for a project; close its Editor before batch runs. Documentation-only changes need link/path/accuracy checks, not a Unity rebuild.
 - Use visible release captures for performance conclusions, with equivalent workload counters. Keep reference modes; record source, settings and limits. Run one desktop performance capture at a time.
 - Automated checks and screenshots do not establish fun. Clearly separate human play observations, benchmark evidence and unverified assumptions.
