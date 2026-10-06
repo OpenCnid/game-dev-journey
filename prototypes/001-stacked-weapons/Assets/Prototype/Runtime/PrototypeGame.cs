@@ -292,6 +292,7 @@ namespace Journey
             GUILayout.EndHorizontal(); GUILayout.BeginHorizontal();
             if (GUILayout.Button("Earned growth")) SelectScenario(ScenarioKind.EarnedGrowth);
             if (GUILayout.Button("Weapon stack")) SelectScenario(ScenarioKind.WeaponStack);
+            if (GUILayout.Button("Mixed threats")) SelectScenario(ScenarioKind.MixedThreats);
             if (GUILayout.Button("Developer parity")) { SelectScenario(ScenarioKind.DeveloperParity); SetRifleRate(4); }
             if (GUILayout.Button("Named defaults"))
             {

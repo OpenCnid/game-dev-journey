@@ -7,6 +7,80 @@ namespace Journey.Tests
 {
     public class SharedConnectionTests
     {
+        [UnityTest] public IEnumerator MixedPlayableRunCarriesShortStallInBoundedFramesButRejectsLongBacklog()
+        {
+            var root = new GameObject("Mixed physical backlog test"); var view = new ArenaPresentation(); var sim = new CombatSimulation();
+            var game = root.AddComponent<SharedGame>(); game.enabled = false;
+            const System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+            var clock = typeof(SharedGame).GetField("previousClock", flags); var update = typeof(SharedGame).GetMethod("Update", flags);
+            var accumulator = typeof(SharedGame).GetField("accumulator", flags);
+            typeof(SharedGame).GetField("output", flags).SetValue(game,
+                System.IO.Path.Combine(Application.dataPath, "../artifacts/mixed-clock-" + System.Guid.NewGuid().ToString("N")));
+            try
+            {
+                LogAssert.Expect(LogType.Log, new System.Text.RegularExpressions.Regex("^SHARED_SESSION HOST "));
+                view.Create(root.transform); game.Initialize(view, sim, true, "", 0, ScenarioConfiguration.Named(ScenarioKind.MixedThreats), soloGrowth: true);
+                update.Invoke(game, null); clock.SetValue(game, Time.realtimeSinceStartupAsDouble - 2); update.Invoke(game, null);
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Running)); Assert.That(game.Snapshot.Tick, Is.Zero);
+                clock.SetValue(game, Time.realtimeSinceStartupAsDouble - .3); update.Invoke(game, null);
+                Assert.That(game.Snapshot.Tick, Is.EqualTo(8)); Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Running));
+                Assert.That((float)accumulator.GetValue(game), Is.GreaterThan(.16f), "Active physical time remains pending");
+                clock.SetValue(game, Time.realtimeSinceStartupAsDouble); update.Invoke(game, null);
+                Assert.That(game.Snapshot.Tick, Is.EqualTo(16)); Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Running));
+                Assert.That((float)accumulator.GetValue(game), Is.GreaterThan(0));
+                clock.SetValue(game, Time.realtimeSinceStartupAsDouble); update.Invoke(game, null);
+                Assert.That(game.Snapshot.Tick, Is.GreaterThanOrEqualTo(18));
+                Assert.That((float)accumulator.GetValue(game), Is.LessThan(CombatSimulation.Tick));
+                LogAssert.Expect(LogType.Log, "SHARED_ABORT Authority tick catch-up limit");
+                LogAssert.Expect(LogType.Log, new System.Text.RegularExpressions.Regex("^SHARED_REPORT "));
+                clock.SetValue(game, Time.realtimeSinceStartupAsDouble - 1.5); update.Invoke(game, null);
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Aborted));
+            }
+            finally { Object.DestroyImmediate(root); view.Dispose(); sim.Dispose(); }
+            yield return null; LogAssert.NoUnexpectedReceived();
+        }
+        [UnityTest] public IEnumerator MixedThreatSnapshotsDeliverWindupFlightDamageAndRetryAtomically()
+        {
+            using (var host = new SharedConnection(true, "127.0.0.1", 17785, true))
+            using (var client = new SharedConnection(false, "127.0.0.1", 17785))
+            {
+                var game = new SharedEncounter(ScenarioConfiguration.Named(ScenarioKind.MixedThreats)); game.Start();
+                for (int i = 0; i < 35; i++) game.Current.Enemies[i].Position = new Vector3(28, 0, 28);
+                for (int i = 0; i < 5; i++) game.Current.Ranged.Attacks[i].Until = 500;
+                game.Current.Enemies[0].Position = new Vector3(0, 0, 10); game.Current.Ranged.Attacks[0].Until = 0;
+                game.Current.Players[0].Position = new Vector3(-12, 0, 0); game.Current.Players[1].Position = Vector3.zero;
+                var destination = new SharedSnapshot(); var assembly = new SnapshotAssembly();
+                int received = 0; string loss = "";
+                host.Lost += r => loss = r; client.Lost += r => loss = r;
+                client.Received += (message, reader) => {
+                    bool complete = false;
+                    if (message == SharedConnection.Message.Snapshot) { SharedConnection.ReadSnapshot(reader, destination); complete = true; }
+                    if (message == SharedConnection.Message.SnapshotChunk) complete = assembly.Read(reader, destination, Time.realtimeSinceStartupAsDouble);
+                    if (!complete) return;
+                    received++;
+                    Assert.That(destination.Run, Is.EqualTo(game.Current.Run)); Assert.That(destination.Tick, Is.EqualTo(game.Current.Tick));
+                    Assert.That(destination.Ranged.Count, Is.EqualTo(game.Current.Ranged.Count)); Assert.That(destination.Ranged.Hits, Is.EqualTo(game.Current.Ranged.Hits));
+                    Assert.That(destination.Players[1].Health, Is.EqualTo(game.Current.Players[1].Health));
+                    Assert.That(destination.Ranged.Attacks[0].Phase, Is.EqualTo(game.Current.Ranged.Attacks[0].Phase));
+                    if (destination.Ranged.Count > 0) Assert.That(destination.Ranged.Bolts[0].Position, Is.EqualTo(game.Current.Ranged.Bolts[0].Position));
+                };
+                double deadline = Time.realtimeSinceStartupAsDouble + 8;
+                while (!host.Connected && Time.realtimeSinceStartupAsDouble < deadline) { host.Poll(); client.Poll(); yield return null; }
+                Assert.That(host.Connected, Is.True);
+                foreach (int tick in new[] { 1, 76, 140, 141 })
+                {
+                    while (game.Current.Tick < tick) game.Step();
+                    if (tick == 141) { game.Current.State = SharedState.Defeat; game.Retry(1, 0); game.Retry(1, 1); }
+                    int expected = received + 1; Assert.That(host.SendSnapshot(game.Current), Is.True);
+                    while (received < expected && Time.realtimeSinceStartupAsDouble < deadline) { host.Poll(); client.Poll(); yield return null; }
+                    Assert.That(received, Is.EqualTo(expected));
+                    if (tick == 140) { Assert.That(destination.Players[1].Health, Is.EqualTo(85)); Assert.That(destination.Ranged.Hits, Is.EqualTo(1)); }
+                }
+                Assert.That(destination.Run, Is.EqualTo(2)); Assert.That(destination.Ranged.Fired, Is.Zero); Assert.That(destination.Ranged.Count, Is.Zero);
+                Assert.That(loss, Is.Empty); Assert.That(assembly.Pending, Is.False);
+            }
+            yield return null; LogAssert.NoUnexpectedReceived();
+        }
         [UnityTest] public IEnumerator LargeReliableSnapshotsRetainBoundedChunksAndAtomicOrderedState()
         {
             using (var host = new SharedConnection(true, "127.0.0.1", 17783, true, diagnostics: true))

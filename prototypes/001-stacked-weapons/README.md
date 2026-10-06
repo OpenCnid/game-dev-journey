@@ -111,7 +111,7 @@ CLI-only `co-op-scale` maintains 1–1000 respawning 60-HP drones, seed 137, fro
 
 For the GDJ-24 publication diagnosis only, `-sharedDiagnostics` adds `publication.csv` with current-update CPU scopes and cumulative publication/packet/copy/send/flush/driver counters. Parent timings overlap children. `terminal-save.json` preserves the original Save boundary and `terminal-after-2s.json` observes two subsequent seconds without changing gameplay or report timing. Hold both players until both observation files exist; omit `-sharedQuit`. Empty application queues do not prove transport acknowledgement. The original summary and its failed gates remain authoritative evidence. Omit the flag for the same build's observation-disabled control.
 
-Solo and shared rifle play consume the same validated version-3 starting configuration. The menu shows separate **Next solo** and **Host** settings; selecting a named scenario for both makes their starting enemy HP, damage and interval match. The default controls remain intentionally different:
+Solo and shared rifle play consume the same validated version-4 starting configuration. The menu shows separate **Next solo** and **Host** settings; selecting a named scenario for both makes their starting enemy HP, damage and interval match. The default controls remain intentionally different:
 
 | CLI name | Drones / HP | Body / head | Interval | Seed / duration |
 | --- | --- | --- | --- | --- |
@@ -120,12 +120,13 @@ Solo and shared rifle play consume the same validated version-3 starting configu
 | `developer-parity` | 12 / 90 | 15 / 45 (x3) | .25 s | 271 / 60 s |
 | `earned-growth` | 35 / 60 | 20 / 40 (x2) | .12 s | 137 / 60 s |
 | `weapon-stack` | 35 / 60 | 20 / 40 rifle (x2) | .12 s rifle | 137 / 120 s |
+| `mixed-threats` | 30 chasers + 5 sentinels / 60 | 20 / 40 rifle (x2) | .12 s rifle | 137 / 120 s |
 | `stack-reference` | 35 / 60 | 20 / 40 rifle (x2) | .12 s rifle | 137 / 60 s |
 | `co-op-scale` (diagnostic default) | 35 / 60 | 20 / 40 rifle (x2) | .12 s rifle | 137 / 90 s |
 
 With no `-scenario`, solo selects solo precision and Host selects shared rifle. `-scenario <name>` selects the same definition for either path. Explicit overrides: `-scenarioEnemies` (1–35), `-scenarioHp` (1–10000), `-scenarioDamage` (1–1000), `-scenarioHead` (integer 1–4), `-scenarioDuration` (finite 1–600 seconds), `-seed` (signed 32-bit integer), and the retained `-rifleRate` (finite .5–120 shots/sec). CLI numbers use invariant decimal notation. Unsupported names/versions, missing/malformed values and out-of-range settings reject launch. Overrides are labelled in the native HUD/menu and saved evidence. The maximum 35-drone snapshot fits the unchanged 1100-byte packet limit; this is a functional bound, not a new network-performance envelope.
 
-Host transfers the full bounded scenario and a new session ID. Client validates and acknowledges that exact content before Start; local client tuning is ignored. Shared settings are frozen for the entire session, including both-ready Retry, which increments run identity and resets state. Changing shared settings requires a fresh pair. Protocol 6 intentionally rejects older players. Stale/mismatched configuration and malformed snapshots cannot replace active state. Disconnect still aborts, including while choices pause combat.
+Host transfers the full bounded scenario and a new session ID. Client validates and acknowledges that exact content before Start; local client tuning is ignored. Shared settings are frozen for the entire session, including both-ready Retry, which increments run identity and resets state. Changing shared settings requires a fresh pair. Protocol 7 intentionally rejects older players. Stale/mismatched configuration and malformed snapshots cannot replace active state. Disconnect still aborts, including while choices pause combat.
 
 Solo rate edits still preserve fractional cooldown, paused timing and session/restart retention; the chosen rate also applies to the next Host session. Scenario selection applies on Start/Host. Native HUD and JSON show the scenario name, content hash and effective HP/body/head/rate/interval. Shared output includes `scenario.json`, per-run summaries with `scenario`, and preview state with the same values. Solo Start/Restart writes `solo-scenario-<run-id>.json` under `-results` or the usual BenchmarkResults directory. Synthetic benchmarks retain their historical 40-HP/body-only workload and independent crowd controls; their existing rate/interval metadata remains authoritative.
 
@@ -140,6 +141,16 @@ Example direct launches from the repository root after the release build (use a 
 Add `-sharedScripted` for an automated companion or `-sharedPreview` for the existing game-owned command/state bridge. Those are functional/diagnostic modes. [The task contract](../../docs/planning/tasks/GDJ-22.md) separates starting definitions from future per-player earned builds and the GDJ-21 test interface.
 
 ## Prepare, test, and build
+
+### Mixed ranged-threat run (GDJ-25)
+
+Choose **Mixed threats** before Start/Host, or launch with `-playtest -scenario mixed-threats` for solo. For the fixed pair, use `-host -sharedLoopback -scenario mixed-threats -port 17845` and `-join 127.0.0.1 -port 17845` in two copies of the same player. The existing background runner accepts `--scenario mixed-threats`. Rifle entry, collected XP at 10/25, personal scatter/piercer additions or specialization, paused choices/Continue, death/return and Retry use the existing weapon-stack loop.
+
+Five orange sentinels have a crown/cannon silhouette, a growing charge and a fixed aim beam. They approach to 14 metres, stop and commit aim for 1.25 seconds, then release a straight 10 m/s bolt and cool down for 2.75 seconds. Bolts deal 15 damage, use a .26-metre radius and expire after 3.5 seconds in a 20-bolt pool. All are initial tuning hypotheses. Host owns attacks and swept hits against both players. Choice pause freezes attack/bolt time; enemy death cancels pending wind-up while released shots persist, protection/life checks prevent stale return damage, and terminal/Retry clears attacks and bolts. The pure-chaser fixtures remain available. Cosmetic crown/cannon adornments do not add separate weapon hit regions; shoot the normal body/head.
+
+Owner check: **spot a wind-up, dodge its bolt, choose a threat to kill, earn an upgrade and Retry**. Report whether the shot was readable and whether the new threat changed movement or target choice. Automated state checks do not establish that experience.
+
+The mixed playable fixture tolerates brief desktop stalls by carrying up to one second of physical backlog over later frames, with at most eight ticks per frame. It retains active time and records catch-up events; a longer backlog still aborts. Pure-chaser/reference/scale scenarios retain their strict catch-up guard. This tolerance is not a frame-time or network-performance pass.
 
 From the repository root in PowerShell:
 

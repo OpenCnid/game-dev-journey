@@ -191,7 +191,7 @@ namespace Journey
             for (int p = 0; p < s.Roster; p++)
             {
                 UpgradeId a = UpgradeId.StrongerHits, b = UpgradeId.FasterFire;
-                if (s.Configuration.Kind == ScenarioKind.WeaponStack)
+                if (s.Configuration.StackedGrowth)
                 { a = next == 2 ? UpgradeId.AddScattergun : WeaponArsenal.Missing(s.Players[p].FirstAddition); b = next == 2 ? UpgradeId.AddPiercer : WeaponArsenal.Enhancement(s.Players[p].FirstAddition); }
                 bool reversed = draws[p].Next(2) != 0;
                 var offer = new PersonalOffer { Id = (next - 2) * 2 + p + 1, Tick = s.Tick, Weapon = s.Players[p].Weapon,

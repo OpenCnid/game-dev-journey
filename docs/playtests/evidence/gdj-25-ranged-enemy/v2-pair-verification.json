@@ -1,0 +1,851 @@
+{
+  "result": "PASS",
+  "source": "{\n    \"revision\": \"02bddffcff2d66e67ef9ff2861169fd9030afe83\",\n    \"builtUtc\": \"2026-10-06T07:50:50.1433929Z\",\n    \"dirty\": false\n}",
+  "note": "Compact export from the full native verification archive; functional evidence only.",
+  "rawArchive": "prototypes\\001-stacked-weapons\\artifacts\\gdj25-v2-pair",
+  "rawVerificationSha256": "afc3038836671697c8c3ac029c1657c7908bd4a438dd2ac1e73af122a7ddc401",
+  "summaries": [
+    {
+      "role": "host A",
+      "source": "{\n    \"revision\": \"02bddffcff2d66e67ef9ff2861169fd9030afe83\",\n    \"builtUtc\": \"2026-10-06T07:50:50.1433929Z\",\n    \"dirty\": false\n}",
+      "scenario": {
+        "version": 4,
+        "seed": 137,
+        "enemies": 35,
+        "enemyHp": 60,
+        "bodyDamage": 20,
+        "headMultiplier": 2,
+        "headDamage": 40,
+        "run": 1,
+        "startingArsenal": 1,
+        "startingSpecialization": 0,
+        "duration": 120.0,
+        "rifleInterval": 0.11999999731779099,
+        "rifleRate": 8.333333969116211,
+        "name": "Mixed threats",
+        "identity": "7677298a186e0cdc5042d79ab61450ded0f63c06d17b8793c4802a824119d9e2",
+        "session": "f1175991dd0b43c193d27769b84d1e34"
+      },
+      "development": false,
+      "previewEnabled": true,
+      "run": 1,
+      "ticks": 7200,
+      "state": 2,
+      "players": [
+        {
+          "Position": {
+            "x": 26.84084701538086,
+            "y": 0.0,
+            "z": -6.6347856521606445
+          },
+          "Yaw": 3.2592861652374268,
+          "Pitch": 2.3881919384002686,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 21.816667556762695,
+          "ContactUntil": 115.75000762939453,
+          "Health": 35,
+          "Life": 2,
+          "Shots": 1139,
+          "Hits": 1246,
+          "Damage": 19872,
+          "Kills": 328,
+          "Weapon": 1,
+          "BodyDamage": 20,
+          "Arsenal": 7,
+          "FirstAddition": 3,
+          "Specialization": 0,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false,
+          "ChoiceReady": true,
+          "Offer": {
+            "Id": 3,
+            "Tick": 592,
+            "Weapon": 1,
+            "AppliedTick": 592,
+            "ControlRevision": 7,
+            "First": 4,
+            "Second": 5,
+            "Selected": 4
+          }
+        },
+        {
+          "Position": {
+            "x": 5.787772178649902,
+            "y": 0.0,
+            "z": -4.008203506469727
+          },
+          "Yaw": 207.19361877441406,
+          "Pitch": 0.1831904947757721,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 9.466667175292969,
+          "Health": 75,
+          "Life": 1,
+          "Shots": 1094,
+          "Hits": 1122,
+          "Damage": 32868,
+          "Kills": 551,
+          "Weapon": 2,
+          "BodyDamage": 20,
+          "Arsenal": 5,
+          "FirstAddition": 4,
+          "Specialization": 6,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false,
+          "ChoiceReady": true,
+          "Offer": {
+            "Id": 4,
+            "Tick": 592,
+            "Weapon": 2,
+            "AppliedTick": 592,
+            "ControlRevision": 8,
+            "First": 6,
+            "Second": 3,
+            "Selected": 6
+          }
+        }
+      ],
+      "xp": 786,
+      "level": 3,
+      "choicePhase": 2,
+      "controlRevision": 10,
+      "uncollectedXp": 93,
+      "xpDrops": 879,
+      "xpCollections": 610,
+      "catchupLimits": 0,
+      "ranged": {
+        "Count": 0,
+        "Fired": 35,
+        "Hits": 2,
+        "Blocked": 1,
+        "Expired": 32,
+        "Overflow": 0
+      }
+    },
+    {
+      "role": "client B",
+      "source": "{\n    \"revision\": \"02bddffcff2d66e67ef9ff2861169fd9030afe83\",\n    \"builtUtc\": \"2026-10-06T07:50:50.1433929Z\",\n    \"dirty\": false\n}",
+      "scenario": {
+        "version": 4,
+        "seed": 137,
+        "enemies": 35,
+        "enemyHp": 60,
+        "bodyDamage": 20,
+        "headMultiplier": 2,
+        "headDamage": 40,
+        "run": 1,
+        "startingArsenal": 1,
+        "startingSpecialization": 0,
+        "duration": 120.0,
+        "rifleInterval": 0.11999999731779099,
+        "rifleRate": 8.333333969116211,
+        "name": "Mixed threats",
+        "identity": "7677298a186e0cdc5042d79ab61450ded0f63c06d17b8793c4802a824119d9e2",
+        "session": "f1175991dd0b43c193d27769b84d1e34"
+      },
+      "development": false,
+      "previewEnabled": true,
+      "run": 1,
+      "ticks": 7200,
+      "state": 2,
+      "players": [
+        {
+          "Position": {
+            "x": 26.84084701538086,
+            "y": 0.0,
+            "z": -6.6347856521606445
+          },
+          "Yaw": 3.2592861652374268,
+          "Pitch": 2.3881919384002686,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 21.816667556762695,
+          "ContactUntil": 115.75000762939453,
+          "Health": 35,
+          "Life": 2,
+          "Shots": 1139,
+          "Hits": 1246,
+          "Damage": 19872,
+          "Kills": 328,
+          "Weapon": 1,
+          "BodyDamage": 20,
+          "Arsenal": 7,
+          "FirstAddition": 3,
+          "Specialization": 0,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false,
+          "ChoiceReady": true,
+          "Offer": {
+            "Id": 3,
+            "Tick": 592,
+            "Weapon": 1,
+            "AppliedTick": 592,
+            "ControlRevision": 7,
+            "First": 4,
+            "Second": 5,
+            "Selected": 4
+          }
+        },
+        {
+          "Position": {
+            "x": 5.787772178649902,
+            "y": 0.0,
+            "z": -4.008203506469727
+          },
+          "Yaw": 207.19361877441406,
+          "Pitch": 0.1831904947757721,
+          "ReturnAt": 0.0,
+          "ImmuneUntil": 0.0,
+          "ContactUntil": 9.466667175292969,
+          "Health": 75,
+          "Life": 1,
+          "Shots": 1094,
+          "Hits": 1122,
+          "Damage": 32868,
+          "Kills": 551,
+          "Weapon": 2,
+          "BodyDamage": 20,
+          "Arsenal": 5,
+          "FirstAddition": 4,
+          "Specialization": 6,
+          "RifleInterval": 0.11999999731779099,
+          "Ready": false,
+          "ChoiceReady": true,
+          "Offer": {
+            "Id": 4,
+            "Tick": 592,
+            "Weapon": 2,
+            "AppliedTick": 592,
+            "ControlRevision": 8,
+            "First": 6,
+            "Second": 3,
+            "Selected": 6
+          }
+        }
+      ],
+      "xp": 786,
+      "level": 3,
+      "choicePhase": 2,
+      "controlRevision": 10,
+      "uncollectedXp": 93,
+      "xpDrops": 879,
+      "xpCollections": 610,
+      "catchupLimits": 0,
+      "ranged": {
+        "Count": 0,
+        "Fired": 35,
+        "Hits": 2,
+        "Blocked": 1,
+        "Expired": 32,
+        "Overflow": 0
+      }
+    }
+  ],
+  "pauses": [
+    {
+      "physicalFrozen": true,
+      "earned": [
+        {
+          "local": 0,
+          "run": 1,
+          "tick": 472,
+          "elapsed": 7.8666672706604,
+          "state": "Choosing",
+          "xp": 10,
+          "level": 2,
+          "choicePhase": 1,
+          "controlRevision": 1,
+          "physicalSha256": "6e27c905b5193d6c0a6fe6496e5f0cf281cf4515b4140d717b955deb3d805346",
+          "liveBolts": 3,
+          "windups": 1,
+          "players": [
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 1,
+              "choice": 0,
+              "ready": false
+            },
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 1,
+              "choice": 0,
+              "ready": false
+            }
+          ]
+        },
+        {
+          "local": 1,
+          "run": 1,
+          "tick": 472,
+          "elapsed": 7.8666672706604,
+          "state": "Choosing",
+          "xp": 10,
+          "level": 2,
+          "choicePhase": 1,
+          "controlRevision": 1,
+          "physicalSha256": "6e27c905b5193d6c0a6fe6496e5f0cf281cf4515b4140d717b955deb3d805346",
+          "liveBolts": 3,
+          "windups": 1,
+          "players": [
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 1,
+              "choice": 0,
+              "ready": false
+            },
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 1,
+              "choice": 0,
+              "ready": false
+            }
+          ]
+        }
+      ],
+      "held": [
+        {
+          "local": 0,
+          "run": 1,
+          "tick": 472,
+          "elapsed": 7.8666672706604,
+          "state": "Choosing",
+          "xp": 10,
+          "level": 2,
+          "choicePhase": 1,
+          "controlRevision": 1,
+          "physicalSha256": "6e27c905b5193d6c0a6fe6496e5f0cf281cf4515b4140d717b955deb3d805346",
+          "liveBolts": 3,
+          "windups": 1,
+          "players": [
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 1,
+              "choice": 0,
+              "ready": false
+            },
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 1,
+              "choice": 0,
+              "ready": false
+            }
+          ]
+        },
+        {
+          "local": 1,
+          "run": 1,
+          "tick": 472,
+          "elapsed": 7.8666672706604,
+          "state": "Choosing",
+          "xp": 10,
+          "level": 2,
+          "choicePhase": 1,
+          "controlRevision": 1,
+          "physicalSha256": "6e27c905b5193d6c0a6fe6496e5f0cf281cf4515b4140d717b955deb3d805346",
+          "liveBolts": 3,
+          "windups": 1,
+          "players": [
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 1,
+              "choice": 0,
+              "ready": false
+            },
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 1,
+              "choice": 0,
+              "ready": false
+            }
+          ]
+        }
+      ],
+      "selected": [
+        {
+          "local": 0,
+          "run": 1,
+          "tick": 472,
+          "elapsed": 7.8666672706604,
+          "state": "Choosing",
+          "xp": 10,
+          "level": 2,
+          "choicePhase": 1,
+          "controlRevision": 3,
+          "physicalSha256": "6e27c905b5193d6c0a6fe6496e5f0cf281cf4515b4140d717b955deb3d805346",
+          "liveBolts": 3,
+          "windups": 1,
+          "players": [
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 3,
+              "choice": 3,
+              "ready": false
+            },
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 5,
+              "choice": 4,
+              "ready": false
+            }
+          ]
+        },
+        {
+          "local": 1,
+          "run": 1,
+          "tick": 472,
+          "elapsed": 7.8666672706604,
+          "state": "Choosing",
+          "xp": 10,
+          "level": 2,
+          "choicePhase": 1,
+          "controlRevision": 3,
+          "physicalSha256": "6e27c905b5193d6c0a6fe6496e5f0cf281cf4515b4140d717b955deb3d805346",
+          "liveBolts": 3,
+          "windups": 1,
+          "players": [
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 3,
+              "choice": 3,
+              "ready": false
+            },
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 5,
+              "choice": 4,
+              "ready": false
+            }
+          ]
+        }
+      ],
+      "resumed": [
+        {
+          "local": 0,
+          "run": 1,
+          "tick": 475,
+          "elapsed": 7.9166669845581055,
+          "state": "Running",
+          "xp": 10,
+          "level": 2,
+          "choicePhase": 1,
+          "controlRevision": 5,
+          "physicalSha256": "f54818a5f99dcf5db2accf574b991d2ef687f9402d04997b05f4cdb6114532ee",
+          "liveBolts": 3,
+          "windups": 1,
+          "players": [
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 3,
+              "choice": 3,
+              "ready": true
+            },
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 5,
+              "choice": 4,
+              "ready": true
+            }
+          ]
+        },
+        {
+          "local": 1,
+          "run": 1,
+          "tick": 476,
+          "elapsed": 7.933333873748779,
+          "state": "Running",
+          "xp": 10,
+          "level": 2,
+          "choicePhase": 1,
+          "controlRevision": 5,
+          "physicalSha256": "44b63fcf6633a44fcc89a6c950dddd9bc9e5ed367b9d995b5525f93734597d93",
+          "liveBolts": 3,
+          "windups": 1,
+          "players": [
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 3,
+              "choice": 3,
+              "ready": true
+            },
+            {
+              "health": 100,
+              "life": 1,
+              "arsenal": 5,
+              "choice": 4,
+              "ready": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "physicalFrozen": true,
+      "earned": [
+        {
+          "local": 0,
+          "run": 1,
+          "tick": 592,
+          "elapsed": 9.866666793823242,
+          "state": "Choosing",
+          "xp": 25,
+          "level": 3,
+          "choicePhase": 2,
+          "controlRevision": 6,
+          "physicalSha256": "0ed8c4ad5f8483194866fe0ab0d7672e4bb4ce6334363c4a4def322918f902e9",
+          "liveBolts": 2,
+          "windups": 2,
+          "players": [
+            {
+              "health": 90,
+              "life": 1,
+              "arsenal": 3,
+              "choice": 0,
+              "ready": false
+            },
+            {
+              "health": 75,
+              "life": 1,
+              "arsenal": 5,
+              "choice": 0,
+              "ready": false
+            }
+          ]
+        },
+        {
+          "local": 1,
+          "run": 1,
+          "tick": 592,
+          "elapsed": 9.866666793823242,
+          "state": "Choosing",
+          "xp": 25,
+          "level": 3,
+          "choicePhase": 2,
+          "controlRevision": 6,
+          "physicalSha256": "0ed8c4ad5f8483194866fe0ab0d7672e4bb4ce6334363c4a4def322918f902e9",
+          "liveBolts": 2,
+          "windups": 2,
+          "players": [
+            {
+              "health": 90,
+              "life": 1,
+              "arsenal": 3,
+              "choice": 0,
+              "ready": false
+            },
+            {
+              "health": 75,
+              "life": 1,
+              "arsenal": 5,
+              "choice": 0,
+              "ready": false
+            }
+          ]
+        }
+      ],
+      "held": [
+        {
+          "local": 0,
+          "run": 1,
+          "tick": 592,
+          "elapsed": 9.866666793823242,
+          "state": "Choosing",
+          "xp": 25,
+          "level": 3,
+          "choicePhase": 2,
+          "controlRevision": 6,
+          "physicalSha256": "0ed8c4ad5f8483194866fe0ab0d7672e4bb4ce6334363c4a4def322918f902e9",
+          "liveBolts": 2,
+          "windups": 2,
+          "players": [
+            {
+              "health": 90,
+              "life": 1,
+              "arsenal": 3,
+              "choice": 0,
+              "ready": false
+            },
+            {
+              "health": 75,
+              "life": 1,
+              "arsenal": 5,
+              "choice": 0,
+              "ready": false
+            }
+          ]
+        },
+        {
+          "local": 1,
+          "run": 1,
+          "tick": 592,
+          "elapsed": 9.866666793823242,
+          "state": "Choosing",
+          "xp": 25,
+          "level": 3,
+          "choicePhase": 2,
+          "controlRevision": 6,
+          "physicalSha256": "0ed8c4ad5f8483194866fe0ab0d7672e4bb4ce6334363c4a4def322918f902e9",
+          "liveBolts": 2,
+          "windups": 2,
+          "players": [
+            {
+              "health": 90,
+              "life": 1,
+              "arsenal": 3,
+              "choice": 0,
+              "ready": false
+            },
+            {
+              "health": 75,
+              "life": 1,
+              "arsenal": 5,
+              "choice": 0,
+              "ready": false
+            }
+          ]
+        }
+      ],
+      "selected": [
+        {
+          "local": 0,
+          "run": 1,
+          "tick": 592,
+          "elapsed": 9.866666793823242,
+          "state": "Choosing",
+          "xp": 25,
+          "level": 3,
+          "choicePhase": 2,
+          "controlRevision": 8,
+          "physicalSha256": "0ed8c4ad5f8483194866fe0ab0d7672e4bb4ce6334363c4a4def322918f902e9",
+          "liveBolts": 2,
+          "windups": 2,
+          "players": [
+            {
+              "health": 90,
+              "life": 1,
+              "arsenal": 7,
+              "choice": 4,
+              "ready": false
+            },
+            {
+              "health": 75,
+              "life": 1,
+              "arsenal": 5,
+              "choice": 6,
+              "ready": false
+            }
+          ]
+        },
+        {
+          "local": 1,
+          "run": 1,
+          "tick": 592,
+          "elapsed": 9.866666793823242,
+          "state": "Choosing",
+          "xp": 25,
+          "level": 3,
+          "choicePhase": 2,
+          "controlRevision": 8,
+          "physicalSha256": "0ed8c4ad5f8483194866fe0ab0d7672e4bb4ce6334363c4a4def322918f902e9",
+          "liveBolts": 2,
+          "windups": 2,
+          "players": [
+            {
+              "health": 90,
+              "life": 1,
+              "arsenal": 7,
+              "choice": 4,
+              "ready": false
+            },
+            {
+              "health": 75,
+              "life": 1,
+              "arsenal": 5,
+              "choice": 6,
+              "ready": false
+            }
+          ]
+        }
+      ],
+      "resumed": [
+        {
+          "local": 0,
+          "run": 1,
+          "tick": 596,
+          "elapsed": 9.933333396911621,
+          "state": "Running",
+          "xp": 25,
+          "level": 3,
+          "choicePhase": 2,
+          "controlRevision": 10,
+          "physicalSha256": "a08d9fd302da3d81aa66253be3e78184ea1a77342678a0077f1e957a8f0ccc4e",
+          "liveBolts": 4,
+          "windups": 0,
+          "players": [
+            {
+              "health": 90,
+              "life": 1,
+              "arsenal": 7,
+              "choice": 4,
+              "ready": true
+            },
+            {
+              "health": 75,
+              "life": 1,
+              "arsenal": 5,
+              "choice": 6,
+              "ready": true
+            }
+          ]
+        },
+        {
+          "local": 1,
+          "run": 1,
+          "tick": 596,
+          "elapsed": 9.933333396911621,
+          "state": "Running",
+          "xp": 25,
+          "level": 3,
+          "choicePhase": 2,
+          "controlRevision": 10,
+          "physicalSha256": "a08d9fd302da3d81aa66253be3e78184ea1a77342678a0077f1e957a8f0ccc4e",
+          "liveBolts": 4,
+          "windups": 0,
+          "players": [
+            {
+              "health": 90,
+              "life": 1,
+              "arsenal": 7,
+              "choice": 4,
+              "ready": true
+            },
+            {
+              "health": 75,
+              "life": 1,
+              "arsenal": 5,
+              "choice": 6,
+              "ready": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "terminalParity": {
+    "players": {
+      "equal": true,
+      "sha256": "80b81f9bc5a94172a5432f067e94d7cd5966e60b69091304ffc424c236c40147"
+    },
+    "enemyStates": {
+      "equal": true,
+      "sha256": "d5dce5be10c2103cd67fe338f049976a5c53fd55504053f97547055941b45623"
+    },
+    "ranged": {
+      "equal": true,
+      "sha256": "667099ec00f88ed3afd3bc51a1aff0129e925547145a59a8e94310fc5eb04ee0"
+    },
+    "xp": {
+      "equal": true,
+      "sha256": "87c7965a1cc6c11a653b210aaef95e381b95afddf1781da3fa5b2d4b1d3097bf"
+    },
+    "level": {
+      "equal": true,
+      "sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"
+    },
+    "choicePhase": {
+      "equal": true,
+      "sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35"
+    },
+    "controlRevision": {
+      "equal": true,
+      "sha256": "4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5"
+    }
+  },
+  "reset": [
+    {
+      "local": 0,
+      "run": 2,
+      "tick": 2,
+      "elapsed": 0.03333333507180214,
+      "state": "Running",
+      "xp": 0,
+      "level": 1,
+      "choicePhase": 0,
+      "controlRevision": 0,
+      "physicalSha256": "652bcdd94e2e96eacfa1ddfa66c0ab5f564739fd49a0bab155893b4b683cdc28",
+      "liveBolts": 0,
+      "windups": 0,
+      "players": [
+        {
+          "health": 100,
+          "life": 1,
+          "arsenal": 1,
+          "choice": 0,
+          "ready": false
+        },
+        {
+          "health": 100,
+          "life": 1,
+          "arsenal": 1,
+          "choice": 0,
+          "ready": false
+        }
+      ]
+    },
+    {
+      "local": 1,
+      "run": 2,
+      "tick": 4,
+      "elapsed": 0.06666667014360428,
+      "state": "Running",
+      "xp": 0,
+      "level": 1,
+      "choicePhase": 0,
+      "controlRevision": 0,
+      "physicalSha256": "5c32541b6b5ea0bbe4f808dbadbd5211b1084ee3f2ab9acfb65a3bb173aaa563",
+      "liveBolts": 0,
+      "windups": 0,
+      "players": [
+        {
+          "health": 100,
+          "life": 1,
+          "arsenal": 1,
+          "choice": 0,
+          "ready": false
+        },
+        {
+          "health": 100,
+          "life": 1,
+          "arsenal": 1,
+          "choice": 0,
+          "ready": false
+        }
+      ]
+    }
+  ],
+  "windupObservations": 364,
+  "flightObservations": 586,
+  "desktopLifetime": {
+    "inputBefore": "Default",
+    "inputAfter": "Default",
+    "unchanged": true,
+    "children": [
+      23992,
+      33540
+    ],
+    "stopped": true
+  }
+}
