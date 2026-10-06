@@ -4,6 +4,8 @@ Follow-up requested by the owner to [draft PR #16](https://github.com/OpenCnid/g
 
 ## Measurement contract, before instrumentation
 
+**Historical contract, superseded October 6 by [owner direction below](#owner-direction--mvp-progress).** No further captures are planned.
+
 October 6 process check finds no `StackLab.exe` and no Unity Editor. Unity Hub's existing service remains untouched. Owner-controlled games require permission if one appears later. Reuse the attached isolated PR worktree and pinned Unity 6000.3.25f1 / URP 17.3.0 / Transport 2.7.4. Rehash the whole v2 build before reuse; preserve it as the uninstrumented control.
 
 Keep S7: two actual native local UDP processes, 1000 active 60-HP enemies, eight independent instances each, seed 137, fixed combat tuning, exact steering grid, frozen invulnerable diagnostic with conserved collected XP and no offers. Keep 1920×1080 / render scale 1 / current effects / uncapped / VSync off / D3D11 / scripted input / game-owned mute / no preview. Same-machine contention and actual role visibility are declared; overlapping views cannot establish acceptance. All old failures remain.
@@ -19,3 +21,13 @@ Validate unchanged serialization/authority/XP/lifecycle with the existing meanin
 ## Results and Resume
 
 Measurement contract recorded before edits. Next: uninstrumented current reproduction, stage instrumentation, serialized tests/build, three instrumented S7 captures, raw audits, supported explanation and next experiment. PR #16 remains draft; main/current-state unchanged. Human and broader performance acceptance gates remain separate.
+
+## Interrupted checkpoint
+
+Owner stopped Computer Use with physical Escape during R2 window inventory. Work stopped; only verified agent-owned R2 players were closed. Vampire Hunters was left untouched. Instrumented clean release source 140a046a83bbe47aebbebaaca184e6a466ee58db built 2026-10-06T07:19:50.0460414Z; manifest release-manifest-v3.json. EditMode 152/152 and PlayMode 18/18 passed; initial compile failure retained. R1 aborted before warm-up at host tick 1303 with full 1024-record FIFO; after two seconds both queues remained pending (host 1024/client 445). EndSend queue-full host 1797/client 1078, BeginSend queue-full both zero. This differs from the original completed five-minute capture and cannot yet explain its final three pending records. Raw R1 audit is preserved in evidence/gdj-24-publication/r1; R2 interrupted raw remains in ignored artifacts/gdj24-publication-r2. Resume: preserve/audit R2 interruption, finish publication timing analysis, obtain complete terminal observations where feasible and update task/Linear/PR handoff. No fix, gate pass, push or merge performed; diagnostic report remains incomplete.
+
+## Owner direction — MVP progress
+
+October 6: the owner explicitly stopped repeated benchmarking and prioritizes testing whether the game's layers stack together into a viable MVP. Rough implementation and shortcuts are acceptable while building that combined playable proof. The original five-minute run is sufficient to continue MVP work; meeting frame/network targets is not the next feature's entry gate. Preserve the original misses and this failed/interrupted investigation, without claiming a performance pass or automatically resuming captures. This supersedes the unfinished capture plan above. No performance fix, merge or new gameplay feature was performed by this clarification. Existing instrumentation is optional and defaults off.
+
+Final status: stopped, diagnosis inconclusive. The original completed run's pending ending records have not been explained by a complete measured terminal observation. R1 failed with a full retained FIFO; R2 was interrupted by the owner and timed out waiting for reports after its owned players were closed. Both remain evidence, not an MVP acceptance obligation. No StackLab player remains running.

@@ -1,0 +1,102 @@
+{
+  "client/events.csv": {
+    "bytes": 165586,
+    "sha256": "b67afeac5db16d5f8f54bd6100d16646f468e69b5bdb79c1ca13aacca06399af"
+  },
+  "client/frames.csv": {
+    "bytes": 3468516,
+    "sha256": "4f5b2c0dd65d397be2eb18582d96a7e1a93f90b1b7b07a9e97ea6d104cc1a470"
+  },
+  "client/growth.jsonl": {
+    "bytes": 326182,
+    "sha256": "6e0f5db31389b002d67a4d6d27c1f09227b40c174351f5eb1160ab452a9f4d40"
+  },
+  "client/invocation.json": {
+    "bytes": 1269,
+    "sha256": "53cafc519d85ac460b28346a9d6717d6ebc00c9429cdf3bba9cc1147e7d044c8"
+  },
+  "client/player.log": {
+    "bytes": 1829,
+    "sha256": "27a513982c6111bbd444d2e4fe4e371094203b4ec296cdb2e64ec4d1ba1368de"
+  },
+  "client/process-memory.csv": {
+    "bytes": 268,
+    "sha256": "4e4aef02f5338e4bffbfdd29d9b94e99414e930c7f96e0f7414a26965d854092"
+  },
+  "client/publication.csv": {
+    "bytes": 1800945,
+    "sha256": "c264e71d47e5a3c6de25098a868965615e347c942b865e4625de200e92bc83da"
+  },
+  "client/scenario.json": {
+    "bytes": 507,
+    "sha256": "f9b73c4f0fed065b3ca0841bb00e9237e5d9c36f3789acc02e64103dc0ac252d"
+  },
+  "client/summary-run-1.json": {
+    "bytes": 234837,
+    "sha256": "76f2ce9adafa00b735dd14670d60dae6d7916c5499d32666d1ef11d9e0c9a7f7"
+  },
+  "client/terminal-after-2s.json": {
+    "bytes": 59374,
+    "sha256": "f5781886431e9cb1592be161cbbe71cccc225be010448040f5f334812510b25e"
+  },
+  "client/terminal-save.json": {
+    "bytes": 59527,
+    "sha256": "b34c4b31e795b2357284db2d9a9a4fcd4f3f62d3f89a8b5d704ff6524427e1cf"
+  },
+  "completion.json": {
+    "bytes": 140,
+    "sha256": "775b693b8f8ba0e1352d138c4a6b3a4e7711d05c97dde1339f425e14dbc54c5e"
+  },
+  "host/events.csv": {
+    "bytes": 169914,
+    "sha256": "8b98e63627b6bad46e28331c4530828943acbda30e9231d1294681bc019c249f"
+  },
+  "host/frames.csv": {
+    "bytes": 1941199,
+    "sha256": "19a9bb46fd4546fda5322c249790d547577b1f13f4df1f2536522a3ce7663ea5"
+  },
+  "host/growth.jsonl": {
+    "bytes": 334855,
+    "sha256": "caba7cd747fd17ce460814065ab6049d54d463d8483c58048aa1bfff3c84bf53"
+  },
+  "host/invocation.json": {
+    "bytes": 1269,
+    "sha256": "e977abc030c5ba2cfacbb572257ec6e8a59fc5b1921c1f4d6691e9426806378f"
+  },
+  "host/player.log": {
+    "bytes": 1854,
+    "sha256": "3766ba4fa18abb5c88776ad6ba663887b7b264214c48e3eafc3b6bd130ad90c0"
+  },
+  "host/process-memory.csv": {
+    "bytes": 268,
+    "sha256": "9376a659c957c69d1c5a933091a75ed03c796f544c6f7941d7b02e3ed2a295bc"
+  },
+  "host/publication.csv": {
+    "bytes": 1152110,
+    "sha256": "9f680131e68ca2d3645c625607116d4c5483afcbfd1d741025fbfc1cc55f2bb2"
+  },
+  "host/scenario.json": {
+    "bytes": 507,
+    "sha256": "f9b73c4f0fed065b3ca0841bb00e9237e5d9c36f3789acc02e64103dc0ac252d"
+  },
+  "host/summary-run-1.json": {
+    "bytes": 234916,
+    "sha256": "c6eb5c85ddbafcfd6208e6de0214802ff8ed8e5780b66403eb7dfdb3eaeda6a1"
+  },
+  "host/terminal-after-2s.json": {
+    "bytes": 134349,
+    "sha256": "7b5d36cf57fd56f6fe1531fdc4b20cd7e3e26416b96c89015165fd01385d590f"
+  },
+  "host/terminal-save.json": {
+    "bytes": 134804,
+    "sha256": "f259b509d539aab48ef3e05a944fb931bb0226a4e6a9e27955bcd60d7ea35c2c"
+  },
+  "process-preflight.json": {
+    "bytes": 395,
+    "sha256": "0721d62908514faa438d0396edff63610e843b2111ed306a8d6d838b1b1772e9"
+  },
+  "visibility.json": {
+    "bytes": 523,
+    "sha256": "82afba5ba8f77733f65d6e9e2fd46831553eb4afb43ada738fb9ba1e9eb6ec09"
+  }
+}

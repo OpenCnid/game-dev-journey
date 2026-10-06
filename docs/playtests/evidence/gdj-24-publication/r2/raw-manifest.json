@@ -1,0 +1,78 @@
+{
+  "client/events.csv": {
+    "bytes": 167936,
+    "sha256": "57f2a865113475172aa3e2c55113ee50136221a627b4db1e493b3414f3d5a07a"
+  },
+  "client/frames.csv": {
+    "bytes": 2883584,
+    "sha256": "a35eb4551914d9403e92853fb38e3494417e443deb75e32d349c797d3b9082db"
+  },
+  "client/growth.jsonl": {
+    "bytes": 372736,
+    "sha256": "180766c9c608ef49f2d62a8733b97b1da93b0b59978109bb355db0a82fa69e10"
+  },
+  "client/invocation.json": {
+    "bytes": 1269,
+    "sha256": "38a34086caf640b5a91a0b5973e5ea0f2b9f36e51c23399c15efcf8763b27461"
+  },
+  "client/player.log": {
+    "bytes": 1640,
+    "sha256": "bf72795af5fa4581439cd3ab732fa999cf1d49f60f58d549de69eb4bb07ab2a5"
+  },
+  "client/process-memory.csv": {
+    "bytes": 224,
+    "sha256": "6045ab41c44cfe8577dba104123def69cabf76173ed42068509477708ecf367b"
+  },
+  "client/publication.csv": {
+    "bytes": 1277952,
+    "sha256": "5152d4f652666d9e2cc45900b271ccb88491b0f30e453ca3ad8e5e21873cf73f"
+  },
+  "client/scenario.json": {
+    "bytes": 507,
+    "sha256": "5180300b4bf5278fdea23262118af445bb7ecdf09a182b9bd96e66a5149661b0"
+  },
+  "completion.json": {
+    "bytes": 142,
+    "sha256": "0e5b593f865224ca8977cf050f4700fbdf6d835dd042260f783784c77d745b46"
+  },
+  "host/events.csv": {
+    "bytes": 172032,
+    "sha256": "65571c8817cd1733b572c70e85ae8c4d46d9e1460e0f0a64a5796ae85ad9192e"
+  },
+  "host/frames.csv": {
+    "bytes": 1835008,
+    "sha256": "8e66ffc569773b8f4632c187080d4658884c4b52629b3edac9b8257cb2a23b22"
+  },
+  "host/growth.jsonl": {
+    "bytes": 376832,
+    "sha256": "39ac909ca0d52684bec88eb96500ec51a9537f6e3c6e2dad427f5b6e9f942f6a"
+  },
+  "host/invocation.json": {
+    "bytes": 1269,
+    "sha256": "0b294851968737d9843854d13e711a4ebd9654478801d87642dd30aaa580dd4e"
+  },
+  "host/player.log": {
+    "bytes": 1636,
+    "sha256": "47443bc47150f5809e7be75f149ebbe78b19f2ec583bdb393541554e933d76d9"
+  },
+  "host/process-memory.csv": {
+    "bytes": 224,
+    "sha256": "076e6a4c1df06664b3080a0a2a317f8bb6fbc24257b03748657dc4229ac53b2d"
+  },
+  "host/publication.csv": {
+    "bytes": 917504,
+    "sha256": "7cd5e2c9fceaa237981bcbea4e0d9b22aedd389a201cb6ab53d3c4dcff81441b"
+  },
+  "host/scenario.json": {
+    "bytes": 507,
+    "sha256": "5180300b4bf5278fdea23262118af445bb7ecdf09a182b9bd96e66a5149661b0"
+  },
+  "owner-interruption.json": {
+    "bytes": 201,
+    "sha256": "433c2bf6d301a9c22c0ca75023b397ad7384b47975c4bce60ba6f002c48c8707"
+  },
+  "process-preflight.json": {
+    "bytes": 395,
+    "sha256": "0721d62908514faa438d0396edff63610e843b2111ed306a8d6d838b1b1772e9"
+  }
+}

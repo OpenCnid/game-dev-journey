@@ -82,6 +82,8 @@ Implement a bounded slice with explicit places for those known extensions. Expan
 
 ## Match verification to the change
 
+Owner direction, October 6: prioritize the MVP's combined playable stack. Combat, simultaneous weapons, progression and co-op need to work together so we can keep adding useful layers; rough implementation and shortcuts are acceptable at this stage. The existing successful combined run is sufficient evidence to continue MVP development. Do not make repeated benchmarks or publication/frame/network targets a prerequisite for each addition. Check the affected behavior, and profile a concrete issue when it blocks the playable experiment or the owner specifically requests diagnosis. Preserve existing measurements/failures and long-term goals for later validation. The owner stopped the October 6 repeated-capture investigation; do not resume it automatically from an older handoff.
+
 | Change | Useful check |
 | --- | --- |
 | Documentation | Paths, links and consistency with the current repository. |
