@@ -1,0 +1,14 @@
+{
+  "source": "{\n    \"revision\": \"44e998ce4ec535b8a1db550cdae22c58b2205efa\",\n    \"builtUtc\": \"2026-10-06T07:44:06.5326120Z\",\n    \"dirty\": false\n}",
+  "state": 4,
+  "ticks": 1090,
+  "reason": "Authority tick catch-up limit",
+  "abortFrameMs": 236.50409999999766,
+  "abortRemainingMs": 109.79123413562775,
+  "abortPreviousUpdateMs": 0.4627,
+  "abortCatchupTicks": 8,
+  "updateMaxMs": 33.5299,
+  "outgoingPending": 0,
+  "outgoingBytes": 0,
+  "outgoingHighWater": 0
+}

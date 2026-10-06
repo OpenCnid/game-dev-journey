@@ -2,6 +2,35 @@
 
 This bounded layer serves enemy abilities and readable, responsive combat. Owner readability/enjoyment remains unverified. The [task brief](../planning/tasks/GDJ-25.md#implementation-ownership-and-interactions--october-6) records ownership and future interactions before implementation. No GDJ-24 performance ladder or publication diagnosis was resumed.
 
+## Current review candidate — v2
+
+**Only v2 is the current owner candidate.** [Draft PR #17](https://github.com/OpenCnid/game-dev-journey/pull/17) targets `codex/gdj-24-coop-scale`; PR #16 remains draft/open at `742ca2a`. Runtime/build source is **`02bddffcff2d66e67ef9ff2861169fd9030afe83`**, clean stamp `2026-10-06T07:50:50.1433929Z`. The runtime DLL SHA-256 is `AF0E0EB852508E83145711C06F36460FCA21CEC9B226FF41D86D57D10C016E63`; the unchanged Unity executable stub alone cannot distinguish these C# builds. Later evidence/documentation commits do not change this runtime.
+
+Whole player folder: `C:/Users/Darian/.codex/worktrees/gdj-25-ranged-enemy/new-game-dev/prototypes/001-stacked-weapons/build/StackLab-GDJ25-v2`. Double-click **`Play-Mixed-Solo.cmd`** there; `candidate.json` identifies source/scenario and `READ-ME.txt` gives the short check. WASD moves, mouse aims, rifle fires automatically. Choose personal upgrades, Continue, then Retry after the ending. For the fixed pair, use two copies of this same player: `StackLab.exe -host -sharedLoopback -scenario mixed-threats -port 17846`, then `StackLab.exe -join 127.0.0.1 -port 17846`. Preserve the entire build folder. These paths are local ignored artifacts; the runtime commit and smoke runner are reproducible.
+
+Whole-folder ZIP is beside it as `StackLab-GDJ25-v2.zip` (36,063,673 bytes), SHA-256 `85053A7242CE725CBB030E80A482CE20F9DF995C1253DCC8289226581FB24A7B`. It includes the launcher and candidate manifest; extract the entire folder before playing.
+
+**Functional verification, not performance or human play:** [162 Edit / 20 Play results and build stamp](evidence/gdj-25-ranged-enemy/checks.json), [v2 solo verification](evidence/gdj-25-ranged-enemy/v2-solo-verification.json), [v2 pair verification](evidence/gdj-25-ranged-enemy/v2-pair-verification.json). Both suites pass with zero failures and the release builds successfully through `tools/unity.ps1`.
+
+| v2 standalone smoke | Result |
+| --- | --- |
+| Solo | Two earned arsenal stages with physical ranged freeze/Continue, natural defeat at tick 2382 (39.7 active seconds), XP 111 collected + 2 pending from 113 kills, 33 bolts / 2 damaging hits / 1 protected hit / 28 expired / 2 cleared on ending, no overflow; Retry resets run, growth, attacks and bolts. |
+| Pair | Complete at tick 7200 (120 active seconds); A returns as life 2 with all three weapons retained, B retains its specialized piercer build. Exact terminal players/enemies/ranged/XP match; identical growth replica. XP 786 collected + 93 pending from 879 kills. 35 bolts / 2 damaging hits / 1 protected hit / 32 expired / no overflow; both-ready Retry resets both roles. |
+
+The pair's two choices occur at 7.867/9.867 active seconds under automated aiming; this does not establish desirable progression pace. Solo freezes three live bolts at both choices; pair freezes three/two live bolts respectively, alongside wind-ups. Neither v2 smoke records a catch-up event; the injected Play Mode test establishes the new carry behavior. The ordinary input driver deliberately waits for one opening shot and steers A without firing toward a threat for the death/return check. No health/enemy/progression state is injected in the standalone tests. Preview camera captures and scripted choices do not establish owner readability, movement response or enjoyment.
+
+Raw archives remain in this worktree's `prototypes/001-stacked-weapons/artifacts/gdj25-v2-solo` and `gdj25-v2-pair`: invocation/source, game logs, CSVs, commands, observed snapshots, terminal summaries and verification. Owned player PIDs are stopped and both archives confirm input desktop `Default` before/after. No owner windows were closed. The [v1 failed pair checkpoint](evidence/gdj-25-ranged-enemy/v1-pair-failure.json) remains preserved.
+
+Reproduction from the worktree root after `tools/unity.ps1 -Action Build`:
+
+```powershell
+# Use the bundled Python executable or a configured Python installation.
+python docs/playtests/evidence/gdj-25-ranged-enemy/check_mixed.py --player prototypes/001-stacked-weapons/build/StackLab/StackLab.exe --results prototypes/001-stacked-weapons/artifacts/NEW-mixed-solo --solo
+python docs/playtests/evidence/gdj-25-ranged-enemy/check_mixed.py --player prototypes/001-stacked-weapons/build/StackLab/StackLab.exe --results prototypes/001-stacked-weapons/artifacts/NEW-mixed-pair --port 17846
+```
+
+**Next:** owner check and orchestrator diff/integration review; keep GDJ-25 In Review. No merge or further feature is started. Sentinel art uses existing procedural Unity geometry/materials; no external asset was imported.
+
 ## Source and implementation
 
 Worker `01a11023-fdee-7921-b208-e693a0f1ac09`, managed worktree `C:/Users/Darian/.codex/worktrees/gdj-25-ranged-enemy/new-game-dev`, branch `codex/gdj-25-ranged-enemy`, exact start `0cd77ad4600d21ce812df1c52e0cb40149df831b`. Upstream `742ca2a8eb0186fee93c56ffe7eefc62727da0ba` is still in draft PR #16. A stacked draft PR targets `codex/gdj-24-coop-scale`; main is not replaced or merged.

@@ -1,0 +1,757 @@
+{
+  "runtimeSource": "02bddffcff2d66e67ef9ff2861169fd9030afe83",
+  "commands": [
+    "tools/unity.ps1 -Action Test -TestPlatform EditMode",
+    "tools/unity.ps1 -Action Test -TestPlatform PlayMode",
+    "tools/unity.ps1 -Action Build"
+  ],
+  "tests": {
+    "EditMode": {
+      "result": "Passed",
+      "passed": 162,
+      "failed": 0,
+      "cases": [
+        {
+          "name": "Journey.Tests.BurstTests.BossJobsPreserveActivationsProjectileOrderCollisionAndReset",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.BurstTests.CulledInstancesKeepVisibleAndFrustumEdgeGeometryInStableOrder",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.BurstTests.DenseCrowdJobMatchesReferenceAndDoesNotSkipNeighbors(64)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.BurstTests.DenseCrowdJobMatchesReferenceAndDoesNotSkipNeighbors(128)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.BurstTests.DenseCrowdJobMatchesReferenceAndDoesNotSkipNeighbors(256)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.BurstTests.JobsActuallyUseBurst",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CombatTests.BossesTelegraphBurstCollideAndResetWithoutSkippingStateUpdates",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CombatTests.CombatEndsAndBenchmarkDoesNotUseCombatDuration",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CombatTests.ContactDamageHasGracePeriodAndCanEndTheRun",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CombatTests.DenseCrowdBoundsNeighborWorkAndKeepsAllEnemiesActive",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CombatTests.NearestRankPercentilesExposeTailSpikes",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CombatTests.PauseFreezesMovementClockAndWeapon",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CombatTests.RaySphereRejectsBehindAndZeroDirectionAndReturnsNearestSurface",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CombatTests.RenderRateDoesNotChangeFixedTickMovementOrShotCount(60)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CombatTests.RenderRateDoesNotChangeFixedTickMovementOrShotCount(144)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CombatTests.RenderRateDoesNotChangeFixedTickMovementOrShotCount(240)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CombatTests.RenderRateDoesNotChangeFixedTickMovementOrShotCount(360)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CombatTests.RestartClearsRunStateAndDoesNotExceedCapacity",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CombatTests.SameSeedReproducesCrowdAndDifferentSeedChangesIt",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CombatTests.SweptProjectileCollisionDoesNotTunnelAcrossPlayer",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CombatTests.TwoHitsKillAndOnlyOneKillIsAwardedBeforeRespawn",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CoopScaleTests.ChunkedSnapshotIsBoundedAtomicAndSurvivesRetryGeneration",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CoopScaleTests.ChunkForgeryDuplicatesGapsAndMalformedCompletionCannotMutateDisplayedState",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CoopScaleTests.DiagnosticBoundsAndIdentityCannotChangeOrdinaryGameplay",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CoopScaleTests.DiagnosticXpUsesConservedLedgerWithoutOffersAndStillTestsContacts",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.CoopScaleTests.EightInstancesKeepOwnershipArchetypeAndIndependentCadence",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.ChoosingFreezesPhysicsAndDeadReturnUntilEveryMemberExplicitlyContinues",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.DamageThresholdsUseEarnedBuild(False,None,3)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.DamageThresholdsUseEarnedBuild(True,None,2)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.DamageThresholdsUseEarnedBuild(False,StrongerHits,2)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.DamageThresholdsUseEarnedBuild(True,StrongerHits,1)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.DamageThresholdsUseEarnedBuild(False,FasterFire,3)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.DamageThresholdsUseEarnedBuild(True,FasterFire,2)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.DeadSelectionRetainsBuildOnReturnAndTerminalTickSuppressesCollection",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.DeathCreatesOnceBeforeReuseButDoesNotCreditXp",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.DenseSameCellMergeConservesTwentyThousandDiagnosticXpWithoutQuadraticScan",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.FasterFirePreservesFractionalCooldownWithoutRetroactiveBurst",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.FixedRosterEarnsOneOfferIncludingDeadMemberAndXpContinuesAtCap",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.FrozenStartingConfigAcceptsLegalEarnedSnapshotRejectsForgedStats",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.GravityAndMergingPreserveValueProvenanceAndInclusiveCollection",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.GrowthSettingsCannotBeOverriddenOrRateEdited",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.InclusiveRadiusStableCollectorAndDeadExclusion",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.IndependentExplicitChoicesApplyNextTickOnceAndKeepOtherOffer",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.LedgerExceedsPacketAndReliableRecordsAreBoundedIdempotentAndResettable",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.ReplicaRejectsNonConservingAndRepeatedMerge",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.RetryResetsAllGrowthAndDrawsAndRejectsOldChoice",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.SameTickChoicesAndReadinessReplicateWithoutPhysicalAdvanceAndResetTheirRevision",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.SelectionRevalidatesWeaponWithoutSpendingEntitlement",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.EarnedGrowthTests.SoloUsesSameThresholdAndOneClickRetry",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExactSteeringTests.CellEdgesCoincidentAndDensePositionsNeverClipNeighbors",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExactSteeringTests.ExactGridPreservesSnapshotsCombatXpAndRetryAtFixedTicks(35,1)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExactSteeringTests.ExactGridPreservesSnapshotsCombatXpAndRetryAtFixedTicks(250,3)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExactSteeringTests.ExactGridPreservesSnapshotsCombatXpAndRetryAtFixedTicks(1000,8)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExperimentTests.CompactProjectilesMatchMatrixCullingInterpolationAndEmptyReset",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExperimentTests.ConcurrentPreparationMatchesSequentialAndCannotReusePendingBuffers",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExperimentTests.EngineTimingRejectsUnavailableAndDisjointQueries(4.2d,True)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExperimentTests.EngineTimingRejectsUnavailableAndDisjointQueries(0.0d,False)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExperimentTests.EngineTimingRejectsUnavailableAndDisjointQueries(-1.0d,False)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExperimentTests.EngineTimingRejectsUnavailableAndDisjointQueries(double.NaN,False)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExperimentTests.EngineTimingRejectsUnavailableAndDisjointQueries(double.PositiveInfinity,False)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExperimentTests.EngineTimingRejectsUnavailableAndDisjointQueries(1000000000.0d,False)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExperimentTests.NativeOwnershipPreservesCombatProjectilesInterpolationAndReset(100,False,720)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExperimentTests.NativeOwnershipPreservesCombatProjectilesInterpolationAndReset(20000,True,190)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExperimentTests.WarningCacheTracksTicksResetAndDeduplicationMode",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ExperimentTests.WarningDeduplicationPreservesDistinctTargetsAndDeadlines",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.FeedbackTests.ActualPlayerHealthLossPulsesOnceFreezesOnPauseAndClearsOnRestart",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.FeedbackTests.BarsReadAuthoritativeWoundsAndFilterBehindCameraAndDistance",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.FeedbackTests.CrowdedLabelsDoNotOverlapAndPreserveWoundedAndAimedEnemies",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.FeedbackTests.HitOutcomeMatchesHealthAndKeepsDeathSeparateFromRespawn(False,False)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.FeedbackTests.HitOutcomeMatchesHealthAndKeepsDeathSeparateFromRespawn(True,False)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.FeedbackTests.HitOutcomeMatchesHealthAndKeepsDeathSeparateFromRespawn(True,True)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.FeedbackTests.HudRotationKeepsMarkersAndConnectorsAtTheirScaledAnchor(1.0f)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.FeedbackTests.HudRotationKeepsMarkersAndConnectorsAtTheirScaledAnchor(1.5f)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.FeedbackTests.HudRotationKeepsMarkersAndConnectorsAtTheirScaledAnchor(2.0f)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.FeedbackTests.MissDoesNotCreateDamageAndPausedOrTerminalShotsAreRejected",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.FeedbackTests.NormalTargetHealthAppearsAfterDamageAndRespawnHidesIt",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.FeedbackTests.RapidFireHitsRemainVisibleDuringLongerKillConfirmation",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.FeedbackTests.WoundedCulledPoseChangesSilhouetteAndReturnsToNormalWithoutMask",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.PrecisionAimTests.BenchmarkRetainsFixedSphereBodyDamageEvenOnVisibleHeadRay",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.PrecisionAimTests.FirstSurfaceWinsOverlapHeadWinsExactRegionTieAndSlotWinsEnemyTie",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.PrecisionAimTests.FreshCriticalAndWoundedCriticalCaptureActualDamageBeforeSingleRespawn(False,False)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.PrecisionAimTests.FreshCriticalAndWoundedCriticalCaptureActualDamageBeforeSingleRespawn(True,False)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.PrecisionAimTests.FreshCriticalAndWoundedCriticalCaptureActualDamageBeforeSingleRespawn(True,True)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.PrecisionAimTests.InclusiveBoundariesInsideBehindZeroAndRangeAreExplicit",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.PrecisionAimTests.MissConsumesCooldownWithoutDamageAndPreviewDoesNotMutateState",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.PrecisionAimTests.RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette(False,Body)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.PrecisionAimTests.RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette(False,Head)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.PrecisionAimTests.RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette(True,Body)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.PrecisionAimTests.RegionEdgesAgreeWithRenderedCubesAndRejectOutsideSilhouette(True,Head)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.PrecisionAimTests.WoundMovesHeadAndCompressesBodyInsteadOfKeepingHealthyHitRegions",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RangedThreatsTests.ChoiceFreezeAndRetryClearPhysicalAttacksAndBolts",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RangedThreatsTests.CommittedShotHitsAppropriateLivingPlayerExactlyOnce(1)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RangedThreatsTests.CommittedShotHitsAppropriateLivingPlayerExactlyOnce(2)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RangedThreatsTests.KillingSentinelCancelsWindupDropsNormalXpAndReleasedBoltSurvives",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RangedThreatsTests.MixedDefinitionKeepsEarnedArsenalAndPureChaserReference",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RangedThreatsTests.ReleasedPoolIsBoundedAndTargetDeathCancelsPendingShot",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RangedThreatsTests.ReturnLifeAndImmunityPreventStaleOrDuplicateDamage",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RangedThreatsTests.SnapshotRoundtripIsDeepAndMalformedRangedStateCannotReplaceDisplay",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RangedThreatsTests.SweptCollisionIncludesCrossingPlayerAndSelectsNearestPlayer",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RangedThreatsTests.WindupLocksAimAndPositionThenMovingPlayerDodgesStraightBolt",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RifleRateTests.BaselineDecimalInputRestoresTheExactOriginalInterval",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(0.5f,30)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(2,144)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(8.333334f,240)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(30,60)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(120,8)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(120,30)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(120,144)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RifleRateTests.ConfiguredCadenceMatchesAcrossCombatFramesAndBenchmarkTicks(120,240)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RifleRateTests.InvalidRatesCannotPoisonTheWeaponClock",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RifleRateTests.RateChangesPreserveCooldownProgressWhilePauseAndRestartKeepTheirRules",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioConfigurationTests.LargestSnapshotFitsPacketAndFailedParseCannotMutateDestination",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioConfigurationTests.MatchingCadenceConsumesAllDueShotsIncludingAboveTickRate(0.5f)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioConfigurationTests.MatchingCadenceConsumesAllDueShotsIncludingAboveTickRate(2.0f)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioConfigurationTests.MatchingCadenceConsumesAllDueShotsIncludingAboveTickRate(4.0f)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioConfigurationTests.MatchingCadenceConsumesAllDueShotsIncludingAboveTickRate(8.333334f)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioConfigurationTests.MatchingCadenceConsumesAllDueShotsIncludingAboveTickRate(30.0f)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioConfigurationTests.MatchingCadenceConsumesAllDueShotsIncludingAboveTickRate(120.0f)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioConfigurationTests.NamedControlsRetainValuesAndBothPathsResolveBodyHeadAndRespawn(SoloPrecision,35,40,20,2,0.12f)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioConfigurationTests.NamedControlsRetainValuesAndBothPathsResolveBodyHeadAndRespawn(SharedRifle,12,60,20,2,0.12f)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioConfigurationTests.NamedControlsRetainValuesAndBothPathsResolveBodyHeadAndRespawn(DeveloperParity,12,90,15,3,0.25f)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioConfigurationTests.OfferIsAtomicAndAcknowledgementCannotStartDifferentOrStaleConfiguration",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioConfigurationTests.RetryRetainsFrozenConfigurationRejectsOldStateAndCannotAdoptForeignTuning",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioConfigurationTests.ValidationRejectsNonfiniteBoundsVersionsAndMalformedArguments",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedEncounterTests.AbortNeverBecomesSuccessOrAllowsRetry",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedEncounterTests.BothPlayersHaveIndependentContactGrace",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedEncounterTests.BothReadyResetInvalidatesAllOldRunInputsShotsAndRetry",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedEncounterTests.DuplicateAndOldIncarnationCannotDamageReplacement",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedEncounterTests.ExpiredHistoryInvalidRayAndWrongWeaponReject",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedEncounterTests.HostRequeriesHistoricalDisplayedPoseRatherThanCurrentPosition",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedEncounterTests.LastDeathBeatsExpiringReturnAndCompletion",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedEncounterTests.LifeTokenRejectsShotsAndInputsAfterReturn",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedEncounterTests.NearestLivingUsesStableTieAndIgnoresDead",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedEncounterTests.OverkillAttributesOnlyRemainingActualDamage",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedEncounterTests.ReadOnlyPreviewCannotGrantDamage",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedEncounterTests.ReturnTakesFiveSecondsAndProvidesOneSecondImmunity",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedEncounterTests.SnapshotWireRoundTripPreservesBothPlayersAndIncarnations",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedEncounterTests.TimedCompletionFreezesDeadReturnAndShots",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedEncounterTests.TwoSourcesShareHealthAndExactlyOneDeathSnapshot",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedPreviewTests.InvalidOrUnboundedInputRejectsWithoutChangingAuthority",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedPreviewTests.OldRunAndLifeCannotControlAnotherAttemptOrReturnedPlayer",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedPreviewTests.RetryAndInputRespectTerminalAndDeadStates",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ShotAlignmentTests.FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup(8)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ShotAlignmentTests.FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup(30)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ShotAlignmentTests.FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup(60)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ShotAlignmentTests.FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup(144)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ShotAlignmentTests.FrameBatchedShotsMatchFixedTickCadenceIncludingCatchup(240)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ShotAlignmentTests.HitsUseDisplayedEnemyPoseAndWoundSparksStartAtResolvedSurface(False,False)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ShotAlignmentTests.HitsUseDisplayedEnemyPoseAndWoundSparksStartAtResolvedSurface(True,False)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ShotAlignmentTests.HitsUseDisplayedEnemyPoseAndWoundSparksStartAtResolvedSurface(True,True)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.WeaponStackTests.BankedXpGrantsTwoSeparateFrozenStagesWithIndependentBroadAndSpecializedBuilds",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.WeaponStackTests.DeadMemberKeepsTwoStageChoicesAndArsenalOnReturnThenRetryClearsAllSlots",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.WeaponStackTests.InstalledSlotsHaveIndependentCooldownsAndRejectForeignOrAbsentIds",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.WeaponStackTests.PiercingHitsNearestDistinctEnemiesOnceWithBoundedDepth(\"all\",0.8f,3,16)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.WeaponStackTests.PiercingHitsNearestDistinctEnemiesOnceWithBoundedDepth(\"pierce\",0.8f,5,16)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.WeaponStackTests.PiercingHitsNearestDistinctEnemiesOnceWithBoundedDepth(\"all\",1.6f,3,32)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.WeaponStackTests.ReferenceLoadoutsAreFrozenDistinctAndCannotEnterEarnedScenario",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.WeaponStackTests.ScatterCannotDamageRespawnFromEarlierPelletAndCreatesOneDeathXp",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.WeaponStackTests.ScatterUsesHorizontalFanAndExactRangeWithoutPerPelletTriggers(\"all\",5)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.WeaponStackTests.ScatterUsesHorizontalFanAndExactRangeWithoutPerPelletTriggers(\"scatter\",7)",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.WeaponStackTests.StackSnapshotsAndMultiTargetHitsRoundTripUnderPacketLimitAndRejectForgedBuilds",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.WeaponStackTests.WorkCountsHistoricalGeometryQueriesEvenWhenRespawnRejectsThePrimaryTrigger",
+          "result": "Passed"
+        }
+      ]
+    },
+    "PlayMode": {
+      "result": "Passed",
+      "passed": 20,
+      "failed": 0,
+      "cases": [
+        {
+          "name": "Journey.Tests.PrecisionFeedbackTests.PreviewTracksDisplayedPoseMissCooldownPauseAndResetWithIndependentCriticalCue",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RifleRateControlTests.MenuRateValidationAndCombatRestartUseTheChosenRate",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RuntimeTests.ArenaStartsFiresAndRestartsWithoutRuntimeErrors",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RuntimeTests.DamagePresentationRendersBothOutcomesAndRestartClearsIt",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.RuntimeTests.ExperimentalRenderingPreservesSimulationAndDisposesBuffers",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioAgreementTests.ActualGamesAgreeBeforeStartAndBothReadyRetryRetainsDefaultsAndOverride",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioAgreementTests.ActualStackPairReplicatesTwoIndependentChoicesAndReadinessResetsWithoutReroll",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioAgreementTests.FlatPickupBatchesKeepObjectOwnershipFixedAcrossOneThousandCarriers",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioAgreementTests.ReturningFromRunningHostInterruptsPeerAndReleasesSocket",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioAgreementTests.SoloGrowthChoicePausesCannotHideAndContinueRestoresCombatWithoutPausedCatchup",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioAgreementTests.StartAndRetryKeepCurrentRunFeedbackReceivedWithTheNewSnapshot",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ScenarioAgreementTests.WaitingHostCanReturnRehostAndStartFreshSoloWithoutLosingMenuSettingsOrLogs",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedConnectionTests.LargeReliableSnapshotsRetainBoundedChunksAndAtomicOrderedState",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedConnectionTests.MixedPlayableRunCarriesShortStallInBoundedFramesButRejectsLongBacklog",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedConnectionTests.MixedThreatSnapshotsDeliverWindupFlightDamageAndRetryAtomically",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedConnectionTests.RealLoopbackHandshakeSnapshotAndRetryRoundTrip",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedConnectionTests.ReliableBurstRetainsEveryEventInOrderPastTransportWindow",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.SharedConnectionTests.StartAndRetryExcludeWaitingFramesButActiveStallsStillAbort",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ShotPresentationTests.FastTurnUsesCurrentMuzzleAndDoesNotLeaveAnOldLine",
+          "result": "Passed"
+        },
+        {
+          "name": "Journey.Tests.ShotPresentationTests.FreshShotsSurviveLongFrameButLinesClearOnPauseAndRestart",
+          "result": "Passed"
+        }
+      ]
+    }
+  },
+  "build": {
+    "revision": "02bddffcff2d66e67ef9ff2861169fd9030afe83",
+    "builtUtc": "2026-10-06T07:50:50.1433929Z",
+    "dirty": false
+  }
+}
