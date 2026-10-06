@@ -76,6 +76,8 @@ Use Editor/Play Mode and affected automated checks for ordinary development iter
 
 ## Design for the game's future
 
+Owner clarification, October 6: the core loop and genre are chosen, drawing on Vampire Hunters and Vampire Survivors. Build the MVP through a coherent capability sequence rather than repeatedly asking whether that genre loop is fun. Each small task should name the missing capability it completes, its dependencies and how it joins the current playable stack. Play remains useful for improving our implementation, choices and interactions. Rough implementations and shortcuts are compatible with this organized sequence; routine benchmarks remain governed by the proportional checks below.
+
 The owner asks that new features account for the future game and its interactions, not only the current prototype. Before implementing a feature, identify its relevant consumers, state ownership and known extension needs in the design or task record. Explain how it could affect future content, build strategies and balance. Progression is the current example: upgrades can affect weapons, loot generation and future upgrade draws; a weapon-only definition would exclude an already identified need.
 
 Implement a bounded slice with explicit places for those known extensions. Expand through ordinary content and focused effect types as needs become concrete; an all-purpose rules engine is not required. Validate current behavior and the boundaries affected by the known future cases. Preserve measured scalability requirements and describe risks without claiming that extensibility proves performance or balance.
