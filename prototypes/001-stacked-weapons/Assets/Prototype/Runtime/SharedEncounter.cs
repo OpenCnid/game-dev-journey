@@ -34,12 +34,15 @@ namespace Journey
         public Guid Session;
         public ScenarioConfiguration Configuration { get; private set; }
         public SharedEnemy[] Enemies { get; private set; }
+        public RangedState Ranged { get; private set; }
         public SharedSnapshot(ScenarioConfiguration configuration = null)
-        { Configuration = configuration ?? ScenarioConfiguration.Named(ScenarioKind.SharedRifle); Enemies = new SharedEnemy[Configuration.EnemyCount]; }
+        { Configuration = configuration ?? ScenarioConfiguration.Named(ScenarioKind.SharedRifle); Enemies = new SharedEnemy[Configuration.EnemyCount]; Ranged = Configuration.RangedCount == 0 ? null : new RangedState(Configuration.RangedCount); }
         public void CopyFrom(SharedSnapshot other)
         {
             Configuration = other.Configuration; Session = other.Session;
             if (Enemies.Length != other.Enemies.Length) Enemies = new SharedEnemy[other.Enemies.Length];
+            if (other.Ranged == null) Ranged = null;
+            else { if (Ranged == null) Ranged = new RangedState(other.Ranged.Attacks.Length); Ranged.CopyFrom(other.Ranged); }
             Roster = other.Roster; Xp = other.Xp; Level = other.Level;
             ChoicePhase = other.ChoicePhase; ControlRevision = other.ControlRevision;
             Run = other.Run; Tick = other.Tick; Elapsed = other.Elapsed; State = other.State;
@@ -100,6 +103,7 @@ namespace Journey
         readonly float[] inputTime = new float[2];
         readonly Vector3[] velocities;
         readonly ExactSteeringGrid steeringGrid;
+        readonly RangedThreats ranged;
         public bool ExactSteering => steeringGrid != null;
         System.Random random;
         public event Action<SharedHit> Resolved;
@@ -111,6 +115,7 @@ namespace Journey
             if (roster < 1 || roster > 2) throw new ArgumentException("Fixed roster must be one or two");
             Growth = Configuration.Pickups ? new EarnedGrowth() : null;
             Current = new SharedSnapshot(Configuration) { Roster = roster, Session = session == Guid.Empty ? Guid.NewGuid() : session };
+            if (Current.Ranged != null) ranged = new RangedThreats(Current);
             velocities = new Vector3[Configuration.EnemyCount];
             if (exactSteering) steeringGrid = new ExactSteeringGrid(Configuration.EnemyCount);
             for (int i = 0; i < history.Length; i++) history[i] = new SharedSnapshot(Configuration) { Tick = -1 };
@@ -130,6 +135,7 @@ namespace Journey
                 nextShot[p] = 0; lastEvent[p] = lastInput[p] = 0; inputTime[p] = 0;
             }
             for (int i = 0; i < Configuration.EnemyCount; i++) { Current.Enemies[i] = default; Respawn(i); }
+            ranged?.Reset();
             foreach (SharedSnapshot pose in history) { pose.Run = 0; pose.Tick = -1; }
             Remember();
         }
@@ -202,7 +208,7 @@ namespace Journey
                 SharedPlayer player = Current.Players[choice.Player];
                 if (!ValidChoice(choice) || !frozen && player.Offer.Tick >= Current.Tick) continue;
                 UpgradeDefinition definition = GrowthUpgrade.Definition(choice.Upgrade);
-                if (Configuration.Kind == ScenarioKind.WeaponStack)
+                if (Configuration.StackedGrowth)
                 {
                     WeaponArsenal.Apply(ref player, choice.Upgrade);
                     int added = WeaponArsenal.AddedMask(choice.Upgrade);
@@ -235,10 +241,12 @@ namespace Journey
             Work.contactTests += (long)Configuration.EnemyCount * Current.Roster;
             // Read all positions before applying velocities, matching the local steering rule.
             steeringGrid?.Build(Current.Enemies);
+            ranged?.StepAttacks(NearestLiving);
             for (int i = 0; i < Configuration.EnemyCount; i++)
             {
                 Vector3 position = Current.Enemies[i].Position, separation = Vector3.zero;
                 int target = NearestLiving(position);
+                if (ranged != null && ranged.HoldPosition(i, target)) { velocities[i] = Vector3.zero; continue; }
                 int candidates = steeringGrid?.Gather(position) ?? Configuration.EnemyCount;
                 Work.steeringChecks += candidates;
                 for (int candidate = 0; candidate < candidates; candidate++)
@@ -257,6 +265,7 @@ namespace Journey
                 for (int p = 0; p < Current.Roster; p++) if ((e.Position - Current.Players[p].Position).sqrMagnitude < 1.25f) Contact(p);
             }
             double crowdMs = StageProfile.End(stage); Work.frameCrowdMs += crowdMs; Work.crowdMs += crowdMs;
+            ranged?.StepBolts(DamagePlayer);
             // Wipe wins over both completion and an expiring return.
             if (NearestLiving(Vector3.zero) < 0) Current.State = SharedState.Defeat;
             else if (Current.Elapsed >= Configuration.Duration) Current.State = SharedState.Complete;
@@ -272,6 +281,7 @@ namespace Journey
                     lastInput[p] = 0; inputTime[p] = 0;
                 }
             }
+            if (Current.State == SharedState.Complete || Current.State == SharedState.Defeat) Current.Ranged?.ClearCombat();
             if (Current.State == SharedState.Running && Growth != null)
             {
                 stage = StageProfile.Begin();
@@ -295,13 +305,17 @@ namespace Journey
         }
         void Contact(int p)
         {
+            if (DamagePlayer(p, 10)) Work.contactApplications++;
+        }
+        bool DamagePlayer(int p, int damage)
+        {
             SharedPlayer player = Current.Players[p];
-            if (player.Health == 0 || Current.Elapsed < player.ContactUntil || Current.Elapsed < player.ImmuneUntil) return;
-            Work.contactApplications++;
-            if (!Configuration.Scaling) player.Health = Mathf.Max(0, player.Health - 10);
+            if (player.Health == 0 || Current.Elapsed < player.ContactUntil || Current.Elapsed < player.ImmuneUntil) return false;
+            if (!Configuration.Scaling) player.Health = Mathf.Max(0, player.Health - damage);
             player.ContactUntil = Current.Elapsed + .4f;
             if (player.Health == 0) player.ReturnAt = Current.Elapsed + ReturnDelay;
             Current.Players[p] = player;
+            return true;
         }
         void Resolve(SharedShot source)
         {
@@ -400,6 +414,7 @@ namespace Journey
                 if ((p - Current.Players[0].Position).sqrMagnitude > 100 && (p - Current.Players[1].Position).sqrMagnitude > 100) break;
             }
             Current.Enemies[i] = new SharedEnemy { Position = p, Health = Configuration.EnemyHealth, Incarnation = Current.Enemies[i].Incarnation + 1 };
+            if (i < Configuration.RangedCount) ranged?.Respawn(i);
         }
         void Remember() => history[Current.Tick % history.Length].CopyFrom(Current);
         public bool Retry(int run, int p)
@@ -426,7 +441,7 @@ namespace Journey
             for (int i = 0; i < Current.Roster; i++) if (!Current.Players[i].ChoiceReady) return true;
             Current.State = SharedState.Running; pending.Clear(); Remember(); return true;
         }
-        public void Abort(string reason) { Current.State = SharedState.Aborted; AbortReason = reason; pending.Clear(); choices.Clear(); }
+        public void Abort(string reason) { Current.State = SharedState.Aborted; Current.Ranged?.ClearCombat(); AbortReason = reason; pending.Clear(); choices.Clear(); }
         static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);
     }
 }

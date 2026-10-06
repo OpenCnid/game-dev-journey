@@ -49,6 +49,7 @@ namespace Journey
             public ScenarioEvidence scenario;
             public SharedPlayer[] players;
             public SharedEnemy[] enemies;
+            public RangedState ranged;
             public int xp, level, choicePhase, controlRevision;
         }
         SharedGame game;
@@ -100,7 +101,7 @@ namespace Journey
                 var state = new State { run = snapshot.Run, life = snapshot.Players[game.LocalPlayer].Life,
                     local = game.LocalPlayer, tick = snapshot.Tick, elapsed = snapshot.Elapsed, state = snapshot.State.ToString(),
                     scenario = new ScenarioEvidence(snapshot.Configuration, snapshot.Session, snapshot.Run),
-                    xp = snapshot.Xp, level = snapshot.Level, players = snapshot.Players, enemies = snapshot.Enemies, lastSequence = lastSequence, commandResult = result,
+                    xp = snapshot.Xp, level = snapshot.Level, players = snapshot.Players, enemies = snapshot.Enemies, ranged = snapshot.Ranged, lastSequence = lastSequence, commandResult = result,
                     choicePhase = snapshot.ChoicePhase, controlRevision = snapshot.ControlRevision,
                     frameSequence = frameSequence, capturedWallSeconds = lastCapture, captureError = captureError,
                     source = stamp, width = Screen.width, height = Screen.height, scripted = game.Scripted,

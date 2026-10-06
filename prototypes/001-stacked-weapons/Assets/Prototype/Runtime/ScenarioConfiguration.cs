@@ -5,12 +5,12 @@ using System.Security.Cryptography;
 
 namespace Journey
 {
-    public enum ScenarioKind { SoloPrecision = 1, SharedRifle = 2, DeveloperParity = 3, EarnedGrowth = 4, WeaponStack = 5, StackReference = 6, CoopScale = 7 }
+    public enum ScenarioKind { SoloPrecision = 1, SharedRifle = 2, DeveloperParity = 3, EarnedGrowth = 4, WeaponStack = 5, StackReference = 6, CoopScale = 7, MixedThreats = 8 }
 
     // Starting definitions only. Earned personal build state belongs to the run authority.
     public sealed class ScenarioConfiguration
     {
-        public const int Version = 3, MaxEnemies = 1000;
+        public const int Version = 4, MaxEnemies = 1000;
         public readonly int Schema, Seed, EnemyCount, EnemyHealth, BodyDamage, HeadMultiplier;
         public readonly ScenarioKind Kind;
         public readonly float Duration, RifleInterval;
@@ -31,13 +31,15 @@ namespace Journey
                 return identity;
             }
         }
-        public bool Growth => Kind == ScenarioKind.EarnedGrowth || Kind == ScenarioKind.WeaponStack;
+        public bool StackedGrowth => Kind == ScenarioKind.WeaponStack || Kind == ScenarioKind.MixedThreats;
+        public int RangedCount => Kind == ScenarioKind.MixedThreats ? 5 : 0;
+        public bool Growth => Kind == ScenarioKind.EarnedGrowth || StackedGrowth;
         public bool Scaling => Kind == ScenarioKind.CoopScale;
         public bool Pickups => Growth || Scaling;
-        public bool Stacking => Kind == ScenarioKind.WeaponStack || Kind == ScenarioKind.StackReference || Scaling;
+        public bool Stacking => StackedGrowth || Kind == ScenarioKind.StackReference || Scaling;
         public bool SharedSolo => Pickups || Stacking;
-        public int LevelCap => Kind == ScenarioKind.WeaponStack ? 3 : 2;
-        public string Name => Kind == ScenarioKind.SoloPrecision ? "Solo precision" : Kind == ScenarioKind.SharedRifle ? "Shared rifle" : Kind == ScenarioKind.DeveloperParity ? "Developer parity" : Kind == ScenarioKind.EarnedGrowth ? "Earned growth" : Kind == ScenarioKind.WeaponStack ? "Weapon stack" : Scaling ? "Co-op scale (diagnostic)" : "Stack reference (diagnostic)";
+        public int LevelCap => StackedGrowth ? 3 : 2;
+        public string Name => Kind == ScenarioKind.SoloPrecision ? "Solo precision" : Kind == ScenarioKind.SharedRifle ? "Shared rifle" : Kind == ScenarioKind.DeveloperParity ? "Developer parity" : Kind == ScenarioKind.EarnedGrowth ? "Earned growth" : Kind == ScenarioKind.WeaponStack ? "Weapon stack" : Kind == ScenarioKind.MixedThreats ? "Mixed threats" : Scaling ? "Co-op scale (diagnostic)" : "Stack reference (diagnostic)";
         public bool Overridden => (overridden ?? (overridden = !SameValues(Named(Kind)))).Value;
         public string Label => Name + (Overridden ? " (override)" : "");
         public string Settings => FormattableString.Invariant($"{EnemyCount} drones / {EnemyHealth} HP · Body {BodyDamage} / Head {HeadDamage} (x{HeadMultiplier}) · {RifleRate:0.##}/s ({RifleInterval:0.####}s)") + (Kind == ScenarioKind.StackReference || Scaling ? " · " + WeaponArsenal.Label(StartingArsenal) + (StartingSpecialization == UpgradeId.None ? "" : " · " + GrowthUpgrade.Label(StartingSpecialization)) : "") + (Scaling ? " · invulnerable / frozen arsenal / collected XP" : "");
@@ -46,7 +48,7 @@ namespace Journey
             int bodyDamage, int headMultiplier, float duration, float rifleInterval, int startingArsenal = WeaponArsenal.Rifle, UpgradeId startingSpecialization = UpgradeId.None)
         {
             if (schema != Version) throw new ArgumentException("Unsupported scenario version.");
-            if (kind < ScenarioKind.SoloPrecision || kind > ScenarioKind.CoopScale) throw new ArgumentException("Unknown scenario.");
+            if (kind < ScenarioKind.SoloPrecision || kind > ScenarioKind.MixedThreats) throw new ArgumentException("Unknown scenario.");
             if (enemyCount < 1 || enemyCount > (kind == ScenarioKind.CoopScale ? MaxEnemies : 35)) throw new ArgumentException("Ordinary fixtures support 1–35 drones; scale diagnostics support 1–1000.");
             if (enemyHealth < 1 || enemyHealth > 10000 || bodyDamage < 1 || bodyDamage > 1000 || headMultiplier < 1 || headMultiplier > 4)
                 throw new ArgumentException("HP must be 1–10000, body damage 1–1000 and head multiplier 1–4.");
@@ -56,8 +58,8 @@ namespace Journey
             if (Scaling && (seed != 137 || enemyHealth != 60 || bodyDamage != 20 || headMultiplier != 2 || rifleInterval != .12f ||
                 startingArsenal != 1 && startingArsenal != 7 && startingArsenal != 255 || startingSpecialization != UpgradeId.None))
                 throw new ArgumentException("Scale diagnostics keep fixed combat tuning and 1/3/8 owned instances.");
-            if ((kind == ScenarioKind.EarnedGrowth || kind == ScenarioKind.WeaponStack || kind == ScenarioKind.StackReference) &&
-                (seed != 137 || enemyCount != 35 || enemyHealth != 60 || bodyDamage != 20 || headMultiplier != 2 || duration != (kind == ScenarioKind.WeaponStack ? 120 : 60) || rifleInterval != .12f))
+            if ((kind == ScenarioKind.EarnedGrowth || StackedGrowth || kind == ScenarioKind.StackReference) &&
+                (seed != 137 || enemyCount != 35 || enemyHealth != 60 || bodyDamage != 20 || headMultiplier != 2 || duration != (StackedGrowth ? 120 : 60) || rifleInterval != .12f))
                 throw new ArgumentException("Growth/stack scenarios use fixed test settings; tuning overrides are disabled.");
             if (!Scaling && (startingArsenal != 1 && startingArsenal != 3 && startingArsenal != 5 && startingArsenal != 7 ||
                 startingSpecialization != UpgradeId.None && startingSpecialization != UpgradeId.WiderScatter && startingSpecialization != UpgradeId.DeeperPierce ||
@@ -72,7 +74,7 @@ namespace Journey
         {
             if (kind == ScenarioKind.CoopScale) return new ScenarioConfiguration(Version, kind, 137, 35, 60, 20, 2, 90, .12f, 7);
             if (kind == ScenarioKind.EarnedGrowth) return new ScenarioConfiguration(Version, kind, 137, 35, 60, 20, 2, 60, .12f);
-            if (kind == ScenarioKind.WeaponStack || kind == ScenarioKind.StackReference) return new ScenarioConfiguration(Version, kind, 137, 35, 60, 20, 2, kind == ScenarioKind.WeaponStack ? 120 : 60, .12f);
+            if (kind == ScenarioKind.WeaponStack || kind == ScenarioKind.MixedThreats || kind == ScenarioKind.StackReference) return new ScenarioConfiguration(Version, kind, 137, 35, 60, 20, 2, kind == ScenarioKind.StackReference ? 60 : 120, .12f);
             if (kind == ScenarioKind.DeveloperParity) return new ScenarioConfiguration(Version, kind, 271, 12, 90, 15, 3, 60, .25f);
             return new ScenarioConfiguration(Version, kind, 137, kind == ScenarioKind.SoloPrecision ? 35 : 12,
                 kind == ScenarioKind.SoloPrecision ? 40 : 60, 20, 2, 60, .12f);
@@ -115,7 +117,7 @@ namespace Journey
             {
                 string value = Value(args, i);
                 kind = value == "solo-precision" ? ScenarioKind.SoloPrecision : value == "shared-rifle" ? ScenarioKind.SharedRifle :
-                    value == "developer-parity" ? ScenarioKind.DeveloperParity : value == "earned-growth" ? ScenarioKind.EarnedGrowth : value == "weapon-stack" ? ScenarioKind.WeaponStack : value == "stack-reference" ? ScenarioKind.StackReference : value == "co-op-scale" ? ScenarioKind.CoopScale : throw new ArgumentException("Unknown -scenario.");
+                    value == "developer-parity" ? ScenarioKind.DeveloperParity : value == "earned-growth" ? ScenarioKind.EarnedGrowth : value == "weapon-stack" ? ScenarioKind.WeaponStack : value == "mixed-threats" ? ScenarioKind.MixedThreats : value == "stack-reference" ? ScenarioKind.StackReference : value == "co-op-scale" ? ScenarioKind.CoopScale : throw new ArgumentException("Unknown -scenario.");
             }
             ScenarioConfiguration result = Named(kind);
             for (int i = 0; i < args.Length; i++)
@@ -194,7 +196,7 @@ namespace Journey
                 }
                 else if (Configuration.Growth)
                 {
-                    if (Configuration.Kind == ScenarioKind.WeaponStack)
+                    if (Configuration.StackedGrowth)
                     { if (!WeaponArsenal.ValidBuild(incoming, p)) throw new ArgumentException("Invalid stacked build snapshot"); }
                     else if (incoming.Xp < 0 || incoming.Level != (incoming.Xp >= EarnedGrowth.Threshold ? 2 : 1) ||
                         (incoming.Level == 1 && (offer.Id != 0 || offer.Selected != UpgradeId.None || offer.AppliedTick != 0)) ||

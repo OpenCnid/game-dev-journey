@@ -42,6 +42,16 @@ Stop at a coherent playable candidate plus the required review. Do not run anoth
 
 ## Durable handoff
 
+## Implementation ownership and interactions — October 6
+
+Worker chat `01a11023-fdee-7921-b208-e693a0f1ac09` uses managed checkout `C:/Users/Darian/.codex/worktrees/gdj-25-ranged-enemy/new-game-dev`, branch `codex/gdj-25-ranged-enemy`, from exact start `0cd77ad4600d21ce812df1c52e0cb40149df831b`. PR #16 remains draft/open; the implementation PR will target `codex/gdj-24-coop-scale`.
+
+The named `mixed-threats` configuration retains the 120-second/35-enemy weapon-stack loop: the first five stable enemy slots are ranged sentinels, the remaining 30 chase. A concrete ranged definition owns range, wind-up, cooldown, bolt speed/damage/radius/lifetime and a bounded pool. SharedEncounter owns all attack timing and swept bolt hits in solo and pair; snapshots carry the five committed attacks and live bolts for read-only presentation. Pure-chaser snapshots/reference workloads retain their existing enemy state layout. New players intentionally reject old protocol versions.
+
+Sentinels approach to 14 metres, stop during a 1.25-second wind-up and lock a straight horizontal aim at its start. A bright cannon/crown, expanding charge and fixed aim beam supplement color. Initial cooldowns stagger attacks; the post-shot cooldown is 2.75 seconds. Bolts initially use 10 m/s, 15 damage, .26-metre radius and 3.5-second lifetime; capacity is 20. These are practical hypotheses for play, not accepted balance/readability. Enemy death cancels its pending attack; a released bolt survives its source's death. A bolt can hit either player once, but only the player lives present at launch; return immunity and the existing shared damage grace also apply. Swept segment collision consumes the nearest intersected bolt even when protection blocks damage. Choice pause freezes physical attack/bolt clocks; terminal states clear bolts/wind-ups, and Retry resets pools, counters and enemy incarnations.
+
+Future enemy abilities can add concrete definitions/state beside this bounded attack without changing weapon damage or XP ownership. Ranged deaths use the normal collectible XP path and personal arsenal offers. Range pressure may favor piercer focus or scatter crowd clearing, and future slows, interrupts, loot changes or draw modifiers must respect authority/life boundaries; none is implemented in this slice. No general AI framework or new progression system is required.
+
 Save the exact commit, branch/worktree, PR/base dependency, scenario/tuning and changed behavior; list the relevant checks, one current build path and short reproduction steps. Record actual results in a dated playtest record and link it from Linear. Separate automated correctness, human observations and assumptions. Update [current state](../../current-state.md) when capabilities change and [planning](../README.md) when intent changes; the foundation changes only for an accepted product decision.
 
 If unfinished, keep completed steps, uncommitted changes, failed/unrun checks, remaining acceptance, blockers and the next concrete action in the issue's Resume or this linked plan. Finish the implementation handoff for orchestrator review without starting another feature or merging upstream.

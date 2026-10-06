@@ -35,6 +35,7 @@ namespace Journey
         bool inputActive = true, scripted, quitAtEnd, saved, solo, soloPrepared, cardsVisible = true;
         readonly OrbReplica orbReplica = new OrbReplica();
         XpPresentation pickups;
+        RangedPresentation rangedView;
         SharedState previousState;
         bool pickupCue, levelCue, screenshotAtLevelUp;
         double pickupCueAt, pickupFlashUntil;
@@ -112,6 +113,7 @@ namespace Journey
                 diagnosticLog.WriteLine("wall_seconds,frame_ms,run,tick,state,update_cpu_ms,sim_ms,crowd_ms,weapon_ms,xp_ms,presentation_ms,input_aim_ms,publish_ms,state_copy_ms,publish_count,serialization_ms,logging_ms,diagnostic_logging_ms,memory_sample_ms," + NetworkWork.Header + ",queue_records,queue_bytes,queue_age_ms");
             }
             pickups = new XpPresentation(transform);
+            if (binding.Configuration != null && binding.Configuration.RangedCount > 0) rangedView = new RangedPresentation(transform);
             if (!solo)
             {
                 connection = new SharedConnection(host, address, port, Array.IndexOf(args, "-sharedLoopback") >= 0, diagnostics);
@@ -147,6 +149,7 @@ namespace Journey
             {
                 binding.AcceptOffer(r);
                 display.CopyFrom(new SharedSnapshot(binding.Configuration) { Session = binding.Session });
+                if (binding.Configuration.RangedCount > 0) rangedView = new RangedPresentation(transform);
                 SaveConfiguration();
                 connection.Send(SharedConnection.Message.ConfigurationAck, binding.Write);
             }
@@ -404,6 +407,7 @@ namespace Journey
                 }
             }
             view.Draw(projection, 1);
+            rangedView?.Draw(display);
             // CollectBars performs one full head/body precision query per presented running frame.
             if (projection.State == RunState.Running || projection.State == RunState.Paused) { presentationRays++; presentationProbes += projection.Count; }
             if (solo && display.State == SharedState.Waiting) soloPrepared = true;
@@ -501,7 +505,7 @@ namespace Journey
         }
         UpgradeId ScriptedUpgrade()
         {
-            if (display.Configuration.Kind != ScenarioKind.WeaponStack) return scriptedChoice;
+            if (!display.Configuration.StackedGrowth) return scriptedChoice;
             if (scriptedStackPath.Length == 0) return UpgradeId.None;
             if (display.Level == 2) return scriptedStackPath == "pierce" ? UpgradeId.AddPiercer : UpgradeId.AddScattergun;
             if (display.Level == 3) return scriptedStackPath == "broad" ? WeaponArsenal.Missing(display.Players[local].FirstAddition) : WeaponArsenal.Enhancement(display.Players[local].FirstAddition);
@@ -632,6 +636,7 @@ namespace Journey
             public SharedState state;
             public SharedPlayer[] players;
             public SharedEnemy[] enemyStates;
+            public RangedState ranged;
             public WeaponWork[] weaponWork;
             public int roster, xp, level, uncollectedOrbs, uncollectedXp, choicePhase, controlRevision;
             public float pickupRadius, attractionRadius, mergeRadius;
@@ -663,6 +668,7 @@ namespace Journey
             report.uncollectedXp = orbReplica.UncollectedXp; report.choicePhase = display.ChoicePhase; report.controlRevision = display.ControlRevision;
             report.weaponWork = weaponWork;
             report.authorityWork = authority?.Work;
+            report.ranged = display.Ranged;
             report.presentationRays = presentationRays; report.presentationProbes = presentationProbes;
             report.sentMessages = connection?.SentMessages ?? 0; report.receivedMessages = connection?.ReceivedMessages ?? 0;
             report.snapshotBytes = connection?.SnapshotBytes ?? 0; report.snapshotMessages = connection?.SnapshotMessages ?? 0;
@@ -798,6 +804,7 @@ namespace Journey
             }
             if (preview != null) { preview.Close(); Destroy(preview); }
             pickups?.Dispose();
+            rangedView?.Dispose();
             frameLog?.Dispose(); hitLog?.Dispose(); growthLog?.Dispose(); diagnosticLog?.Dispose(); if (allyMaterial != null) Destroy(allyMaterial);
             if (ally != null) Destroy(ally);
             if (allyShot != null) { Destroy(allyShot.sharedMaterial); Destroy(allyShot.gameObject); }

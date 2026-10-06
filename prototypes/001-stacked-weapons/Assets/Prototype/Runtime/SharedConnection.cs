@@ -11,7 +11,7 @@ namespace Journey
     // One fixed peer, bounded packets, one reliable ordered pipeline. No scene/object replication.
     public sealed class SharedConnection : IDisposable
     {
-        public const int Protocol = 6, MaxPacket = 1100;
+        public const int Protocol = 7, MaxPacket = 1100;
         public const int MaxBufferedMessages = 1024;
         public enum Message : byte { Hello, Input, Shot, Snapshot, Hit, Retry, Abort, Ping, Pong, Configuration, ConfigurationAck, Growth, Choice, ContinueChoice, SnapshotChunk }
         NetworkDriver driver;
@@ -276,6 +276,7 @@ namespace Journey
                 w.Write(p.Shots); w.Write(p.Hits); w.Write(p.Damage); w.Write(p.Kills);
             }
             foreach (SharedEnemy e in s.Enemies) { Vector(w, e.Position); w.Write(e.Health); w.Write(e.Incarnation); }
+            s.Ranged?.Write(w);
         }
         public static void ReadSnapshot(BinaryReader r, SharedSnapshot s)
         {
@@ -294,6 +295,7 @@ namespace Journey
                 Arsenal = r.ReadInt32(), FirstAddition = (UpgradeId)r.ReadInt32(), Specialization = (UpgradeId)r.ReadInt32(),
                 Offer = GrowthEvent.ReadOffer(r), Shots = r.ReadInt32(), Hits = r.ReadInt32(), Damage = r.ReadInt32(), Kills = r.ReadInt32() };
             for (int i = 0; i < s.Enemies.Length; i++) s.Enemies[i] = new SharedEnemy { Position = Vector(r), Health = r.ReadInt32(), Incarnation = r.ReadInt32() };
+            s.Ranged?.Read(r);
         }
         public static void WriteHit(BinaryWriter w, SharedHit hit)
         {

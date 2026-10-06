@@ -7,6 +7,48 @@ namespace Journey.Tests
 {
     public class SharedConnectionTests
     {
+        [UnityTest] public IEnumerator MixedThreatSnapshotsDeliverWindupFlightDamageAndRetryAtomically()
+        {
+            using (var host = new SharedConnection(true, "127.0.0.1", 17785, true))
+            using (var client = new SharedConnection(false, "127.0.0.1", 17785))
+            {
+                var game = new SharedEncounter(ScenarioConfiguration.Named(ScenarioKind.MixedThreats)); game.Start();
+                for (int i = 0; i < 35; i++) game.Current.Enemies[i].Position = new Vector3(28, 0, 28);
+                for (int i = 0; i < 5; i++) game.Current.Ranged.Attacks[i].Until = 500;
+                game.Current.Enemies[0].Position = new Vector3(0, 0, 10); game.Current.Ranged.Attacks[0].Until = 0;
+                game.Current.Players[0].Position = new Vector3(-12, 0, 0); game.Current.Players[1].Position = Vector3.zero;
+                var destination = new SharedSnapshot(); var assembly = new SnapshotAssembly();
+                int received = 0; string loss = "";
+                host.Lost += r => loss = r; client.Lost += r => loss = r;
+                client.Received += (message, reader) => {
+                    bool complete = false;
+                    if (message == SharedConnection.Message.Snapshot) { SharedConnection.ReadSnapshot(reader, destination); complete = true; }
+                    if (message == SharedConnection.Message.SnapshotChunk) complete = assembly.Read(reader, destination, Time.realtimeSinceStartupAsDouble);
+                    if (!complete) return;
+                    received++;
+                    Assert.That(destination.Run, Is.EqualTo(game.Current.Run)); Assert.That(destination.Tick, Is.EqualTo(game.Current.Tick));
+                    Assert.That(destination.Ranged.Count, Is.EqualTo(game.Current.Ranged.Count)); Assert.That(destination.Ranged.Hits, Is.EqualTo(game.Current.Ranged.Hits));
+                    Assert.That(destination.Players[1].Health, Is.EqualTo(game.Current.Players[1].Health));
+                    Assert.That(destination.Ranged.Attacks[0].Phase, Is.EqualTo(game.Current.Ranged.Attacks[0].Phase));
+                    if (destination.Ranged.Count > 0) Assert.That(destination.Ranged.Bolts[0].Position, Is.EqualTo(game.Current.Ranged.Bolts[0].Position));
+                };
+                double deadline = Time.realtimeSinceStartupAsDouble + 8;
+                while (!host.Connected && Time.realtimeSinceStartupAsDouble < deadline) { host.Poll(); client.Poll(); yield return null; }
+                Assert.That(host.Connected, Is.True);
+                foreach (int tick in new[] { 1, 76, 140, 141 })
+                {
+                    while (game.Current.Tick < tick) game.Step();
+                    if (tick == 141) { game.Current.State = SharedState.Defeat; game.Retry(1, 0); game.Retry(1, 1); }
+                    int expected = received + 1; Assert.That(host.SendSnapshot(game.Current), Is.True);
+                    while (received < expected && Time.realtimeSinceStartupAsDouble < deadline) { host.Poll(); client.Poll(); yield return null; }
+                    Assert.That(received, Is.EqualTo(expected));
+                    if (tick == 140) { Assert.That(destination.Players[1].Health, Is.EqualTo(85)); Assert.That(destination.Ranged.Hits, Is.EqualTo(1)); }
+                }
+                Assert.That(destination.Run, Is.EqualTo(2)); Assert.That(destination.Ranged.Fired, Is.Zero); Assert.That(destination.Ranged.Count, Is.Zero);
+                Assert.That(loss, Is.Empty); Assert.That(assembly.Pending, Is.False);
+            }
+            yield return null; LogAssert.NoUnexpectedReceived();
+        }
         [UnityTest] public IEnumerator LargeReliableSnapshotsRetainBoundedChunksAndAtomicOrderedState()
         {
             using (var host = new SharedConnection(true, "127.0.0.1", 17783, true, diagnostics: true))
