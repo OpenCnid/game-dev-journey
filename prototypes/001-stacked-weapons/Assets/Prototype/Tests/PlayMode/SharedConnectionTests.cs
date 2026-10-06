@@ -7,6 +7,38 @@ namespace Journey.Tests
 {
     public class SharedConnectionTests
     {
+        [UnityTest] public IEnumerator MixedPlayableRunCarriesShortStallInBoundedFramesButRejectsLongBacklog()
+        {
+            var root = new GameObject("Mixed physical backlog test"); var view = new ArenaPresentation(); var sim = new CombatSimulation();
+            var game = root.AddComponent<SharedGame>(); game.enabled = false;
+            const System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic;
+            var clock = typeof(SharedGame).GetField("previousClock", flags); var update = typeof(SharedGame).GetMethod("Update", flags);
+            var accumulator = typeof(SharedGame).GetField("accumulator", flags);
+            typeof(SharedGame).GetField("output", flags).SetValue(game,
+                System.IO.Path.Combine(Application.dataPath, "../artifacts/mixed-clock-" + System.Guid.NewGuid().ToString("N")));
+            try
+            {
+                LogAssert.Expect(LogType.Log, new System.Text.RegularExpressions.Regex("^SHARED_SESSION HOST "));
+                view.Create(root.transform); game.Initialize(view, sim, true, "", 0, ScenarioConfiguration.Named(ScenarioKind.MixedThreats), soloGrowth: true);
+                update.Invoke(game, null); clock.SetValue(game, Time.realtimeSinceStartupAsDouble - 2); update.Invoke(game, null);
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Running)); Assert.That(game.Snapshot.Tick, Is.Zero);
+                clock.SetValue(game, Time.realtimeSinceStartupAsDouble - .3); update.Invoke(game, null);
+                Assert.That(game.Snapshot.Tick, Is.EqualTo(8)); Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Running));
+                Assert.That((float)accumulator.GetValue(game), Is.GreaterThan(.16f), "Active physical time remains pending");
+                clock.SetValue(game, Time.realtimeSinceStartupAsDouble); update.Invoke(game, null);
+                Assert.That(game.Snapshot.Tick, Is.EqualTo(16)); Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Running));
+                Assert.That((float)accumulator.GetValue(game), Is.GreaterThan(0));
+                clock.SetValue(game, Time.realtimeSinceStartupAsDouble); update.Invoke(game, null);
+                Assert.That(game.Snapshot.Tick, Is.GreaterThanOrEqualTo(18));
+                Assert.That((float)accumulator.GetValue(game), Is.LessThan(CombatSimulation.Tick));
+                LogAssert.Expect(LogType.Log, "SHARED_ABORT Authority tick catch-up limit");
+                LogAssert.Expect(LogType.Log, new System.Text.RegularExpressions.Regex("^SHARED_REPORT "));
+                clock.SetValue(game, Time.realtimeSinceStartupAsDouble - 1.5); update.Invoke(game, null);
+                Assert.That(game.Snapshot.State, Is.EqualTo(SharedState.Aborted));
+            }
+            finally { Object.DestroyImmediate(root); view.Dispose(); sim.Dispose(); }
+            yield return null; LogAssert.NoUnexpectedReceived();
+        }
         [UnityTest] public IEnumerator MixedThreatSnapshotsDeliverWindupFlightDamageAndRetryAtomically()
         {
             using (var host = new SharedConnection(true, "127.0.0.1", 17785, true))

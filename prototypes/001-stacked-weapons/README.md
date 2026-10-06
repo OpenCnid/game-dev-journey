@@ -150,6 +150,8 @@ Five orange sentinels have a crown/cannon silhouette, a growing charge and a fix
 
 Owner check: **spot a wind-up, dodge its bolt, choose a threat to kill, earn an upgrade and Retry**. Report whether the shot was readable and whether the new threat changed movement or target choice. Automated state checks do not establish that experience.
 
+The mixed playable fixture tolerates brief desktop stalls by carrying up to one second of physical backlog over later frames, with at most eight ticks per frame. It retains active time and records catch-up events; a longer backlog still aborts. Pure-chaser/reference/scale scenarios retain their strict catch-up guard. This tolerance is not a frame-time or network-performance pass.
+
 From the repository root in PowerShell:
 
 ```powershell
