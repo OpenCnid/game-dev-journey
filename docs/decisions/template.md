@@ -2,6 +2,8 @@
 
 - **Date:** YYYY-MM-DD
 - **Status:** proposed / accepted / superseded
+- **Authority:** dated owner instruction/acceptance or explicitly proposed; identify what this supersedes.
+- **Affected design and trace:** foundation/GDD chapter links and upstream record IDs; update the registry and affected rules together.
 
 ## Context
 

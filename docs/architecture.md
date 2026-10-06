@@ -2,14 +2,15 @@
 
 ## Current shape
 
-The repository separates the game we intend to finish from experiments and the record of how we learned. The first self-contained Unity/C#/URP project lives under `prototypes/001-stacked-weapons/`; `game/` remains reserved for the maintained game after the experiment is evaluated.
+The active Unity/C#/URP game project remains under `prototypes/001-stacked-weapons/`. `game/` is a reserved placeholder; the earlier promotion plan is historical and no move is currently authorized. The [documentation contract](documentation.md) owns document placement and the [map](README.md) locates its records.
 
 | Location | Owns | Placement rule |
 | --- | --- | --- |
-| `game/` | The chosen game and its runtime assets | Keep one authoritative engine project here. |
-| `prototypes/` | Isolated experiments | One named subfolder per experiment, each with a question and result. |
+| `game/` | Reserved placeholder | Do not create a second active project or infer a migration from its name. |
+| `prototypes/001-stacked-weapons/` | Active Unity project | Keep runtime/assets/tests here with pinned versions. |
+| Other `prototypes/` subfolders | Separately scoped experiments | Create only for a selected question with a documented result. |
 | `assets/` | Editable originals and the asset register | Put runtime exports in the game; track their source here. |
-| `docs/design/` | Current intended player experience | Keep the brief aligned with what we are actually building. |
+| `docs/design/` | GDD chapter map and system/content designs | Follow the document contract; distinguish accepted rules, proposals and historical fixtures. |
 | `docs/decisions/` | Significant decisions and their reasoning | Add a record when a choice is costly to reverse or likely to be questioned later. |
 | `docs/devlog/` | Chronological progress and lessons | Use dated entries; link to relevant experiments and decisions. |
 | `docs/playtests/` | Session observations and resulting actions | Separate observed behavior from our interpretation. |
@@ -26,12 +27,14 @@ Do not create separate packages, a shared engine layer, or a generalized plugin 
 
 ## Moving from experiment to game
 
+This is an available future migration procedure, not a current task. Require an explicit migration decision and update all setup/document paths if one is selected.
+
 1. Write the experiment's outcome in its README.
 2. Choose which behavior or implementation is worth keeping.
 3. Move or adapt the selected work into `game/`; verify it there.
 4. Mark the original experiment as concluded and identify the maintained version.
 
-The game folder becomes the source of truth for promoted work. Experiments are allowed to be rough and disposable.
+Only an executed, verified migration changes the active project location. Rough MVP implementation remains acceptable in the current project.
 
 ## Asset and generated-file boundaries
 

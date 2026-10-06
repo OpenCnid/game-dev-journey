@@ -17,9 +17,12 @@ Start a fresh session with the [project foundation](foundation.md), [planning ha
 
 ## Documentation responsibilities
 
+The [document map](README.md) is the navigation entry point. The [documentation contract](documentation.md) owns exact placement, authority and traceability rules; [registry.json](registry.json) inventories every document and generates the [catalogue](catalog.md). New and moved documents must be registered and pass `python tools/docs.py`. This structure is required by the owner's October 6 request for a stricter GDD harness.
+
 | Record | Owns |
 | --- | --- |
 | [Project foundation](foundation.md) | What the game is: identity, intended player experience, design pillars, core systems and agreed boundaries. |
+| [GDD chapter index](design/README.md) | Connected system designs, their existing homes and explicit gaps in the complete player experience. |
 | [Decisions](decisions/README.md) | Accepted consequential choices and their reasons; preserve superseded reasoning. |
 | [Game brief](design/game-brief.md) and [roadmap](roadmap.md) | Specific design experiments, test settings and milestone sequence. |
 | [Planning handoff](planning/README.md) | Near-term intent, open questions and context routing. |

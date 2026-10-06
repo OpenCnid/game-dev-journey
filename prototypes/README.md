@@ -15,4 +15,4 @@ Prototypes may use rough code and placeholder assets. They still need enough ins
 
 ## Experiments
 
-- [001: Stacked weapons](001-stacked-weapons/README.md) - playable one-weapon survival slice and repeatable crowd benchmark; stacking/upgrade slices remain future work.
+- [001: Stacked weapons](001-stacked-weapons/README.md) - the active Unity game project. [Current state](../docs/current-state.md) distinguishes integrated solo/co-op weapon growth from candidate branches and historical benchmarks. No move to `game/` is scheduled.

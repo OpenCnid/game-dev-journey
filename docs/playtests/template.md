@@ -5,6 +5,8 @@
 - **Platform and input:**
 - **Participant label:**
 - **Question for this session:**
+- **Task/design basis:** link the issue/task, relevant GDD rule and registered upstream IDs.
+- **Evidence type and limits:** automated checks, human observations or measured performance; specify what remains unverified.
 
 ## Setup
 

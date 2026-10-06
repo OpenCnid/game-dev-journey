@@ -10,7 +10,7 @@ Linear project: https://linear.app/cnid/project/first-weapon-stacking-playtest-8
 
 START FROM SAVED CONTEXT
 1. Read AGENTS.md and docs/foundation.md. Establish the game's identity, intended player experience, run loop, design pillars, core systems and agreed boundaries. Use this product definition as the basis for planning.
-2. Read docs/planning/README.md and docs/current-state.md to understand near-term intent and implementation progress. Keep intended systems, proposed experiments, implemented capabilities and verified results distinct.
+2. Read docs/README.md for document routing, docs/planning/README.md for near-term intent and docs/current-state.md for implementation progress. Use docs/design/README.md for GDD chapters/gaps and docs/catalog.md for document purposes and upstream basis. Keep intended systems, proposed experiments, implemented capabilities and verified results distinct.
 3. Check the actual branch, commit and working-tree changes. Inspect the current Linear project, relevant issue dependencies and any Resume section or task handoff. Follow only the context links needed for the current decision; earlier chat history is optional. Verify summaries against relevant source and dated evidence. If a service or evidence is unavailable, identify what remains unverified.
 
 COORDINATE THE WORK
@@ -23,6 +23,8 @@ COORDINATE THE WORK
 
 PRESERVE CONTINUITY
 Linear owns live priority/status/dependencies; GitHub owns the product definition, source, planning intent, decisions and evidence. At useful checkpoints and before ending, save changed planning intent in docs/planning/README.md, changed capabilities/constraints in docs/current-state.md, and detailed evidence in its relevant record. For unfinished work, preserve exact revision, completed steps, checks, remaining work, blockers and next action in the issue's Resume section or linked task plan. Keep the shared root concise and link deeper material. Follow AGENTS.md and docs/workflow.md. Update the foundation when an accepted product decision changes it; task progress belongs in the handoff and current state.
+
+Follow docs/documentation.md for canonical locations and authority. Register new/moved documents and their upstream IDs in docs/registry.json. Regenerate the catalogue and run python tools/docs.py before handoff. A task brief must trace to a GDD section/decision or explicit test hypothesis; its source/evidence must trace back to the task. Structural checks do not establish semantic correctness or owner approval.
 
 BEGIN NOW
 Inspect the saved context, repo and board, then give me:

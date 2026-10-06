@@ -1,8 +1,8 @@
 # The game
 
-The maintained Unity game project will live here after the first prototype is evaluated. The playable experiment currently lives under [prototypes/001-stacked-weapons](../prototypes/001-stacked-weapons/README.md), using Unity 6000.3.25f1, C#, and URP 17.3.0. This `game/` folder does not contain a second Unity project.
+This is a reserved placeholder. The active game project lives under [prototypes/001-stacked-weapons](../prototypes/001-stacked-weapons/README.md), using its pinned Unity/C#/URP configuration. This `game/` folder does not contain a second Unity project, and no migration is currently authorized.
 
-Implementation starts in [the stacked-weapons prototype](../prototypes/001-stacked-weapons/README.md). Promote selected work here after the experiment establishes a promising direction.
+Continue implementation in [the active project](../prototypes/001-stacked-weapons/README.md). The following setup outline applies only if a future migration is explicitly selected.
 
 Use the engine's normal folder structure. Replace this placeholder with:
 

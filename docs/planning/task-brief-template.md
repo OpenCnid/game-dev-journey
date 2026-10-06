@@ -12,6 +12,8 @@ State briefly which game system and foundation pillar the outcome serves, and th
 
 **Context:** the relevant foundation section and files/design/evidence links. Add the starting commit and worktree when giving the task to AI. Read the foundation first to understand the game, then the planning handoff, current state and this task's context.
 
+**Trace:** identify the GDD chapter/decision or explicitly proposed hypothesis that authorizes this slice, its affected system interactions and the exact source base. Register the task's upstream IDs in [the document registry](../registry.json) when it has a repo file. Link the resulting commit/PR and evidence back to this task and Linear. See [the documentation contract](../documentation.md#traceability-required-before-implementation).
+
 The task's status, assignee and dependencies live in Linear's fields. A short completion note normally needs just the result, commit/build and checks/evidence links.
 
 ## Resume across fresh sessions

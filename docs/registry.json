@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "kinds": {
+    "index": {
+      "paths": [
+        "docs/README.md",
+        "docs/catalog.md",
+        "docs/*/README.md"
+      ],
+      "purpose": "Navigation into owned records; indexing does not grant product authority."
+    },
+    "foundation": {
+      "paths": [
+        "docs/foundation.md"
+      ],
+      "purpose": "Accepted game identity, player promise, pillars and boundaries."
+    },
+    "design": {
+      "paths": [
+        "docs/design/*.md"
+      ],
+      "purpose": "Player-facing rules, interactions, alternatives and open design questions."
+    },
+    "decision": {
+      "paths": [
+        "docs/decisions/[0-9][0-9][0-9][0-9]-*.md"
+      ],
+      "purpose": "Dated consequential choices, authorization, rationale and supersession."
+    },
+    "planning": {
+      "paths": [
+        "docs/planning/README.md",
+        "docs/roadmap.md"
+      ],
+      "purpose": "Near-term intent and construction sequence; Linear owns live scheduling."
+    },
+    "task": {
+      "paths": [
+        "docs/planning/tasks/GDJ-*.md"
+      ],
+      "purpose": "Bounded work, its design basis, acceptance and durable Resume."
+    },
+    "state": {
+      "paths": [
+        "docs/current-state.md"
+      ],
+      "purpose": "Current capability orientation backed by source and dated evidence."
+    },
+    "evidence": {
+      "paths": [
+        "docs/playtests/20??-??-??-*.md",
+        "docs/playtests/evidence/*/README.md"
+      ],
+      "purpose": "Exact tested source, results and limits; human and automated evidence remain distinct."
+    },
+    "technical": {
+      "paths": [
+        "docs/technical/*.md",
+        "docs/architecture.md",
+        "docs/performance.md",
+        "docs/profiling.md",
+        "docs/design/multiplayer-boundaries.md",
+        "docs/design/late-game-workload.md"
+      ],
+      "purpose": "Engineering boundaries and measurement methods, including named legacy locations."
+    },
+    "workflow": {
+      "paths": [
+        "AGENTS.md",
+        "docs/workflow.md",
+        "docs/documentation.md",
+        "docs/planning/start-*-session.md"
+      ],
+      "purpose": "Session behavior, document ownership, update rules and reusable instructions."
+    },
+    "template": {
+      "paths": [
+        ".github/*.md",
+        "docs/decisions/template.md",
+        "docs/design/template.md",
+        "docs/playtests/template.md",
+        "docs/planning/task-brief-template.md"
+      ],
+      "purpose": "Forms for creating traceable records; placeholder content is not a decision."
+    },
+    "history": {
+      "paths": [
+        "docs/devlog/20??-??-??-*.md",
+        "docs/planning/20??-??-??-*.md",
+        "docs/planning/sessions/*.md",
+        "docs/planning/diagrams/verification.md"
+      ],
+      "purpose": "Dated learning/process context with no authority to schedule current work."
+    },
+    "guide": {
+      "paths": [
+        "README.md",
+        "CONTRIBUTING.md",
+        "assets/README.md",
+        "game/README.md",
+        "prototypes/README.md",
+        "prototypes/*/README.md",
+        "tools/README.md",
+        "docs/vision.md"
+      ],
+      "purpose": "Repository/project/tool navigation, motivation or asset provenance at its owning location."
+    }
+  },
+  "documents": [
+    {"id": "template-bug-report", "path": ".github/ISSUE_TEMPLATE/bug_report.md", "kind": "template", "purpose": "Author build and environment with context, source and handoff fields.", "maintenance": "template", "upstream": ["document-contract"]},
+    {"id": "template-experiment", "path": ".github/ISSUE_TEMPLATE/experiment.md", "kind": "template", "purpose": "Author player benefit or question with context, source and handoff fields.", "maintenance": "template", "upstream": ["document-contract"]},
+    {"id": "template-pr", "path": ".github/pull_request_template.md", "kind": "template", "purpose": "Author what changed and why? with context, source and handoff fields.", "maintenance": "template", "upstream": ["document-contract"]},
+    {"id": "agent-entry", "path": "AGENTS.md", "kind": "workflow", "purpose": "Require source-aware startup, bounded work and the documentation contract.", "maintenance": "current", "upstream": ["workflow", "document-contract"]},
+    {"id": "contributing", "path": "CONTRIBUTING.md", "kind": "guide", "purpose": "Explain how focused contributions and review fit this repository.", "maintenance": "current", "upstream": ["workflow"]},
+    {"id": "repo-guide", "path": "README.md", "kind": "guide", "purpose": "Orient readers and route them to maintained game, planning and document records.", "maintenance": "current", "upstream": ["document-map", "current-state"]},
+    {"id": "asset-register", "path": "assets/README.md", "kind": "guide", "purpose": "Record external asset origins, licensing and editable-source provenance.", "maintenance": "current", "upstream": ["architecture"]},
+    {"id": "document-map", "path": "docs/README.md", "kind": "index", "purpose": "Locate authoritative answers and show how to trace from intention to evidence.", "maintenance": "current", "upstream": []},
+    {"id": "architecture", "path": "docs/architecture.md", "kind": "technical", "purpose": "Locate the active Unity project and distinguish code, assets and documents.", "maintenance": "current", "upstream": ["workflow", "document-contract"]},
+    {"id": "catalog", "path": "docs/catalog.md", "kind": "index", "purpose": "Generated complete inventory with document purposes and upstream links.", "maintenance": "current", "upstream": []},
+    {"id": "current-state", "path": "docs/current-state.md", "kind": "state", "purpose": "Distinguish integrated capabilities, candidates and dated evidence limits.", "maintenance": "current", "upstream": ["evidence-ranged-enemy", "evidence-coop-scale", "evidence-coop-publication-diagnosis", "evidence-weapon-stack", "evidence-earned-growth", "evidence-scenario-configuration", "evidence-shared-rifle", "evidence-rifle-baseline", "evidence-precision-aim", "evidence-overhead-health", "evidence-shot-alignment", "evidence-rifle-rate-controls", "evidence-renderer-experiments"]},
+    {"id": "decision-0001", "path": "docs/decisions/0001-engine-recommendation.md", "kind": "decision", "purpose": "Preserve the owner decision and consequences: Use Unity and C# for the first prototype.", "maintenance": "mixed", "upstream": []},
+    {"id": "decision-0002", "path": "docs/decisions/0002-cooperative-pve-ai-world.md", "kind": "decision", "purpose": "Preserve the owner decision and consequences: Cooperative PvE in an AI-controlled world.", "maintenance": "mixed", "upstream": []},
+    {"id": "decision-0003", "path": "docs/decisions/0003-shared-xp-personal-upgrade-draws.md", "kind": "decision", "purpose": "Preserve the owner decision and consequences: Shared XP and personal upgrade draws.", "maintenance": "mixed", "upstream": []},
+    {"id": "decision-0004", "path": "docs/decisions/0004-party-thinking-space.md", "kind": "decision", "purpose": "Preserve the owner decision and consequences: Party thinking space for cooperative choices.", "maintenance": "mixed", "upstream": []},
+    {"id": "decision-0005", "path": "docs/decisions/0005-technology-magic-and-cultivation.md", "kind": "decision", "purpose": "Preserve the owner decision and consequences: Technology magic and cultivation in weapon builds.", "maintenance": "mixed", "upstream": []},
+    {"id": "decision-0006", "path": "docs/decisions/0006-capacity-mastery-and-prepared-power.md", "kind": "decision", "purpose": "Preserve the owner decision and consequences: Capacity mastery and prepared power for hybrid guns.", "maintenance": "mixed", "upstream": []},
+    {"id": "decision-0007", "path": "docs/decisions/0007-roguelike-run-identity-and-camera-exploration.md", "kind": "decision", "purpose": "Preserve the owner decision and consequences: Roguelike identity permanent discovery and camera exploration.", "maintenance": "mixed", "upstream": []},
+    {"id": "decision-0008", "path": "docs/decisions/0008-bullet-heaven-solo-play-and-core-experience.md", "kind": "decision", "purpose": "Preserve the owner decision and consequences: Bullet heaven solo play and the core experience.", "maintenance": "mixed", "upstream": []},
+    {"id": "decision-0009", "path": "docs/decisions/0009-weapon-control-and-accessible-combat.md", "kind": "decision", "purpose": "Preserve the owner decision and consequences: Weapon control and accessible combat.", "maintenance": "mixed", "upstream": []},
+    {"id": "decision-0010", "path": "docs/decisions/0010-xp-pickups-and-death-participation.md", "kind": "decision", "purpose": "Preserve the owner decision and consequences: XP pickups and death participation.", "maintenance": "mixed", "upstream": []},
+    {"id": "decision-0011", "path": "docs/decisions/0011-weapon-traits-and-upgrade-eligibility.md", "kind": "decision", "purpose": "Preserve the owner decision and consequences: Weapon traits and upgrade eligibility.", "maintenance": "mixed", "upstream": []},
+    {"id": "decision-0012", "path": "docs/decisions/0012-disconnect-recovery-and-preserved-return.md", "kind": "decision", "purpose": "Preserve the owner decision and consequences: Disconnect recovery and preserved return.", "maintenance": "mixed", "upstream": []},
+    {"id": "decision-0013", "path": "docs/decisions/0013-readable-xp-and-safe-first-level-up.md", "kind": "decision", "purpose": "Preserve the owner decision and consequences: Readable XP and safe first level-up.", "maintenance": "mixed", "upstream": ["evidence-earned-growth"]},
+    {"id": "decision-index", "path": "docs/decisions/README.md", "kind": "index", "purpose": "Locate significant choices and their rationale.", "maintenance": "current", "upstream": []},
+    {"id": "template-decisions", "path": "docs/decisions/template.md", "kind": "template", "purpose": "Author nnnn: decision title with context, source and handoff fields.", "maintenance": "template", "upstream": ["document-contract"]},
+    {"id": "gdd-index", "path": "docs/design/README.md", "kind": "index", "purpose": "Map GDD chapters to existing homes and expose missing connected design.", "maintenance": "current", "upstream": ["foundation"]},
+    {"id": "design-ai-world-options", "path": "docs/design/ai-world-options.md", "kind": "design", "purpose": "Compare setting alternatives and preserve the selected Engine Kingdoms premise.", "maintenance": "mixed", "upstream": ["foundation", "decision-0002"]},
+    {"id": "design-cooperative-session-recovery", "path": "docs/design/cooperative-session-recovery.md", "kind": "design", "purpose": "Separate accepted disconnect allowance from proposed recovery/lifecycle policies.", "maintenance": "mixed", "upstream": ["foundation", "decision-0012", "decision-0004"]},
+    {"id": "design-crosshair-customization-and-imports", "path": "docs/design/crosshair-customization-and-imports.md", "kind": "design", "purpose": "Specify proposed crosshair customization and assess import compatibility.", "maintenance": "draft", "upstream": ["foundation", "design-weapon-control-and-combat-readability"]},
+    {"id": "design-engine-kingdoms-first-encounter", "path": "docs/design/engine-kingdoms-first-encounter.md", "kind": "design", "purpose": "Preserve world/encounter design discussion and route to accepted test rules.", "maintenance": "mixed", "upstream": ["foundation", "decision-0002", "decision-0005"]},
+    {"id": "design-first-earned-level-up", "path": "docs/design/first-earned-level-up.md", "kind": "design", "purpose": "Specify the accepted first growth fixture and preserve later supersession context.", "maintenance": "mixed", "upstream": ["foundation", "decision-0003", "decision-0010", "decision-0011"]},
+    {"id": "design-game-brief", "path": "docs/design/game-brief.md", "kind": "design", "purpose": "Preserve early experiment proposals with explicit current-status routing.", "maintenance": "mixed", "upstream": ["foundation"]},
+    {"id": "design-late-game-workload", "path": "docs/design/late-game-workload.md", "kind": "technical", "purpose": "Describe synthetic density assumptions and what representative workload still lacks.", "maintenance": "mixed", "upstream": ["foundation", "performance"]},
+    {"id": "design-multiplayer-boundaries", "path": "docs/design/multiplayer-boundaries.md", "kind": "technical", "purpose": "Propose authority, configuration, lifecycle and replication responsibilities.", "maintenance": "draft", "upstream": ["design-first-earned-level-up", "decision-0012"]},
+    {"id": "design-permanent-progression-matrix", "path": "docs/design/permanent-progression-matrix.md", "kind": "design", "purpose": "Explore the parked permanent-matrix idea without selecting MVP scope.", "maintenance": "draft", "upstream": ["foundation", "decision-0007"]},
+    {"id": "design-progression-and-upgrade-pools", "path": "docs/design/progression-and-upgrade-pools.md", "kind": "design", "purpose": "Own accepted progression direction and distinguish unsettled draw/grant rules.", "maintenance": "mixed", "upstream": ["foundation", "decision-0003", "decision-0010", "decision-0011"]},
+    {"id": "template-design", "path": "docs/design/template.md", "kind": "template", "purpose": "Author design: topic with context, source and handoff fields.", "maintenance": "template", "upstream": ["document-contract"]},
+    {"id": "design-upgrade-selection-accessibility", "path": "docs/design/upgrade-selection-accessibility.md", "kind": "design", "purpose": "Preserve proposed comparisons of choice access, time pressure and party needs.", "maintenance": "draft", "upstream": ["foundation", "decision-0004", "design-progression-and-upgrade-pools"]},
+    {"id": "design-vampire-hunters-study", "path": "docs/design/vampire-hunters-study.md", "kind": "design", "purpose": "Preserve cited reference observations and design hypotheses, not product commitments.", "maintenance": "mixed", "upstream": ["foundation"]},
+    {"id": "design-weapon-control-and-combat-readability", "path": "docs/design/weapon-control-and-combat-readability.md", "kind": "design", "purpose": "Connect accepted firing/targeting/readability direction to proposed controls.", "maintenance": "mixed", "upstream": ["foundation", "decision-0009"]},
+    {"id": "journal-boss-scale", "path": "docs/devlog/2026-09-30-boss-scale.md", "kind": "history", "purpose": "Record the dated development lesson: Testing the intended late-game scale.", "maintenance": "historical", "upstream": ["foundation"]},
+    {"id": "journal-day-zero", "path": "docs/devlog/2026-09-30-day-zero.md", "kind": "history", "purpose": "Record the dated development lesson: Day zero: learning to make a game.", "maintenance": "historical", "upstream": ["foundation"]},
+    {"id": "journal-first-playable", "path": "docs/devlog/2026-09-30-first-playable.md", "kind": "history", "purpose": "Record the dated development lesson: First playable: one rifle and a repeatable crowd.", "maintenance": "historical", "upstream": ["foundation"]},
+    {"id": "journal-frame-spike-experiments", "path": "docs/devlog/2026-09-30-frame-spike-experiments.md", "kind": "history", "purpose": "Record the dated development lesson: Four experiments after Jobs/Burst.", "maintenance": "historical", "upstream": ["foundation"]},
+    {"id": "journal-jobs-burst", "path": "docs/devlog/2026-09-30-jobs-burst.md", "kind": "history", "purpose": "Record the dated development lesson: Measuring Jobs/Burst and rendering changes.", "maintenance": "historical", "upstream": ["foundation"]},
+    {"id": "journal-reference-direction", "path": "docs/devlog/2026-09-30-reference-direction.md", "kind": "history", "purpose": "Record the dated development lesson: Choosing a reference: Vampire Hunters.", "maintenance": "historical", "upstream": ["foundation"]},
+    {"id": "journal-renderer-experiments", "path": "docs/devlog/2026-09-30-renderer-experiments.md", "kind": "history", "purpose": "Record the dated development lesson: Rendering fewer submissions, keeping every attack.", "maintenance": "historical", "upstream": ["foundation"]},
+    {"id": "journal-unity-selected", "path": "docs/devlog/2026-09-30-unity-selected.md", "kind": "history", "purpose": "Record the dated development lesson: Selecting Unity and C#.", "maintenance": "historical", "upstream": ["foundation"]},
+    {"id": "journal-index", "path": "docs/devlog/README.md", "kind": "index", "purpose": "Locate the historical development journal.", "maintenance": "current", "upstream": []},
+    {"id": "document-contract", "path": "docs/documentation.md", "kind": "workflow", "purpose": "Define mandatory placement, authority, registration and traceability.", "maintenance": "current", "upstream": ["workflow"]},
+    {"id": "foundation", "path": "docs/foundation.md", "kind": "foundation", "purpose": "Own the accepted game definition while linking its decision history.", "maintenance": "current", "upstream": ["decision-0001", "decision-0002", "decision-0003", "decision-0004", "decision-0005", "decision-0006", "decision-0007", "decision-0008", "decision-0009", "decision-0010", "decision-0011", "decision-0012", "decision-0013"]},
+    {"id": "performance", "path": "docs/performance.md", "kind": "technical", "purpose": "Preserve performance goals and protocols for explicitly selected investigations.", "maintenance": "current", "upstream": ["foundation", "workflow"]},
+    {"id": "history-2026-10-02-development-system", "path": "docs/planning/2026-10-02-development-system.md", "kind": "history", "purpose": "Preserve earlier process context: Our journey and proposed development system.", "maintenance": "historical", "upstream": ["workflow"]},
+    {"id": "planning", "path": "docs/planning/README.md", "kind": "planning", "purpose": "Preserve current intent and route sessions to relevant context branches.", "maintenance": "current", "upstream": ["foundation", "gdd-index", "current-state"]},
+    {"id": "history-verification", "path": "docs/planning/diagrams/verification.md", "kind": "history", "purpose": "Preserve earlier process context: Development loop verification.", "maintenance": "historical", "upstream": ["workflow"]},
+    {"id": "history-2026-10-02-solo-ai-system", "path": "docs/planning/sessions/2026-10-02-solo-ai-system.md", "kind": "history", "purpose": "Preserve earlier process context: Planning session: solo development with replaceable AI chats.", "maintenance": "historical", "upstream": ["workflow"]},
+    {"id": "start-design", "path": "docs/planning/start-design-session.md", "kind": "workflow", "purpose": "Resume a focused design conversation from the registered sources.", "maintenance": "current", "upstream": ["document-contract", "gdd-index"]},
+    {"id": "start-planning", "path": "docs/planning/start-planning-session.md", "kind": "workflow", "purpose": "Resume coordination without relying on prior chat history.", "maintenance": "current", "upstream": ["document-contract", "planning"]},
+    {"id": "template-task", "path": "docs/planning/task-brief-template.md", "kind": "template", "purpose": "Author task brief and handoff with context, source and handoff fields.", "maintenance": "template", "upstream": ["document-contract"]},
+    {"id": "task-gdj-15", "path": "docs/planning/tasks/GDJ-15.md", "kind": "task", "purpose": "Bounded outcome, context, acceptance and handoff: immediate rifle feedback during fast turns.", "maintenance": "mixed", "upstream": ["design-weapon-control-and-combat-readability", "evidence-rifle-baseline"]},
+    {"id": "task-gdj-16", "path": "docs/planning/tasks/GDJ-16.md", "kind": "task", "purpose": "Bounded outcome, context, acceptance and handoff: readable damage in the rifle arena.", "maintenance": "mixed", "upstream": ["design-weapon-control-and-combat-readability", "evidence-rifle-baseline"]},
+    {"id": "task-gdj-17", "path": "docs/planning/tasks/GDJ-17.md", "kind": "task", "purpose": "Bounded outcome, context, acceptance and handoff: precision aim and critical head hits.", "maintenance": "mixed", "upstream": ["design-weapon-control-and-combat-readability", "evidence-overhead-health"]},
+    {"id": "task-gdj-19", "path": "docs/planning/tasks/GDJ-19.md", "kind": "task", "purpose": "Bounded outcome, context, acceptance and handoff: rifle fire-rate controls for testing.", "maintenance": "mixed", "upstream": ["design-weapon-control-and-combat-readability"]},
+    {"id": "task-gdj-2", "path": "docs/planning/tasks/GDJ-2.md", "kind": "task", "purpose": "Bounded outcome, context, acceptance and handoff: observe the current rifle before expansion.", "maintenance": "mixed", "upstream": ["foundation"]},
+    {"id": "task-gdj-20", "path": "docs/planning/tasks/GDJ-20.md", "kind": "task", "purpose": "Bounded outcome, context, acceptance and handoff: shared rifle combat and lifecycle.", "maintenance": "mixed", "upstream": ["design-first-earned-level-up", "design-multiplayer-boundaries"]},
+    {"id": "task-gdj-22", "path": "docs/planning/tasks/GDJ-22.md", "kind": "task", "purpose": "Bounded outcome, context, acceptance and handoff: GDJ-22 — shared scenario configuration.", "maintenance": "mixed", "upstream": ["design-multiplayer-boundaries", "evidence-shared-rifle"]},
+    {"id": "task-gdj-23", "path": "docs/planning/tasks/GDJ-23.md", "kind": "task", "purpose": "Bounded outcome, context, acceptance and handoff: first earned level-up implementation.", "maintenance": "mixed", "upstream": ["design-first-earned-level-up", "design-progression-and-upgrade-pools", "decision-0013"]},
+    {"id": "task-gdj-24", "path": "docs/planning/tasks/GDJ-24.md", "kind": "task", "purpose": "Bounded outcome, context, acceptance and handoff: larger arsenal, enemy crowd and co-op performance.", "maintenance": "mixed", "upstream": ["evidence-weapon-stack", "performance", "workflow"]},
+    {"id": "task-gdj-25", "path": "docs/planning/tasks/GDJ-25.md", "kind": "task", "purpose": "Bounded outcome, context, acceptance and handoff: a readable ranged threat in the growing arsenal run.", "maintenance": "mixed", "upstream": ["foundation", "design-weapon-control-and-combat-readability", "evidence-weapon-stack", "workflow"]},
+    {"id": "task-gdj-26", "path": "docs/planning/tasks/GDJ-26.md", "kind": "task", "purpose": "Bounded outcome, context, acceptance and handoff: GDD structure and traceability.", "maintenance": "current", "upstream": ["foundation", "document-contract", "gdd-index"]},
+    {"id": "task-gdj-3", "path": "docs/planning/tasks/GDJ-3.md", "kind": "task", "purpose": "Bounded outcome, context, acceptance and handoff: Earn a simultaneous weapon stack.", "maintenance": "mixed", "upstream": ["design-progression-and-upgrade-pools", "decision-0011"]},
+    {"id": "task-gdj-6", "path": "docs/planning/tasks/GDJ-6.md", "kind": "task", "purpose": "Bounded outcome, context, acceptance and handoff: Design the first Engine Kingdoms cooperative encounter.", "maintenance": "mixed", "upstream": ["design-engine-kingdoms-first-encounter", "design-first-earned-level-up"]},
+    {"id": "evidence-boss-scale", "path": "docs/playtests/2026-09-30-boss-scale.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Boss-scale diagnostic — 2026-09-30.", "maintenance": "historical", "upstream": ["performance", "unity-project"]},
+    {"id": "evidence-frame-spike-experiments", "path": "docs/playtests/2026-09-30-frame-spike-experiments.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Effect rendering, job scheduling, and native-state experiments.", "maintenance": "historical", "upstream": ["performance", "unity-project"]},
+    {"id": "evidence-jobs-burst", "path": "docs/playtests/2026-09-30-jobs-burst.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Jobs/Burst and rendering comparison — 2026-09-30.", "maintenance": "historical", "upstream": ["performance", "unity-project"]},
+    {"id": "evidence-prototype-performance", "path": "docs/playtests/2026-09-30-prototype-performance.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: First prototype: build and performance validation.", "maintenance": "historical", "upstream": ["performance", "unity-project"]},
+    {"id": "evidence-renderer-experiments", "path": "docs/playtests/2026-09-30-renderer-experiments.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Cheaper projectile and character renderers.", "maintenance": "historical", "upstream": ["performance", "unity-project"]},
+    {"id": "evidence-aimed-health-feedback", "path": "docs/playtests/2026-10-03-aimed-health-feedback.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Candidate: useful body brackets without central HP panels.", "maintenance": "historical", "upstream": ["task-gdj-16"]},
+    {"id": "evidence-damage-readability-revision", "path": "docs/playtests/2026-10-03-damage-readability-revision.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Candidate: attached enemy health bars and wounded silhouettes.", "maintenance": "historical", "upstream": ["task-gdj-16"]},
+    {"id": "evidence-damage-readability", "path": "docs/playtests/2026-10-03-damage-readability.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Candidate: enemy health and damage readability.", "maintenance": "historical", "upstream": ["task-gdj-16"]},
+    {"id": "evidence-damaged-only-health", "path": "docs/playtests/2026-10-03-damaged-only-health.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Candidate: normal-enemy HP only after damage.", "maintenance": "historical", "upstream": ["task-gdj-16"]},
+    {"id": "evidence-focused-health-feedback", "path": "docs/playtests/2026-10-03-focused-health-feedback.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Candidate: fixed target HP and retained wounded bars.", "maintenance": "historical", "upstream": ["task-gdj-16"]},
+    {"id": "evidence-overhead-health", "path": "docs/playtests/2026-10-03-overhead-health.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Candidate: overhead HP without cyan brackets.", "maintenance": "historical", "upstream": ["task-gdj-16"]},
+    {"id": "evidence-rifle-baseline", "path": "docs/playtests/2026-10-03-rifle-baseline.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Playtest: current rifle baseline.", "maintenance": "historical", "upstream": ["task-gdj-2"]},
+    {"id": "evidence-precision-aim", "path": "docs/playtests/2026-10-04-precision-aim.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: GDJ-17: aimed target color and critical head hits.", "maintenance": "historical", "upstream": ["task-gdj-17"]},
+    {"id": "evidence-rifle-rate-controls", "path": "docs/playtests/2026-10-04-rifle-rate-controls.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: GDJ-19: rifle rate testing controls.", "maintenance": "historical", "upstream": ["task-gdj-19"]},
+    {"id": "evidence-scenario-configuration", "path": "docs/playtests/2026-10-04-scenario-configuration.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: GDJ-22 — scenario configuration candidate.", "maintenance": "historical", "upstream": ["task-gdj-22"]},
+    {"id": "evidence-shared-rifle", "path": "docs/playtests/2026-10-04-shared-rifle.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: GDJ-20 shared rifle and background preview.", "maintenance": "historical", "upstream": ["task-gdj-20"]},
+    {"id": "evidence-shot-alignment", "path": "docs/playtests/2026-10-04-shot-alignment.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: GDJ-15: rifle shots during fast turns.", "maintenance": "historical", "upstream": ["task-gdj-15"]},
+    {"id": "evidence-coop-scale", "path": "docs/playtests/2026-10-05-coop-scale.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Larger simultaneous arsenals and cooperative crowds — October 5.", "maintenance": "historical", "upstream": ["task-gdj-24"]},
+    {"id": "evidence-earned-growth", "path": "docs/playtests/2026-10-05-earned-growth.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: First earned growth: owner feedback and revised candidate.", "maintenance": "historical", "upstream": ["task-gdj-23"]},
+    {"id": "evidence-weapon-stack", "path": "docs/playtests/2026-10-05-weapon-stack.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Earned simultaneous weapon-stack MVP — October 5.", "maintenance": "historical", "upstream": ["task-gdj-3"]},
+    {"id": "evidence-coop-publication-diagnosis", "path": "docs/playtests/2026-10-06-coop-publication-diagnosis.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Large co-op host publication diagnosis — October 6.", "maintenance": "historical", "upstream": ["task-gdj-24"]},
+    {"id": "evidence-ranged-enemy", "path": "docs/playtests/2026-10-06-ranged-enemy.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: GDJ-25 ranged-enemy candidate — October 6, 2026.", "maintenance": "historical", "upstream": ["task-gdj-25"]},
+    {"id": "evidence-index", "path": "docs/playtests/README.md", "kind": "index", "purpose": "Explain how to record observations and locate dated reports.", "maintenance": "current", "upstream": []},
+    {"id": "evidence-support-frame-spikes", "path": "docs/playtests/evidence/frame-spikes/README.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Frame-spike experiment evidence.", "maintenance": "historical", "upstream": ["evidence-frame-spike-experiments"]},
+    {"id": "evidence-support-renderers", "path": "docs/playtests/evidence/renderers/README.md", "kind": "evidence", "purpose": "Preserve dated source, results and limits: Renderer experiment evidence.", "maintenance": "historical", "upstream": ["evidence-renderer-experiments"]},
+    {"id": "template-playtests", "path": "docs/playtests/template.md", "kind": "template", "purpose": "Author playtest: short title with context, source and handoff fields.", "maintenance": "template", "upstream": ["document-contract"]},
+    {"id": "profiling", "path": "docs/profiling.md", "kind": "technical", "purpose": "Reproduce a bounded profiler investigation when needed.", "maintenance": "current", "upstream": ["performance"]},
+    {"id": "roadmap", "path": "docs/roadmap.md", "kind": "planning", "purpose": "Connect proposed MVP milestones to the accepted game and current design priority.", "maintenance": "current", "upstream": ["foundation", "gdd-index", "current-state"]},
+    {"id": "project-motivation", "path": "docs/vision.md", "kind": "guide", "purpose": "Explain the learning goals behind the project; foundation owns game identity.", "maintenance": "current", "upstream": ["foundation"]},
+    {"id": "workflow", "path": "docs/workflow.md", "kind": "workflow", "purpose": "Own role boundaries, implementation/review procedure and proportional verification.", "maintenance": "current", "upstream": []},
+    {"id": "game-placeholder", "path": "game/README.md", "kind": "guide", "purpose": "Explain that this reserved directory is not the active Unity project.", "maintenance": "current", "upstream": ["architecture"]},
+    {"id": "unity-project", "path": "prototypes/001-stacked-weapons/README.md", "kind": "guide", "purpose": "Own pinned setup, controls, scenario commands, tests and build reproduction.", "maintenance": "current", "upstream": ["foundation", "architecture"]},
+    {"id": "prototype-index", "path": "prototypes/README.md", "kind": "guide", "purpose": "Locate the active project and explain separately scoped experiments.", "maintenance": "current", "upstream": ["architecture"]},
+    {"id": "tools-guide", "path": "tools/README.md", "kind": "guide", "purpose": "Locate reusable commands, prerequisites and documentation validation.", "maintenance": "current", "upstream": ["workflow", "document-contract"]}
+  ],
+  "resource_groups": [
+    {"glob": "docs/planning/diagrams/*", "owner": "history-2026-10-02-development-system", "purpose": "Saved planning visualization, its source and visual-check outputs."},
+    {"glob": "docs/playtests/evidence/frame-spikes/*", "owner": "evidence-frame-spike-experiments", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/renderers/*", "owner": "evidence-renderer-experiments", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/jobs-burst/*", "owner": "evidence-jobs-burst", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-2-rifle/*", "owner": "evidence-rifle-baseline", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-3-weapon-stack/*", "owner": "evidence-weapon-stack", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-15-shot-v1/*", "owner": "evidence-shot-alignment", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-16-damage/*", "owner": "evidence-damage-readability", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-16-damage-v3/*", "owner": "evidence-damage-readability-revision", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-16-damage-v4/*", "owner": "evidence-focused-health-feedback", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-16-damage-v5/*", "owner": "evidence-aimed-health-feedback", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-16-damage-v6/*", "owner": "evidence-damaged-only-health", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-16-damage-v7/*", "owner": "evidence-overhead-health", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-17-precision-v1/*", "owner": "evidence-precision-aim", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-19-rate-v1/*", "owner": "evidence-rifle-rate-controls", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-19-rate-v2/*", "owner": "evidence-rifle-rate-controls", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-20-*/*", "owner": "evidence-shared-rifle", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-22-scenarios/*", "owner": "evidence-scenario-configuration", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-23-earned-growth/*", "owner": "evidence-earned-growth", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-24-coop-scale/*", "owner": "evidence-coop-scale", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-24-publication/*", "owner": "evidence-coop-publication-diagnosis", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/gdj-25-ranged-enemy/*", "owner": "evidence-ranged-enemy", "purpose": "Raw captures/manifests explained by the owning dated report."},
+    {"glob": "docs/playtests/evidence/2026-09-30-arena.png", "owner": "evidence-prototype-performance", "purpose": "Original local diagnostic image or capture; read the report limits."},
+    {"glob": "docs/playtests/evidence/2026-09-30-bosses.png", "owner": "evidence-boss-scale", "purpose": "Original local diagnostic image or capture; read the report limits."},
+    {"glob": "docs/playtests/evidence/2026-09-30-hidden-10000-bosses.json", "owner": "evidence-boss-scale", "purpose": "Original local diagnostic image or capture; read the report limits."},
+    {"glob": "docs/playtests/evidence/2026-09-30-hidden-20000-bosses.json", "owner": "evidence-boss-scale", "purpose": "Original local diagnostic image or capture; read the report limits."},
+    {"glob": "docs/playtests/evidence/2026-09-30-hidden-20000-synchronized.json", "owner": "evidence-boss-scale", "purpose": "Original local diagnostic image or capture; read the report limits."},
+    {"glob": "docs/playtests/evidence/2026-09-30-visible-1000.json", "owner": "evidence-prototype-performance", "purpose": "Original local diagnostic image or capture; read the report limits."},
+    {"glob": "docs/playtests/evidence/2026-09-30-visible-15000-bosses.json", "owner": "evidence-boss-scale", "purpose": "Original local diagnostic image or capture; read the report limits."},
+    {"glob": "docs/playtests/evidence/2026-09-30-visible-15000-invocation.json", "owner": "evidence-boss-scale", "purpose": "Original local diagnostic image or capture; read the report limits."}
+  ]
+}
