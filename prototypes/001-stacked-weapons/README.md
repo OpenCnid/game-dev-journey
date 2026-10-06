@@ -109,6 +109,8 @@ CLI-only `co-op-scale` maintains 1–1000 respawning 60-HP drones, seed 137, fro
 
 ### Starting configuration controls
 
+For the GDJ-24 publication diagnosis only, `-sharedDiagnostics` adds `publication.csv` with current-update CPU scopes and cumulative publication/packet/copy/send/flush/driver counters. Parent timings overlap children. `terminal-save.json` preserves the original Save boundary and `terminal-after-2s.json` observes two subsequent seconds without changing gameplay or report timing. Hold both players until both observation files exist; omit `-sharedQuit`. Empty application queues do not prove transport acknowledgement. The original summary and its failed gates remain authoritative evidence. Omit the flag for the same build's observation-disabled control.
+
 Solo and shared rifle play consume the same validated version-3 starting configuration. The menu shows separate **Next solo** and **Host** settings; selecting a named scenario for both makes their starting enemy HP, damage and interval match. The default controls remain intentionally different:
 
 | CLI name | Drones / HP | Body / head | Interval | Seed / duration |

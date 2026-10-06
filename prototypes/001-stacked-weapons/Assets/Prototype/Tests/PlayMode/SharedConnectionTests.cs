@@ -9,8 +9,8 @@ namespace Journey.Tests
     {
         [UnityTest] public IEnumerator LargeReliableSnapshotsRetainBoundedChunksAndAtomicOrderedState()
         {
-            using (var host = new SharedConnection(true, "127.0.0.1", 17783, true))
-            using (var client = new SharedConnection(false, "127.0.0.1", 17783))
+            using (var host = new SharedConnection(true, "127.0.0.1", 17783, true, diagnostics: true))
+            using (var client = new SharedConnection(false, "127.0.0.1", 17783, diagnostics: true))
             {
                 var game = new SharedEncounter(ScenarioConfiguration.Named(ScenarioKind.CoopScale).Scale(1000, 8, 90)); game.Start();
                 var destination = new SharedSnapshot(); var assembly = new SnapshotAssembly();
@@ -39,6 +39,12 @@ namespace Journey.Tests
                 Assert.That(loss, Is.Empty); Assert.That(received, Is.EqualTo(10));
                 Assert.That(host.PendingMessages, Is.Zero); Assert.That(host.PendingBytes, Is.Zero); Assert.That(assembly.Pending, Is.False);
                 Assert.That(host.SnapshotMessages, Is.GreaterThan(10));
+                Assert.That(host.Diagnostic.sendAttempts, Is.GreaterThanOrEqualTo(host.SentMessages));
+                Assert.That(host.Diagnostic.copiedBytes, Is.GreaterThanOrEqualTo(host.SentBytes));
+                Assert.That(host.Diagnostic.snapshotCopiedBytes, Is.GreaterThan(0));
+                Assert.That(host.Diagnostic.snapshotSendMs, Is.GreaterThan(0));
+                Assert.That(host.Diagnostic.flushedRecords, Is.GreaterThan(0));
+                Assert.That(host.ObservePending(), Is.Empty, "Diagnostic observation must not change retained delivery.");
             }
             yield return null; LogAssert.NoUnexpectedReceived();
         }

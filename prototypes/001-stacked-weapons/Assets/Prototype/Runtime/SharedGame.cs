@@ -49,6 +49,11 @@ namespace Journey
         long presentationProbes, presentationRays;
         double pollMs, presentationMs, pickupRenderMs;
         double loggingMs, loggingMaxMs;
+        bool diagnostics, terminalObserved;
+        StreamWriter diagnosticLog;
+        readonly NetworkWork noConnectionWork = new NetworkWork();
+        double publishMs, stateCopyMs, inputAimMs, diagnosticLoggingMs, terminalAt = -1, firstQueueEmptyAfterSave = -1;
+        long publishCount;
         bool exactSteering;
         double memoryAt, memorySampleMs, memorySamplingMs;
         long sampledHeapBytes, sampledWorkingSetBytes;
@@ -74,6 +79,7 @@ namespace Journey
             binding = new SharedScenarioBinding(host ? configuration ?? ScenarioConfiguration.Named(ScenarioKind.SharedRifle) : null);
             view = arena; projection = sim; local = host ? 0 : 1;
             var args = Environment.GetCommandLineArgs();
+            diagnostics = Array.IndexOf(args, "-sharedDiagnostics") >= 0;
             if (Array.IndexOf(args, "-sharedMute") >= 0) AudioListener.volume = 0;
             scripted = Array.IndexOf(args, "-sharedScripted") >= 0; quitAtEnd = Array.IndexOf(args, "-sharedQuit") >= 0;
             screenshotAtLevelUp = Array.IndexOf(args, "-screenshotAtLevelUp") >= 0;
@@ -100,10 +106,15 @@ namespace Journey
             hitLog = new StreamWriter(Path.Combine(output, "events.csv"));
             hitLog.WriteLine("wall_seconds,run,player,weapon,event,pose_tick,life,decision,enemy,incarnation,region,requested,before,actual,after,confirmed_delay_ms,trigger,ray_index,rays,target_tests");
             growthLog = new StreamWriter(Path.Combine(output, "growth.jsonl"));
+            if (diagnostics)
+            {
+                diagnosticLog = new StreamWriter(Path.Combine(output, "publication.csv"));
+                diagnosticLog.WriteLine("wall_seconds,frame_ms,run,tick,state,update_cpu_ms,sim_ms,crowd_ms,weapon_ms,xp_ms,presentation_ms,input_aim_ms,publish_ms,state_copy_ms,publish_count,serialization_ms,logging_ms,diagnostic_logging_ms,memory_sample_ms," + NetworkWork.Header + ",queue_records,queue_bytes,queue_age_ms");
+            }
             pickups = new XpPresentation(transform);
             if (!solo)
             {
-                connection = new SharedConnection(host, address, port, Array.IndexOf(args, "-sharedLoopback") >= 0);
+                connection = new SharedConnection(host, address, port, Array.IndexOf(args, "-sharedLoopback") >= 0, diagnostics);
                 connection.Received += Receive; connection.Lost += Abort;
             }
             if (host) { authority = new SharedEncounter(binding.Configuration, binding.Session, solo ? 1 : 2, exactSteering); display.CopyFrom(authority.Current); authority.Resolved += Resolve; if (authority.Growth != null) authority.Growth.Changed += GrowthChanged; }
@@ -185,9 +196,12 @@ namespace Journey
         }
         void Publish()
         {
+            long whole = diagnostics ? StageProfile.Begin() : 0, copy = diagnostics ? StageProfile.Begin() : 0;
             if (display.Run != authority.Current.Run) orbReplica.Reset(authority.Current.Run);
             display.CopyFrom(authority.Current);
+            if (diagnostics) stateCopyMs += StageProfile.End(copy);
             connection?.SendSnapshot(display);
+            if (diagnostics) { publishMs += StageProfile.End(whole); publishCount++; }
         }
         void Abort(string value)
         {
@@ -207,6 +221,7 @@ namespace Journey
             if (newRun)
             {
                 accumulator = 0; shotSequence = 0; emitted.Clear(); saved = false;
+                terminalAt = firstQueueEmptyAfterSave = -1; terminalObserved = false;
                 // Poll can deliver the new snapshot and its first hits together.
                 // Retain that run's feedback while discarding prior-run events.
                 int queued = feedback.Count;
@@ -265,6 +280,7 @@ namespace Journey
             if (keyboard != null && keyboard.enterKey.wasPressedThisFrame) ContinueChoice();
             if (authority != null && authority.CommitChoices()) Publish();
             if (scripted && GrowthUpgrade.Valid(ScriptedUpgrade()) && display.State == SharedState.Choosing && display.Players[local].Offer.Selected != UpgradeId.None) ContinueChoice();
+            long inputStarted = diagnostics ? StageProfile.Begin() : 0;
             float dt = Mathf.Min(.05f, (float)(frame * .001));
             bool active = display.State == SharedState.Running && player.Health > 0;
             Vector3 movement = Vector3.zero;
@@ -315,6 +331,7 @@ namespace Journey
                         w.Write(run); w.Write(life); w.Write(inputSequence); w.Write(inputTime); SharedConnection.Vector(w, predicted); w.Write(yaw); w.Write(pitch); });
                 }
             }
+            if (diagnostics) inputAimMs = StageProfile.End(inputStarted);
             if (authority != null && display.State == SharedState.Running)
             {
                 if (previousState == SharedState.Choosing) { frame = accumulator = 0; }
@@ -419,6 +436,50 @@ namespace Journey
             { Directory.CreateDirectory(Path.GetDirectoryName(screenshot)); ScreenCapture.CaptureScreenshot(screenshot); screenshot = ""; }
             updateLastMs = (System.Diagnostics.Stopwatch.GetTimestamp() - updateStarted) * 1000.0 / System.Diagnostics.Stopwatch.Frequency;
             updateMaxMs = Math.Max(updateMaxMs, updateLastMs);
+            if (diagnostics && !terminalObserved)
+            {
+                long diagnosticStarted = StageProfile.Begin();
+                WritePublicationFrame(now, frame);
+                if (saved)
+                {
+                    if (firstQueueEmptyAfterSave < 0 && (connection == null || connection.PendingMessages == 0))
+                        firstQueueEmptyAfterSave = Time.realtimeSinceStartupAsDouble - terminalAt;
+                    if (Time.realtimeSinceStartupAsDouble - terminalAt >= 2)
+                    { ObserveTerminal("terminal-after-2s.json"); terminalObserved = true; diagnosticLog.Flush(); hitLog.Flush(); growthLog.Flush(); }
+                }
+                diagnosticLoggingMs += StageProfile.End(diagnosticStarted);
+            }
+        }
+        void WritePublicationFrame(double now, double frame)
+        {
+            SharedWork w = authority?.Work;
+            diagnosticLog.Write(FormattableString.Invariant($"{now:F6},{frame:F4},{run},{display.Tick},{display.State},{updateLastMs:F6},{w?.frameSimulationMs ?? 0:F6},{w?.frameCrowdMs ?? 0:F6},{w?.frameWeaponMs ?? 0:F6},{w?.frameXpMs ?? 0:F6},{presentationMs:F6},{inputAimMs:F6},{publishMs:F6},{stateCopyMs:F6},{publishCount},{connection?.SerializationMs ?? 0:F6},{loggingMs:F6},{diagnosticLoggingMs:F6},{memorySampleMs:F6},"));
+            (connection?.Diagnostic ?? noConnectionWork).Write(diagnosticLog);
+            diagnosticLog.WriteLine(FormattableString.Invariant($",{connection?.PendingMessages ?? 0},{connection?.PendingBytes ?? 0},{connection?.PendingAgeMs ?? 0:F6}"));
+        }
+        [Serializable] sealed class TerminalObservation
+        {
+            public string source, role, method;
+            public int run, tick, xp, uncollectedXp, pendingRecords, pendingBytes;
+            public SharedState state;
+            public double secondsAfterSave, firstQueueEmptyAfterSave, diagnosticLoggingMs;
+            public long sentBytes, sentMessages, receivedBytes, receivedMessages;
+            public SharedConnection.PendingRecord[] pending;
+            public NetworkWork network;
+            public WeaponWork[] weapons;
+            public SharedPlayer[] players;
+        }
+        void ObserveTerminal(string file)
+        {
+            TextAsset stamp = Resources.Load<TextAsset>("BuildInfo");
+            var observation = new TerminalObservation { source = stamp == null ? "Editor" : stamp.text, role = local == 0 ? "host A" : "client B",
+                method = "Observational probe only; original first-terminal summary unchanged. Empty application FIFO does not prove transport acknowledgement.",
+                run = run, tick = display.Tick, state = display.State, xp = display.Xp, uncollectedXp = orbReplica.UncollectedXp,
+                secondsAfterSave = Time.realtimeSinceStartupAsDouble - terminalAt, firstQueueEmptyAfterSave = firstQueueEmptyAfterSave,
+                diagnosticLoggingMs = diagnosticLoggingMs, pendingRecords = connection?.PendingMessages ?? 0, pendingBytes = connection?.PendingBytes ?? 0,
+                sentBytes = connection?.SentBytes ?? 0, sentMessages = connection?.SentMessages ?? 0, receivedBytes = connection?.ReceivedBytes ?? 0, receivedMessages = connection?.ReceivedMessages ?? 0,
+                pending = connection?.ObservePending(), network = connection?.Diagnostic, weapons = weaponWork, players = display.Players };
+            File.WriteAllText(Path.Combine(output, file), JsonUtility.ToJson(observation, true));
         }
         void WriteWorkFrame()
         {
@@ -587,6 +648,7 @@ namespace Journey
         }
         void Save()
         {
+            if (diagnostics) { terminalAt = Time.realtimeSinceStartupAsDouble; ObserveTerminal("terminal-save.json"); }
             saved = true; frameLog.Flush(); hitLog.Flush(); growthLog.Flush();
             TextAsset stamp = Resources.Load<TextAsset>("BuildInfo");
             var report = new Report { role = local == 0 ? "host A" : "client B", source = stamp == null ? "Editor" : stamp.text,
@@ -736,7 +798,7 @@ namespace Journey
             }
             if (preview != null) { preview.Close(); Destroy(preview); }
             pickups?.Dispose();
-            frameLog?.Dispose(); hitLog?.Dispose(); growthLog?.Dispose(); if (allyMaterial != null) Destroy(allyMaterial);
+            frameLog?.Dispose(); hitLog?.Dispose(); growthLog?.Dispose(); diagnosticLog?.Dispose(); if (allyMaterial != null) Destroy(allyMaterial);
             if (ally != null) Destroy(ally);
             if (allyShot != null) { Destroy(allyShot.sharedMaterial); Destroy(allyShot.gameObject); }
             foreach (LineRenderer line in secondaryLines) if (line != null) Destroy(line.gameObject);
