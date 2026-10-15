@@ -1,6 +1,26 @@
 # Current state
 
-Updated October 5, 2026. This is an orientation page, not a copy of the task board. Update it when the playable capability, accepted configuration or a major constraint changes.
+Updated October 15, 2026. This is an orientation page, not a copy of the task board. Update it when the playable capability, accepted configuration or a major constraint changes.
+
+## Latest playable: Hexwake
+
+The owner accepted the current first-person horde-survival prototype for GitHub
+publication as **Hexwake**. Start with the [landing page](../README.md) for the
+Windows download, screenshot and controls, or the
+[source snapshot and rebuild route](../prototypes/002-hexwake/README.md).
+
+This is a separate Unity 6000.6.3f1 retained-Mono-player snapshot, not a replacement
+for `prototypes/001-stacked-weapons/` or a fresh Editor project export. It includes
+the playtested J/R6 readable upgrade/loot/gun changes, with publication-only
+branding. It is solo; future co-op goals are not current capability.
+
+The [accepted publication decision](decisions/2026-10-15-hexwake-publication.md)
+records scope and the [verification note](../prototypes/002-hexwake/VERIFICATION.md)
+separates baseline acceptance from the named-release checks.
+
+The sections below retain the **October 5 prototype and planning history**.
+Their engine pin, task state and performance observations apply to that earlier
+prototype, not automatically to Hexwake.
 
 Start a fresh session with the [project foundation](foundation.md), [planning handoff](planning/README.md), then this page and the selected task's relevant context. The foundation defines the game; this page reports how much of it exists. Planning and task sessions write durable outcomes back before ending.
 

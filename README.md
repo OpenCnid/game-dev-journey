@@ -1,88 +1,72 @@
-# Game Dev Journey
+# Hexwake
 
-**A software engineer's first game, built with curiosity, experimentation, and AI.**
+**A first-person horde-survival shooter. Build a six-gun arsenal, find strange relics, and outlast the swarm.**
 
-I've never made a game before. I know how to build software, but making something fun is a new challenge: controls, game feel, pacing, sound, visual feedback, and all the little decisions that make someone want to play again.
+Windows x64 · Single-player prototype · Keyboard and mouse
 
-This repository documents our journey from that starting point to a finished, small game. I'll bring the ideas, judgment, and persistence. AI and LLMs will help me explore unfamiliar territory, learn the tools, write and review code, and iterate.
+**[Download Hexwake for Windows](https://github.com/OpenCnid/game-dev-journey/releases/download/hexwake-v0.1.0/Hexwake-v0.1.0-windows-x64.zip)**
 
-Two or three years ago, I wouldn't have felt ready to take this on this way. Today, I think the tools have made it worth trying. That's the motivation behind this project, and the journey will show what actually works, where AI helps, and where we still have to figure things out ourselves.
+[Release notes](https://github.com/OpenCnid/game-dev-journey/releases/tag/hexwake-v0.1.0) · [Source and build instructions](prototypes/002-hexwake/README.md)
 
-## Where we are
+![Hexwake gameplay: a first-person gun, a cathedral arena, and distinct gun and relic drops](assets/hexwake/gameplay.png)
 
-| Area | Status |
+## Play in a minute
+
+1. Download the Windows ZIP above.
+2. Extract the **whole folder**, not just the executable.
+3. Run **`Hexwake.exe`**, choose a starting weapon, and click **Begin**.
+
+No Unity installation is needed to play. Keep `Hexwake_Data`, `MonoBleedingEdge`, and the adjacent DLLs beside the executable.
+While this repository remains private, downloads require repository access.
+
+## What you're playing
+
+Survive a ten-minute run through a dark fantasy arena with magic, technology, and increasingly persistent enemies.
+
+- **Grow an arsenal:** collect dropped guns, including duplicate copies, up to six independently firing weapons.
+- **Make a build:** levels and successful weapon use improve gear you already own; enemy loot brings new guns and relics.
+- **Find strange advantages:** relics change headshots, healing, reloads, air control, and other combat interactions.
+- **Keep moving:** aim, jump, bunny-hop, and use your class's mobility ability instead of standing still.
+- **Read the action:** large gun models and gold relic seals distinguish valuable drops from routine XP. Pause to inspect the full inventory.
+
+Automatic firing is available, with a manual-fire toggle when you want direct control.
+
+## Controls
+
+| Input | Action |
 | --- | --- |
-| Experience | Software engineering background; first game |
-| Game concept | Bullet-heaven survival roguelite for 1-4 players, solo or cooperative PvE, focused on pleasant level-ups, stacking weapons and powerful builds; first person for MVP/alpha, optional third person parked for later; The Engine Kingdoms AI-world isekai direction |
-| Engine and language | Unity **6000.3.25f1** + C#, URP **17.3.0**; editor and packages pinned |
-| Target platform | First prototype: Windows desktop, keyboard and mouse |
-| Playable build | One-weapon arena with health, pause/restart, and crowd/boss stress scenarios up to 20,000 enemies |
-| Current milestone | Design a small Engine Kingdoms cooperative encounter, then validate minimal two-player shared combat; existing playable build remains local |
-| Performance target | At least 144 FPS in the declared supported envelope; broad hardware reach inspired by League of Legends/Valorant; final-game and low-end targets not validated |
+| WASD / mouse | Move / aim |
+| Space | Jump / keep hopping |
+| Shift | Class mobility |
+| F | Toggle automatic / manual firing |
+| Left mouse | Fire in manual mode |
+| R | Reload |
+| E | Collect a gun or relic |
+| 1-6 | Select a gun; at full capacity, select the copy to replace |
+| 1-3 or mouse | Choose an upgrade |
+| Escape | Frozen inventory / pause / resume |
+| M | Frozen map and settings |
 
-Open [the prototype project](prototypes/001-stacked-weapons/README.md) for setup, controls, build commands, and benchmark instructions. The maintained game will move into `game/` after the experiment is evaluated.
+Pause includes graphics presets and master volume. Upgrade choices also freeze the action.
 
-Our current benchmark machine is the owner's desktop: Intel Core i7-10700K, NVIDIA GeForce RTX 3090, and approximately 64 GB RAM. Keep the existing 1080p benchmark configuration for comparisons. GTX 1080 Ti and older-CPU testing is deferred until the game is more polished. See [the performance plan](docs/performance.md) for the 6.944 ms frame budget and benchmark scenarios.
+## Current build
 
-Late-game ambition includes **more than 10,000 active enemies, potentially all bosses with special abilities**. The [boss workload specification](docs/design/late-game-workload.md) separates this goal from what the current graybox has actually demonstrated. Unity/C# remains our chosen engine and language; target performance is not yet validated.
+**v0.1.0** is the current Windows prototype, published from the playtested J/R6 revision with a new public name. It is a development build, not a finished commercial game.
 
-The prototype now includes Jobs/Burst simulation, culled instanced rendering, and selectable reference paths. See [the measured comparison](docs/playtests/2026-09-30-jobs-burst.md) and [profiling instructions](docs/profiling.md).
+The release was checked with the retained gameplay suite and rendered scenarios. There is no multiplayer in this build; cooperative play remains a longer-term design direction.
 
-Further [frame-spike experiments](docs/playtests/2026-09-30-frame-spike-experiments.md) compare effect rendering, identical-warning deduplication, concurrent preparation, and native state ownership. These experiments retain the original optimized path as the default and record visual diagnostics separately from performance acceptance.
+See the [verification and known limits](prototypes/002-hexwake/VERIFICATION.md) and [asset/runtime notices](prototypes/002-hexwake/THIRD_PARTY_NOTICES.md).
 
-The next [renderer comparison](docs/playtests/2026-09-30-renderer-experiments.md) tests compact indirect projectiles, combined character meshes, and cached warning collection against native-state simulation. It includes separate CPU/GPU profiles and repeated visible release captures on the current desktop. Renderer variants remain selectable experiments; final-game performance still requires representative content.
+## Why this repository exists
 
-## What we're aiming for
+I'm a software engineer learning to make a first game with AI. This is the working game and the record of the experiments, playtests, wrong turns, and lessons behind it.
 
-- Finish a small game with a clear beginning, playable loop, and ending.
-- Learn enough to understand and maintain what we build.
-- Test ideas by playing them, including with people who didn't build them.
-- Keep an honest record of experiments, mistakes, decisions, and progress.
-- Use AI to accelerate the work while taking responsibility for the result.
+Hexwake is the newest playable snapshot. The earlier [stacked-weapons Unity project](prototypes/001-stacked-weapons/README.md) and its experiments remain intact; its engine pin and benchmark results do not describe this release.
 
-Our first scope guardrail: **one core mechanic, one compact play space, and one complete loop.** Bigger ideas can wait until that works.
+- [Project foundation](docs/foundation.md) - longer-term player experience and systems.
+- [Current state](docs/current-state.md) - what has actually been built.
+- [Playtest history](docs/playtests/) - results and lessons.
+- [Contribution guide](CONTRIBUTING.md) - working with the project.
+- [AI workflow](AGENTS.md) - instructions for coding agents.
 
-## Repository map
-
-```text
-.
-|-- README.md
-|-- CONTRIBUTING.md
-|-- AGENTS.md               # Short entry point for AI tasks
-|-- .github/                 # Issue and pull request templates
-|-- docs/
-|   |-- foundation.md        # What the game is: identity, player experience and systems
-|   |-- vision.md            # Motivation, principles, and scope
-|   |-- roadmap.md           # Milestones with observable completion criteria
-|   |-- architecture.md      # Folder ownership and how the structure can grow
-|   |-- workflow.md          # Development loop and use of AI
-|   |-- current-state.md     # Current capability, evidence and constraints
-|   |-- design/              # Current game brief
-|   |-- decisions/           # Reasons behind significant choices
-|   |-- devlog/              # Dated progress and lessons
-|   `-- playtests/           # Observations from real play sessions
-|-- prototypes/             # Small, disposable experiments
-|-- game/                   # The selected game's engine project
-|-- assets/                 # Editable source assets and provenance
-`-- tools/                  # Small scripts that earn their place
-```
-
-See [the architecture guide](docs/architecture.md) for placement rules.
-
-## Start here
-
-1. Read [the project foundation](docs/foundation.md), then [the vision](docs/vision.md) and [roadmap](docs/roadmap.md) as needed.
-2. Read [the Vampire Hunters study](docs/design/vampire-hunters-study.md) and [proposed game brief](docs/design/game-brief.md).
-3. Open the prototype with its pinned editor, following [the project instructions](prototypes/001-stacked-weapons/README.md).
-4. Play the one-minute combat slice and run its repeatable crowd benchmark.
-5. Play it, capture observations, and decide whether to keep, change, or discard it.
-
-Follow along in [the development journal](docs/devlog/README.md), starting with [day zero](docs/devlog/2026-09-30-day-zero.md). Start every fresh planning/task session with the [project foundation](docs/foundation.md), [planning handoff](docs/planning/README.md) and [current state](docs/current-state.md), then the selected task's relevant context. Our [workflow](docs/workflow.md) explains how Linear, GitHub and replaceable AI sessions connect with little overhead. The live board is [First weapon-stacking playtest](https://linear.app/cnid/project/first-weapon-stacking-playtest-89b5952f722e), in the **Game Dev (GDJ)** Linear team.
-
-The [journey review and proposed AI-chat/build system](docs/planning/2026-10-02-development-system.md) connects our progress to a bounded task workflow, with an [interactive development loop](docs/planning/diagrams/development-loop.html) and a reusable task handoff template.
-
-## Contributing and reuse
-
-This starts as a personal learning project with AI assistance. Suggestions and focused contributions are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
-
-A project license has not been selected yet. Any third-party assets or code must retain their own attribution and terms; record asset sources in [the asset register](assets/README.md).
+Previous versions of this landing page remain in Git history.

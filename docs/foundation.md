@@ -1,5 +1,11 @@
 # Project foundation: the game we are building
 
+> **Current playable publication, October 15:** the accepted solo prototype is
+> **[Hexwake](../README.md)**. Its public name and separate source/build route
+> are recorded in the [publication decision](decisions/2026-10-15-hexwake-publication.md).
+> The product definition below remains the longer-term design; its cooperative
+> ambitions are not a claim about the current Windows build.
+
 **Product definition, revision 19 — October 5, 2026.** This page defines the intended game. Read it first to understand the project; implementation progress lives in [current state](current-state.md), and immediate work lives in the [planning handoff](planning/README.md).
 
 ## What this project is

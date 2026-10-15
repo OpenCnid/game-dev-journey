@@ -1,0 +1,271 @@
+{
+  "unityVersion": "6000.6.3f1",
+  "version": "0.1.0",
+  "sources": [
+    {
+      "path": "source/game/Assets/FantasyTrialB/Runtime/ArtParts.cs",
+      "upstreamSha256": "309d16d27bfca52c805d83c06d51515ae42e42c82646690e19c6223dc300bdb0",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Tests/PlayMode/ChaseWeaponArtITests.cs",
+      "upstreamSha256": "70aedb6b386d01b3c42e6fbf9549d885bb9f85c9b501f99741fc88646d8761d4",
+      "role": "test"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Tests/PlayMode/ChaseRelicsITests.cs",
+      "upstreamSha256": "13611086bae6244aad8b798af861db67ec8f836d1017a076f2efd02bc06c4c9a",
+      "role": "test"
+    },
+    {
+      "path": "source/game/Assets/FantasyTrialB/Runtime/FantasyShowcaseController.cs",
+      "upstreamSha256": "c601c62ea5b1777797de28932c553f73c1c47d02e845871eead79816450ef00f",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/FantasyTrialB/Runtime/FantasyRun.cs",
+      "upstreamSha256": "fcf1206cb1435df37f1a2c1ecf8bd492981dcb700a77a497c4d9f840965cab55",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/FantasyTrialB/Runtime/EnemyArtRig.cs",
+      "upstreamSha256": "b84a56d13c6d1d9a050e1a99a954ca40314e25f84a93ff3f3c74e08e644cee2d",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Tests/PlayMode/ChaseProgressionITests.cs",
+      "upstreamSha256": "b556c129b94ca9173c862f1f89ae1b65ff4d3192a85d40bd1c4f0456c61af9b8",
+      "role": "test"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Tests/PlayMode/ChaseLootITests.cs",
+      "upstreamSha256": "3191f1579c944b8b99ceb4d273e0e478219f3ed7f9083c5a7773f8e6d52d0ffe",
+      "role": "test"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Tests/PlayMode/ChaseEnvironmentITests.cs",
+      "upstreamSha256": "fdbf2549a1184667db4580c789537ef38ac540cf86af8efb4b7f694519e5cbb3",
+      "role": "test"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Tests/PlayMode/ChaseAnatomyITests.cs",
+      "upstreamSha256": "3a3cb138fe12e8b9f2b43d7590e8013d7b6bc2233b256f2fbfa46216c6b309a5",
+      "role": "test"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Tests/PlayMode/ChasePbrITests.cs",
+      "upstreamSha256": "4ec92c31926faea678a2e72726a1f7b7a7663aa3c2d7c7ade06564f11a3a32a1",
+      "role": "test"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Tests/PlayMode/ChasePacingBalanceITests.cs",
+      "upstreamSha256": "1105911343f674e4bd29ce8fe1b0b62f61f988bb442e7692cba2f3b04eb71267",
+      "role": "test"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Tests/PlayMode/ChaseMovementITests.cs",
+      "upstreamSha256": "2cfb035c61adc8f331027864a8c5c8097aa85377de5e183a31a420bc80a18804",
+      "role": "test"
+    },
+    {
+      "path": "source/game/Assets/FantasyTrialB/Runtime/FantasyWorldArt.cs",
+      "upstreamSha256": "03d2dfc6e9cafded0f2534a38cf763fd9e583ec3ea7dc99707fc8f2775c60286",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Tools/CrucibleClarity/Runtime/ChaseLootArt.cs",
+      "upstreamSha256": "aaae36e3bce05d14350c6df7b25469a612d3630a7166d214f548063cae75683b",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Tools/CrucibleClarity/Runtime/ChaseHud.cs",
+      "upstreamSha256": "bc687c5476e3add96b3e1951cdd26f4c52f7f37a55f46febd972c7b2b0b150dd",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Tools/CrucibleClarity/Runtime/ChaseGunRig.cs",
+      "upstreamSha256": "43ad1233ee7245059c7bf427f80e74a7900bcdd47c2f254eb7a368e8acaa9695",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Tools/CrucibleClarity/Tests/ChaseLootArtJTests.cs",
+      "upstreamSha256": "19ac31acbeb5a43a5ccc458c605030190f941fe2111725cfed0abd50333b16a9",
+      "role": "test"
+    },
+    {
+      "path": "source/game/Tools/CrucibleClarity/Runtime/HorrorChaseController.cs",
+      "upstreamSha256": "a027bd93f52949b20f576858d3c64b6587a24fae95055bcab3b179c53747c7d1",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Tools/CrucibleClarity/Runtime/ChaseSmoke.cs",
+      "upstreamSha256": "49411afd4584fdf1d2fffaba0e2a13b064aabb18ddf5a44345fab8562d0f0bac",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Tools/CrucibleClarity/RetainedPlayerBridge.cs",
+      "upstreamSha256": "ec8d6cb41ac70d3e81e67101c520dd8d92c90008aed78a81949818c45da148fb",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/FantasyTrialB/Runtime/PlayerArmsArt.cs",
+      "upstreamSha256": "94181d8729bf6d84d2c212a9661780e13b7dff919fc1f40ad1986838b10db705",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/FantasyTrialB/Runtime/PhotoRock.cs",
+      "upstreamSha256": "80bc124b323c485d66b73e157d4733ba1f2f79c956e352d615dc74b571e92128",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/FantasyTrialB/Runtime/GunArtRig.cs",
+      "upstreamSha256": "a103abcdc2ea5986af0403024b1b0aa533d9b2659df2cf743b6be30fc2df8824",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/FantasyTrialB/Tests/PlayMode/FantasyRunTests.cs",
+      "upstreamSha256": "810db4c44044993be4a3944db9c42a28d19f0421fef48ff4d675aa35253603c2",
+      "role": "test"
+    },
+    {
+      "path": "source/game/Assets/FantasyTrialB/Runtime/SkyPanorama.cs",
+      "upstreamSha256": "4ae2e3a76fc35060be7aac7468dab5d223268f217464ac238f9bf2c3e477a73c",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/FantasyTrialB/Runtime/ShowcaseSmoke.cs",
+      "upstreamSha256": "bb3b240f962501b4aadd573864cf074c97483883bf6344fc50ed896605ca88ad",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Tests/PlayMode/ChaseAimITests.cs",
+      "upstreamSha256": "809866eb82a5f56c6177c061dc8eb99381426926dcf242ac72ac3f49587c28cf",
+      "role": "test"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseGraphics.cs",
+      "upstreamSha256": "d1a6a972e40371777f2215e9eb362bd583491f7252201214896d65faa31f1a24",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseEnemyRig.cs",
+      "upstreamSha256": "c37e922b47fa0a479ff290415e5f1a868dc5362665aadebd450d44855a9e938b",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseEffects.cs",
+      "upstreamSha256": "a485925a8c75624e17720c3bf7afb1e471af1cd7550c49b1a4b7132242e26901",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseMaterials.cs",
+      "upstreamSha256": "580b51d5e28c7f07dfe8a91052d6dfd30c5a724e882dcc707d31641b226a9f0f",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseDebris.cs",
+      "upstreamSha256": "da0d9046380a4a7fed936beeb9f2aac3584c2222bf4cf8a75c1c7c3871d5722b",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseArmsArt.cs",
+      "upstreamSha256": "07c9b7d6a8022119ce13cb4cf6b302872868f5368eab5c1049cefb71b895fbda",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseArena.cs",
+      "upstreamSha256": "3f193039a2aab555aae55f0c26026d2c16b0af5e388f8fa4c0316f4a50a80c75",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseAim.cs",
+      "upstreamSha256": "9f0f2fd6e9a8dd0dc7af8aec8f126e3543aa9f9eafd39b561665fb4812a96e7d",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseCatalog.cs",
+      "upstreamSha256": "1f418d19652f29c54fbe0f742b3b54a3caa40e5bb138084be22bc2a719b9d88f",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseCalibration.cs",
+      "upstreamSha256": "f33c5a04c7329547b69ede64eb45ae1395bb34e3c21914ca32df90bd8cf5d7b9",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseArt.cs",
+      "upstreamSha256": "c7055be298575a7987312ee3fc441e99b5dd77b9f8d3253c7f0b9430647214a8",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseMovement.cs",
+      "upstreamSha256": "fbccb0481afde106416daee62021a5b59f6b310dcd069dcc9ccbc05190a47eaa",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/EnemyMotor.cs",
+      "upstreamSha256": "8a4adad77164377a768c07ce280adbce2951f7094401cb0a34bb5014798cc4d9",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseVisibility.cs",
+      "upstreamSha256": "f7bfab9d2ceec9b356d105ed1d7d4e8b833e2dae61c47cf80be39b955f9befb9",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/RebornWeaponGeometry.cs",
+      "upstreamSha256": "a184428be6894eca12e69a59b5ef0e5e0643924df0ab9d3fadd131ce5c911b04",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/RebornEnvironmentGeometry.cs",
+      "upstreamSha256": "5b2af11faa0e435aade4d62c66719a6b3fa8e3de5c9a094d960ab9b96339f0a1",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/RebornAnatomy.cs",
+      "upstreamSha256": "3d5043423287cba287cc6ee8c8d26ef8083360f8810c5643ef6aa22b2aaff9e7",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseSwarm.cs",
+      "upstreamSha256": "ffe36cdc59ad343e6cb23cc3258e67bd66222626ca97454d3ddb268983ea23ba",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseRelics.cs",
+      "upstreamSha256": "8a96cd514b3d2702d6fd4d40f3fea4cc115ebe3e4f51404257f535cdbe1d4f5b",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChasePlayerFeedback.cs",
+      "upstreamSha256": "1c46d5326798180408249de969aa6307c093b54fd708f944c594f83477661ec6",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseNativeTelemetry.cs",
+      "upstreamSha256": "914b025cd5fedc9c2316b458f7b90942b55b7bebf5c7316b543b09b2625ce3a0",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseScenery.cs",
+      "upstreamSha256": "88b9d67768c14aa6aff2b0054a2a312d3c5ad8af0361aed2a69011f4f6b5d0e2",
+      "role": "runtime"
+    },
+    {
+      "path": "source/game/Assets/CrucibleReborn/Runtime/ChaseRun.cs",
+      "upstreamSha256": "01e733a0b1b5033a472681a20fddb7582517e948dbd3360b2e9f232d42dafcfc",
+      "role": "runtime"
+    }
+  ],
+  "brandingChanges": [
+    "Window title",
+    "Starting-menu title",
+    "Executable and Data directory names"
+  ],
+  "freshUnityProjectExport": false,
+  "name": "Hexwake",
+  "upstreamRevision": "Crucible Clarity J R6",
+  "route": "retained Unity Mono player template with compiled C# snapshot",
+  "schemaVersion": 1
+}

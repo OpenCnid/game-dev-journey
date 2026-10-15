@@ -1,0 +1,19 @@
+HEXWAKE v0.1.0
+
+Run Hexwake.exe, choose a starting weapon, and click Begin.
+Keep this entire extracted folder together.
+
+WASD: move       Mouse: aim       Space: jump / hop
+Shift: mobility  F: auto/manual   Left mouse: manual fire
+R: reload        E: collect gun/relic
+1-6: select gun  1-3: upgrade choice
+Escape: frozen inventory / pause / resume
+M: map and settings
+
+Single-player Windows x64 development prototype.
+No Unity installation is needed to play.
+
+Source, updates and release notes:
+https://github.com/OpenCnid/game-dev-journey
+
+See THIRD_PARTY_NOTICES.md for inherited resource/runtime notices.
