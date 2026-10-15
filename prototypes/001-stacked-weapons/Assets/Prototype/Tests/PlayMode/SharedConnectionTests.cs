@@ -7,6 +7,47 @@ namespace Journey.Tests
 {
     public class SharedConnectionTests
     {
+        [UnityTest] public IEnumerator LargeReliableSnapshotsRetainBoundedChunksAndAtomicOrderedState()
+        {
+            using (var host = new SharedConnection(true, "127.0.0.1", 17783, true, diagnostics: true))
+            using (var client = new SharedConnection(false, "127.0.0.1", 17783, diagnostics: true))
+            {
+                var game = new SharedEncounter(ScenarioConfiguration.Named(ScenarioKind.CoopScale).Scale(1000, 8, 90)); game.Start();
+                var destination = new SharedSnapshot(); var assembly = new SnapshotAssembly();
+                int received = 0; string loss = "";
+                host.Lost += r => loss = r; client.Lost += r => loss = r;
+                client.Received += (message, reader) => {
+                    if (message != SharedConnection.Message.SnapshotChunk) return;
+                    int previous = destination.Tick;
+                    if (assembly.Read(reader, destination, Time.realtimeSinceStartupAsDouble))
+                    {
+                        Assert.That(destination.Tick, Is.EqualTo(++received));
+                        Assert.That(destination.Enemies.Length, Is.EqualTo(1000));
+                        Assert.That(destination.Enemies[999].Incarnation, Is.EqualTo(received));
+                        Assert.That(destination.Players[0].Arsenal, Is.EqualTo(255));
+                    }
+                    else Assert.That(destination.Tick, Is.EqualTo(previous));
+                };
+                double deadline = Time.realtimeSinceStartupAsDouble + 8;
+                while (!host.Connected && Time.realtimeSinceStartupAsDouble < deadline) { host.Poll(); client.Poll(); yield return null; }
+                Assert.That(host.Connected, Is.True);
+                for (int i = 1; i <= 10; i++)
+                { game.Current.Tick = i; game.Current.Enemies[999].Incarnation = i; Assert.That(host.SendSnapshot(game.Current), Is.True); }
+                Assert.That(host.PendingMessages, Is.GreaterThan(0)); Assert.That(host.PendingBytes, Is.GreaterThan(0));
+                Assert.That(host.BufferedHighWater, Is.LessThanOrEqualTo(SharedConnection.MaxBufferedMessages));
+                while (received < 10 && Time.realtimeSinceStartupAsDouble < deadline) { host.Poll(); client.Poll(); yield return null; }
+                Assert.That(loss, Is.Empty); Assert.That(received, Is.EqualTo(10));
+                Assert.That(host.PendingMessages, Is.Zero); Assert.That(host.PendingBytes, Is.Zero); Assert.That(assembly.Pending, Is.False);
+                Assert.That(host.SnapshotMessages, Is.GreaterThan(10));
+                Assert.That(host.Diagnostic.sendAttempts, Is.GreaterThanOrEqualTo(host.SentMessages));
+                Assert.That(host.Diagnostic.copiedBytes, Is.GreaterThanOrEqualTo(host.SentBytes));
+                Assert.That(host.Diagnostic.snapshotCopiedBytes, Is.GreaterThan(0));
+                Assert.That(host.Diagnostic.snapshotSendMs, Is.GreaterThan(0));
+                Assert.That(host.Diagnostic.flushedRecords, Is.GreaterThan(0));
+                Assert.That(host.ObservePending(), Is.Empty, "Diagnostic observation must not change retained delivery.");
+            }
+            yield return null; LogAssert.NoUnexpectedReceived();
+        }
         [UnityTest] public IEnumerator ReliableBurstRetainsEveryEventInOrderPastTransportWindow()
         {
             using (var host = new SharedConnection(true, "127.0.0.1", 17782, true))

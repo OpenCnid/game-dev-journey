@@ -1,0 +1,42 @@
+[
+  {
+    "name": "EditMode.xml",
+    "sha256": "00e64218bf119668e52b0a2bd334ca3be46abdd2e4d9a559a5bb9752f4ff6081",
+    "result": {
+      "id": "2",
+      "testcasecount": "152",
+      "result": "Passed",
+      "total": "152",
+      "passed": "152",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-10-06 07:17:20Z",
+      "end-time": "2026-10-06 07:17:36Z",
+      "duration": "16.1110963"
+    }
+  },
+  {
+    "name": "PlayMode.xml",
+    "sha256": "6af26df75e399c3033403c524fb7a7c53c1d03ed1a3c22b0feadec0eccf4b071",
+    "result": {
+      "id": "2",
+      "testcasecount": "18",
+      "result": "Passed",
+      "total": "18",
+      "passed": "18",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-10-06 07:18:28Z",
+      "end-time": "2026-10-06 07:18:33Z",
+      "duration": "4.7734114"
+    }
+  }
+]

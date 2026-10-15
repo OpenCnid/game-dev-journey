@@ -1,0 +1,39 @@
+{
+  "capturedUtc": "2026-10-05T09:17:18.1055692Z",
+  "cpu": [
+    {
+      "Name": "Intel(R) Core(TM) i7-10700K CPU @ 3.80GHz",
+      "NumberOfCores": 8,
+      "NumberOfLogicalProcessors": 16,
+      "MaxClockSpeed": 3792,
+      "CurrentClockSpeed": 3792
+    }
+  ],
+  "gpu": [
+    {
+      "Name": "Intel(R) UHD Graphics 630",
+      "DriverVersion": "31.0.101.2140",
+      "CurrentHorizontalResolution": null,
+      "CurrentVerticalResolution": null,
+      "CurrentRefreshRate": null
+    },
+    {
+      "Name": "NVIDIA GeForce RTX 3090",
+      "DriverVersion": "32.0.15.9186",
+      "CurrentHorizontalResolution": 3840,
+      "CurrentVerticalResolution": 1600,
+      "CurrentRefreshRate": 143
+    }
+  ],
+  "os": {
+    "Caption": "Microsoft Windows 11 Home",
+    "Version": "10.0.26200",
+    "BuildNumber": "26200",
+    "TotalVisibleMemorySize": 66926924
+  },
+  "power": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+  "concurrentPlayer": {
+    "ProcessId": 31288,
+    "ExecutablePath": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-23-earned-growth\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ23-v7\\StackLab.exe"
+  }
+}

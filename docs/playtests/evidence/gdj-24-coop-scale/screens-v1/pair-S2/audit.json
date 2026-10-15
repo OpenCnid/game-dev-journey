@@ -1,0 +1,3011 @@
+{
+  "warmupSeconds": 10.0,
+  "classification": "numerical audit; acceptance requires separate visibility/correctness gates",
+  "roles": [
+    {
+      "folder": "prototypes\\001-stacked-weapons\\artifacts\\gdj24-v1-pair-S2\\host",
+      "report": {
+        "role": "host A",
+        "source": "{\n    \"revision\": \"4a6b5b024be285d00c2de190b2ab451313888456\",\n    \"builtUtc\": \"2026-10-05T09:08:54.2308920Z\",\n    \"dirty\": false\n}",
+        "machine": "Intel(R) Core(TM) i7-10700K CPU @ 3.80GHz",
+        "gpu": "NVIDIA GeForce RTX 3090",
+        "connection": "Direct IPv4 UDP; declare actual address/machine/visibility separately",
+        "reason": "",
+        "hostBindEndpoint": "127.0.0.1:7798",
+        "scenario": {
+          "version": 3,
+          "seed": 137,
+          "enemies": 35,
+          "enemyHp": 60,
+          "bodyDamage": 20,
+          "headMultiplier": 2,
+          "headDamage": 40,
+          "run": 1,
+          "startingArsenal": 7,
+          "startingSpecialization": 0,
+          "duration": 40.0,
+          "rifleInterval": 0.11999999731779099,
+          "rifleRate": 8.333333969116211,
+          "name": "Co-op scale (diagnostic) (override)",
+          "identity": "04a61786e9df738943d2a79f9e48847ebb15bfa04dcf45fd14bc93749257d7db",
+          "session": "1508764bf0e445bdb4c33ed8befe68fa"
+        },
+        "scripted": true,
+        "development": false,
+        "previewEnabled": false,
+        "audioVolume": 0.0,
+        "run": 1,
+        "ticks": 2400,
+        "enemies": 35,
+        "catchupLimits": 0,
+        "frameSamples": 38326,
+        "confirmedHits": 395,
+        "width": 1920,
+        "height": 1080,
+        "frameCap": -1,
+        "vsync": 0,
+        "frameP50": 0.8662999999984322,
+        "frameP95": 1.6128999999978078,
+        "frameP99": 2.001100000001088,
+        "frameMax": 10.601300000001146,
+        "confirmP50": 7.952699999997037,
+        "confirmP95": 17.162899999995318,
+        "confirmMax": 21.55959999999979,
+        "rttMs": 4.750699999995334,
+        "updateLastMs": 0.3964,
+        "updateMaxMs": 25.828,
+        "abortFrameMs": 0.0,
+        "abortRemainingMs": 0.0,
+        "abortPreviousUpdateMs": 0.0,
+        "previewCaptureLastMs": 0.0,
+        "previewCaptureMaxMs": 0.0,
+        "previewCaptureCompletedAt": 0.0,
+        "previewPollMaxMs": 0.0,
+        "abortCatchupTicks": 0,
+        "state": 2,
+        "players": [
+          {
+            "Position": {
+              "x": -17.18592071533203,
+              "y": 0.0,
+              "z": -8.101799964904785
+            },
+            "Yaw": 322.55804443359375,
+            "Pitch": 2.7445480823516846,
+            "ReturnAt": 0.0,
+            "ImmuneUntil": 0.0,
+            "ContactUntil": 0.0,
+            "Health": 100,
+            "Life": 1,
+            "Shots": 450,
+            "Hits": 453,
+            "Damage": 8140,
+            "Kills": 94,
+            "Weapon": 1,
+            "BodyDamage": 20,
+            "Arsenal": 7,
+            "FirstAddition": 0,
+            "Specialization": 0,
+            "RifleInterval": 0.11999999731779099,
+            "Ready": false,
+            "ChoiceReady": false,
+            "Offer": {
+              "Id": 0,
+              "Tick": 0,
+              "Weapon": 0,
+              "AppliedTick": 0,
+              "ControlRevision": 0,
+              "First": 0,
+              "Second": 0,
+              "Selected": 0
+            }
+          },
+          {
+            "Position": {
+              "x": -17.21965217590332,
+              "y": 0.0,
+              "z": -7.973639965057373
+            },
+            "Yaw": 175.75802612304688,
+            "Pitch": 1.2193102836608887,
+            "ReturnAt": 0.0,
+            "ImmuneUntil": 0.0,
+            "ContactUntil": 0.0,
+            "Health": 100,
+            "Life": 1,
+            "Shots": 431,
+            "Hits": 402,
+            "Damage": 13208,
+            "Kills": 261,
+            "Weapon": 2,
+            "BodyDamage": 20,
+            "Arsenal": 7,
+            "FirstAddition": 0,
+            "Specialization": 0,
+            "RifleInterval": 0.11999999731779099,
+            "Ready": false,
+            "ChoiceReady": false,
+            "Offer": {
+              "Id": 0,
+              "Tick": 0,
+              "Weapon": 0,
+              "AppliedTick": 0,
+              "ControlRevision": 0,
+              "First": 0,
+              "Second": 0,
+              "Selected": 0
+            }
+          }
+        ],
+        "enemyStates": [
+          {
+            "Position": {
+              "x": 17.346086502075195,
+              "y": 0.0,
+              "z": 7.250809669494629
+            },
+            "Health": 60,
+            "Incarnation": 31
+          },
+          {
+            "Position": {
+              "x": 19.13048553466797,
+              "y": 0.0,
+              "z": 26.42942237854004
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 8.635183334350586,
+              "y": 0.0,
+              "z": -18.868881225585938
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 18.756553649902344,
+              "y": 0.0,
+              "z": 25.290863037109375
+            },
+            "Health": 60,
+            "Incarnation": 13
+          },
+          {
+            "Position": {
+              "x": 11.188580513000488,
+              "y": 0.0,
+              "z": -6.350514888763428
+            },
+            "Health": 12,
+            "Incarnation": 20
+          },
+          {
+            "Position": {
+              "x": 6.049335479736328,
+              "y": 0.0,
+              "z": -27.427200317382812
+            },
+            "Health": 60,
+            "Incarnation": 11
+          },
+          {
+            "Position": {
+              "x": 13.78583812713623,
+              "y": 0.0,
+              "z": 19.181150436401367
+            },
+            "Health": 60,
+            "Incarnation": 10
+          },
+          {
+            "Position": {
+              "x": 6.799813747406006,
+              "y": 0.0,
+              "z": 1.0480902194976807
+            },
+            "Health": 60,
+            "Incarnation": 12
+          },
+          {
+            "Position": {
+              "x": 19.638708114624023,
+              "y": 0.0,
+              "z": 15.556194305419922
+            },
+            "Health": 60,
+            "Incarnation": 11
+          },
+          {
+            "Position": {
+              "x": 9.874643325805664,
+              "y": 0.0,
+              "z": 21.169626235961914
+            },
+            "Health": 60,
+            "Incarnation": 8
+          },
+          {
+            "Position": {
+              "x": -27.936843872070312,
+              "y": 0.0,
+              "z": 5.9441022872924805
+            },
+            "Health": 60,
+            "Incarnation": 10
+          },
+          {
+            "Position": {
+              "x": -20.217134475708008,
+              "y": 0.0,
+              "z": 22.707807540893555
+            },
+            "Health": 60,
+            "Incarnation": 11
+          },
+          {
+            "Position": {
+              "x": 0.5559220910072327,
+              "y": 0.0,
+              "z": 11.681367874145508
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 20.126239776611328,
+              "y": 0.0,
+              "z": -27.655080795288086
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 25.76919937133789,
+              "y": 0.0,
+              "z": -20.128307342529297
+            },
+            "Health": 60,
+            "Incarnation": 12
+          },
+          {
+            "Position": {
+              "x": 3.642374038696289,
+              "y": 0.0,
+              "z": 21.479724884033203
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 6.643597602844238,
+              "y": 0.0,
+              "z": 16.801586151123047
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 8.408114433288574,
+              "y": 0.0,
+              "z": 25.418155670166016
+            },
+            "Health": 60,
+            "Incarnation": 12
+          },
+          {
+            "Position": {
+              "x": 11.010175704956055,
+              "y": 0.0,
+              "z": -14.234556198120117
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 15.517462730407715,
+              "y": 0.0,
+              "z": 23.812292098999023
+            },
+            "Health": 60,
+            "Incarnation": 12
+          },
+          {
+            "Position": {
+              "x": 24.252485275268555,
+              "y": 0.0,
+              "z": 2.4740192890167236
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 11.213312149047852,
+              "y": 0.0,
+              "z": -21.105159759521484
+            },
+            "Health": 60,
+            "Incarnation": 13
+          },
+          {
+            "Position": {
+              "x": 7.5635175704956055,
+              "y": 0.0,
+              "z": -7.366055965423584
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 20.237258911132812,
+              "y": 0.0,
+              "z": 25.981266021728516
+            },
+            "Health": 60,
+            "Incarnation": 14
+          },
+          {
+            "Position": {
+              "x": 10.613018989562988,
+              "y": 0.0,
+              "z": 24.837726593017578
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 1.3904551267623901,
+              "y": 0.0,
+              "z": 24.073348999023438
+            },
+            "Health": 60,
+            "Incarnation": 11
+          },
+          {
+            "Position": {
+              "x": 14.539811134338379,
+              "y": 0.0,
+              "z": 20.165985107421875
+            },
+            "Health": 60,
+            "Incarnation": 8
+          },
+          {
+            "Position": {
+              "x": -27.340961456298828,
+              "y": 0.0,
+              "z": 17.367971420288086
+            },
+            "Health": 60,
+            "Incarnation": 7
+          },
+          {
+            "Position": {
+              "x": 9.726110458374023,
+              "y": 0.0,
+              "z": -9.559508323669434
+            },
+            "Health": 60,
+            "Incarnation": 14
+          },
+          {
+            "Position": {
+              "x": -16.19052505493164,
+              "y": 0.0,
+              "z": 26.81313133239746
+            },
+            "Health": 60,
+            "Incarnation": 11
+          },
+          {
+            "Position": {
+              "x": 22.579118728637695,
+              "y": 0.0,
+              "z": 17.003747940063477
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 20.993606567382812,
+              "y": 0.0,
+              "z": 19.381669998168945
+            },
+            "Health": 60,
+            "Incarnation": 14
+          },
+          {
+            "Position": {
+              "x": 22.50349998474121,
+              "y": 0.0,
+              "z": -16.64488410949707
+            },
+            "Health": 60,
+            "Incarnation": 6
+          },
+          {
+            "Position": {
+              "x": 9.914278984069824,
+              "y": 0.0,
+              "z": 12.291853904724121
+            },
+            "Health": 60,
+            "Incarnation": 8
+          },
+          {
+            "Position": {
+              "x": 3.9511871337890625,
+              "y": 0.0,
+              "z": 19.739530563354492
+            },
+            "Health": 60,
+            "Incarnation": 12
+          }
+        ],
+        "weaponWork": [
+          {
+            "weapon": 1,
+            "player": 0,
+            "instance": 0,
+            "triggers": 334,
+            "rays": 334,
+            "targetTests": 11690,
+            "hits": 334,
+            "damage": 6420,
+            "kills": 91,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 2,
+            "player": 1,
+            "instance": 0,
+            "triggers": 315,
+            "rays": 334,
+            "targetTests": 11690,
+            "hits": 315,
+            "damage": 11240,
+            "kills": 226,
+            "rejected": 19,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 3,
+            "player": 0,
+            "instance": 1,
+            "triggers": 54,
+            "rays": 270,
+            "targetTests": 9450,
+            "hits": 41,
+            "damage": 492,
+            "kills": 0,
+            "rejected": 2,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 4,
+            "player": 1,
+            "instance": 1,
+            "triggers": 54,
+            "rays": 270,
+            "targetTests": 9450,
+            "hits": 29,
+            "damage": 576,
+            "kills": 7,
+            "rejected": 11,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 5,
+            "player": 0,
+            "instance": 2,
+            "triggers": 62,
+            "rays": 62,
+            "targetTests": 2170,
+            "hits": 78,
+            "damage": 1228,
+            "kills": 3,
+            "rejected": 1,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 6,
+            "player": 1,
+            "instance": 2,
+            "triggers": 62,
+            "rays": 62,
+            "targetTests": 2170,
+            "hits": 58,
+            "damage": 1392,
+            "kills": 28,
+            "rejected": 13,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 7,
+            "player": 0,
+            "instance": 3,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 8,
+            "player": 1,
+            "instance": 3,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 9,
+            "player": 0,
+            "instance": 4,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 10,
+            "player": 1,
+            "instance": 4,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 11,
+            "player": 0,
+            "instance": 5,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 12,
+            "player": 1,
+            "instance": 5,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 13,
+            "player": 0,
+            "instance": 6,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 14,
+            "player": 1,
+            "instance": 6,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 15,
+            "player": 0,
+            "instance": 7,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 16,
+            "player": 1,
+            "instance": 7,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          }
+        ],
+        "roster": 2,
+        "xp": 169,
+        "level": 1,
+        "uncollectedOrbs": 128,
+        "uncollectedXp": 186,
+        "choicePhase": 0,
+        "controlRevision": 0,
+        "pickupRadius": 2.0,
+        "attractionRadius": 1.5,
+        "mergeRadius": 0.30000001192092896,
+        "sentBytes": 2738817,
+        "receivedBytes": 112328,
+        "outgoingPending": 0,
+        "outgoingHighWater": 0,
+        "outgoingDeferred": 0,
+        "outgoingLimit": 1024,
+        "authorityWork": {
+          "ticks": 2400,
+          "steeringChecks": 2940000,
+          "contactTests": 168000,
+          "contactApplications": 0,
+          "attractionQueries": 313545,
+          "simulationMs": 340.9594999999997,
+          "crowdMs": 93.85550000000003,
+          "weaponMs": 102.01490000000209,
+          "xpMs": 133.58339999999967,
+          "frameSimulationMs": 0.0332,
+          "frameCrowdMs": 0.0304,
+          "frameWeaponMs": 0.0001,
+          "frameXpMs": 0.0,
+          "frameTicks": 1
+        },
+        "sentMessages": 5026,
+        "receivedMessages": 3012,
+        "snapshotBytes": 2458624,
+        "snapshotMessages": 2401,
+        "allocatedThreadBytes": 0,
+        "managedHeapBytes": 34148352,
+        "workingSetBytes": 0,
+        "presentationRays": 42162,
+        "presentationProbes": 1475670,
+        "serializationMs": 47.34539999999997,
+        "outgoingAgeMs": 0.0,
+        "outgoingMaxAgeMs": 0.0,
+        "loggingMs": 2862.2261000000535,
+        "loggingMaxMs": 1.5593,
+        "outgoingBytes": 0,
+        "outgoingBytesHighWater": 0,
+        "xpDrops": 355,
+        "xpMerges": 119,
+        "xpMoveEvents": 522,
+        "xpCollections": 108,
+        "physicalXpMoves": 3102
+      },
+      "frameMs": {
+        "samples": 31377,
+        "p50": 0.8569,
+        "p95": 1.6002,
+        "p99": 1.9646,
+        "max": 3.2768,
+        "over6_944": 0,
+        "over13_889": 0
+      },
+      "coldFrameMs": {
+        "samples": 41496,
+        "p50": 0.8623,
+        "p95": 1.6088,
+        "p99": 2.0075,
+        "max": 20.4984
+      },
+      "confirmationMs": {
+        "samples": 295,
+        "p50": 8.016,
+        "p95": 17.156,
+        "p99": 17.782,
+        "max": 18.048
+      },
+      "rttMs": {
+        "samples": 60,
+        "p50": 3.281,
+        "p95": 5.006,
+        "p99": 5.976,
+        "max": 5.976
+      },
+      "rttMethod": "one sample per RTT sequence",
+      "firstTick": 600,
+      "lastTick": 2399,
+      "traceWallSpan": 29.997708999999997,
+      "terminalComplete": true,
+      "noCatchup": true,
+      "rawHashes": {
+        "frames.csv": {
+          "bytes": 23307457,
+          "sha256": "1f5083e5d840b83518b4bdcafe37f85abaff090f9ed2d792b3357bc69fe71092"
+        },
+        "events.csv": {
+          "bytes": 98818,
+          "sha256": "7c79ac22dd1607df6002622caa42fb6ee0c6ffd0fec00402e79cc1232d70bb99"
+        },
+        "growth.jsonl": {
+          "bytes": 413148,
+          "sha256": "5c9b35a65a093c7a5e4bac5a596078bee83fb1b7b63a3168c0675670b75b782e"
+        },
+        "player.log": {
+          "bytes": 1744,
+          "sha256": "e79ef271b4089ad1fbf528c4441ba629298bf1d51320d3e83421730cd53ac6d5"
+        },
+        "summary-run-1.json": {
+          "bytes": 18444,
+          "sha256": "42b8d7bf81e925d3829ba25b4d17d20905807bc371dcecca410e573c9f3a6047"
+        },
+        "invocation.json": {
+          "bytes": 1115,
+          "sha256": "069fc819bef01df69689f4ef92e6ca4e44d7254c6f14501fa365ce0062e2134b"
+        },
+        "visibility.json": {
+          "bytes": 280,
+          "sha256": "e8aff0be06fdeee068e317fcdcb93446f2499f1c7521fc9f9199a614d62b4157"
+        }
+      },
+      "workWindow": {
+        "wallSeconds": 29.997708999999997,
+        "tickSpan": 1799,
+        "cumulativeDeltas": {
+          "steering_checks": 2203775.0,
+          "contact_tests": 125930.0,
+          "attraction_queries": 288122.0,
+          "presentation_rays": 31872.0,
+          "presentation_probes": 1115520.0,
+          "sent_bytes": 2054907.0,
+          "received_bytes": 84135.0,
+          "sent_messages": 3792.0,
+          "received_messages": 2255.0,
+          "snapshot_bytes": 1842176.0,
+          "snapshot_messages": 1799.0,
+          "serialization_ms": 35.0505,
+          "allocated_thread_bytes": 0.0,
+          "gc0": 354.0,
+          "gc1": 354.0,
+          "gc2": 354.0,
+          "xp_drops": 267.0,
+          "xp_merges": 97.0,
+          "xp_move_events": 410.0,
+          "xp_collections": 93.0,
+          "weapon1_triggers": 250.0,
+          "weapon1_rays": 250.0,
+          "weapon1_target_tests": 8750.0,
+          "weapon1_hits": 250.0,
+          "weapon1_damage": 4796.0,
+          "weapon1_kills": 66.0,
+          "weapon2_triggers": 234.0,
+          "weapon2_rays": 250.0,
+          "weapon2_target_tests": 8750.0,
+          "weapon2_hits": 234.0,
+          "weapon2_damage": 8440.0,
+          "weapon2_kills": 173.0,
+          "weapon3_triggers": 40.0,
+          "weapon3_rays": 200.0,
+          "weapon3_target_tests": 7000.0,
+          "weapon3_hits": 35.0,
+          "weapon3_damage": 420.0,
+          "weapon3_kills": 0.0,
+          "weapon4_triggers": 40.0,
+          "weapon4_rays": 200.0,
+          "weapon4_target_tests": 7000.0,
+          "weapon4_hits": 25.0,
+          "weapon4_damage": 500.0,
+          "weapon4_kills": 5.0,
+          "weapon5_triggers": 46.0,
+          "weapon5_rays": 46.0,
+          "weapon5_target_tests": 1610.0,
+          "weapon5_hits": 52.0,
+          "weapon5_damage": 820.0,
+          "weapon5_kills": 2.0,
+          "weapon6_triggers": 46.0,
+          "weapon6_rays": 46.0,
+          "weapon6_target_tests": 1610.0,
+          "weapon6_hits": 44.0,
+          "weapon6_damage": 1060.0,
+          "weapon6_kills": 21.0,
+          "weapon7_triggers": 0.0,
+          "weapon7_rays": 0.0,
+          "weapon7_target_tests": 0.0,
+          "weapon7_hits": 0.0,
+          "weapon7_damage": 0.0,
+          "weapon7_kills": 0.0,
+          "weapon8_triggers": 0.0,
+          "weapon8_rays": 0.0,
+          "weapon8_target_tests": 0.0,
+          "weapon8_hits": 0.0,
+          "weapon8_damage": 0.0,
+          "weapon8_kills": 0.0,
+          "weapon9_triggers": 0.0,
+          "weapon9_rays": 0.0,
+          "weapon9_target_tests": 0.0,
+          "weapon9_hits": 0.0,
+          "weapon9_damage": 0.0,
+          "weapon9_kills": 0.0,
+          "weapon10_triggers": 0.0,
+          "weapon10_rays": 0.0,
+          "weapon10_target_tests": 0.0,
+          "weapon10_hits": 0.0,
+          "weapon10_damage": 0.0,
+          "weapon10_kills": 0.0,
+          "weapon11_triggers": 0.0,
+          "weapon11_rays": 0.0,
+          "weapon11_target_tests": 0.0,
+          "weapon11_hits": 0.0,
+          "weapon11_damage": 0.0,
+          "weapon11_kills": 0.0,
+          "weapon12_triggers": 0.0,
+          "weapon12_rays": 0.0,
+          "weapon12_target_tests": 0.0,
+          "weapon12_hits": 0.0,
+          "weapon12_damage": 0.0,
+          "weapon12_kills": 0.0,
+          "weapon13_triggers": 0.0,
+          "weapon13_rays": 0.0,
+          "weapon13_target_tests": 0.0,
+          "weapon13_hits": 0.0,
+          "weapon13_damage": 0.0,
+          "weapon13_kills": 0.0,
+          "weapon14_triggers": 0.0,
+          "weapon14_rays": 0.0,
+          "weapon14_target_tests": 0.0,
+          "weapon14_hits": 0.0,
+          "weapon14_damage": 0.0,
+          "weapon14_kills": 0.0,
+          "weapon15_triggers": 0.0,
+          "weapon15_rays": 0.0,
+          "weapon15_target_tests": 0.0,
+          "weapon15_hits": 0.0,
+          "weapon15_damage": 0.0,
+          "weapon15_kills": 0.0,
+          "weapon16_triggers": 0.0,
+          "weapon16_rays": 0.0,
+          "weapon16_target_tests": 0.0,
+          "weapon16_hits": 0.0,
+          "weapon16_damage": 0.0,
+          "weapon16_kills": 0.0
+        },
+        "stageFrameMs": {
+          "sim_ms": {
+            "samples": 31377,
+            "p50": 0.0,
+            "p95": 0.0659,
+            "p99": 0.1941,
+            "max": 1.0121
+          },
+          "crowd_ms": {
+            "samples": 31377,
+            "p50": 0.0,
+            "p95": 0.0299,
+            "p99": 0.0386,
+            "max": 0.7354
+          },
+          "weapon_ms": {
+            "samples": 31377,
+            "p50": 0.0,
+            "p95": 0.0002,
+            "p99": 0.0795,
+            "max": 0.8899
+          },
+          "xp_ms": {
+            "samples": 31377,
+            "p50": 0.0,
+            "p95": 0.0282,
+            "p99": 0.0787,
+            "max": 0.6916
+          },
+          "presentation_ms": {
+            "samples": 31377,
+            "p50": 0.1229,
+            "p95": 0.3276,
+            "p99": 0.569,
+            "max": 1.0085
+          },
+          "render_prepare_ms": {
+            "samples": 31377,
+            "p50": 0.0137,
+            "p95": 0.0226,
+            "p99": 0.1169,
+            "max": 0.7039
+          },
+          "render_submit_ms": {
+            "samples": 31377,
+            "p50": 0.0057,
+            "p95": 0.0097,
+            "p99": 0.0285,
+            "max": 0.5791
+          },
+          "pickup_render_ms": {
+            "samples": 31377,
+            "p50": 0.0174,
+            "p95": 0.0306,
+            "p99": 0.1846,
+            "max": 0.8104
+          },
+          "net_poll_ms": {
+            "samples": 31377,
+            "p50": 0.0402,
+            "p95": 0.1232,
+            "p99": 0.2892,
+            "max": 1.128
+          },
+          "crowd_ms_per_tick": {
+            "samples": 1800,
+            "p50": 0.0305,
+            "p95": 0.0496,
+            "p99": 0.2588,
+            "max": 0.7354
+          }
+        },
+        "gauges": {
+          "enemies": {
+            "first": 35.0,
+            "last": 35.0,
+            "min": 35.0,
+            "max": 35.0
+          },
+          "installed_instances": {
+            "first": 6.0,
+            "last": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "active_instances": {
+            "first": 6.0,
+            "last": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "submitted_instances": {
+            "first": 58.0,
+            "last": 16.0,
+            "min": 0.0,
+            "max": 109.0
+          },
+          "instance_batches": {
+            "first": 3.0,
+            "last": 3.0,
+            "min": 0.0,
+            "max": 4.0
+          },
+          "pickup_carriers": {
+            "first": 51.0,
+            "last": 128.0,
+            "min": 49.0,
+            "max": 128.0
+          },
+          "secondary_cues": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 6.0
+          },
+          "uncollected_xp": {
+            "first": 70.0,
+            "last": 186.0,
+            "min": 70.0,
+            "max": 186.0
+          },
+          "queue_records": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "queue_bytes": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "queue_age_ms": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "payloadRatesPerSecond": {
+          "sent_bytes": 68502.13127942538,
+          "received_bytes": 2804.714186673389,
+          "sent_messages": 126.40965348387107,
+          "received_messages": 75.17240733284
+        },
+        "threadAllocationBytesPerSecond": null,
+        "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+        "memorySamples": [],
+        "longestQueueAgeOver100msSeconds": 0,
+        "queueAgeGate": true
+      },
+      "coldWorkWindow": {
+        "wallSeconds": 40.003024999999994,
+        "tickSpan": 2399,
+        "cumulativeDeltas": {
+          "steering_checks": 2938775.0,
+          "contact_tests": 167930.0,
+          "attraction_queries": 313545.0,
+          "presentation_rays": 42154.0,
+          "presentation_probes": 1475390.0,
+          "sent_bytes": 2736688.0,
+          "received_bytes": 112244.0,
+          "sent_messages": 5021.0,
+          "received_messages": 3008.0,
+          "snapshot_bytes": 2456576.0,
+          "snapshot_messages": 2399.0,
+          "serialization_ms": 46.965799999999994,
+          "allocated_thread_bytes": 0.0,
+          "gc0": 470.0,
+          "gc1": 470.0,
+          "gc2": 470.0,
+          "xp_drops": 355.0,
+          "xp_merges": 119.0,
+          "xp_move_events": 522.0,
+          "xp_collections": 108.0,
+          "weapon1_triggers": 334.0,
+          "weapon1_rays": 334.0,
+          "weapon1_target_tests": 11690.0,
+          "weapon1_hits": 334.0,
+          "weapon1_damage": 6420.0,
+          "weapon1_kills": 91.0,
+          "weapon2_triggers": 315.0,
+          "weapon2_rays": 334.0,
+          "weapon2_target_tests": 11690.0,
+          "weapon2_hits": 315.0,
+          "weapon2_damage": 11240.0,
+          "weapon2_kills": 226.0,
+          "weapon3_triggers": 54.0,
+          "weapon3_rays": 270.0,
+          "weapon3_target_tests": 9450.0,
+          "weapon3_hits": 41.0,
+          "weapon3_damage": 492.0,
+          "weapon3_kills": 0.0,
+          "weapon4_triggers": 54.0,
+          "weapon4_rays": 270.0,
+          "weapon4_target_tests": 9450.0,
+          "weapon4_hits": 29.0,
+          "weapon4_damage": 576.0,
+          "weapon4_kills": 7.0,
+          "weapon5_triggers": 62.0,
+          "weapon5_rays": 62.0,
+          "weapon5_target_tests": 2170.0,
+          "weapon5_hits": 78.0,
+          "weapon5_damage": 1228.0,
+          "weapon5_kills": 3.0,
+          "weapon6_triggers": 62.0,
+          "weapon6_rays": 62.0,
+          "weapon6_target_tests": 2170.0,
+          "weapon6_hits": 58.0,
+          "weapon6_damage": 1392.0,
+          "weapon6_kills": 28.0,
+          "weapon7_triggers": 0.0,
+          "weapon7_rays": 0.0,
+          "weapon7_target_tests": 0.0,
+          "weapon7_hits": 0.0,
+          "weapon7_damage": 0.0,
+          "weapon7_kills": 0.0,
+          "weapon8_triggers": 0.0,
+          "weapon8_rays": 0.0,
+          "weapon8_target_tests": 0.0,
+          "weapon8_hits": 0.0,
+          "weapon8_damage": 0.0,
+          "weapon8_kills": 0.0,
+          "weapon9_triggers": 0.0,
+          "weapon9_rays": 0.0,
+          "weapon9_target_tests": 0.0,
+          "weapon9_hits": 0.0,
+          "weapon9_damage": 0.0,
+          "weapon9_kills": 0.0,
+          "weapon10_triggers": 0.0,
+          "weapon10_rays": 0.0,
+          "weapon10_target_tests": 0.0,
+          "weapon10_hits": 0.0,
+          "weapon10_damage": 0.0,
+          "weapon10_kills": 0.0,
+          "weapon11_triggers": 0.0,
+          "weapon11_rays": 0.0,
+          "weapon11_target_tests": 0.0,
+          "weapon11_hits": 0.0,
+          "weapon11_damage": 0.0,
+          "weapon11_kills": 0.0,
+          "weapon12_triggers": 0.0,
+          "weapon12_rays": 0.0,
+          "weapon12_target_tests": 0.0,
+          "weapon12_hits": 0.0,
+          "weapon12_damage": 0.0,
+          "weapon12_kills": 0.0,
+          "weapon13_triggers": 0.0,
+          "weapon13_rays": 0.0,
+          "weapon13_target_tests": 0.0,
+          "weapon13_hits": 0.0,
+          "weapon13_damage": 0.0,
+          "weapon13_kills": 0.0,
+          "weapon14_triggers": 0.0,
+          "weapon14_rays": 0.0,
+          "weapon14_target_tests": 0.0,
+          "weapon14_hits": 0.0,
+          "weapon14_damage": 0.0,
+          "weapon14_kills": 0.0,
+          "weapon15_triggers": 0.0,
+          "weapon15_rays": 0.0,
+          "weapon15_target_tests": 0.0,
+          "weapon15_hits": 0.0,
+          "weapon15_damage": 0.0,
+          "weapon15_kills": 0.0,
+          "weapon16_triggers": 0.0,
+          "weapon16_rays": 0.0,
+          "weapon16_target_tests": 0.0,
+          "weapon16_hits": 0.0,
+          "weapon16_damage": 0.0,
+          "weapon16_kills": 0.0
+        },
+        "stageFrameMs": {
+          "sim_ms": {
+            "samples": 41496,
+            "p50": 0.0,
+            "p95": 0.0596,
+            "p99": 0.1883,
+            "max": 8.1561
+          },
+          "crowd_ms": {
+            "samples": 41496,
+            "p50": 0.0,
+            "p95": 0.0299,
+            "p99": 0.0387,
+            "max": 0.7354
+          },
+          "weapon_ms": {
+            "samples": 41496,
+            "p50": 0.0,
+            "p95": 0.0002,
+            "p99": 0.0804,
+            "max": 3.5303
+          },
+          "xp_ms": {
+            "samples": 41496,
+            "p50": 0.0,
+            "p95": 0.0195,
+            "p99": 0.0737,
+            "max": 2.0137
+          },
+          "presentation_ms": {
+            "samples": 41496,
+            "p50": 0.121,
+            "p95": 0.3117,
+            "p99": 0.5607,
+            "max": 8.1475
+          },
+          "render_prepare_ms": {
+            "samples": 41496,
+            "p50": 0.0138,
+            "p95": 0.023,
+            "p99": 0.11,
+            "max": 0.7039
+          },
+          "render_submit_ms": {
+            "samples": 41496,
+            "p50": 0.0058,
+            "p95": 0.0101,
+            "p99": 0.0275,
+            "max": 1.9513
+          },
+          "pickup_render_ms": {
+            "samples": 41496,
+            "p50": 0.0165,
+            "p95": 0.0294,
+            "p99": 0.1653,
+            "max": 0.8104
+          },
+          "net_poll_ms": {
+            "samples": 41496,
+            "p50": 0.0411,
+            "p95": 0.1251,
+            "p99": 0.2791,
+            "max": 4.8122
+          },
+          "crowd_ms_per_tick": {
+            "samples": 2398,
+            "p50": 0.0306,
+            "p95": 0.0496,
+            "p99": 0.2363,
+            "max": 0.7354
+          }
+        },
+        "gauges": {
+          "enemies": {
+            "first": 35.0,
+            "last": 35.0,
+            "min": 35.0,
+            "max": 35.0
+          },
+          "installed_instances": {
+            "first": 6.0,
+            "last": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "active_instances": {
+            "first": 6.0,
+            "last": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "submitted_instances": {
+            "first": 10.0,
+            "last": 16.0,
+            "min": 0.0,
+            "max": 113.0
+          },
+          "instance_batches": {
+            "first": 2.0,
+            "last": 3.0,
+            "min": 0.0,
+            "max": 4.0
+          },
+          "pickup_carriers": {
+            "first": 0.0,
+            "last": 128.0,
+            "min": 0.0,
+            "max": 128.0
+          },
+          "secondary_cues": {
+            "first": 6.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 6.0
+          },
+          "uncollected_xp": {
+            "first": 0.0,
+            "last": 186.0,
+            "min": 0.0,
+            "max": 186.0
+          },
+          "queue_records": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "queue_bytes": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "queue_age_ms": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "payloadRatesPerSecond": {
+          "sent_bytes": 68412.026340508,
+          "received_bytes": 2805.8878047347675,
+          "sent_messages": 125.51550788971586,
+          "received_messages": 75.19431343004686
+        },
+        "threadAllocationBytesPerSecond": null,
+        "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+        "memorySamples": [],
+        "longestQueueAgeOver100msSeconds": 0,
+        "queueAgeGate": true
+      },
+      "terminalRow": {
+        "wall_seconds": "44.887474",
+        "frame_ms": "1.1477",
+        "run": "1",
+        "tick": "2400",
+        "state": "Complete",
+        "A_shots": "450",
+        "B_shots": "431",
+        "A_hits": "453",
+        "B_hits": "402",
+        "A_damage": "8140",
+        "B_damage": "13208",
+        "A_kills": "94",
+        "B_kills": "261",
+        "A_hp": "100",
+        "B_hp": "100",
+        "enemies": "35",
+        "rtt_ms": "4.751",
+        "xp": "169",
+        "level": "1",
+        "uncollected_orbs": "128",
+        "weapon1_triggers": "334",
+        "weapon1_rays": "334",
+        "weapon1_target_tests": "11690",
+        "weapon1_hits": "334",
+        "weapon1_damage": "6420",
+        "weapon1_kills": "91",
+        "weapon2_triggers": "315",
+        "weapon2_rays": "334",
+        "weapon2_target_tests": "11690",
+        "weapon2_hits": "315",
+        "weapon2_damage": "11240",
+        "weapon2_kills": "226",
+        "weapon3_triggers": "54",
+        "weapon3_rays": "270",
+        "weapon3_target_tests": "9450",
+        "weapon3_hits": "41",
+        "weapon3_damage": "492",
+        "weapon3_kills": "0",
+        "weapon4_triggers": "54",
+        "weapon4_rays": "270",
+        "weapon4_target_tests": "9450",
+        "weapon4_hits": "29",
+        "weapon4_damage": "576",
+        "weapon4_kills": "7",
+        "weapon5_triggers": "62",
+        "weapon5_rays": "62",
+        "weapon5_target_tests": "2170",
+        "weapon5_hits": "78",
+        "weapon5_damage": "1228",
+        "weapon5_kills": "3",
+        "weapon6_triggers": "62",
+        "weapon6_rays": "62",
+        "weapon6_target_tests": "2170",
+        "weapon6_hits": "58",
+        "weapon6_damage": "1392",
+        "weapon6_kills": "28",
+        "weapon7_triggers": "0",
+        "weapon7_rays": "0",
+        "weapon7_target_tests": "0",
+        "weapon7_hits": "0",
+        "weapon7_damage": "0",
+        "weapon7_kills": "0",
+        "weapon8_triggers": "0",
+        "weapon8_rays": "0",
+        "weapon8_target_tests": "0",
+        "weapon8_hits": "0",
+        "weapon8_damage": "0",
+        "weapon8_kills": "0",
+        "weapon9_triggers": "0",
+        "weapon9_rays": "0",
+        "weapon9_target_tests": "0",
+        "weapon9_hits": "0",
+        "weapon9_damage": "0",
+        "weapon9_kills": "0",
+        "weapon10_triggers": "0",
+        "weapon10_rays": "0",
+        "weapon10_target_tests": "0",
+        "weapon10_hits": "0",
+        "weapon10_damage": "0",
+        "weapon10_kills": "0",
+        "weapon11_triggers": "0",
+        "weapon11_rays": "0",
+        "weapon11_target_tests": "0",
+        "weapon11_hits": "0",
+        "weapon11_damage": "0",
+        "weapon11_kills": "0",
+        "weapon12_triggers": "0",
+        "weapon12_rays": "0",
+        "weapon12_target_tests": "0",
+        "weapon12_hits": "0",
+        "weapon12_damage": "0",
+        "weapon12_kills": "0",
+        "weapon13_triggers": "0",
+        "weapon13_rays": "0",
+        "weapon13_target_tests": "0",
+        "weapon13_hits": "0",
+        "weapon13_damage": "0",
+        "weapon13_kills": "0",
+        "weapon14_triggers": "0",
+        "weapon14_rays": "0",
+        "weapon14_target_tests": "0",
+        "weapon14_hits": "0",
+        "weapon14_damage": "0",
+        "weapon14_kills": "0",
+        "weapon15_triggers": "0",
+        "weapon15_rays": "0",
+        "weapon15_target_tests": "0",
+        "weapon15_hits": "0",
+        "weapon15_damage": "0",
+        "weapon15_kills": "0",
+        "weapon16_triggers": "0",
+        "weapon16_rays": "0",
+        "weapon16_target_tests": "0",
+        "weapon16_hits": "0",
+        "weapon16_damage": "0",
+        "weapon16_kills": "0",
+        "rtt_sequence": "80",
+        "sim_ticks": "1",
+        "sim_ms": "0.033200",
+        "crowd_ms": "0.030400",
+        "weapon_ms": "0.000100",
+        "xp_ms": "0.000000",
+        "steering_checks": "2940000",
+        "contact_tests": "168000",
+        "attraction_queries": "313545",
+        "presentation_rays": "42162",
+        "presentation_probes": "1475670",
+        "presentation_ms": "0.346400",
+        "render_prepare_ms": "0.013600",
+        "render_submit_ms": "0.006400",
+        "pickup_render_ms": "0.312500",
+        "submitted_instances": "16",
+        "instance_batches": "3",
+        "pickup_carriers": "128",
+        "secondary_cues": "0",
+        "net_poll_ms": "0.047000",
+        "sent_bytes": "2738817",
+        "received_bytes": "112328",
+        "sent_messages": "5026",
+        "received_messages": "3012",
+        "snapshot_bytes": "2458624",
+        "snapshot_messages": "2401",
+        "serialization_ms": "47.345400",
+        "queue_records": "0",
+        "queue_bytes": "0",
+        "queue_age_ms": "0.000000",
+        "queue_high_water": "0",
+        "queue_deferred": "0",
+        "allocated_thread_bytes": "0",
+        "gc0": "499",
+        "gc1": "499",
+        "gc2": "499",
+        "installed_instances": "6",
+        "active_instances": "6",
+        "xp_drops": "355",
+        "xp_merges": "119",
+        "xp_move_events": "522",
+        "xp_collections": "108",
+        "uncollected_xp": "186"
+      },
+      "correctness": {
+        "errors": [],
+        "xpDeaths": 355,
+        "outcomeEvents": 1359,
+        "outcomesSha256": "91ee32496f063928f73b993596164ac1d9327014068809318077e98b3dbc3aa8",
+        "growthSha256": "4118c5415d33d132acbf7b6f21ad09283131d6da271f3baf0db0661bc042bcfd",
+        "terminalQueueEmpty": true
+      }
+    },
+    {
+      "folder": "prototypes\\001-stacked-weapons\\artifacts\\gdj24-v1-pair-S2\\client",
+      "report": {
+        "role": "client B",
+        "source": "{\n    \"revision\": \"4a6b5b024be285d00c2de190b2ab451313888456\",\n    \"builtUtc\": \"2026-10-05T09:08:54.2308920Z\",\n    \"dirty\": false\n}",
+        "machine": "Intel(R) Core(TM) i7-10700K CPU @ 3.80GHz",
+        "gpu": "NVIDIA GeForce RTX 3090",
+        "connection": "Direct IPv4 UDP; declare actual address/machine/visibility separately",
+        "reason": "",
+        "hostBindEndpoint": "",
+        "scenario": {
+          "version": 3,
+          "seed": 137,
+          "enemies": 35,
+          "enemyHp": 60,
+          "bodyDamage": 20,
+          "headMultiplier": 2,
+          "headDamage": 40,
+          "run": 1,
+          "startingArsenal": 7,
+          "startingSpecialization": 0,
+          "duration": 40.0,
+          "rifleInterval": 0.11999999731779099,
+          "rifleRate": 8.333333969116211,
+          "name": "Co-op scale (diagnostic) (override)",
+          "identity": "04a61786e9df738943d2a79f9e48847ebb15bfa04dcf45fd14bc93749257d7db",
+          "session": "1508764bf0e445bdb4c33ed8befe68fa"
+        },
+        "scripted": true,
+        "development": false,
+        "previewEnabled": false,
+        "audioVolume": 0.0,
+        "run": 1,
+        "ticks": 2400,
+        "enemies": 35,
+        "catchupLimits": 0,
+        "frameSamples": 39231,
+        "confirmedHits": 364,
+        "width": 1920,
+        "height": 1080,
+        "frameCap": -1,
+        "vsync": 0,
+        "frameP50": 0.8276000000009276,
+        "frameP95": 1.6545000000007803,
+        "frameP99": 2.105500000002536,
+        "frameMax": 4.123499999998614,
+        "confirmP50": 14.071200000000061,
+        "confirmP95": 25.979299999999483,
+        "confirmMax": 48.65619999999993,
+        "rttMs": 3.2578999999941516,
+        "updateLastMs": 0.2236,
+        "updateMaxMs": 19.8215,
+        "abortFrameMs": 0.0,
+        "abortRemainingMs": 0.0,
+        "abortPreviousUpdateMs": 0.0,
+        "previewCaptureLastMs": 0.0,
+        "previewCaptureMaxMs": 0.0,
+        "previewCaptureCompletedAt": 0.0,
+        "previewPollMaxMs": 0.0,
+        "abortCatchupTicks": 0,
+        "state": 2,
+        "players": [
+          {
+            "Position": {
+              "x": -17.18592071533203,
+              "y": 0.0,
+              "z": -8.101799964904785
+            },
+            "Yaw": 322.55804443359375,
+            "Pitch": 2.7445480823516846,
+            "ReturnAt": 0.0,
+            "ImmuneUntil": 0.0,
+            "ContactUntil": 0.0,
+            "Health": 100,
+            "Life": 1,
+            "Shots": 450,
+            "Hits": 453,
+            "Damage": 8140,
+            "Kills": 94,
+            "Weapon": 1,
+            "BodyDamage": 20,
+            "Arsenal": 7,
+            "FirstAddition": 0,
+            "Specialization": 0,
+            "RifleInterval": 0.11999999731779099,
+            "Ready": false,
+            "ChoiceReady": false,
+            "Offer": {
+              "Id": 0,
+              "Tick": 0,
+              "Weapon": 0,
+              "AppliedTick": 0,
+              "ControlRevision": 0,
+              "First": 0,
+              "Second": 0,
+              "Selected": 0
+            }
+          },
+          {
+            "Position": {
+              "x": -17.21965217590332,
+              "y": 0.0,
+              "z": -7.973639965057373
+            },
+            "Yaw": 175.75802612304688,
+            "Pitch": 1.2193102836608887,
+            "ReturnAt": 0.0,
+            "ImmuneUntil": 0.0,
+            "ContactUntil": 0.0,
+            "Health": 100,
+            "Life": 1,
+            "Shots": 431,
+            "Hits": 402,
+            "Damage": 13208,
+            "Kills": 261,
+            "Weapon": 2,
+            "BodyDamage": 20,
+            "Arsenal": 7,
+            "FirstAddition": 0,
+            "Specialization": 0,
+            "RifleInterval": 0.11999999731779099,
+            "Ready": false,
+            "ChoiceReady": false,
+            "Offer": {
+              "Id": 0,
+              "Tick": 0,
+              "Weapon": 0,
+              "AppliedTick": 0,
+              "ControlRevision": 0,
+              "First": 0,
+              "Second": 0,
+              "Selected": 0
+            }
+          }
+        ],
+        "enemyStates": [
+          {
+            "Position": {
+              "x": 17.346086502075195,
+              "y": 0.0,
+              "z": 7.250809669494629
+            },
+            "Health": 60,
+            "Incarnation": 31
+          },
+          {
+            "Position": {
+              "x": 19.13048553466797,
+              "y": 0.0,
+              "z": 26.42942237854004
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 8.635183334350586,
+              "y": 0.0,
+              "z": -18.868881225585938
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 18.756553649902344,
+              "y": 0.0,
+              "z": 25.290863037109375
+            },
+            "Health": 60,
+            "Incarnation": 13
+          },
+          {
+            "Position": {
+              "x": 11.188580513000488,
+              "y": 0.0,
+              "z": -6.350514888763428
+            },
+            "Health": 12,
+            "Incarnation": 20
+          },
+          {
+            "Position": {
+              "x": 6.049335479736328,
+              "y": 0.0,
+              "z": -27.427200317382812
+            },
+            "Health": 60,
+            "Incarnation": 11
+          },
+          {
+            "Position": {
+              "x": 13.78583812713623,
+              "y": 0.0,
+              "z": 19.181150436401367
+            },
+            "Health": 60,
+            "Incarnation": 10
+          },
+          {
+            "Position": {
+              "x": 6.799813747406006,
+              "y": 0.0,
+              "z": 1.0480902194976807
+            },
+            "Health": 60,
+            "Incarnation": 12
+          },
+          {
+            "Position": {
+              "x": 19.638708114624023,
+              "y": 0.0,
+              "z": 15.556194305419922
+            },
+            "Health": 60,
+            "Incarnation": 11
+          },
+          {
+            "Position": {
+              "x": 9.874643325805664,
+              "y": 0.0,
+              "z": 21.169626235961914
+            },
+            "Health": 60,
+            "Incarnation": 8
+          },
+          {
+            "Position": {
+              "x": -27.936843872070312,
+              "y": 0.0,
+              "z": 5.9441022872924805
+            },
+            "Health": 60,
+            "Incarnation": 10
+          },
+          {
+            "Position": {
+              "x": -20.217134475708008,
+              "y": 0.0,
+              "z": 22.707807540893555
+            },
+            "Health": 60,
+            "Incarnation": 11
+          },
+          {
+            "Position": {
+              "x": 0.5559220910072327,
+              "y": 0.0,
+              "z": 11.681367874145508
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 20.126239776611328,
+              "y": 0.0,
+              "z": -27.655080795288086
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 25.76919937133789,
+              "y": 0.0,
+              "z": -20.128307342529297
+            },
+            "Health": 60,
+            "Incarnation": 12
+          },
+          {
+            "Position": {
+              "x": 3.642374038696289,
+              "y": 0.0,
+              "z": 21.479724884033203
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 6.643597602844238,
+              "y": 0.0,
+              "z": 16.801586151123047
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 8.408114433288574,
+              "y": 0.0,
+              "z": 25.418155670166016
+            },
+            "Health": 60,
+            "Incarnation": 12
+          },
+          {
+            "Position": {
+              "x": 11.010175704956055,
+              "y": 0.0,
+              "z": -14.234556198120117
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 15.517462730407715,
+              "y": 0.0,
+              "z": 23.812292098999023
+            },
+            "Health": 60,
+            "Incarnation": 12
+          },
+          {
+            "Position": {
+              "x": 24.252485275268555,
+              "y": 0.0,
+              "z": 2.4740192890167236
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 11.213312149047852,
+              "y": 0.0,
+              "z": -21.105159759521484
+            },
+            "Health": 60,
+            "Incarnation": 13
+          },
+          {
+            "Position": {
+              "x": 7.5635175704956055,
+              "y": 0.0,
+              "z": -7.366055965423584
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 20.237258911132812,
+              "y": 0.0,
+              "z": 25.981266021728516
+            },
+            "Health": 60,
+            "Incarnation": 14
+          },
+          {
+            "Position": {
+              "x": 10.613018989562988,
+              "y": 0.0,
+              "z": 24.837726593017578
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 1.3904551267623901,
+              "y": 0.0,
+              "z": 24.073348999023438
+            },
+            "Health": 60,
+            "Incarnation": 11
+          },
+          {
+            "Position": {
+              "x": 14.539811134338379,
+              "y": 0.0,
+              "z": 20.165985107421875
+            },
+            "Health": 60,
+            "Incarnation": 8
+          },
+          {
+            "Position": {
+              "x": -27.340961456298828,
+              "y": 0.0,
+              "z": 17.367971420288086
+            },
+            "Health": 60,
+            "Incarnation": 7
+          },
+          {
+            "Position": {
+              "x": 9.726110458374023,
+              "y": 0.0,
+              "z": -9.559508323669434
+            },
+            "Health": 60,
+            "Incarnation": 14
+          },
+          {
+            "Position": {
+              "x": -16.19052505493164,
+              "y": 0.0,
+              "z": 26.81313133239746
+            },
+            "Health": 60,
+            "Incarnation": 11
+          },
+          {
+            "Position": {
+              "x": 22.579118728637695,
+              "y": 0.0,
+              "z": 17.003747940063477
+            },
+            "Health": 60,
+            "Incarnation": 9
+          },
+          {
+            "Position": {
+              "x": 20.993606567382812,
+              "y": 0.0,
+              "z": 19.381669998168945
+            },
+            "Health": 60,
+            "Incarnation": 14
+          },
+          {
+            "Position": {
+              "x": 22.50349998474121,
+              "y": 0.0,
+              "z": -16.64488410949707
+            },
+            "Health": 60,
+            "Incarnation": 6
+          },
+          {
+            "Position": {
+              "x": 9.914278984069824,
+              "y": 0.0,
+              "z": 12.291853904724121
+            },
+            "Health": 60,
+            "Incarnation": 8
+          },
+          {
+            "Position": {
+              "x": 3.9511871337890625,
+              "y": 0.0,
+              "z": 19.739530563354492
+            },
+            "Health": 60,
+            "Incarnation": 12
+          }
+        ],
+        "weaponWork": [
+          {
+            "weapon": 1,
+            "player": 0,
+            "instance": 0,
+            "triggers": 334,
+            "rays": 334,
+            "targetTests": 11690,
+            "hits": 334,
+            "damage": 6420,
+            "kills": 91,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 2,
+            "player": 1,
+            "instance": 0,
+            "triggers": 315,
+            "rays": 334,
+            "targetTests": 11690,
+            "hits": 315,
+            "damage": 11240,
+            "kills": 226,
+            "rejected": 19,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 3,
+            "player": 0,
+            "instance": 1,
+            "triggers": 54,
+            "rays": 270,
+            "targetTests": 9450,
+            "hits": 41,
+            "damage": 492,
+            "kills": 0,
+            "rejected": 2,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 4,
+            "player": 1,
+            "instance": 1,
+            "triggers": 54,
+            "rays": 270,
+            "targetTests": 9450,
+            "hits": 29,
+            "damage": 576,
+            "kills": 7,
+            "rejected": 11,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 5,
+            "player": 0,
+            "instance": 2,
+            "triggers": 62,
+            "rays": 62,
+            "targetTests": 2170,
+            "hits": 78,
+            "damage": 1228,
+            "kills": 3,
+            "rejected": 1,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 6,
+            "player": 1,
+            "instance": 2,
+            "triggers": 62,
+            "rays": 62,
+            "targetTests": 2170,
+            "hits": 58,
+            "damage": 1392,
+            "kills": 28,
+            "rejected": 13,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 7,
+            "player": 0,
+            "instance": 3,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 8,
+            "player": 1,
+            "instance": 3,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 9,
+            "player": 0,
+            "instance": 4,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 10,
+            "player": 1,
+            "instance": 4,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 11,
+            "player": 0,
+            "instance": 5,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 12,
+            "player": 1,
+            "instance": 5,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Piercer"
+          },
+          {
+            "weapon": 13,
+            "player": 0,
+            "instance": 6,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 14,
+            "player": 1,
+            "instance": 6,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Rifle"
+          },
+          {
+            "weapon": 15,
+            "player": 0,
+            "instance": 7,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          },
+          {
+            "weapon": 16,
+            "player": 1,
+            "instance": 7,
+            "triggers": 0,
+            "rays": 0,
+            "targetTests": 0,
+            "hits": 0,
+            "damage": 0,
+            "kills": 0,
+            "rejected": 0,
+            "name": "Scattergun"
+          }
+        ],
+        "roster": 2,
+        "xp": 169,
+        "level": 1,
+        "uncollectedOrbs": 128,
+        "uncollectedXp": 186,
+        "choicePhase": 0,
+        "controlRevision": 0,
+        "pickupRadius": 2.0,
+        "attractionRadius": 1.5,
+        "mergeRadius": 0.30000001192092896,
+        "sentBytes": 112439,
+        "receivedBytes": 2738817,
+        "outgoingPending": 0,
+        "outgoingHighWater": 0,
+        "outgoingDeferred": 0,
+        "outgoingLimit": 1024,
+        "authorityWork": {
+          "ticks": 0,
+          "steeringChecks": 0,
+          "contactTests": 0,
+          "contactApplications": 0,
+          "attractionQueries": 0,
+          "simulationMs": 0.0,
+          "crowdMs": 0.0,
+          "weaponMs": 0.0,
+          "xpMs": 0.0,
+          "frameSimulationMs": 0.0,
+          "frameCrowdMs": 0.0,
+          "frameWeaponMs": 0.0,
+          "frameXpMs": 0.0,
+          "frameTicks": 0
+        },
+        "sentMessages": 3015,
+        "receivedMessages": 5026,
+        "snapshotBytes": 0,
+        "snapshotMessages": 0,
+        "allocatedThreadBytes": 0,
+        "managedHeapBytes": 34758656,
+        "workingSetBytes": 0,
+        "presentationRays": 42082,
+        "presentationProbes": 1472870,
+        "serializationMs": 0.0,
+        "outgoingAgeMs": 0.0,
+        "outgoingMaxAgeMs": 0.0,
+        "loggingMs": 2920.4474000000355,
+        "loggingMaxMs": 1.7943,
+        "outgoingBytes": 0,
+        "outgoingBytesHighWater": 0,
+        "xpDrops": 355,
+        "xpMerges": 119,
+        "xpMoveEvents": 522,
+        "xpCollections": 108,
+        "physicalXpMoves": 0
+      },
+      "frameMs": {
+        "samples": 32589,
+        "p50": 0.8138,
+        "p95": 1.5951,
+        "p99": 2.0065,
+        "max": 4.1235,
+        "over6_944": 0,
+        "over13_889": 0
+      },
+      "coldFrameMs": {
+        "samples": 41416,
+        "p50": 0.8353,
+        "p95": 1.6849,
+        "p99": 2.301,
+        "max": 20.6601
+      },
+      "confirmationMs": {
+        "samples": 271,
+        "p50": 12.349,
+        "p95": 19.049,
+        "p99": 20.362,
+        "max": 22.597
+      },
+      "rttMs": {
+        "samples": 61,
+        "p50": 3.379,
+        "p95": 4.579,
+        "p99": 5.566,
+        "max": 5.566
+      },
+      "rttMethod": "one sample per RTT sequence",
+      "firstTick": 601,
+      "lastTick": 2399,
+      "traceWallSpan": 30.022404,
+      "terminalComplete": true,
+      "noCatchup": true,
+      "rawHashes": {
+        "frames.csv": {
+          "bytes": 22383978,
+          "sha256": "641c4996bb8ba39c1fc8f67e97e46c7bba0f1aead708e038184096c48a8df2eb"
+        },
+        "events.csv": {
+          "bytes": 98932,
+          "sha256": "87e876556b901506e182efc332ff80d97e13d9d9b07a08ceda143371048379cf"
+        },
+        "growth.jsonl": {
+          "bytes": 413148,
+          "sha256": "5c9b35a65a093c7a5e4bac5a596078bee83fb1b7b63a3168c0675670b75b782e"
+        },
+        "player.log": {
+          "bytes": 1750,
+          "sha256": "a59757f8b32aa202c935dbbfb4a44fae768d4e20e0e375a04e74945ba8012aa7"
+        },
+        "summary-run-1.json": {
+          "bytes": 18322,
+          "sha256": "cc451d70b796539bb76b1279cec3d7c2a4e9cae29e5094bfed2b05271ec6306a"
+        },
+        "invocation.json": {
+          "bytes": 1115,
+          "sha256": "d8074f57b307f1948751fe80b6a2e56c63ab15e6d4075b1c00a1171016da55c5"
+        },
+        "visibility.json": {
+          "bytes": 280,
+          "sha256": "a384041fd2d4561293c3049f73f67dc4d28f6043d803c70508ea16075806d64a"
+        }
+      },
+      "workWindow": {
+        "wallSeconds": 30.022404,
+        "tickSpan": 1798,
+        "cumulativeDeltas": {
+          "steering_checks": 0.0,
+          "contact_tests": 0.0,
+          "attraction_queries": 0.0,
+          "presentation_rays": 33084.0,
+          "presentation_probes": 1157940.0,
+          "sent_bytes": 84172.0,
+          "received_bytes": 2053882.0,
+          "sent_messages": 2256.0,
+          "received_messages": 3791.0,
+          "snapshot_bytes": 0.0,
+          "snapshot_messages": 0.0,
+          "serialization_ms": 0.0,
+          "allocated_thread_bytes": 0.0,
+          "gc0": 368.0,
+          "gc1": 368.0,
+          "gc2": 368.0,
+          "xp_drops": 267.0,
+          "xp_merges": 97.0,
+          "xp_move_events": 410.0,
+          "xp_collections": 93.0,
+          "weapon1_triggers": 250.0,
+          "weapon1_rays": 250.0,
+          "weapon1_target_tests": 8750.0,
+          "weapon1_hits": 250.0,
+          "weapon1_damage": 4796.0,
+          "weapon1_kills": 66.0,
+          "weapon2_triggers": 234.0,
+          "weapon2_rays": 250.0,
+          "weapon2_target_tests": 8750.0,
+          "weapon2_hits": 234.0,
+          "weapon2_damage": 8440.0,
+          "weapon2_kills": 173.0,
+          "weapon3_triggers": 40.0,
+          "weapon3_rays": 200.0,
+          "weapon3_target_tests": 7000.0,
+          "weapon3_hits": 35.0,
+          "weapon3_damage": 420.0,
+          "weapon3_kills": 0.0,
+          "weapon4_triggers": 40.0,
+          "weapon4_rays": 200.0,
+          "weapon4_target_tests": 7000.0,
+          "weapon4_hits": 25.0,
+          "weapon4_damage": 500.0,
+          "weapon4_kills": 5.0,
+          "weapon5_triggers": 46.0,
+          "weapon5_rays": 46.0,
+          "weapon5_target_tests": 1610.0,
+          "weapon5_hits": 52.0,
+          "weapon5_damage": 820.0,
+          "weapon5_kills": 2.0,
+          "weapon6_triggers": 46.0,
+          "weapon6_rays": 46.0,
+          "weapon6_target_tests": 1610.0,
+          "weapon6_hits": 44.0,
+          "weapon6_damage": 1060.0,
+          "weapon6_kills": 21.0,
+          "weapon7_triggers": 0.0,
+          "weapon7_rays": 0.0,
+          "weapon7_target_tests": 0.0,
+          "weapon7_hits": 0.0,
+          "weapon7_damage": 0.0,
+          "weapon7_kills": 0.0,
+          "weapon8_triggers": 0.0,
+          "weapon8_rays": 0.0,
+          "weapon8_target_tests": 0.0,
+          "weapon8_hits": 0.0,
+          "weapon8_damage": 0.0,
+          "weapon8_kills": 0.0,
+          "weapon9_triggers": 0.0,
+          "weapon9_rays": 0.0,
+          "weapon9_target_tests": 0.0,
+          "weapon9_hits": 0.0,
+          "weapon9_damage": 0.0,
+          "weapon9_kills": 0.0,
+          "weapon10_triggers": 0.0,
+          "weapon10_rays": 0.0,
+          "weapon10_target_tests": 0.0,
+          "weapon10_hits": 0.0,
+          "weapon10_damage": 0.0,
+          "weapon10_kills": 0.0,
+          "weapon11_triggers": 0.0,
+          "weapon11_rays": 0.0,
+          "weapon11_target_tests": 0.0,
+          "weapon11_hits": 0.0,
+          "weapon11_damage": 0.0,
+          "weapon11_kills": 0.0,
+          "weapon12_triggers": 0.0,
+          "weapon12_rays": 0.0,
+          "weapon12_target_tests": 0.0,
+          "weapon12_hits": 0.0,
+          "weapon12_damage": 0.0,
+          "weapon12_kills": 0.0,
+          "weapon13_triggers": 0.0,
+          "weapon13_rays": 0.0,
+          "weapon13_target_tests": 0.0,
+          "weapon13_hits": 0.0,
+          "weapon13_damage": 0.0,
+          "weapon13_kills": 0.0,
+          "weapon14_triggers": 0.0,
+          "weapon14_rays": 0.0,
+          "weapon14_target_tests": 0.0,
+          "weapon14_hits": 0.0,
+          "weapon14_damage": 0.0,
+          "weapon14_kills": 0.0,
+          "weapon15_triggers": 0.0,
+          "weapon15_rays": 0.0,
+          "weapon15_target_tests": 0.0,
+          "weapon15_hits": 0.0,
+          "weapon15_damage": 0.0,
+          "weapon15_kills": 0.0,
+          "weapon16_triggers": 0.0,
+          "weapon16_rays": 0.0,
+          "weapon16_target_tests": 0.0,
+          "weapon16_hits": 0.0,
+          "weapon16_damage": 0.0,
+          "weapon16_kills": 0.0
+        },
+        "stageFrameMs": {
+          "sim_ms": {
+            "samples": 32589,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "crowd_ms": {
+            "samples": 32589,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "weapon_ms": {
+            "samples": 32589,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "xp_ms": {
+            "samples": 32589,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "presentation_ms": {
+            "samples": 32589,
+            "p50": 0.1259,
+            "p95": 0.3684,
+            "p99": 0.5989,
+            "max": 1.1175
+          },
+          "render_prepare_ms": {
+            "samples": 32589,
+            "p50": 0.0138,
+            "p95": 0.021,
+            "p99": 0.1651,
+            "max": 0.5977
+          },
+          "render_submit_ms": {
+            "samples": 32589,
+            "p50": 0.006,
+            "p95": 0.0095,
+            "p99": 0.0158,
+            "max": 0.5957
+          },
+          "pickup_render_ms": {
+            "samples": 32589,
+            "p50": 0.0169,
+            "p95": 0.0278,
+            "p99": 0.195,
+            "max": 0.8188
+          },
+          "net_poll_ms": {
+            "samples": 32589,
+            "p50": 0.0379,
+            "p95": 0.1306,
+            "p99": 0.366,
+            "max": 1.312
+          },
+          "crowd_ms_per_tick": {
+            "samples": 0
+          }
+        },
+        "gauges": {
+          "enemies": {
+            "first": 35.0,
+            "last": 35.0,
+            "min": 35.0,
+            "max": 35.0
+          },
+          "installed_instances": {
+            "first": 6.0,
+            "last": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "active_instances": {
+            "first": 6.0,
+            "last": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "submitted_instances": {
+            "first": 50.0,
+            "last": 40.0,
+            "min": 7.0,
+            "max": 119.0
+          },
+          "instance_batches": {
+            "first": 3.0,
+            "last": 3.0,
+            "min": 2.0,
+            "max": 4.0
+          },
+          "pickup_carriers": {
+            "first": 51.0,
+            "last": 128.0,
+            "min": 49.0,
+            "max": 128.0
+          },
+          "secondary_cues": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 6.0
+          },
+          "uncollected_xp": {
+            "first": 70.0,
+            "last": 186.0,
+            "min": 70.0,
+            "max": 186.0
+          },
+          "queue_records": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "queue_bytes": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "queue_age_ms": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "payloadRatesPerSecond": {
+          "sent_bytes": 2803.6395752985004,
+          "received_bytes": 68411.64351795411,
+          "sent_messages": 75.14388254851276,
+          "received_messages": 126.2723664633918
+        },
+        "threadAllocationBytesPerSecond": null,
+        "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+        "memorySamples": [],
+        "longestQueueAgeOver100msSeconds": 0,
+        "queueAgeGate": true
+      },
+      "coldWorkWindow": {
+        "wallSeconds": 40.022966000000004,
+        "tickSpan": 2399,
+        "cumulativeDeltas": {
+          "steering_checks": 0.0,
+          "contact_tests": 0.0,
+          "attraction_queries": 0.0,
+          "presentation_rays": 42074.0,
+          "presentation_probes": 1472590.0,
+          "sent_bytes": 112171.0,
+          "received_bytes": 2736688.0,
+          "sent_messages": 3007.0,
+          "received_messages": 5021.0,
+          "snapshot_bytes": 0.0,
+          "snapshot_messages": 0.0,
+          "serialization_ms": 0.0,
+          "allocated_thread_bytes": 0.0,
+          "gc0": 470.0,
+          "gc1": 470.0,
+          "gc2": 470.0,
+          "xp_drops": 355.0,
+          "xp_merges": 119.0,
+          "xp_move_events": 522.0,
+          "xp_collections": 108.0,
+          "weapon1_triggers": 334.0,
+          "weapon1_rays": 334.0,
+          "weapon1_target_tests": 11690.0,
+          "weapon1_hits": 334.0,
+          "weapon1_damage": 6420.0,
+          "weapon1_kills": 91.0,
+          "weapon2_triggers": 315.0,
+          "weapon2_rays": 334.0,
+          "weapon2_target_tests": 11690.0,
+          "weapon2_hits": 315.0,
+          "weapon2_damage": 11240.0,
+          "weapon2_kills": 226.0,
+          "weapon3_triggers": 54.0,
+          "weapon3_rays": 270.0,
+          "weapon3_target_tests": 9450.0,
+          "weapon3_hits": 41.0,
+          "weapon3_damage": 492.0,
+          "weapon3_kills": 0.0,
+          "weapon4_triggers": 54.0,
+          "weapon4_rays": 270.0,
+          "weapon4_target_tests": 9450.0,
+          "weapon4_hits": 29.0,
+          "weapon4_damage": 576.0,
+          "weapon4_kills": 7.0,
+          "weapon5_triggers": 62.0,
+          "weapon5_rays": 62.0,
+          "weapon5_target_tests": 2170.0,
+          "weapon5_hits": 78.0,
+          "weapon5_damage": 1228.0,
+          "weapon5_kills": 3.0,
+          "weapon6_triggers": 62.0,
+          "weapon6_rays": 62.0,
+          "weapon6_target_tests": 2170.0,
+          "weapon6_hits": 58.0,
+          "weapon6_damage": 1392.0,
+          "weapon6_kills": 28.0,
+          "weapon7_triggers": 0.0,
+          "weapon7_rays": 0.0,
+          "weapon7_target_tests": 0.0,
+          "weapon7_hits": 0.0,
+          "weapon7_damage": 0.0,
+          "weapon7_kills": 0.0,
+          "weapon8_triggers": 0.0,
+          "weapon8_rays": 0.0,
+          "weapon8_target_tests": 0.0,
+          "weapon8_hits": 0.0,
+          "weapon8_damage": 0.0,
+          "weapon8_kills": 0.0,
+          "weapon9_triggers": 0.0,
+          "weapon9_rays": 0.0,
+          "weapon9_target_tests": 0.0,
+          "weapon9_hits": 0.0,
+          "weapon9_damage": 0.0,
+          "weapon9_kills": 0.0,
+          "weapon10_triggers": 0.0,
+          "weapon10_rays": 0.0,
+          "weapon10_target_tests": 0.0,
+          "weapon10_hits": 0.0,
+          "weapon10_damage": 0.0,
+          "weapon10_kills": 0.0,
+          "weapon11_triggers": 0.0,
+          "weapon11_rays": 0.0,
+          "weapon11_target_tests": 0.0,
+          "weapon11_hits": 0.0,
+          "weapon11_damage": 0.0,
+          "weapon11_kills": 0.0,
+          "weapon12_triggers": 0.0,
+          "weapon12_rays": 0.0,
+          "weapon12_target_tests": 0.0,
+          "weapon12_hits": 0.0,
+          "weapon12_damage": 0.0,
+          "weapon12_kills": 0.0,
+          "weapon13_triggers": 0.0,
+          "weapon13_rays": 0.0,
+          "weapon13_target_tests": 0.0,
+          "weapon13_hits": 0.0,
+          "weapon13_damage": 0.0,
+          "weapon13_kills": 0.0,
+          "weapon14_triggers": 0.0,
+          "weapon14_rays": 0.0,
+          "weapon14_target_tests": 0.0,
+          "weapon14_hits": 0.0,
+          "weapon14_damage": 0.0,
+          "weapon14_kills": 0.0,
+          "weapon15_triggers": 0.0,
+          "weapon15_rays": 0.0,
+          "weapon15_target_tests": 0.0,
+          "weapon15_hits": 0.0,
+          "weapon15_damage": 0.0,
+          "weapon15_kills": 0.0,
+          "weapon16_triggers": 0.0,
+          "weapon16_rays": 0.0,
+          "weapon16_target_tests": 0.0,
+          "weapon16_hits": 0.0,
+          "weapon16_damage": 0.0,
+          "weapon16_kills": 0.0
+        },
+        "stageFrameMs": {
+          "sim_ms": {
+            "samples": 41416,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "crowd_ms": {
+            "samples": 41416,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "weapon_ms": {
+            "samples": 41416,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "xp_ms": {
+            "samples": 41416,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "presentation_ms": {
+            "samples": 41416,
+            "p50": 0.1253,
+            "p95": 0.3757,
+            "p99": 0.6017,
+            "max": 7.8148
+          },
+          "render_prepare_ms": {
+            "samples": 41416,
+            "p50": 0.0141,
+            "p95": 0.022,
+            "p99": 0.1769,
+            "max": 0.7176
+          },
+          "render_submit_ms": {
+            "samples": 41416,
+            "p50": 0.0061,
+            "p95": 0.01,
+            "p99": 0.0237,
+            "max": 1.9418
+          },
+          "pickup_render_ms": {
+            "samples": 41416,
+            "p50": 0.0162,
+            "p95": 0.0273,
+            "p99": 0.1917,
+            "max": 0.8489
+          },
+          "net_poll_ms": {
+            "samples": 41416,
+            "p50": 0.039,
+            "p95": 0.139,
+            "p99": 0.399,
+            "max": 3.9754
+          },
+          "crowd_ms_per_tick": {
+            "samples": 0
+          }
+        },
+        "gauges": {
+          "enemies": {
+            "first": 35.0,
+            "last": 35.0,
+            "min": 35.0,
+            "max": 35.0
+          },
+          "installed_instances": {
+            "first": 6.0,
+            "last": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "active_instances": {
+            "first": 6.0,
+            "last": 6.0,
+            "min": 6.0,
+            "max": 6.0
+          },
+          "submitted_instances": {
+            "first": 10.0,
+            "last": 40.0,
+            "min": 2.0,
+            "max": 119.0
+          },
+          "instance_batches": {
+            "first": 2.0,
+            "last": 3.0,
+            "min": 2.0,
+            "max": 4.0
+          },
+          "pickup_carriers": {
+            "first": 0.0,
+            "last": 128.0,
+            "min": 0.0,
+            "max": 128.0
+          },
+          "secondary_cues": {
+            "first": 6.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 6.0
+          },
+          "uncollected_xp": {
+            "first": 0.0,
+            "last": 186.0,
+            "min": 0.0,
+            "max": 186.0
+          },
+          "queue_records": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "queue_bytes": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "queue_age_ms": {
+            "first": 0.0,
+            "last": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "payloadRatesPerSecond": {
+          "sent_bytes": 2802.665849402565,
+          "received_bytes": 68377.94080528663,
+          "sent_messages": 75.1318630408351,
+          "received_messages": 125.45297117659895
+        },
+        "threadAllocationBytesPerSecond": null,
+        "allocationNote": "Mono returned zero for the entire thread allocation counter; unavailable, not zero allocation",
+        "memorySamples": [],
+        "longestQueueAgeOver100msSeconds": 0,
+        "queueAgeGate": true
+      },
+      "terminalRow": {
+        "wall_seconds": "44.933297",
+        "frame_ms": "1.1425",
+        "run": "1",
+        "tick": "2400",
+        "state": "Complete",
+        "A_shots": "450",
+        "B_shots": "431",
+        "A_hits": "453",
+        "B_hits": "402",
+        "A_damage": "8140",
+        "B_damage": "13208",
+        "A_kills": "94",
+        "B_kills": "261",
+        "A_hp": "100",
+        "B_hp": "100",
+        "enemies": "35",
+        "rtt_ms": "3.258",
+        "xp": "169",
+        "level": "1",
+        "uncollected_orbs": "128",
+        "weapon1_triggers": "334",
+        "weapon1_rays": "334",
+        "weapon1_target_tests": "11690",
+        "weapon1_hits": "334",
+        "weapon1_damage": "6420",
+        "weapon1_kills": "91",
+        "weapon2_triggers": "315",
+        "weapon2_rays": "334",
+        "weapon2_target_tests": "11690",
+        "weapon2_hits": "315",
+        "weapon2_damage": "11240",
+        "weapon2_kills": "226",
+        "weapon3_triggers": "54",
+        "weapon3_rays": "270",
+        "weapon3_target_tests": "9450",
+        "weapon3_hits": "41",
+        "weapon3_damage": "492",
+        "weapon3_kills": "0",
+        "weapon4_triggers": "54",
+        "weapon4_rays": "270",
+        "weapon4_target_tests": "9450",
+        "weapon4_hits": "29",
+        "weapon4_damage": "576",
+        "weapon4_kills": "7",
+        "weapon5_triggers": "62",
+        "weapon5_rays": "62",
+        "weapon5_target_tests": "2170",
+        "weapon5_hits": "78",
+        "weapon5_damage": "1228",
+        "weapon5_kills": "3",
+        "weapon6_triggers": "62",
+        "weapon6_rays": "62",
+        "weapon6_target_tests": "2170",
+        "weapon6_hits": "58",
+        "weapon6_damage": "1392",
+        "weapon6_kills": "28",
+        "weapon7_triggers": "0",
+        "weapon7_rays": "0",
+        "weapon7_target_tests": "0",
+        "weapon7_hits": "0",
+        "weapon7_damage": "0",
+        "weapon7_kills": "0",
+        "weapon8_triggers": "0",
+        "weapon8_rays": "0",
+        "weapon8_target_tests": "0",
+        "weapon8_hits": "0",
+        "weapon8_damage": "0",
+        "weapon8_kills": "0",
+        "weapon9_triggers": "0",
+        "weapon9_rays": "0",
+        "weapon9_target_tests": "0",
+        "weapon9_hits": "0",
+        "weapon9_damage": "0",
+        "weapon9_kills": "0",
+        "weapon10_triggers": "0",
+        "weapon10_rays": "0",
+        "weapon10_target_tests": "0",
+        "weapon10_hits": "0",
+        "weapon10_damage": "0",
+        "weapon10_kills": "0",
+        "weapon11_triggers": "0",
+        "weapon11_rays": "0",
+        "weapon11_target_tests": "0",
+        "weapon11_hits": "0",
+        "weapon11_damage": "0",
+        "weapon11_kills": "0",
+        "weapon12_triggers": "0",
+        "weapon12_rays": "0",
+        "weapon12_target_tests": "0",
+        "weapon12_hits": "0",
+        "weapon12_damage": "0",
+        "weapon12_kills": "0",
+        "weapon13_triggers": "0",
+        "weapon13_rays": "0",
+        "weapon13_target_tests": "0",
+        "weapon13_hits": "0",
+        "weapon13_damage": "0",
+        "weapon13_kills": "0",
+        "weapon14_triggers": "0",
+        "weapon14_rays": "0",
+        "weapon14_target_tests": "0",
+        "weapon14_hits": "0",
+        "weapon14_damage": "0",
+        "weapon14_kills": "0",
+        "weapon15_triggers": "0",
+        "weapon15_rays": "0",
+        "weapon15_target_tests": "0",
+        "weapon15_hits": "0",
+        "weapon15_damage": "0",
+        "weapon15_kills": "0",
+        "weapon16_triggers": "0",
+        "weapon16_rays": "0",
+        "weapon16_target_tests": "0",
+        "weapon16_hits": "0",
+        "weapon16_damage": "0",
+        "weapon16_kills": "0",
+        "rtt_sequence": "81",
+        "sim_ticks": "0",
+        "sim_ms": "0.000000",
+        "crowd_ms": "0.000000",
+        "weapon_ms": "0.000000",
+        "xp_ms": "0.000000",
+        "steering_checks": "0",
+        "contact_tests": "0",
+        "attraction_queries": "0",
+        "presentation_rays": "42082",
+        "presentation_probes": "1472870",
+        "presentation_ms": "0.104100",
+        "render_prepare_ms": "0.021800",
+        "render_submit_ms": "0.012700",
+        "pickup_render_ms": "0.038100",
+        "submitted_instances": "40",
+        "instance_batches": "3",
+        "pickup_carriers": "128",
+        "secondary_cues": "0",
+        "net_poll_ms": "0.577400",
+        "sent_bytes": "112439",
+        "received_bytes": "2738817",
+        "sent_messages": "3015",
+        "received_messages": "5026",
+        "snapshot_bytes": "0",
+        "snapshot_messages": "0",
+        "serialization_ms": "0.000000",
+        "queue_records": "0",
+        "queue_bytes": "0",
+        "queue_age_ms": "0.000000",
+        "queue_high_water": "0",
+        "queue_deferred": "0",
+        "allocated_thread_bytes": "0",
+        "gc0": "499",
+        "gc1": "499",
+        "gc2": "499",
+        "installed_instances": "6",
+        "active_instances": "6",
+        "xp_drops": "355",
+        "xp_merges": "119",
+        "xp_move_events": "522",
+        "xp_collections": "108",
+        "uncollected_xp": "186"
+      },
+      "correctness": {
+        "errors": [],
+        "xpDeaths": 355,
+        "outcomeEvents": 1359,
+        "outcomesSha256": "91ee32496f063928f73b993596164ac1d9327014068809318077e98b3dbc3aa8",
+        "growthSha256": "4118c5415d33d132acbf7b6f21ad09283131d6da271f3baf0db0661bc042bcfd",
+        "terminalQueueEmpty": true
+      }
+    }
+  ],
+  "terminalParity": {
+    "run": true,
+    "ticks": true,
+    "state": true,
+    "players": true,
+    "enemyStates": true,
+    "xp": true,
+    "uncollectedXp": true,
+    "level": true,
+    "choicePhase": true,
+    "controlRevision": true,
+    "weaponWork": true
+  },
+  "replicaEventParity": {
+    "outcomesSha256": true,
+    "growthSha256": true
+  }
+}

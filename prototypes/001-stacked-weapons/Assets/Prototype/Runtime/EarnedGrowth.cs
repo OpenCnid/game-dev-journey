@@ -92,6 +92,9 @@ namespace Journey
         readonly System.Random[] draws = new System.Random[2];
         int orbId, sequence, level = 1;
         public int AttractionQueries { get; private set; }
+        public int Merges { get; private set; }
+        public int Moves { get; private set; }
+        public int Collections { get; private set; }
         public int EarnedXp { get; private set; }
         public int UncollectedXp => EarnedXp - Xp;
         public int Xp { get; private set; }
@@ -102,6 +105,7 @@ namespace Journey
         {
             Orbs.Clear(); deaths.Clear(); collected.Clear(); orbId = sequence = Xp = 0;
             EarnedXp = AttractionQueries = 0; ordered.Clear(); links.Clear();
+            Merges = Moves = Collections = 0;
             level = 1;
             for (int p = 0; p < 2; p++) draws[p] = new System.Random(unchecked(seed * 397 ^ (p + 1) * 7919));
         }
@@ -156,11 +160,13 @@ namespace Journey
                 if ((orb.Position - target.Position).sqrMagnitude <= MergeRadius * MergeRadius)
                 {
                     target.Value = checked(target.Value + orb.Value); Orbs[targetId] = target; Orbs.Remove(id);
+                    Merges++;
                     Emit(s, GrowthEventKind.Merged, target.SourcePlayer, target, consumedOrb: id);
                 }
                 else
                 {
                     Orbs[id] = orb;
+                    Moves++;
                     if (s.Tick % 6 == 0) Emit(s, GrowthEventKind.Moved, orb.SourcePlayer, orb);
                 }
             }
@@ -172,9 +178,10 @@ namespace Journey
             foreach (XpOrb orb in Orbs.Values)
                 for (int p = 0; p < s.Roster; p++) if (s.Players[p].Health > 0 &&
                     (s.Players[p].Position - orb.Position).sqrMagnitude <= PickupRadius * PickupRadius)
-                { collected.Add(orb.Id); Xp += orb.Value; Emit(s, GrowthEventKind.Collected, p, orb); break; }
+                { collected.Add(orb.Id); Xp += orb.Value; Collections++; Emit(s, GrowthEventKind.Collected, p, orb); break; }
             foreach (int id in collected) Orbs.Remove(id);
             s.Xp = Xp;
+            if (!s.Configuration.Growth) return; // Diagnostic XP uses the same ledger/collection without offers.
             // Bank excess collected value, but grant only one decision stage at a time.
             // The physical pause prevents a later entitlement overwriting an unspent offer.
             int next = s.Level + 1;
@@ -200,8 +207,12 @@ namespace Journey
     {
         public readonly Dictionary<int, XpOrb> Orbs = new Dictionary<int, XpOrb>();
         public int UncollectedXp { get; private set; }
+        public int Drops { get; private set; }
+        public int MergeEvents { get; private set; }
+        public int MoveEvents { get; private set; }
+        public int Collections { get; private set; }
         int run, sequence;
-        public void Reset(int generation) { run = generation; sequence = UncollectedXp = 0; Orbs.Clear(); }
+        public void Reset(int generation) { run = generation; sequence = UncollectedXp = Drops = MergeEvents = MoveEvents = Collections = 0; Orbs.Clear(); }
         public bool Apply(GrowthEvent e)
         {
             if (e.Run != run || e.Sequence <= sequence) return false;
@@ -214,6 +225,7 @@ namespace Journey
                 {
                     if (e.Orb.Value != 1 || Orbs.ContainsKey(e.Orb.Id)) throw new ArgumentException("Duplicate or invalid death XP");
                     Orbs.Add(e.Orb.Id, e.Orb); UncollectedXp += e.Orb.Value;
+                    Drops++;
                 }
                 else
                 {
@@ -224,8 +236,9 @@ namespace Journey
                         if (e.ConsumedOrb == e.Orb.Id || !Orbs.TryGetValue(e.ConsumedOrb, out XpOrb consumed) ||
                             e.Orb.Value != checked(prior.Value + consumed.Value)) throw new ArgumentException("Non-conserving XP merge");
                         Orbs.Remove(e.ConsumedOrb);
+                        MergeEvents++;
                     }
-                    else if (e.Orb.Value != prior.Value) throw new ArgumentException("XP changed during movement");
+                    else { if (e.Orb.Value != prior.Value) throw new ArgumentException("XP changed during movement"); MoveEvents++; }
                     Orbs[e.Orb.Id] = e.Orb;
                 }
             }
@@ -233,6 +246,7 @@ namespace Journey
             {
                 if (!Orbs.TryGetValue(e.Orb.Id, out XpOrb collected) || collected.Value != e.Orb.Value) throw new ArgumentException("Unknown collected value");
                 Orbs.Remove(e.Orb.Id); UncollectedXp -= collected.Value;
+                Collections++;
             }
             sequence = e.Sequence; return true;
         }

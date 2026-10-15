@@ -1,0 +1,132 @@
+{
+  "control": {
+    "runtimeSource": "d8c3eee6ad6b4b8109c8d63c524512efb9a918b3",
+    "dirty": false,
+    "builtUtc": "2026-10-05T07:31:06.1059078Z",
+    "archive": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-23-earned-growth\\new-game-dev\\prototypes\\001-stacked-weapons\\build\\StackLab-GDJ3-v3",
+    "fileCount": 167,
+    "totalBytes": 97909030.0
+  },
+  "archiveHashCheck": "PASS",
+  "unexpectedFiles": [],
+  "preservedFailures": [
+    {
+      "folder": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-23-earned-growth\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\gdj3-v2-solo\\solo",
+      "source": {
+        "revision": "bf7f2c2ad7de0013e67657dfaf64581c3d8d5f22",
+        "builtUtc": "2026-10-05T07:14:24.3839462Z",
+        "dirty": false
+      },
+      "reason": "Authority tick catch-up limit",
+      "ticks": 152,
+      "catchupLimits": 1,
+      "previewEnabled": true,
+      "scripted": true,
+      "updateMaxMs": null,
+      "abortFrameMs": null,
+      "lastTracedTick": "144",
+      "lastTracedFrameMs": "6.9539",
+      "maxTracedFrameMs": 21.3322,
+      "frames": 251,
+      "rawFiles": {
+        "events.csv": {
+          "bytes": 1656,
+          "sha256": "9396a519c971df5b8a2e6251872d2ccbdf5d4e931e80bfa86a92431825c12fe6"
+        },
+        "frames.csv": {
+          "bytes": 37803,
+          "sha256": "0834cd2f36d62b1280c5f841e2015e92cae1d47012d67d2f5dd7a285178e0a4e"
+        },
+        "growth.jsonl": {
+          "bytes": 3305,
+          "sha256": "c8a58bdfa28834aa278407c56c61f8adf8a5165a95aa81351a048a56626eb7dd"
+        },
+        "invocation.json": {
+          "bytes": 894,
+          "sha256": "4dff8981bab5c83b0229b946916044fb6fe6125e9c2fa65aedae1978f154941e"
+        },
+        "player.log": {
+          "bytes": 1780,
+          "sha256": "ff92e9d7cd5d7af44d9b0b1a2c97a60f58f72397c3149ffc71295234422ec861"
+        },
+        "preview.jpg": {
+          "bytes": 20160,
+          "sha256": "6b22bad615e5037b279668bc3288597f0b15d5329e48d37b32c36ce960e94aa0"
+        },
+        "scenario.json": {
+          "bytes": 481,
+          "sha256": "bb9b3b527f57fe1a94ac5c44a5e2229c34fb264ec7c6823de08f22f71737e321"
+        },
+        "state.json": {
+          "bytes": 5217,
+          "sha256": "ea4f9248b06341bdf89a270612adf033fbe6ee9f4e8f1fe242d60f047f91bc47"
+        },
+        "summary-run-1.json": {
+          "bytes": 13517,
+          "sha256": "3e23c7cb73a1e9e31adeccb985b460806678f75c17f15b161fc8e41a9358ce0b"
+        }
+      },
+      "limit": "Running-only trace excludes the abort frame; no cause can be established. Preview was enabled."
+    },
+    {
+      "folder": "C:\\Users\\Darian\\.codex\\worktrees\\gdj-23-earned-growth\\new-game-dev\\prototypes\\001-stacked-weapons\\artifacts\\gdj3-v2-reference-all\\solo",
+      "source": {
+        "revision": "bf7f2c2ad7de0013e67657dfaf64581c3d8d5f22",
+        "builtUtc": "2026-10-05T07:14:24.3839462Z",
+        "dirty": false
+      },
+      "reason": "Authority tick catch-up limit",
+      "ticks": 3266,
+      "catchupLimits": 1,
+      "previewEnabled": true,
+      "scripted": true,
+      "updateMaxMs": null,
+      "abortFrameMs": null,
+      "lastTracedTick": "3258",
+      "lastTracedFrameMs": "6.9420",
+      "maxTracedFrameMs": 27.3107,
+      "frames": 5656,
+      "rawFiles": {
+        "events.csv": {
+          "bytes": 67328,
+          "sha256": "a2f2a540f0c8d71f72175ed5962ba6a2aad68fef56543d0e0ae2ea7ae0b0fa17"
+        },
+        "frames.csv": {
+          "bytes": 1008281,
+          "sha256": "1292e25776aeab5fb6f107d5925e435e83e680aaa7aeb62acf5efa35a01e5167"
+        },
+        "growth.jsonl": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "invocation.json": {
+          "bytes": 949,
+          "sha256": "8f98eb058c65bed0a4f1b33afc6d600dc3d3e45274effc042afc2bcb2d6ecb01"
+        },
+        "player.log": {
+          "bytes": 1798,
+          "sha256": "ac6ffe9217d366b7268eb14da883a7597ea2f89cde603d7452d53773ad1ddab2"
+        },
+        "preview.jpg": {
+          "bytes": 21678,
+          "sha256": "d0a005a43954d2a3a1e1ae0273181ccfd9cf0e252d4c5c675274a9ad8d868418"
+        },
+        "scenario.json": {
+          "bytes": 507,
+          "sha256": "8229785a90f7a0ec66593435ef30ab431d446cd7be495b280f35d039f5c3f0b5"
+        },
+        "state.json": {
+          "bytes": 5255,
+          "sha256": "cdb703eae94ab699c0962d9376881fdc35c2f1af8313d9744c2aed26bf7a7241"
+        },
+        "summary-run-1.json": {
+          "bytes": 13647,
+          "sha256": "41f232fdddc3a793882404fe944d1be8dfe32655b8a1a62de8f79c99804d6961"
+        }
+      },
+      "limit": "Running-only trace excludes the abort frame; no cause can be established. Preview was enabled."
+    }
+  ],
+  "newPerformanceCapture": false,
+  "stallCause": "unresolved"
+}

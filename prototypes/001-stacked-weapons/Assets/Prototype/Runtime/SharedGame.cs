@@ -11,6 +11,7 @@ namespace Journey
     public sealed class SharedGame : MonoBehaviour
     {
         readonly SharedSnapshot display = new SharedSnapshot(), incoming = new SharedSnapshot();
+        readonly SnapshotAssembly snapshotAssembly = new SnapshotAssembly();
         readonly Queue<SharedHit> feedback = new Queue<SharedHit>();
         readonly Dictionary<int, double> emitted = new Dictionary<int, double>();
         readonly List<double> frames = new List<double>(), confirms = new List<double>();
@@ -24,11 +25,11 @@ namespace Journey
         LineRenderer allyShot;
         int local, run, life, inputSequence, shotSequence, catchupLimits;
         float yaw, pitch, inputTime, inputRemaining, accumulator, pingRemaining;
-        readonly float[] shotRemaining = new float[3];
-        readonly WeaponWork[] weaponWork = new WeaponWork[6];
+        readonly float[] shotRemaining = new float[WeaponArsenal.MaxInstances];
+        readonly WeaponWork[] weaponWork = new WeaponWork[WeaponArsenal.MaxOwnedIds];
         readonly AimResult[] cueTargets = new AimResult[ScenarioConfiguration.MaxEnemies];
-        readonly LineRenderer[] secondaryLines = new LineRenderer[8];
-        Material scatterTrail, pierceTrail;
+        readonly LineRenderer[] secondaryLines = new LineRenderer[WeaponArsenal.MaxInstances * 5];
+        Material scatterTrail, pierceTrail, rifleTrail;
         int secondaryCue;
         Vector3 predicted;
         bool inputActive = true, scripted, quitAtEnd, saved, solo, soloPrepared, cardsVisible = true;
@@ -44,6 +45,19 @@ namespace Journey
         double previousClock, lastRtt;
         double updateLastMs, updateMaxMs, abortFrameMs, abortRemainingMs, abortPreviousUpdateMs;
         int abortCatchupTicks;
+        int rttSequence;
+        long presentationProbes, presentationRays;
+        double pollMs, presentationMs, pickupRenderMs;
+        double loggingMs, loggingMaxMs;
+        bool diagnostics, terminalObserved;
+        StreamWriter diagnosticLog;
+        readonly NetworkWork noConnectionWork = new NetworkWork();
+        double publishMs, stateCopyMs, inputAimMs, diagnosticLoggingMs, terminalAt = -1, firstQueueEmptyAfterSave = -1;
+        long publishCount;
+        bool exactSteering;
+        double memoryAt, memorySampleMs, memorySamplingMs;
+        long sampledHeapBytes, sampledWorkingSetBytes;
+        int memorySamples;
         string reason = "", output = "", screenshot = "";
         StreamWriter frameLog, hitLog;
         GUIStyle heading, small, lifeHeading, lifeDetail, choiceCard;
@@ -65,6 +79,7 @@ namespace Journey
             binding = new SharedScenarioBinding(host ? configuration ?? ScenarioConfiguration.Named(ScenarioKind.SharedRifle) : null);
             view = arena; projection = sim; local = host ? 0 : 1;
             var args = Environment.GetCommandLineArgs();
+            diagnostics = Array.IndexOf(args, "-sharedDiagnostics") >= 0;
             if (Array.IndexOf(args, "-sharedMute") >= 0) AudioListener.volume = 0;
             scripted = Array.IndexOf(args, "-sharedScripted") >= 0; quitAtEnd = Array.IndexOf(args, "-sharedQuit") >= 0;
             screenshotAtLevelUp = Array.IndexOf(args, "-screenshotAtLevelUp") >= 0;
@@ -72,6 +87,7 @@ namespace Journey
             for (int i = 0; i < args.Length - 1; i++)
             {
                 if (args[i] == "-sharedResults") output = Path.GetFullPath(args[i + 1]);
+                if (args[i] == "-sharedSteering") exactSteering = args[i + 1] == "grid" ? true : args[i + 1] == "pairwise" ? false : throw new ArgumentException("Steering must be grid or pairwise");
                 if (args[i] == "-growthChoice") scriptedChoice = args[i + 1] == "stronger" ? UpgradeId.StrongerHits : args[i + 1] == "faster" ? UpgradeId.FasterFire : throw new ArgumentException("Unknown growth choice");
                 if (args[i] == "-stackPath") scriptedStackPath = args[i + 1] == "broad" || args[i + 1] == "scatter" || args[i + 1] == "pierce" ? args[i + 1] : throw new ArgumentException("Unknown stack path");
                 if (args[i] == "-screenshot") screenshot = Path.GetFullPath(args[i + 1]);
@@ -83,18 +99,25 @@ namespace Journey
             { preview = gameObject.AddComponent<SharedPreview>(); preview.Initialize(this, view.Camera, output); }
             frameLog = new StreamWriter(Path.Combine(output, "frames.csv"));
             frameLog.Write("wall_seconds,frame_ms,run,tick,state,A_shots,B_shots,A_hits,B_hits,A_damage,B_damage,A_kills,B_kills,A_hp,B_hp,enemies,rtt_ms,xp,level,uncollected_orbs");
-            for (int id = 1; id <= 6; id++) frameLog.Write($",weapon{id}_triggers,weapon{id}_rays,weapon{id}_target_tests,weapon{id}_hits,weapon{id}_damage,weapon{id}_kills");
+            for (int id = 1; id <= WeaponArsenal.MaxOwnedIds; id++) frameLog.Write($",weapon{id}_triggers,weapon{id}_rays,weapon{id}_target_tests,weapon{id}_hits,weapon{id}_damage,weapon{id}_kills");
+            frameLog.Write(",rtt_sequence,sim_ticks,sim_ms,crowd_ms,weapon_ms,xp_ms,steering_checks,contact_tests,attraction_queries,presentation_rays,presentation_probes,presentation_ms,render_prepare_ms,render_submit_ms,pickup_render_ms,submitted_instances,instance_batches,pickup_carriers,secondary_cues,net_poll_ms,sent_bytes,received_bytes,sent_messages,received_messages,snapshot_bytes,snapshot_messages,serialization_ms,queue_records,queue_bytes,queue_age_ms,queue_high_water,queue_deferred,allocated_thread_bytes,gc0,gc1,gc2,installed_instances,active_instances,xp_drops,xp_merges,xp_move_events,xp_collections,uncollected_xp");
+            frameLog.Write(",memory_samples,managed_heap_bytes,working_set_bytes,memory_sample_ms");
             frameLog.WriteLine();
             hitLog = new StreamWriter(Path.Combine(output, "events.csv"));
             hitLog.WriteLine("wall_seconds,run,player,weapon,event,pose_tick,life,decision,enemy,incarnation,region,requested,before,actual,after,confirmed_delay_ms,trigger,ray_index,rays,target_tests");
             growthLog = new StreamWriter(Path.Combine(output, "growth.jsonl"));
+            if (diagnostics)
+            {
+                diagnosticLog = new StreamWriter(Path.Combine(output, "publication.csv"));
+                diagnosticLog.WriteLine("wall_seconds,frame_ms,run,tick,state,update_cpu_ms,sim_ms,crowd_ms,weapon_ms,xp_ms,presentation_ms,input_aim_ms,publish_ms,state_copy_ms,publish_count,serialization_ms,logging_ms,diagnostic_logging_ms,memory_sample_ms," + NetworkWork.Header + ",queue_records,queue_bytes,queue_age_ms");
+            }
             pickups = new XpPresentation(transform);
             if (!solo)
             {
-                connection = new SharedConnection(host, address, port, Array.IndexOf(args, "-sharedLoopback") >= 0);
+                connection = new SharedConnection(host, address, port, Array.IndexOf(args, "-sharedLoopback") >= 0, diagnostics);
                 connection.Received += Receive; connection.Lost += Abort;
             }
-            if (host) { authority = new SharedEncounter(binding.Configuration, binding.Session, solo ? 1 : 2); display.CopyFrom(authority.Current); authority.Resolved += Resolve; if (authority.Growth != null) authority.Growth.Changed += GrowthChanged; }
+            if (host) { authority = new SharedEncounter(binding.Configuration, binding.Session, solo ? 1 : 2, exactSteering); display.CopyFrom(authority.Current); authority.Resolved += Resolve; if (authority.Growth != null) authority.Growth.Changed += GrowthChanged; }
             ally = GameObject.CreatePrimitive(PrimitiveType.Capsule); ally.name = "Teammate " + (host ? "B" : "A");
             Destroy(ally.GetComponent<Collider>()); ally.transform.SetParent(transform);
             allyMaterial = new Material(Resources.Load<Material>("Body"));
@@ -106,6 +129,7 @@ namespace Journey
             allyShot.enabled = false;
             scatterTrail = new Material(Resources.Load<Material>("Trail")); scatterTrail.color = new Color(1, .55f, .1f);
             pierceTrail = new Material(Resources.Load<Material>("Trail")); pierceTrail.color = new Color(.8f, .35f, 1);
+            rifleTrail = new Material(Resources.Load<Material>("Trail")); rifleTrail.color = new Color(.1f, .9f, 1);
             for (int i = 0; i < secondaryLines.Length; i++)
             {
                 var line = new GameObject("Secondary shot " + i).AddComponent<LineRenderer>(); line.transform.SetParent(transform);
@@ -142,8 +166,10 @@ namespace Journey
             else if (message == SharedConnection.Message.Snapshot && authority == null)
             {
                 SharedConnection.ReadSnapshot(r, incoming);
-                if (binding.CanAdopt(incoming, display)) { if (incoming.Run != display.Run) orbReplica.Reset(incoming.Run); display.CopyFrom(incoming); }
+                AdoptSnapshot();
             }
+            else if (message == SharedConnection.Message.SnapshotChunk && authority == null)
+            { if (snapshotAssembly.Read(r, incoming, Time.realtimeSinceStartupAsDouble)) AdoptSnapshot(); }
             else if (message == SharedConnection.Message.Growth && authority == null) GrowthChanged(GrowthEvent.Read(r));
             else if (message == SharedConnection.Message.Choice && authority != null)
             {
@@ -160,17 +186,22 @@ namespace Journey
             }
             else if (message == SharedConnection.Message.Abort) Abort(r.ReadString());
             else if (message == SharedConnection.Message.Ping) { double stamp = r.ReadDouble(); connection.Send(SharedConnection.Message.Pong, w => w.Write(stamp)); }
-            else if (message == SharedConnection.Message.Pong) lastRtt = (Time.realtimeSinceStartupAsDouble - r.ReadDouble()) * 1000;
+            else if (message == SharedConnection.Message.Pong) { lastRtt = (Time.realtimeSinceStartupAsDouble - r.ReadDouble()) * 1000; rttSequence++; }
         }
+        void AdoptSnapshot()
+        { if (binding.CanAdopt(incoming, display)) { if (incoming.Run != display.Run) orbReplica.Reset(incoming.Run); display.CopyFrom(incoming); } }
         void Resolve(SharedHit hit)
         {
             feedback.Enqueue(hit); connection?.Send(SharedConnection.Message.Hit, w => SharedConnection.WriteHit(w, hit));
         }
         void Publish()
         {
+            long whole = diagnostics ? StageProfile.Begin() : 0, copy = diagnostics ? StageProfile.Begin() : 0;
             if (display.Run != authority.Current.Run) orbReplica.Reset(authority.Current.Run);
             display.CopyFrom(authority.Current);
-            connection?.Send(SharedConnection.Message.Snapshot, w => SharedConnection.WriteSnapshot(w, display));
+            if (diagnostics) stateCopyMs += StageProfile.End(copy);
+            connection?.SendSnapshot(display);
+            if (diagnostics) { publishMs += StageProfile.End(whole); publishCount++; }
         }
         void Abort(string value)
         {
@@ -190,6 +221,7 @@ namespace Journey
             if (newRun)
             {
                 accumulator = 0; shotSequence = 0; emitted.Clear(); saved = false;
+                terminalAt = firstQueueEmptyAfterSave = -1; terminalObserved = false;
                 // Poll can deliver the new snapshot and its first hits together.
                 // Retain that run's feedback while discarding prior-run events.
                 int queued = feedback.Count;
@@ -199,6 +231,7 @@ namespace Journey
                     if (hit.Source.Run == run) feedback.Enqueue(hit);
                 }
                 frames.Clear(); confirms.Clear(); catchupLimits = 0;
+                presentationRays = presentationProbes = 0;
                 abortFrameMs = abortRemainingMs = abortPreviousUpdateMs = 0; abortCatchupTicks = 0;
                 for (int i = 0; i < weaponWork.Length; i++) weaponWork[i] = new WeaponWork(i + 1);
                 previousWatched = -1; viewTransition = 0; cardsVisible = true; confirmationUntil = 0; emissionInterval = player.RifleInterval;
@@ -208,10 +241,21 @@ namespace Journey
         {
             if (binding == null) return;
             long updateStarted = System.Diagnostics.Stopwatch.GetTimestamp();
+            StageProfile.Reset(); authority?.Work.BeginFrame();
             double now = Time.realtimeSinceStartupAsDouble, frame = (now - previousClock) * 1000; previousClock = now;
+            memorySampleMs = 0;
+            if (now >= memoryAt)
+            {
+                long memoryStarted = StageProfile.Begin();
+                sampledHeapBytes = GC.GetTotalMemory(false);
+                using (var process = System.Diagnostics.Process.GetCurrentProcess()) sampledWorkingSetBytes = process.WorkingSet64;
+                memorySamples++; memoryAt = now + 1;
+                memorySampleMs = StageProfile.End(memoryStarted); memorySamplingMs += memorySampleMs;
+            }
             bool runningAtFrameStart = display.State == SharedState.Running;
             int frameRun = display.Run;
-            connection?.Poll();
+            long pollStarted = StageProfile.Begin(); connection?.Poll(); pollMs = StageProfile.End(pollStarted);
+            if (snapshotAssembly.AgeMs(now) > 1000) Abort("Snapshot assembly timed out");
             if (previousState == SharedState.Choosing && display.State == SharedState.Running)
             { frame = accumulator = 0; inputActive = true; predicted = display.Players[local].Position; previewInputUntil = 0; confirmationUntil = (float)now + 2; SetCursor(!scripted && preview == null); }
             if (solo && display.State == SharedState.Waiting && soloPrepared)
@@ -236,6 +280,7 @@ namespace Journey
             if (keyboard != null && keyboard.enterKey.wasPressedThisFrame) ContinueChoice();
             if (authority != null && authority.CommitChoices()) Publish();
             if (scripted && GrowthUpgrade.Valid(ScriptedUpgrade()) && display.State == SharedState.Choosing && display.Players[local].Offer.Selected != UpgradeId.None) ContinueChoice();
+            long inputStarted = diagnostics ? StageProfile.Begin() : 0;
             float dt = Mathf.Min(.05f, (float)(frame * .001));
             bool active = display.State == SharedState.Running && player.Health > 0;
             Vector3 movement = Vector3.zero;
@@ -246,7 +291,7 @@ namespace Journey
                 {
                     float t = display.Elapsed;
                     Vector3 goal = new Vector3(Mathf.Cos(t * .30f + local * Mathf.PI) * 22, 0, Mathf.Sin(t * .30f + local * Mathf.PI) * 22);
-                    if (display.Configuration.Growth && orbReplica.Orbs.Count > 0)
+                    if (display.Configuration.Pickups && orbReplica.Orbs.Count > 0)
                     {
                         float nearest = float.PositiveInfinity;
                         foreach (XpOrb orb in orbReplica.Orbs.Values)
@@ -286,6 +331,7 @@ namespace Journey
                         w.Write(run); w.Write(life); w.Write(inputSequence); w.Write(inputTime); SharedConnection.Vector(w, predicted); w.Write(yaw); w.Write(pitch); });
                 }
             }
+            if (diagnostics) inputAimMs = StageProfile.End(inputStarted);
             if (authority != null && display.State == SharedState.Running)
             {
                 if (previousState == SharedState.Choosing) { frame = accumulator = 0; }
@@ -304,6 +350,7 @@ namespace Journey
             }
             SyncGeneration();
             player = display.Players[local];
+            long presentationStarted = StageProfile.Begin();
             if (player.RifleInterval != emissionInterval)
             { shotRemaining[0] = Mathf.Max(0, shotRemaining[0]) / emissionInterval * player.RifleInterval; emissionInterval = player.RifleInterval; }
             active = display.State == SharedState.Running && player.Health > 0;
@@ -321,7 +368,7 @@ namespace Journey
             {
                 SharedHit hit = feedback.Dequeue();
                 if (hit.Source.Run != run) continue;
-                if (hit.Source.Weapon >= 1 && hit.Source.Weapon <= 6) weaponWork[hit.Source.Weapon - 1].Record(hit);
+                if (hit.Source.Weapon >= 1 && hit.Source.Weapon <= WeaponArsenal.MaxOwnedIds) weaponWork[hit.Source.Weapon - 1].Record(hit);
                 double delay = -1;
                 if (hit.Source.Player == local && emitted.TryGetValue(hit.Source.Event, out double emission))
                 {
@@ -338,16 +385,16 @@ namespace Journey
             }
             if (active && (scripted || (preview == null ? inputActive : previewActive && previewFire)))
             {
-                for (int s = 0; s < 3; s++)
+                for (int s = 0; s < WeaponArsenal.MaxInstances; s++)
                 {
-                    WeaponSlot slot = (WeaponSlot)s; int weapon = WeaponArsenal.Id(local, slot);
+                    int weapon = WeaponArsenal.Id(local, s); WeaponSlot slot = WeaponArsenal.Slot(weapon);
                     if (!WeaponArsenal.Owns(player, local, weapon)) { shotRemaining[s] = 0; continue; }
                     shotRemaining[s] -= dt;
                     while (shotRemaining[s] <= 0)
                     {
                         shotRemaining[s] += WeaponArsenal.Interval(player, slot);
                         Ray ray = new Ray(view.Camera.transform.position, view.Camera.transform.forward);
-                        if (slot == WeaponSlot.Rifle) view.ShowShot(ray.GetPoint(display.Query(ray).Distance));
+                        if (s == 0) { view.ShowShot(ray.GetPoint(display.Query(ray).Distance)); presentationRays++; presentationProbes += display.Enemies.Length; }
                         else SecondaryCue(player, slot, ray);
                         var shot = new SharedShot { Run = run, Player = local, Life = life, Weapon = weapon, Event = ++shotSequence, PoseTick = display.Tick, Ray = ray };
                         emitted[shot.Event] = now;
@@ -357,9 +404,14 @@ namespace Journey
                 }
             }
             view.Draw(projection, 1);
+            // CollectBars performs one full head/body precision query per presented running frame.
+            if (projection.State == RunState.Running || projection.State == RunState.Paused) { presentationRays++; presentationProbes += projection.Count; }
             if (solo && display.State == SharedState.Waiting) soloPrepared = true;
             if (display.State == SharedState.Choosing) { predicted = display.Players[local].Position; inputActive = false; SetCursor(false); }
-            pickups.Draw(orbReplica, view.Camera, display.Players[local].Position, display.Configuration.Growth && player.Health > 0 && (display.State == SharedState.Running || display.State == SharedState.Choosing));
+            long pickupStarted = StageProfile.Begin();
+            pickups.Draw(orbReplica, view.Camera, display.Players[local].Position, display.Configuration.Pickups && player.Health > 0 && (display.State == SharedState.Running || display.State == SharedState.Choosing));
+            pickupRenderMs = StageProfile.End(pickupStarted);
+            presentationMs = StageProfile.End(presentationStarted);
             if (levelCue || pickupCue && now >= pickupCueAt)
             { view.PlayGrowthCue(levelCue); pickupCueAt = now + .075; levelCue = pickupCue = false; }
             previousState = display.State;
@@ -367,20 +419,76 @@ namespace Journey
             ally.transform.position = display.Players[other].Position + Vector3.up;
             pingRemaining -= dt;
             if (connection != null && connection.Connected && pingRemaining <= 0) { pingRemaining = .5f; connection.Send(SharedConnection.Message.Ping, w => w.Write(now)); }
-            if (display.State == SharedState.Running)
+            if (display.State == SharedState.Running || display.State != SharedState.Waiting && display.State != SharedState.Choosing && !saved)
             {
-                if (display.Elapsed >= 3 && frame > 0) frames.Add(frame);
+                long loggingStarted = StageProfile.Begin();
+                if (display.State == SharedState.Running && display.Elapsed >= 3 && frame > 0) frames.Add(frame);
                 SharedPlayer a = display.Players[0], b = display.Players[1];
                 frameLog.Write(FormattableString.Invariant($"{now:F6},{frame:F4},{run},{display.Tick},{display.State},{a.Shots},{b.Shots},{a.Hits},{b.Hits},{a.Damage},{b.Damage},{a.Kills},{b.Kills},{a.Health},{b.Health},{display.Enemies.Length},{lastRtt:F3},{display.Xp},{display.Level},{orbReplica.Orbs.Count}"));
                 foreach (WeaponWork work in weaponWork) frameLog.Write($",{work.triggers},{work.rays},{work.targetTests},{work.hits},{work.damage},{work.kills}");
+                WriteWorkFrame();
                 frameLog.WriteLine();
+                double logMs = StageProfile.End(loggingStarted); loggingMs += logMs; loggingMaxMs = Math.Max(loggingMaxMs, logMs);
             }
-            else if (display.State != SharedState.Waiting && display.State != SharedState.Choosing && !saved)
+            if (display.State != SharedState.Running && display.State != SharedState.Waiting && display.State != SharedState.Choosing && !saved)
             { Save(); SetCursor(false); if (quitAtEnd) Application.Quit(display.State == SharedState.Aborted ? 2 : 0); }
             if (screenshot.Length > 0 && (screenshotAtLevelUp ? display.State == SharedState.Choosing : display.State == SharedState.Running && display.Elapsed >= 5))
             { Directory.CreateDirectory(Path.GetDirectoryName(screenshot)); ScreenCapture.CaptureScreenshot(screenshot); screenshot = ""; }
             updateLastMs = (System.Diagnostics.Stopwatch.GetTimestamp() - updateStarted) * 1000.0 / System.Diagnostics.Stopwatch.Frequency;
             updateMaxMs = Math.Max(updateMaxMs, updateLastMs);
+            if (diagnostics && !terminalObserved)
+            {
+                long diagnosticStarted = StageProfile.Begin();
+                WritePublicationFrame(now, frame);
+                if (saved)
+                {
+                    if (firstQueueEmptyAfterSave < 0 && (connection == null || connection.PendingMessages == 0))
+                        firstQueueEmptyAfterSave = Time.realtimeSinceStartupAsDouble - terminalAt;
+                    if (Time.realtimeSinceStartupAsDouble - terminalAt >= 2)
+                    { ObserveTerminal("terminal-after-2s.json"); terminalObserved = true; diagnosticLog.Flush(); hitLog.Flush(); growthLog.Flush(); }
+                }
+                diagnosticLoggingMs += StageProfile.End(diagnosticStarted);
+            }
+        }
+        void WritePublicationFrame(double now, double frame)
+        {
+            SharedWork w = authority?.Work;
+            diagnosticLog.Write(FormattableString.Invariant($"{now:F6},{frame:F4},{run},{display.Tick},{display.State},{updateLastMs:F6},{w?.frameSimulationMs ?? 0:F6},{w?.frameCrowdMs ?? 0:F6},{w?.frameWeaponMs ?? 0:F6},{w?.frameXpMs ?? 0:F6},{presentationMs:F6},{inputAimMs:F6},{publishMs:F6},{stateCopyMs:F6},{publishCount},{connection?.SerializationMs ?? 0:F6},{loggingMs:F6},{diagnosticLoggingMs:F6},{memorySampleMs:F6},"));
+            (connection?.Diagnostic ?? noConnectionWork).Write(diagnosticLog);
+            diagnosticLog.WriteLine(FormattableString.Invariant($",{connection?.PendingMessages ?? 0},{connection?.PendingBytes ?? 0},{connection?.PendingAgeMs ?? 0:F6}"));
+        }
+        [Serializable] sealed class TerminalObservation
+        {
+            public string source, role, method;
+            public int run, tick, xp, uncollectedXp, pendingRecords, pendingBytes;
+            public SharedState state;
+            public double secondsAfterSave, firstQueueEmptyAfterSave, diagnosticLoggingMs;
+            public long sentBytes, sentMessages, receivedBytes, receivedMessages;
+            public SharedConnection.PendingRecord[] pending;
+            public NetworkWork network;
+            public WeaponWork[] weapons;
+            public SharedPlayer[] players;
+        }
+        void ObserveTerminal(string file)
+        {
+            TextAsset stamp = Resources.Load<TextAsset>("BuildInfo");
+            var observation = new TerminalObservation { source = stamp == null ? "Editor" : stamp.text, role = local == 0 ? "host A" : "client B",
+                method = "Observational probe only; original first-terminal summary unchanged. Empty application FIFO does not prove transport acknowledgement.",
+                run = run, tick = display.Tick, state = display.State, xp = display.Xp, uncollectedXp = orbReplica.UncollectedXp,
+                secondsAfterSave = Time.realtimeSinceStartupAsDouble - terminalAt, firstQueueEmptyAfterSave = firstQueueEmptyAfterSave,
+                diagnosticLoggingMs = diagnosticLoggingMs, pendingRecords = connection?.PendingMessages ?? 0, pendingBytes = connection?.PendingBytes ?? 0,
+                sentBytes = connection?.SentBytes ?? 0, sentMessages = connection?.SentMessages ?? 0, receivedBytes = connection?.ReceivedBytes ?? 0, receivedMessages = connection?.ReceivedMessages ?? 0,
+                pending = connection?.ObservePending(), network = connection?.Diagnostic, weapons = weaponWork, players = display.Players };
+            File.WriteAllText(Path.Combine(output, file), JsonUtility.ToJson(observation, true));
+        }
+        void WriteWorkFrame()
+        {
+            SharedWork work = authority?.Work;
+            int installed = 0, active = 0;
+            for (int p = 0; p < display.Roster; p++) for (int instance = 0; instance < WeaponArsenal.MaxInstances; instance++)
+                if ((display.Players[p].Arsenal & (1 << instance)) != 0) { installed++; if (display.Players[p].Health > 0) active++; }
+            frameLog.Write(FormattableString.Invariant($",{rttSequence},{work?.frameTicks ?? 0},{work?.frameSimulationMs ?? 0:F6},{work?.frameCrowdMs ?? 0:F6},{work?.frameWeaponMs ?? 0:F6},{work?.frameXpMs ?? 0:F6},{work?.steeringChecks ?? 0},{work?.contactTests ?? 0},{work?.attractionQueries ?? 0},{presentationRays},{presentationProbes},{presentationMs:F6},{StageProfile.RenderPrepareMs:F6},{StageProfile.RenderSubmitMs:F6},{pickupRenderMs:F6},{StageProfile.SubmittedInstances},{StageProfile.InstanceBatches},{pickups.SubmittedCarriers},{secondaryCue},{pollMs:F6},{connection?.SentBytes ?? 0},{connection?.ReceivedBytes ?? 0},{connection?.SentMessages ?? 0},{connection?.ReceivedMessages ?? 0},{connection?.SnapshotBytes ?? 0},{connection?.SnapshotMessages ?? 0},{connection?.SerializationMs ?? 0:F6},{connection?.PendingMessages ?? 0},{connection?.PendingBytes ?? 0},{connection?.PendingAgeMs ?? 0:F6},{connection?.BufferedHighWater ?? 0},{connection?.DeferredSends ?? 0},{GC.GetAllocatedBytesForCurrentThread()},{GC.CollectionCount(0)},{GC.CollectionCount(1)},{GC.CollectionCount(2)},{installed},{active},{orbReplica.Drops},{orbReplica.MergeEvents},{orbReplica.MoveEvents},{orbReplica.Collections},{orbReplica.UncollectedXp}"));
+            frameLog.Write(FormattableString.Invariant($",{memorySamples},{sampledHeapBytes},{sampledWorkingSetBytes},{memorySampleMs:F6}"));
         }
         void GrowthChanged(GrowthEvent e)
         {
@@ -406,8 +514,9 @@ namespace Journey
             {
                 Ray ray = slot == WeaponSlot.Scattergun ? WeaponArsenal.Fan(aim, r, rays) : aim;
                 int count = WeaponArsenal.Query(display, ray, range, cueTargets);
+                presentationRays++; presentationProbes += display.Enemies.Length;
                 float distance = count == 0 ? range : cueTargets[slot == WeaponSlot.Piercer ? Math.Min(count, WeaponArsenal.PierceLimit(player)) - 1 : 0].Distance;
-                LineRenderer line = secondaryLines[secondaryCue++]; line.sharedMaterial = slot == WeaponSlot.Scattergun ? scatterTrail : pierceTrail;
+                LineRenderer line = secondaryLines[secondaryCue++]; line.sharedMaterial = slot == WeaponSlot.Scattergun ? scatterTrail : slot == WeaponSlot.Piercer ? pierceTrail : rifleTrail;
                 line.SetPosition(0, aim.origin + view.Camera.transform.right * .25f - Vector3.up * .18f);
                 line.SetPosition(1, ray.GetPoint(distance)); line.enabled = true;
             }
@@ -436,6 +545,11 @@ namespace Journey
         }
         void GrowthHud(float w, float h)
         {
+            if (display.Configuration.Scaling)
+            {
+                GUI.Label(new Rect(25, 139, 1100, 26), $"XP · {display.Xp} collected · {orbReplica.Orbs.Count} pickups hold {orbReplica.UncollectedXp} XP", heading);
+                return;
+            }
             if (!display.Configuration.Growth) return;
             SharedPlayer player = display.Players[local]; PersonalOffer offer = player.Offer;
             int goal = display.Level < display.Configuration.LevelCap ? EarnedGrowth.ThresholdFor(display.Level + 1) : EarnedGrowth.ThresholdFor(display.Configuration.LevelCap);
@@ -506,7 +620,7 @@ namespace Journey
         }
         [Serializable] sealed class Report
         {
-            public string role, source, machine, gpu, connection, reason, hostBindEndpoint;
+            public string role, source, machine, gpu, connection, reason, hostBindEndpoint, steering;
             public ScenarioEvidence scenario;
             public bool scripted, development, previewEnabled;
             public float audioVolume;
@@ -523,9 +637,18 @@ namespace Journey
             public float pickupRadius, attractionRadius, mergeRadius;
             public long sentBytes, receivedBytes;
             public int outgoingPending, outgoingHighWater, outgoingDeferred, outgoingLimit;
+            public SharedWork authorityWork;
+            public long sentMessages, receivedMessages, snapshotBytes, snapshotMessages, allocatedThreadBytes, managedHeapBytes, workingSetBytes;
+            public long presentationRays, presentationProbes;
+            public double serializationMs, outgoingAgeMs, outgoingMaxAgeMs;
+            public double loggingMs, loggingMaxMs;
+            public int memorySamples;
+            public double memorySamplingMs;
+            public int outgoingBytes, outgoingBytesHighWater, xpDrops, xpMerges, xpMoveEvents, xpCollections, physicalXpMoves;
         }
         void Save()
         {
+            if (diagnostics) { terminalAt = Time.realtimeSinceStartupAsDouble; ObserveTerminal("terminal-save.json"); }
             saved = true; frameLog.Flush(); hitLog.Flush(); growthLog.Flush();
             TextAsset stamp = Resources.Load<TextAsset>("BuildInfo");
             var report = new Report { role = local == 0 ? "host A" : "client B", source = stamp == null ? "Editor" : stamp.text,
@@ -539,6 +662,20 @@ namespace Journey
                 state = display.State, players = display.Players, enemyStates = display.Enemies, roster = display.Roster, xp = display.Xp, level = display.Level, uncollectedOrbs = orbReplica.Orbs.Count, sentBytes = connection?.SentBytes ?? 0, receivedBytes = connection?.ReceivedBytes ?? 0 };
             report.uncollectedXp = orbReplica.UncollectedXp; report.choicePhase = display.ChoicePhase; report.controlRevision = display.ControlRevision;
             report.weaponWork = weaponWork;
+            report.authorityWork = authority?.Work;
+            report.presentationRays = presentationRays; report.presentationProbes = presentationProbes;
+            report.sentMessages = connection?.SentMessages ?? 0; report.receivedMessages = connection?.ReceivedMessages ?? 0;
+            report.snapshotBytes = connection?.SnapshotBytes ?? 0; report.snapshotMessages = connection?.SnapshotMessages ?? 0;
+            report.serializationMs = connection?.SerializationMs ?? 0;
+            report.loggingMs = loggingMs; report.loggingMaxMs = loggingMaxMs;
+            report.steering = authority == null ? "client; host owns steering" : authority.ExactSteering ? "exact grid" : "pairwise";
+            report.memorySamples = memorySamples; report.memorySamplingMs = memorySamplingMs;
+            report.outgoingBytes = connection?.PendingBytes ?? 0; report.outgoingBytesHighWater = connection?.BufferedBytesHighWater ?? 0;
+            report.outgoingAgeMs = connection?.PendingAgeMs ?? 0; report.outgoingMaxAgeMs = connection?.OldestAgeHighWaterMs ?? 0;
+            report.xpDrops = orbReplica.Drops; report.xpMerges = orbReplica.MergeEvents; report.xpMoveEvents = orbReplica.MoveEvents;
+            report.xpCollections = orbReplica.Collections; report.physicalXpMoves = authority?.Growth?.Moves ?? 0;
+            report.allocatedThreadBytes = GC.GetAllocatedBytesForCurrentThread(); report.managedHeapBytes = GC.GetTotalMemory(false);
+            using (var process = System.Diagnostics.Process.GetCurrentProcess()) report.workingSetBytes = process.WorkingSet64;
             report.updateLastMs = updateLastMs; report.updateMaxMs = updateMaxMs;
             report.abortFrameMs = abortFrameMs; report.abortRemainingMs = abortRemainingMs;
             report.abortPreviousUpdateMs = abortPreviousUpdateMs; report.abortCatchupTicks = abortCatchupTicks;
@@ -661,11 +798,12 @@ namespace Journey
             }
             if (preview != null) { preview.Close(); Destroy(preview); }
             pickups?.Dispose();
-            frameLog?.Dispose(); hitLog?.Dispose(); growthLog?.Dispose(); if (allyMaterial != null) Destroy(allyMaterial);
+            frameLog?.Dispose(); hitLog?.Dispose(); growthLog?.Dispose(); diagnosticLog?.Dispose(); if (allyMaterial != null) Destroy(allyMaterial);
             if (ally != null) Destroy(ally);
             if (allyShot != null) { Destroy(allyShot.sharedMaterial); Destroy(allyShot.gameObject); }
             foreach (LineRenderer line in secondaryLines) if (line != null) Destroy(line.gameObject);
             if (scatterTrail != null) Destroy(scatterTrail); if (pierceTrail != null) Destroy(pierceTrail);
+            if (rifleTrail != null) Destroy(rifleTrail);
             if (authority != null) { authority.Resolved -= Resolve; if (authority.Growth != null) authority.Growth.Changed -= GrowthChanged; }
             authority = null; binding = null; enabled = false; SetCursor(false);
         }
